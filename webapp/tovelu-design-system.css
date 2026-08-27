@@ -1,84 +1,88 @@
 /**
- * APPLE DESIGN SYSTEM (TDS-APPLE HIG) FOR TOVELU HEALTH
- * Inspired by Apple Health, iOS 18, and Apple Intelligence
+ * TOVELU GOOGLE PAY (GPAY) MATERIAL DESIGN SYSTEM (TDS-GPAY)
+ * 100% Google Pay (GPay) Material Design 3 Architecture
  * Supreme Constitutional Governance: LAW-001
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Ubuntu:wght@500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Google+Sans:wght@400;500;700&family=Google+Sans+Text:wght@400;500;700&family=Google+Sans+Display:wght@400;500;700;800&family=Ubuntu:wght@500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
 :root {
-  /* ==================== 1. APPLE SYSTEM PALETTES ==================== */
-  /* Apple System Colors */
-  --apple-blue: #0071E3;
-  --apple-blue-hover: #0077ED;
-  --apple-blue-subtle: rgba(0, 113, 227, 0.1);
+  /* ==================== 1. GOOGLE 4-COLOR BRAND PALETTE ==================== */
+  --gpay-blue: #1A73E8;
+  --gpay-blue-hover: #1557B0;
+  --gpay-blue-subtle: #E8F0FE;
+  --gpay-blue-border: #D2E3FC;
 
-  --apple-health-green: #34C759;
-  --apple-health-green-subtle: rgba(52, 199, 89, 0.12);
+  --gpay-green: #1E8E3E;
+  --gpay-green-subtle: #E6F4EA;
+  --gpay-green-border: #CEEAD6;
 
-  --apple-indigo: #5856D6;
-  --apple-purple: #AF52DE;
-  --apple-pink: #FF2D55;
-  --apple-orange: #FF9500;
-  --apple-yellow: #FFCC00;
-  --apple-teal: #30B0C7;
+  --gpay-yellow: #F9AB00;
+  --gpay-yellow-subtle: #FEF7E0;
+  --gpay-yellow-border: #FEEFC3;
 
-  /* Apple Intelligence Siri Glow Gradient */
-  --apple-siri-gradient: linear-gradient(135deg, #0071E3 0%, #AF52DE 40%, #FF2D55 70%, #FF9500 100%);
-  --apple-ring-move: #FF2D55;
-  --apple-ring-exercise: #30D158;
-  --apple-ring-stand: #00C7BE;
+  --gpay-red: #D93025;
+  --gpay-red-subtle: #FCE8E6;
+  --gpay-red-border: #FAD2CF;
 
-  /* Light Theme (Apple Porcelain Canvas) */
-  --apple-bg: #F5F5F7;
-  --apple-surface: #FFFFFF;
-  --apple-surface-secondary: #F5F5F7;
-  --apple-surface-tertiary: #E5E5EA;
-  --apple-border: rgba(0, 0, 0, 0.08);
-  --apple-border-subtle: rgba(0, 0, 0, 0.04);
+  /* Surfaces (Light Theme - GPay Pure White & Porcelain) */
+  --gpay-bg: #FFFFFF;
+  --gpay-surface: #FFFFFF;
+  --gpay-surface-elevated: #F8F9FA;
+  --gpay-surface-container: #F1F3F4;
+  --gpay-surface-active: #E8EAED;
+  --gpay-border: #DADCE0;
+  --gpay-border-subtle: #F1F3F4;
 
-  --apple-text-main: #1D1D1F;
-  --apple-text-secondary: #86868B;
-  --apple-text-tertiary: #AEAEB2;
+  --gpay-text-main: #202124;
+  --gpay-text-muted: #5F6368;
+  --gpay-text-subtle: #80868B;
 
-  /* Apple Squircle Radii */
-  --apple-radius-sm: 10px;
-  --apple-radius-md: 16px;
-  --apple-radius-lg: 22px;
-  --apple-radius-xl: 28px;
-  --apple-radius-full: 9999px;
+  /* GPay Corner Squircles */
+  --gpay-radius-xs: 4px;
+  --gpay-radius-sm: 8px;
+  --gpay-radius-md: 16px;
+  --gpay-radius-lg: 24px;
+  --gpay-radius-xl: 28px;
+  --gpay-radius-full: 9999px;
 
-  /* Apple Shadows */
-  --apple-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
-  --apple-shadow-md: 0 8px 24px -4px rgba(0, 0, 0, 0.08);
-  --apple-shadow-lg: 0 16px 36px -6px rgba(0, 0, 0, 0.12);
+  /* GPay Elevation Shadows */
+  --gpay-shadow-sm: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+  --gpay-shadow-md: 0 1px 3px 0 rgba(60, 64, 67, 0.3), 0 4px 8px 3px rgba(60, 64, 67, 0.15);
+  --gpay-shadow-card: 0 1px 2px rgba(60, 64, 67, 0.08), 0 2px 6px 2px rgba(60, 64, 67, 0.06);
 }
 
-/* Apple Dark Mode (Pure OLED Jet Black #000000) */
+/* Dark Theme (Google Dark #202124) */
 [data-theme="dark"], .tds-theme-dark {
-  --apple-bg: #000000;
-  --apple-surface: #1C1C1E;
-  --apple-surface-secondary: #2C2C2E;
-  --apple-surface-tertiary: #3A3A3C;
-  --apple-border: rgba(255, 255, 255, 0.12);
-  --apple-border-subtle: rgba(255, 255, 255, 0.06);
+  --gpay-bg: #202124;
+  --gpay-surface: #202124;
+  --gpay-surface-elevated: #292A2D;
+  --gpay-surface-container: #35363A;
+  --gpay-surface-active: #3C4043;
+  --gpay-border: #5F6368;
+  --gpay-border-subtle: #35363A;
 
-  --apple-text-main: #F5F5F7;
-  --apple-text-secondary: #86868B;
-  --apple-text-tertiary: #636366;
+  --gpay-text-main: #E8EAED;
+  --gpay-text-muted: #9AA0A6;
+  --gpay-text-subtle: #80868B;
 
-  --apple-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.5);
-  --apple-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.7);
-  --apple-shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.9);
+  --gpay-blue-subtle: rgba(26, 115, 232, 0.2);
+  --gpay-green-subtle: rgba(30, 142, 62, 0.2);
+  --gpay-yellow-subtle: rgba(249, 171, 0, 0.2);
+  --gpay-red-subtle: rgba(217, 48, 37, 0.2);
+
+  --gpay-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
+  --gpay-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.7);
+  --gpay-shadow-card: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
-/* ==================== 2. APPLE TYPOGRAPHY & ANIMATIONS ==================== */
+/* ==================== 2. TYPOGRAPHY & MATERIAL SYMBOLS ==================== */
 .material-symbols-outlined {
   font-family: 'Material Symbols Outlined';
   font-weight: normal;
   font-style: normal;
-  font-size: 22px;
+  font-size: 24px;
   line-height: 1;
   letter-spacing: normal;
   text-transform: none;
@@ -90,159 +94,187 @@
   vertical-align: middle;
 }
 
-/* Apple Siri Glow Perimeter Animation */
-@keyframes siriGlowPulse {
-  0% { filter: drop-shadow(0 0 12px rgba(0, 113, 227, 0.4)); }
-  50% { filter: drop-shadow(0 0 24px rgba(175, 82, 222, 0.7)); }
-  100% { filter: drop-shadow(0 0 12px rgba(0, 113, 227, 0.4)); }
-}
-.apple-siri-glow {
-  animation: siriGlowPulse 4s ease-in-out infinite;
-}
-
-/* Apple Button */
-.apple-btn {
+/* ==================== 3. GPAY BUTTONS & CONTROLS ==================== */
+.gpay-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  height: 48px;
+  height: 44px;
   padding: 0 24px;
-  border-radius: var(--apple-radius-full);
-  font-family: -apple-system, BlinkMacSystemFont, 'Plus Jakarta Sans', sans-serif;
-  font-weight: 600;
-  font-size: 15px;
+  border-radius: var(--gpay-radius-full);
+  font-family: 'Google Sans', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
   cursor: pointer;
   user-select: none;
   text-decoration: none;
   border: none;
   outline: none;
-  transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
   touch-action: manipulation;
 }
-.apple-btn:active {
+.gpay-btn:active {
   transform: scale(0.97);
 }
 
-.apple-btn-primary {
-  background: var(--apple-blue);
+.gpay-btn-primary {
+  background: var(--gpay-blue);
   color: #FFFFFF;
+  box-shadow: var(--gpay-shadow-sm);
 }
-.apple-btn-primary:hover {
-  background: var(--apple-blue-hover);
-}
-
-.apple-btn-health {
-  background: var(--apple-health-green);
-  color: #FFFFFF;
-  box-shadow: 0 4px 16px rgba(52, 199, 89, 0.35);
+.gpay-btn-primary:hover {
+  background: var(--gpay-blue-hover);
+  box-shadow: var(--gpay-shadow-md);
 }
 
-.apple-btn-secondary {
-  background: var(--apple-surface-secondary);
-  color: var(--apple-text-main);
-  border: 1px solid var(--apple-border);
+.gpay-btn-tonal {
+  background: var(--gpay-surface-container);
+  color: var(--gpay-text-main);
 }
-.apple-btn-secondary:hover {
-  background: var(--apple-surface-tertiary);
-}
-
-/* Apple Health Card */
-.apple-card {
-  background: var(--apple-surface);
-  border-radius: var(--apple-radius-xl);
-  padding: 22px;
-  box-shadow: var(--apple-shadow-sm);
-  border: 1px solid var(--apple-border-subtle);
-  transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
-}
-.apple-card:hover {
-  box-shadow: var(--apple-shadow-md);
+.gpay-btn-tonal:hover {
+  background: var(--gpay-surface-active);
 }
 
-/* Apple Segmented Control */
-.apple-segmented-control {
-  background: var(--apple-surface-secondary);
-  padding: 3px;
-  border-radius: var(--apple-radius-sm);
-  display: inline-flex;
-  gap: 2px;
-  border: 1px solid var(--apple-border);
-}
-.apple-segment-btn {
-  padding: 6px 16px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--apple-text-secondary);
+.gpay-btn-outline {
   background: transparent;
-  border: none;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-.apple-segment-btn.active {
-  background: var(--apple-surface);
-  color: var(--apple-text-main);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--gpay-border);
+  color: var(--gpay-blue);
 }
 
-/* Apple iOS Grouped Cell (1-Tap Selection) */
-.apple-list-cell {
-  background: var(--apple-surface);
-  border: 1.5px solid var(--apple-border);
-  border-radius: var(--apple-radius-md);
-  padding: 16px 18px;
+/* GPay Action Circle Avatar (People / Protocols) */
+.gpay-avatar-circle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
-  gap: 14px;
+  justify-content: center;
+  font-size: 24px;
   cursor: pointer;
   user-select: none;
   transition: all 0.15s;
+  border: 1px solid var(--gpay-border-subtle);
 }
-.apple-list-cell:hover {
-  background: var(--apple-surface-secondary);
+.gpay-avatar-circle:hover {
+  transform: scale(1.06);
+  box-shadow: var(--gpay-shadow-sm);
 }
-.apple-list-cell.selected {
-  background: var(--apple-blue-subtle);
-  border-color: var(--apple-blue);
+.gpay-avatar-circle:active {
+  transform: scale(0.95);
 }
 
-.apple-check-box {
+/* GPay Card */
+.gpay-card {
+  background: var(--gpay-surface);
+  border: 1px solid var(--gpay-border);
+  border-radius: var(--gpay-radius-lg);
+  padding: 20px;
+  box-shadow: var(--gpay-shadow-card);
+  transition: all 0.2s;
+}
+
+/* GPay 1-Tap Option Row (Grouped Cell) */
+.gpay-option-row {
+  background: var(--gpay-surface);
+  border: 1.5px solid var(--gpay-border);
+  border-radius: var(--gpay-radius-md);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  transition: all 0.15s;
+}
+.gpay-option-row:hover {
+  background: var(--gpay-surface-elevated);
+  border-color: var(--gpay-blue);
+}
+.gpay-option-row.selected {
+  background: var(--gpay-blue-subtle);
+  border-color: var(--gpay-blue);
+  box-shadow: 0 0 0 1px var(--gpay-blue);
+}
+
+.gpay-radio-check {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  border: 2px solid var(--apple-text-tertiary);
+  border: 2px solid var(--gpay-border);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 12px;
   font-weight: 800;
-  background: var(--apple-surface);
+  background: var(--gpay-surface);
 }
-.apple-list-cell.selected .apple-check-box {
-  background: var(--apple-blue);
-  border-color: var(--apple-blue);
+.gpay-option-row.selected .gpay-radio-check {
+  background: var(--gpay-blue);
+  border-color: var(--gpay-blue);
   color: #FFFFFF;
 }
 
-/* Apple Preset Chips */
-.apple-chip {
+/* GPay Chips */
+.gpay-chip {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   padding: 6px 14px;
-  border-radius: var(--apple-radius-full);
+  border-radius: var(--gpay-radius-full);
   font-size: 13px;
-  font-weight: 600;
-  background: var(--apple-surface-secondary);
-  color: var(--apple-text-main);
-  border: 1px solid var(--apple-border);
+  font-weight: 500;
+  background: var(--gpay-surface);
+  border: 1px solid var(--gpay-border);
+  color: var(--gpay-text-main);
   cursor: pointer;
   user-select: none;
   transition: all 0.15s;
 }
-.apple-chip.active {
-  background: var(--apple-blue);
-  border-color: var(--apple-blue);
-  color: #FFFFFF;
+.gpay-chip.active {
+  background: var(--gpay-blue-subtle);
+  border-color: var(--gpay-blue);
+  color: var(--gpay-blue);
+  font-weight: 700;
+}
+
+/* GPay Bottom Navigation Bar */
+.gpay-nav-bar {
+  height: 72px;
+  background: var(--gpay-surface);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 16px;
+  border-top: 1px solid var(--gpay-border);
+}
+.gpay-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+  color: var(--gpay-text-muted);
+  font-family: 'Google Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.gpay-nav-indicator {
+  width: 60px;
+  height: 30px;
+  border-radius: var(--gpay-radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.gpay-nav-item.active .gpay-nav-indicator {
+  background: var(--gpay-blue-subtle);
+  color: var(--gpay-blue);
+}
+.gpay-nav-item.active {
+  color: var(--gpay-blue);
+  font-weight: 700;
 }
