@@ -39,10 +39,10 @@
       transition: background-color 0.2s, color 0.2s;
     }
 
-    /* Smartphone App Frame */
+    /* Universal Responsive App Shell */
     .app-shell {
       width: 100%;
-      max-width: 480px;
+      max-width: 520px;
       min-height: 100vh;
       background: var(--gemini-bg);
       display: flex;
@@ -91,7 +91,7 @@
       background: transparent;
       border: none;
       color: var(--gemini-text-muted);
-      padding: 5px 14px;
+      padding: 6px 16px;
       border-radius: 9999px;
       font-size: 11px;
       font-weight: 800;
@@ -107,8 +107,8 @@
 
     /* Profile Avatar Button */
     .profile-avatar-btn {
-      width: 34px;
-      height: 34px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       background: var(--gemini-surface-container);
       border: 1.5px solid var(--gemini-border);
@@ -118,6 +118,10 @@
       font-size: 15px;
       cursor: pointer;
       color: var(--gemini-text-main);
+      transition: all 0.15s;
+    }
+    .profile-avatar-btn:hover {
+      border-color: var(--gemini-sparkle-blue);
     }
 
     /* App Main Scroll Content */
@@ -152,62 +156,20 @@
       display: flex;
     }
 
-    /* Daily Biometric Meters (2x2 Grid) */
-    .telemetry-2x2-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-    .telemetry-meter-card {
-      background: var(--gemini-surface);
-      border: 1px solid var(--gemini-border);
-      border-radius: 16px;
-      padding: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-    .meter-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 11px;
-      font-weight: 800;
-      color: var(--gemini-text-muted);
-      text-transform: uppercase;
-    }
-    .meter-val {
-      font-family: 'Google Sans Display', sans-serif;
-      font-size: 20px;
-      font-weight: 800;
-      color: var(--gemini-text-main);
-    }
-    .meter-bar-track {
-      height: 6px;
-      background: var(--gemini-surface-container);
-      border-radius: 9999px;
-      overflow: hidden;
-    }
-    .meter-bar-fill {
-      height: 100%;
-      background: var(--gemini-gradient-btn);
-      border-radius: 9999px;
-      transition: width 0.3s ease;
-    }
-
     /* Meal Card with 3 Input Modes (Scan | Manually | Ask AI) */
     .app-meal-card {
       background: var(--gemini-surface);
       border: 1px solid var(--gemini-border);
-      border-radius: 16px;
+      border-radius: 18px;
       padding: 16px;
       display: flex;
       flex-direction: column;
       gap: 12px;
+      box-shadow: var(--gemini-shadow-sm);
     }
     .meal-card-header {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
     }
     .meal-title {
@@ -219,14 +181,14 @@
     .meal-modes-row {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 6px;
+      gap: 8px;
       margin-top: 4px;
     }
     .meal-mode-btn {
       background: var(--gemini-surface-container);
       border: 1px solid var(--gemini-border-subtle);
-      border-radius: 10px;
-      padding: 8px 6px;
+      border-radius: 12px;
+      padding: 10px 6px;
       font-size: 11px;
       font-weight: 700;
       color: var(--gemini-text-main);
@@ -244,11 +206,39 @@
       box-shadow: var(--gemini-shadow-sm);
     }
 
-    /* Modal / Bottom Sheet for Food Intelligence & Pantry */
+    /* Category Selection Pills for Food Modal */
+    .food-type-selector {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      background: var(--gemini-surface-container);
+      padding: 4px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+    }
+    .food-type-pill {
+      background: transparent;
+      border: none;
+      padding: 8px 4px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--gemini-text-muted);
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s;
+    }
+    .food-type-pill.active {
+      background: var(--gemini-surface);
+      color: var(--gemini-sparkle-blue);
+      box-shadow: var(--gemini-shadow-sm);
+    }
+
+    /* Modal / Bottom Sheet */
     .food-modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.45);
+      background: rgba(0, 0, 0, 0.5);
       backdrop-filter: blur(8px);
       z-index: 200;
       display: none;
@@ -257,7 +247,7 @@
     }
     .food-modal-sheet {
       width: 100%;
-      max-width: 480px;
+      max-width: 520px;
       background: var(--gemini-surface);
       border-top-left-radius: 24px;
       border-top-right-radius: 24px;
@@ -265,7 +255,7 @@
       display: flex;
       flex-direction: column;
       gap: 16px;
-      max-height: 85vh;
+      max-height: 90vh;
       overflow-y: auto;
       animation: slideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -340,7 +330,7 @@
       position: fixed;
       bottom: 0;
       width: 100%;
-      max-width: 480px;
+      max-width: 520px;
       height: 64px;
       background: var(--gemini-bg);
       backdrop-filter: blur(20px);
@@ -409,7 +399,7 @@
 
   <div class="app-shell">
     
-    <!-- ==================== FIXED TOP APP BAR: [ LOGO | DAY/WEEK | PROFILE ] ==================== -->
+    <!-- ==================== FIXED TOP APP BAR: [ FULL LOGO | DAY/WEEK | PROFILE ] ==================== -->
     <header class="app-topbar">
       <!-- Full Mitosis Logo + Wordmark -->
       <a href="#" class="brand-lockup" onclick="switchAppTab('flow')">
@@ -532,7 +522,7 @@
                   <span style="font-size: 11px; font-weight: 800; color: var(--gemini-sparkle-blue);">🍳 BREAKFAST • 08:30 AM</span>
                   <div class="meal-title" style="margin-top: 2px;">Savory Pasture Eggs / Paneer + Greens</div>
                 </div>
-                <span style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald);" id="status-breakfast-tag">✓ 32g Protein</span>
+                <span style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald);" id="status-breakfast-tag">✓ 32g Protein Logged</span>
               </div>
               
               <!-- 3 Consumption Pathways: Scan | Manually | Ask AI -->
@@ -863,14 +853,21 @@
 
   </div>
 
-  <!-- ==================== FOOD INTELLIGENCE BOTTOM SHEET MODAL ==================== -->
+  <!-- ==================== COMPLETE 3-SITUATION FOOD INTELLIGENCE MODAL ==================== -->
   <div id="food-modal-overlay" class="food-modal-overlay" onclick="if(event.target===this) closeFoodModal()">
     <div class="food-modal-sheet">
       <div style="display: flex; justify-content: space-between; align-items: center;">
         <h3 id="food-modal-title" style="font-family: 'Google Sans Display', sans-serif; font-size: 18px; font-weight: 800;">
-          Scan & Analyze Food
+          Food Intelligence Engine
         </h3>
         <button class="gemini-btn gemini-btn-tonal" style="height: 30px; width: 30px; padding: 0; border-radius: 50%;" onclick="closeFoodModal()">✕</button>
+      </div>
+
+      <!-- 3 Detection Situation Selector -->
+      <div class="food-type-selector" id="food-type-selector">
+        <button class="food-type-pill active" id="pill-cooked" onclick="setFoodCategory('cooked')">🍲 Cooked Dish</button>
+        <button class="food-type-pill" id="pill-ingredient" onclick="setFoodCategory('ingredient')">🥦 Raw Ingredients</button>
+        <button class="food-type-pill" id="pill-menu" onclick="setFoodCategory('menu')">📜 Restaurant Menu</button>
       </div>
 
       <!-- Modal Body Dynamic Area -->
@@ -955,6 +952,8 @@
   <script src="thais_engine.js"></script>
   <script>
     let currentMealTarget = 'Breakfast';
+    let currentInputMode = 'scan'; // 'scan', 'manual', 'ask_ai'
+    let currentFoodCategory = 'cooked'; // 'cooked', 'ingredient', 'menu'
     let userAnswers = {};
 
     // Tab Switching (FLOW | CHAT | HEALTH)
@@ -987,38 +986,34 @@
     // Food Intelligence Modal Handlers
     function openFoodModal(mode, mealName) {
       currentMealTarget = mealName;
+      currentInputMode = mode;
       const overlay = document.getElementById('food-modal-overlay');
+      const selector = document.getElementById('food-type-selector');
+      
+      if (mode === 'ask_ai') {
+        selector.style.display = 'none';
+      } else {
+        selector.style.display = 'grid';
+      }
+
+      renderFoodModalContent();
+      overlay.style.display = 'flex';
+    }
+
+    function setFoodCategory(cat) {
+      currentFoodCategory = cat;
+      document.querySelectorAll('.food-type-pill').forEach(p => p.classList.remove('active'));
+      const activePill = document.getElementById(`pill-${cat}`);
+      if (activePill) activePill.classList.add('active');
+      renderFoodModalContent();
+    }
+
+    function renderFoodModalContent() {
       const title = document.getElementById('food-modal-title');
       const body = document.getElementById('food-modal-body');
 
-      if (mode === 'scan') {
-        title.innerText = `📷 Scan ${mealName} (Photo / Menu / Dish)`;
-        body.innerHTML = `
-          <div style="border: 2px dashed var(--gemini-border); border-radius: 16px; padding: 24px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px;">
-            <span class="material-symbols-outlined" style="font-size: 36px; color: var(--gemini-sparkle-blue);">add_a_photo</span>
-            <div style="font-size: 13px; font-weight: 700;">Snap or Upload a Photo</div>
-            <div style="font-size: 11px; color: var(--gemini-text-muted);">Upload cooked dish, raw ingredients, or restaurant menu.</div>
-            <input type="file" accept="image/*" style="display: none;" id="food-file-input" onchange="processFoodUpload(this)" />
-            <button class="gemini-btn gemini-btn-primary" style="height: 38px; padding: 0 16px;" onclick="document.getElementById('food-file-input').click()">
-              Choose Photo / Camera
-            </button>
-          </div>
-          <div id="food-scan-result" style="display: none;"></div>
-        `;
-      } else if (mode === 'manual') {
-        title.innerText = `✍️ Enter ${mealName} Manually`;
-        body.innerHTML = `
-          <div style="display: flex; flex-direction: column; gap: 10px;">
-            <label style="font-size: 12px; font-weight: 700; color: var(--gemini-text-muted);">Describe what you ate or what ingredients you have:</label>
-            <textarea class="gemini-prompt-input" id="manual-food-input" placeholder="e.g. 3 scrambled eggs with spinach and olive oil, or Dal Tadka with Brown Rice..." style="border: 1.5px solid var(--gemini-border); border-radius: 12px; padding: 12px; font-size: 13px; min-height: 80px;"></textarea>
-            <button class="gemini-btn gemini-btn-primary" style="height: 42px;" onclick="processManualFoodEntry()">
-              Analyze & Log Meal ➔
-            </button>
-          </div>
-          <div id="food-manual-result" style="display: none;"></div>
-        `;
-      } else if (mode === 'ask_ai') {
-        title.innerText = `🤖 THAIS AI Suggestion for ${mealName}`;
+      if (currentInputMode === 'ask_ai') {
+        title.innerText = `🤖 THAIS AI Suggestion for ${currentMealTarget}`;
         body.innerHTML = `
           <div class="gemini-card" style="background: var(--gemini-surface-container); padding: 16px; border-left: 4px solid var(--gemini-vitality-emerald);">
             <div style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald); text-transform: uppercase;">
@@ -1028,7 +1023,7 @@
               Savory Pasture Eggs / Paneer + Sautéed Spinach & Desi Ghee
             </div>
             <p style="font-size: 12px; color: var(--gemini-text-muted); line-height: 1.45;">
-              Using ingredients saved in your <strong>Kitchen Inventory</strong>. Cooked in pure desi ghee with 1/2 avocado. Delivers <strong>32g protein</strong> with flat glycemic response.
+              Calibrated from your <strong>Kitchen Inventory</strong>. Cooked in pure desi ghee with 1/2 avocado. Delivers <strong>32g protein</strong> with flat glycemic response.
             </p>
             <div style="display: flex; gap: 6px; margin-top: 8px;">
               <span class="macro-tag">32g Protein</span>
@@ -1036,48 +1031,114 @@
               <span class="macro-tag">15m Cook Time</span>
             </div>
           </div>
-          <button class="gemini-btn gemini-btn-primary" style="height: 42px; width: 100%;" onclick="confirmMealLog('${mealName}', 32)">
-            ✓ I Ate This — Log ${mealName}
+          <button class="gemini-btn gemini-btn-primary" style="height: 42px; width: 100%;" onclick="confirmMealLog('${currentMealTarget}', 32)">
+            ✓ I Ate This — Log to Portion Meter
           </button>
         `;
+        return;
       }
 
-      overlay.style.display = 'flex';
+      // If Scan or Manual: Render based on selected category (Cooked / Ingredient / Menu)
+      if (currentInputMode === 'scan') {
+        title.innerText = `📷 Scan ${currentMealTarget} (${currentFoodCategory.toUpperCase()})`;
+        body.innerHTML = `
+          <div style="border: 2px dashed var(--gemini-border); border-radius: 16px; padding: 20px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <span class="material-symbols-outlined" style="font-size: 36px; color: var(--gemini-sparkle-blue);">add_a_photo</span>
+            <div style="font-size: 13px; font-weight: 700;">Upload or Snap Photo of ${currentFoodCategory === 'cooked' ? 'Cooked Dish' : currentFoodCategory === 'ingredient' ? 'Raw Ingredients' : 'Restaurant Menu'}</div>
+            <input type="file" accept="image/*" style="display: none;" id="food-file-input" onchange="processCategoryResult()" />
+            <button class="gemini-btn gemini-btn-primary" style="height: 36px; padding: 0 16px;" onclick="document.getElementById('food-file-input').click()">
+              Choose Photo / Open Camera
+            </button>
+          </div>
+          <div id="category-output-area"></div>
+        `;
+      } else if (currentInputMode === 'manual') {
+        title.innerText = `✍️ Enter ${currentMealTarget} Manually`;
+        let placeholder = currentFoodCategory === 'cooked' 
+          ? "Type your cooked dish (e.g., Dal Tadka with 2 Rotis, Paneer Bhurji)..."
+          : currentFoodCategory === 'ingredient'
+          ? "Type ingredients you have (e.g., 3 eggs, spinach, desi ghee, tomato)..."
+          : "Type restaurant dish or paste menu text...";
+
+        body.innerHTML = `
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <label style="font-size: 12px; font-weight: 700; color: var(--gemini-text-muted);">
+              ${currentFoodCategory === 'cooked' ? '🍲 Cooked Dish Details:' : currentFoodCategory === 'ingredient' ? '🥦 Raw Ingredients Available:' : '📜 Restaurant Dish / Menu:'}
+            </label>
+            <textarea class="gemini-prompt-input" id="manual-food-input" placeholder="${placeholder}" style="border: 1.5px solid var(--gemini-border); border-radius: 12px; padding: 12px; font-size: 13px; min-height: 80px;"></textarea>
+            <button class="gemini-btn gemini-btn-primary" style="height: 42px;" onclick="processCategoryResult()">
+              Analyze & Generate Guidance ➔
+            </button>
+          </div>
+          <div id="category-output-area"></div>
+        `;
+      }
+    }
+
+    function processCategoryResult() {
+      const out = document.getElementById('category-output-area');
+      if (!out) return;
+
+      if (currentFoodCategory === 'cooked') {
+        // SITUATION 1: ALREADY COOKED DISH
+        out.innerHTML = `
+          <div class="gemini-card" style="border-left: 4px solid var(--gemini-vitality-emerald); padding: 14px; margin-top: 10px;">
+            <div style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald); text-transform: uppercase;">
+              ✓ DISH DETECTED: DAL TADKA & PANEER SABZI
+            </div>
+            <div style="margin-top: 8px; font-size: 12px; display: flex; flex-direction: column; gap: 6px;">
+              <div><strong style="color: var(--gemini-vitality-emerald);">🟢 WHAT TO EAT:</strong> 1.5 bowls Dal Tadka + 1 bowl Paneer & Greens.</div>
+              <div><strong style="color: #DC2626;">🔴 WHAT TO AVOID:</strong> Skip refined rotis or sugary chutney.</div>
+              <div><strong style="color: var(--gemini-sparkle-blue);">⚖️ HOW MUCH TO EAT:</strong> Consume all protein & fiber first for flat glucose curve.</div>
+            </div>
+            <button class="gemini-btn gemini-btn-primary" style="height: 38px; width: 100%; margin-top: 12px;" onclick="confirmMealLog(currentMealTarget, 34)">
+              ✓ Confirm & Log to Portion Level Meter (+34g Protein)
+            </button>
+          </div>
+        `;
+      } else if (currentFoodCategory === 'ingredient') {
+        // SITUATION 2: RAW INGREDIENTS
+        out.innerHTML = `
+          <div class="gemini-card" style="border-left: 4px solid var(--gemini-sparkle-blue); padding: 14px; margin-top: 10px;">
+            <div style="font-size: 11px; font-weight: 800; color: var(--gemini-sparkle-blue); text-transform: uppercase;">
+              ✓ RECIPE GENERATED FROM YOUR INGREDIENTS
+            </div>
+            <div style="font-size: 14px; font-weight: 800; margin: 4px 0;">Savory Desi Ghee Scramble with Sautéed Spinach</div>
+            <div style="font-size: 11px; font-weight: 700; color: var(--gemini-vitality-emerald); margin-bottom: 6px;">⏱️ 12 Mins Cook Time • 0% Seed Oils</div>
+            <div style="font-size: 12px; color: var(--gemini-text-muted); line-height: 1.5;">
+              <strong>Step-by-Step Cooking Guide:</strong><br/>
+              1. Heat 1 tbsp desi ghee in a pan over medium flame.<br/>
+              2. Sauté garlic and baby spinach for 2 mins until tender.<br/>
+              3. Crack 3 eggs (or 100g crumbled paneer), add salt & turmeric, scramble gently for 3 mins.<br/>
+              4. Serve warm with 1/2 avocado.
+            </div>
+            <button class="gemini-btn gemini-btn-primary" style="height: 38px; width: 100%; margin-top: 12px;" onclick="confirmMealLog(currentMealTarget, 32)">
+              ✓ I Cooked & Ate This (+32g Protein Logged)
+            </button>
+          </div>
+        `;
+      } else if (currentFoodCategory === 'menu') {
+        // SITUATION 3: RESTAURANT MENU / ONLINE ORDER
+        out.innerHTML = `
+          <div class="gemini-card" style="border-left: 4px solid #F59E0B; padding: 14px; margin-top: 10px;">
+            <div style="font-size: 11px; font-weight: 800; color: #D97706; text-transform: uppercase;">
+              ✓ RESTAURANT MENU SAFETY & ORDER TRIAGE
+            </div>
+            <div style="margin-top: 8px; font-size: 12px; display: flex; flex-direction: column; gap: 6px;">
+              <div><strong style="color: #DC2626;">🚨 SEED OIL WARNING:</strong> Gravy curries contain palm/sunflower oil. Avoid deep-fried items.</div>
+              <div><strong style="color: var(--gemini-vitality-emerald);">🟢 WHAT TO ORDER:</strong> 1 Portion Tandoori Chicken Tikka / Paneer Tikka + Yellow Dal Tadka + Green Salad.</div>
+              <div><strong style="color: var(--gemini-sparkle-blue);">⚖️ HOW MUCH TO ORDER:</strong> 1 Full portion tikka (38g protein). Ask for butter/ghee brush instead of oil.</div>
+            </div>
+            <button class="gemini-btn gemini-btn-primary" style="height: 38px; width: 100%; margin-top: 12px;" onclick="confirmMealLog(currentMealTarget, 38)">
+              ✓ Order Confirmed — Log Meal (+38g Protein)
+            </button>
+          </div>
+        `;
+      }
     }
 
     function closeFoodModal() {
       document.getElementById('food-modal-overlay').style.display = 'none';
-    }
-
-    function processFoodUpload(input) {
-      const res = document.getElementById('food-scan-result');
-      res.style.display = 'block';
-      res.innerHTML = `
-        <div class="gemini-card" style="margin-top: 10px; border-left: 4px solid var(--gemini-vitality-emerald);">
-          <div style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald);">✓ DISH RECOGNIZED: SCRAMBLED EGGS & GREENS</div>
-          <div style="font-size: 13px; font-weight: 700; margin-top: 2px;">What to Eat: Entire egg scramble with spinach.</div>
-          <div style="font-size: 11px; color: var(--gemini-text-muted);">What to Avoid: Skip refined toast or sweet ketchup.</div>
-          <button class="gemini-btn gemini-btn-primary" style="height: 36px; width: 100%; margin-top: 10px;" onclick="confirmMealLog(currentMealTarget, 32)">
-            Confirm & Log (+32g Protein)
-          </button>
-        </div>
-      `;
-    }
-
-    function processManualFoodEntry() {
-      const val = document.getElementById('manual-food-input').value.trim();
-      if (!val) return;
-      const res = document.getElementById('food-manual-result');
-      res.style.display = 'block';
-      res.innerHTML = `
-        <div class="gemini-card" style="margin-top: 10px; border-left: 4px solid var(--gemini-vitality-emerald);">
-          <div style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald);">✓ ANALYZED & VERIFIED</div>
-          <div style="font-size: 13px; font-weight: 700; margin-top: 2px;">Estimated: 34g Protein • Flat Glycemic Curve</div>
-          <button class="gemini-btn gemini-btn-primary" style="height: 36px; width: 100%; margin-top: 10px;" onclick="confirmMealLog(currentMealTarget, 34)">
-            Log to Today's Portion Meter
-          </button>
-        </div>
-      `;
     }
 
     function confirmMealLog(mealName, proteinGrams) {
