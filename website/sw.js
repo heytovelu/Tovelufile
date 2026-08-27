@@ -1,35 +1,16 @@
 /**
- * TOVELU PWA SERVICE WORKER V1.0
- * Provides offline resilience, instant cache-first asset loading, and PWA installation support.
+ * TOVELU PWA SERVICE WORKER V3.0 (NETWORK-FIRST WITH LIVE SYNC)
+ * Ensures fresh code is always fetched immediately while supporting offline fallbacks.
  */
 
-const CACHE_NAME = 'tovelu-cache-v1';
-const ASSETS_TO_CACHE = [
-  './',
-  './app.html',
-  './index.html',
-  './survey.html',
-  './mobile-survey.html',
-  './desktop-survey.html',
-  './thais.html',
-  './thais_engine.js',
-  './survey-data.js',
-  './tovelu-design-system.css',
-  './manifest.json',
-  './tovelu-icon-color.svg'
-];
+const CACHE_NAME = 'tovelu-live-v3';
 
 // Install Event
 self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS_TO_CACHE).catch(() => {});
-    })
-  );
   self.skipWaiting();
 });
 
-// Activate Event
+// Activate Event: Clear all previous caches immediately
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) => {
@@ -40,32 +21,27 @@ self.addEventListener('activate', (event) => {
           }
         })
       );
-    })
+    }).then(() => self.clients.claim())
   );
-  self.clients.claim();
 });
 
-// Fetch Event
+// Fetch Event: Network-First Strategy
 self.addEventListener('fetch', (event) => {
+  if (event.request.method !== 'GET') return;
+
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      if (cachedResponse) {
-        return cachedResponse;
-      }
-      return fetch(event.request).then((networkResponse) => {
-        if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
-          return networkResponse;
+    fetch(event.request)
+      .then((networkResponse) => {
+        if (networkResponse && networkResponse.status === 200) {
+          const responseClone = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => {
+            cache.put(event.request, responseClone);
+          });
         }
-        const responseToCache = networkResponse.clone();
-        caches.open(CACHE_NAME).then((cache) => {
-          cache.put(event.request, responseToCache);
-        });
         return networkResponse;
-      }).catch(() => {
-        if (event.request.mode === 'navigate') {
-          return caches.match('./app.html');
-        }
-      });
-    })
+      })
+      .catch(() => {
+        return caches.match(event.request);
+      })
   );
 });
