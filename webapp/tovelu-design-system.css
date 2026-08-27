@@ -14,7 +14,7 @@
   --gemini-sparkle-purple: #9B72CB;
   --gemini-sparkle-pink: #D96570;
   --gemini-sparkle-coral: #FF8BCB;
-  --gemini-vitality-emerald: #059669;
+  --gemini-vitality-emerald: #00D06C;
 
   /* Gradients */
   --gemini-gradient-text: linear-gradient(74deg, #4285F4 0%, #9B72CB 9%, #D96570 20%, #D96570 24%, #8AB4F8 35%, #4285F4 44%, #9B72CB 50%, #D96570 56%, #8AB4F8 75%, #4285F4 100%);
@@ -104,13 +104,25 @@
   to { background-position: 200% center; }
 }
 
+/* RAZOR-SHARP ZERO-BLUR VECTOR LOGO ANIMATION */
 @keyframes bioMitosisPulse {
-  0% { transform: scale(1); filter: drop-shadow(0 0 4px rgba(5, 150, 105, 0.3)); }
-  50% { transform: scale(1.05); filter: drop-shadow(0 0 14px rgba(16, 185, 129, 0.6)); }
-  100% { transform: scale(1); filter: drop-shadow(0 0 4px rgba(5, 150, 105, 0.3)); }
+  0% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+  100% { transform: scale(1); }
 }
 .tovelu-mitosis-anim {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   animation: bioMitosisPulse 3s ease-in-out infinite;
+  transform-origin: center center;
+  will-change: transform;
+  filter: none !important; /* STRICT: NO BLUR / DROP SHADOW ON LOGO */
+}
+.tovelu-mitosis-anim svg {
+  shape-rendering: geometricPrecision;
+  image-rendering: -webkit-optimize-contrast;
+  filter: none !important;
 }
 
 @keyframes geminiOrbPulse {
