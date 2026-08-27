@@ -378,12 +378,6 @@
     let currentQIndex = 0;
     let userAnswers = {};
 
-    const COUNTRIES = [
-      "India", "United States", "United Kingdom", "United Arab Emirates", "Australia", "Canada", "Germany",
-      "Singapore", "Saudi Arabia", "South Africa", "Brazil", "France", "Italy", "Japan", "Mexico", "Spain",
-      "Netherlands", "New Zealand", "Sweden", "Switzerland", "Qatar", "Kuwait", "Oman", "Indonesia", "Malaysia"
-    ];
-
     function calculateRealtimeBMR() {
       const sex = userAnswers['sex'] || 'Male';
       const weight = parseFloat(userAnswers['weight_num']) || 70;
@@ -537,12 +531,19 @@
           </div>
         `;
       } else if (q.type === 'location') {
+        const countriesList = (typeof TOVELU_GLOBAL_COUNTRIES !== 'undefined') ? TOVELU_GLOBAL_COUNTRIES : ["India", "United States", "United Kingdom", "United Arab Emirates", "Australia", "Canada", "Germany", "Singapore"];
         optionsHTML = `
           <div class="gemini-card" style="display: flex; flex-direction: column; gap: 14px;">
-            <select class="time-select" id="loc-country">
-              ${COUNTRIES.map(c => `<option value="${c}" ${c==='India'?'selected':''}>${c}</option>`).join('')}
-            </select>
-            <input type="text" class="gemini-prompt-input" id="loc-city" placeholder="Type your City (e.g. Mumbai, New Delhi, London, New York)" style="border: 1.5px solid var(--gemini-border); border-radius: 12px; padding: 12px; font-size: 15px;" value="${userAnswers['city'] || ''}" />
+            <div>
+              <label style="font-size: 12px; font-weight: 700; color: var(--gemini-text-muted); margin-bottom: 6px; display: block;">Select Your Country (230+ Countries):</label>
+              <select class="time-select" id="loc-country" style="width: 100%; text-align: left; padding: 12px 14px;">
+                ${countriesList.map(c => `<option value="${c}" ${c==='India'?'selected':''}>${c}</option>`).join('')}
+              </select>
+            </div>
+            <div>
+              <label style="font-size: 12px; font-weight: 700; color: var(--gemini-text-muted); margin-bottom: 6px; display: block;">Your Current Postal / PIN Code:</label>
+              <input type="text" class="gemini-prompt-input" id="loc-pincode" placeholder="e.g. 400001 or 90210 or SW1A 1AA" style="border: 1.5px solid var(--gemini-border); border-radius: 12px; padding: 12px; font-size: 16px; font-weight: 700; width: 100%;" value="${userAnswers['pincode'] || ''}" />
+            </div>
           </div>
         `;
       } else if (q.type === 'time_wake' || q.type === 'time_sleep') {
@@ -679,7 +680,7 @@
         userAnswers['weight'] = `${userAnswers['weight_num']} kg`;
       } else if (q.type === 'location') {
         userAnswers['country'] = document.getElementById('loc-country').value;
-        userAnswers['city'] = document.getElementById('loc-city').value;
+        userAnswers['pincode'] = document.getElementById('loc-pincode').value;
       }
     }
 
