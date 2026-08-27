@@ -224,9 +224,8 @@
       <span class="brand-wordmark">tovelu</span>
     </div>
 
-    <!-- Progress Indicator -->
+    <!-- Actions -->
     <div style="display: flex; align-items: center; gap: 10px;">
-      <span id="step-name" style="font-size: 11px; font-weight: 700; color: var(--gemini-text-muted);">Q1 of 42</span>
       <button class="gemini-btn gemini-btn-tonal" style="height: 30px; padding: 0 8px; font-size: 11px;" onclick="toggleTheme()">
         <span class="material-symbols-outlined" id="theme-icon-sym" style="font-size: 14px;">dark_mode</span>
       </button>
@@ -282,9 +281,10 @@
       const stage = document.getElementById('survey-content-area');
       const progress = Math.round(((currentQIndex + 1) / TOVELU_SURVEY_QUESTIONS.length) * 100);
 
-      document.getElementById('step-name').innerText = `Q${currentQIndex + 1} of ${TOVELU_SURVEY_QUESTIONS.length}`;
-      document.getElementById('survey-progress-fill').style.width = `${progress}%`;
-      document.getElementById('btn-prev').disabled = currentQIndex === 0;
+      const fillElem = document.getElementById('survey-progress-fill');
+      if (fillElem) fillElem.style.width = `${progress}%`;
+      const prevBtn = document.getElementById('btn-prev');
+      if (prevBtn) prevBtn.disabled = currentQIndex === 0;
 
       hideAlert();
 

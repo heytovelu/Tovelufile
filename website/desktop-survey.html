@@ -222,21 +222,12 @@
         </svg>
       </div>
       <span class="brand-wordmark">tovelu</span>
-      <span style="font-family: 'Google Sans', sans-serif; font-size: 11px; font-weight: 700; color: var(--gemini-sparkle-blue); background: var(--gemini-surface-container); padding: 3px 8px; border-radius: 9999px;">
-        42 PRECISION INTAKE
-      </span>
     </div>
 
     <!-- Live Progress Bar -->
-    <div style="display: flex; align-items: center; gap: 20px; max-width: 480px; width: 100%;">
-      <div style="flex: 1; display: flex; flex-direction: column; gap: 4px;">
-        <div style="display: flex; justify-content: space-between; font-size: 12px; font-weight: 700; color: var(--gemini-text-muted);">
-          <span id="step-name">Question 1 of 42</span>
-          <span id="step-progress-percent" style="color: var(--gemini-sparkle-blue);">2%</span>
-        </div>
-        <div style="height: 6px; background: var(--gemini-surface-container); border-radius: 9999px; overflow: hidden;">
-          <div id="survey-progress-fill" style="height: 100%; width: 2%; background: var(--gemini-gradient-btn); transition: width 0.25s ease-out;"></div>
-        </div>
+    <div style="display: flex; align-items: center; gap: 20px;">
+      <div style="width: 220px; height: 6px; background: var(--gemini-surface-container); border-radius: 9999px; overflow: hidden;">
+        <div id="survey-progress-fill" style="height: 100%; width: 2%; background: var(--gemini-gradient-btn); transition: width 0.25s ease-out;"></div>
       </div>
 
       <a href="mobile-survey.html" class="gemini-btn gemini-btn-tonal" style="height: 36px; padding: 0 14px; font-size: 12px;">
@@ -300,10 +291,10 @@
       const stage = document.getElementById('survey-content-area');
       const progress = Math.round(((currentQIndex + 1) / TOVELU_SURVEY_QUESTIONS.length) * 100);
 
-      document.getElementById('step-name').innerText = `Question ${currentQIndex + 1} of ${TOVELU_SURVEY_QUESTIONS.length}`;
-      document.getElementById('step-progress-percent').innerText = `${progress}%`;
-      document.getElementById('survey-progress-fill').style.width = `${progress}%`;
-      document.getElementById('btn-prev').disabled = currentQIndex === 0;
+      const fillElem = document.getElementById('survey-progress-fill');
+      if (fillElem) fillElem.style.width = `${progress}%`;
+      const prevBtn = document.getElementById('btn-prev');
+      if (prevBtn) prevBtn.disabled = currentQIndex === 0;
 
       calculateRealtimeBMR();
       hideAlert();
