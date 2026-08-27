@@ -3,22 +3,26 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>TOVELU • Google Pay (GPay) Material Design System</title>
+  <title>TOVELU • Master Google Gemini Design System (Adaptive)</title>
   
-  <!-- Google Fonts: Google Sans, Roboto, Ubuntu & Material Symbols -->
+  <!-- Favicon: Official Tovelu Mitosis Bio-Cell Logo (Bright Luminous) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 16 C28 16, 16 32, 16 50 C16 68, 28 84, 50 84 C38 72, 34 58, 34 50 C34 42, 38 28, 50 16 Z' fill='%230091FF'/%3E%3Cpath d='M50 16 C72 16, 84 32, 84 50 C84 68, 72 84, 50 84 C62 72, 66 58, 66 50 C66 42, 62 28, 50 16 Z' fill='%2300E676'/%3E%3Ccircle cx='50' cy='50' r='8' fill='%2300F5A0'/%3E%3C/svg%3E" />
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23131314'/%3E%3Cpath d='M50 16 C28 16, 16 32, 16 50 C16 68, 28 84, 50 84 C38 72, 34 58, 34 50 C34 42, 38 28, 50 16 Z' fill='%230091FF'/%3E%3Cpath d='M50 16 C72 16, 84 32, 84 50 C84 68, 72 84, 50 84 C62 72, 66 58, 66 50 C66 42, 62 28, 50 16 Z' fill='%2300E676'/%3E%3Ccircle cx='50' cy='50' r='8' fill='%2300F5A0'/%3E%3C/svg%3E" />
+
+  <!-- Google Fonts: Google Sans, Roboto, Ubuntu, JetBrains Mono & Material Symbols -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Google+Sans:wght@400;500;700&family=Google+Sans+Text:wght@400;500;700&family=Google+Sans+Display:wght@400;500;700;800&family=Ubuntu:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Google+Sans:wght@400;500;700&family=Google+Sans+Text:wght@400;500;700&family=Google+Sans+Display:wght@400;500;700;800&family=Ubuntu:wght@500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   
-  <!-- TDS GPay CSS Framework -->
+  <!-- TDS Gemini CSS Framework -->
   <link rel="stylesheet" href="tovelu-design-system.css">
   
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background-color: var(--gpay-bg);
-      color: var(--gpay-text-main);
+      background-color: var(--gemini-bg);
+      color: var(--gemini-text-main);
       font-family: 'Google Sans Text', 'Roboto', sans-serif;
       line-height: 1.5;
       min-height: 100vh;
@@ -27,8 +31,8 @@
       transition: background-color 0.2s, color 0.2s;
     }
 
-    /* GPay Top Bar */
-    header.gpay-header {
+    /* Top Gateway Bar */
+    header.master-header {
       height: 64px;
       padding: 0 clamp(1rem, 3vw, 2.5rem);
       display: flex;
@@ -37,8 +41,9 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: var(--gpay-bg);
-      border-bottom: 1px solid var(--gpay-border);
+      background: var(--gemini-bg);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--gemini-border-subtle);
     }
 
     .brand-lockup {
@@ -51,476 +56,128 @@
       font-family: 'Ubuntu', sans-serif;
       font-weight: 500;
       font-size: 24px;
-      color: var(--gpay-text-main);
+      color: var(--gemini-text-main);
     }
 
-    .gpay-account-avatar {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: var(--gpay-blue);
-      color: #FFFFFF;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Google Sans', sans-serif;
-      font-weight: 700;
-      font-size: 15px;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    /* Viewport Switcher */
-    .viewport-control-bar {
-      background: var(--gpay-surface-container);
-      border-bottom: 1px solid var(--gpay-border);
-      padding: 6px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      position: sticky;
-      top: 64px;
-      z-index: 95;
-    }
-    .device-pill {
+    /* Gateway Direct Links */
+    .gateway-pill {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 5px 14px;
+      padding: 6px 14px;
       border-radius: 9999px;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-      background: transparent;
-      color: var(--gpay-text-muted);
-      border: 1px solid transparent;
+      font-size: 13px;
+      font-weight: 700;
+      background: var(--gemini-surface-container);
+      color: var(--gemini-text-main);
+      text-decoration: none;
       transition: all 0.15s;
     }
-    .device-pill:hover {
-      background: var(--gpay-surface);
-      color: var(--gpay-text-main);
-    }
-    .device-pill.active {
-      background: var(--gpay-blue);
+    .gateway-pill:hover {
+      background: var(--gemini-sparkle-blue);
       color: #FFFFFF;
-      box-shadow: var(--gpay-shadow-sm);
     }
 
-    /* Resizable Stage */
-    .stage-wrapper {
-      display: flex;
-      justify-content: center;
-      width: 100%;
+    /* Iframe / Frame Container */
+    .embed-stage {
       flex: 1;
-      padding: 24px 16px 80px 16px;
-      transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
-    }
-
-    .device-frame {
-      width: 100%;
-      max-width: 960px; /* Laptop Default */
-      transition: max-width 0.3s cubic-bezier(0.2, 0, 0, 1), border 0.3s, box-shadow 0.3s;
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-    }
-
-    /* Tablet Frame */
-    .device-frame.mode-tablet {
-      max-width: 740px;
-      border: 8px solid var(--gpay-border);
-      border-radius: 36px;
-      padding: 24px 20px;
-      background: var(--gpay-bg);
-      box-shadow: var(--gpay-shadow-card);
-    }
-
-    /* Mobile Smartphone Frame */
-    .device-frame.mode-mobile {
-      max-width: 400px;
-      border: 10px solid var(--gpay-text-main);
-      border-radius: 46px;
-      padding: 0 0 16px 0;
-      background: var(--gpay-bg);
-      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.3);
-      overflow: hidden;
-    }
-
-    /* Mobile Status Bar */
-    .mobile-status-bar {
-      display: none;
-      height: 40px;
-      padding: 0 20px;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--gpay-text-main);
-      background: var(--gpay-bg);
-    }
-    .mode-mobile .mobile-status-bar {
-      display: flex;
-    }
-
-    .content-area {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-    .mode-mobile .content-area {
-      padding: 0 16px;
-    }
-
-    /* GPay Action Row (Horizontal Avatars) */
-    .gpay-avatar-row {
-      display: flex;
-      gap: 18px;
-      overflow-x: auto;
-      padding: 6px 2px 14px 2px;
-      scroll-snap-type: x mandatory;
-      scrollbar-width: none;
-    }
-    .gpay-avatar-row::-webkit-scrollbar {
-      display: none;
-    }
-
-    .gpay-avatar-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      text-align: center;
-      cursor: pointer;
-      flex-shrink: 0;
-      scroll-snap-align: start;
-    }
-    .gpay-avatar-label {
-      font-family: 'Google Sans', sans-serif;
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--gpay-text-main);
-      max-width: 68px;
-      line-height: 1.2;
-    }
-
-    /* 2-Col Grid */
-    .grid-2col {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 16px;
-    }
-    .mode-mobile .grid-2col {
-      grid-template-columns: 1fr;
-    }
-
-    /* GPay Floating Bottom Scan Button */
-    .gpay-floating-scan-bar {
-      position: sticky;
-      bottom: 16px;
-      z-index: 90;
-      width: 100%;
       display: flex;
       justify-content: center;
+      width: 100%;
+      background: var(--gemini-bg);
     }
 
-    .gpay-scan-pill {
-      background: var(--gpay-blue);
-      color: #FFFFFF;
-      height: 50px;
-      padding: 0 26px;
-      border-radius: var(--gpay-radius-full);
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      font-family: 'Google Sans', sans-serif;
-      font-weight: 700;
-      font-size: 15px;
-      box-shadow: 0 4px 14px rgba(26, 115, 232, 0.35);
-      cursor: pointer;
-      user-select: none;
-      transition: all 0.2s;
+    iframe#stage-frame {
+      width: 100%;
+      height: calc(100vh - 64px);
+      border: none;
+      background: var(--gemini-bg);
+      transition: max-width 0.3s cubic-bezier(0.2, 0, 0, 1), border 0.3s, box-shadow 0.3s;
     }
-    .gpay-scan-pill:active {
-      transform: scale(0.97);
+
+    /* Device Framing */
+    .view-desktop iframe#stage-frame {
+      max-width: 100%;
+    }
+    .view-tablet iframe#stage-frame {
+      max-width: 768px;
+      height: 90vh;
+      margin: 20px auto;
+      border: 8px solid var(--gemini-border);
+      border-radius: 36px;
+      box-shadow: var(--gemini-shadow-lg);
+    }
+    .view-mobile iframe#stage-frame {
+      max-width: 412px;
+      height: 92vh;
+      margin: 20px auto;
+      border: 10px solid var(--gemini-text-main);
+      border-radius: 46px;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.35);
     }
   </style>
 </head>
-<body>
+<body class="view-desktop" id="body-container">
 
-  <!-- GPay Top Bar -->
-  <header class="gpay-header">
+  <!-- Master Header Gateway -->
+  <header class="master-header">
     <div class="brand-lockup">
-      <!-- TOVELU MITOSIS LOGO -->
-      <svg width="30" height="30" viewBox="0 0 100 100" fill="none">
-        <path d="M50 16 C28 16, 16 32, 16 50 C16 68, 28 84, 50 84 C38 72, 34 58, 34 50 C34 42, 38 28, 50 16 Z" fill="url(#gp-l)"/>
-        <path d="M50 16 C72 16, 84 32, 84 50 C84 68, 72 84, 50 84 C62 72, 66 58, 66 50 C66 42, 62 28, 50 16 Z" fill="url(#gp-r)"/>
-        <circle cx="50" cy="50" r="8" fill="#1E8E3E"/>
-        <defs>
-          <linearGradient id="gp-l" x1="16" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#1A73E8"/>
-            <stop offset="1" stop-color="#1557B0"/>
-          </linearGradient>
-          <linearGradient id="gp-r" x1="84" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#1E8E3E"/>
-            <stop offset="1" stop-color="#34A853"/>
-          </linearGradient>
-        </defs>
-      </svg>
+      <div class="tovelu-mitosis-anim">
+        <svg width="32" height="32" viewBox="0 0 100 100" fill="none" shape-rendering="geometricPrecision">
+          <path d="M50 16 C28 16, 16 32, 16 50 C16 68, 28 84, 50 84 C38 72, 34 58, 34 50 C34 42, 38 28, 50 16 Z" fill="url(#gw-c)"/>
+          <path d="M50 16 C72 16, 84 32, 84 50 C84 68, 72 84, 50 84 C62 72, 66 58, 66 50 C66 42, 62 28, 50 16 Z" fill="url(#gw-e)"/>
+          <circle cx="50" cy="50" r="8.5" fill="#00F5A0"/>
+          <defs>
+            <linearGradient id="gw-c" x1="16" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse"><stop stop-color="#00C0FF"/><stop offset="1" stop-color="#0062FF"/></linearGradient>
+            <linearGradient id="gw-e" x1="84" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse"><stop stop-color="#00F5A0"/><stop offset="1" stop-color="#00D06C"/></linearGradient>
+          </defs>
+        </svg>
+      </div>
       <span class="brand-wordmark">tovelu</span>
-      <span style="font-family: 'Google Sans', sans-serif; font-size: 11px; font-weight: 700; color: #1A73E8; background: #E8F0FE; padding: 3px 8px; border-radius: 9999px;">
-        GPAY MATERIAL
+      <span style="font-family: 'Google Sans', sans-serif; font-size: 11px; font-weight: 700; color: var(--gemini-sparkle-blue); background: var(--gemini-surface-container); padding: 3px 8px; border-radius: 9999px;">
+        LOCKED STANDARD
       </span>
     </div>
 
-    <div style="display: flex; align-items: center; gap: 10px;">
-      <button class="gpay-btn gpay-btn-tonal" style="height: 36px; padding: 0 14px; font-size: 13px;" onclick="toggleTheme()">
-        <span class="material-symbols-outlined" id="theme-icon-sym" style="font-size: 17px;">dark_mode</span>
-        <span id="theme-btn-text">Dark</span>
-      </button>
-      <div class="gpay-account-avatar" title="Google Account">T</div>
+    <!-- Direct Viewport Switchers -->
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <a href="desktop-design-system.html" target="_blank" class="gateway-pill" title="Open full desktop in new tab">
+        <span class="material-symbols-outlined" style="font-size: 16px;">laptop</span> Desktop Spec
+      </a>
+      <a href="mobile-design-system.html" target="_blank" class="gateway-pill" title="Open full mobile in new tab">
+        <span class="material-symbols-outlined" style="font-size: 16px;">smartphone</span> Mobile Spec
+      </a>
+      <a href="survey.html" class="gemini-btn gemini-btn-primary" style="height: 34px; padding: 0 14px; font-size: 12px;">
+        Survey ➔
+      </a>
     </div>
   </header>
 
-  <!-- Viewport Switcher -->
-  <div class="viewport-control-bar">
-    <span style="font-size: 12px; font-weight: 700; color: var(--gpay-text-muted); margin-right: 4px;">VIEWPORT:</span>
-    <button class="device-pill active" id="btn-laptop" onclick="setViewportMode('laptop')">
-      <span class="material-symbols-outlined" style="font-size: 15px;">laptop</span> Laptop (960px)
-    </button>
-    <button class="device-pill" id="btn-tablet" onclick="setViewportMode('tablet')">
-      <span class="material-symbols-outlined" style="font-size: 15px;">tablet_mac</span> Tablet (740px)
-    </button>
-    <button class="device-pill" id="btn-mobile" onclick="setViewportMode('mobile')">
-      <span class="material-symbols-outlined" style="font-size: 15px;">smartphone</span> Mobile (400px)
-    </button>
-  </div>
-
-  <!-- Master Stage -->
-  <div class="stage-wrapper">
-    <main class="device-frame" id="main-device-frame">
-      
-      <!-- Mobile Status Bar -->
-      <div class="mobile-status-bar">
-        <span>09:41</span>
-        <div style="display: flex; align-items: center; gap: 5px;">
-          <span class="material-symbols-outlined" style="font-size: 15px;">signal_cellular_alt</span>
-          <span class="material-symbols-outlined" style="font-size: 15px;">wifi</span>
-          <span class="material-symbols-outlined" style="font-size: 16px;">battery_full</span>
-        </div>
-      </div>
-
-      <!-- Main Content Area -->
-      <div class="content-area">
-        
-        <!-- Search Bar (GPay Style) -->
-        <div style="display: flex; align-items: center; gap: 12px; background: var(--gpay-surface-container); border-radius: 9999px; padding: 12px 18px;">
-          <span class="material-symbols-outlined" style="color: var(--gpay-text-muted);">search</span>
-          <input type="text" id="gpay-search-input" placeholder="Pay, explore protocols, or search 55,000+ conditions..." style="flex: 1; border: none; background: transparent; outline: none; font-family: 'Google Sans', sans-serif; font-size: 14px; color: var(--gpay-text-main);" onkeypress="if(event.key === 'Enter') runGpayAction()" />
-          <span class="material-symbols-outlined" style="color: var(--gpay-blue); cursor: pointer;" onclick="runGpayAction()">mic</span>
-        </div>
-
-        <!-- Iconic GPay Avatar Row (People / Protocols) -->
-        <div>
-          <div style="font-family: 'Google Sans', sans-serif; font-size: 13px; font-weight: 700; color: var(--gpay-text-muted); margin-bottom: 10px; letter-spacing: 0.02em;">
-            QUICK PROTOCOLS & DOCTORS
-          </div>
-
-          <div class="gpay-avatar-row">
-            <div class="gpay-avatar-item" onclick="triggerProtocol('FLOW Protocol (90-Day Cellular Reset)')">
-              <div class="gpay-avatar-circle" style="background: var(--gpay-blue-subtle); color: var(--gpay-blue);">
-                <span class="material-symbols-outlined">bolt</span>
-              </div>
-              <span class="gpay-avatar-label">FLOW</span>
-            </div>
-
-            <div class="gpay-avatar-item" onclick="triggerProtocol('DNAm Epigenetic Clock Speedometer')">
-              <div class="gpay-avatar-circle" style="background: var(--gpay-green-subtle); color: var(--gpay-green);">
-                <span class="material-symbols-outlined">genetics</span>
-              </div>
-              <span class="gpay-avatar-label">DNAm Age</span>
-            </div>
-
-            <div class="gpay-avatar-item" onclick="triggerProtocol('Precision 3-Meal Plan (Zero Seed Oils)')">
-              <div class="gpay-avatar-circle" style="background: var(--gpay-yellow-subtle); color: #B06000;">
-                <span class="material-symbols-outlined">restaurant</span>
-              </div>
-              <span class="gpay-avatar-label">3-Meal</span>
-            </div>
-
-            <div class="gpay-avatar-item" onclick="triggerProtocol('Circadian Solar Sunlight & Melatonin Sync')">
-              <div class="gpay-avatar-circle" style="background: var(--gpay-red-subtle); color: var(--gpay-red);">
-                <span class="material-symbols-outlined">wb_sunny</span>
-              </div>
-              <span class="gpay-avatar-label">Solar Sync</span>
-            </div>
-
-            <div class="gpay-avatar-item" onclick="triggerProtocol('55,000+ WHO ICD-11 Diagnostic Triage')">
-              <div class="gpay-avatar-circle" style="background: var(--gpay-blue-subtle); color: var(--gpay-blue);">
-                <span class="material-symbols-outlined">medical_services</span>
-              </div>
-              <span class="gpay-avatar-label">WHO Triage</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- GPay Large Amount / Metric Display Card -->
-        <div class="gpay-card" style="display: flex; flex-direction: column; gap: 8px;">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <span style="font-family: 'Google Sans', sans-serif; font-size: 12px; font-weight: 700; color: var(--gpay-text-muted); text-transform: uppercase;">
-              TOTAL BASAL METABOLIC RATE (BMR)
-            </span>
-            <span style="font-size: 11px; font-weight: 700; color: var(--gpay-green); background: var(--gpay-green-subtle); padding: 3px 8px; border-radius: 9999px;">
-              ✓ VERIFIED
-            </span>
-          </div>
-
-          <!-- GPay Large Number -->
-          <div style="font-family: 'Google Sans Display', 'Google Sans', sans-serif; font-size: 38px; font-weight: 700; color: var(--gpay-text-main); line-height: 1.1;">
-            1,740 <span style="font-size: 18px; font-weight: 500; color: var(--gpay-text-muted);">kcal / day</span>
-          </div>
-
-          <div style="font-size: 13px; color: var(--gpay-blue); font-weight: 500;">
-            Top 11.2% Metabolic Profile on Earth • Epigenetic Age: <strong>25.8 Yrs (-4.2 Yrs Saved)</strong>
-          </div>
-        </div>
-
-        <!-- 1-Tap Option Rows (GPay Transaction Style) -->
-        <div class="gpay-card" style="display: flex; flex-direction: column; gap: 10px;">
-          <div style="font-family: 'Google Sans', sans-serif; font-size: 14px; font-weight: 700;">1-Tap Health Goals</div>
-
-          <div class="gpay-option-row selected" onclick="toggleGpayOption(this)">
-            <div class="gpay-radio-check">✓</div>
-            <div class="gpay-avatar-circle" style="width: 40px; height: 40px; background: var(--gpay-blue-subtle); color: var(--gpay-blue); font-size: 18px;">
-              <span class="material-symbols-outlined" style="font-size: 20px;">local_fire_department</span>
-            </div>
-            <div style="flex: 1;">
-              <div style="font-family: 'Google Sans', sans-serif; font-weight: 700; font-size: 14px;">Burn Visceral Belly Fat</div>
-              <div style="font-size: 12px; color: var(--gpay-text-muted);">Calibrate lipolytic oxidation.</div>
-            </div>
-          </div>
-
-          <div class="gpay-option-row" onclick="toggleGpayOption(this)">
-            <div class="gpay-radio-check"></div>
-            <div class="gpay-avatar-circle" style="width: 40px; height: 40px; background: var(--gpay-green-subtle); color: var(--gpay-green); font-size: 18px;">
-              <span class="material-symbols-outlined" style="font-size: 20px;">bolt</span>
-            </div>
-            <div style="flex: 1;">
-              <div style="font-family: 'Google Sans', sans-serif; font-weight: 700; font-size: 14px;">Stop 2:00 PM Afternoon Crashes</div>
-              <div style="font-size: 12px; color: var(--gpay-text-muted);">Flatten glycemic spikes.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 1-Tap Preset Time Chips -->
-        <div class="gpay-card" style="display: flex; flex-direction: column; gap: 10px;">
-          <div style="font-family: 'Google Sans', sans-serif; font-size: 14px; font-weight: 700;">Sleep & Wake 1-Tap Chips</div>
-          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-            <div class="gpay-chip active" onclick="toggleGpayChip(this)">06:00 AM</div>
-            <div class="gpay-chip" onclick="toggleGpayChip(this)">06:30 AM</div>
-            <div class="gpay-chip" onclick="toggleGpayChip(this)">10:30 PM</div>
-            <div class="gpay-chip" onclick="toggleGpayChip(this)">11:00 PM</div>
-          </div>
-        </div>
-
-        <!-- GPay Rewards & Milestone Card -->
-        <div class="gpay-card" style="background: linear-gradient(135deg, #1A73E8, #1557B0); color: #FFFFFF; border: none; display: flex; align-items: center; justify-content: space-between;">
-          <div>
-            <div style="font-family: 'Google Sans', sans-serif; font-size: 16px; font-weight: 700;">+6.2 Epigenetic Years Unlocked</div>
-            <div style="font-size: 12px; opacity: 0.9; margin-top: 2px;">Completed 34 clinical baseline markers.</div>
-          </div>
-          <span class="material-symbols-outlined" style="font-size: 36px; color: #FBBC04;">military_tech</span>
-        </div>
-
-        <!-- Floating GPay Scan & Pay Button -->
-        <div class="gpay-floating-scan-bar">
-          <div class="gpay-scan-pill" onclick="window.location.href='survey.html'">
-            <span class="material-symbols-outlined">qr_code_scanner</span>
-            <span>Start Health Intake</span>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- GPay 4-Tab Bottom Navigation Bar -->
-      <nav class="gpay-nav-bar">
-        <a class="gpay-nav-item active" onclick="selectGpayNav(this)">
-          <div class="gpay-nav-indicator"><span class="material-symbols-outlined">home</span></div>
-          <span>Home</span>
-        </a>
-        <a class="gpay-nav-item" onclick="selectGpayNav(this)">
-          <div class="gpay-nav-indicator"><span class="material-symbols-outlined">bolt</span></div>
-          <span>FLOW</span>
-        </a>
-        <a class="gpay-nav-item" onclick="selectGpayNav(this)">
-          <div class="gpay-nav-indicator"><span class="material-symbols-outlined">monitoring</span></div>
-          <span>Biometrics</span>
-        </a>
-        <a class="gpay-nav-item" onclick="selectGpayNav(this)">
-          <div class="gpay-nav-indicator"><span class="material-symbols-outlined">person</span></div>
-          <span>Profile</span>
-        </a>
-      </nav>
-
-    </main>
+  <!-- Auto-Adaptive Embed Stage -->
+  <div class="embed-stage">
+    <iframe id="stage-frame" src="desktop-design-system.html"></iframe>
   </div>
 
   <script>
-    function toggleTheme() {
-      const html = document.documentElement;
-      const current = html.getAttribute('data-theme') || 'light';
-      const next = current === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', next);
-      document.body.className = next === 'dark' ? 'tds-theme-dark' : '';
-      document.getElementById('theme-icon-sym').innerText = next === 'dark' ? 'light_mode' : 'dark_mode';
-      document.getElementById('theme-btn-text').innerText = next === 'dark' ? 'Light' : 'Dark';
-    }
+    // Automatic Device Routing Logic (Locked Platform Standard)
+    function autoRouteDevice() {
+      const w = window.innerWidth;
+      const frame = document.getElementById('stage-frame');
+      const body = document.getElementById('body-container');
 
-    function setViewportMode(mode) {
-      document.querySelectorAll('.device-pill').forEach(p => p.classList.remove('active'));
-      const frame = document.getElementById('main-device-frame');
-      frame.className = 'device-frame';
-
-      if (mode === 'laptop') {
-        document.getElementById('btn-laptop').classList.add('active');
-      } else if (mode === 'tablet') {
-        document.getElementById('btn-tablet').classList.add('active');
-        frame.classList.add('mode-tablet');
-      } else if (mode === 'mobile') {
-        document.getElementById('btn-mobile').classList.add('active');
-        frame.classList.add('mode-mobile');
+      if (w < 768) {
+        // Mobile Phones & Web App -> Mobile Design System
+        frame.src = "mobile-design-system.html";
+        body.className = "view-mobile";
+      } else {
+        // Desktop, Laptop, and Tablets -> Desktop Design System
+        frame.src = "desktop-design-system.html";
+        body.className = "view-desktop";
       }
     }
 
-    function toggleGpayOption(row) {
-      const parent = row.parentElement;
-      parent.querySelectorAll('.gpay-option-row').forEach(r => {
-        r.classList.remove('selected');
-        r.querySelector('.gpay-radio-check').innerText = '';
-      });
-      row.classList.add('selected');
-      row.querySelector('.gpay-radio-check').innerText = '✓';
-    }
-
-    function toggleGpayChip(chip) {
-      const parent = chip.parentElement;
-      parent.querySelectorAll('.gpay-chip').forEach(c => c.classList.remove('active'));
-      chip.classList.add('active');
-    }
-
-    function selectGpayNav(item) {
-      document.querySelectorAll('.gpay-nav-item').forEach(i => i.classList.remove('active'));
-      item.classList.add('active');
-    }
-
-    function triggerProtocol(name) {
-      alert(`Google Pay & Tovelu Clinical Action: Executing "${name}" protocol.`);
-    }
-
-    function runGpayAction() {
-      const q = document.getElementById('gpay-search-input').value.trim() || "FLOW protocol";
-      alert(`Searching and triaging "${q}" across 55,000+ WHO ICD-11 conditions.`);
-    }
+    // Run on initial load and window resize
+    window.addEventListener('load', autoRouteDevice);
   </script>
 </body>
 </html>
