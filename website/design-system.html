@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>TOVELU • Google Gemini Design System (Master Living Catalog)</title>
+  <title>TOVELU • Responsive Gemini Design System (Laptop, Tablet, Mobile)</title>
   
   <!-- Google Fonts: Google Sans, Roboto, Ubuntu & Material Symbols -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,7 +27,7 @@
       transition: background-color 0.2s, color 0.2s;
     }
 
-    /* Top Sticky Bar */
+    /* Global Header */
     header.gemini-nav-header {
       height: 68px;
       padding: 0 clamp(1rem, 3vw, 2.5rem);
@@ -55,89 +55,126 @@
       color: var(--gemini-text-main);
     }
 
-    /* Master Layout */
-    .gemini-container {
-      max-width: 1080px;
-      width: 100%;
-      margin: 0 auto;
-      padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 1.5rem) 7rem clamp(1rem, 3vw, 1.5rem);
-      display: flex;
-      flex-direction: column;
-      gap: 3.5rem;
-    }
-
-    /* Section Headings */
-    .section-header {
-      margin-bottom: 1.5rem;
-    }
-    .section-title {
-      font-family: 'Google Sans', sans-serif;
-      font-size: 24px;
-      font-weight: 700;
-      margin-bottom: 6px;
+    /* Device Viewport Mode Switcher Bar */
+    .viewport-control-bar {
+      background: var(--gemini-surface-container);
+      border-bottom: 1px solid var(--gemini-border);
+      padding: 8px 16px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      justify-content: center;
+      gap: 8px;
+      position: sticky;
+      top: 68px;
+      z-index: 95;
+    }
+    .device-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      background: transparent;
+      color: var(--gemini-text-muted);
+      border: 1px solid transparent;
+      transition: all 0.15s;
+    }
+    .device-pill:hover {
+      background: var(--gemini-surface);
       color: var(--gemini-text-main);
     }
-    .section-desc {
-      font-size: 14px;
-      color: var(--gemini-text-muted);
+    .device-pill.active {
+      background: var(--gemini-sparkle-blue);
+      color: #FFFFFF;
+      box-shadow: var(--gemini-shadow-sm);
     }
 
-    /* Grids */
-    .grid-2col {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 20px;
+    /* Resizable Simulation Stage */
+    .stage-wrapper {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      flex: 1;
+      padding: 24px 16px 80px 16px;
+      transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
     }
+
+    .device-frame {
+      width: 100%;
+      max-width: 1080px; /* Default Laptop */
+      transition: max-width 0.3s cubic-bezier(0.2, 0, 0, 1), border 0.3s, box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    /* Tablet Frame Mode (768px) */
+    .device-frame.mode-tablet {
+      max-width: 768px;
+      border: 8px solid var(--gemini-border);
+      border-radius: 36px;
+      padding: 24px 20px;
+      background: var(--gemini-bg);
+      box-shadow: var(--gemini-shadow-lg);
+    }
+
+    /* Mobile Frame Mode (390px iPhone/Android) */
+    .device-frame.mode-mobile {
+      max-width: 412px;
+      border: 10px solid var(--gemini-border);
+      border-radius: 44px;
+      padding: 20px 16px;
+      background: var(--gemini-bg);
+      box-shadow: var(--gemini-shadow-lg);
+    }
+
+    /* Responsive Grids */
     .grid-4col {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
       gap: 14px;
     }
-
-    /* Audio Waveform */
-    .audio-wave-track {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      height: 24px;
-    }
-    .audio-bar {
-      width: 3.5px;
-      background: var(--gemini-sparkle-blue);
-      border-radius: 9999px;
-      animation: audioFlux 1.2s ease-in-out infinite alternate;
+    .mode-mobile .grid-4col {
+      grid-template-columns: 1fr;
     }
 
-    /* Fixed Floating Prompt Bar */
+    .grid-2col {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 16px;
+    }
+    .mode-mobile .grid-2col {
+      grid-template-columns: 1fr;
+    }
+
+    /* Mobile Safe Area */
     .floating-prompt-wrapper {
       position: sticky;
-      bottom: 24px;
+      bottom: calc(16px + env(safe-area-inset-bottom));
       z-index: 90;
       width: 100%;
-      margin-top: 1.5rem;
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Sticky Navigation Bar -->
+  <!-- Top Sticky Header -->
   <header class="gemini-nav-header">
     <div class="brand-lockup">
-      <!-- TOVELU MITOSIS BIO-CELL LOGO -->
       <div class="tovelu-mitosis-anim">
-        <svg width="34" height="34" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M50 16 C28 16, 16 32, 16 50 C16 68, 28 84, 50 84 C38 72, 34 58, 34 50 C34 42, 38 28, 50 16 Z" fill="url(#t-logo-left)"/>
-          <path d="M50 16 C72 16, 84 32, 84 50 C84 68, 72 84, 50 84 C62 72, 66 58, 66 50 C66 42, 62 28, 50 16 Z" fill="url(#t-logo-right)"/>
+        <svg width="34" height="34" viewBox="0 0 100 100" fill="none">
+          <path d="M50 16 C28 16, 16 32, 16 50 C16 68, 28 84, 50 84 C38 72, 34 58, 34 50 C34 42, 38 28, 50 16 Z" fill="url(#tl1)"/>
+          <path d="M50 16 C72 16, 84 32, 84 50 C84 68, 72 84, 50 84 C62 72, 66 58, 66 50 C66 42, 62 28, 50 16 Z" fill="url(#tl2)"/>
           <circle cx="50" cy="50" r="8" fill="#059669"/>
           <defs>
-            <linearGradient id="t-logo-left" x1="16" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse">
+            <linearGradient id="tl1" x1="16" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse">
               <stop stop-color="#0284C7"/>
               <stop offset="1" stop-color="#1D4ED8"/>
             </linearGradient>
-            <linearGradient id="t-logo-right" x1="84" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse">
+            <linearGradient id="tl2" x1="84" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse">
               <stop stop-color="#059669"/>
               <stop offset="1" stop-color="#10B981"/>
             </linearGradient>
@@ -146,7 +183,7 @@
       </div>
       <span class="brand-wordmark">tovelu</span>
       <span style="font-family: 'Google Sans', sans-serif; font-size: 12px; font-weight: 700; color: var(--gemini-sparkle-blue); background: var(--gemini-surface-container); padding: 4px 10px; border-radius: 9999px;">
-        GEMINI SYSTEM
+        ALL-DEVICE GEMINI
       </span>
     </div>
 
@@ -161,289 +198,193 @@
     </div>
   </header>
 
-  <!-- Master Living Showcase -->
-  <main class="gemini-container">
-    
-    <!-- Hero Gemini Greeting -->
-    <div style="display: flex; flex-direction: column; gap: 14px;">
-      <h1 style="font-family: 'Google Sans Display', 'Google Sans', sans-serif; font-size: clamp(34px, 6vw, 56px); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em;">
-        <span class="gemini-gradient-heading">Hello, Human.</span><br />
-        <span style="color: var(--gemini-text-muted);">How can THAIS optimize your biology today?</span>
-      </h1>
-      <p style="font-size: 16px; color: var(--gemini-text-subtle); max-width: 760px; line-height: 1.6;">
-        The master Google Gemini design system built for Tovelu. Codified for 8.15 Billion humans with real-time DNA methylation telemetry, 55,000+ WHO ICD-11 diagnostic logic, and zero-typing plain-language UI.
-      </p>
-    </div>
+  <!-- Viewport Device Switcher Bar -->
+  <div class="viewport-control-bar">
+    <span style="font-size: 12px; font-weight: 800; color: var(--gemini-text-muted); margin-right: 6px;">PREVIEW VIEWPORT:</span>
+    <button class="device-pill active" id="btn-laptop" onclick="setViewportMode('laptop')">
+      <span class="material-symbols-outlined" style="font-size: 16px;">laptop</span> Laptop (1080px)
+    </button>
+    <button class="device-pill" id="btn-tablet" onclick="setViewportMode('tablet')">
+      <span class="material-symbols-outlined" style="font-size: 16px;">tablet_mac</span> Tablet (768px)
+    </button>
+    <button class="device-pill" id="btn-mobile" onclick="setViewportMode('mobile')">
+      <span class="material-symbols-outlined" style="font-size: 16px;">smartphone</span> Mobile (412px)
+    </button>
+  </div>
 
-    <!-- 4-Grid Suggestion Action Cards -->
-    <div class="grid-4col">
-      <div class="gemini-action-card" onclick="triggerQuery('Calculate my epigenetic biological age trajectory')">
-        <span class="material-symbols-outlined gemini-sparkle-svg" style="font-size: 28px;">genetics</span>
-        <div>
-          <div style="font-weight: 700; font-size: 15px; margin-bottom: 4px;">Epigenetic DNAm Age</div>
-          <div style="font-size: 13px; color: var(--gemini-text-muted);">Simulate rate of aging & years restored.</div>
-        </div>
+  <!-- Main Stage -->
+  <div class="stage-wrapper">
+    <main class="device-frame" id="main-device-frame">
+      
+      <!-- Hero Greeting -->
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <h1 style="font-family: 'Google Sans Display', 'Google Sans', sans-serif; font-size: clamp(28px, 5vw, 54px); font-weight: 800; line-height: 1.1; letter-spacing: -0.03em;">
+          <span class="gemini-gradient-heading">Hello, Human.</span><br />
+          <span style="color: var(--gemini-text-muted);">How can THAIS optimize your biology today?</span>
+        </h1>
+        <p style="font-size: 15px; color: var(--gemini-text-subtle); max-width: 720px; line-height: 1.5;">
+          Tovelu Gemini Design System adaptive across Laptop, Tablet, and Mobile screens for all 8.15 Billion humans.
+        </p>
       </div>
 
-      <div class="gemini-action-card" onclick="triggerQuery('Generate a whole-food meal plan with zero seed oils')">
-        <span class="material-symbols-outlined" style="font-size: 28px; color: var(--gemini-vitality-emerald);">restaurant</span>
-        <div>
-          <div style="font-weight: 700; font-size: 15px; margin-bottom: 4px;">Seed-Oil-Free 3-Meal</div>
-          <div style="font-size: 13px; color: var(--gemini-text-muted);">Calibrate 1,740 kcal BMR with real food.</div>
-        </div>
-      </div>
-
-      <div class="gemini-action-card" onclick="triggerQuery('What is my optimal circadian sunlight & melatonin window?')">
-        <span class="material-symbols-outlined" style="font-size: 28px; color: #D97706;">wb_sunny</span>
-        <div>
-          <div style="font-weight: 700; font-size: 15px; margin-bottom: 4px;">Circadian Solar Sync</div>
-          <div style="font-size: 13px; color: var(--gemini-text-muted);">Morning cortisol spike & night shield.</div>
-        </div>
-      </div>
-
-      <div class="gemini-action-card" onclick="triggerQuery('Triage symptoms across the 55,000+ WHO ICD-11 database')">
-        <span class="material-symbols-outlined" style="font-size: 28px; color: var(--gemini-sparkle-blue);">medical_services</span>
-        <div>
-          <div style="font-weight: 700; font-size: 15px; margin-bottom: 4px;">55k WHO Triage</div>
-          <div style="font-size: 13px; color: var(--gemini-text-muted);">Reversible vs Manageable vs Hospital.</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Gemini Live Voice Orb -->
-    <div class="gemini-card" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 32px 24px;">
-      <div class="gemini-live-orb" onclick="startVoicePulse()">
-        <span class="material-symbols-outlined" style="font-size: 32px;">mic</span>
-      </div>
-      <div style="font-weight: 700; font-size: 17px; margin-top: 14px;">Gemini Live Voice • THAIS AI</div>
-      <div style="font-size: 14px; color: var(--gemini-text-muted); max-width: 480px; margin-top: 4px;">
-        Tap the pulsing orb to speak naturally with THAIS about your symptoms, lab tests, and longevity goals.
-      </div>
-    </div>
-
-    <!-- Gemini Multi-Turn AI Response Demo -->
-    <div id="gemini-chat-response" class="gemini-card" style="display: none; flex-direction: column; gap: 16px;">
-      <div style="display: flex; align-items: center; justify-content: space-between;">
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <span class="material-symbols-outlined gemini-sparkle-svg" style="font-size: 24px;">auto_awesome</span>
-          <span style="font-weight: 700; font-size: 15px;">THAIS Clinical Intelligence</span>
-        </div>
-        <span style="font-size: 12px; font-weight: 700; color: var(--gemini-vitality-emerald); background: var(--gemini-surface-container); padding: 3px 8px; border-radius: 9999px;">
-          ✓ LAW-001 VERIFIED
-        </span>
-      </div>
-
-      <div id="gemini-output-content" style="font-size: 15px; line-height: 1.6; color: var(--gemini-text-main);"></div>
-
-      <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--gemini-border); padding-top: 12px;">
-        <div style="display: flex; gap: 8px;">
-          <button class="gemini-btn gemini-btn-tonal" style="height: 32px; padding: 0 10px;" title="Good response"><span class="material-symbols-outlined" style="font-size: 16px;">thumb_up</span></button>
-          <button class="gemini-btn gemini-btn-tonal" style="height: 32px; padding: 0 10px;" title="Bad response"><span class="material-symbols-outlined" style="font-size: 16px;">thumb_down</span></button>
-          <button class="gemini-btn gemini-btn-tonal" style="height: 32px; padding: 0 10px;" title="Copy" onclick="alert('Copied to clipboard!')"><span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span></button>
-        </div>
-        <div style="font-size: 12px; color: var(--gemini-text-subtle);">Mifflin-St Jeor & WHO ICD-11 Calibrated</div>
-      </div>
-    </div>
-
-    <!-- ==================== 1. BRAND IDENTITY & LOGO SPECIFICATIONS ==================== -->
-    <section>
-      <div class="section-header">
-        <h2 class="section-title"><span class="material-symbols-outlined gemini-sparkle-svg">palette</span> 1. Brand Identity & Logo Specifications</h2>
-        <p class="section-desc">The official Mitosis Bio-Cell trademark geometry and Ubuntu 500 wordmark lockup.</p>
-      </div>
-
-      <div class="gemini-card" style="display: flex; align-items: center; justify-content: space-around; flex-wrap: wrap; gap: 2rem;">
-        <div style="text-align: center;">
-          <svg width="84" height="84" viewBox="0 0 100 100" fill="none">
-            <path d="M50 16 C28 16, 16 32, 16 50 C16 68, 28 84, 50 84 C38 72, 34 58, 34 50 C34 42, 38 28, 50 16 Z" fill="url(#tl1)"/>
-            <path d="M50 16 C72 16, 84 32, 84 50 C84 68, 72 84, 50 84 C62 72, 66 58, 66 50 C66 42, 62 28, 50 16 Z" fill="url(#tl2)"/>
-            <circle cx="50" cy="50" r="8" fill="#059669"/>
-            <defs>
-              <linearGradient id="tl1" x1="16" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#0284C7"/>
-                <stop offset="1" stop-color="#1D4ED8"/>
-              </linearGradient>
-              <linearGradient id="tl2" x1="84" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#059669"/>
-                <stop offset="1" stop-color="#10B981"/>
-              </linearGradient>
-            </defs>
-          </svg>
-          <div style="font-size: 12px; font-weight: 700; color: var(--gemini-text-muted); margin-top: 6px;">MITOSIS BIO-CELL</div>
+      <!-- 4-Grid Action Cards -->
+      <div class="grid-4col">
+        <div class="gemini-action-card" onclick="triggerQuery('Calculate my epigenetic biological age trajectory')">
+          <span class="material-symbols-outlined gemini-sparkle-svg" style="font-size: 28px;">genetics</span>
+          <div>
+            <div style="font-weight: 700; font-size: 15px; margin-bottom: 4px;">Epigenetic DNAm Age</div>
+            <div style="font-size: 13px; color: var(--gemini-text-muted);">Rate of aging & years saved.</div>
+          </div>
         </div>
 
-        <div>
-          <div class="brand-wordmark" style="font-size: 52px; line-height: 1;">tovelu</div>
-          <div style="font-size: 13px; color: var(--gemini-text-muted); margin-top: 8px;">
-            <strong>Wordmark Font:</strong> Ubuntu 500 • <strong>Casing:</strong> Strict Lowercase • <strong>Clinical Trust:</strong> 100%
+        <div class="gemini-action-card" onclick="triggerQuery('Generate a whole-food meal plan with zero seed oils')">
+          <span class="material-symbols-outlined" style="font-size: 28px; color: var(--gemini-vitality-emerald);">restaurant</span>
+          <div>
+            <div style="font-weight: 700; font-size: 15px; margin-bottom: 4px;">Seed-Oil-Free 3-Meal</div>
+            <div style="font-size: 13px; color: var(--gemini-text-muted);">Calibrate 1,740 kcal BMR.</div>
+          </div>
+        </div>
+
+        <div class="gemini-action-card" onclick="triggerQuery('What is my optimal circadian sunlight & melatonin window?')">
+          <span class="material-symbols-outlined" style="font-size: 28px; color: #D97706;">wb_sunny</span>
+          <div>
+            <div style="font-weight: 700; font-size: 15px; margin-bottom: 4px;">Circadian Solar Sync</div>
+            <div style="font-size: 13px; color: var(--gemini-text-muted);">Morning cortisol & night shield.</div>
+          </div>
+        </div>
+
+        <div class="gemini-action-card" onclick="triggerQuery('Triage symptoms across the 55,000+ WHO ICD-11 database')">
+          <span class="material-symbols-outlined" style="font-size: 28px; color: var(--gemini-sparkle-blue);">medical_services</span>
+          <div>
+            <div style="font-weight: 700; font-size: 15px; margin-bottom: 4px;">55k WHO Triage</div>
+            <div style="font-size: 13px; color: var(--gemini-text-muted);">Reversible vs Emergency.</div>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- ==================== 2. GEMINI BUTTONS & INTERACTIVE CONTROLS ==================== -->
-    <section>
-      <div class="section-header">
-        <h2 class="section-title"><span class="material-symbols-outlined gemini-sparkle-svg">smart_button</span> 2. Gemini Buttons & Action Triggers</h2>
-        <p class="section-desc">Tactile pill buttons with Google state layers and micro-depress animations.</p>
+      <!-- Gemini Live Voice Orb -->
+      <div class="gemini-card" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 28px 20px;">
+        <div class="gemini-live-orb" onclick="startVoicePulse()">
+          <span class="material-symbols-outlined" style="font-size: 32px;">mic</span>
+        </div>
+        <div style="font-weight: 700; font-size: 16px; margin-top: 12px;">Gemini Live Voice • THAIS AI</div>
+        <div style="font-size: 13px; color: var(--gemini-text-muted); max-width: 440px; margin-top: 4px;">
+          Tap the pulsing orb to speak naturally on any device.
+        </div>
       </div>
 
-      <div class="gemini-card" style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
-        <button class="gemini-btn gemini-btn-primary">
-          <span class="material-symbols-outlined" style="font-size: 18px;">auto_awesome</span> Generate Protocol
-        </button>
-        <button class="gemini-btn gemini-btn-vitality">
-          <span class="material-symbols-outlined" style="font-size: 18px;">favorite</span> Unlock Biomarkers
-        </button>
-        <button class="gemini-btn gemini-btn-tonal">
-          <span class="material-symbols-outlined" style="font-size: 18px;">tune</span> Tonal Filter
-        </button>
-        <button class="gemini-btn gemini-btn-outline">
-          <span class="material-symbols-outlined" style="font-size: 18px;">bookmark</span> Outlined
-        </button>
+      <!-- Gemini Multi-Turn AI Response Demo -->
+      <div id="gemini-chat-response" class="gemini-card" style="display: none; flex-direction: column; gap: 14px;">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="material-symbols-outlined gemini-sparkle-svg" style="font-size: 22px;">auto_awesome</span>
+            <span style="font-weight: 700; font-size: 14px;">THAIS Clinical Intelligence</span>
+          </div>
+          <span style="font-size: 11px; font-weight: 700; color: var(--gemini-vitality-emerald); background: var(--gemini-surface-container); padding: 2px 8px; border-radius: 9999px;">
+            ✓ LAW-001
+          </span>
+        </div>
+
+        <div id="gemini-output-content" style="font-size: 14px; line-height: 1.5; color: var(--gemini-text-main);"></div>
+
+        <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--gemini-border); padding-top: 10px;">
+          <div style="display: flex; gap: 6px;">
+            <button class="gemini-btn gemini-btn-tonal" style="height: 30px; padding: 0 8px;"><span class="material-symbols-outlined" style="font-size: 15px;">thumb_up</span></button>
+            <button class="gemini-btn gemini-btn-tonal" style="height: 30px; padding: 0 8px;"><span class="material-symbols-outlined" style="font-size: 15px;">thumb_down</span></button>
+            <button class="gemini-btn gemini-btn-tonal" style="height: 30px; padding: 0 8px;" onclick="alert('Copied!')"><span class="material-symbols-outlined" style="font-size: 15px;">content_copy</span></button>
+          </div>
+          <div style="font-size: 11px; color: var(--gemini-text-subtle);">Mifflin-St Jeor & WHO Calibrated</div>
+        </div>
       </div>
-    </section>
 
-    <!-- ==================== 3. 1-TAP INTAKE CARDS & TIME PICKERS ==================== -->
-    <section>
-      <div class="section-header">
-        <h2 class="section-title"><span class="material-symbols-outlined gemini-sparkle-svg">touch_app</span> 3. 1-Tap Intake Cards & Time Pickers</h2>
-        <p class="section-desc">Zero-typing form controls engineered so users never struggle on mobile screens.</p>
-      </div>
+      <!-- 1-Tap Intake Controls -->
+      <section>
+        <div style="font-size: 18px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+          <span class="material-symbols-outlined gemini-sparkle-svg">touch_app</span> 1-Tap Mobile & Laptop Controls
+        </div>
 
-      <div class="grid-2col">
-        <!-- 1-Tap Option Cards -->
-        <div class="gemini-card" style="display: flex; flex-direction: column; gap: 10px;">
-          <div style="font-weight: 700; font-size: 15px; margin-bottom: 4px;">1-Tap Health Goals</div>
+        <div class="grid-2col">
+          <!-- 1-Tap Option Card -->
+          <div class="gemini-card" style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="font-weight: 700; font-size: 14px;">1-Tap Health Goals</div>
 
-          <div class="gemini-option-card selected" onclick="toggleOption(this)">
-            <div class="gemini-check-circle">✓</div>
-            <span class="material-symbols-outlined" style="font-size: 26px; color: var(--gemini-sparkle-blue);">local_fire_department</span>
-            <div style="flex: 1;">
-              <div style="font-weight: 700; font-size: 14px;">Burn Visceral Belly Fat</div>
-              <div style="font-size: 12px; color: var(--gemini-text-muted);">Calibrate lipolytic fatty acid oxidation.</div>
+            <div class="gemini-option-card selected" onclick="toggleOption(this)">
+              <div class="gemini-check-circle">✓</div>
+              <span class="material-symbols-outlined" style="font-size: 24px; color: var(--gemini-sparkle-blue);">local_fire_department</span>
+              <div style="flex: 1;">
+                <div style="font-weight: 700; font-size: 14px;">Burn Visceral Belly Fat</div>
+                <div style="font-size: 12px; color: var(--gemini-text-muted);">Calibrate lipolytic oxidation.</div>
+              </div>
+            </div>
+
+            <div class="gemini-option-card" onclick="toggleOption(this)">
+              <div class="gemini-check-circle"></div>
+              <span class="material-symbols-outlined" style="font-size: 24px; color: var(--gemini-vitality-emerald);">bolt</span>
+              <div style="flex: 1;">
+                <div style="font-weight: 700; font-size: 14px;">Stop 2:00 PM Energy Crashes</div>
+                <div style="font-size: 12px; color: var(--gemini-text-muted);">Flatten glucose spikes.</div>
+              </div>
             </div>
           </div>
 
-          <div class="gemini-option-card" onclick="toggleOption(this)">
-            <div class="gemini-check-circle"></div>
-            <span class="material-symbols-outlined" style="font-size: 26px; color: var(--gemini-vitality-emerald);">bolt</span>
-            <div style="flex: 1;">
-              <div style="font-weight: 700; font-size: 14px;">Stop 2:00 PM Energy Crashes</div>
-              <div style="font-size: 12px; color: var(--gemini-text-muted);">Resensitize insulin and flatten glucose spikes.</div>
+          <!-- 1-Tap Preset Time Chips -->
+          <div class="gemini-card" style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="font-weight: 700; font-size: 14px;">Sleep & Wake 1-Tap Chips</div>
+            
+            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+              <div class="gemini-chip active" onclick="toggleChip(this)">06:00 AM</div>
+              <div class="gemini-chip" onclick="toggleChip(this)">06:30 AM</div>
+              <div class="gemini-chip" onclick="toggleChip(this)">10:30 PM</div>
+              <div class="gemini-chip" onclick="toggleChip(this)">11:00 PM</div>
+            </div>
+
+            <div style="font-size: 12px; color: var(--gemini-text-muted); margin-top: 4px;">
+              Optimized for thumb tap on phone and 1-click on laptop.
             </div>
           </div>
         </div>
+      </section>
 
-        <!-- 1-Tap Preset Time Chips -->
-        <div class="gemini-card" style="display: flex; flex-direction: column; gap: 12px;">
-          <div style="font-weight: 700; font-size: 15px;">Sleep & Wake 1-Tap Preset Chips</div>
-          
-          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-            <div class="gemini-chip active" onclick="toggleChip(this)">06:00 AM</div>
-            <div class="gemini-chip" onclick="toggleChip(this)">06:30 AM</div>
-            <div class="gemini-chip" onclick="toggleChip(this)">07:00 AM</div>
-            <div class="gemini-chip" onclick="toggleChip(this)">10:30 PM</div>
-            <div class="gemini-chip" onclick="toggleChip(this)">11:00 PM</div>
-          </div>
-
-          <div style="font-size: 13px; color: var(--gemini-text-muted); margin-top: 8px;">
-            Eliminates typing mistakes and AM/PM confusion on all devices.
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== 4. HEALTH & CLINICAL INTELLIGENCE WIDGETS ==================== -->
-    <section>
-      <div class="section-header">
-        <h2 class="section-title"><span class="material-symbols-outlined gemini-sparkle-svg">vital_signs</span> 4. Clinical Intelligence Specialized Widgets</h2>
-        <p class="section-desc">Mifflin-St Jeor, DNAm Epigenetic age, and 55,000+ WHO triage categorized under LAW-001.</p>
-      </div>
-
-      <div class="grid-2col">
-        <!-- Epigenetic Longevity Meter -->
-        <div class="gemini-card">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <span style="font-size: 12px; font-weight: 800; color: var(--gemini-vitality-emerald); text-transform: uppercase;">DNAm EPIGENETIC SPEEDOMETER</span>
-            <span style="font-size: 12px; font-weight: 700; color: var(--gemini-sparkle-blue);">0.82x Aging Rate</span>
-          </div>
-          <div style="font-size: 32px; font-weight: 800; color: var(--gemini-vitality-emerald); margin: 8px 0 2px 0;">25.8 Biological Yrs</div>
-          <div style="font-size: 13px; color: var(--gemini-text-muted);">Chronological: 32.0 Yrs • <strong>+6.2 Yrs Restored</strong></div>
-          <div style="height: 8px; background: var(--gemini-surface-container); border-radius: 9999px; overflow: hidden; margin-top: 12px;">
-            <div style="height: 100%; width: 82%; background: var(--gemini-gradient-btn);"></div>
-          </div>
-        </div>
-
-        <!-- 3-Column WHO ICD-11 Triage -->
-        <div class="gemini-card" style="border-left: 5px solid var(--gemini-vitality-emerald);">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <strong style="color: var(--gemini-vitality-emerald); font-size: 14px;">100% Solvable by Tovelu</strong>
-            <span style="font-size: 11px; font-weight: 800; background: var(--gemini-surface-container); padding: 2px 8px; border-radius: 9999px;">ICD-11 5B81</span>
-          </div>
-          <div style="font-size: 13px; color: var(--gemini-text-muted); margin-top: 6px; line-height: 1.5;">
-            <strong>Pre-Diabetes & Metabolic Syndrome:</strong> 88% biological reversal rate via whole-food precision nutrition and post-meal Zone 2 walks.
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== 5. 5-TAB PLATFORM NAVIGATION BAR ==================== -->
-    <section>
-      <div class="section-header">
-        <h2 class="section-title"><span class="material-symbols-outlined gemini-sparkle-svg">navigation</span> 5. 5-Tab Platform Navigation Bar</h2>
-        <p class="section-desc">Signature Google bottom bar with active gradient pill selection indicator.</p>
-      </div>
-
-      <div class="gemini-card" style="padding: 0; overflow: hidden; border-radius: 24px;">
+      <!-- 5-Tab Navigation Bar -->
+      <div class="gemini-card" style="padding: 0; overflow: hidden; border-radius: 20px;">
         <div class="gemini-nav-bar">
           <div class="gemini-nav-item active" onclick="selectNav(this)">
-            <div class="gemini-nav-indicator">
-              <span class="material-symbols-outlined">bolt</span>
-            </div>
+            <div class="gemini-nav-indicator"><span class="material-symbols-outlined">bolt</span></div>
             <span>FLOW</span>
           </div>
           <div class="gemini-nav-item" onclick="selectNav(this)">
-            <div class="gemini-nav-indicator">
-              <span class="material-symbols-outlined">menu_book</span>
-            </div>
+            <div class="gemini-nav-indicator"><span class="material-symbols-outlined">menu_book</span></div>
             <span>BOOK</span>
           </div>
           <div class="gemini-nav-item" onclick="selectNav(this)">
-            <div class="gemini-nav-indicator">
-              <span class="material-symbols-outlined">chat</span>
-            </div>
+            <div class="gemini-nav-indicator"><span class="material-symbols-outlined">chat</span></div>
             <span>CHAT</span>
           </div>
           <div class="gemini-nav-item" onclick="selectNav(this)">
-            <div class="gemini-nav-indicator">
-              <span class="material-symbols-outlined">monitoring</span>
-            </div>
+            <div class="gemini-nav-indicator"><span class="material-symbols-outlined">monitoring</span></div>
             <span>HEALTH</span>
           </div>
           <div class="gemini-nav-item" onclick="selectNav(this)">
-            <div class="gemini-nav-indicator">
-              <span class="material-symbols-outlined">person</span>
-            </div>
+            <div class="gemini-nav-indicator"><span class="material-symbols-outlined">person</span></div>
             <span>YOU</span>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- Fixed Floating Gemini Prompt Capsule -->
-    <div class="floating-prompt-wrapper">
-      <div class="gemini-prompt-box">
-        <span class="material-symbols-outlined" style="color: var(--gemini-text-subtle); cursor: pointer;" title="Attach lab tests or photos">add_photo_alternate</span>
-        <input type="text" class="gemini-prompt-input" id="gemini-input-field" placeholder="Ask THAIS anything about your health, diet, or biomarkers..." onkeypress="if(event.key === 'Enter') executeGeminiQuery()" />
-        <span class="material-symbols-outlined" style="color: var(--gemini-text-subtle); cursor: pointer;" title="Voice input" onclick="startVoicePulse()">mic</span>
-        <button class="gemini-btn gemini-btn-primary" style="height: 36px; width: 36px; padding: 0; border-radius: 50%;" onclick="executeGeminiQuery()">
-          <span class="material-symbols-outlined" style="font-size: 20px;">arrow_upward</span>
-        </button>
+      <!-- Floating Prompt Capsule -->
+      <div class="floating-prompt-wrapper">
+        <div class="gemini-prompt-box">
+          <span class="material-symbols-outlined" style="color: var(--gemini-text-subtle); cursor: pointer;" title="Attach lab tests">add_photo_alternate</span>
+          <input type="text" class="gemini-prompt-input" id="gemini-input-field" placeholder="Ask THAIS anything about your health or diet..." onkeypress="if(event.key === 'Enter') executeGeminiQuery()" />
+          <span class="material-symbols-outlined" style="color: var(--gemini-text-subtle); cursor: pointer;" onclick="startVoicePulse()">mic</span>
+          <button class="gemini-btn gemini-btn-primary" style="height: 34px; width: 34px; padding: 0; border-radius: 50%;" onclick="executeGeminiQuery()">
+            <span class="material-symbols-outlined" style="font-size: 18px;">arrow_upward</span>
+          </button>
+        </div>
       </div>
-    </div>
 
-  </main>
+    </main>
+  </div>
 
   <script>
     function toggleTheme() {
@@ -454,6 +395,22 @@
       document.body.className = next === 'dark' ? 'tds-theme-dark' : '';
       document.getElementById('theme-icon-sym').innerText = next === 'dark' ? 'light_mode' : 'dark_mode';
       document.getElementById('theme-btn-text').innerText = next === 'dark' ? 'Light' : 'Dark';
+    }
+
+    function setViewportMode(mode) {
+      document.querySelectorAll('.device-pill').forEach(p => p.classList.remove('active'));
+      const frame = document.getElementById('main-device-frame');
+      frame.className = 'device-frame';
+
+      if (mode === 'laptop') {
+        document.getElementById('btn-laptop').classList.add('active');
+      } else if (mode === 'tablet') {
+        document.getElementById('btn-tablet').classList.add('active');
+        frame.classList.add('mode-tablet');
+      } else if (mode === 'mobile') {
+        document.getElementById('btn-mobile').classList.add('active');
+        frame.classList.add('mode-mobile');
+      }
     }
 
     function toggleOption(card) {
