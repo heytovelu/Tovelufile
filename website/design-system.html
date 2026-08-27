@@ -3,14 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>Material 3 for Tovelu (TDS-M3) — Living Design System</title>
+  <title>Google Material 3 for Tovelu Health (Official System Showcase)</title>
   
-  <!-- Locked Brand Typography -->
+  <!-- Google Fonts: Google Sans & Material Symbols -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Ubuntu:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Google+Sans:wght@400;500;700&family=Google+Sans+Text:wght@400;500;700&family=Google+Sans+Display:wght@400;500;700&family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   
-  <!-- TDS Material 3 CSS -->
+  <!-- TDS Material 3 Framework -->
   <link rel="stylesheet" href="tovelu-design-system.css">
   
   <style>
@@ -18,7 +19,7 @@
     body {
       background-color: var(--md-sys-color-surface);
       color: var(--md-sys-color-on-surface);
-      font-family: 'Inter', sans-serif;
+      font-family: 'Google Sans Text', 'Roboto', sans-serif;
       line-height: 1.5;
       min-height: 100vh;
       display: flex;
@@ -26,8 +27,8 @@
       transition: background-color 0.2s, color 0.2s;
     }
 
-    /* M3 Top App Bar */
-    header.m3-top-app-bar {
+    /* Google M3 Top App Bar */
+    header.google-top-app-bar {
       height: 72px;
       background: var(--md-sys-color-surface-container);
       padding: 0 clamp(1rem, 3vw, 2.5rem);
@@ -40,7 +41,7 @@
       border-bottom: 1px solid var(--md-sys-color-outline-variant);
     }
 
-    .brand-lockup {
+    .google-brand-lockup {
       display: flex;
       align-items: center;
       gap: 12px;
@@ -53,9 +54,24 @@
       color: var(--md-sys-color-on-surface);
     }
 
+    .google-account-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--md-sys-color-primary);
+      color: var(--md-sys-color-on-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+      user-select: none;
+    }
+
     /* Main Container */
-    .m3-container {
-      max-width: 1200px;
+    .google-container {
+      max-width: 1100px;
       width: 100%;
       margin: 0 auto;
       padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem) 6rem clamp(1rem, 3vw, 2rem);
@@ -64,323 +80,320 @@
       gap: 3.5rem;
     }
 
-    .m3-hero {
-      background: var(--md-sys-color-surface-container-low);
-      border-radius: var(--md-sys-shape-corner-extra-large);
-      padding: clamp(2rem, 5vw, 3.5rem);
-      border: 1px solid var(--md-sys-color-outline-variant);
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .hero-title {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      font-weight: 800;
-      line-height: 1.15;
-      letter-spacing: -0.03em;
-      color: var(--md-sys-color-on-surface);
-    }
-
-    .hero-subtitle {
-      font-size: clamp(1rem, 2.5vw, 1.2rem);
-      color: var(--md-sys-color-on-surface-variant);
-      max-width: 780px;
-      line-height: 1.6;
-    }
-
-    /* Section Layout */
-    .m3-section-title {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 1.6rem;
-      font-weight: 800;
-      margin-bottom: 0.5rem;
+    /* M3 Section Styling */
+    .section-title-m3 {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 6px;
       display: flex;
       align-items: center;
       gap: 10px;
+      color: var(--md-sys-color-on-surface);
     }
-    .m3-section-desc {
-      font-size: 0.92rem;
+    .section-subtitle-m3 {
+      font-size: 14px;
       color: var(--md-sys-color-on-surface-variant);
-      margin-bottom: 1.75rem;
+      margin-bottom: 24px;
     }
 
-    /* Palette Grid */
-    .palette-grid {
+    /* Color Grid */
+    .color-grid-m3 {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
     }
-    .palette-column {
-      display: flex;
-      flex-direction: column;
-      border-radius: var(--md-sys-shape-corner-large);
+    .color-pill-card {
+      border-radius: 16px;
       overflow: hidden;
       border: 1px solid var(--md-sys-color-outline-variant);
+      display: flex;
+      flex-direction: column;
     }
-    .palette-step {
-      padding: 1rem 1.25rem;
+    .color-box-m3 {
+      padding: 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 0.84rem;
-      font-weight: 700;
+      font-family: 'Google Sans Text', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
     }
 
-    /* Interactive Component Grids */
-    .component-grid {
+    /* Layout Grids */
+    .interactive-grid-m3 {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 1.5rem;
-    }
-
-    /* Custom Color Picker Swatches */
-    .theme-picker-bar {
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      gap: 20px;
     }
   </style>
 </head>
 <body>
 
-  <!-- M3 Top App Bar -->
-  <header class="m3-top-app-bar">
-    <div class="brand-lockup">
-      <svg width="34" height="34" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M50 16 C28 16, 16 32, 16 50 C16 68, 28 84, 50 84 C38 72, 34 58, 34 50 C34 42, 38 28, 50 16 Z" fill="url(#h-l3)"/>
-        <path d="M50 16 C72 16, 84 32, 84 50 C84 68, 72 84, 50 84 C62 72, 66 58, 66 50 C66 42, 62 28, 50 16 Z" fill="url(#h-r3)"/>
-        <circle cx="50" cy="50" r="8" fill="#059669"/>
+  <!-- Google M3 Top App Bar -->
+  <header class="google-top-app-bar">
+    <div class="google-brand-lockup">
+      <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 16 C28 16, 16 32, 16 50 C16 68, 28 84, 50 84 C38 72, 34 58, 34 50 C34 42, 38 28, 50 16 Z" fill="url(#g-l)"/>
+        <path d="M50 16 C72 16, 84 32, 84 50 C84 68, 72 84, 50 84 C62 72, 66 58, 66 50 C66 42, 62 28, 50 16 Z" fill="url(#g-r)"/>
+        <circle cx="50" cy="50" r="8" fill="#146C2E"/>
         <defs>
-          <linearGradient id="h-l3" x1="16" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#0284C7"/>
-            <stop offset="1" stop-color="#1D4ED8"/>
+          <linearGradient id="g-l" x1="16" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#00639B"/>
+            <stop offset="1" stop-color="#0B57D0"/>
           </linearGradient>
-          <linearGradient id="h-r3" x1="84" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse">
-            <stop stop-color="#059669"/>
-            <stop offset="1" stop-color="#10B981"/>
+          <linearGradient id="g-r" x1="84" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#146C2E"/>
+            <stop offset="1" stop-color="#198754"/>
           </linearGradient>
         </defs>
       </svg>
       <span class="brand-wordmark">tovelu</span>
-      <span class="m3-badge m3-badge-primary" style="margin-left: 6px;">MATERIAL 3</span>
+      <span class="m3-badge m3-badge-primary" style="margin-left: 6px;">GOOGLE MATERIAL 3</span>
     </div>
 
-    <div class="theme-picker-bar">
+    <div style="display: flex; align-items: center; gap: 12px;">
       <button class="m3-btn m3-btn-tonal" onclick="toggleTheme()">
-        <span id="theme-btn-icon">🌙</span> <span id="theme-btn-text">Dark Mode</span>
+        <span class="material-symbols-outlined" id="theme-icon-sym" style="font-size: 18px;">dark_mode</span>
+        <span id="theme-btn-text">Dark Mode</span>
       </button>
-      <a href="survey.html" class="m3-btn m3-btn-filled">
-        Test Survey ➔
-      </a>
+      <div class="google-account-avatar" title="Google Account">T</div>
     </div>
   </header>
 
   <!-- Main Container -->
-  <main class="m3-container">
+  <main class="google-container">
     
-    <!-- Hero Banner -->
-    <div class="m3-hero">
-      <div class="m3-badge m3-badge-secondary" style="width: fit-content;">GOVERNING DESIGN SYSTEM</div>
-      <h1 class="hero-title">Material 3 for Tovelu</h1>
-      <p class="hero-subtitle">
-        The universal visual language for 8.15 Billion humans. Engineered with Google Material 3 tonal elevation, fluid squircle shapes, and hospital-grade clinical precision under Constitutional LAW-001.
+    <!-- M3 Search Bar -->
+    <div class="m3-search-bar">
+      <span class="material-symbols-outlined" style="color: var(--md-sys-color-on-surface-variant);">search</span>
+      <input type="text" class="m3-search-input" placeholder="Search 55,000+ conditions, foods, or biomarkers in Material 3..." />
+      <span class="material-symbols-outlined" style="color: var(--md-sys-color-primary); cursor: pointer;">mic</span>
+    </div>
+
+    <!-- Hero Card -->
+    <div class="m3-card m3-card-filled" style="padding: 32px;">
+      <div class="m3-badge m3-badge-secondary" style="width: fit-content; margin-bottom: 12px;">
+        <span class="material-symbols-outlined" style="font-size: 16px;">verified</span> OFFICIAL MATERIAL 3 DESIGN LANGUAGE
+      </div>
+      <h1 style="font-family: 'Google Sans Display', 'Google Sans', sans-serif; font-size: 32px; font-weight: 700; line-height: 1.2; margin-bottom: 8px;">
+        Tovelu Health Intelligence • Material You
+      </h1>
+      <p style="font-size: 16px; color: var(--md-sys-color-on-surface-variant); max-width: 740px;">
+        100% pure Google Material 3 (M3) component system for 8.15 Billion humans. Dynamic tonal surface elevation, authentic Google Sans typography, Material Symbols, and hospital-grade medical precision.
       </p>
     </div>
 
     <!-- 1. M3 TONAL PALETTES -->
     <section>
-      <h2 class="m3-section-title"><span>🎨</span> 1. M3 Dynamic Tonal Color System</h2>
-      <p class="m3-section-desc">Material 3 uses algorithmic tonal steps (Primary, Secondary, Tertiary, Surface Containers) for perfect WCAG AAA contrast.</p>
+      <h2 class="section-title-m3"><span class="material-symbols-outlined" style="color: var(--md-sys-color-primary);">palette</span> 1. M3 Tonal Palette System</h2>
+      <p class="section-subtitle-m3">Google's dynamic color roles engineered for optimal accessibility and visual balance.</p>
 
-      <div class="palette-grid">
-        <!-- Primary Tonal Column -->
-        <div class="palette-column">
-          <div class="palette-step" style="background: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary);">
-            <span>Primary (Azure)</span>
-            <span>#1D4ED8</span>
+      <div class="color-grid-m3">
+        <!-- Primary Tonal -->
+        <div class="color-pill-card">
+          <div class="color-box-m3" style="background: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary);">
+            <span>Primary</span>
+            <span>#0B57D0</span>
           </div>
-          <div class="palette-step" style="background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container);">
+          <div class="color-box-m3" style="background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container);">
             <span>Primary Container</span>
-            <span>#DBEAFE</span>
+            <span>#D3E3FD</span>
           </div>
-          <div class="palette-step" style="background: var(--md-sys-color-on-primary-container); color: #FFFFFF;">
+          <div class="color-box-m3" style="background: var(--md-sys-color-on-primary-container); color: #FFFFFF;">
             <span>On-Primary Container</span>
-            <span>#1E3A8A</span>
+            <span>#041E49</span>
           </div>
         </div>
 
-        <!-- Secondary Tonal Column -->
-        <div class="palette-column">
-          <div class="palette-step" style="background: var(--md-sys-color-secondary); color: var(--md-sys-color-on-secondary);">
-            <span>Secondary (Sky)</span>
-            <span>#0284C7</span>
+        <!-- Secondary Tonal -->
+        <div class="color-pill-card">
+          <div class="color-box-m3" style="background: var(--md-sys-color-secondary); color: var(--md-sys-color-on-secondary);">
+            <span>Secondary</span>
+            <span>#00639B</span>
           </div>
-          <div class="palette-step" style="background: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container);">
+          <div class="color-box-m3" style="background: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container);">
             <span>Secondary Container</span>
-            <span>#E0F2FE</span>
+            <span>#C2E7FF</span>
           </div>
-          <div class="palette-step" style="background: var(--md-sys-color-on-secondary-container); color: #FFFFFF;">
+          <div class="color-box-m3" style="background: var(--md-sys-color-on-secondary-container); color: #FFFFFF;">
             <span>On-Secondary Container</span>
-            <span>#0369A1</span>
+            <span>#001D35</span>
           </div>
         </div>
 
-        <!-- Tertiary Tonal Column -->
-        <div class="palette-column">
-          <div class="palette-step" style="background: var(--md-sys-color-tertiary); color: var(--md-sys-color-on-tertiary);">
+        <!-- Tertiary Tonal -->
+        <div class="color-pill-card">
+          <div class="color-box-m3" style="background: var(--md-sys-color-tertiary); color: var(--md-sys-color-on-tertiary);">
             <span>Tertiary (Vitality)</span>
-            <span>#059669</span>
+            <span>#146C2E</span>
           </div>
-          <div class="palette-step" style="background: var(--md-sys-color-tertiary-container); color: var(--md-sys-color-on-tertiary-container);">
+          <div class="color-box-m3" style="background: var(--md-sys-color-tertiary-container); color: var(--md-sys-color-on-tertiary-container);">
             <span>Tertiary Container</span>
-            <span>#D1FAE5</span>
+            <span>#C4EED0</span>
           </div>
-          <div class="palette-step" style="background: var(--md-sys-color-on-tertiary-container); color: #FFFFFF;">
+          <div class="color-box-m3" style="background: var(--md-sys-color-on-tertiary-container); color: #FFFFFF;">
             <span>On-Tertiary Container</span>
-            <span>#065F46</span>
-          </div>
-        </div>
-
-        <!-- Surface Container Column -->
-        <div class="palette-column">
-          <div class="palette-step" style="background: var(--md-sys-color-surface-container-low); color: var(--md-sys-color-on-surface);">
-            <span>Surface Container Low</span>
-            <span>Tone 96</span>
-          </div>
-          <div class="palette-step" style="background: var(--md-sys-color-surface-container); color: var(--md-sys-color-on-surface);">
-            <span>Surface Container</span>
-            <span>Tone 94</span>
-          </div>
-          <div class="palette-step" style="background: var(--md-sys-color-surface-container-high); color: var(--md-sys-color-on-surface);">
-            <span>Surface Container High</span>
-            <span>Tone 92</span>
+            <span>#072711</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 2. M3 BUTTONS & FAB -->
+    <!-- 2. GOOGLE M3 BUTTONS & FAB -->
     <section>
-      <h2 class="m3-section-title"><span>🔘</span> 2. Material 3 Buttons & Actions</h2>
-      <p class="m3-section-desc">Pill-shaped, tactile buttons with state layers, elevation shifts, and floating action buttons.</p>
+      <h2 class="section-title-m3"><span class="material-symbols-outlined" style="color: var(--md-sys-color-primary);">smart_button</span> 2. Google M3 Buttons & FABs</h2>
+      <p class="section-subtitle-m3">Official Material 3 button variants with rounded-full pill shapes and state layers.</p>
 
-      <div class="m3-card m3-card-filled" style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center;">
-        <button class="m3-btn m3-btn-filled">Filled Button</button>
-        <button class="m3-btn m3-btn-tonal">Tonal Button</button>
-        <button class="m3-btn m3-btn-elevated">Elevated Button</button>
-        <button class="m3-btn m3-btn-outlined">Outlined Button</button>
-        <button class="m3-btn m3-btn-vitality">Vitality Action ⚡</button>
-        <button class="m3-fab" title="Floating Action Button">➕</button>
+      <div class="m3-card m3-card-outlined" style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
+        <button class="m3-btn m3-btn-filled">
+          <span class="material-symbols-outlined" style="font-size: 18px;">check</span> Filled Button
+        </button>
+        <button class="m3-btn m3-btn-tonal">
+          <span class="material-symbols-outlined" style="font-size: 18px;">tune</span> Tonal Button
+        </button>
+        <button class="m3-btn m3-btn-elevated">
+          <span class="material-symbols-outlined" style="font-size: 18px;">star</span> Elevated Button
+        </button>
+        <button class="m3-btn m3-btn-outlined">
+          <span class="material-symbols-outlined" style="font-size: 18px;">bookmark</span> Outlined Button
+        </button>
+        <button class="m3-btn m3-btn-text">
+          <span class="material-symbols-outlined" style="font-size: 18px;">info</span> Text Button
+        </button>
+        <button class="m3-fab-extended">
+          <span class="material-symbols-outlined">add</span> Create Master Plan
+        </button>
+        <button class="m3-fab" title="M3 FAB">
+          <span class="material-symbols-outlined">favorite</span>
+        </button>
       </div>
     </section>
 
-    <!-- 3. M3 1-TAP CARDS & CHIPS -->
+    <!-- 3. M3 SELECTION CARDS, CHIPS & SWITCHES -->
     <section>
-      <h2 class="m3-section-title"><span>🎛️</span> 3. M3 Selection Cards & Interactive Chips</h2>
-      <p class="m3-section-desc">Zero-typing interactive elements designed for 1-tap mobile intake.</p>
+      <h2 class="section-title-m3"><span class="material-symbols-outlined" style="color: var(--md-sys-color-primary);">touch_app</span> 3. Material 3 1-Tap Intake & Chips</h2>
+      <p class="section-subtitle-m3">1-Tap selection cards with Google check indicators, assist chips, and switches.</p>
 
-      <div class="component-grid">
-        <!-- 1-Tap Option Cards -->
-        <div class="m3-card m3-card-outlined" style="display: flex; flex-direction: column; gap: 1rem;">
-          <h3 style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.1rem; font-weight: 800;">1-Tap Option Cards</h3>
+      <div class="interactive-grid-m3">
+        <!-- 1-Tap Selection Cards -->
+        <div class="m3-card m3-card-elevated" style="display: flex; flex-direction: column; gap: 12px;">
+          <h3 style="font-family: 'Google Sans', sans-serif; font-size: 16px; font-weight: 700;">1-Tap Option Cards</h3>
           
           <div class="m3-option-card selected" onclick="toggleOptionCard(this)">
             <div class="m3-icon-check">✓</div>
-            <span style="font-size: 1.5rem;">🔥</span>
-            <div>
-              <div style="font-weight: 700; font-size: 0.95rem;">Lose Visceral Belly Fat</div>
-              <div style="font-size: 0.8rem; color: var(--md-sys-color-on-surface-variant);">Calibrate lipolytic metabolism and drop waist size.</div>
+            <span class="material-symbols-outlined" style="font-size: 28px; color: var(--md-sys-color-primary);">local_fire_department</span>
+            <div style="flex: 1;">
+              <div style="font-family: 'Google Sans', sans-serif; font-weight: 700; font-size: 15px;">Burn Visceral Fat</div>
+              <div style="font-size: 13px; color: var(--md-sys-color-on-surface-variant);">Calibrate lipolytic metabolism and mitochondrial energy.</div>
             </div>
           </div>
 
           <div class="m3-option-card" onclick="toggleOptionCard(this)">
             <div class="m3-icon-check"></div>
-            <span style="font-size: 1.5rem;">⚡</span>
-            <div>
-              <div style="font-weight: 700; font-size: 0.95rem;">Stop 2:00 PM Afternoon Crashes</div>
-              <div style="font-size: 0.8rem; color: var(--md-sys-color-on-surface-variant);">Flatten glycemic volatility & restore focus.</div>
+            <span class="material-symbols-outlined" style="font-size: 28px; color: var(--md-sys-color-secondary);">bolt</span>
+            <div style="flex: 1;">
+              <div style="font-family: 'Google Sans', sans-serif; font-weight: 700; font-size: 15px;">Stop 2:00 PM Fatigue</div>
+              <div style="font-size: 13px; color: var(--md-sys-color-on-surface-variant);">Eliminate reactive insulin drops and brain fog.</div>
             </div>
           </div>
         </div>
 
-        <!-- M3 Chips & Presets -->
-        <div class="m3-card m3-card-outlined" style="display: flex; flex-direction: column; gap: 1rem;">
-          <h3 style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.1rem; font-weight: 800;">M3 Time Preset Chips</h3>
-          <p style="font-size: 0.85rem; color: var(--md-sys-color-on-surface-variant);">Instant 1-tap chips eliminate AM/PM keyboard errors.</p>
+        <!-- Chips & Switches -->
+        <div class="m3-card m3-card-elevated" style="display: flex; flex-direction: column; gap: 16px;">
+          <h3 style="font-family: 'Google Sans', sans-serif; font-size: 16px; font-weight: 700;">M3 Chips & Switches</h3>
           
           <div style="display: flex; flex-wrap: wrap; gap: 8px;">
-            <div class="m3-chip active" onclick="toggleChip(this)">06:00 AM</div>
-            <div class="m3-chip" onclick="toggleChip(this)">06:30 AM</div>
-            <div class="m3-chip" onclick="toggleChip(this)">07:00 AM</div>
-            <div class="m3-chip" onclick="toggleChip(this)">10:30 PM</div>
-            <div class="m3-chip" onclick="toggleChip(this)">11:00 PM</div>
+            <div class="m3-chip active" onclick="toggleChip(this)">
+              <span class="material-symbols-outlined" style="font-size: 18px;">wb_sunny</span> 06:00 AM
+            </div>
+            <div class="m3-chip" onclick="toggleChip(this)">
+              <span class="material-symbols-outlined" style="font-size: 18px;">schedule</span> 06:30 AM
+            </div>
+            <div class="m3-chip" onclick="toggleChip(this)">
+              <span class="material-symbols-outlined" style="font-size: 18px;">bedtime</span> 10:30 PM
+            </div>
           </div>
 
-          <!-- M3 Text Field -->
-          <div style="margin-top: 0.5rem;">
-            <label style="font-size: 0.72rem; font-weight: 800; color: var(--md-sys-color-primary); text-transform: uppercase;">M3 Filled Input Field</label>
-            <input type="text" class="m3-text-field" placeholder="e.g. Type custom city or allergy..." value="Mumbai, India" />
+          <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 10px; border-top: 1px solid var(--md-sys-color-outline-variant);">
+            <div>
+              <div style="font-weight: 700; font-size: 14px;">Circadian Melatonin Shield</div>
+              <div style="font-size: 12px; color: var(--md-sys-color-on-surface-variant);">Auto-dim blue light at 09:30 PM</div>
+            </div>
+            <div class="m3-switch active" onclick="this.classList.toggle('active')">
+              <div class="m3-switch-thumb"></div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 4. M3 NAVIGATION BAR -->
+    <!-- 4. GOOGLE M3 NAVIGATION BAR -->
     <section>
-      <h2 class="m3-section-title"><span>📱</span> 4. M3 Mobile Navigation Bar with Pill Indicators</h2>
-      <p class="m3-section-desc">Google's signature Material 3 navigation bar with rounded pill active state.</p>
+      <h2 class="section-title-m3"><span class="material-symbols-outlined" style="color: var(--md-sys-color-primary);">navigation</span> 4. Google M3 Navigation Bar</h2>
+      <p class="section-subtitle-m3">Signature 80px navigation bar with pill active indicator for Tovelu's 5 core tabs.</p>
 
-      <div class="m3-card m3-card-outlined" style="padding: 0; overflow: hidden;">
+      <div class="m3-card m3-card-outlined" style="padding: 0; overflow: hidden; border-radius: 20px;">
         <div class="m3-nav-bar">
           <div class="m3-nav-item active" onclick="selectNavItem(this)">
-            <div class="m3-nav-indicator">⚡</div>
+            <div class="m3-nav-indicator">
+              <span class="material-symbols-outlined">bolt</span>
+            </div>
             <span>FLOW</span>
           </div>
           <div class="m3-nav-item" onclick="selectNavItem(this)">
-            <div class="m3-nav-indicator">📖</div>
+            <div class="m3-nav-indicator">
+              <span class="material-symbols-outlined">menu_book</span>
+            </div>
             <span>BOOK</span>
           </div>
           <div class="m3-nav-item" onclick="selectNavItem(this)">
-            <div class="m3-nav-indicator">💬</div>
+            <div class="m3-nav-indicator">
+              <span class="material-symbols-outlined">chat</span>
+            </div>
             <span>CHAT</span>
           </div>
           <div class="m3-nav-item" onclick="selectNavItem(this)">
-            <div class="m3-nav-indicator">📊</div>
+            <div class="m3-nav-indicator">
+              <span class="material-symbols-outlined">monitoring</span>
+            </div>
             <span>HEALTH</span>
           </div>
           <div class="m3-nav-item" onclick="selectNavItem(this)">
-            <div class="m3-nav-indicator">👤</div>
+            <div class="m3-nav-indicator">
+              <span class="material-symbols-outlined">person</span>
+            </div>
             <span>YOU</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 5. HEALTH CLINICAL WIDGETS -->
+    <!-- 5. HEALTH & CLINICAL DIAGNOSTICS -->
     <section>
-      <h2 class="m3-section-title"><span>🏥</span> 5. M3 Health & Clinical Triage Widgets</h2>
-      <p class="m3-section-desc">Clinical widgets built with M3 card containers and biological color tokens.</p>
+      <h2 class="section-title-m3"><span class="material-symbols-outlined" style="color: var(--md-sys-color-tertiary);">vital_signs</span> 5. M3 Health & Diagnostic Triage</h2>
+      <p class="section-subtitle-m3">WHO ICD-11 condition triaging and biometric meters in Material 3 cards.</p>
 
-      <div class="component-grid">
-        <!-- Biomarker Gauge Card -->
+      <div class="interactive-grid-m3">
+        <!-- Metabolic Gauge -->
         <div class="m3-card m3-card-filled">
-          <span class="m3-badge m3-badge-tertiary">METABOLIC SIMULATOR</span>
-          <div style="font-size: 1.8rem; font-weight: 800; color: var(--md-sys-color-tertiary); margin: 0.5rem 0 0.2rem 0;">1,740 kcal / day</div>
-          <div style="font-size: 0.85rem; color: var(--md-sys-color-secondary); font-weight: 700;">Top 11.2% Metabolic Profile on Earth</div>
-          <div style="height: 8px; background: var(--md-sys-color-surface-container-highest); border-radius: 9999px; overflow: hidden; margin-top: 1rem;">
+          <span class="m3-badge m3-badge-tertiary">
+            <span class="material-symbols-outlined" style="font-size: 14px;">insights</span> METABOLIC BASAL ENGINE
+          </span>
+          <div style="font-size: 28px; font-weight: 700; color: var(--md-sys-color-tertiary); margin: 12px 0 4px 0;">1,740 kcal / day</div>
+          <div style="font-size: 13px; color: var(--md-sys-color-secondary); font-weight: 500;">Top 11.2% Metabolic Profile on Earth</div>
+          <div style="height: 8px; background: var(--md-sys-color-surface-container-highest); border-radius: 9999px; overflow: hidden; margin-top: 16px;">
             <div style="height: 100%; width: 78%; background: linear-gradient(90deg, var(--md-sys-color-secondary), var(--md-sys-color-tertiary));"></div>
           </div>
         </div>
 
-        <!-- 3-Column Triage M3 Card -->
+        <!-- 3-Column Triage -->
         <div class="m3-card m3-card-elevated" style="border-left: 6px solid var(--md-sys-color-tertiary);">
           <div style="display: flex; justify-content: space-between; align-items: center;">
-            <strong style="color: var(--md-sys-color-tertiary); font-size: 1rem;">Category 1: 100% Solvable by Tovelu</strong>
+            <strong style="color: var(--md-sys-color-tertiary); font-size: 15px;">Category 1: 100% Solvable by Tovelu</strong>
             <span class="m3-badge m3-badge-tertiary">ICD-11 5B81</span>
           </div>
-          <div style="font-size: 0.86rem; color: var(--md-sys-color-on-surface-variant); margin-top: 0.5rem;">
+          <div style="font-size: 13px; color: var(--md-sys-color-on-surface-variant); margin-top: 8px; line-height: 1.5;">
             <strong>Pre-Diabetes & Fatty Liver:</strong> 88% biological reversal rate in 60-90 days via whole-food precision nutrition and post-meal Zone 2 walks.
           </div>
         </div>
@@ -396,7 +409,7 @@
       const next = current === 'dark' ? 'light' : 'dark';
       html.setAttribute('data-theme', next);
       document.body.className = next === 'dark' ? 'tds-theme-dark' : '';
-      document.getElementById('theme-btn-icon').innerText = next === 'dark' ? '☀️' : '🌙';
+      document.getElementById('theme-icon-sym').innerText = next === 'dark' ? 'light_mode' : 'dark_mode';
       document.getElementById('theme-btn-text').innerText = next === 'dark' ? 'Light Mode' : 'Dark Mode';
     }
 
