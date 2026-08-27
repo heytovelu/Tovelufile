@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TOVELU • Master Desktop Google Gemini Design System</title>
   
+  <!-- Favicon: Official Tovelu Mitosis Bio-Cell Logo (Bright Luminous) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 16 C28 16, 16 32, 16 50 C16 68, 28 84, 50 84 C38 72, 34 58, 34 50 C34 42, 38 28, 50 16 Z' fill='%230091FF'/%3E%3Cpath d='M50 16 C72 16, 84 32, 84 50 C84 68, 72 84, 50 84 C62 72, 66 58, 66 50 C66 42, 62 28, 50 16 Z' fill='%2300E676'/%3E%3Ccircle cx='50' cy='50' r='8' fill='%2300F5A0'/%3E%3C/svg%3E" />
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23131314'/%3E%3Cpath d='M50 16 C28 16, 16 32, 16 50 C16 68, 28 84, 50 84 C38 72, 34 58, 34 50 C34 42, 38 28, 50 16 Z' fill='%230091FF'/%3E%3Cpath d='M50 16 C72 16, 84 32, 84 50 C84 68, 72 84, 50 84 C62 72, 66 58, 66 50 C66 42, 62 28, 50 16 Z' fill='%2300E676'/%3E%3Ccircle cx='50' cy='50' r='8' fill='%2300F5A0'/%3E%3C/svg%3E" />
+
   <!-- Google Fonts: Google Sans, Roboto, Ubuntu, JetBrains Mono & Material Symbols -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -171,11 +175,6 @@
     }
 
     /* Grids */
-    .grid-4col {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-    }
     .grid-3col {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -225,20 +224,20 @@
   <!-- Desktop Header -->
   <header class="desktop-header">
     <div class="brand-lockup">
-      <!-- TOVELU MITOSIS LOGO -->
+      <!-- TOVELU MITOSIS LOGO (BRIGHT ELECTRIC GRADIENT) -->
       <div class="tovelu-mitosis-anim">
-        <svg width="34" height="34" viewBox="0 0 100 100" fill="none">
-          <path d="M50 16 C28 16, 16 32, 16 50 C16 68, 28 84, 50 84 C38 72, 34 58, 34 50 C34 42, 38 28, 50 16 Z" fill="url(#tl1)"/>
-          <path d="M50 16 C72 16, 84 32, 84 50 C84 68, 72 84, 50 84 C62 72, 66 58, 66 50 C66 42, 62 28, 50 16 Z" fill="url(#tl2)"/>
-          <circle cx="50" cy="50" r="8" fill="#059669"/>
+        <svg width="36" height="36" viewBox="0 0 100 100" fill="none">
+          <path d="M50 16 C28 16, 16 32, 16 50 C16 68, 28 84, 50 84 C38 72, 34 58, 34 50 C34 42, 38 28, 50 16 Z" fill="url(#b-cyan)"/>
+          <path d="M50 16 C72 16, 84 32, 84 50 C84 68, 72 84, 50 84 C62 72, 66 58, 66 50 C66 42, 62 28, 50 16 Z" fill="url(#b-emerald)"/>
+          <circle cx="50" cy="50" r="8.5" fill="#00F5A0"/>
           <defs>
-            <linearGradient id="tl1" x1="16" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#0284C7"/>
-              <stop offset="1" stop-color="#1D4ED8"/>
+            <linearGradient id="b-cyan" x1="16" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#00C0FF"/>
+              <stop offset="1" stop-color="#0062FF"/>
             </linearGradient>
-            <linearGradient id="tl2" x1="84" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#059669"/>
-              <stop offset="1" stop-color="#10B981"/>
+            <linearGradient id="b-emerald" x1="84" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#00F5A0"/>
+              <stop offset="1" stop-color="#00D06C"/>
             </linearGradient>
           </defs>
         </svg>
@@ -295,71 +294,82 @@
 
       <!-- 1. BRAND & LOGO SECTION -->
       <section id="sec-brand" class="system-section">
-        <h2 class="section-title"><span class="material-symbols-outlined gemini-sparkle-svg">verified</span> Table 1: Brand & Logo Lockup System</h2>
+        <h2 class="section-title"><span class="material-symbols-outlined gemini-sparkle-svg">verified</span> Table 1: Brand & Logo Lockup System (Bright Luminous)</h2>
         
         <div class="grid-3col">
+          <!-- Logo Card -->
           <div class="gemini-card" style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px;">
             <div class="tovelu-mitosis-anim">
-              <svg width="60" height="60" viewBox="0 0 100 100" fill="none">
-                <path d="M50 16 C28 16, 16 32, 16 50 C16 68, 28 84, 50 84 C38 72, 34 58, 34 50 C34 42, 38 28, 50 16 Z" fill="url(#b1)"/>
-                <path d="M50 16 C72 16, 84 32, 84 50 C84 68, 72 84, 50 84 C62 72, 66 58, 66 50 C66 42, 62 28, 50 16 Z" fill="url(#b2)"/>
-                <circle cx="50" cy="50" r="8" fill="#059669"/>
+              <svg width="72" height="72" viewBox="0 0 100 100" fill="none">
+                <path d="M50 16 C28 16, 16 32, 16 50 C16 68, 28 84, 50 84 C38 72, 34 58, 34 50 C34 42, 38 28, 50 16 Z" fill="url(#card-b1)"/>
+                <path d="M50 16 C72 16, 84 32, 84 50 C84 68, 72 84, 50 84 C62 72, 66 58, 66 50 C66 42, 62 28, 50 16 Z" fill="url(#card-b2)"/>
+                <circle cx="50" cy="50" r="8.5" fill="#00F5A0"/>
                 <defs>
-                  <linearGradient id="b1" x1="16" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse"><stop stop-color="#0284C7"/><stop offset="1" stop-color="#1D4ED8"/></linearGradient>
-                  <linearGradient id="b2" x1="84" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse"><stop stop-color="#059669"/><stop offset="1" stop-color="#10B981"/></linearGradient>
+                  <linearGradient id="card-b1" x1="16" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse"><stop stop-color="#00C0FF"/><stop offset="1" stop-color="#0062FF"/></linearGradient>
+                  <linearGradient id="card-b2" x1="84" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse"><stop stop-color="#00F5A0"/><stop offset="1" stop-color="#00D06C"/></linearGradient>
                 </defs>
               </svg>
             </div>
             <div>
-              <div style="font-weight: 700; font-size: 15px;">Mitosis Bio-Cell</div>
-              <div style="font-size: 12px; color: var(--gemini-text-muted);">Dual organic crescents + nucleus</div>
+              <div style="font-weight: 700; font-size: 15px;">Mitosis Bio-Cell Logo</div>
+              <div style="font-size: 12px; color: var(--gemini-text-muted);">Bright Electric Cyan (#00C0FF) + Luminous Emerald (#00F5A0)</div>
             </div>
           </div>
 
+          <!-- Wordmark Card -->
           <div class="gemini-card" style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px;">
-            <span style="font-family: 'Ubuntu', sans-serif; font-size: 38px; font-weight: 500; color: var(--gemini-text-main);">tovelu</span>
+            <span style="font-family: 'Ubuntu', sans-serif; font-size: 42px; font-weight: 500; color: var(--gemini-text-main);">tovelu</span>
             <div>
               <div style="font-weight: 700; font-size: 15px;">Primary Wordmark</div>
               <div style="font-size: 12px; color: var(--gemini-text-muted);">Ubuntu 500 Humanist Kerning</div>
             </div>
           </div>
 
+          <!-- App Icon Favicon (OFFICIAL TOVELU MITOSIS LOGO EMBEDDED) -->
           <div class="gemini-card" style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px;">
-            <div style="width: 56px; height: 56px; border-radius: 16px; background: var(--gemini-gradient-btn); display: flex; align-items: center; justify-content: center; color: #FFF; font-family: 'Ubuntu', sans-serif; font-weight: 700; font-size: 28px;">
-              t
+            <div style="width: 72px; height: 72px; border-radius: 20px; background: #131314; display: flex; align-items: center; justify-content: center; box-shadow: var(--gemini-shadow-md); border: 1.5px solid rgba(255,255,255,0.1);">
+              <svg width="48" height="48" viewBox="0 0 100 100" fill="none">
+                <path d="M50 16 C28 16, 16 32, 16 50 C16 68, 28 84, 50 84 C38 72, 34 58, 34 50 C34 42, 38 28, 50 16 Z" fill="url(#fav-b1)"/>
+                <path d="M50 16 C72 16, 84 32, 84 50 C84 68, 72 84, 50 84 C62 72, 66 58, 66 50 C66 42, 62 28, 50 16 Z" fill="url(#fav-b2)"/>
+                <circle cx="50" cy="50" r="8.5" fill="#00F5A0"/>
+                <defs>
+                  <linearGradient id="fav-b1" x1="16" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse"><stop stop-color="#00C0FF"/><stop offset="1" stop-color="#0062FF"/></linearGradient>
+                  <linearGradient id="fav-b2" x1="84" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse"><stop stop-color="#00F5A0"/><stop offset="1" stop-color="#00D06C"/></linearGradient>
+                </defs>
+              </svg>
             </div>
             <div>
               <div style="font-weight: 700; font-size: 15px;">App Icon Favicon</div>
-              <div style="font-size: 12px; color: var(--gemini-text-muted);">512x512 Master Squircle</div>
+              <div style="font-size: 12px; color: var(--gemini-text-muted);">Official Mitosis Logo inside 512x512 Master Squircle</div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- 2. COLOR PALETTES -->
+      <!-- 2. COLOR PALETTES (BRIGHTER ELECTRIC SWATCHES) -->
       <section id="sec-colors" class="system-section">
-        <h2 class="section-title"><span class="material-symbols-outlined">palette</span> Table 2: Google Gemini Color System</h2>
+        <h2 class="section-title"><span class="material-symbols-outlined">palette</span> Table 2: Google Gemini Color System (Bright Luminous Palette)</h2>
         
         <div class="swatch-grid">
           <div class="swatch-card">
-            <div class="swatch-preview" style="background: #1A73E8;"></div>
-            <div class="swatch-info"><span class="swatch-name">Sparkle Blue</span><span class="swatch-hex">#1A73E8</span></div>
+            <div class="swatch-preview" style="background: #0091FF;"></div>
+            <div class="swatch-info"><span class="swatch-name">Electric Cyan Blue</span><span class="swatch-hex">#0091FF</span></div>
+          </div>
+          <div class="swatch-card">
+            <div class="swatch-preview" style="background: #00F5A0;"></div>
+            <div class="swatch-info"><span class="swatch-name">Luminous Emerald</span><span class="swatch-hex">#00F5A0</span></div>
           </div>
           <div class="swatch-card">
             <div class="swatch-preview" style="background: #8AB4F8;"></div>
             <div class="swatch-info"><span class="swatch-name">Sparkle Sky</span><span class="swatch-hex">#8AB4F8</span></div>
           </div>
           <div class="swatch-card">
-            <div class="swatch-preview" style="background: #9B72CB;"></div>
-            <div class="swatch-info"><span class="swatch-name">Gemini Purple</span><span class="swatch-hex">#9B72CB</span></div>
+            <div class="swatch-preview" style="background: #A855F7;"></div>
+            <div class="swatch-info"><span class="swatch-name">Vivid Purple</span><span class="swatch-hex">#A855F7</span></div>
           </div>
           <div class="swatch-card">
-            <div class="swatch-preview" style="background: #D96570;"></div>
-            <div class="swatch-info"><span class="swatch-name">Gemini Pink</span><span class="swatch-hex">#D96570</span></div>
-          </div>
-          <div class="swatch-card">
-            <div class="swatch-preview" style="background: #059669;"></div>
-            <div class="swatch-info"><span class="swatch-name">Bio-Emerald</span><span class="swatch-hex">#059669</span></div>
+            <div class="swatch-preview" style="background: #FF4081;"></div>
+            <div class="swatch-info"><span class="swatch-name">Vibrant Pink</span><span class="swatch-hex">#FF4081</span></div>
           </div>
           <div class="swatch-card">
             <div class="swatch-preview" style="background: #F0F4F9; border-bottom: 1px solid #E3E8EF;"></div>
