@@ -1,79 +1,78 @@
 /**
- * TOVELU MINIMALIST GEMINI DESIGN SYSTEM (ZEN EDITION)
- * Master Production CSS Engine for Laptop & Mobile
+ * GOOGLE GEMINI DESIGN SYSTEM (TDS-GEMINI) FOR TOVELU HEALTH AI
+ * 100% Google Gemini AI Aesthetic, Typography, Voice Waveforms & Component Matrix
  * Supreme Constitutional Governance: LAW-001
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Ubuntu:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Google+Sans:wght@400;500;700&family=Google+Sans+Text:wght@400;500;700&family=Google+Sans+Display:wght@400;500;700;800&family=Ubuntu:wght@500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
 :root {
-  /* ==================== 1. MINIMALIST COLOR PALETTE ==================== */
-  /* Calming Focus Accents */
-  --zen-primary: #1D4ED8;
-  --zen-primary-hover: #1E40AF;
-  --zen-primary-subtle: #EFF6FF;
-  --zen-primary-glow: rgba(29, 78, 216, 0.08);
+  /* ==================== 1. GOOGLE GEMINI COLOR SYSTEM ==================== */
+  /* Gemini Holographic Sparkle Palette */
+  --gemini-sparkle-blue: #1A73E8;
+  --gemini-sparkle-sky: #8AB4F8;
+  --gemini-sparkle-purple: #9B72CB;
+  --gemini-sparkle-pink: #D96570;
+  --gemini-sparkle-coral: #FF8BCB;
+  --gemini-vitality-emerald: #059669;
 
-  --zen-vitality: #059669;
-  --zen-vitality-subtle: #ECFDF5;
+  /* Master Gemini Multi-Color Gradients */
+  --gemini-gradient-text: linear-gradient(74deg, #4285F4 0%, #9B72CB 9%, #D96570 20%, #D96570 24%, #8AB4F8 35%, #4285F4 44%, #9B72CB 50%, #D96570 56%, #8AB4F8 75%, #4285F4 100%);
+  --gemini-gradient-sparkle: linear-gradient(135deg, #1A73E8 0%, #8AB4F8 30%, #C58AF9 65%, #FF8BCB 100%);
+  --gemini-gradient-btn: linear-gradient(135deg, #1A73E8 0%, #6875F5 50%, #9B72CB 100%);
+  --gemini-glow-radial: radial-gradient(circle at 50% 0%, rgba(138, 180, 248, 0.22) 0%, transparent 65%);
 
-  --zen-warning: #D97706;
-  --zen-warning-subtle: #FFFBEB;
+  /* Gemini Light Theme Surfaces (Day Porcelain) */
+  --gemini-bg: #F0F4F9;
+  --gemini-surface: #FFFFFF;
+  --gemini-surface-hover: #F8FAFD;
+  --gemini-surface-container: #E1E7EE;
+  --gemini-surface-container-high: #D3E3FD;
+  --gemini-border: #E3E8EF;
+  --gemini-border-subtle: #EEF2F6;
 
-  /* Pure Minimalist Surfaces (Light Day Porcelain) */
-  --zen-bg: #F8FAFC;
-  --zen-surface: #FFFFFF;
-  --zen-surface-hover: #F1F5F9;
-  --zen-border: #E2E8F0;
-  --zen-border-subtle: #F1F5F9;
-  --zen-border-focus: #3B82F6;
+  --gemini-text-main: #1F1F1F;
+  --gemini-text-muted: #444746;
+  --gemini-text-subtle: #747775;
 
-  --zen-text-main: #0F172A;
-  --zen-text-muted: #64748B;
-  --zen-text-subtle: #94A3B8;
+  /* Corner Squircles */
+  --gemini-radius-sm: 8px;
+  --gemini-radius-md: 16px;
+  --gemini-radius-lg: 24px;
+  --gemini-radius-xl: 32px;
+  --gemini-radius-full: 9999px;
 
-  /* Pure Geometric Curves */
-  --zen-radius-sm: 8px;
-  --zen-radius-md: 14px;
-  --zen-radius-lg: 20px;
-  --zen-radius-xl: 28px;
-  --zen-radius-full: 9999px;
-
-  /* Whisper Soft Elevation */
-  --zen-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
-  --zen-shadow-md: 0 4px 12px -2px rgba(15, 23, 42, 0.06);
-  --zen-shadow-lg: 0 12px 30px -4px rgba(15, 23, 42, 0.08);
+  /* Shadows */
+  --gemini-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --gemini-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --gemini-shadow-glow: 0 0 32px rgba(66, 133, 244, 0.15);
 }
 
-/* Dark Theme (Minimalist Deep Obsidian) */
+/* Dark Theme (Google Gemini Dark #131314) */
 [data-theme="dark"], .tds-theme-dark {
-  --zen-bg: #090D16;
-  --zen-surface: #0E1524;
-  --zen-surface-hover: #151F33;
-  --zen-border: #1E2B45;
-  --zen-border-subtle: #131D30;
-  --zen-border-focus: #60A5FA;
+  --gemini-bg: #131314;
+  --gemini-surface: #1E1F20;
+  --gemini-surface-hover: #282A2C;
+  --gemini-surface-container: #282A2C;
+  --gemini-surface-container-high: #333537;
+  --gemini-border: #333537;
+  --gemini-border-subtle: #282A2C;
 
-  --zen-text-main: #F8FAFC;
-  --zen-text-muted: #94A3B8;
-  --zen-text-subtle: #64748B;
+  --gemini-text-main: #E3E3E3;
+  --gemini-text-muted: #C4C7C5;
+  --gemini-text-subtle: #8E918F;
 
-  --zen-primary-subtle: rgba(29, 78, 216, 0.15);
-  --zen-vitality-subtle: rgba(5, 150, 105, 0.15);
-  --zen-warning-subtle: rgba(217, 119, 6, 0.15);
-
-  --zen-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
-  --zen-shadow-md: 0 4px 14px rgba(0, 0, 0, 0.6);
-  --zen-shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.8);
+  --gemini-glow-radial: radial-gradient(circle at 50% 0%, rgba(138, 180, 248, 0.15) 0%, transparent 65%);
+  --gemini-shadow-glow: 0 0 32px rgba(138, 180, 248, 0.12);
 }
 
-/* ==================== 2. TYPOGRAPHY & SYMBOLS ==================== */
+/* ==================== 2. GEMINI TYPOGRAPHY & SPARKLE ANIMATIONS ==================== */
 .material-symbols-outlined {
   font-family: 'Material Symbols Outlined';
   font-weight: normal;
   font-style: normal;
-  font-size: 22px;
+  font-size: 24px;
   line-height: 1;
   letter-spacing: normal;
   text-transform: none;
@@ -85,96 +84,171 @@
   vertical-align: middle;
 }
 
-/* Subtle Breathing Mitosis Pulse */
-@keyframes zenPulse {
-  0% { transform: scale(1); opacity: 0.95; }
-  50% { transform: scale(1.04); opacity: 1; }
-  100% { transform: scale(1); opacity: 0.95; }
-}
-.zen-mitosis-logo {
-  animation: zenPulse 3.5s ease-in-out infinite;
+/* Shimmering Gemini Gradient Text */
+.gemini-gradient-heading {
+  background: var(--gemini-gradient-text);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: geminiShimmer 8s linear infinite;
+  display: inline-block;
 }
 
-/* ==================== 3. MINIMALIST BUTTONS & CONTROLS ==================== */
-.zen-btn {
+@keyframes geminiShimmer {
+  to { background-position: 200% center; }
+}
+
+/* Gemini Sparkle Icon */
+.gemini-sparkle-svg {
+  background: var(--gemini-gradient-sparkle);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+/* Breathing Mitosis Logo Pulse */
+@keyframes bioPulse {
+  0% { transform: scale(1); filter: drop-shadow(0 0 3px rgba(5, 150, 105, 0.3)); }
+  50% { transform: scale(1.05); filter: drop-shadow(0 0 12px rgba(16, 185, 129, 0.5)); }
+  100% { transform: scale(1); filter: drop-shadow(0 0 3px rgba(5, 150, 105, 0.3)); }
+}
+.tovelu-mitosis-anim {
+  animation: bioPulse 3s ease-in-out infinite;
+}
+
+/* Gemini Live Voice Orb (Pulsating 4-Color Fluid) */
+.gemini-live-orb {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--gemini-gradient-sparkle);
+  box-shadow: 0 0 24px rgba(66, 133, 244, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  animation: geminiOrbPulse 2.5s ease-in-out infinite;
+  cursor: pointer;
+  border: none;
+}
+
+@keyframes geminiOrbPulse {
+  0% { transform: scale(1); box-shadow: 0 0 16px rgba(66, 133, 244, 0.4); }
+  50% { transform: scale(1.08); box-shadow: 0 0 32px rgba(197, 138, 249, 0.7); }
+  100% { transform: scale(1); box-shadow: 0 0 16px rgba(66, 133, 244, 0.4); }
+}
+
+/* ==================== 3. GEMINI UI COMPONENTS ==================== */
+/* Gemini Prompt Input Box */
+.gemini-prompt-box {
+  background: var(--gemini-surface-container);
+  border-radius: var(--gemini-radius-xl);
+  padding: 14px 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+  position: relative;
+  box-shadow: var(--gemini-shadow-md);
+}
+.gemini-prompt-box:focus-within {
+  background: var(--gemini-surface);
+  box-shadow: var(--gemini-shadow-md), 0 0 0 2px var(--gemini-sparkle-blue);
+}
+
+.gemini-prompt-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: 'Google Sans Text', sans-serif;
+  font-size: 16px;
+  color: var(--gemini-text-main);
+}
+.gemini-prompt-input::placeholder {
+  color: var(--gemini-text-subtle);
+}
+
+/* Gemini Suggestion Card */
+.gemini-action-card {
+  background: var(--gemini-surface);
+  border-radius: var(--gemini-radius-md);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 140px;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s;
+  box-shadow: var(--gemini-shadow-sm);
+  border: 1px solid var(--gemini-border-subtle);
+}
+.gemini-action-card:hover {
+  background: var(--gemini-surface-hover);
+  box-shadow: var(--gemini-shadow-md);
+  transform: translateY(-2px);
+  border-color: var(--gemini-sparkle-blue);
+}
+
+/* Gemini Pill Button */
+.gemini-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   height: 44px;
-  padding: 0 22px;
-  border-radius: var(--zen-radius-full);
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-weight: 600;
+  padding: 0 24px;
+  border-radius: var(--gemini-radius-full);
+  font-family: 'Google Sans Text', sans-serif;
+  font-weight: 500;
   font-size: 14px;
   cursor: pointer;
   user-select: none;
   text-decoration: none;
   border: none;
   outline: none;
-  transition: all 0.18s cubic-bezier(0.2, 0, 0, 1);
+  transition: all 0.2s;
   touch-action: manipulation;
 }
-.zen-btn:active {
-  transform: scale(0.98);
+.gemini-btn:active {
+  transform: scale(0.97);
 }
 
-.zen-btn-primary {
-  background: var(--zen-primary);
+.gemini-btn-primary {
+  background: var(--gemini-gradient-btn);
   color: #FFFFFF;
-  box-shadow: 0 2px 8px rgba(29, 78, 216, 0.25);
+  box-shadow: 0 4px 16px rgba(26, 115, 232, 0.35);
 }
-.zen-btn-primary:hover {
-  background: var(--zen-primary-hover);
-  box-shadow: 0 4px 14px rgba(29, 78, 216, 0.35);
-}
-
-.zen-btn-vitality {
-  background: var(--zen-vitality);
-  color: #FFFFFF;
-  box-shadow: 0 2px 8px rgba(5, 150, 105, 0.25);
-}
-.zen-btn-vitality:hover {
-  background: #047857;
+.gemini-btn-primary:hover {
+  filter: brightness(1.08);
 }
 
-.zen-btn-tonal {
-  background: var(--zen-surface-hover);
-  color: var(--zen-text-main);
-  border: 1px solid var(--zen-border);
+.gemini-btn-tonal {
+  background: var(--gemini-surface-container);
+  color: var(--gemini-text-main);
 }
-.zen-btn-tonal:hover {
-  background: var(--zen-border);
-}
-
-.zen-btn-ghost {
-  background: transparent;
-  color: var(--zen-text-muted);
-}
-.zen-btn-ghost:hover {
-  color: var(--zen-text-main);
-  background: var(--zen-surface-hover);
+.gemini-btn-tonal:hover {
+  background: var(--gemini-border);
 }
 
-/* ==================== 4. MINIMALIST CARDS & INPUTS ==================== */
-.zen-card {
-  background: var(--zen-surface);
-  border-radius: var(--zen-radius-lg);
+/* Gemini Response Card */
+.gemini-response-card {
+  background: var(--gemini-surface);
+  border-radius: var(--gemini-radius-lg);
   padding: 24px;
-  border: 1px solid var(--zen-border);
-  box-shadow: var(--zen-shadow-sm);
-  transition: all 0.18s ease;
-}
-.zen-card:hover {
-  box-shadow: var(--zen-shadow-md);
-  border-color: var(--zen-border-focus);
+  border: 1px solid var(--gemini-border-subtle);
+  box-shadow: var(--gemini-shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-/* 1-Tap Option Selection Card */
-.zen-option-card {
-  background: var(--zen-surface);
-  border: 1.5px solid var(--zen-border);
-  border-radius: var(--zen-radius-md);
+/* 1-Tap Option Cards */
+.gemini-option-card {
+  background: var(--gemini-surface);
+  border: 2px solid var(--gemini-border);
+  border-radius: var(--gemini-radius-md);
   padding: 14px 18px;
   display: flex;
   align-items: center;
@@ -184,87 +258,90 @@
   touch-action: manipulation;
   transition: all 0.15s;
 }
-.zen-option-card:hover {
-  border-color: var(--zen-border-focus);
-  background: var(--zen-surface-hover);
+.gemini-option-card:hover {
+  border-color: var(--gemini-sparkle-blue);
+  background: var(--gemini-surface-hover);
 }
-.zen-option-card.selected {
-  background: var(--zen-primary-subtle);
-  border-color: var(--zen-primary);
-  box-shadow: 0 0 0 1px var(--zen-primary), var(--zen-shadow-sm);
+.gemini-option-card.selected {
+  background: var(--gemini-surface-container-high);
+  border-color: var(--gemini-sparkle-blue);
+  box-shadow: 0 0 0 1px var(--gemini-sparkle-blue), var(--gemini-shadow-sm);
 }
 
-.zen-check-circle {
-  width: 20px;
-  height: 20px;
+.gemini-check-circle {
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
-  border: 1.5px solid var(--zen-border);
+  border: 2px solid var(--gemini-border);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 800;
   flex-shrink: 0;
-  background: var(--zen-surface);
+  background: var(--gemini-surface);
 }
-.zen-option-card.selected .zen-check-circle {
-  background: var(--zen-primary);
-  border-color: var(--zen-primary);
+.gemini-option-card.selected .gemini-check-circle {
+  background: var(--gemini-sparkle-blue);
+  border-color: var(--gemini-sparkle-blue);
   color: #FFFFFF;
 }
 
-/* Minimalist Prompt Capsule */
-.zen-prompt-box {
-  background: var(--zen-surface);
-  border: 1.5px solid var(--zen-border);
-  border-radius: var(--zen-radius-full);
-  padding: 10px 18px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  box-shadow: var(--zen-shadow-md);
-  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
-}
-.zen-prompt-box:focus-within {
-  border-color: var(--zen-primary);
-  box-shadow: 0 0 0 3px var(--zen-primary-glow), var(--zen-shadow-lg);
-}
-
-.zen-prompt-input {
-  flex: 1;
-  background: transparent;
-  border: none;
-  outline: none;
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  color: var(--zen-text-main);
-}
-.zen-prompt-input::placeholder {
-  color: var(--zen-text-subtle);
-}
-
 /* Preset Chips */
-.zen-chip {
+.gemini-chip {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   padding: 6px 14px;
-  border-radius: var(--zen-radius-full);
-  font-size: 12px;
+  border-radius: var(--gemini-radius-full);
+  font-size: 13px;
   font-weight: 600;
-  background: var(--zen-surface);
-  border: 1px solid var(--zen-border);
-  color: var(--zen-text-main);
+  background: var(--gemini-surface-container);
+  color: var(--gemini-text-main);
   cursor: pointer;
   user-select: none;
   transition: all 0.15s;
 }
-.zen-chip:hover {
-  border-color: var(--zen-primary);
-  color: var(--zen-primary);
-}
-.zen-chip.active {
-  background: var(--zen-primary);
-  border-color: var(--zen-primary);
+.gemini-chip.active {
+  background: var(--gemini-sparkle-blue);
   color: #FFFFFF;
+}
+
+/* 5-Tab Navigation Bar */
+.gemini-nav-bar {
+  height: 76px;
+  background: var(--gemini-surface);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 16px;
+  border-top: 1px solid var(--gemini-border);
+}
+.gemini-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+  color: var(--gemini-text-muted);
+  font-family: 'Google Sans Text', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.gemini-nav-indicator {
+  width: 60px;
+  height: 30px;
+  border-radius: var(--gemini-radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.gemini-nav-item.active .gemini-nav-indicator {
+  background: var(--gemini-gradient-btn);
+  color: #FFFFFF;
+}
+.gemini-nav-item.active {
+  color: var(--gemini-text-main);
 }
