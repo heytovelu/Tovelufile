@@ -1,6 +1,6 @@
 /**
- * TOVELU GOOGLE PAY (GPAY) MATERIAL DESIGN SYSTEM (TDS-GPAY)
- * 100% Google Pay (GPay) Material Design 3 Architecture
+ * TOVELU GOOGLE GEMINI DESIGN SYSTEM (TDS-GEMINI)
+ * Universal CSS Engine powering Desktop & Mobile
  * Supreme Constitutional Governance: LAW-001
  */
 
@@ -8,76 +8,66 @@
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
 :root {
-  /* ==================== 1. GOOGLE 4-COLOR BRAND PALETTE ==================== */
-  --gpay-blue: #1A73E8;
-  --gpay-blue-hover: #1557B0;
-  --gpay-blue-subtle: #E8F0FE;
-  --gpay-blue-border: #D2E3FC;
+  /* Gemini Holographic Sparkle Palette */
+  --gemini-sparkle-blue: #1A73E8;
+  --gemini-sparkle-sky: #8AB4F8;
+  --gemini-sparkle-purple: #9B72CB;
+  --gemini-sparkle-pink: #D96570;
+  --gemini-sparkle-coral: #FF8BCB;
+  --gemini-vitality-emerald: #059669;
 
-  --gpay-green: #1E8E3E;
-  --gpay-green-subtle: #E6F4EA;
-  --gpay-green-border: #CEEAD6;
+  /* Gradients */
+  --gemini-gradient-text: linear-gradient(74deg, #4285F4 0%, #9B72CB 9%, #D96570 20%, #D96570 24%, #8AB4F8 35%, #4285F4 44%, #9B72CB 50%, #D96570 56%, #8AB4F8 75%, #4285F4 100%);
+  --gemini-gradient-sparkle: linear-gradient(135deg, #1A73E8 0%, #8AB4F8 30%, #C58AF9 65%, #FF8BCB 100%);
+  --gemini-gradient-btn: linear-gradient(135deg, #1A73E8 0%, #6875F5 50%, #9B72CB 100%);
 
-  --gpay-yellow: #F9AB00;
-  --gpay-yellow-subtle: #FEF7E0;
-  --gpay-yellow-border: #FEEFC3;
+  /* Light Theme (Day Porcelain Canvas) */
+  --gemini-bg: #F0F4F9;
+  --gemini-surface: #FFFFFF;
+  --gemini-surface-hover: #F8FAFD;
+  --gemini-surface-container: #E1E7EE;
+  --gemini-surface-container-high: #D3E3FD;
+  --gemini-border: #E3E8EF;
+  --gemini-border-subtle: #EEF2F6;
 
-  --gpay-red: #D93025;
-  --gpay-red-subtle: #FCE8E6;
-  --gpay-red-border: #FAD2CF;
+  --gemini-text-main: #1F1F1F;
+  --gemini-text-muted: #444746;
+  --gemini-text-subtle: #747775;
 
-  /* Surfaces (Light Theme - GPay Pure White & Porcelain) */
-  --gpay-bg: #FFFFFF;
-  --gpay-surface: #FFFFFF;
-  --gpay-surface-elevated: #F8F9FA;
-  --gpay-surface-container: #F1F3F4;
-  --gpay-surface-active: #E8EAED;
-  --gpay-border: #DADCE0;
-  --gpay-border-subtle: #F1F3F4;
+  /* Corner Squircles */
+  --gemini-radius-sm: 8px;
+  --gemini-radius-md: 16px;
+  --gemini-radius-lg: 24px;
+  --gemini-radius-xl: 32px;
+  --gemini-radius-full: 9999px;
 
-  --gpay-text-main: #202124;
-  --gpay-text-muted: #5F6368;
-  --gpay-text-subtle: #80868B;
-
-  /* GPay Corner Squircles */
-  --gpay-radius-xs: 4px;
-  --gpay-radius-sm: 8px;
-  --gpay-radius-md: 16px;
-  --gpay-radius-lg: 24px;
-  --gpay-radius-xl: 28px;
-  --gpay-radius-full: 9999px;
-
-  /* GPay Elevation Shadows */
-  --gpay-shadow-sm: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
-  --gpay-shadow-md: 0 1px 3px 0 rgba(60, 64, 67, 0.3), 0 4px 8px 3px rgba(60, 64, 67, 0.15);
-  --gpay-shadow-card: 0 1px 2px rgba(60, 64, 67, 0.08), 0 2px 6px 2px rgba(60, 64, 67, 0.06);
+  /* Shadows */
+  --gemini-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --gemini-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --gemini-shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.12);
+  --gemini-shadow-glow: 0 0 32px rgba(66, 133, 244, 0.15);
 }
 
-/* Dark Theme (Google Dark #202124) */
+/* Dark Theme (Google Gemini Dark #131314) */
 [data-theme="dark"], .tds-theme-dark {
-  --gpay-bg: #202124;
-  --gpay-surface: #202124;
-  --gpay-surface-elevated: #292A2D;
-  --gpay-surface-container: #35363A;
-  --gpay-surface-active: #3C4043;
-  --gpay-border: #5F6368;
-  --gpay-border-subtle: #35363A;
+  --gemini-bg: #131314;
+  --gemini-surface: #1E1F20;
+  --gemini-surface-hover: #282A2C;
+  --gemini-surface-container: #282A2C;
+  --gemini-surface-container-high: #333537;
+  --gemini-border: #333537;
+  --gemini-border-subtle: #282A2C;
 
-  --gpay-text-main: #E8EAED;
-  --gpay-text-muted: #9AA0A6;
-  --gpay-text-subtle: #80868B;
+  --gemini-text-main: #E3E3E3;
+  --gemini-text-muted: #C4C7C5;
+  --gemini-text-subtle: #8E918F;
 
-  --gpay-blue-subtle: rgba(26, 115, 232, 0.2);
-  --gpay-green-subtle: rgba(30, 142, 62, 0.2);
-  --gpay-yellow-subtle: rgba(249, 171, 0, 0.2);
-  --gpay-red-subtle: rgba(217, 48, 37, 0.2);
-
-  --gpay-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
-  --gpay-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.7);
-  --gpay-shadow-card: 0 2px 8px rgba(0, 0, 0, 0.5);
+  --gemini-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --gemini-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+  --gemini-shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.7);
+  --gemini-shadow-glow: 0 0 32px rgba(138, 180, 248, 0.15);
 }
 
-/* ==================== 2. TYPOGRAPHY & MATERIAL SYMBOLS ==================== */
 .material-symbols-outlined {
   font-family: 'Material Symbols Outlined';
   font-weight: normal;
@@ -94,16 +84,65 @@
   vertical-align: middle;
 }
 
-/* ==================== 3. GPAY BUTTONS & CONTROLS ==================== */
-.gpay-btn {
+.gemini-sparkle-svg {
+  background: var(--gemini-gradient-sparkle);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+}
+
+.gemini-gradient-heading {
+  background: var(--gemini-gradient-text);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: geminiShimmer 8s linear infinite;
+  display: inline-block;
+}
+
+@keyframes geminiShimmer {
+  to { background-position: 200% center; }
+}
+
+@keyframes bioMitosisPulse {
+  0% { transform: scale(1); filter: drop-shadow(0 0 4px rgba(5, 150, 105, 0.3)); }
+  50% { transform: scale(1.05); filter: drop-shadow(0 0 14px rgba(16, 185, 129, 0.6)); }
+  100% { transform: scale(1); filter: drop-shadow(0 0 4px rgba(5, 150, 105, 0.3)); }
+}
+.tovelu-mitosis-anim {
+  animation: bioMitosisPulse 3s ease-in-out infinite;
+}
+
+@keyframes geminiOrbPulse {
+  0% { transform: scale(1); box-shadow: 0 0 16px rgba(66, 133, 244, 0.4); }
+  50% { transform: scale(1.08); box-shadow: 0 0 36px rgba(197, 138, 249, 0.7); }
+  100% { transform: scale(1); box-shadow: 0 0 16px rgba(66, 133, 244, 0.4); }
+}
+.gemini-live-orb {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--gemini-gradient-sparkle);
+  box-shadow: 0 0 24px rgba(66, 133, 244, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  animation: geminiOrbPulse 2.5s ease-in-out infinite;
+  cursor: pointer;
+  border: none;
+}
+
+/* Gemini Buttons */
+.gemini-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   height: 44px;
   padding: 0 24px;
-  border-radius: var(--gpay-radius-full);
-  font-family: 'Google Sans', sans-serif;
+  border-radius: var(--gemini-radius-full);
+  font-family: 'Google Sans Text', sans-serif;
   font-weight: 500;
   font-size: 14px;
   cursor: pointer;
@@ -114,167 +153,144 @@
   transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
   touch-action: manipulation;
 }
-.gpay-btn:active {
+.gemini-btn:active {
   transform: scale(0.97);
 }
 
-.gpay-btn-primary {
-  background: var(--gpay-blue);
+.gemini-btn-primary {
+  background: var(--gemini-gradient-btn);
   color: #FFFFFF;
-  box-shadow: var(--gpay-shadow-sm);
+  box-shadow: 0 4px 16px rgba(26, 115, 232, 0.35);
 }
-.gpay-btn-primary:hover {
-  background: var(--gpay-blue-hover);
-  box-shadow: var(--gpay-shadow-md);
-}
-
-.gpay-btn-tonal {
-  background: var(--gpay-surface-container);
-  color: var(--gpay-text-main);
-}
-.gpay-btn-tonal:hover {
-  background: var(--gpay-surface-active);
+.gemini-btn-primary:hover {
+  filter: brightness(1.08);
 }
 
-.gpay-btn-outline {
-  background: transparent;
-  border: 1px solid var(--gpay-border);
-  color: var(--gpay-blue);
+.gemini-btn-tonal {
+  background: var(--gemini-surface-container);
+  color: var(--gemini-text-main);
+}
+.gemini-btn-tonal:hover {
+  background: var(--gemini-border);
 }
 
-/* GPay Action Circle Avatar (People / Protocols) */
-.gpay-avatar-circle {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  cursor: pointer;
-  user-select: none;
-  transition: all 0.15s;
-  border: 1px solid var(--gpay-border-subtle);
-}
-.gpay-avatar-circle:hover {
-  transform: scale(1.06);
-  box-shadow: var(--gpay-shadow-sm);
-}
-.gpay-avatar-circle:active {
-  transform: scale(0.95);
-}
-
-/* GPay Card */
-.gpay-card {
-  background: var(--gpay-surface);
-  border: 1px solid var(--gpay-border);
-  border-radius: var(--gpay-radius-lg);
-  padding: 20px;
-  box-shadow: var(--gpay-shadow-card);
+/* Gemini Cards */
+.gemini-card {
+  background: var(--gemini-surface);
+  border-radius: var(--gemini-radius-lg);
+  padding: 24px;
+  border: 1px solid var(--gemini-border-subtle);
+  box-shadow: var(--gemini-shadow-sm);
   transition: all 0.2s;
 }
 
-/* GPay 1-Tap Option Row (Grouped Cell) */
-.gpay-option-row {
-  background: var(--gpay-surface);
-  border: 1.5px solid var(--gpay-border);
-  border-radius: var(--gpay-radius-md);
+.gemini-action-card {
+  background: var(--gemini-surface);
+  border-radius: var(--gemini-radius-md);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 130px;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s;
+  box-shadow: var(--gemini-shadow-sm);
+  border: 1px solid var(--gemini-border-subtle);
+}
+.gemini-action-card:hover {
+  background: var(--gemini-surface-hover);
+  box-shadow: var(--gemini-shadow-md);
+  transform: translateY(-2px);
+  border-color: var(--gemini-sparkle-blue);
+}
+
+/* 1-Tap Option Cards */
+.gemini-option-card {
+  background: var(--gemini-surface);
+  border: 2px solid var(--gemini-border);
+  border-radius: var(--gemini-radius-md);
   padding: 14px 18px;
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
   cursor: pointer;
   user-select: none;
   touch-action: manipulation;
   transition: all 0.15s;
 }
-.gpay-option-row:hover {
-  background: var(--gpay-surface-elevated);
-  border-color: var(--gpay-blue);
+.gemini-option-card:hover {
+  border-color: var(--gemini-sparkle-blue);
+  background: var(--gemini-surface-hover);
 }
-.gpay-option-row.selected {
-  background: var(--gpay-blue-subtle);
-  border-color: var(--gpay-blue);
-  box-shadow: 0 0 0 1px var(--gpay-blue);
+.gemini-option-card.selected {
+  background: var(--gemini-surface-container-high);
+  border-color: var(--gemini-sparkle-blue);
+  box-shadow: 0 0 0 1px var(--gemini-sparkle-blue), var(--gemini-shadow-sm);
 }
 
-.gpay-radio-check {
+.gemini-check-circle {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  border: 2px solid var(--gpay-border);
+  border: 2px solid var(--gemini-border);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 12px;
   font-weight: 800;
-  background: var(--gpay-surface);
+  flex-shrink: 0;
+  background: var(--gemini-surface);
 }
-.gpay-option-row.selected .gpay-radio-check {
-  background: var(--gpay-blue);
-  border-color: var(--gpay-blue);
+.gemini-option-card.selected .gemini-check-circle {
+  background: var(--gemini-sparkle-blue);
+  border-color: var(--gemini-sparkle-blue);
   color: #FFFFFF;
 }
 
-/* GPay Chips */
-.gpay-chip {
+/* Gemini Prompt Capsule */
+.gemini-prompt-box {
+  background: var(--gemini-surface-container);
+  border-radius: var(--gemini-radius-xl);
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+  position: relative;
+  box-shadow: var(--gemini-shadow-md);
+}
+.gemini-prompt-box:focus-within {
+  background: var(--gemini-surface);
+  box-shadow: var(--gemini-shadow-lg), 0 0 0 2px var(--gemini-sparkle-blue);
+}
+
+.gemini-prompt-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: 'Google Sans Text', sans-serif;
+  font-size: 15px;
+  color: var(--gemini-text-main);
+}
+
+/* Preset Chips */
+.gemini-chip {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   padding: 6px 14px;
-  border-radius: var(--gpay-radius-full);
+  border-radius: var(--gemini-radius-full);
   font-size: 13px;
-  font-weight: 500;
-  background: var(--gpay-surface);
-  border: 1px solid var(--gpay-border);
-  color: var(--gpay-text-main);
+  font-weight: 600;
+  background: var(--gemini-surface-container);
+  color: var(--gemini-text-main);
   cursor: pointer;
   user-select: none;
   transition: all 0.15s;
 }
-.gpay-chip.active {
-  background: var(--gpay-blue-subtle);
-  border-color: var(--gpay-blue);
-  color: var(--gpay-blue);
-  font-weight: 700;
-}
-
-/* GPay Bottom Navigation Bar */
-.gpay-nav-bar {
-  height: 72px;
-  background: var(--gpay-surface);
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  padding: 0 16px;
-  border-top: 1px solid var(--gpay-border);
-}
-.gpay-nav-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  text-decoration: none;
-  color: var(--gpay-text-muted);
-  font-family: 'Google Sans', sans-serif;
-  font-size: 12px;
-  font-weight: 500;
-  cursor: pointer;
-}
-.gpay-nav-indicator {
-  width: 60px;
-  height: 30px;
-  border-radius: var(--gpay-radius-full);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-}
-.gpay-nav-item.active .gpay-nav-indicator {
-  background: var(--gpay-blue-subtle);
-  color: var(--gpay-blue);
-}
-.gpay-nav-item.active {
-  color: var(--gpay-blue);
-  font-weight: 700;
+.gemini-chip.active {
+  background: var(--gemini-sparkle-blue);
+  color: #FFFFFF;
 }
