@@ -1,358 +1,371 @@
 /**
- * TOVELU UNIVERSAL DESIGN SYSTEM (TDS-1.0) CSS FRAMEWORK
- * Supreme Constitutional Governance: LAW-001 (Scientific, Medical & Legal Verification)
- * Built for 8.15 Billion Humans on Earth
+ * TOVELU MATERIAL 3 DESIGN SYSTEM (TDS-M3)
+ * Inspired by Google Material Design 3 (Material You)
+ * Supreme Constitutional Governance: LAW-001
  */
 
-/* ==================== 1. DESIGN TOKENS (LIGHT & DARK) ==================== */
 :root {
-  /* Brand Core Palettes */
-  --tds-primary: #1D4ED8;
-  --tds-primary-hover: #1E40AF;
-  --tds-primary-subtle: #EFF6FF;
-  --tds-primary-border: #BFDBFE;
-  --tds-primary-glow: rgba(29, 78, 216, 0.16);
+  /* ==================== 1. M3 TONAL PALETTE (LIGHT THEME DEFAULT) ==================== */
+  /* Primary Tonal (Clinical Azure) */
+  --md-sys-color-primary: #1D4ED8;
+  --md-sys-color-on-primary: #FFFFFF;
+  --md-sys-color-primary-container: #DBEAFE;
+  --md-sys-color-on-primary-container: #1E3A8A;
 
-  --tds-secondary: #0284C7;
-  --tds-secondary-hover: #0369A1;
-  --tds-secondary-subtle: #E0F2FE;
+  /* Secondary Tonal (Luminous Intelligence Sky) */
+  --md-sys-color-secondary: #0284C7;
+  --md-sys-color-on-secondary: #FFFFFF;
+  --md-sys-color-secondary-container: #E0F2FE;
+  --md-sys-color-on-secondary-container: #0369A1;
 
-  --tds-vitality: #059669;
-  --tds-vitality-glow: #10B981;
-  --tds-vitality-subtle: #ECFDF5;
-  --tds-vitality-border: #A7F3D0;
+  /* Tertiary Tonal (Bio-Emerald Vitality) */
+  --md-sys-color-tertiary: #059669;
+  --md-sys-color-on-tertiary: #FFFFFF;
+  --md-sys-color-tertiary-container: #D1FAE5;
+  --md-sys-color-on-tertiary-container: #065F46;
 
-  --tds-warning: #D97706;
-  --tds-warning-subtle: #FFFBEB;
-  --tds-warning-border: #FDE68A;
+  /* Error / Emergency Crimson */
+  --md-sys-color-error: #BA1A1A;
+  --md-sys-color-on-error: #FFFFFF;
+  --md-sys-color-error-container: #FFDAD6;
+  --md-sys-color-on-error-container: #410002;
 
-  --tds-danger: #DC2626;
-  --tds-danger-subtle: #FEF2F2;
-  --tds-danger-border: #FECACA;
+  /* Warning / Manageable Amber */
+  --md-sys-color-warning: #D97706;
+  --md-sys-color-on-warning: #FFFFFF;
+  --md-sys-color-warning-container: #FEF3C7;
+  --md-sys-color-on-warning-container: #78350F;
 
-  /* Surfaces (Light Theme - Default) */
-  --tds-canvas: #F8FAFC;
-  --tds-surface: #FFFFFF;
-  --tds-surface-elevated: #F1F5F9;
-  --tds-surface-active: #E2E8F0;
-  --tds-border: #E2E8F0;
-  --tds-border-subtle: #F1F5F9;
-  --tds-border-focus: #38BDF8;
+  /* M3 Surface Tonal Elevation (Pure Light) */
+  --md-sys-color-surface: #F8FAFC;
+  --md-sys-color-on-surface: #0F172A;
+  --md-sys-color-surface-variant: #E2E8F0;
+  --md-sys-color-on-surface-variant: #475569;
 
-  --tds-text-main: #0F172A;
-  --tds-text-muted: #475569;
-  --tds-text-subtle: #94A3B8;
+  --md-sys-color-surface-dim: #E2E8F0;
+  --md-sys-color-surface-bright: #FFFFFF;
+  --md-sys-color-surface-container-lowest: #FFFFFF;
+  --md-sys-color-surface-container-low: #F8FAFC;
+  --md-sys-color-surface-container: #F1F5F9;
+  --md-sys-color-surface-container-high: #E2E8F0;
+  --md-sys-color-surface-container-highest: #CBD5E1;
 
-  /* Elevation Shadows */
-  --tds-shadow-0: none;
-  --tds-shadow-1: 0 1px 3px rgba(15, 23, 42, 0.05);
-  --tds-shadow-2: 0 4px 14px -2px rgba(15, 23, 42, 0.08);
-  --tds-shadow-3: 0 12px 30px -4px rgba(15, 23, 42, 0.12);
-  --tds-shadow-modal: 0 20px 45px -8px rgba(15, 23, 42, 0.2);
+  --md-sys-color-outline: #94A3B8;
+  --md-sys-color-outline-variant: #E2E8F0;
 
-  /* Radius Continuous Curves */
-  --tds-radius-none: 0px;
-  --tds-radius-xs: 4px;
-  --tds-radius-sm: 8px;
-  --tds-radius-md: 14px;
-  --tds-radius-lg: 20px;
-  --tds-radius-xl: 28px;
-  --tds-radius-full: 9999px;
+  /* M3 Elevation Shadows */
+  --md-sys-elevation-0: none;
+  --md-sys-elevation-1: 0px 1px 3px 1px rgba(0, 0, 0, 0.08), 0px 1px 2px 0px rgba(0, 0, 0, 0.12);
+  --md-sys-elevation-2: 0px 2px 6px 2px rgba(0, 0, 0, 0.08), 0px 1px 2px 0px rgba(0, 0, 0, 0.14);
+  --md-sys-elevation-3: 0px 4px 8px 3px rgba(0, 0, 0, 0.08), 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
+  --md-sys-elevation-4: 0px 6px 10px 4px rgba(0, 0, 0, 0.08), 0px 2px 3px 0px rgba(0, 0, 0, 0.15);
+  --md-sys-elevation-5: 0px 8px 12px 6px rgba(0, 0, 0, 0.08), 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
 
-  /* Spacing Grid (8pt System) */
-  --tds-space-1: 4px;
-  --tds-space-2: 8px;
-  --tds-space-3: 12px;
-  --tds-space-4: 16px;
-  --tds-space-5: 20px;
-  --tds-space-6: 24px;
-  --tds-space-8: 32px;
-  --tds-space-10: 40px;
-  --tds-space-12: 48px;
-  --tds-space-16: 64px;
-  --tds-space-24: 96px;
+  /* M3 Shapes (Continuous Squircles) */
+  --md-sys-shape-corner-none: 0px;
+  --md-sys-shape-corner-extra-small: 4px;
+  --md-sys-shape-corner-small: 8px;
+  --md-sys-shape-corner-medium: 12px;
+  --md-sys-shape-corner-large: 16px;
+  --md-sys-shape-corner-extra-large: 28px;
+  --md-sys-shape-corner-full: 9999px;
 
-  /* Motion & Easing */
-  --tds-ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
-  --tds-ease-standard: cubic-bezier(0.2, 0, 0, 1);
-  --tds-duration-instant: 100ms;
-  --tds-duration-quick: 180ms;
-  --tds-duration-standard: 280ms;
+  /* Motion */
+  --md-sys-motion-easing-standard: cubic-bezier(0.2, 0.0, 0, 1.0);
+  --md-sys-motion-easing-emphasized: cubic-bezier(0.2, 0.0, 0, 1.0);
+  --md-sys-motion-duration-short: 150ms;
+  --md-sys-motion-duration-medium: 300ms;
 }
 
-/* Dark Theme Overrides */
+/* ==================== DARK THEME TONAL OVERRIDES ==================== */
 [data-theme="dark"], .tds-theme-dark {
-  --tds-canvas: #080B11;
-  --tds-surface: #0E131F;
-  --tds-surface-elevated: #151D2E;
-  --tds-surface-active: #1C273C;
-  --tds-border: #1F2C42;
-  --tds-border-subtle: #162032;
-  --tds-border-focus: #0EA5E9;
+  --md-sys-color-primary: #93C5FD;
+  --md-sys-color-on-primary: #1E3A8A;
+  --md-sys-color-primary-container: #1D4ED8;
+  --md-sys-color-on-primary-container: #DBEAFE;
 
-  --tds-text-main: #F8FAFC;
-  --tds-text-muted: #94A3B8;
-  --tds-text-subtle: #64748B;
+  --md-sys-color-secondary: #7DD3FC;
+  --md-sys-color-on-secondary: #0369A1;
+  --md-sys-color-secondary-container: #0284C7;
+  --md-sys-color-on-secondary-container: #E0F2FE;
 
-  --tds-primary-subtle: rgba(29, 78, 216, 0.16);
-  --tds-primary-border: #1E40AF;
-  --tds-vitality-subtle: rgba(16, 185, 129, 0.15);
-  --tds-vitality-border: #059669;
-  --tds-warning-subtle: rgba(245, 158, 11, 0.15);
-  --tds-danger-subtle: rgba(239, 68, 68, 0.15);
+  --md-sys-color-tertiary: #6EE7B7;
+  --md-sys-color-on-tertiary: #065F46;
+  --md-sys-color-tertiary-container: #059669;
+  --md-sys-color-on-tertiary-container: #D1FAE5;
 
-  --tds-shadow-1: 0 1px 3px rgba(0, 0, 0, 0.4);
-  --tds-shadow-2: 0 6px 18px rgba(0, 0, 0, 0.6);
-  --tds-shadow-3: 0 14px 35px rgba(0, 0, 0, 0.8);
+  --md-sys-color-surface: #0B0F17;
+  --md-sys-color-on-surface: #F8FAFC;
+  --md-sys-color-surface-variant: #1E293B;
+  --md-sys-color-on-surface-variant: #94A3B8;
+
+  --md-sys-color-surface-container-lowest: #05080E;
+  --md-sys-color-surface-container-low: #0B0F17;
+  --md-sys-color-surface-container: #131B29;
+  --md-sys-color-surface-container-high: #1B263B;
+  --md-sys-color-surface-container-highest: #26354F;
+
+  --md-sys-color-outline: #475569;
+  --md-sys-color-outline-variant: #1E293B;
 }
 
-/* ==================== 2. TYPOGRAPHY CLASSES ==================== */
-.tds-font-wordmark {
-  font-family: 'Ubuntu', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-}
+/* ==================== 2. M3 COMPONENT PRIMITIVES ==================== */
 
-.tds-display-lg { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: clamp(2rem, 5vw, 2.75rem); line-height: 1.15; letter-spacing: -0.03em; }
-.tds-display-md { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: clamp(1.75rem, 4vw, 2.25rem); line-height: 1.2; letter-spacing: -0.03em; }
-.tds-headline-lg { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: clamp(1.35rem, 3.5vw, 1.65rem); line-height: 1.25; letter-spacing: -0.02em; }
-.tds-headline-md { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: clamp(1.15rem, 3vw, 1.35rem); line-height: 1.3; letter-spacing: -0.015em; }
-.tds-title-lg { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 1.05rem; line-height: 1.35; }
-.tds-title-md { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 0.95rem; line-height: 1.4; }
-
-.tds-body-lg { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 1rem; line-height: 1.5; }
-.tds-body-md { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 0.88rem; line-height: 1.5; }
-.tds-body-sm { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 0.78rem; line-height: 1.45; }
-
-.tds-label-lg { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.88rem; line-height: 1.2; }
-.tds-label-md { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.75rem; line-height: 1.2; }
-.tds-label-micro { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 0.68rem; line-height: 1; text-transform: uppercase; letter-spacing: 0.05em; }
-
-/* ==================== 3. BUTTONS & INTERACTIVE TRIGGERS ==================== */
-.tds-btn {
+/* --- M3 BUTTONS --- */
+.m3-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--tds-space-2);
-  padding: 0.85rem 1.4rem;
-  border-radius: var(--tds-radius-md);
+  gap: 8px;
+  height: 44px;
+  padding: 0 24px;
+  border-radius: var(--md-sys-shape-corner-full);
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-weight: 700;
-  font-size: 0.92rem;
+  font-size: 0.88rem;
   cursor: pointer;
   user-select: none;
-  touch-action: manipulation;
-  transition: background var(--tds-duration-quick) var(--tds-ease-emphasized),
-              transform var(--tds-duration-instant) var(--tds-ease-emphasized),
-              box-shadow var(--tds-duration-quick) var(--tds-ease-emphasized);
-  min-height: 48px;
-  border: none;
   text-decoration: none;
+  border: none;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
+  touch-action: manipulation;
 }
-.tds-btn:active {
-  transform: scale(0.985);
-}
-
-.tds-btn-primary {
-  background: var(--tds-primary);
-  color: #FFFFFF;
-  box-shadow: 0 4px 14px var(--tds-primary-glow);
-}
-.tds-btn-primary:hover {
-  background: var(--tds-primary-hover);
+.m3-btn:active {
+  transform: scale(0.98);
 }
 
-.tds-btn-tonal {
-  background: var(--tds-surface-elevated);
-  border: 1.5px solid var(--tds-border);
-  color: var(--tds-text-main);
+/* 1. M3 Filled Button */
+.m3-btn-filled {
+  background: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+  box-shadow: var(--md-sys-elevation-0);
 }
-.tds-btn-tonal:hover {
-  background: var(--tds-surface-active);
+.m3-btn-filled:hover {
+  box-shadow: var(--md-sys-elevation-1);
+  filter: brightness(1.05);
 }
 
-.tds-btn-outline {
+/* 2. M3 Tonal Button */
+.m3-btn-tonal {
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+.m3-btn-tonal:hover {
+  box-shadow: var(--md-sys-elevation-1);
+}
+
+/* 3. M3 Elevated Button */
+.m3-btn-elevated {
+  background: var(--md-sys-color-surface-container-low);
+  color: var(--md-sys-color-primary);
+  box-shadow: var(--md-sys-elevation-1);
+}
+.m3-btn-elevated:hover {
+  box-shadow: var(--md-sys-elevation-2);
+}
+
+/* 4. M3 Outlined Button */
+.m3-btn-outlined {
   background: transparent;
-  border: 2px solid var(--tds-border);
-  color: var(--tds-text-main);
+  border: 1px solid var(--md-sys-color-outline);
+  color: var(--md-sys-color-primary);
 }
-.tds-btn-outline:hover {
-  border-color: var(--tds-primary);
-  background: var(--tds-primary-subtle);
-  color: var(--tds-primary);
-}
-
-.tds-btn-vitality {
-  background: var(--tds-vitality);
-  color: #FFFFFF;
-  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.25);
-}
-.tds-btn-vitality:hover {
-  background: #047857;
+.m3-btn-outlined:hover {
+  background: var(--md-sys-color-primary-container);
+  border-color: var(--md-sys-color-primary);
 }
 
-.tds-btn:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
+/* 5. M3 Vitality Button */
+.m3-btn-vitality {
+  background: var(--md-sys-color-tertiary);
+  color: var(--md-sys-color-on-tertiary);
 }
 
-/* ==================== 4. CARDS & SELECTION SURFACES ==================== */
-.tds-card {
-  background: var(--tds-surface);
-  border: 1.5px solid var(--tds-border);
-  border-radius: var(--tds-radius-lg);
-  padding: clamp(1.25rem, 3.5vw, 1.75rem);
-  box-shadow: var(--tds-shadow-1);
-  transition: all var(--tds-duration-quick) var(--tds-ease-emphasized);
+/* --- M3 CARDS --- */
+.m3-card {
+  border-radius: var(--md-sys-shape-corner-extra-large);
+  padding: 24px;
+  position: relative;
+  transition: all var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
 }
-.tds-card-elevated {
-  box-shadow: var(--tds-shadow-2);
+.m3-card-elevated {
+  background: var(--md-sys-color-surface-container-low);
+  box-shadow: var(--md-sys-elevation-1);
+}
+.m3-card-filled {
+  background: var(--md-sys-color-surface-container);
+}
+.m3-card-outlined {
+  background: var(--md-sys-color-surface);
+  border: 1px solid var(--md-sys-color-outline-variant);
 }
 
-/* 1-Tap Option Card */
-.tds-option-card {
-  background: var(--tds-surface);
-  border: 2px solid var(--tds-border);
-  border-radius: var(--tds-radius-md);
-  padding: 0.95rem 1.15rem;
+/* --- M3 CHIPS & PRESETS --- */
+.m3-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 16px;
+  border-radius: var(--md-sys-shape-corner-small);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  background: var(--md-sys-color-surface);
+  color: var(--md-sys-color-on-surface-variant);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  user-select: none;
+  transition: all var(--md-sys-motion-duration-short);
+}
+.m3-chip:hover {
+  background: var(--md-sys-color-surface-container-high);
+}
+.m3-chip.selected, .m3-chip.active {
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+  border-color: var(--md-sys-color-secondary);
+}
+
+/* --- M3 OPTION CARDS (1-TAP) --- */
+.m3-option-card {
+  background: var(--md-sys-color-surface-container-low);
+  border: 2px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--md-sys-shape-corner-large);
+  padding: 16px 20px;
   display: flex;
   align-items: center;
-  gap: var(--tds-space-3);
+  gap: 16px;
   cursor: pointer;
   user-select: none;
   touch-action: manipulation;
-  transition: all var(--tds-duration-quick) var(--tds-ease-emphasized);
-  box-shadow: var(--tds-shadow-1);
+  transition: all var(--md-sys-motion-duration-short);
 }
-.tds-option-card:hover {
-  border-color: var(--tds-border-focus);
-  background: var(--tds-primary-subtle);
+.m3-option-card:hover {
+  background: var(--md-sys-color-surface-container);
+  border-color: var(--md-sys-color-outline);
 }
-.tds-option-card:active {
-  transform: scale(0.99);
-}
-.tds-option-card.selected {
-  border-color: var(--tds-primary);
-  background: var(--tds-primary-subtle);
-  box-shadow: 0 0 0 1px var(--tds-primary), var(--tds-shadow-2);
+.m3-option-card.selected {
+  background: var(--md-sys-color-primary-container);
+  border-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary-container);
 }
 
-.tds-check-circle {
-  width: 22px;
-  height: 22px;
+.m3-icon-check {
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
-  border: 2px solid var(--tds-border);
+  border: 2px solid var(--md-sys-color-outline);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 800;
   flex-shrink: 0;
-  background: var(--tds-surface);
-  transition: all var(--tds-duration-instant);
+  background: var(--md-sys-color-surface);
 }
-.tds-option-card.selected .tds-check-circle {
-  background: var(--tds-primary);
-  border-color: var(--tds-primary);
-  color: #FFFFFF;
-}
-
-/* ==================== 5. FORM CONTROLS & PICKERS ==================== */
-.tds-input {
-  width: 100%;
-  background: var(--tds-surface);
-  border: 2px solid var(--tds-border);
-  color: var(--tds-text-main);
-  padding: 0.85rem 1.1rem;
-  border-radius: var(--tds-radius-md);
-  font-size: 0.95rem;
-  font-family: 'Inter', sans-serif;
-  outline: none;
-  box-shadow: var(--tds-shadow-1);
-  transition: border-color var(--tds-duration-quick);
-  min-height: 48px;
-}
-.tds-input:focus {
-  border-color: var(--tds-primary);
-  box-shadow: 0 0 0 3px var(--tds-primary-glow);
+.m3-option-card.selected .m3-icon-check {
+  background: var(--md-sys-color-primary);
+  border-color: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
 }
 
-/* Preset Chips */
-.tds-preset-chip {
-  background: var(--tds-surface-elevated);
-  border: 1.5px solid var(--tds-border);
-  color: var(--tds-text-main);
-  padding: 0.45rem 0.85rem;
-  border-radius: var(--tds-radius-full);
-  font-size: 0.8rem;
+/* --- M3 NAVIGATION BAR WITH PILL INDICATOR --- */
+.m3-nav-bar {
+  height: 80px;
+  background: var(--md-sys-color-surface-container);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 16px;
+}
+.m3-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: 0.72rem;
   font-weight: 700;
   cursor: pointer;
-  user-select: none;
-  touch-action: manipulation;
-  transition: all var(--tds-duration-instant);
 }
-.tds-preset-chip:hover {
-  border-color: var(--tds-primary);
-  color: var(--tds-primary);
-  background: var(--tds-primary-subtle);
+.m3-nav-indicator {
+  width: 64px;
+  height: 32px;
+  border-radius: var(--md-sys-shape-corner-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: all var(--md-sys-motion-duration-short);
 }
-.tds-preset-chip.active {
-  background: var(--tds-primary);
-  border-color: var(--tds-primary);
-  color: #FFFFFF;
-  box-shadow: var(--tds-shadow-1);
+.m3-nav-item.active .m3-nav-indicator {
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+.m3-nav-item.active {
+  color: var(--md-sys-color-on-surface);
 }
 
-/* Badges */
-.tds-badge {
+/* --- M3 FLOATING ACTION BUTTON (FAB) --- */
+.m3-fab {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--md-sys-shape-corner-large);
+  background: var(--md-sys-color-primary-container);
+  color: var(--md-sys-color-on-primary-container);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: var(--md-sys-elevation-3);
+  cursor: pointer;
+  border: none;
+  transition: all var(--md-sys-motion-duration-short);
+}
+.m3-fab:hover {
+  box-shadow: var(--md-sys-elevation-4);
+  transform: scale(1.04);
+}
+
+/* --- M3 FORM INPUTS --- */
+.m3-text-field {
+  width: 100%;
+  height: 56px;
+  background: var(--md-sys-color-surface-container-high);
+  border: none;
+  border-bottom: 2px solid var(--md-sys-color-outline);
+  border-radius: 8px 8px 0 0;
+  padding: 0 16px;
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  color: var(--md-sys-color-on-surface);
+  outline: none;
+  transition: all var(--md-sys-motion-duration-short);
+}
+.m3-text-field:focus {
+  border-bottom: 2px solid var(--md-sys-color-primary);
+  background: var(--md-sys-color-surface-container-highest);
+}
+
+/* --- M3 BADGES --- */
+.m3-badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  padding: 0.3rem 0.75rem;
-  border-radius: var(--tds-radius-full);
-  font-size: 0.7rem;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: var(--md-sys-shape-corner-full);
+  font-size: 0.72rem;
   font-weight: 800;
-  letter-spacing: 0.04em;
   text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
-.tds-badge-vitality { background: var(--tds-vitality-subtle); color: var(--tds-vitality); border: 1px solid var(--tds-vitality-border); }
-.tds-badge-primary { background: var(--tds-primary-subtle); color: var(--tds-primary); border: 1px solid var(--tds-primary-border); }
-.tds-badge-warning { background: var(--tds-warning-subtle); color: var(--tds-warning); border: 1px solid var(--tds-warning-border); }
-.tds-badge-danger { background: var(--tds-danger-subtle); color: var(--tds-danger); border: 1px solid var(--tds-danger-border); }
-
-/* ==================== 6. HEALTH CLINICAL COMPONENTS ==================== */
-/* Biomarker Gauge */
-.tds-gauge-card {
-  background: var(--tds-surface-elevated);
-  border: 1px solid var(--tds-border);
-  border-radius: var(--tds-radius-md);
-  padding: 1.25rem;
-}
-.tds-gauge-track {
-  height: 8px;
-  background: var(--tds-border);
-  border-radius: var(--tds-radius-full);
-  overflow: hidden;
-  margin-top: 0.5rem;
-}
-.tds-gauge-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--tds-secondary), var(--tds-vitality));
-  border-radius: var(--tds-radius-full);
-  transition: width 0.4s var(--tds-ease-emphasized);
-}
-
-/* 3-Column Diagnostic Triage Card */
-.tds-triage-card {
-  background: var(--tds-surface);
-  border: 1.5px solid var(--tds-border);
-  border-radius: var(--tds-radius-md);
-  padding: 1rem 1.15rem;
-  margin-bottom: 0.75rem;
-  box-shadow: var(--tds-shadow-1);
-}
-.tds-triage-card.tier-1 { border-left: 4.5px solid var(--tds-vitality); }
-.tds-triage-card.tier-2 { border-left: 4.5px solid var(--tds-warning); }
-.tds-triage-card.tier-3 { border-left: 4.5px solid var(--tds-danger); }
+.m3-badge-primary { background: var(--md-sys-color-primary-container); color: var(--md-sys-color-on-primary-container); }
+.m3-badge-secondary { background: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container); }
+.m3-badge-tertiary { background: var(--md-sys-color-tertiary-container); color: var(--md-sys-color-on-tertiary-container); }
+.m3-badge-warning { background: var(--md-sys-color-warning-container); color: var(--md-sys-color-on-warning-container); }
+.m3-badge-error { background: var(--md-sys-color-error-container); color: var(--md-sys-color-on-error-container); }
