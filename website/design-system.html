@@ -3,23 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>TOVELU • Native Mobile-First Gemini Design System</title>
+  <title>TOVELU • Minimalist Gemini Design System (Laptop & Mobile)</title>
   
-  <!-- Google Fonts: Google Sans, Roboto, Ubuntu & Material Symbols -->
+  <!-- Fonts: Plus Jakarta Sans, Inter, Ubuntu & Material Symbols -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Google+Sans:wght@400;500;700&family=Google+Sans+Text:wght@400;500;700&family=Google+Sans+Display:wght@400;500;700;800&family=Ubuntu:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Ubuntu:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   
-  <!-- TDS Gemini CSS Framework -->
+  <!-- TDS Minimalist CSS Framework -->
   <link rel="stylesheet" href="tovelu-design-system.css">
   
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background-color: var(--gemini-bg);
-      color: var(--gemini-text-main);
-      font-family: 'Google Sans Text', 'Roboto', sans-serif;
+      background-color: var(--zen-bg);
+      color: var(--zen-text-main);
+      font-family: 'Inter', sans-serif;
       line-height: 1.5;
       min-height: 100vh;
       display: flex;
@@ -27,8 +27,8 @@
       transition: background-color 0.2s, color 0.2s;
     }
 
-    /* Global Sticky Header */
-    header.gemini-nav-header {
+    /* Minimalist Top App Bar */
+    header.zen-header {
       height: 64px;
       padding: 0 clamp(1rem, 3vw, 2.5rem);
       display: flex;
@@ -37,9 +37,9 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: var(--gemini-bg);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--gemini-border-subtle);
+      background: var(--zen-bg);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--zen-border);
     }
 
     .brand-lockup {
@@ -52,18 +52,18 @@
       font-family: 'Ubuntu', sans-serif;
       font-weight: 500;
       font-size: 24px;
-      color: var(--gemini-text-main);
+      color: var(--zen-text-main);
     }
 
-    /* Device Viewport Mode Switcher Bar */
+    /* Minimal Viewport Switcher */
     .viewport-control-bar {
-      background: var(--gemini-surface-container);
-      border-bottom: 1px solid var(--gemini-border);
-      padding: 8px 16px;
+      background: var(--zen-surface);
+      border-bottom: 1px solid var(--zen-border);
+      padding: 6px 16px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 6px;
       position: sticky;
       top: 64px;
       z-index: 95;
@@ -72,200 +72,206 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 6px 14px;
+      padding: 5px 14px;
       border-radius: 9999px;
-      font-size: 13px;
-      font-weight: 700;
+      font-size: 12px;
+      font-weight: 600;
       cursor: pointer;
       background: transparent;
-      color: var(--gemini-text-muted);
+      color: var(--zen-text-muted);
       border: 1px solid transparent;
       transition: all 0.15s;
     }
     .device-pill:hover {
-      background: var(--gemini-surface);
-      color: var(--gemini-text-main);
+      background: var(--zen-surface-hover);
+      color: var(--zen-text-main);
     }
     .device-pill.active {
-      background: var(--gemini-sparkle-blue);
+      background: var(--zen-primary);
       color: #FFFFFF;
-      box-shadow: var(--gemini-shadow-sm);
+      box-shadow: var(--zen-shadow-sm);
     }
 
-    /* Main Stage */
+    /* Resizable Viewport Stage */
     .stage-wrapper {
       display: flex;
       justify-content: center;
       width: 100%;
       flex: 1;
-      padding: 20px 16px 80px 16px;
+      padding: 24px 16px 80px 16px;
       transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
     }
 
     .device-frame {
       width: 100%;
-      max-width: 1080px; /* Default Laptop */
-      transition: max-width 0.3s cubic-bezier(0.2, 0, 0, 1), border 0.3s, box-shadow 0.3s, border-radius 0.3s;
+      max-width: 1020px; /* Laptop Mode Default */
+      transition: max-width 0.3s cubic-bezier(0.2, 0, 0, 1), border 0.3s, box-shadow 0.3s;
       display: flex;
       flex-direction: column;
       gap: 2rem;
     }
 
-    /* ==================== NATIVE SMARTPHONE MOBILE APP STYLING ==================== */
-    .device-frame.mode-mobile {
-      max-width: 412px;
-      border: 12px solid var(--gemini-text-main);
-      border-radius: 48px;
-      padding: 0 0 16px 0;
-      background: var(--gemini-bg);
-      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.3);
-      overflow: hidden;
-      position: relative;
+    /* Tablet Frame */
+    .device-frame.mode-tablet {
+      max-width: 740px;
+      border: 6px solid var(--zen-border);
+      border-radius: 32px;
+      padding: 24px 20px;
+      background: var(--zen-bg);
+      box-shadow: var(--zen-shadow-lg);
     }
 
-    /* Mobile Status Bar (Dynamic Island / Speaker notch) */
+    /* Mobile Smartphone Frame */
+    .device-frame.mode-mobile {
+      max-width: 390px;
+      border: 10px solid var(--zen-text-main);
+      border-radius: 46px;
+      padding: 0 0 16px 0;
+      background: var(--zen-bg);
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+    }
+
+    /* Mobile Status Bar */
     .mobile-status-bar {
       display: none;
-      height: 44px;
+      height: 40px;
       padding: 0 20px;
       align-items: center;
       justify-content: space-between;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--gemini-text-main);
-      background: var(--gemini-bg);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--zen-text-main);
+      background: var(--zen-bg);
     }
     .mode-mobile .mobile-status-bar {
       display: flex;
     }
 
-    /* Mobile Content Container */
-    .mobile-content-scroll {
+    /* Content Area */
+    .content-area {
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
+    }
+    .mode-mobile .content-area {
       padding: 0 16px;
     }
-    .mode-laptop .mobile-content-scroll,
-    .mode-tablet .mobile-content-scroll {
-      padding: 0;
-    }
 
-    /* Tablet Frame Mode */
-    .device-frame.mode-tablet {
-      max-width: 768px;
-      border: 8px solid var(--gemini-border);
-      border-radius: 36px;
-      padding: 24px 20px;
-      background: var(--gemini-bg);
-      box-shadow: var(--gemini-shadow-lg);
-    }
-
-    /* Horizontal Swipe Rail for Mobile Suggestion Cards */
-    .horizontal-swipe-rail {
-      display: flex;
+    /* Minimalist Swipe Rail on Mobile / Grid on Laptop */
+    .action-rail {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 12px;
+    }
+    .mode-mobile .action-rail {
+      display: flex;
       overflow-x: auto;
-      padding: 4px 2px 12px 2px;
       scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
+      gap: 10px;
+      padding-bottom: 8px;
       scrollbar-width: none;
     }
-    .horizontal-swipe-rail::-webkit-scrollbar {
+    .mode-mobile .action-rail::-webkit-scrollbar {
       display: none;
     }
 
-    .swipe-card {
-      min-width: 170px;
-      max-width: 170px;
-      background: var(--gemini-surface);
-      border: 1px solid var(--gemini-border-subtle);
-      border-radius: 18px;
-      padding: 16px 14px;
+    .minimal-action-card {
+      background: var(--zen-surface);
+      border: 1px solid var(--zen-border);
+      border-radius: var(--zen-radius-md);
+      padding: 16px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      height: 130px;
+      min-height: 115px;
       cursor: pointer;
-      scroll-snap-align: start;
-      box-shadow: var(--gemini-shadow-sm);
+      user-select: none;
+      box-shadow: var(--zen-shadow-sm);
       transition: all 0.15s;
+    }
+    .mode-mobile .minimal-action-card {
+      min-width: 160px;
+      max-width: 160px;
       flex-shrink: 0;
+      scroll-snap-align: start;
     }
-    .swipe-card:active {
-      transform: scale(0.97);
+    .minimal-action-card:hover {
+      border-color: var(--zen-border-focus);
+      transform: translateY(-1px);
+    }
+    .minimal-action-card:active {
+      transform: scale(0.98);
     }
 
-    /* Laptop Grid layout for suggestions when not on mobile */
-    .mode-laptop .horizontal-swipe-rail,
-    .mode-tablet .horizontal-swipe-rail {
+    /* 2-Col Grid */
+    .grid-2col {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      overflow-x: visible;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 14px;
     }
-    .mode-laptop .swipe-card,
-    .mode-tablet .swipe-card {
-      min-width: unset;
-      max-width: unset;
-      height: 130px;
+    .mode-mobile .grid-2col {
+      grid-template-columns: 1fr;
     }
 
-    /* Mobile Bottom Navigation Bar */
-    .native-bottom-nav {
-      height: 68px;
-      background: var(--gemini-surface);
+    /* Minimalist Bottom Navigation */
+    .zen-bottom-nav {
+      height: 64px;
+      background: var(--zen-surface);
+      border: 1px solid var(--zen-border);
+      border-radius: var(--zen-radius-full);
       display: flex;
       align-items: center;
       justify-content: space-around;
-      border-top: 1px solid var(--gemini-border);
-      border-radius: 20px;
-      margin-top: 10px;
+      padding: 0 12px;
+      box-shadow: var(--zen-shadow-sm);
     }
-    .mode-mobile .native-bottom-nav {
+    .mode-mobile .zen-bottom-nav {
       border-radius: 0;
-      margin-top: 0;
+      border-left: none;
+      border-right: none;
+      border-bottom: none;
       position: sticky;
       bottom: 0;
       z-index: 100;
-      padding-bottom: env(safe-area-inset-bottom);
     }
 
-    .nav-tab-btn {
+    .nav-item {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 3px;
-      color: var(--gemini-text-muted);
+      gap: 2px;
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 600;
+      color: var(--zen-text-muted);
       cursor: pointer;
       text-decoration: none;
+      padding: 4px 12px;
+      border-radius: var(--zen-radius-full);
+      transition: all 0.15s;
     }
-    .nav-tab-indicator {
-      width: 52px;
-      height: 28px;
-      border-radius: 9999px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.2s;
+    .nav-item.active {
+      color: var(--zen-primary);
+      background: var(--zen-primary-subtle);
     }
-    .nav-tab-btn.active .nav-tab-indicator {
-      background: var(--gemini-gradient-btn);
-      color: #FFFFFF;
-    }
-    .nav-tab-btn.active {
-      color: var(--gemini-text-main);
+
+    /* Floating Prompt Bar */
+    .floating-prompt-wrapper {
+      position: sticky;
+      bottom: 16px;
+      z-index: 90;
+      width: 100%;
     }
   </style>
 </head>
 <body>
 
-  <!-- Global Header -->
-  <header class="gemini-nav-header">
+  <!-- Minimal Header -->
+  <header class="zen-header">
     <div class="brand-lockup">
-      <div class="tovelu-mitosis-anim">
-        <svg width="32" height="32" viewBox="0 0 100 100" fill="none">
+      <!-- TOVELU MITOSIS LOGO -->
+      <div class="zen-mitosis-logo">
+        <svg width="30" height="30" viewBox="0 0 100 100" fill="none">
           <path d="M50 16 C28 16, 16 32, 16 50 C16 68, 28 84, 50 84 C38 72, 34 58, 34 50 C34 42, 38 28, 50 16 Z" fill="url(#tl1)"/>
           <path d="M50 16 C72 16, 84 32, 84 50 C84 68, 72 84, 50 84 C62 72, 66 58, 66 50 C66 42, 62 28, 50 16 Z" fill="url(#tl2)"/>
           <circle cx="50" cy="50" r="8" fill="#059669"/>
@@ -282,208 +288,204 @@
         </svg>
       </div>
       <span class="brand-wordmark">tovelu</span>
-      <span style="font-family: 'Google Sans', sans-serif; font-size: 11px; font-weight: 700; color: var(--gemini-sparkle-blue); background: var(--gemini-surface-container); padding: 3px 8px; border-radius: 9999px;">
-        GEMINI MOBILE-FIRST
+      <span style="font-size: 11px; font-weight: 700; color: var(--zen-primary); background: var(--zen-primary-subtle); padding: 3px 8px; border-radius: 9999px;">
+        MINIMALIST
       </span>
     </div>
 
-    <div style="display: flex; align-items: center; gap: 10px;">
-      <button class="gemini-btn gemini-btn-tonal" style="height: 36px; padding: 0 14px; font-size: 13px;" onclick="toggleTheme()">
-        <span class="material-symbols-outlined" id="theme-icon-sym" style="font-size: 17px;">dark_mode</span>
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <button class="zen-btn zen-btn-tonal" style="height: 36px; padding: 0 14px; font-size: 12px;" onclick="toggleTheme()">
+        <span class="material-symbols-outlined" id="theme-icon-sym" style="font-size: 16px;">dark_mode</span>
         <span id="theme-btn-text">Dark</span>
       </button>
-      <a href="survey.html" class="gemini-btn gemini-btn-primary" style="height: 36px; padding: 0 16px; font-size: 13px;">
+      <a href="survey.html" class="zen-btn zen-btn-primary" style="height: 36px; padding: 0 16px; font-size: 12px;">
         Survey ➔
       </a>
     </div>
   </header>
 
-  <!-- Viewport Device Switcher Bar -->
+  <!-- Viewport Switcher Bar -->
   <div class="viewport-control-bar">
-    <span style="font-size: 12px; font-weight: 800; color: var(--gemini-text-muted); margin-right: 4px;">VIEWPORT:</span>
-    <button class="device-pill" id="btn-laptop" onclick="setViewportMode('laptop')">
-      <span class="material-symbols-outlined" style="font-size: 16px;">laptop</span> Laptop
+    <span style="font-size: 11px; font-weight: 700; color: var(--zen-text-muted); margin-right: 4px;">VIEWPORT:</span>
+    <button class="device-pill active" id="btn-laptop" onclick="setViewportMode('laptop')">
+      <span class="material-symbols-outlined" style="font-size: 15px;">laptop</span> Laptop (1020px)
     </button>
     <button class="device-pill" id="btn-tablet" onclick="setViewportMode('tablet')">
-      <span class="material-symbols-outlined" style="font-size: 16px;">tablet_mac</span> Tablet
+      <span class="material-symbols-outlined" style="font-size: 15px;">tablet_mac</span> Tablet (740px)
     </button>
-    <button class="device-pill active" id="btn-mobile" onclick="setViewportMode('mobile')">
-      <span class="material-symbols-outlined" style="font-size: 16px;">smartphone</span> Mobile Phone (Native)
+    <button class="device-pill" id="btn-mobile" onclick="setViewportMode('mobile')">
+      <span class="material-symbols-outlined" style="font-size: 15px;">smartphone</span> Mobile (390px)
     </button>
   </div>
 
   <!-- Master Stage -->
   <div class="stage-wrapper">
-    <main class="device-frame mode-mobile" id="main-device-frame">
+    <main class="device-frame" id="main-device-frame">
       
-      <!-- Native Mobile Status Bar (iOS/Pixel style) -->
+      <!-- Mobile Status Bar -->
       <div class="mobile-status-bar">
         <span>09:41</span>
-        <div style="display: flex; align-items: center; gap: 6px;">
-          <span class="material-symbols-outlined" style="font-size: 16px;">signal_cellular_alt</span>
-          <span class="material-symbols-outlined" style="font-size: 16px;">wifi</span>
-          <span class="material-symbols-outlined" style="font-size: 18px;">battery_full</span>
+        <div style="display: flex; align-items: center; gap: 5px;">
+          <span class="material-symbols-outlined" style="font-size: 15px;">signal_cellular_alt</span>
+          <span class="material-symbols-outlined" style="font-size: 15px;">wifi</span>
+          <span class="material-symbols-outlined" style="font-size: 16px;">battery_full</span>
         </div>
       </div>
 
-      <!-- Main Mobile Scrollable Content -->
-      <div class="mobile-content-scroll">
+      <!-- Main Content Area -->
+      <div class="content-area">
         
-        <!-- Hero Greeting -->
-        <div style="display: flex; flex-direction: column; gap: 8px; padding-top: 4px;">
-          <h1 style="font-family: 'Google Sans Display', 'Google Sans', sans-serif; font-size: clamp(26px, 5.5vw, 38px); font-weight: 800; line-height: 1.15; letter-spacing: -0.02em;">
-            <span class="gemini-gradient-heading">Hello, Human.</span><br />
-            <span style="color: var(--gemini-text-muted); font-size: 0.75em;">How can THAIS help today?</span>
+        <!-- Clean Hero Greeting -->
+        <div style="display: flex; flex-direction: column; gap: 6px; padding-top: 4px;">
+          <h1 style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(24px, 4vw, 36px); font-weight: 700; line-height: 1.2; letter-spacing: -0.02em;">
+            Welcome to <span style="color: var(--zen-primary);">Tovelu</span>
           </h1>
+          <p style="font-size: 14px; color: var(--zen-text-muted); max-width: 620px; line-height: 1.5;">
+            Autonomous biological intelligence for 8.15 Billion humans. Calm, minimal, hospital-grade precision.
+          </p>
         </div>
 
-        <!-- Horizontal Swipe Rail of Action Cards (Native Mobile Touch) -->
+        <!-- Minimal Action Rail -->
         <div>
-          <div style="font-size: 12px; font-weight: 700; color: var(--gemini-text-subtle); margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;">
-            <span>QUICK PROTOCOLS (SWIPE)</span>
-            <span class="material-symbols-outlined" style="font-size: 16px; color: var(--gemini-text-subtle);">arrow_forward</span>
+          <div style="font-size: 11px; font-weight: 700; color: var(--zen-text-subtle); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 8px;">
+            CLINICAL MODULES
           </div>
 
-          <div class="horizontal-swipe-rail">
-            <div class="swipe-card" onclick="triggerQuery('Calculate my epigenetic biological age trajectory')">
-              <span class="material-symbols-outlined gemini-sparkle-svg" style="font-size: 26px;">genetics</span>
+          <div class="action-rail">
+            <div class="minimal-action-card" onclick="triggerQuery('Calculate my epigenetic biological age trajectory')">
+              <span class="material-symbols-outlined" style="color: var(--zen-primary); font-size: 22px;">genetics</span>
               <div>
-                <div style="font-weight: 700; font-size: 13px;">DNAm Age</div>
-                <div style="font-size: 11px; color: var(--gemini-text-muted);">Rate of aging & years saved.</div>
+                <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 13px;">DNAm Age</div>
+                <div style="font-size: 11px; color: var(--zen-text-muted);">Epigenetic aging trajectory.</div>
               </div>
             </div>
 
-            <div class="swipe-card" onclick="triggerQuery('Generate a whole-food meal plan with zero seed oils')">
-              <span class="material-symbols-outlined" style="font-size: 26px; color: var(--gemini-vitality-emerald);">restaurant</span>
+            <div class="minimal-action-card" onclick="triggerQuery('Generate a whole-food meal plan with zero seed oils')">
+              <span class="material-symbols-outlined" style="color: var(--zen-vitality); font-size: 22px;">restaurant</span>
               <div>
-                <div style="font-weight: 700; font-size: 13px;">Seed-Oil-Free</div>
-                <div style="font-size: 11px; color: var(--gemini-text-muted);">Calibrate 1,740 kcal BMR.</div>
+                <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 13px;">3-Meal Plan</div>
+                <div style="font-size: 11px; color: var(--zen-text-muted);">1,740 kcal BMR real food.</div>
               </div>
             </div>
 
-            <div class="swipe-card" onclick="triggerQuery('What is my optimal circadian sunlight & melatonin window?')">
-              <span class="material-symbols-outlined" style="font-size: 26px; color: #D97706;">wb_sunny</span>
+            <div class="minimal-action-card" onclick="triggerQuery('What is my optimal circadian sunlight & melatonin window?')">
+              <span class="material-symbols-outlined" style="color: var(--zen-warning); font-size: 22px;">wb_sunny</span>
               <div>
-                <div style="font-weight: 700; font-size: 13px;">Solar Sync</div>
-                <div style="font-size: 11px; color: var(--gemini-text-muted);">Cortisol & melatonin shield.</div>
+                <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 13px;">Circadian Sync</div>
+                <div style="font-size: 11px; color: var(--zen-text-muted);">Cortisol & melatonin shield.</div>
               </div>
             </div>
 
-            <div class="swipe-card" onclick="triggerQuery('Triage symptoms across the 55,000+ WHO ICD-11 database')">
-              <span class="material-symbols-outlined" style="font-size: 26px; color: var(--gemini-sparkle-blue);">medical_services</span>
+            <div class="minimal-action-card" onclick="triggerQuery('Triage symptoms across the 55,000+ WHO ICD-11 database')">
+              <span class="material-symbols-outlined" style="color: #0284C7; font-size: 22px;">medical_services</span>
               <div>
-                <div style="font-weight: 700; font-size: 13px;">55k WHO Triage</div>
-                <div style="font-size: 11px; color: var(--gemini-text-muted);">Reversible vs Hospital.</div>
+                <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 13px;">55k Triage</div>
+                <div style="font-size: 11px; color: var(--zen-text-muted);">Reversible vs Emergency.</div>
               </div>
             </div>
-          </div>
-        </div>
-
-        <!-- Gemini Live Voice Orb (Compact Native Card) -->
-        <div class="gemini-card" style="display: flex; align-items: center; justify-content: space-between; padding: 18px 20px;">
-          <div>
-            <div style="font-weight: 700; font-size: 15px;">Gemini Live Voice</div>
-            <div style="font-size: 12px; color: var(--gemini-text-muted);">Talk naturally with THAIS AI</div>
-          </div>
-          <div class="gemini-live-orb" style="width: 50px; height: 50px;" onclick="startVoicePulse()">
-            <span class="material-symbols-outlined" style="font-size: 26px;">mic</span>
           </div>
         </div>
 
         <!-- AI Streaming Response Box -->
-        <div id="gemini-chat-response" class="gemini-card" style="display: none; flex-direction: column; gap: 10px; padding: 16px;">
+        <div id="zen-chat-response" class="zen-card" style="display: none; flex-direction: column; gap: 10px; padding: 18px;">
           <div style="display: flex; align-items: center; justify-content: space-between;">
             <div style="display: flex; align-items: center; gap: 6px;">
-              <span class="material-symbols-outlined gemini-sparkle-svg" style="font-size: 18px;">auto_awesome</span>
-              <span style="font-weight: 700; font-size: 13px;">THAIS Clinical AI</span>
+              <span class="material-symbols-outlined" style="font-size: 18px; color: var(--zen-primary);">auto_awesome</span>
+              <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 13px;">THAIS Intelligence</span>
             </div>
-            <span style="font-size: 10px; font-weight: 700; color: var(--gemini-vitality-emerald); background: var(--gemini-surface-container); padding: 2px 6px; border-radius: 9999px;">
+            <span style="font-size: 10px; font-weight: 700; color: var(--zen-vitality); background: var(--zen-vitality-subtle); padding: 2px 6px; border-radius: 9999px;">
               LAW-001
             </span>
           </div>
 
-          <div id="gemini-output-content" style="font-size: 13px; line-height: 1.5; color: var(--gemini-text-main);"></div>
+          <div id="zen-output-content" style="font-size: 13px; line-height: 1.5; color: var(--zen-text-main);"></div>
         </div>
 
-        <!-- 1-Tap Mobile Intake Cards -->
-        <div class="gemini-card" style="display: flex; flex-direction: column; gap: 10px; padding: 16px;">
-          <div style="font-weight: 700; font-size: 14px;">1-Tap Health Goals (Mobile Optimized)</div>
+        <!-- 1-Tap Form Controls & Chips -->
+        <section>
+          <div class="grid-2col">
+            <!-- 1-Tap Option Cards -->
+            <div class="zen-card" style="display: flex; flex-direction: column; gap: 8px; padding: 18px;">
+              <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 13px;">1-Tap Health Goals</div>
 
-          <div class="gemini-option-card selected" onclick="toggleOption(this)">
-            <div class="gemini-check-circle">✓</div>
-            <span class="material-symbols-outlined" style="font-size: 22px; color: var(--gemini-sparkle-blue);">local_fire_department</span>
-            <div style="flex: 1;">
-              <div style="font-weight: 700; font-size: 13px;">Burn Visceral Belly Fat</div>
-              <div style="font-size: 11px; color: var(--gemini-text-muted);">Calibrate lipolytic oxidation.</div>
+              <div class="zen-option-card selected" onclick="toggleOption(this)">
+                <div class="zen-check-circle">✓</div>
+                <span class="material-symbols-outlined" style="font-size: 20px; color: var(--zen-primary);">local_fire_department</span>
+                <div style="flex: 1;">
+                  <div style="font-weight: 600; font-size: 13px;">Burn Visceral Belly Fat</div>
+                  <div style="font-size: 11px; color: var(--zen-text-muted);">Calibrate lipolytic oxidation.</div>
+                </div>
+              </div>
+
+              <div class="zen-option-card" onclick="toggleOption(this)">
+                <div class="zen-check-circle"></div>
+                <span class="material-symbols-outlined" style="font-size: 20px; color: var(--zen-vitality);">bolt</span>
+                <div style="flex: 1;">
+                  <div style="font-weight: 600; font-size: 13px;">Stop 2:00 PM Energy Crashes</div>
+                  <div style="font-size: 11px; color: var(--zen-text-muted);">Flatten glycemic spikes.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Preset Time Chips & Epigenetic Meter -->
+            <div class="zen-card" style="display: flex; flex-direction: column; justify-content: space-between; gap: 12px; padding: 18px;">
+              <div>
+                <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 13px; margin-bottom: 8px;">1-Tap Sleep/Wake Times</div>
+                <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                  <div class="zen-chip active" onclick="toggleChip(this)">06:00 AM</div>
+                  <div class="zen-chip" onclick="toggleChip(this)">06:30 AM</div>
+                  <div class="zen-chip" onclick="toggleChip(this)">10:30 PM</div>
+                  <div class="zen-chip" onclick="toggleChip(this)">11:00 PM</div>
+                </div>
+              </div>
+
+              <div style="border-top: 1px solid var(--zen-border); padding-top: 10px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span style="font-size: 11px; font-weight: 700; color: var(--zen-vitality);">DNAm AGE: 25.8 YRS</span>
+                  <span style="font-size: 11px; color: var(--zen-text-muted);">+6.2 Yrs Saved</span>
+                </div>
+                <div style="height: 6px; background: var(--zen-border-subtle); border-radius: 9999px; overflow: hidden; margin-top: 6px;">
+                  <div style="height: 100%; width: 82%; background: var(--zen-vitality);"></div>
+                </div>
+              </div>
             </div>
           </div>
+        </section>
 
-          <div class="gemini-option-card" onclick="toggleOption(this)">
-            <div class="gemini-check-circle"></div>
-            <span class="material-symbols-outlined" style="font-size: 22px; color: var(--gemini-vitality-emerald);">bolt</span>
-            <div style="flex: 1;">
-              <div style="font-weight: 700; font-size: 13px;">Stop 2:00 PM Energy Crashes</div>
-              <div style="font-size: 11px; color: var(--gemini-text-muted);">Resensitize insulin curve.</div>
-            </div>
+        <!-- Minimal Floating Prompt Capsule -->
+        <div class="floating-prompt-wrapper">
+          <div class="zen-prompt-box">
+            <span class="material-symbols-outlined" style="color: var(--zen-text-subtle); cursor: pointer; font-size: 18px;">add_photo_alternate</span>
+            <input type="text" class="zen-prompt-input" id="zen-input-field" placeholder="Ask THAIS anything..." onkeypress="if(event.key === 'Enter') executeZenQuery()" />
+            <span class="material-symbols-outlined" style="color: var(--zen-text-subtle); cursor: pointer; font-size: 18px;" onclick="triggerQuery('Listening via THAIS Voice...')">mic</span>
+            <button class="zen-btn zen-btn-primary" style="height: 32px; width: 32px; padding: 0; border-radius: 50%;" onclick="executeZenQuery()">
+              <span class="material-symbols-outlined" style="font-size: 16px;">arrow_upward</span>
+            </button>
           </div>
-        </div>
-
-        <!-- 1-Tap Time Preset Chips -->
-        <div class="gemini-card" style="display: flex; flex-direction: column; gap: 10px; padding: 16px;">
-          <div style="font-weight: 700; font-size: 14px;">1-Tap Sleep/Wake Preset Chips</div>
-          <div style="display: flex; flex-wrap: wrap; gap: 6px;">
-            <div class="gemini-chip active" onclick="toggleChip(this)">06:00 AM</div>
-            <div class="gemini-chip" onclick="toggleChip(this)">06:30 AM</div>
-            <div class="gemini-chip" onclick="toggleChip(this)">10:30 PM</div>
-            <div class="gemini-chip" onclick="toggleChip(this)">11:00 PM</div>
-          </div>
-        </div>
-
-        <!-- Epigenetic Longevity Meter -->
-        <div class="gemini-card" style="padding: 16px;">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <span style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald);">DNAm EPIGENETIC CLOCK</span>
-            <span style="font-size: 11px; font-weight: 700; color: var(--gemini-sparkle-blue);">0.82x Rate</span>
-          </div>
-          <div style="font-size: 24px; font-weight: 800; color: var(--gemini-vitality-emerald); margin: 4px 0;">25.8 Biological Yrs</div>
-          <div style="font-size: 12px; color: var(--gemini-text-muted);">Chronological: 32.0 Yrs • <strong>+6.2 Yrs Restored</strong></div>
-          <div style="height: 6px; background: var(--gemini-surface-container); border-radius: 9999px; overflow: hidden; margin-top: 8px;">
-            <div style="height: 100%; width: 82%; background: var(--gemini-gradient-btn);"></div>
-          </div>
-        </div>
-
-        <!-- Floating Mobile Prompt Bar -->
-        <div class="gemini-prompt-box" style="margin-top: 4px;">
-          <span class="material-symbols-outlined" style="color: var(--gemini-text-subtle); cursor: pointer; font-size: 20px;">add_photo_alternate</span>
-          <input type="text" class="gemini-prompt-input" id="gemini-input-field" placeholder="Ask THAIS anything..." onkeypress="if(event.key === 'Enter') executeGeminiQuery()" style="font-size: 14px;" />
-          <span class="material-symbols-outlined" style="color: var(--gemini-text-subtle); cursor: pointer; font-size: 20px;" onclick="startVoicePulse()">mic</span>
-          <button class="gemini-btn gemini-btn-primary" style="height: 32px; width: 32px; padding: 0; border-radius: 50%;" onclick="executeGeminiQuery()">
-            <span class="material-symbols-outlined" style="font-size: 17px;">arrow_upward</span>
-          </button>
         </div>
 
       </div>
 
-      <!-- Native Mobile 5-Tab Bottom Bar -->
-      <nav class="native-bottom-nav">
-        <a class="nav-tab-btn active" onclick="selectNav(this)">
-          <div class="nav-tab-indicator"><span class="material-symbols-outlined" style="font-size: 20px;">bolt</span></div>
+      <!-- Minimal 5-Tab Navigation Bar -->
+      <nav class="zen-bottom-nav">
+        <a class="nav-item active" onclick="selectNav(this)">
+          <span class="material-symbols-outlined" style="font-size: 18px;">bolt</span>
           <span>FLOW</span>
         </a>
-        <a class="nav-tab-btn" onclick="selectNav(this)">
-          <div class="nav-tab-indicator"><span class="material-symbols-outlined" style="font-size: 20px;">menu_book</span></div>
+        <a class="nav-item" onclick="selectNav(this)">
+          <span class="material-symbols-outlined" style="font-size: 18px;">menu_book</span>
           <span>BOOK</span>
         </a>
-        <a class="nav-tab-btn" onclick="selectNav(this)">
-          <div class="nav-tab-indicator"><span class="material-symbols-outlined" style="font-size: 20px;">chat</span></div>
+        <a class="nav-item" onclick="selectNav(this)">
+          <span class="material-symbols-outlined" style="font-size: 18px;">chat</span>
           <span>CHAT</span>
         </a>
-        <a class="nav-tab-btn" onclick="selectNav(this)">
-          <div class="nav-tab-indicator"><span class="material-symbols-outlined" style="font-size: 20px;">monitoring</span></div>
+        <a class="nav-item" onclick="selectNav(this)">
+          <span class="material-symbols-outlined" style="font-size: 18px;">monitoring</span>
           <span>HEALTH</span>
         </a>
-        <a class="nav-tab-btn" onclick="selectNav(this)">
-          <div class="nav-tab-indicator"><span class="material-symbols-outlined" style="font-size: 20px;">person</span></div>
+        <a class="nav-item" onclick="selectNav(this)">
+          <span class="material-symbols-outlined" style="font-size: 18px;">person</span>
           <span>YOU</span>
         </a>
       </nav>
@@ -509,7 +511,6 @@
 
       if (mode === 'laptop') {
         document.getElementById('btn-laptop').classList.add('active');
-        frame.classList.add('mode-laptop');
       } else if (mode === 'tablet') {
         document.getElementById('btn-tablet').classList.add('active');
         frame.classList.add('mode-tablet');
@@ -521,51 +522,47 @@
 
     function toggleOption(card) {
       const parent = card.parentElement;
-      parent.querySelectorAll('.gemini-option-card').forEach(c => {
+      parent.querySelectorAll('.zen-option-card').forEach(c => {
         c.classList.remove('selected');
-        c.querySelector('.gemini-check-circle').innerText = '';
+        c.querySelector('.zen-check-circle').innerText = '';
       });
       card.classList.add('selected');
-      card.querySelector('.gemini-check-circle').innerText = '✓';
+      card.querySelector('.zen-check-circle').innerText = '✓';
     }
 
     function toggleChip(chip) {
       const parent = chip.parentElement;
-      parent.querySelectorAll('.gemini-chip').forEach(c => c.classList.remove('active'));
+      parent.querySelectorAll('.zen-chip').forEach(c => c.classList.remove('active'));
       chip.classList.add('active');
     }
 
     function selectNav(item) {
-      document.querySelectorAll('.nav-tab-btn').forEach(i => i.classList.remove('active'));
+      document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
       item.classList.add('active');
     }
 
     function triggerQuery(text) {
-      document.getElementById('gemini-input-field').value = text;
-      executeGeminiQuery();
+      document.getElementById('zen-input-field').value = text;
+      executeZenQuery();
     }
 
-    function executeGeminiQuery() {
-      const input = document.getElementById('gemini-input-field');
+    function executeZenQuery() {
+      const input = document.getElementById('zen-input-field');
       const q = input.value.trim() || "What is my biological age trajectory?";
-      const resCard = document.getElementById('gemini-chat-response');
-      const outText = document.getElementById('gemini-output-content');
+      const resCard = document.getElementById('zen-chat-response');
+      const outText = document.getElementById('zen-output-content');
       
       resCard.style.display = 'flex';
-      outText.innerHTML = `<span style="color: var(--gemini-sparkle-blue); font-weight: 700;">Thinking...</span> Analyzing with THAIS clinical reasoning...`;
+      outText.innerHTML = `<span style="color: var(--zen-primary); font-weight: 600;">Analyzing...</span> Calibrating with THAIS clinical engine...`;
       
       setTimeout(() => {
         outText.innerHTML = `
           <strong>Clinical Analysis for "${q}":</strong><br>
-          • <strong>Metabolic BMR:</strong> 1,740 kcal/day.<br>
-          • <strong>Epigenetic Longevity:</strong> Pace of aging reduced from <code>1.04x</code> to <code>0.82x</code> (-4.2 biological years saved).<br>
-          • <strong>Circadian Sync:</strong> Sunlight at <strong>06:30 AM</strong> for cortisol & melatonin balance.
+          • <strong>Metabolic Baseline:</strong> 1,740 kcal/day BMR.<br>
+          • <strong>Epigenetic Longevity:</strong> Biological age de-accelerated to <code>0.82x</code> (-4.2 biological years saved).<br>
+          • <strong>Circadian Sync:</strong> Morning sunlight at <strong>06:30 AM</strong> to stabilize cortisol & melatonin.
         `;
-      }, 500);
-    }
-
-    function startVoicePulse() {
-      triggerQuery("Listening via Gemini Live Voice... Tell THAIS your symptoms.");
+      }, 400);
     }
   </script>
 </body>
