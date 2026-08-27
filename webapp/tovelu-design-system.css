@@ -1,124 +1,73 @@
 /**
- * TOVELU YEAR 2126 QUANTUM HEALTH DESIGN SYSTEM (TDS-2126 M3)
- * Google Material 3 Architecture + 100-Year Autonomous Bio-Cell Intelligence
- * Supreme Constitutional Governance: LAW-001
+ * GOOGLE GEMINI DESIGN SYSTEM (TDS-GEMINI) FOR TOVELU HEALTH AI
+ * 100% Google Gemini AI Aesthetic, Typography, Voice Waveforms & Component Matrix
  */
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Google+Sans:wght@400;500;700&family=Google+Sans+Text:wght@400;500;700&family=Google+Sans+Display:wght@400;500;700;800&family=Ubuntu:wght@500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
 :root {
-  /* ==================== 1. YEAR 2126 QUANTUM TONAL PALETTES ==================== */
-  /* Clinical Quantum Azure */
-  --md-sys-color-primary: #0B57D0;
-  --md-sys-color-on-primary: #FFFFFF;
-  --md-sys-color-primary-container: #D3E3FD;
-  --md-sys-color-on-primary-container: #041E49;
+  /* ==================== 1. GOOGLE GEMINI COLOR SYSTEM ==================== */
+  /* Gemini Holographic Sparkle Palette */
+  --gemini-sparkle-blue: #1A73E8;
+  --gemini-sparkle-sky: #8AB4F8;
+  --gemini-sparkle-purple: #9B72CB;
+  --gemini-sparkle-pink: #D96570;
+  --gemini-sparkle-coral: #FF8BCB;
+  --gemini-vitality-emerald: #146C2E;
 
-  /* Luminous Cyber-Cyan */
-  --md-sys-color-secondary: #00639B;
-  --md-sys-color-on-secondary: #FFFFFF;
-  --md-sys-color-secondary-container: #C2E7FF;
-  --md-sys-color-on-secondary-container: #001D35;
+  /* Master Gemini Multi-Color Gradients */
+  --gemini-gradient-text: linear-gradient(74deg, #4285F4 0%, #9B72CB 9%, #D96570 20%, #D96570 24%, #8AB4F8 35%, #4285F4 44%, #9B72CB 50%, #D96570 56%, #8AB4F8 75%, #4285F4 100%);
+  --gemini-gradient-sparkle: linear-gradient(135deg, #1A73E8 0%, #8AB4F8 30%, #C58AF9 65%, #FF8BCB 100%);
+  --gemini-gradient-btn: linear-gradient(135deg, #1A73E8 0%, #6875F5 50%, #9B72CB 100%);
+  --gemini-glow-radial: radial-gradient(circle at 50% 0%, rgba(138, 180, 248, 0.22) 0%, transparent 65%);
 
-  /* Living Bio-Cell Vitality Emerald */
-  --md-sys-color-tertiary: #059669;
-  --md-sys-color-on-tertiary: #FFFFFF;
-  --md-sys-color-tertiary-container: #D1FAE5;
-  --md-sys-color-on-tertiary-container: #065F46;
+  /* Gemini Light Theme Surfaces */
+  --gemini-bg: #F0F4F9;
+  --gemini-surface: #FFFFFF;
+  --gemini-surface-hover: #F8FAFD;
+  --gemini-surface-container: #E1E7EE;
+  --gemini-surface-container-high: #D3E3FD;
+  --gemini-border: #E3E8EF;
+  --gemini-border-subtle: #EEF2F6;
 
-  /* Year 2126 Quantum Hologram Gradients */
-  --tovelu-2126-gradient: linear-gradient(135deg, #0B57D0 0%, #00639B 30%, #059669 70%, #10B981 100%);
-  --tovelu-gemini-gradient: linear-gradient(135deg, #1A73E8 0%, #8AB4F8 30%, #C58AF9 60%, #FF8BCB 100%);
-  --tovelu-dna-glow: radial-gradient(circle at 50% 50%, rgba(5, 150, 105, 0.18) 0%, transparent 75%);
-  --tovelu-quantum-border: linear-gradient(135deg, rgba(11, 87, 208, 0.4), rgba(5, 150, 105, 0.4));
+  --gemini-text-main: #1F1F1F;
+  --gemini-text-muted: #444746;
+  --gemini-text-subtle: #747775;
 
-  /* M3 Tonal Surfaces (Light Theme - Default) */
-  --md-sys-color-surface: #F8FAFC;
-  --md-sys-color-on-surface: #0F172A;
-  --md-sys-color-surface-variant: #E2E8F0;
-  --md-sys-color-on-surface-variant: #475569;
+  /* Corner Squircles */
+  --gemini-radius-sm: 8px;
+  --gemini-radius-md: 16px;
+  --gemini-radius-lg: 24px;
+  --gemini-radius-xl: 32px;
+  --gemini-radius-full: 9999px;
 
-  --md-sys-color-surface-container-lowest: #FFFFFF;
-  --md-sys-color-surface-container-low: #F1F5F9;
-  --md-sys-color-surface-container: #E2E8F0;
-  --md-sys-color-surface-container-high: #CBD5E1;
-  --md-sys-color-surface-container-highest: #94A3B8;
-
-  --md-sys-color-outline: #94A3B8;
-  --md-sys-color-outline-variant: #E2E8F0;
-
-  /* M3 Shadows */
-  --md-sys-elevation-level0: none;
-  --md-sys-elevation-level1: 0px 1px 3px 1px rgba(0, 0, 0, 0.08), 0px 1px 2px 0px rgba(0, 0, 0, 0.12);
-  --md-sys-elevation-level2: 0px 2px 6px 2px rgba(0, 0, 0, 0.08), 0px 1px 2px 0px rgba(0, 0, 0, 0.14);
-  --md-sys-elevation-level3: 0px 4px 8px 3px rgba(0, 0, 0, 0.08), 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
-  --md-sys-elevation-level4: 0px 6px 12px 4px rgba(0, 0, 0, 0.1), 0px 2px 4px 0px rgba(0, 0, 0, 0.15);
-
-  /* Corner Shapes */
-  --md-sys-shape-corner-small: 8px;
-  --md-sys-shape-corner-medium: 14px;
-  --md-sys-shape-corner-large: 20px;
-  --md-sys-shape-corner-extra-large: 28px;
-  --md-sys-shape-corner-full: 9999px;
+  /* Shadows */
+  --gemini-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --gemini-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --gemini-shadow-glow: 0 0 32px rgba(66, 133, 244, 0.15);
 }
 
-/* Dark Theme (Night Obsidian Quantum) */
+/* Dark Theme (Google Gemini Dark #131314) */
 [data-theme="dark"], .tds-theme-dark {
-  --md-sys-color-primary: #A8C7FA;
-  --md-sys-color-on-primary: #042D78;
-  --md-sys-color-primary-container: #0842A0;
-  --md-sys-color-on-primary-container: #D3E3FD;
+  --gemini-bg: #131314;
+  --gemini-surface: #1E1F20;
+  --gemini-surface-hover: #282A2C;
+  --gemini-surface-container: #282A2C;
+  --gemini-surface-container-high: #333537;
+  --gemini-border: #333537;
+  --gemini-border-subtle: #282A2C;
 
-  --md-sys-color-secondary: #7FCFFF;
-  --md-sys-color-on-secondary: #003453;
-  --md-sys-color-secondary-container: #004B75;
-  --md-sys-color-on-secondary-container: #C2E7FF;
+  --gemini-text-main: #E3E3E3;
+  --gemini-text-muted: #C4C7C5;
+  --gemini-text-subtle: #8E918F;
 
-  --md-sys-color-tertiary: #6EE7B7;
-  --md-sys-color-on-tertiary: #065F46;
-  --md-sys-color-tertiary-container: #059669;
-  --md-sys-color-on-tertiary-container: #D1FAE5;
-
-  --md-sys-color-surface: #090D16;
-  --md-sys-color-on-surface: #F8FAFC;
-  --md-sys-color-surface-variant: #1E293B;
-  --md-sys-color-on-surface-variant: #94A3B8;
-
-  --md-sys-color-surface-container-lowest: #05080E;
-  --md-sys-color-surface-container-low: #0E1524;
-  --md-sys-color-surface-container: #151F33;
-  --md-sys-color-surface-container-high: #1E2B45;
-  --md-sys-color-surface-container-highest: #28395A;
-
-  --md-sys-color-outline: #475569;
-  --md-sys-color-outline-variant: #1E293B;
+  --gemini-glow-radial: radial-gradient(circle at 50% 0%, rgba(138, 180, 248, 0.15) 0%, transparent 65%);
+  --gemini-shadow-glow: 0 0 32px rgba(138, 180, 248, 0.12);
 }
 
-/* ==================== 2. YEAR 2126 QUANTUM ANIMATIONS & MICRO-PULSE ==================== */
+/* ==================== 2. GEMINI TYPOGRAPHY & SPARKLE ANIMATIONS ==================== */
 
-@keyframes bioPulse {
-  0% { transform: scale(1); filter: drop-shadow(0 0 4px rgba(5, 150, 105, 0.3)); }
-  50% { transform: scale(1.04); filter: drop-shadow(0 0 16px rgba(16, 185, 129, 0.6)); }
-  100% { transform: scale(1); filter: drop-shadow(0 0 4px rgba(5, 150, 105, 0.3)); }
-}
-
-@keyframes waveOscillate {
-  0% { transform: translateX(0); }
-  50% { transform: translateX(-25%); }
-  100% { transform: translateX(0); }
-}
-
-@keyframes dnaRotate {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.tovelu-pulse-nucleus {
-  animation: bioPulse 3s ease-in-out infinite;
-}
-
-/* Material Symbols */
 .material-symbols-outlined {
   font-family: 'Material Symbols Outlined';
   font-weight: normal;
@@ -135,187 +84,150 @@
   vertical-align: middle;
 }
 
-/* Year 2126 Hologram Sparkle Icon */
-.tovelu-2126-icon {
-  background: var(--tovelu-2126-gradient);
+/* Shimmering Gemini Gradient Text */
+.gemini-gradient-heading {
+  background: var(--gemini-gradient-text);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: geminiShimmer 8s linear infinite;
+  display: inline-block;
+}
+
+@keyframes geminiShimmer {
+  to { background-position: 200% center; }
+}
+
+/* Gemini Sparkle Icon */
+.gemini-sparkle-svg {
+  background: var(--gemini-gradient-sparkle);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
 }
 
-/* Quantum Glass Card */
-.tovelu-quantum-card {
-  background: var(--md-sys-color-surface-container-lowest);
-  border: 1.5px solid var(--md-sys-color-outline-variant);
-  border-radius: var(--md-sys-shape-corner-extra-large);
-  padding: 24px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: var(--md-sys-elevation-level1);
-  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
-}
-.tovelu-quantum-card:hover {
-  box-shadow: var(--md-sys-elevation-level3);
-  border-color: var(--md-sys-color-primary);
-}
-
-/* 2126 Quantum Prompt Capsule */
-.quantum-prompt-capsule {
-  background: var(--md-sys-color-surface-container-low);
-  border: 2px solid var(--md-sys-color-outline-variant);
-  border-radius: var(--md-sys-shape-corner-full);
-  padding: 10px 22px;
+/* Gemini Pulse Orb (Live Voice Mode) */
+.gemini-live-orb {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--gemini-gradient-sparkle);
+  box-shadow: 0 0 24px rgba(66, 133, 244, 0.5);
   display: flex;
   align-items: center;
-  gap: 14px;
-  box-shadow: var(--md-sys-elevation-level2);
-  transition: all 0.2s;
-}
-.quantum-prompt-capsule:focus-within {
-  border-color: var(--md-sys-color-primary);
-  background: var(--md-sys-color-surface-container-lowest);
-  box-shadow: 0 0 0 4px var(--md-sys-color-primary-container), var(--md-sys-elevation-level3);
+  justify-content: center;
+  color: #FFFFFF;
+  animation: geminiOrbPulse 2.5s ease-in-out infinite;
+  cursor: pointer;
 }
 
-.quantum-input {
+@keyframes geminiOrbPulse {
+  0% { transform: scale(1); box-shadow: 0 0 16px rgba(66, 133, 244, 0.4); }
+  50% { transform: scale(1.08); box-shadow: 0 0 32px rgba(197, 138, 249, 0.7); }
+  100% { transform: scale(1); box-shadow: 0 0 16px rgba(66, 133, 244, 0.4); }
+}
+
+/* ==================== 3. GEMINI UI COMPONENTS ==================== */
+
+/* Gemini Prompt Input Box */
+.gemini-prompt-box {
+  background: var(--gemini-surface-container);
+  border-radius: var(--gemini-radius-xl);
+  padding: 14px 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+  position: relative;
+}
+.gemini-prompt-box:focus-within {
+  background: var(--gemini-surface);
+  box-shadow: var(--gemini-shadow-md), 0 0 0 2px var(--gemini-sparkle-blue);
+}
+
+.gemini-prompt-input {
   flex: 1;
   background: transparent;
   border: none;
   outline: none;
   font-family: 'Google Sans Text', sans-serif;
-  font-size: 15px;
-  color: var(--md-sys-color-on-surface);
+  font-size: 16px;
+  color: var(--gemini-text-main);
+}
+.gemini-prompt-input::placeholder {
+  color: var(--gemini-text-subtle);
 }
 
-/* Quantum Buttons */
-.m3-btn {
+/* Gemini Suggestion Card */
+.gemini-action-card {
+  background: var(--gemini-surface);
+  border-radius: var(--gemini-radius-md);
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 140px;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s;
+  box-shadow: var(--gemini-shadow-sm);
+  border: 1px solid var(--gemini-border-subtle);
+}
+.gemini-action-card:hover {
+  background: var(--gemini-surface-hover);
+  box-shadow: var(--gemini-shadow-md);
+  transform: translateY(-2px);
+  border-color: var(--gemini-sparkle-blue);
+}
+
+/* Gemini Pill Button */
+.gemini-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   height: 44px;
   padding: 0 24px;
-  border-radius: var(--md-sys-shape-corner-full);
+  border-radius: var(--gemini-radius-full);
   font-family: 'Google Sans Text', sans-serif;
-  font-weight: 700;
+  font-weight: 500;
   font-size: 14px;
   cursor: pointer;
   user-select: none;
   text-decoration: none;
   border: none;
   outline: none;
-  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
-  touch-action: manipulation;
+  transition: all 0.2s;
 }
-.m3-btn:active {
+.gemini-btn:active {
   transform: scale(0.97);
 }
 
-.m3-btn-quantum {
-  background: var(--tovelu-2126-gradient);
+.gemini-btn-primary {
+  background: var(--gemini-gradient-btn);
   color: #FFFFFF;
-  box-shadow: 0 4px 16px rgba(11, 87, 208, 0.35);
+  box-shadow: 0 4px 16px rgba(26, 115, 232, 0.35);
 }
-.m3-btn-quantum:hover {
-  filter: brightness(1.1);
-  box-shadow: 0 6px 20px rgba(5, 150, 105, 0.45);
-}
-
-.m3-btn-filled {
-  background: var(--md-sys-color-primary);
-  color: var(--md-sys-color-on-primary);
+.gemini-btn-primary:hover {
+  filter: brightness(1.08);
 }
 
-.m3-btn-tonal {
-  background: var(--md-sys-color-secondary-container);
-  color: var(--md-sys-color-on-secondary-container);
+.gemini-btn-tonal {
+  background: var(--gemini-surface-container);
+  color: var(--gemini-text-main);
+}
+.gemini-btn-tonal:hover {
+  background: var(--gemini-border);
 }
 
-.m3-btn-vitality {
-  background: var(--md-sys-color-tertiary);
-  color: var(--md-sys-color-on-tertiary);
-  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.3);
-}
-
-/* 1-Tap Option Cards */
-.m3-option-card {
-  background: var(--md-sys-color-surface-container-low);
-  border: 2px solid var(--md-sys-color-outline-variant);
-  border-radius: var(--md-sys-shape-corner-large);
-  padding: 16px 20px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  cursor: pointer;
-  user-select: none;
-  touch-action: manipulation;
-  transition: all 0.15s;
-}
-.m3-option-card:hover {
-  background: var(--md-sys-color-surface-container);
-  border-color: var(--md-sys-color-primary);
-}
-.m3-option-card.selected {
-  background: var(--md-sys-color-primary-container);
-  border-color: var(--md-sys-color-primary);
-  color: var(--md-sys-color-on-primary-container);
-}
-
-.m3-icon-check {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  border: 2px solid var(--md-sys-color-outline);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.75rem;
-  font-weight: 800;
-  flex-shrink: 0;
-  background: var(--md-sys-color-surface);
-}
-.m3-option-card.selected .m3-icon-check {
-  background: var(--md-sys-color-primary);
-  border-color: var(--md-sys-color-primary);
-  color: var(--md-sys-color-on-primary);
-}
-
-/* Quantum Navigation Bar */
-.m3-nav-bar {
-  height: 80px;
-  background: var(--md-sys-color-surface-container);
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  padding: 0 16px;
-  border-top: 1px solid var(--md-sys-color-outline-variant);
-}
-.m3-nav-item {
+/* Gemini Multi-Turn Response Bubble */
+.gemini-response-card {
+  background: var(--gemini-surface);
+  border-radius: var(--gemini-radius-lg);
+  padding: 24px;
+  border: 1px solid var(--gemini-border-subtle);
+  box-shadow: var(--gemini-shadow-sm);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  text-decoration: none;
-  color: var(--md-sys-color-on-surface-variant);
-  font-family: 'Google Sans Text', sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
-}
-.m3-nav-indicator {
-  width: 64px;
-  height: 32px;
-  border-radius: var(--md-sys-shape-corner-full);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
-}
-.m3-nav-item.active .m3-nav-indicator {
-  background: var(--tovelu-2126-gradient);
-  color: #FFFFFF;
-  box-shadow: 0 2px 8px rgba(11, 87, 208, 0.3);
-}
-.m3-nav-item.active {
-  color: var(--md-sys-color-on-surface);
+  gap: 16px;
 }

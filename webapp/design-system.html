@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>TOVELU 2126 • Google Material 3 Quantum Health Design System</title>
+  <title>Google Gemini Design for Tovelu Health AI</title>
   
   <!-- Google Fonts: Google Sans & Material Symbols -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,14 +11,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Google+Sans:wght@400;500;700&family=Google+Sans+Text:wght@400;500;700&family=Google+Sans+Display:wght@400;500;700;800&family=Ubuntu:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   
-  <!-- TDS Material 3 Framework -->
+  <!-- Gemini CSS Framework -->
   <link rel="stylesheet" href="tovelu-design-system.css">
   
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background-color: var(--md-sys-color-surface);
-      color: var(--md-sys-color-on-surface);
+      background-color: var(--gemini-bg);
+      color: var(--gemini-text-main);
       font-family: 'Google Sans Text', 'Roboto', sans-serif;
       line-height: 1.5;
       min-height: 100vh;
@@ -27,10 +27,9 @@
       transition: background-color 0.2s, color 0.2s;
     }
 
-    /* Google M3 Top App Bar */
-    header.google-top-app-bar {
-      height: 72px;
-      background: var(--md-sys-color-surface-container-low);
+    /* Gemini Header Bar */
+    header.gemini-nav-header {
+      height: 64px;
       padding: 0 clamp(1rem, 3vw, 2.5rem);
       display: flex;
       align-items: center;
@@ -38,345 +37,185 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      border-bottom: 1px solid var(--md-sys-color-outline-variant);
-      backdrop-filter: blur(20px);
+      background: var(--gemini-bg);
+      backdrop-filter: blur(16px);
     }
 
-    .brand-lockup {
+    .gemini-brand {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       text-decoration: none;
     }
     .brand-wordmark {
       font-family: 'Ubuntu', sans-serif;
       font-weight: 500;
       font-size: 26px;
-      color: var(--md-sys-color-on-surface);
+      color: var(--gemini-text-main);
     }
 
-    /* Main Container */
-    .google-container {
-      max-width: 1140px;
+    /* Main Showcase Container */
+    .gemini-main {
+      max-width: 900px;
       width: 100%;
       margin: 0 auto;
-      padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem) 6rem clamp(1rem, 3vw, 2rem);
+      padding: clamp(1rem, 3vw, 2.5rem) clamp(1rem, 3vw, 1.5rem) 7rem clamp(1rem, 3vw, 1.5rem);
       display: flex;
       flex-direction: column;
-      gap: 3.5rem;
+      gap: 2.5rem;
+      flex: 1;
     }
 
-    /* 2126 Hero Banner */
-    .hero-2126-card {
-      background: var(--md-sys-color-surface-container-lowest);
-      border-radius: 32px;
-      padding: clamp(2rem, 5vw, 3.5rem);
-      border: 1.5px solid var(--md-sys-color-outline-variant);
-      position: relative;
-      overflow: hidden;
+    /* Gemini Greeting Hero */
+    .gemini-hero {
       display: flex;
       flex-direction: column;
-      gap: 20px;
-      box-shadow: var(--md-sys-elevation-level2);
+      gap: 12px;
+      padding-top: 1rem;
     }
-    .hero-2126-glow {
-      position: absolute;
-      top: -120px;
-      right: -120px;
-      width: 380px;
-      height: 380px;
-      background: var(--tovelu-2126-gradient);
-      filter: blur(90px);
-      opacity: 0.18;
-      border-radius: 50%;
-      pointer-events: none;
+    .gemini-greeting {
+      font-family: 'Google Sans Display', 'Google Sans', sans-serif;
+      font-size: clamp(34px, 6vw, 56px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
     }
 
-    /* Audio Waveform Simulator */
-    .audio-wave-track {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      height: 24px;
-    }
-    .audio-bar {
-      width: 3.5px;
-      background: var(--md-sys-color-primary);
-      border-radius: 9999px;
-      animation: audioFlux 1.2s ease-in-out infinite alternate;
-    }
-    @keyframes audioFlux {
-      0% { height: 4px; }
-      100% { height: 22px; }
-    }
-
-    /* Section Styling */
-    .section-title-m3 {
-      font-family: 'Google Sans', sans-serif;
-      font-size: 24px;
-      font-weight: 700;
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--md-sys-color-on-surface);
-    }
-    .section-subtitle-m3 {
-      font-size: 14px;
-      color: var(--md-sys-color-on-surface-variant);
-      margin-bottom: 24px;
-    }
-
-    /* Layout Grids */
-    .interactive-grid-m3 {
+    /* Gemini 4-Card Suggestion Grid */
+    .gemini-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+    }
+
+    /* Fixed Bottom Gemini Prompt Box */
+    .gemini-floating-bar-container {
+      position: sticky;
+      bottom: 24px;
+      z-index: 90;
+      width: 100%;
+      margin-top: 1rem;
     }
   </style>
 </head>
 <body>
 
-  <!-- Top App Bar -->
-  <header class="google-top-app-bar">
-    <div class="brand-lockup">
-      <div class="tovelu-pulse-nucleus">
-        <svg width="34" height="34" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M50 16 C28 16, 16 32, 16 50 C16 68, 28 84, 50 84 C38 72, 34 58, 34 50 C34 42, 38 28, 50 16 Z" fill="url(#g-l5)"/>
-          <path d="M50 16 C72 16, 84 32, 84 50 C84 68, 72 84, 50 84 C62 72, 66 58, 66 50 C66 42, 62 28, 50 16 Z" fill="url(#g-r5)"/>
-          <circle cx="50" cy="50" r="8" fill="#059669"/>
-          <defs>
-            <linearGradient id="g-l5" x1="16" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#00639B"/>
-              <stop offset="1" stop-color="#0B57D0"/>
-            </linearGradient>
-            <linearGradient id="g-r5" x1="84" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#059669"/>
-              <stop offset="1" stop-color="#10B981"/>
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
+  <!-- Top Gemini Header -->
+  <header class="gemini-nav-header">
+    <div class="gemini-brand">
+      <span class="material-symbols-outlined gemini-sparkle-svg" style="font-size: 30px;">auto_awesome</span>
       <span class="brand-wordmark">tovelu</span>
-      <span class="m3-badge m3-badge-primary" style="margin-left: 6px;">
-        <span class="material-symbols-outlined tovelu-2126-icon" style="font-size: 16px;">biotech</span> YEAR 2126 M3
+      <span style="font-family: 'Google Sans', sans-serif; font-size: 13px; font-weight: 700; color: var(--gemini-sparkle-blue); background: var(--gemini-surface-container); padding: 4px 10px; border-radius: 9999px; margin-left: 4px;">
+        THAIS GEMINI 1.0
       </span>
     </div>
 
     <div style="display: flex; align-items: center; gap: 12px;">
-      <button class="m3-btn m3-btn-tonal" style="height: 38px; padding: 0 16px;" onclick="toggleTheme()">
+      <button class="gemini-btn gemini-btn-tonal" style="height: 38px; padding: 0 16px;" onclick="toggleTheme()">
         <span class="material-symbols-outlined" id="theme-icon-sym" style="font-size: 18px;">dark_mode</span>
-        <span id="theme-btn-text">Dark Mode</span>
+        <span id="theme-btn-text">Dark</span>
       </button>
-      <a href="survey.html" class="m3-btn m3-btn-quantum" style="height: 38px; padding: 0 18px;">
+      <a href="survey.html" class="gemini-btn gemini-btn-primary" style="height: 38px; padding: 0 18px;">
         Launch Survey ➔
       </a>
     </div>
   </header>
 
-  <!-- Main Showcase Container -->
-  <main class="google-container">
+  <!-- Main Gemini Experience -->
+  <main class="gemini-main">
     
-    <!-- 2126 Quantum Health Hero Card -->
-    <div class="hero-2126-card">
-      <div class="hero-2126-glow"></div>
-      
-      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
-        <span class="m3-badge m3-badge-tertiary">
-          <span class="material-symbols-outlined tovelu-2126-icon" style="font-size: 16px;">auto_awesome</span> 100-YEAR AUTONOMOUS HEALTH ARCHITECTURE
-        </span>
-        
-        <!-- Live Neural Audio Waveform -->
-        <div style="display: flex; align-items: center; gap: 8px; background: var(--md-sys-color-surface-container); padding: 4px 12px; border-radius: 9999px;">
-          <span style="font-size: 11px; font-weight: 700; color: var(--md-sys-color-primary);">THAIS NEURAL VOICE</span>
-          <div class="audio-wave-track">
-            <div class="audio-bar" style="animation-delay: 0s;"></div>
-            <div class="audio-bar" style="animation-delay: 0.2s;"></div>
-            <div class="audio-bar" style="animation-delay: 0.4s;"></div>
-            <div class="audio-bar" style="animation-delay: 0.1s;"></div>
-            <div class="audio-bar" style="animation-delay: 0.3s;"></div>
-          </div>
-        </div>
-      </div>
-
-      <h1 style="font-family: 'Google Sans Display', 'Google Sans', sans-serif; font-size: clamp(28px, 5vw, 42px); font-weight: 800; line-height: 1.15; letter-spacing: -0.025em;">
-        Year 2126 Quantum Health • Material 3
+    <!-- Gemini Shimmering Hero Greeting -->
+    <div class="gemini-hero">
+      <h1 class="gemini-greeting">
+        <span class="gemini-gradient-heading">Hello, Human.</span><br />
+        <span style="color: var(--gemini-text-muted);">How can THAIS optimize your biology today?</span>
       </h1>
-
-      <p style="font-size: 16px; color: var(--md-sys-color-on-surface-variant); max-width: 760px; line-height: 1.6;">
-        The living synthesis of Google Material 3 engineering and Tovelu’s 100-year bio-cell intelligence. Codified for 8.15 Billion humans with real-time DNA methylation telemetry, 55,000+ WHO triage logic, and zero-typing plain-language UI.
+      <p style="font-size: 16px; color: var(--gemini-text-subtle); max-width: 680px; line-height: 1.6;">
+        Google Gemini AI design system engineered for Tovelu. Clinical intelligence powered by 55,000+ WHO ICD-11 conditions, Mifflin-St Jeor metabolic math, and epigenetic DNAm longevity telemetry.
       </p>
+    </div>
 
-      <!-- Quantum AI Multimodal Prompt Capsule -->
-      <div class="quantum-prompt-capsule" style="margin-top: 10px;">
-        <span class="material-symbols-outlined tovelu-2126-icon" style="font-size: 26px;">neurology</span>
-        <input type="text" class="quantum-input" id="quantum-query-input" placeholder="Query THAIS 2126: 'De-accelerate epigenetic age' or 'Fix post-meal insulin crash'..." />
-        <button class="m3-btn m3-btn-quantum" style="height: 38px; padding: 0 18px;" onclick="runQuantumSimulation()">
-          <span class="material-symbols-outlined" style="font-size: 18px;">bolt</span> Simulate
-        </button>
+    <!-- Gemini 4-Grid Action Cards -->
+    <div class="gemini-grid">
+      <div class="gemini-action-card" onclick="triggerQuery('Calculate my epigenetic biological age trajectory')">
+        <span class="material-symbols-outlined gemini-sparkle-svg" style="font-size: 28px;">genetics</span>
+        <div>
+          <div style="font-weight: 700; font-size: 15px; margin-bottom: 4px;">Epigenetic DNAm Age</div>
+          <div style="font-size: 13px; color: var(--gemini-text-muted);">Simulate rate of aging & years restored.</div>
+        </div>
       </div>
 
-      <!-- Live Simulation Stream -->
-      <div id="quantum-sim-output" style="display: none; background: var(--md-sys-color-surface-container-low); border-radius: 20px; padding: 16px 20px; border: 1px solid var(--md-sys-color-outline-variant);">
-        <div style="display: flex; align-items: center; gap: 8px; font-weight: 700; color: var(--md-sys-color-primary); margin-bottom: 6px;">
-          <span class="material-symbols-outlined tovelu-2126-icon" style="font-size: 20px;">genetics</span>
-          <span>THAIS Epigenetic Telemetry Engine (Year 2126):</span>
+      <div class="gemini-action-card" onclick="triggerQuery('Generate a whole-food meal plan with zero seed oils')">
+        <span class="material-symbols-outlined" style="font-size: 28px; color: var(--gemini-vitality-emerald);">restaurant</span>
+        <div>
+          <div style="font-weight: 700; font-size: 15px; margin-bottom: 4px;">Seed-Oil-Free 3-Meal</div>
+          <div style="font-size: 13px; color: var(--gemini-text-muted);">Calibrate 1,740 kcal BMR with real food.</div>
         </div>
-        <div id="quantum-sim-text" style="font-size: 14px; color: var(--md-sys-color-on-surface); line-height: 1.6;"></div>
+      </div>
+
+      <div class="gemini-action-card" onclick="triggerQuery('What is my optimal circadian sunlight & melatonin window?')">
+        <span class="material-symbols-outlined" style="font-size: 28px; color: #D97706;">wb_sunny</span>
+        <div>
+          <div style="font-weight: 700; font-size: 15px; margin-bottom: 4px;">Circadian Solar Sync</div>
+          <div style="font-size: 13px; color: var(--gemini-text-muted);">Morning cortisol spike & night shield.</div>
+        </div>
+      </div>
+
+      <div class="gemini-action-card" onclick="triggerQuery('Triage symptoms across the 55,000+ WHO ICD-11 database')">
+        <span class="material-symbols-outlined" style="font-size: 28px; color: var(--gemini-sparkle-blue);">medical_services</span>
+        <div>
+          <div style="font-weight: 700; font-size: 15px; margin-bottom: 4px;">55k WHO Triage</div>
+          <div style="font-size: 13px; color: var(--gemini-text-muted);">Reversible vs Manageable vs Hospital.</div>
+        </div>
       </div>
     </div>
 
-    <!-- 1. YEAR 2126 DNA & BIOLOGICAL TELEMETRY -->
-    <section>
-      <h2 class="section-title-m3">
-        <span class="material-symbols-outlined tovelu-2126-icon">genetics</span> 1. Year 2126 Epigenetic DNAm Telemetry
-      </h2>
-      <p class="section-subtitle-m3">Live biological aging meters tracking rate of aging and cellular youth restoration.</p>
-
-      <div class="interactive-grid-m3">
-        <!-- Epigenetic Aging Speedometer -->
-        <div class="tovelu-quantum-card">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <span class="m3-badge m3-badge-tertiary">DNAm EPIGENETIC CLOCK</span>
-            <span style="font-size: 12px; font-weight: 800; color: var(--md-sys-color-tertiary);">0.82x Aging Rate</span>
-          </div>
-          
-          <div style="display: flex; align-items: baseline; gap: 10px; margin: 16px 0 6px 0;">
-            <span style="font-size: 36px; font-weight: 800; color: var(--md-sys-color-tertiary);">25.8 Yrs</span>
-            <span style="font-size: 14px; color: var(--md-sys-color-on-surface-variant); text-decoration: line-through;">32.0 Chronological</span>
-          </div>
-
-          <div style="font-size: 13px; font-weight: 700; color: var(--md-sys-color-primary); margin-bottom: 12px;">
-            ✓ +6.2 Biological Years Restored via Tovelu Protocol
-          </div>
-
-          <div style="height: 10px; background: var(--md-sys-color-surface-container); border-radius: 9999px; overflow: hidden;">
-            <div style="height: 100%; width: 84%; background: var(--tovelu-2126-gradient);"></div>
-          </div>
-        </div>
-
-        <!-- Sinusoidal Circadian Waveform -->
-        <div class="tovelu-quantum-card">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <span class="m3-badge m3-badge-secondary">SOLAR CIRCADIAN FLUX</span>
-            <span style="font-size: 12px; font-weight: 700; color: var(--md-sys-color-secondary);">Cortisol & Melatonin Equilibrium</span>
-          </div>
-
-          <div style="margin: 16px 0 8px 0; height: 50px; display: flex; align-items: center; justify-content: center; background: var(--md-sys-color-surface-container-low); border-radius: 14px; overflow: hidden;">
-            <svg width="100%" height="40" viewBox="0 0 300 40" fill="none">
-              <path d="M0 20 Q75 0, 150 20 T300 20" stroke="url(#g-wave)" stroke-width="3" fill="none"/>
-              <circle cx="150" cy="20" r="5" fill="#059669"/>
-              <defs>
-                <linearGradient id="g-wave" x1="0" y1="0" x2="300" y2="0" gradientUnits="userSpaceOnUse">
-                  <stop stop-color="#0B57D0"/>
-                  <stop offset="0.5" stop-color="#059669"/>
-                  <stop offset="1" stop-color="#00639B"/>
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
-
-          <div style="font-size: 13px; color: var(--md-sys-color-on-surface-variant); display: flex; justify-content: space-between;">
-            <span>☀️ 06:30 AM Solar Pulse</span>
-            <span>🌙 10:30 PM Melatonin Shield</span>
-          </div>
-        </div>
+    <!-- Gemini Live Voice Mode Component -->
+    <div class="gemini-response-card" style="align-items: center; text-align: center; padding: 32px 24px;">
+      <div class="gemini-live-orb" onclick="startVoicePulse()">
+        <span class="material-symbols-outlined" style="font-size: 32px;">mic</span>
       </div>
-    </section>
+      <div style="font-weight: 700; font-size: 17px; margin-top: 12px;">Gemini Live Voice • THAIS AI</div>
+      <div style="font-size: 14px; color: var(--gemini-text-muted); max-width: 480px;">
+        Tap the pulsing orb to speak naturally with THAIS about your symptoms, lab tests, and longevity goals.
+      </div>
+    </div>
 
-    <!-- 2. GOOGLE M3 BUTTONS & 2126 QUANTUM ACTIONS -->
-    <section>
-      <h2 class="section-title-m3">
-        <span class="material-symbols-outlined tovelu-2126-icon">smart_button</span> 2. Google M3 & Quantum Interactive Triggers
-      </h2>
-      <p class="section-subtitle-m3">Tactile pill-shaped buttons with 0ms response physics and Google state layers.</p>
+    <!-- Gemini Multi-Turn AI Response Demo -->
+    <div id="gemini-chat-response" class="gemini-response-card" style="display: none;">
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span class="material-symbols-outlined gemini-sparkle-svg" style="font-size: 24px;">auto_awesome</span>
+          <span style="font-weight: 700; font-size: 15px;">THAIS Clinical Intelligence</span>
+        </div>
+        <span style="font-size: 12px; font-weight: 700; color: var(--gemini-vitality-emerald); background: var(--gemini-surface-container); padding: 3px 8px; border-radius: 9999px;">
+          ✓ LAW-001 VERIFIED
+        </span>
+      </div>
 
-      <div class="tovelu-quantum-card" style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
-        <button class="m3-btn m3-btn-quantum">
-          <span class="material-symbols-outlined" style="font-size: 18px;">auto_awesome</span> Quantum Protocol ➔
-        </button>
-        <button class="m3-btn m3-btn-filled">
-          <span class="material-symbols-outlined" style="font-size: 18px;">check</span> Filled Action
-        </button>
-        <button class="m3-btn m3-btn-vitality">
-          <span class="material-symbols-outlined" style="font-size: 18px;">favorite</span> Vitality Trigger
-        </button>
-        <button class="m3-btn m3-btn-tonal">
-          <span class="material-symbols-outlined" style="font-size: 18px;">tune</span> Tonal Control
+      <div id="gemini-output-content" style="font-size: 15px; line-height: 1.6; color: var(--gemini-text-main);"></div>
+
+      <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--gemini-border); padding-top: 12px; margin-top: 4px;">
+        <div style="display: flex; gap: 8px;">
+          <button class="gemini-btn gemini-btn-tonal" style="height: 32px; padding: 0 10px;" title="Good response"><span class="material-symbols-outlined" style="font-size: 16px;">thumb_up</span></button>
+          <button class="gemini-btn gemini-btn-tonal" style="height: 32px; padding: 0 10px;" title="Bad response"><span class="material-symbols-outlined" style="font-size: 16px;">thumb_down</span></button>
+          <button class="gemini-btn gemini-btn-tonal" style="height: 32px; padding: 0 10px;" title="Copy" onclick="alert('Copied to clipboard!')"><span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span></button>
+        </div>
+        <div style="font-size: 12px; color: var(--gemini-text-subtle);">Mifflin-St Jeor & WHO ICD-11 Calibrated</div>
+      </div>
+    </div>
+
+    <!-- Fixed Floating Gemini Prompt Box -->
+    <div class="gemini-floating-bar-container">
+      <div class="gemini-prompt-box">
+        <span class="material-symbols-outlined" style="color: var(--gemini-text-subtle); cursor: pointer;" title="Attach lab tests or photos">add_photo_alternate</span>
+        <input type="text" class="gemini-prompt-input" id="gemini-input-field" placeholder="Ask THAIS anything about your health, diet, or biomarkers..." onkeypress="if(event.key === 'Enter') executeGeminiQuery()" />
+        <span class="material-symbols-outlined" style="color: var(--gemini-text-subtle); cursor: pointer;" title="Voice input" onclick="startVoicePulse()">mic</span>
+        <button class="gemini-btn gemini-btn-primary" style="height: 36px; width: 36px; padding: 0; border-radius: 50%;" onclick="executeGeminiQuery()">
+          <span class="material-symbols-outlined" style="font-size: 20px;">arrow_upward</span>
         </button>
       </div>
-    </section>
-
-    <!-- 3. M3 1-TAP INTAKE CARDS -->
-    <section>
-      <h2 class="section-title-m3">
-        <span class="material-symbols-outlined tovelu-2126-icon">touch_app</span> 3. Zero-Typing 1-Tap Intake Cards
-      </h2>
-      <p class="section-subtitle-m3">Engineered so 8.15 Billion humans never need to struggle with keyboards.</p>
-
-      <div class="interactive-grid-m3">
-        <div class="m3-option-card selected" onclick="toggleOptionCard(this)">
-          <div class="m3-icon-check">✓</div>
-          <span class="material-symbols-outlined tovelu-2126-icon" style="font-size: 28px;">local_fire_department</span>
-          <div style="flex: 1;">
-            <div style="font-family: 'Google Sans', sans-serif; font-weight: 700; font-size: 15px;">Burn Visceral Belly Fat</div>
-            <div style="font-size: 13px; color: var(--md-sys-color-on-surface-variant);">Re-sensitize lipolytic mitochondrial fatty acid receptors.</div>
-          </div>
-        </div>
-
-        <div class="m3-option-card" onclick="toggleOptionCard(this)">
-          <div class="m3-icon-check"></div>
-          <span class="material-symbols-outlined tovelu-2126-icon" style="font-size: 28px;">bolt</span>
-          <div style="flex: 1;">
-            <div style="font-family: 'Google Sans', sans-serif; font-weight: 700; font-size: 15px;">Eliminate 2:00 PM Brain Fog</div>
-            <div style="font-size: 13px; color: var(--md-sys-color-on-surface-variant);">Stabilize glycemic flux and restore peak cognitive clarity.</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 4. GOOGLE M3 NAVIGATION BAR (80PX PILL) -->
-    <section>
-      <h2 class="section-title-m3">
-        <span class="material-symbols-outlined tovelu-2126-icon">navigation</span> 4. Google M3 Navigation Bar (5-Tab Platform)
-      </h2>
-      <p class="section-subtitle-m3">Google's signature bottom bar with glowing active pill indicator.</p>
-
-      <div class="tovelu-quantum-card" style="padding: 0; overflow: hidden; border-radius: 24px;">
-        <div class="m3-nav-bar">
-          <div class="m3-nav-item active" onclick="selectNavItem(this)">
-            <div class="m3-nav-indicator">
-              <span class="material-symbols-outlined">bolt</span>
-            </div>
-            <span>FLOW</span>
-          </div>
-          <div class="m3-nav-item" onclick="selectNavItem(this)">
-            <div class="m3-nav-indicator">
-              <span class="material-symbols-outlined">menu_book</span>
-            </div>
-            <span>BOOK</span>
-          </div>
-          <div class="m3-nav-item" onclick="selectNavItem(this)">
-            <div class="m3-nav-indicator">
-              <span class="material-symbols-outlined">chat</span>
-            </div>
-            <span>CHAT</span>
-          </div>
-          <div class="m3-nav-item" onclick="selectNavItem(this)">
-            <div class="m3-nav-indicator">
-              <span class="material-symbols-outlined">monitoring</span>
-            </div>
-            <span>HEALTH</span>
-          </div>
-          <div class="m3-nav-item" onclick="selectNavItem(this)">
-            <div class="m3-nav-indicator">
-              <span class="material-symbols-outlined">person</span>
-            </div>
-            <span>YOU</span>
-          </div>
-        </div>
-      </div>
-    </section>
+    </div>
 
   </main>
 
@@ -388,37 +227,35 @@
       html.setAttribute('data-theme', next);
       document.body.className = next === 'dark' ? 'tds-theme-dark' : '';
       document.getElementById('theme-icon-sym').innerText = next === 'dark' ? 'light_mode' : 'dark_mode';
-      document.getElementById('theme-btn-text').innerText = next === 'dark' ? 'Light Mode' : 'Dark Mode';
+      document.getElementById('theme-btn-text').innerText = next === 'dark' ? 'Light' : 'Dark';
     }
 
-    function toggleOptionCard(card) {
-      const parent = card.parentElement;
-      parent.querySelectorAll('.m3-option-card').forEach(c => {
-        c.classList.remove('selected');
-        c.querySelector('.m3-icon-check').innerText = '';
-      });
-      card.classList.add('selected');
-      card.querySelector('.m3-icon-check').innerText = '✓';
+    function triggerQuery(text) {
+      document.getElementById('gemini-input-field').value = text;
+      executeGeminiQuery();
     }
 
-    function selectNavItem(item) {
-      document.querySelectorAll('.m3-nav-item').forEach(i => i.classList.remove('active'));
-      item.classList.add('active');
-    }
-
-    function runQuantumSimulation() {
-      const input = document.getElementById('quantum-query-input');
-      const stream = document.getElementById('quantum-sim-output');
-      const text = document.getElementById('quantum-sim-text');
-      stream.style.display = 'block';
-      text.innerText = "Simulating Year 2126 cellular longevity trajectory against 55,000+ WHO ICD-11 conditions...";
-
+    function executeGeminiQuery() {
+      const input = document.getElementById('gemini-input-field');
+      const q = input.value.trim() || "What is my biological age trajectory?";
+      const resCard = document.getElementById('gemini-chat-response');
+      const outText = document.getElementById('gemini-output-content');
+      
+      resCard.style.display = 'flex';
+      outText.innerHTML = `<span style="color: var(--gemini-sparkle-blue); font-weight: 700;">Thinking...</span> Analyzing your query with THAIS clinical reasoning engine...`;
+      
       setTimeout(() => {
-        text.innerHTML = `<strong>Simulation Completed (Confidence: 96.8%):</strong><br>
-        1. <strong>DNA Methylation Shift:</strong> Predicted biological aging rate reduces from <code>1.04x</code> to <code>0.82x</code> in 90 days.<br>
-        2. <strong>Visceral Fat Oxidation:</strong> Daily caloric expenditure calibrated at 1,740 kcal BMR with zero industrial seed oils.<br>
-        3. <strong>Circadian Solar Sync:</strong> Cortisol peak at 06:45 AM, Melatonin shield at 09:30 PM.`;
+        outText.innerHTML = `
+          <strong>Clinical Analysis for "${q}":</strong><br><br>
+          • <strong>Metabolic Baseline:</strong> Mifflin-St Jeor expenditure calculated at <strong>1,740 kcal BMR</strong>.<br>
+          • <strong>Epigenetic Longevity:</strong> Adherence to your personalized 90-day whole-food protocol de-accelerates your DNAm pace of aging from <code>1.04x</code> to <code>0.82x</code> (-4.2 biological years saved).<br>
+          • <strong>Circadian Anchor:</strong> Sunlight exposure recommended at <strong>06:30 AM</strong> to trigger cortisol spike and stabilize evening melatonin secretion.
+        `;
       }, 500);
+    }
+
+    function startVoicePulse() {
+      triggerQuery("Listening via Gemini Live Voice... Tell THAIS your current symptoms.");
     }
   </script>
 </body>
