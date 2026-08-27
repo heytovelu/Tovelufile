@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>TOVELU • Mobile Health Intelligence Intake Survey (34 Markers)</title>
+  <title>TOVELU • Mobile Health Intelligence Intake Survey (42 Markers)</title>
   
   <!-- Favicon: Official Tovelu Mitosis Bio-Cell Logo (Razor Sharp) -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 16 C28 16, 16 32, 16 50 C16 68, 28 84, 50 84 C38 72, 34 58, 34 50 C34 42, 38 28, 50 16 Z' fill='%230091FF'/%3E%3Cpath d='M50 16 C72 16, 84 32, 84 50 C84 68, 72 84, 50 84 C62 72, 66 58, 66 50 C66 42, 62 28, 50 16 Z' fill='%2300E676'/%3E%3Ccircle cx='50' cy='50' r='8' fill='%2300F5A0'/%3E%3C/svg%3E" />
@@ -94,7 +94,7 @@
 
     .question-title {
       font-family: 'Google Sans Display', 'Google Sans', sans-serif;
-      font-size: 22px;
+      font-size: 21px;
       font-weight: 800;
       line-height: 1.25;
       color: var(--gemini-text-main);
@@ -131,11 +131,6 @@
       gap: 10px;
     }
 
-    .time-picker-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1.2fr;
-      gap: 8px;
-    }
     .time-select {
       background: var(--gemini-surface);
       border: 1.5px solid var(--gemini-border);
@@ -146,6 +141,28 @@
       color: var(--gemini-text-main);
       outline: none;
       text-align: center;
+    }
+
+    .range-presets-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .range-preset-pill {
+      background: var(--gemini-surface-container);
+      border: 1px solid var(--gemini-border-subtle);
+      color: var(--gemini-text-main);
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .range-preset-pill.active {
+      background: var(--gemini-sparkle-blue);
+      color: #FFFFFF;
+      border-color: var(--gemini-sparkle-blue);
     }
 
     .alert-banner {
@@ -182,7 +199,7 @@
 
     <!-- Progress Indicator -->
     <div style="display: flex; align-items: center; gap: 10px;">
-      <span id="step-name" style="font-size: 11px; font-weight: 700; color: var(--gemini-text-muted);">Q1 of 26</span>
+      <span id="step-name" style="font-size: 11px; font-weight: 700; color: var(--gemini-text-muted);">Q1 of 42</span>
       <button class="gemini-btn gemini-btn-tonal" style="height: 30px; padding: 0 8px; font-size: 11px;" onclick="toggleTheme()">
         <span class="material-symbols-outlined" id="theme-icon-sym" style="font-size: 14px;">dark_mode</span>
       </button>
@@ -191,7 +208,7 @@
 
   <!-- Slim Progress Bar -->
   <div style="width: 100%; height: 3px; background: var(--gemini-surface-container); overflow: hidden;">
-    <div id="survey-progress-fill" style="height: 100%; width: 4%; background: var(--gemini-gradient-btn); transition: width 0.2s;"></div>
+    <div id="survey-progress-fill" style="height: 100%; width: 2%; background: var(--gemini-gradient-btn); transition: width 0.2s;"></div>
   </div>
 
   <!-- Smartphone Frame -->
@@ -225,7 +242,7 @@
 
   </div>
 
-  <!-- Load Master 34-Question Dataset -->
+  <!-- Load Master 42-Question Dataset -->
   <script src="survey-data.js"></script>
 
   <!-- Survey Controller Script -->
@@ -234,7 +251,7 @@
     let userAnswers = {};
 
     const COUNTRIES = [
-      "India", "United States", "United Kingdom", "United Arab Emirates", "Australia", "Canada", "Germany", "Singapore"
+      "India", "United States", "United Kingdom", "United Arab Emirates", "Australia", "Canada", "Germany", "Singapore", "Saudi Arabia", "South Africa"
     ];
 
     function renderCurrentQuestion() {
@@ -306,28 +323,39 @@
         `;
       } else if (q.type === 'dob') {
         optionsHTML = `
-          <div class="gemini-card" style="display: flex; gap: 8px;">
-            <select class="time-select" id="dob-day" style="flex: 1;">
-              ${Array.from({length: 31}, (_, i) => `<option value="${i+1}">${i+1}</option>`).join('')}
-            </select>
-            <select class="time-select" id="dob-month" style="flex: 1.4;">
-              ${["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"].map(m => `<option value="${m}">${m}</option>`).join('')}
-            </select>
-            <select class="time-select" id="dob-year" style="flex: 1.2;">
-              ${Array.from({length: 70}, (_, i) => `<option value="${2024 - i}">${2024 - i}</option>`).join('')}
-            </select>
+          <div class="gemini-card" style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; gap: 8px;">
+              <select class="time-select" id="dob-day" style="flex: 1;" onchange="updateCalculatedAgeMobile()">
+                ${Array.from({length: 31}, (_, i) => `<option value="${i+1}">${i+1}</option>`).join('')}
+              </select>
+              <select class="time-select" id="dob-month" style="flex: 1.4;" onchange="updateCalculatedAgeMobile()">
+                ${["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"].map((m, idx) => `<option value="${idx+1}">${m}</option>`).join('')}
+              </select>
+              <select class="time-select" id="dob-year" style="flex: 1.2;" onchange="updateCalculatedAgeMobile()">
+                ${Array.from({length: 70}, (_, i) => `<option value="${2024 - i}">${2024 - i}</option>`).join('')}
+              </select>
+            </div>
+            <div id="dob-calculated-tag" style="background: var(--gemini-surface-container); padding: 8px; border-radius: 10px; font-size: 12px; font-weight: 700; color: var(--gemini-sparkle-blue); text-align: center;">
+              👉 Calculated Age: 29 Years Old
+            </div>
           </div>
         `;
       } else if (q.type === 'height') {
         optionsHTML = `
-          <div class="gemini-card">
+          <div class="gemini-card" style="display: flex; flex-direction: column; gap: 10px;">
             <input type="number" class="gemini-prompt-input" id="input-height-cm" placeholder="175 cm" style="border: 1.5px solid var(--gemini-border); border-radius: 12px; padding: 12px; font-size: 18px; font-weight: 700; width: 100%;" value="${userAnswers['height_num'] || '175'}" oninput="userAnswers['height_num']=this.value" />
+            <div class="range-presets-grid">
+              ${[155, 160, 165, 170, 175, 180, 185].map(h => `<div class="range-preset-pill ${userAnswers['height_num']==h?'active':''}" onclick="userAnswers['height_num']=${h}; document.getElementById('input-height-cm').value=${h}; renderCurrentQuestion();">${h} cm</div>`).join('')}
+            </div>
           </div>
         `;
       } else if (q.type === 'weight') {
         optionsHTML = `
-          <div class="gemini-card">
+          <div class="gemini-card" style="display: flex; flex-direction: column; gap: 10px;">
             <input type="number" class="gemini-prompt-input" id="input-weight" placeholder="70 kg" style="border: 1.5px solid var(--gemini-border); border-radius: 12px; padding: 12px; font-size: 18px; font-weight: 700; width: 100%;" value="${userAnswers['weight_num'] || '70'}" oninput="userAnswers['weight_num']=this.value" />
+            <div class="range-presets-grid">
+              ${[55, 60, 65, 70, 75, 80, 85, 90].map(w => `<div class="range-preset-pill ${userAnswers['weight_num']==w?'active':''}" onclick="userAnswers['weight_num']=${w}; document.getElementById('input-weight').value=${w}; renderCurrentQuestion();">${w} kg</div>`).join('')}
+            </div>
           </div>
         `;
       } else if (q.type === 'location') {
@@ -336,16 +364,19 @@
             <select class="time-select" id="loc-country">
               ${COUNTRIES.map(c => `<option value="${c}">${c}</option>`).join('')}
             </select>
-            <input type="text" class="gemini-prompt-input" id="loc-city" placeholder="Enter City (e.g. Mumbai, London)" style="border: 1.5px solid var(--gemini-border); border-radius: 12px; padding: 12px; font-size: 14px;" value="${userAnswers['city'] || ''}" />
+            <input type="text" class="gemini-prompt-input" id="loc-city" placeholder="Type your City (e.g. Mumbai, London)" style="border: 1.5px solid var(--gemini-border); border-radius: 12px; padding: 12px; font-size: 14px;" value="${userAnswers['city'] || ''}" />
           </div>
         `;
       } else if (q.type === 'time_wake' || q.type === 'time_sleep') {
-        const presets = q.type === 'time_wake' ? ["05:30 AM", "06:00 AM", "06:30 AM", "07:00 AM", "07:30 AM"] : ["09:30 PM", "10:00 PM", "10:30 PM", "11:00 PM", "11:30 PM"];
+        const presets = q.type === 'time_wake' 
+          ? ["05:30 AM", "06:00 AM", "06:30 AM", "07:00 AM", "07:30 AM", "08:00 AM"]
+          : ["09:30 PM", "10:00 PM", "10:30 PM", "11:00 PM", "11:30 PM", "12:00 AM"];
+
         optionsHTML = `
-          <div class="gemini-card" style="display: flex; flex-direction: column; gap: 12px;">
-            <div style="font-weight: 700; font-size: 11px; color: var(--gemini-text-muted); text-transform: uppercase;">1-Tap Presets</div>
-            <div style="display: flex; flex-wrap: wrap; gap: 6px;">
-              ${presets.map(p => `<div class="gemini-chip ${userAnswers[q.id] === p ? 'active' : ''}" onclick="selectTimePreset('${q.id}', '${p}')">${p}</div>`).join('')}
+          <div class="gemini-card" style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="font-weight: 700; font-size: 11px; color: var(--gemini-text-muted); text-transform: uppercase;">1-Tap Exact Times (Zero Typing)</div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+              ${presets.map(p => `<div class="range-preset-pill ${userAnswers[q.id] === p ? 'active' : ''}" style="text-align: center; padding: 10px;" onclick="selectTimePreset('${q.id}', '${p}')">${p}</div>`).join('')}
             </div>
           </div>
         `;
@@ -389,15 +420,24 @@
 
     function selectTimePreset(qId, val) {
       userAnswers[qId] = val;
-      document.querySelectorAll('.gemini-chip').forEach(c => c.classList.toggle('active', c.innerText === val));
+      document.querySelectorAll('.range-preset-pill').forEach(c => c.classList.toggle('active', c.innerText.includes(val)));
       hideAlert();
+      setTimeout(nextQuestion, 160);
+    }
+
+    function updateCalculatedAgeMobile() {
+      const y = parseInt(document.getElementById('dob-year').value) || 1995;
+      const age = 2024 - y;
+      userAnswers['calculated_age'] = age;
+      const tag = document.getElementById('dob-calculated-tag');
+      if (tag) tag.innerText = `👉 Calculated Age: ${age} Years Old`;
     }
 
     function saveInputs() {
       const q = TOVELU_SURVEY_QUESTIONS[currentQIndex];
       if (!q) return;
       if (q.type === 'dob') {
-        userAnswers['dob'] = `${document.getElementById('dob-day').value} ${document.getElementById('dob-month').value} ${document.getElementById('dob-year').value}`;
+        userAnswers['dob'] = `${document.getElementById('dob-day').value}/${document.getElementById('dob-month').value}/${document.getElementById('dob-year').value}`;
       } else if (q.type === 'height') {
         userAnswers['height_num'] = document.getElementById('input-height-cm').value;
         userAnswers['height'] = `${userAnswers['height_num']} cm`;
