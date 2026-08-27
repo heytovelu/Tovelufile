@@ -85,11 +85,18 @@
 
     /* Question Scroll Area */
     .mobile-survey-content {
-      padding: 12px 16px 110px 16px;
+      padding: 16px 16px 110px 16px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 20px;
       flex: 1;
+    }
+
+    .question-header {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 12px;
     }
 
     .question-title {
@@ -103,14 +110,13 @@
       font-size: 13px;
       color: var(--gemini-text-muted);
       line-height: 1.45;
-      margin-top: 4px;
     }
 
     /* Option List */
     .option-list {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
       width: 100%;
     }
 
@@ -449,7 +455,7 @@
       }
 
       stage.innerHTML = `
-        <div>
+        <div class="question-header">
           <h2 class="question-title">${q.title}</h2>
           <p class="question-subtitle">${q.subtitle}</p>
         </div>
