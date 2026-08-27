@@ -142,16 +142,116 @@
       display: flex;
     }
 
-    /* PWA Install Banner */
-    .pwa-install-banner {
-      background: linear-gradient(135deg, rgba(0, 192, 255, 0.12), rgba(0, 245, 160, 0.1));
+    /* Daily Telemetry Grid (2x2) */
+    .telemetry-2x2-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .telemetry-meter-card {
+      background: var(--gemini-surface);
       border: 1px solid var(--gemini-border);
       border-radius: 16px;
-      padding: 14px 16px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .meter-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--gemini-text-muted);
+      text-transform: uppercase;
+    }
+    .meter-val {
+      font-family: 'Google Sans Display', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--gemini-text-main);
+    }
+    .meter-bar-track {
+      height: 6px;
+      background: var(--gemini-surface-container);
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+    .meter-bar-fill {
+      height: 100%;
+      background: var(--gemini-gradient-btn);
+      border-radius: 9999px;
+      transition: width 0.3s ease;
+    }
+
+    /* Interactive Meal Card */
+    .app-meal-card {
+      background: var(--gemini-surface);
+      border: 1px solid var(--gemini-border);
+      border-radius: 16px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: all 0.15s;
+    }
+    .meal-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .meal-title {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--gemini-text-main);
+    }
+    .meal-desc {
+      font-size: 12px;
+      color: var(--gemini-text-muted);
+      line-height: 1.45;
+    }
+    .meal-macros-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .macro-tag {
+      background: var(--gemini-surface-container);
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--gemini-text-main);
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+    .meal-actions-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--gemini-border-subtle);
+      padding-top: 10px;
+      margin-top: 2px;
+    }
+    .btn-log-meal {
+      background: var(--gemini-surface-container);
+      border: 1px solid var(--gemini-border);
+      color: var(--gemini-text-main);
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s;
+    }
+    .btn-log-meal.logged {
+      background: var(--gemini-vitality-emerald);
+      color: #FFFFFF;
+      border-color: var(--gemini-vitality-emerald);
     }
 
     /* Task Item */
@@ -294,20 +394,6 @@
     <!-- App Main Scroll Content -->
     <div class="app-scroll-content">
       
-      <!-- PWA Install Prompt Banner (Available on mobile browsers) -->
-      <div id="pwa-install-card" class="pwa-install-banner" style="display: none;">
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <span class="material-symbols-outlined" style="font-size: 24px; color: var(--gemini-sparkle-blue);">install_mobile</span>
-          <div>
-            <div style="font-size: 13px; font-weight: 800; color: var(--gemini-text-main);">Install Tovelu App</div>
-            <div style="font-size: 11px; color: var(--gemini-text-muted);">Install for offline access & daily habit reminders.</div>
-          </div>
-        </div>
-        <button class="gemini-btn gemini-btn-primary" id="btn-pwa-install" style="height: 34px; padding: 0 12px; font-size: 12px;" onclick="triggerPWAInstall()">
-          Install
-        </button>
-      </div>
-
       <!-- ==================== 1. TAB: FLOW (DAY | WEEK TOGGLE) ==================== -->
       <section id="pane-flow" class="tab-pane active">
         
@@ -324,34 +410,222 @@
         <!-- ---------------- SUB-VIEW 1: DAY (TODAY'S EXECUTION) ---------------- -->
         <div id="subview-flow-day" class="flow-sub-view active">
           
-          <!-- Daily Progress Header Card -->
-          <div class="gemini-card" style="background: linear-gradient(135deg, rgba(0, 192, 255, 0.08), rgba(0, 245, 160, 0.08));">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span style="font-size: 10px; font-weight: 800; color: var(--gemini-vitality-emerald); background: var(--gemini-surface); padding: 3px 8px; border-radius: 9999px;">
-                PROTOCOL ACTIVE • DAY 18
+          <!-- 1. THAIS TODAY'S CLINICAL NOTE / SUGGESTION -->
+          <div class="gemini-card" style="background: linear-gradient(135deg, rgba(0, 192, 255, 0.1), rgba(0, 245, 160, 0.08)); border-left: 4px solid var(--gemini-sparkle-blue);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+              <span style="font-size: 10px; font-weight: 800; color: var(--gemini-sparkle-blue); letter-spacing: 0.05em; text-transform: uppercase;">
+                💡 TODAY'S THAIS CLINICAL SUGGESTION
               </span>
-              <span style="font-size: 11px; font-weight: 700; color: var(--gemini-sparkle-blue);" id="flow-compliance-pct">75% Done</span>
+              <span style="font-size: 10px; font-weight: 700; color: var(--gemini-vitality-emerald);">Active Window</span>
             </div>
-            <div style="font-family: 'Google Sans Display', sans-serif; font-size: 22px; font-weight: 800; margin-top: 6px;">
-              Today's Execution Flow
-            </div>
-            <p style="font-size: 12px; color: var(--gemini-text-muted); margin-top: 2px;">
-              Targeting: <strong style="color: var(--gemini-text-main);">Energy Stabilization, Gut Healing & Deep Sleep</strong>.
+            <p style="font-size: 13px; color: var(--gemini-text-main); font-weight: 500; line-height: 1.45;">
+              "Morning solar lux is peak right now in your area. Step outside for <strong>15 minutes before 09:00 AM</strong> to trigger your cortisol surge and anchor deep slow-wave sleep tonight."
             </p>
           </div>
 
-          <!-- Micro-Habit Tasks Checklist -->
+          <!-- 2. DAILY TELEMETRY METERS (WATER, WALK, SLEEP, SUNLIGHT) -->
+          <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="font-size: 11px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase;">
+              📊 Daily Biometric Meters
+            </div>
+
+            <div class="telemetry-2x2-grid">
+              <!-- Water Meter -->
+              <div class="telemetry-meter-card">
+                <div class="meter-header">
+                  <span>💧 Hydration</span>
+                  <span id="meter-water-txt" style="color: var(--gemini-sparkle-blue);">2.5 / 3.0L</span>
+                </div>
+                <div class="meter-val" id="meter-water-val">2.5 L</div>
+                <div class="meter-bar-track">
+                  <div class="meter-bar-fill" id="meter-water-bar" style="width: 83%;"></div>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-top: 4px;">
+                  <button class="gemini-btn gemini-btn-tonal" style="height: 26px; padding: 0 8px; font-size: 11px;" onclick="addWater(-0.25)">-</button>
+                  <button class="gemini-btn gemini-btn-primary" style="height: 26px; padding: 0 10px; font-size: 11px;" onclick="addWater(0.25)">+250ml</button>
+                </div>
+              </div>
+
+              <!-- Walk / Movement Meter -->
+              <div class="telemetry-meter-card">
+                <div class="meter-header">
+                  <span>🚶 Steps (Zone 2)</span>
+                  <span style="color: var(--gemini-vitality-emerald);">74%</span>
+                </div>
+                <div class="meter-val" id="meter-walk-val">7,420</div>
+                <div class="meter-bar-track">
+                  <div class="meter-bar-fill" style="width: 74%; background: var(--gemini-vitality-emerald);"></div>
+                </div>
+                <div style="font-size: 10px; color: var(--gemini-text-muted); margin-top: 6px;">Goal: 10,000 Steps (Zone 2)</div>
+              </div>
+
+              <!-- Sleep Quality Meter -->
+              <div class="telemetry-meter-card">
+                <div class="meter-header">
+                  <span>😴 Sleep Score</span>
+                  <span style="color: var(--gemini-sparkle-blue);">88 / 100</span>
+                </div>
+                <div class="meter-val">7h 45m</div>
+                <div class="meter-bar-track">
+                  <div class="meter-bar-fill" style="width: 88%;"></div>
+                </div>
+                <div style="font-size: 10px; color: var(--gemini-text-muted); margin-top: 6px;">1h 52m Deep Slow-Wave</div>
+              </div>
+
+              <!-- Sunlight Exposure Meter -->
+              <div class="telemetry-meter-card">
+                <div class="meter-header">
+                  <span>☀️ Sunlight</span>
+                  <span style="color: var(--gemini-vitality-emerald);">15 / 20m</span>
+                </div>
+                <div class="meter-val">15 Mins</div>
+                <div class="meter-bar-track">
+                  <div class="meter-bar-fill" style="width: 75%; background: var(--gemini-vitality-emerald);"></div>
+                </div>
+                <div style="font-size: 10px; color: var(--gemini-text-muted); margin-top: 6px;">SCN Circadian Synchronized</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. THE CLINICAL PORTION STATUS VISUAL (TOVELU BIO-PLATE) -->
+          <div class="gemini-card">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald); text-transform: uppercase;">
+                🥗 The Clinical Portion Bio-Plate
+              </div>
+              <span style="font-size: 10px; font-weight: 700; color: var(--gemini-sparkle-blue);">Flat Glycemic Ratio</span>
+            </div>
+            
+            <div style="display: flex; align-items: center; gap: 16px; margin-top: 10px;">
+              <!-- Visual SVG Biological Plate -->
+              <div style="width: 100px; height: 100px; position: relative; flex-shrink: 0;">
+                <svg width="100" height="100" viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" r="42" fill="none" stroke="var(--gemini-surface-container)" stroke-width="12"/>
+                  <!-- 50% Greens/Fiber (Emerald) -->
+                  <circle cx="50" cy="50" r="42" fill="none" stroke="#00F5A0" stroke-width="12" stroke-dasharray="132 264" stroke-dashoffset="0"/>
+                  <!-- 30% Clean Protein (Cyan/Blue) -->
+                  <circle cx="50" cy="50" r="42" fill="none" stroke="#0062FF" stroke-width="12" stroke-dasharray="79 264" stroke-dashoffset="-132"/>
+                  <!-- 15% Slow Carbs (Amber) -->
+                  <circle cx="50" cy="50" r="42" fill="none" stroke="#F59E0B" stroke-width="12" stroke-dasharray="40 264" stroke-dashoffset="-211"/>
+                  <!-- 5% Pure Fats (Purple) -->
+                  <circle cx="50" cy="50" r="42" fill="none" stroke="#A855F7" stroke-width="12" stroke-dasharray="13 264" stroke-dashoffset="-251"/>
+                </svg>
+                <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: var(--gemini-text-main);">
+                  PLATE
+                </div>
+              </div>
+
+              <!-- Portion Labels -->
+              <div style="flex: 1; display: flex; flex-direction: column; gap: 4px; font-size: 11px;">
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="color: #00D06C; font-weight: 700;">🥦 50% Greens & Fiber</span>
+                  <span style="color: var(--gemini-text-muted);">Prebiotics</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="color: #0062FF; font-weight: 700;">🥩 30% Clean Protein</span>
+                  <span style="color: var(--gemini-text-muted);">Muscle Satiety</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="color: #D97706; font-weight: 700;">🍠 15% Complex Carbs</span>
+                  <span style="color: var(--gemini-text-muted);">Slow Burn</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                  <span style="color: #9333EA; font-weight: 700;">🧈 5% Natural Fats</span>
+                  <span style="color: var(--gemini-text-muted);">Desi Ghee / Olive</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. BREAKFAST, LUNCH, DINNER BUTTONS & PROTOCOL -->
           <div style="display: flex; flex-direction: column; gap: 10px;">
             <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div style="font-size: 11px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase;">1. Daily Micro-Habits</div>
-              <span style="font-size: 11px; font-weight: 700; color: var(--gemini-sparkle-blue);">Auto-synced</span>
+              <div style="font-size: 11px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase;">
+                🍽️ Today's 3-Meal Protocol
+              </div>
+              <span style="font-size: 10px; font-weight: 800; color: var(--gemini-vitality-emerald); background: var(--gemini-surface-container); padding: 2px 8px; border-radius: 9999px;">
+                0% Seed Oils Verified
+              </span>
+            </div>
+
+            <!-- Breakfast Card -->
+            <div class="app-meal-card">
+              <div class="meal-card-header">
+                <span style="font-size: 11px; font-weight: 800; color: var(--gemini-sparkle-blue);">🍳 BREAKFAST • 08:30 AM</span>
+                <span style="font-size: 11px; font-weight: 700; color: var(--gemini-text-muted);">420 kcal</span>
+              </div>
+              <div class="meal-title">Savory Pasture Eggs / Paneer + Sautéed Spinach</div>
+              <div class="meal-desc">Cooked in pure desi ghee with 1/2 avocado, mineral salt, and zero refined oils.</div>
+              <div class="meal-macros-row">
+                <span class="macro-tag">32g Protein</span>
+                <span class="macro-tag">4g Net Carbs</span>
+                <span class="macro-tag">Flat Glycemic</span>
+              </div>
+              <div class="meal-actions-row">
+                <span style="font-size: 11px; color: var(--gemini-text-muted);">Status: <strong id="status-b-txt">Ready</strong></span>
+                <button class="btn-log-meal" id="btn-log-breakfast" onclick="toggleMealLog('breakfast', this)">
+                  ✓ Logged
+                </button>
+              </div>
+            </div>
+
+            <!-- Lunch Card -->
+            <div class="app-meal-card">
+              <div class="meal-card-header">
+                <span style="font-size: 11px; font-weight: 800; color: var(--gemini-sparkle-blue);">🥗 LUNCH • 01:30 PM</span>
+                <span style="font-size: 11px; font-weight: 700; color: var(--gemini-text-muted);">750 kcal</span>
+              </div>
+              <div class="meal-title">Mediterranean Wild Salmon / Sprouted Lentil Bowl</div>
+              <div class="meal-desc">High-fiber salad pre-load first, protein second, complex carbs last.</div>
+              <div class="meal-macros-row">
+                <span class="macro-tag">48g Protein</span>
+                <span class="macro-tag">30g Complex Carbs</span>
+                <span class="macro-tag">High Omega-3</span>
+              </div>
+              <div class="meal-actions-row">
+                <span style="font-size: 11px; color: var(--gemini-text-muted);">Status: <strong id="status-l-txt">Ready</strong></span>
+                <button class="btn-log-meal" id="btn-log-lunch" onclick="toggleMealLog('lunch', this)">
+                  ✓ Logged
+                </button>
+              </div>
+            </div>
+
+            <!-- Dinner Card -->
+            <div class="app-meal-card">
+              <div class="meal-card-header">
+                <span style="font-size: 11px; font-weight: 800; color: var(--gemini-sparkle-blue);">🍲 DINNER • 07:30 PM</span>
+                <span style="font-size: 11px; font-weight: 700; color: var(--gemini-text-muted);">620 kcal</span>
+              </div>
+              <div class="meal-title">Slow-Simmered Bone Broth Stew & Roasted Asparagus</div>
+              <div class="meal-desc">Grass-fed protein with turmeric root; finished 3+ hours before bedtime.</div>
+              <div class="meal-macros-row">
+                <span class="macro-tag">40g Protein</span>
+                <span class="macro-tag">Tryptophan-Rich</span>
+                <span class="macro-tag">Deep REM Aid</span>
+              </div>
+              <div class="meal-actions-row">
+                <span style="font-size: 11px; color: var(--gemini-text-muted);">Status: <strong id="status-d-txt">Ready</strong></span>
+                <button class="btn-log-meal" id="btn-log-dinner" onclick="toggleMealLog('dinner', this)">
+                  ✓ Logged
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. TODAY'S CIRCADIAN MICRO-HABIT TASKS -->
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div style="font-size: 11px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase;">
+                ✅ Today's Circadian Tasks
+              </div>
+              <span style="font-size: 11px; font-weight: 700; color: var(--gemini-sparkle-blue);" id="flow-task-counter">3 / 4 Done</span>
             </div>
 
             <div class="app-task-card completed" onclick="toggleTaskCard(this)">
               <div class="app-task-checkbox">✓</div>
               <div style="flex: 1;">
-                <div style="font-size: 13px; font-weight: 700;">🌅 Morning Sunlight (15 Mins)</div>
-                <div style="font-size: 11px; color: var(--gemini-text-muted);">Expose eyes to natural sunlight within 45m of waking for SCN cortisol sync.</div>
+                <div style="font-size: 13px; font-weight: 700;">🌅 Morning Photobiomodulation (15 Mins)</div>
+                <div style="font-size: 11px; color: var(--gemini-text-muted);">Expose eyes to natural sunlight within 45m of waking. (SCN cortisol sync)</div>
               </div>
             </div>
 
@@ -359,15 +633,15 @@
               <div class="app-task-checkbox">✓</div>
               <div style="flex: 1;">
                 <div style="font-size: 13px; font-weight: 700;">💧 Cellular Osmolyte Hydration</div>
-                <div style="font-size: 11px; color: var(--gemini-text-muted);">500ml water + mineral pinch upon waking to rehydrate adrenal cells.</div>
+                <div style="font-size: 11px; color: var(--gemini-text-muted);">500ml water + Celtic sea salt pinch upon waking.</div>
               </div>
             </div>
 
             <div class="app-task-card completed" onclick="toggleTaskCard(this)">
               <div class="app-task-checkbox">✓</div>
               <div style="flex: 1;">
-                <div style="font-size: 13px; font-weight: 700;">🚶 Post-Lunch Glucose Clearance (12 Mins)</div>
-                <div style="font-size: 11px; color: var(--gemini-text-muted);">Brisk Zone 2 walk after lunch to eliminate 2 PM energy crashes.</div>
+                <div style="font-size: 13px; font-weight: 700;">🚶 Post-Lunch Glucose Clearance Walk (12 Mins)</div>
+                <div style="font-size: 11px; color: var(--gemini-text-muted);">Brisk walking within 20m of eating to lower glucose spike by 34%.</div>
               </div>
             </div>
 
@@ -377,41 +651,6 @@
                 <div style="font-size: 13px; font-weight: 700;">🌙 Circadian Wind-Down & Melatonin Shield</div>
                 <div style="font-size: 11px; color: var(--gemini-text-muted);">Cut blue light 60m before bed; bedroom at 19°C. (Scheduled for 22:00)</div>
               </div>
-            </div>
-          </div>
-
-          <!-- 3-Meal Whole-Food Diet Plan -->
-          <div style="display: flex; flex-direction: column; gap: 10px;">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div style="font-size: 11px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase;">2. Precision 3-Meal Diet</div>
-              <span style="font-size: 11px; font-weight: 700; color: var(--gemini-vitality-emerald);">0% Seed Oils</span>
-            </div>
-
-            <div class="gemini-card" style="padding: 14px;">
-              <div style="display: flex; justify-content: space-between; font-size: 11px; font-weight: 800; color: var(--gemini-sparkle-blue);">
-                <span>🍳 BREAKFAST (08:30 AM)</span>
-                <span>32g Protein • Flat Glycemic</span>
-              </div>
-              <div style="font-size: 13px; font-weight: 700; margin-top: 4px;">Pasture-Raised Eggs / Paneer + Sautéed Spinach</div>
-              <div style="font-size: 11px; color: var(--gemini-text-muted);">Cooked in pure desi ghee with 1/2 avocado and zero refined oils.</div>
-            </div>
-
-            <div class="gemini-card" style="padding: 14px;">
-              <div style="display: flex; justify-content: space-between; font-size: 11px; font-weight: 800; color: var(--gemini-sparkle-blue);">
-                <span>🥗 LUNCH (01:30 PM)</span>
-                <span>48g Protein • High Omega-3</span>
-              </div>
-              <div style="font-size: 13px; font-weight: 700; margin-top: 4px;">Mediterranean Wild Salmon / Sprouted Lentils Bowl</div>
-              <div style="font-size: 11px; color: var(--gemini-text-muted);">Fiber first (green salad), protein second, complex carbs last.</div>
-            </div>
-
-            <div class="gemini-card" style="padding: 14px;">
-              <div style="display: flex; justify-content: space-between; font-size: 11px; font-weight: 800; color: var(--gemini-sparkle-blue);">
-                <span>🍲 DINNER (07:30 PM)</span>
-                <span>40g Protein • Deep REM Aid</span>
-              </div>
-              <div style="font-size: 13px; font-weight: 700; margin-top: 4px;">Grass-Fed Stew / Tofu & Roasted Asparagus</div>
-              <div style="font-size: 11px; color: var(--gemini-text-muted);">Tryptophan-rich for deep restorative delta sleep; eaten 3h before bed.</div>
             </div>
           </div>
 
@@ -604,44 +843,28 @@
   <!-- PWA Service Worker Registration & App Logic -->
   <script src="thais_engine.js"></script>
   <script>
-    let deferredPrompt;
+    let currentWater = 2.5;
     let userAnswers = {};
 
-    // Register Service Worker for PWA
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js').then((reg) => {
-          console.log('Tovelu PWA Service Worker registered:', reg.scope);
-        }).catch((err) => {
-          console.log('PWA Service Worker registration failed:', err);
-        });
-      });
+    function addWater(delta) {
+      currentWater = Math.max(0, Math.min(5.0, currentWater + delta));
+      document.getElementById('meter-water-val').innerText = `${currentWater.toFixed(1)} L`;
+      document.getElementById('meter-water-txt').innerText = `${currentWater.toFixed(1)} / 3.0L`;
+      const pct = Math.round((currentWater / 3.0) * 100);
+      document.getElementById('meter-water-bar').style.width = `${Math.min(100, pct)}%`;
     }
 
-    // Capture PWA Install Prompt
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      const banner = document.getElementById('pwa-install-card');
-      if (banner) banner.style.display = 'flex';
-    });
-
-    function triggerPWAInstall() {
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then((choiceResult) => {
-          if (choiceResult.outcome === 'accepted') {
-            const banner = document.getElementById('pwa-install-card');
-            if (banner) banner.style.display = 'none';
-          }
-          deferredPrompt = null;
-        });
-      } else {
-        alert('To install on iOS: Tap the Share button at the bottom of Safari, then tap "Add to Home Screen".');
+    function toggleMealLog(mealKey, btn) {
+      btn.classList.toggle('logged');
+      const isLogged = btn.classList.contains('logged');
+      btn.innerText = isLogged ? '✓ Logged' : 'Log Meal';
+      const statusTxt = document.getElementById(`status-${mealKey[0]}-txt`);
+      if (statusTxt) {
+        statusTxt.innerText = isLogged ? 'Completed' : 'Ready';
+        statusTxt.style.color = isLogged ? 'var(--gemini-vitality-emerald)' : 'var(--gemini-text-main)';
       }
     }
 
-    // Main 4-Tab Navigation (FLOW, CHAT, HEALTH, YOU)
     function switchAppTab(tabId) {
       document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
       document.querySelectorAll('.nav-item-btn').forEach(b => b.classList.remove('active'));
@@ -652,7 +875,6 @@
       if (btn) btn.classList.add('active');
     }
 
-    // FLOW Sub-Views: DAY vs WEEK (BOOK)
     function switchFlowSubView(subId) {
       document.querySelectorAll('.flow-sub-view').forEach(v => v.classList.remove('active'));
       document.querySelectorAll('.segmented-toggle-btn').forEach(b => b.classList.remove('active'));
@@ -665,6 +887,14 @@
 
     function toggleTaskCard(card) {
       card.classList.toggle('completed');
+      updateTaskCounter();
+    }
+
+    function updateTaskCounter() {
+      const all = document.querySelectorAll('#subview-flow-day .app-task-card');
+      const done = document.querySelectorAll('#subview-flow-day .app-task-card.completed');
+      const counter = document.getElementById('flow-task-counter');
+      if (counter) counter.innerText = `${done.length} / ${all.length} Done`;
     }
 
     function sendAppChat() {
