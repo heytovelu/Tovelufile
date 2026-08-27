@@ -58,69 +58,15 @@
       color: var(--gemini-text-main);
     }
 
-    /* Widescreen 2-Column Grid */
-    .desktop-survey-grid {
-      max-width: 1280px;
+    /* Centered Desktop Survey Container */
+    .desktop-survey-container {
+      max-width: 680px;
       width: 100%;
       margin: 0 auto;
-      padding: 32px 40px 100px 40px;
-      display: grid;
-      grid-template-columns: 340px 1fr;
-      gap: 48px;
+      padding: 40px 24px 100px 24px;
       flex: 1;
-    }
-
-    /* Sticky Left Telemetry Sidebar */
-    .sidebar-telemetry {
-      position: sticky;
-      top: 100px;
-      height: fit-content;
       display: flex;
       flex-direction: column;
-      gap: 20px;
-    }
-
-    .telemetry-card {
-      background: var(--gemini-surface);
-      border: 1px solid var(--gemini-border);
-      border-radius: 20px;
-      padding: 22px;
-      box-shadow: var(--gemini-shadow-sm);
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    /* Milestone Steps List */
-    .pillar-step {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--gemini-text-muted);
-      padding: 6px 0;
-      transition: all 0.15s;
-    }
-    .pillar-step.active {
-      color: var(--gemini-sparkle-blue);
-      font-weight: 700;
-    }
-    .pillar-step.completed {
-      color: var(--gemini-vitality-emerald);
-    }
-    .pillar-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--gemini-surface-container);
-    }
-    .pillar-step.active .pillar-dot {
-      background: var(--gemini-sparkle-blue);
-      box-shadow: 0 0 8px var(--gemini-sparkle-blue);
-    }
-    .pillar-step.completed .pillar-dot {
-      background: var(--gemini-vitality-emerald);
     }
 
     /* Main Question Stage */
@@ -128,7 +74,6 @@
       display: flex;
       flex-direction: column;
       gap: 24px;
-      max-width: 720px;
       width: 100%;
     }
 
@@ -303,53 +248,8 @@
     </div>
   </header>
 
-  <!-- Widescreen 2-Column Grid -->
-  <div class="desktop-survey-grid">
-    
-    <!-- Left Sidebar Telemetry -->
-    <aside class="sidebar-telemetry">
-      
-      <!-- Live Epigenetic Biological Age Real-Time Meter -->
-      <div class="telemetry-card">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <span style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald); letter-spacing: 0.05em; text-transform: uppercase;">
-            LIVE METABOLIC CALCULATION
-          </span>
-          <span style="font-size: 11px; font-weight: 700; color: var(--gemini-sparkle-blue);">LAW-001</span>
-        </div>
-        
-        <div>
-          <div style="font-size: 12px; color: var(--gemini-text-muted);">Basal Metabolic Calorie Burn:</div>
-          <div style="font-family: 'Google Sans Display', sans-serif; font-size: 26px; font-weight: 800; color: var(--gemini-text-main);" id="telemetry-bmr-val">
-            1,740 <span style="font-size: 14px; font-weight: 500; color: var(--gemini-text-muted);">kcal/day</span>
-          </div>
-        </div>
-
-        <div style="border-top: 1px solid var(--gemini-border-subtle); padding-top: 10px;">
-          <div style="font-size: 12px; color: var(--gemini-text-muted);">Epigenetic Pace of Aging:</div>
-          <div style="font-size: 20px; font-weight: 800; color: var(--gemini-vitality-emerald);" id="telemetry-dna-val">0.82x (Optimal)</div>
-          <div style="font-size: 11px; color: var(--gemini-text-subtle); margin-top: 2px;" id="telemetry-savings-val">-4.2 Biological Years Saved.</div>
-        </div>
-      </div>
-
-      <!-- 6-Pillar Milestone Track -->
-      <div class="telemetry-card">
-        <div style="font-size: 12px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase; letter-spacing: 0.04em;">
-          6 CLINICAL PILLARS (42 MARKERS)
-        </div>
-        <div>
-          <div class="pillar-step active" id="pil-1"><span class="pillar-dot"></span> 1. Biological Demographics (Q1-Q5)</div>
-          <div class="pillar-step" id="pil-2"><span class="pillar-dot"></span> 2. Whole-Food Nutrition & Fats (Q6-Q10)</div>
-          <div class="pillar-step" id="pil-3"><span class="pillar-dot"></span> 3. Circadian & Sleep Cycles (Q11-Q14)</div>
-          <div class="pillar-step" id="pil-4"><span class="pillar-dot"></span> 4. Physical Movement & NEAT (Q15-Q17)</div>
-          <div class="pillar-step" id="pil-5"><span class="pillar-dot"></span> 5. Energy, Gut & Symptoms (Q18-Q34)</div>
-          <div class="pillar-step" id="pil-6"><span class="pillar-dot"></span> 6. Deep Personal Precision (Q35-Q42)</div>
-        </div>
-      </div>
-
-    </aside>
-
-    <!-- Main Question Stage -->
+  <!-- Centered Desktop Survey Container -->
+  <div class="desktop-survey-container">
     <main class="question-stage">
       
       <div id="survey-alert" class="alert-box">Please select an option above to continue.</div>
