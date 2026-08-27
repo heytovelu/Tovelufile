@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json.schemastore.org/design-tokens",
+  "name": "Tovelu Universal Design Tokens",
+  "version": "1.2.0",
+  "status": "LOCKED",
+  "brand": {
+    "name": "tovelu",
+    "casing": "lowercase",
+    "wordmark": {
+      "fontFamily": "Ubuntu, -apple-system, BlinkMacSystemFont, sans-serif",
+      "fontWeight": 500,
+      "letterSpacing": "-0.01em",
+      "style": "Humanist Modern"
+    },
+    "icon": {
+      "name": "The Bio-Cell / Mitosis",
+      "symbolism": "Living Cell Genesis, Proactive Health Mitosis, Vitality Nucleus",
+      "geometry": "Dual organic crescents with center nucleus",
+      "aspectRatio": "1:1"
+    },
+    "lockup": {
+      "standardRatio": "1:0.75",
+      "description": "Wordmark height is exactly 75% of the Icon height",
+      "clearSpaceRule": "1x width of lowercase 'o' (~0.35x icon width)",
+      "verticalAlignment": "Cap-Height / x-Height optical centroid"
+    }
+  },
+  "typography": {
+    "displayHeadings": {
+      "fontFamily": "Plus Jakarta Sans, sans-serif",
+      "weights": {
+        "bold": 700,
+        "extraBold": 800
+      },
+      "usage": "Marketing headers, H1-H3 titles, hero statements"
+    },
+    "bodyAndUI": {
+      "fontFamily": "Inter, sans-serif",
+      "weights": {
+        "regular": 400,
+        "medium": 500,
+        "semiBold": 600
+      },
+      "usage": "Clinical data tables, body copy, platform dashboards, settings"
+    }
+  },
+  "colors": {
+    "primary": {
+      "azure": {
+        "value": "#1D4ED8",
+        "description": "Primary Clinical Authority & Deep Trust"
+      },
+      "sky": {
+        "value": "#0EA5E9",
+        "description": "Luminous AI Intelligence & Diagnostic Clarity"
+      },
+      "emerald": {
+        "value": "#10B981",
+        "deepValue": "#059669",
+        "description": "Bio-Vitality & Living Cellular Energy"
+      }
+    },
+    "surfaces": {
+      "nightObsidian": {
+        "value": "#080B11",
+        "elevated": "#101622",
+        "border": "#202C3F",
+        "textMain": "#F8FAFC",
+        "textMuted": "#94A3B8"
+      },
+      "dayPorcelain": {
+        "value": "#F8FAFC",
+        "elevated": "#FFFFFF",
+        "border": "#E2E8F0",
+        "textMain": "#0F172A",
+        "textMuted": "#475569"
+      }
+    }
+  }
+}

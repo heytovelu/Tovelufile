@@ -1,0 +1,7 @@
+<svg width="240" height="70" viewBox="0 0 240 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&amp;display=swap');
+    .txt { font-family: 'Ubuntu', -apple-system, sans-serif; font-weight: 500; font-size: 56px; fill: #080B11; letter-spacing: -0.01em; }
+  </style>
+  <text x="10" y="52" class="txt">tovelu</text>
+</svg>

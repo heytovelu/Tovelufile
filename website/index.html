@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>tovelu — Toward better health</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>tovelu — Toward better health (THAIS Universal Health Platform)</title>
   
   <!-- Locked Brand Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,47 +12,52 @@
   
   <style>
     :root {
-      /* 100-Year Color Architecture (Locked) */
+      /* Locked 100-Year Universal Palette */
       --primary: #1D4ED8;
       --primary-hover: #1E40AF;
+      --primary-glow: #2563EB;
       --luminous: #0EA5E9;
-      --luminous-glow: rgba(14, 165, 233, 0.25);
+      --luminous-glow: rgba(14, 165, 233, 0.22);
       --vitality: #10B981;
       --vitality-deep: #059669;
-      --vitality-glow: rgba(16, 185, 129, 0.25);
+      --vitality-glow: rgba(16, 185, 129, 0.2);
+      --warning: #F59E0B;
+      --warning-glow: rgba(245, 158, 11, 0.18);
+      --danger: #EF4444;
       
       --radius-sm: 8px;
-      --radius-md: 16px;
-      --radius-lg: 24px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 26px;
       --radius-full: 9999px;
     }
 
     body.theme-dark {
       --canvas: #080B11;
-      --surface: rgba(14, 19, 31, 0.65);
-      --surface-elevated: rgba(21, 29, 46, 0.75);
-      --surface-border: rgba(31, 44, 66, 0.7);
+      --surface: #0E131F;
+      --surface-elevated: #151D2E;
+      --surface-active: #1C273C;
+      --border: #1F2C42;
+      --border-subtle: #162032;
       --text-main: #F8FAFC;
       --text-muted: #94A3B8;
       --text-subtle: #64748B;
-      --card-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7);
-      --dna-opacity: 0.65;
-      --cell-glow: rgba(14, 165, 233, 0.15);
-      --immune-glow: rgba(16, 185, 129, 0.18);
+      --card-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.6);
+      --nav-bg: rgba(14, 19, 31, 0.88);
     }
 
     body.theme-light {
       --canvas: #F8FAFC;
-      --surface: rgba(255, 255, 255, 0.8);
-      --surface-elevated: rgba(241, 245, 249, 0.88);
-      --surface-border: rgba(226, 232, 240, 0.88);
+      --surface: #FFFFFF;
+      --surface-elevated: #F1F5F9;
+      --surface-active: #E2E8F0;
+      --border: #E2E8F0;
+      --border-subtle: #EDF2F7;
       --text-main: #0F172A;
       --text-muted: #475569;
       --text-subtle: #64748B;
-      --card-shadow: 0 25px 60px -15px rgba(15, 23, 42, 0.08);
-      --dna-opacity: 0.4;
-      --cell-glow: rgba(14, 165, 233, 0.1);
-      --immune-glow: rgba(16, 185, 129, 0.12);
+      --card-shadow: 0 15px 35px -5px rgba(15, 23, 42, 0.06);
+      --nav-bg: rgba(255, 255, 255, 0.92);
     }
 
     * {
@@ -62,507 +67,2066 @@
       -webkit-tap-highlight-color: transparent;
     }
 
-    html, body {
-      width: 100%;
-      height: 100%;
-      overflow-x: hidden;
-    }
-
     body {
       background-color: var(--canvas);
       color: var(--text-main);
-      font-family: 'Inter', sans-serif;
-      line-height: 1.6;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.5;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-      position: relative;
-      transition: background-color 0.3s ease, color 0.3s ease;
-      padding-top: env(safe-area-inset-top, 0px);
-      padding-bottom: env(safe-area-inset-bottom, 0px);
-      padding-left: env(safe-area-inset-left, 0px);
-      padding-right: env(safe-area-inset-right, 0px);
+      transition: background-color 0.25s ease, color 0.25s ease;
+      overflow-x: hidden;
     }
 
     h1, h2, h3, h4, .brand-heading {
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 800;
-      letter-spacing: -0.035em;
+      letter-spacing: -0.03em;
     }
 
-    /* 3D Biological Scene Background */
-    .bg-3d-scene {
-      position: fixed;
+    /* Top Sticky Header */
+    header.app-header {
+      height: 64px;
+      background: var(--nav-bg);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
       top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
-      perspective: 1200px;
-    }
-
-    /* Volumetric Glowing Light Orbs */
-    .glow-orb-1 {
-      position: absolute;
-      top: -15%;
-      left: 10%;
-      width: min(750px, 90vw);
-      height: min(750px, 90vw);
-      background: radial-gradient(circle, var(--cell-glow) 0%, rgba(29, 78, 216, 0.05) 50%, transparent 70%);
-      filter: blur(60px);
-      animation: floatSlow1 24s ease-in-out infinite alternate;
-    }
-
-    .glow-orb-2 {
-      position: absolute;
-      bottom: -15%;
-      right: 5%;
-      width: min(800px, 90vw);
-      height: min(800px, 90vw);
-      background: radial-gradient(circle, var(--immune-glow) 0%, rgba(5, 150, 105, 0.04) 50%, transparent 70%);
-      filter: blur(70px);
-      animation: floatSlow2 28s ease-in-out infinite alternate-reverse;
-    }
-
-    @keyframes floatSlow1 {
-      0% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(40px, -30px) scale(1.08); }
-      100% { transform: translate(-30px, 30px) scale(0.95); }
-    }
-    @keyframes floatSlow2 {
-      0% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(-35px, 35px) scale(1.05); }
-      100% { transform: translate(30px, -25px) scale(0.92); }
-    }
-
-    /* Floating 3D Biological Objects */
-    .floating-element {
-      position: absolute;
-      transform-style: preserve-3d;
-      will-change: transform;
-    }
-
-    /* 3D DNA Helix (Left Side) */
-    .dna-3d-wrap {
-      top: 15%;
-      left: 3%;
-      width: 220px;
-      height: 480px;
-      opacity: var(--dna-opacity);
-      animation: floatDna 16s ease-in-out infinite alternate;
-    }
-    @keyframes floatDna {
-      0% { transform: translateY(0px) rotateY(0deg) rotateZ(-12deg); }
-      50% { transform: translateY(-25px) rotateY(15deg) rotateZ(-8deg); }
-      100% { transform: translateY(15px) rotateY(-15deg) rotateZ(-15deg); }
-    }
-
-    /* 3D Immune System Antibody Y-Structure (Right Upper) */
-    .immune-y-wrap {
-      top: 12%;
-      right: 6%;
-      width: 180px;
-      height: 180px;
-      opacity: var(--dna-opacity);
-      animation: floatImmune 20s ease-in-out infinite alternate;
-    }
-    @keyframes floatImmune {
-      0% { transform: translateY(0px) rotate(0deg) scale(1); }
-      50% { transform: translateY(-30px) rotate(12deg) scale(1.06); }
-      100% { transform: translateY(20px) rotate(-10deg) scale(0.96); }
-    }
-
-    /* 3D Living Bio-Cell Spheres (Bottom Left & Bottom Right) */
-    .bio-cell-3d-1 {
-      bottom: 8%;
-      right: 8%;
-      width: 220px;
-      height: 220px;
-      opacity: var(--dna-opacity);
-      animation: floatCell 22s ease-in-out infinite alternate-reverse;
-    }
-    .bio-cell-3d-2 {
-      bottom: 12%;
-      left: 8%;
-      width: 160px;
-      height: 160px;
-      opacity: calc(var(--dna-opacity) * 0.85);
-      animation: floatCell 18s ease-in-out infinite alternate;
-    }
-    @keyframes floatCell {
-      0% { transform: translate(0, 0) rotate(0deg) scale(1); }
-      50% { transform: translate(25px, -20px) rotate(45deg) scale(1.05); }
-      100% { transform: translate(-20px, 25px) rotate(-30deg) scale(0.95); }
-    }
-
-    @media (max-width: 768px) {
-      .dna-3d-wrap {
-        left: -40px;
-        top: 25%;
-        width: 150px;
-        height: 340px;
-        opacity: 0.35;
-      }
-      .immune-y-wrap {
-        right: -30px;
-        top: 10%;
-        width: 130px;
-        height: 130px;
-        opacity: 0.35;
-      }
-      .bio-cell-3d-1 {
-        right: -30px;
-        bottom: 5%;
-        width: 150px;
-        height: 150px;
-        opacity: 0.3;
-      }
-      .bio-cell-3d-2 {
-        display: none;
-      }
-    }
-
-    /* Header Bar */
-    header {
-      position: relative;
-      z-index: 10;
-      padding: 1.5rem 2rem;
+      z-index: 100;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      max-width: 1360px;
-      width: 100%;
-      margin: 0 auto;
+      justify-content: space-between;
+      padding: 0 1.25rem;
+      backdrop-filter: blur(16px);
     }
 
     .brand-header-lockup {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 9px;
       text-decoration: none;
+      cursor: pointer;
     }
     .brand-icon-wrap {
-      width: 40px;
-      height: 40px;
-      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
     }
     .brand-wordmark-txt {
       font-family: 'Ubuntu', sans-serif;
       font-weight: 500;
-      font-size: 30px; /* 1:0.75 Golden Ratio (75% of 40px) */
+      font-size: 24px; /* 1:0.75 Golden Ratio */
       color: var(--text-main);
       line-height: 1;
       letter-spacing: -0.01em;
     }
 
-    .theme-toggle-btn {
+    /* Desktop Navigation Tabs (5 Core Sections: FLOW, BOOK, CHAT, HEALTH, YOU) */
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
       background: var(--surface-elevated);
-      border: 1px solid var(--surface-border);
-      color: var(--text-main);
+      padding: 0.25rem;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border);
+    }
+
+    @media (max-width: 820px) {
+      .desktop-nav {
+        display: none;
+      }
+    }
+
+    .nav-tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
       padding: 0.45rem 1.1rem;
       border-radius: var(--radius-full);
       font-size: 0.82rem;
       font-weight: 700;
       cursor: pointer;
-      display: inline-flex;
+      display: flex;
       align-items: center;
-      gap: 0.45rem;
-      backdrop-filter: blur(14px);
+      gap: 0.4rem;
       transition: all 0.2s;
-      min-height: 40px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
     }
-    .theme-toggle-btn:hover {
-      border-color: var(--luminous);
-      transform: translateY(-1px);
+    .nav-tab-btn:hover {
+      color: var(--text-main);
+    }
+    .nav-tab-btn.active {
+      background: var(--primary);
+      color: #FFFFFF;
+      box-shadow: 0 2px 8px rgba(29, 78, 216, 0.4);
     }
 
-    /* Central Minimalist Hero */
-    .hero-container {
-      position: relative;
-      z-index: 10;
-      max-width: 920px;
-      width: 100%;
-      margin: auto;
-      padding: 3rem 1.5rem;
-      text-align: center;
+    /* Header Actions */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .btn-icon {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+    .btn-icon:hover {
+      border-color: var(--luminous);
+    }
+
+    .avatar-pill {
+      background: linear-gradient(135deg, var(--luminous), var(--primary));
+      color: white;
+      font-weight: 800;
+      font-size: 0.8rem;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: 2px solid var(--border);
+    }
+
+    /* Mobile Bottom Navigation Bar (5 Core Tabs) */
+    .mobile-bottom-nav {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100vw;
+      height: 60px;
+      background: var(--nav-bg);
+      border-top: 1px solid var(--border);
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      justify-content: space-around;
+      align-items: center;
+      padding: 0 0.25rem;
+    }
+
+    @media (max-width: 820px) {
+      .mobile-bottom-nav {
+        display: flex;
+      }
+      body {
+        padding-bottom: 74px;
+      }
+    }
+
+    .mobile-nav-item {
       display: flex;
       flex-direction: column;
       align-items: center;
-    }
-
-    /* Tagline Badge */
-    .tagline-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.65rem;
-      background: var(--surface-elevated);
-      border: 1px solid var(--surface-border);
-      padding: 0.5rem 1.4rem;
-      border-radius: var(--radius-full);
-      font-size: 0.85rem;
-      font-weight: 800;
-      color: var(--vitality);
-      margin-bottom: 2rem;
-      backdrop-filter: blur(16px);
-      box-shadow: 0 4px 25px rgba(0,0,0,0.12);
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-    }
-    .pulse-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--vitality);
-      border-radius: 50%;
-      box-shadow: 0 0 12px var(--vitality);
-      animation: pulseLive 2s infinite;
-      flex-shrink: 0;
-    }
-    @keyframes pulseLive {
-      0% { transform: scale(0.95); opacity: 0.8; }
-      50% { transform: scale(1.3); opacity: 1; }
-      100% { transform: scale(0.95); opacity: 0.8; }
-    }
-
-    /* Main Headline */
-    .hero-title {
-      font-size: clamp(2.5rem, 6.5vw, 4.8rem);
-      line-height: 1.1;
-      margin-bottom: 1.5rem;
-      max-width: 860px;
-      color: var(--text-main);
-    }
-    .text-gradient {
-      background: linear-gradient(135deg, #38BDF8 0%, #1D4ED8 50%, #10B981 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      display: inline-block;
-    }
-
-    /* Pure Mission Statement */
-    .hero-mission-statement {
-      font-size: clamp(1.15rem, 2.3vw, 1.45rem);
+      gap: 2px;
       color: var(--text-muted);
-      max-width: 740px;
-      font-weight: 400;
-      line-height: 1.65;
-    }
-    .hero-mission-statement strong {
-      color: var(--text-main);
+      font-size: 0.65rem;
       font-weight: 700;
+      cursor: pointer;
+      padding: 0.35rem 0.5rem;
+      border-radius: var(--radius-sm);
+      transition: color 0.15s;
+    }
+    .mobile-nav-item.active {
+      color: var(--luminous);
+    }
+    .mobile-nav-icon {
+      font-size: 1.15rem;
     }
 
-    /* Minimal Clean Footer */
-    footer {
-      position: relative;
-      z-index: 10;
-      border-top: 1px solid var(--surface-border);
-      padding: 2rem 1.5rem;
-      max-width: 1360px;
+    /* Main Container */
+    .app-main {
+      max-width: 1180px;
       width: 100%;
       margin: 0 auto;
-      display: flex;
-      justify-content: center;
+      padding: 1.5rem 1.25rem;
+      flex: 1;
+    }
+
+    /* Tab Sections */
+    .tab-pane {
+      display: none;
+      animation: fadeIn 0.25s ease-in-out;
+    }
+    .tab-pane.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Cards */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--card-shadow);
+      margin-bottom: 1.25rem;
+    }
+
+    /* Badges */
+    .badge {
+      display: inline-flex;
       align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: var(--radius-full);
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .badge-vitality {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--vitality);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .badge-primary {
+      background: rgba(14, 165, 233, 0.15);
+      color: var(--luminous);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+    .badge-warning {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--warning);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+    .badge-danger {
+      background: rgba(239, 68, 68, 0.15);
+      color: var(--danger);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    /* Buttons */
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius-md);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 15px rgba(29, 78, 216, 0.35);
+    }
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    /* 3-Column Diagnostic Triage Grid */
+    .triage-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin: 1.25rem 0;
+    }
+    @media (max-width: 900px) {
+      .triage-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .triage-col {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .triage-col-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.6rem;
+    }
+
+    .disease-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 0.9rem;
+      font-size: 0.82rem;
+    }
+
+    /* Checklist Tasks */
+    .task-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 0.9rem 1.15rem;
+      margin-bottom: 0.65rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .task-item:hover {
+      border-color: var(--luminous);
+    }
+    .task-item.done {
+      border-color: var(--vitality);
+      opacity: 0.85;
+    }
+    .check-box {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 0.8rem;
+      flex-shrink: 0;
+    }
+    .task-item.done .check-box {
+      background: var(--vitality);
+      border-color: var(--vitality);
+      color: white;
+    }
+
+    /* Meals Grid */
+    .meals-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    @media (max-width: 820px) {
+      .meals-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .meal-card {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.15rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Chat Container */
+    .chat-box {
+      height: 440px;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.15rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      margin-bottom: 1rem;
+    }
+    .chat-msg {
+      max-width: 82%;
+      padding: 0.85rem 1.1rem;
+      border-radius: var(--radius-md);
+      font-size: 0.86rem;
+      line-height: 1.5;
+    }
+    .chat-msg.thais {
+      align-self: flex-start;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+    }
+    .chat-msg.user {
+      align-self: flex-end;
+      background: var(--primary);
+      color: white;
+    }
+
+    /* ==========================================================================
+       SURVEY / INTAKE FULL-SCREEN OVERLAY & DOPAMINE ENGINE
+       ========================================================================== */
+    .survey-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: var(--canvas);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .survey-top-bar {
+      height: 60px;
+      padding: 0 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      background: var(--nav-bg);
+      backdrop-filter: blur(16px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .survey-progress-wrap {
+      flex: 1;
+      max-width: 480px;
+      margin: 0 1.5rem;
+      height: 7px;
+      background: var(--surface-elevated);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .survey-progress-bar {
+      height: 100%;
+      width: 5%;
+      background: linear-gradient(90deg, var(--luminous), var(--vitality));
+      transition: width 0.35s ease;
+    }
+
+    .survey-body {
+      max-width: 640px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 4rem 1.25rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* Question Cards & Options */
+    .question-title {
+      font-size: 1.45rem;
+      font-weight: 800;
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+    }
+    .question-subtitle {
       font-size: 0.85rem;
       color: var(--text-muted);
+      margin-bottom: 1.75rem;
+    }
+
+    .option-card-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .option-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      user-select: none;
+    }
+    .option-card:hover {
+      border-color: var(--luminous);
+      background: var(--surface-elevated);
+      transform: translateY(-1px);
+    }
+    .option-card:active {
+      transform: scale(0.985);
+    }
+    .option-card.selected {
+      border-color: var(--primary);
+      background: rgba(29, 78, 216, 0.1);
+      box-shadow: 0 0 0 1px var(--primary);
+    }
+
+    .option-emoji {
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+    .option-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text-main);
+    }
+    .option-desc {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* Segmented Controls & Unit Pickers */
+    .unit-toggle-wrap {
+      display: flex;
+      background: var(--surface-elevated);
+      padding: 0.25rem;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border);
+      width: fit-content;
+      margin-bottom: 1.25rem;
+    }
+    .unit-toggle-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 0.35rem 1rem;
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .unit-toggle-btn.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    .survey-input {
+      width: 100%;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      color: var(--text-main);
+      padding: 0.9rem 1.15rem;
+      border-radius: var(--radius-md);
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      margin-bottom: 1rem;
+      transition: border-color 0.2s;
+    }
+    .survey-input:focus {
+      border-color: var(--luminous);
+    }
+
+    /* Dopamine Interstitial Cards */
+    .dopamine-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 2.25rem 1.75rem;
+      box-shadow: var(--card-shadow);
       text-align: center;
+      animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.94); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .visual-gauge-box {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+      text-align: left;
+    }
+    .quote-box {
+      border-left: 3px solid var(--vitality);
+      padding-left: 1rem;
+      margin: 1.5rem 0;
+      text-align: left;
+      font-style: italic;
+      color: var(--text-muted);
+      font-size: 0.88rem;
     }
   </style>
 </head>
 <body class="theme-dark">
 
-  <!-- 3D Biological Health, DNA & Immune System Visual Scene -->
-  <div class="bg-3d-scene">
-    <!-- Ambient Radial Glows -->
-    <div class="glow-orb-1"></div>
-    <div class="glow-orb-2"></div>
-
-    <!-- 1. 3D DNA Double-Helix Structure (Left) -->
-    <div class="floating-element dna-3d-wrap">
-      <svg width="100%" height="100%" viewBox="0 0 200 450" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="dna-strand-1" x1="0" y1="0" x2="200" y2="450" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stop-color="#38BDF8"/>
-            <stop offset="50%" stop-color="#1D4ED8"/>
-            <stop offset="100%" stop-color="#10B981"/>
-          </linearGradient>
-          <linearGradient id="dna-strand-2" x1="200" y1="0" x2="0" y2="450" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stop-color="#10B981"/>
-            <stop offset="50%" stop-color="#0EA5E9"/>
-            <stop offset="100%" stop-color="#1D4ED8"/>
-          </linearGradient>
-          <radialGradient id="base-node-glow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#38BDF8" stop-opacity="1"/>
-            <stop offset="100%" stop-color="#1D4ED8" stop-opacity="0.2"/>
-          </radialGradient>
-        </defs>
-
-        <!-- DNA Phosphodiester Backbone Waves -->
-        <path d="M 40 20 Q 160 80, 160 140 T 40 260 T 160 380" stroke="url(#dna-strand-1)" stroke-width="4" stroke-linecap="round" fill="none"/>
-        <path d="M 160 20 Q 40 80, 40 140 T 160 260 T 40 380" stroke="url(#dna-strand-2)" stroke-width="4" stroke-linecap="round" fill="none"/>
-
-        <!-- 3D Nitrogenous Base Pair Rungs & Hydrogen Bonds -->
-        <line x1="50" y1="35" x2="150" y2="35" stroke="rgba(56, 189, 248, 0.4)" stroke-width="2.5" stroke-dasharray="4 4"/>
-        <circle cx="50" cy="35" r="5" fill="#38BDF8"/>
-        <circle cx="150" cy="35" r="5" fill="#10B981"/>
-
-        <line x1="85" y1="80" x2="115" y2="80" stroke="rgba(16, 185, 129, 0.4)" stroke-width="2.5"/>
-        <circle cx="85" cy="80" r="4" fill="#0EA5E9"/>
-        <circle cx="115" cy="80" r="4" fill="#10B981"/>
-
-        <line x1="50" y1="140" x2="150" y2="140" stroke="rgba(56, 189, 248, 0.4)" stroke-width="2.5" stroke-dasharray="4 4"/>
-        <circle cx="50" cy="140" r="5" fill="#1D4ED8"/>
-        <circle cx="150" cy="140" r="5" fill="#38BDF8"/>
-
-        <line x1="85" y1="200" x2="115" y2="200" stroke="rgba(16, 185, 129, 0.4)" stroke-width="2.5"/>
-        <circle cx="85" cy="200" r="4" fill="#10B981"/>
-        <circle cx="115" cy="200" r="4" fill="#0EA5E9"/>
-
-        <line x1="50" y1="260" x2="150" y2="260" stroke="rgba(56, 189, 248, 0.4)" stroke-width="2.5" stroke-dasharray="4 4"/>
-        <circle cx="50" cy="260" r="5" fill="#38BDF8"/>
-        <circle cx="150" cy="260" r="5" fill="#10B981"/>
-
-        <line x1="85" y1="320" x2="115" y2="320" stroke="rgba(16, 185, 129, 0.4)" stroke-width="2.5"/>
-        <circle cx="85" cy="320" r="4" fill="#0EA5E9"/>
-        <circle cx="115" cy="320" r="4" fill="#1D4ED8"/>
-
-        <line x1="50" y1="380" x2="150" y2="380" stroke="rgba(56, 189, 248, 0.4)" stroke-width="2.5" stroke-dasharray="4 4"/>
-        <circle cx="50" cy="380" r="5" fill="#10B981"/>
-        <circle cx="150" cy="380" r="5" fill="#38BDF8"/>
-      </svg>
-    </div>
-
-    <!-- 2. 3D Immune System Antibody Structure (Right Upper) -->
-    <div class="floating-element immune-y-wrap">
-      <svg width="100%" height="100%" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="imm-grad" x1="20" y1="20" x2="160" y2="160" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stop-color="#10B981"/>
-            <stop offset="50%" stop-color="#0EA5E9"/>
-            <stop offset="100%" stop-color="#1D4ED8"/>
-          </linearGradient>
-        </defs>
-        <!-- Antibody Y-Arms (Fab domain) & Stem (Fc domain) -->
-        <path d="M 40 40 L 90 90 L 140 40" stroke="url(#imm-grad)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M 90 90 L 90 150" stroke="url(#imm-grad)" stroke-width="7" stroke-linecap="round"/>
-        <!-- Antigen Binding Terminals with 3D Spheres -->
-        <circle cx="40" cy="40" r="10" fill="#10B981" filter="drop-shadow(0 0 8px rgba(16,185,129,0.8))"/>
-        <circle cx="140" cy="40" r="10" fill="#38BDF8" filter="drop-shadow(0 0 8px rgba(56,189,248,0.8))"/>
-        <circle cx="90" cy="150" r="9" fill="#1D4ED8" filter="drop-shadow(0 0 8px rgba(29,78,216,0.8))"/>
-        <!-- Core Hinge Region Disulfide Bond -->
-        <circle cx="90" cy="90" r="6" fill="#F8FAFC"/>
-      </svg>
-    </div>
-
-    <!-- 3. 3D Cellular Mitosis Spheres with Living Nucleus (Bottom Right) -->
-    <div class="floating-element bio-cell-3d-1">
-      <svg width="100%" height="100%" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <radialGradient id="cell-3d-grad-1" cx="35%" cy="35%" r="65%">
-            <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.8"/>
-            <stop offset="60%" stop-color="#1D4ED8" stop-opacity="0.3"/>
-            <stop offset="100%" stop-color="#080B11" stop-opacity="0"/>
-          </radialGradient>
-          <radialGradient id="nuc-glow" cx="40%" cy="40%" r="60%">
-            <stop offset="0%" stop-color="#10B981"/>
-            <stop offset="100%" stop-color="#059669"/>
-          </radialGradient>
-        </defs>
-        <!-- Outer Cellular Membrane -->
-        <circle cx="100" cy="100" r="85" fill="url(#cell-3d-grad-1)" stroke="rgba(56, 189, 248, 0.35)" stroke-width="2"/>
-        <!-- Organelle Rings -->
-        <ellipse cx="100" cy="100" rx="70" ry="30" stroke="rgba(16, 185, 129, 0.25)" stroke-width="1.5" stroke-dasharray="6 4" transform="rotate(-25 100 100)"/>
-        <!-- Mitochondria / Cellular Nucleus -->
-        <circle cx="100" cy="100" r="22" fill="url(#nuc-glow)" filter="drop-shadow(0 0 12px rgba(16,185,129,0.9))"/>
-      </svg>
-    </div>
-
-    <!-- 4. Secondary Bio-Cell Membrane (Bottom Left) -->
-    <div class="floating-element bio-cell-3d-2">
-      <svg width="100%" height="100%" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <radialGradient id="cell-3d-grad-2" cx="30%" cy="30%" r="70%">
-            <stop offset="0%" stop-color="#10B981" stop-opacity="0.6"/>
-            <stop offset="70%" stop-color="#059669" stop-opacity="0.15"/>
-            <stop offset="100%" stop-color="#080B11" stop-opacity="0"/>
-          </radialGradient>
-        </defs>
-        <circle cx="80" cy="80" r="65" fill="url(#cell-3d-grad-2)" stroke="rgba(16, 185, 129, 0.3)" stroke-width="1.5"/>
-        <circle cx="80" cy="80" r="14" fill="#38BDF8" filter="drop-shadow(0 0 10px rgba(56,189,248,0.8))"/>
-      </svg>
-    </div>
-  </div>
-
-  <!-- Header -->
-  <header>
-    <a href="#" class="brand-header-lockup">
-      <!-- 40px Bio-Cell Icon -->
+  <!-- ==================== HEADER ==================== -->
+  <header class="app-header">
+    <a href="#" class="brand-header-lockup" onclick="switchTab('flow')">
+      <!-- 32px Bio-Cell Icon -->
       <div class="brand-icon-wrap">
         <svg width="100%" height="100%" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M50 16 C28 16, 16 32, 16 50 C16 68, 28 84, 50 84 C38 72, 34 58, 34 50 C34 42, 38 28, 50 16 Z" fill="url(#hdr-cell-l)"/>
-          <path d="M50 16 C72 16, 84 32, 84 50 C84 68, 72 84, 50 84 C62 72, 66 58, 66 50 C66 42, 62 28, 50 16 Z" fill="url(#hdr-cell-r)"/>
+          <path d="M50 16 C28 16, 16 32, 16 50 C16 68, 28 84, 50 84 C38 72, 34 58, 34 50 C34 42, 38 28, 50 16 Z" fill="url(#h-l)"/>
+          <path d="M50 16 C72 16, 84 32, 84 50 C84 68, 72 84, 50 84 C62 72, 66 58, 66 50 C66 42, 62 28, 50 16 Z" fill="url(#h-r)"/>
           <circle cx="50" cy="50" r="8" fill="#10B981"/>
           <defs>
-            <linearGradient id="hdr-cell-l" x1="16" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse">
+            <linearGradient id="h-l" x1="16" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse">
               <stop stop-color="#38BDF8"/>
               <stop offset="1" stop-color="#1D4ED8"/>
             </linearGradient>
-            <linearGradient id="hdr-cell-r" x1="84" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse">
+            <linearGradient id="h-r" x1="84" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse">
               <stop stop-color="#059669"/>
               <stop offset="1" stop-color="#10B981"/>
             </linearGradient>
           </defs>
         </svg>
       </div>
-      <!-- 30px Wordmark (1:0.75 Golden Ratio) -->
+      <!-- 24px Wordmark -->
       <span class="brand-wordmark-txt">tovelu</span>
     </a>
 
-    <button class="theme-toggle-btn" onclick="toggleTheme()">
-      <span id="theme-icon">🌙</span>
-      <span id="theme-label">Night</span>
-    </button>
+    <!-- Desktop Navigation Tabs (5 Core Sections: FLOW, BOOK, CHAT, HEALTH, YOU) -->
+    <nav class="desktop-nav">
+      <button class="nav-tab-btn active" id="dtab-flow" onclick="switchTab('flow')">
+        <span>⚡</span> FLOW
+      </button>
+      <button class="nav-tab-btn" id="dtab-book" onclick="switchTab('book')">
+        <span>📖</span> BOOK
+      </button>
+      <button class="nav-tab-btn" id="dtab-chat" onclick="switchTab('chat')">
+        <span>💬</span> CHAT
+      </button>
+      <button class="nav-tab-btn" id="dtab-health" onclick="switchTab('health')">
+        <span>📊</span> HEALTH
+      </button>
+      <button class="nav-tab-btn" id="dtab-you" onclick="switchTab('you')">
+        <span>👤</span> YOU
+      </button>
+    </nav>
+
+    <!-- Header Actions -->
+    <div class="header-actions">
+      <button class="btn-icon" onclick="startSurvey(true)" title="Take / Retake THAIS Survey">
+        <span>📋</span>
+      </button>
+      <button class="btn-icon" onclick="toggleTheme()" title="Toggle Dark/Light">
+        <span id="theme-icon">🌙</span>
+      </button>
+      <div class="avatar-pill" onclick="switchTab('you')" title="Your Profile">
+        <span id="avatar-initials">AS</span>
+      </div>
+    </div>
   </header>
 
-  <!-- Central Monumental Hero Section -->
-  <main class="hero-container">
-    
-    <!-- Tagline Badge -->
-    <div class="tagline-badge">
-      <span class="pulse-dot"></span>
-      <span>Toward better health</span>
-    </div>
+  <!-- ==================== MAIN PLATFORM TABS ==================== -->
+  <main class="app-main">
 
-    <!-- Announcement Headline -->
-    <h1 class="hero-title">
-      We Are <span class="text-gradient">Coming Soon.</span>
-    </h1>
+    <!-- 1. TAB: FLOW (Current Day Execution Center) -->
+    <section id="pane-flow" class="tab-pane active">
+      <div class="card" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.25rem; background: linear-gradient(135deg, rgba(29,78,216,0.12), rgba(16,185,129,0.1)); border-color: rgba(56,189,248,0.3);">
+        <div>
+          <span class="badge badge-vitality">THAIS Protocol Active • Day 18</span>
+          <h1 style="font-size: 1.7rem; margin: 0.35rem 0;">Today's Execution Flow</h1>
+          <p style="font-size: 0.85rem; color: var(--text-muted);">
+            Targeting: <strong id="flow-user-goals">Energy Stabilization, Pre-Diabetes Reversal, and Deep Sleep</strong>.
+          </p>
+        </div>
 
-    <!-- Pure Mission Statement -->
-    <p class="hero-mission-statement">
-      Building the universal health intelligence platform engineered for the daily life of <strong>all 8 billion humans on Earth</strong>.
-    </p>
+        <div style="display: flex; gap: 1.25rem; align-items: center;">
+          <div style="text-align: right;">
+            <div style="font-size: 1.4rem; font-weight: 800; color: var(--vitality);" id="flow-task-counter">3 / 4 Done</div>
+            <div style="font-size: 0.72rem; color: var(--text-muted);">Compliance: 75%</div>
+          </div>
+          <button class="btn-primary" onclick="startSurvey(true)">Retake Survey</button>
+        </div>
+      </div>
+
+      <!-- Tasks Checklist -->
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <h2 style="font-size: 1.15rem; font-weight: 700;">1. Daily Micro-Habit Tasks (Circadian & Cellular)</h2>
+          <span style="font-size: 0.78rem; color: var(--text-muted);">Auto-generated by THAIS</span>
+        </div>
+
+        <div class="task-item done" onclick="toggleTask(this)">
+          <div class="check-box">✓</div>
+          <div style="flex: 1;">
+            <div style="font-size: 0.9rem; font-weight: 700;">Morning Photobiomodulation (15 min)</div>
+            <div style="font-size: 0.76rem; color: var(--text-muted);">Expose eyes to natural sunlight within 45 min of waking. (SCN cortisol sync)</div>
+          </div>
+          <span class="badge badge-vitality">Done</span>
+        </div>
+
+        <div class="task-item done" onclick="toggleTask(this)">
+          <div class="check-box">✓</div>
+          <div style="flex: 1;">
+            <div style="font-size: 0.9rem; font-weight: 700;">Cellular Hydration & Osmolyte Load</div>
+            <div style="font-size: 0.76rem; color: var(--text-muted);">500ml water + pinch of Celtic sea salt upon waking. (Adrenal rehydration)</div>
+          </div>
+          <span class="badge badge-vitality">Done</span>
+        </div>
+
+        <div class="task-item done" onclick="toggleTask(this)">
+          <div class="check-box">✓</div>
+          <div style="flex: 1;">
+            <div style="font-size: 0.9rem; font-weight: 700;">Post-Lunch Glucose Clearance Walk (12 min)</div>
+            <div style="font-size: 0.76rem; color: var(--text-muted);">Brisk walking within 20m of eating to lower post-prandial spike by 34%.</div>
+          </div>
+          <span class="badge badge-vitality">Done</span>
+        </div>
+
+        <div class="task-item" onclick="toggleTask(this)">
+          <div class="check-box"></div>
+          <div style="flex: 1;">
+            <div style="font-size: 0.9rem; font-weight: 700;">Circadian Wind-Down & Melatonin Shielding</div>
+            <div style="font-size: 0.76rem; color: var(--text-muted);">Cut blue light 60m before bed; bedroom at 19°C. (Scheduled for 22:00)</div>
+          </div>
+          <span class="badge badge-warning">Pending (Tonight)</span>
+        </div>
+      </div>
+
+      <!-- 3-Meal Precision Diet -->
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <div>
+            <h2 style="font-size: 1.15rem; font-weight: 700;">2. Precision 3-Meal Whole-Food Diet Plan</h2>
+            <p style="font-size: 0.78rem; color: var(--text-muted);">Tailored to your metabolic profile and local cuisine</p>
+          </div>
+          <span class="badge badge-primary">Target: 2,150 kcal • 145g Protein</span>
+        </div>
+
+        <div class="meals-grid">
+          <div class="meal-card">
+            <div>
+              <span class="badge badge-vitality" style="margin-bottom: 0.4rem;">Breakfast • 08:30</span>
+              <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.25rem;">Savory High-Protein Scramble</h3>
+              <p style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.5;">
+                3 pasture-raised eggs, sautéed spinach in olive oil, 1/2 avocado, pumpkin seeds.
+              </p>
+            </div>
+            <div style="margin-top: 0.85rem; padding-top: 0.65rem; border-top: 1px solid var(--border); font-size: 0.72rem; color: var(--luminous); font-weight: 700;">
+              32g Protein • 4g Net Carbs • Flat Glycemic Curve
+            </div>
+          </div>
+
+          <div class="meal-card">
+            <div>
+              <span class="badge badge-primary" style="margin-bottom: 0.4rem;">Lunch • 13:00</span>
+              <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.25rem;">Mediterranean Salmon & Quinoa</h3>
+              <p style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.5;">
+                Wild-caught salmon fillet (180g), steamed rainbow vegetables, roasted walnuts.
+              </p>
+            </div>
+            <div style="margin-top: 0.85rem; padding-top: 0.65rem; border-top: 1px solid var(--border); font-size: 0.72rem; color: var(--luminous); font-weight: 700;">
+              44g Protein • 30g Complex Carbs • High Omega-3
+            </div>
+          </div>
+
+          <div class="meal-card">
+            <div>
+              <span class="badge badge-warning" style="margin-bottom: 0.4rem;">Dinner • 19:30</span>
+              <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 0.25rem;">Slow-Simmered Bone Broth Stew</h3>
+              <p style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.5;">
+                Grass-fed beef/lentils, ginger, turmeric root, bone broth & roasted asparagus.
+              </p>
+            </div>
+            <div style="margin-top: 0.85rem; padding-top: 0.65rem; border-top: 1px solid var(--border); font-size: 0.72rem; color: var(--luminous); font-weight: 700;">
+              42g Protein • Tryptophan-Rich for Deep REM Sleep
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. TAB: BOOK (The Master Weekly Playbook, Rules & Grocery) -->
+    <section id="pane-book" class="tab-pane">
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+          <div>
+            <span class="badge badge-primary">Current Week Playbook • Week 3</span>
+            <h2 style="font-size: 1.3rem; font-weight: 800; margin-top: 0.25rem;">
+              Week 3 Playbook: Insulin Resensitization & Fat Adaptation
+            </h2>
+          </div>
+          <span class="badge badge-vitality">Level 1 Longevity</span>
+        </div>
+
+        <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1.25rem;">
+          This week we train your cellular mitochondria to burn stored body fat during morning fasting hours.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+          <div style="background: var(--surface-elevated); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1.15rem;">
+            <h4 style="color: var(--luminous); font-size: 0.9rem; margin-bottom: 0.4rem;">📋 Non-Negotiable Weekly Rules</h4>
+            <ul style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.7; padding-left: 1.1rem;">
+              <li>Zero liquid calories (no soda, sweetened coffees, or fruit juices).</li>
+              <li>Wait at least 90 minutes after waking before drinking first caffeine.</li>
+              <li>Consume minimum 35g of protein at both breakfast and dinner.</li>
+            </ul>
+          </div>
+
+          <div style="background: var(--surface-elevated); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1.15rem;">
+            <h4 style="color: var(--warning); font-size: 0.9rem; margin-bottom: 0.4rem;">⚠️ Obstacles to Expect & Solutions</h4>
+            <ul style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.7; padding-left: 1.1rem;">
+              <li><strong>Craving at 16:00:</strong> Drink 300ml sparkling water + 1 tbsp apple cider vinegar.</li>
+              <li><strong>Social Dinner Out:</strong> Order grilled protein with double green salad; skip seed oil dressings.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grocery Matrix -->
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+          <h3 style="font-size: 1.1rem; font-weight: 700;">🛒 Weekly Smart Grocery Matrix</h3>
+          <span style="font-size: 0.78rem; color: var(--luminous); font-weight: 700; cursor: pointer;">Export to Notes / WhatsApp ➔</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; font-size: 0.8rem;">
+          <div style="background: var(--surface-elevated); padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+            <strong>🥩 Clean Proteins:</strong>
+            <ul style="color: var(--text-muted); margin-top: 0.35rem; padding-left: 1.1rem; line-height: 1.6;">
+              <li>Pasture-raised eggs (2 dozen)</li>
+              <li>Wild-caught salmon (600g)</li>
+              <li>Grass-fed beef or organic lentils</li>
+            </ul>
+          </div>
+
+          <div style="background: var(--surface-elevated); padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+            <strong>🥦 Longevity Vegetables:</strong>
+            <ul style="color: var(--text-muted); margin-top: 0.35rem; padding-left: 1.1rem; line-height: 1.6;">
+              <li>Organic baby spinach & arugula</li>
+              <li>Broccoli sprouts (Sulforaphane)</li>
+              <li>Asparagus & avocado</li>
+            </ul>
+          </div>
+
+          <div style="background: var(--surface-elevated); padding: 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+            <strong>🥑 Healthy Fats & Tea:</strong>
+            <ul style="color: var(--text-muted); margin-top: 0.35rem; padding-left: 1.1rem; line-height: 1.6;">
+              <li>Extra virgin olive oil (high polyphenol)</li>
+              <li>Raw walnuts & pumpkin seeds</li>
+              <li>Celtic sea salt & Chamomile tea</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. TAB: CHAT (THAIS AI Companion with Historical Recall) -->
+    <section id="pane-chat" class="tab-pane">
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+          <div>
+            <h2 style="font-size: 1.2rem; font-weight: 800;">THAIS Health Intelligence Chat</h2>
+            <p style="font-size: 0.78rem; color: var(--text-muted);">
+              Ask anything with complete recall of your survey, meals, and tasks.
+            </p>
+          </div>
+          <span class="badge badge-vitality">LAW-001 Verified AI</span>
+        </div>
+
+        <div class="chat-box" id="chat-messages-container">
+          <div class="chat-msg thais">
+            <strong>THAIS:</strong> Hello! I have your complete biological profile, symptom scan, and today's execution plan in memory. Ask me anything—from <em>"What's my next task?"</em> to <em>"How much protein did I eat in breakfast?"</em> or <em>"How does Zone 2 training reverse my pre-diabetes?"</em>
+          </div>
+          <div class="chat-msg user">
+            What is my next task for today and why?
+          </div>
+          <div class="chat-msg thais">
+            <strong>THAIS:</strong> Your next scheduled task is <strong>Circadian Wind-Down & Melatonin Shielding at 22:00</strong>. Preparing your bedroom temperature to 19°C and cutting blue light allows natural melatonin secretion to trigger deep restorative slow-wave sleep.
+          </div>
+        </div>
+
+        <form style="display: flex; gap: 0.5rem;" onsubmit="handleChatSubmit(event)">
+          <input type="text" id="chat-input" class="survey-input" style="margin-bottom: 0;" placeholder="Ask THAIS anything about your health, tasks, or history..." required />
+          <button type="submit" class="btn-primary" style="white-space: nowrap;">Send ➔</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- 4. TAB: HEALTH (Lifetime Progress & 55,000+ Triage Report) -->
+    <section id="pane-health" class="tab-pane">
+      <!-- 3-Column Diagnostic Triage -->
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1rem;">
+          <div>
+            <span class="badge badge-primary">THAIS Clinical Diagnostic Triage</span>
+            <h2 style="font-size: 1.3rem; font-weight: 800; margin-top: 0.25rem;">
+              Your 55,000+ Disease Risk & Resolution Map
+            </h2>
+            <p style="font-size: 0.8rem; color: var(--text-muted);">
+              Scientifically triaged into 3 actionable categories per LAW-001 standards
+            </p>
+          </div>
+          <button class="btn-primary" style="padding: 0.45rem 1rem; font-size: 0.8rem;" onclick="startSurvey(true)">Re-Run Health Scan</button>
+        </div>
+
+        <div class="triage-grid">
+          <!-- Col 1: 100% Solvable -->
+          <div class="triage-col" style="border-top: 4px solid var(--vitality);">
+            <div class="triage-col-header">
+              <span style="font-weight: 800; font-size: 0.85rem; color: var(--vitality);">1. 100% Solvable by Tovelu</span>
+              <span class="badge badge-vitality">3 Detected</span>
+            </div>
+            <p style="font-size: 0.72rem; color: var(--text-muted);">Directly cured or reversed via daily tasks and nutrition.</p>
+            
+            <div class="disease-item">
+              <div style="font-weight: 700; color: var(--text-main);">Early Pre-Diabetes (Insulin Resistance)</div>
+              <div style="font-size: 0.7rem; color: var(--vitality); margin-top: 2px;">Status: 85% Reversed • Glucose 84 mg/dL</div>
+            </div>
+
+            <div class="disease-item">
+              <div style="font-weight: 700; color: var(--text-main);">MASLD (Stage 1 Hepatic Steatosis)</div>
+              <div style="font-size: 0.7rem; color: var(--vitality); margin-top: 2px;">Status: Reversing • ALT/AST normal</div>
+            </div>
+
+            <div class="disease-item">
+              <div style="font-weight: 700; color: var(--text-main);">Circadian Sleep Phase Delay</div>
+              <div style="font-size: 0.7rem; color: var(--vitality); margin-top: 2px;">Status: Resolved via morning photon habit</div>
+            </div>
+          </div>
+
+          <!-- Col 2: % Manageable + Doctor -->
+          <div class="triage-col" style="border-top: 4px solid var(--warning);">
+            <div class="triage-col-header">
+              <span style="font-weight: 800; font-size: 0.85rem; color: var(--warning);">2. % Manageable + Doctor</span>
+              <span class="badge badge-warning">2 Monitored</span>
+            </div>
+            <p style="font-size: 0.72rem; color: var(--text-muted);">Symptoms & flare-ups reduced by 50%+; physician review suggested.</p>
+
+            <div class="disease-item">
+              <div style="font-weight: 700; color: var(--text-main);">Familial Dyslipidemia (ApoB Elevation)</div>
+              <div style="font-size: 0.7rem; color: var(--warning); margin-top: 2px;">Diet drops ApoB by 25%; cardiologist review suggested.</div>
+            </div>
+
+            <div class="disease-item">
+              <div style="font-weight: 700; color: var(--text-main);">Mild Knee Osteoarthritis</div>
+              <div style="font-size: 0.7rem; color: var(--warning); margin-top: 2px;">Anti-inflammatory diet + quad loading reduces pain 60%.</div>
+            </div>
+          </div>
+
+          <!-- Col 3: Doctor / Surgical Only -->
+          <div class="triage-col" style="border-top: 4px solid var(--danger);">
+            <div class="triage-col-header">
+              <span style="font-weight: 800; font-size: 0.85rem; color: var(--danger);">3. 100% Doctor Care Only</span>
+              <span class="badge badge-danger">0 Active</span>
+            </div>
+            <p style="font-size: 0.72rem; color: var(--text-muted);">Tovelu does not interfere; requires hospital/surgical care.</p>
+            
+            <div class="disease-item" style="opacity: 0.75;">
+              <div style="font-weight: 600; color: var(--text-muted);">No acute surgical trauma or genetic emergencies detected.</div>
+              <div style="font-size: 0.7rem; color: var(--vitality); margin-top: 2px;">All physiological systems in safe range.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Biomarker Progress -->
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1rem;">
+          <h2 style="font-size: 1.15rem; font-weight: 700;">Biomarker Trajectory & Biological Age</h2>
+          
+          <div style="display: flex; background: var(--surface-elevated); padding: 0.2rem; border-radius: var(--radius-full); border: 1px solid var(--border);">
+            <button class="nav-tab-btn" style="padding: 0.25rem 0.7rem; font-size: 0.72rem;" onclick="filterPeriod('7D', this)">7D</button>
+            <button class="nav-tab-btn" style="padding: 0.25rem 0.7rem; font-size: 0.72rem;" onclick="filterPeriod('30D', this)">30D</button>
+            <button class="nav-tab-btn active" style="padding: 0.25rem 0.7rem; font-size: 0.72rem;" onclick="filterPeriod('90D', this)">90D</button>
+            <button class="nav-tab-btn" style="padding: 0.25rem 0.7rem; font-size: 0.72rem;" onclick="filterPeriod('1Y', this)">1Y</button>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.85rem;">
+          <div style="background: var(--surface-elevated); border: 1px solid var(--border); padding: 1.15rem; border-radius: var(--radius-md);">
+            <div style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Biological Age</div>
+            <div style="font-size: 1.6rem; font-weight: 800; color: var(--vitality); margin: 0.2rem 0;">-4.2 Yrs</div>
+            <div style="font-size: 0.7rem; color: var(--vitality);">Decelerating at 0.78x / yr</div>
+          </div>
+
+          <div style="background: var(--surface-elevated); border: 1px solid var(--border); padding: 1.15rem; border-radius: var(--radius-md);">
+            <div style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">Fasting Glucose</div>
+            <div style="font-size: 1.6rem; font-weight: 800; color: var(--text-main); margin: 0.2rem 0;">84 <span style="font-size: 0.85rem; font-weight: 500;">mg/dL</span></div>
+            <div style="font-size: 0.7rem; color: var(--vitality);">-14 mg/dL from Baseline</div>
+          </div>
+
+          <div style="background: var(--surface-elevated); border: 1px solid var(--border); padding: 1.15rem; border-radius: var(--radius-md);">
+            <div style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">hs-CRP Inflammation</div>
+            <div style="font-size: 1.6rem; font-weight: 800; color: var(--text-main); margin: 0.2rem 0;">0.32 <span style="font-size: 0.85rem; font-weight: 500;">mg/L</span></div>
+            <div style="font-size: 0.7rem; color: var(--vitality);">Optimal (Zero flares)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. TAB: YOU (Profile, Sovereign Data Vault & Settings) -->
+    <section id="pane-you" class="tab-pane">
+      <div class="card">
+        <div style="display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; margin-bottom: 1.5rem;">
+          <div class="avatar-pill" style="width: 64px; height: 64px; font-size: 1.4rem;">AS</div>
+          <div>
+            <h2 style="font-size: 1.35rem; font-weight: 800;" id="profile-name">Ajay Sen</h2>
+            <p style="font-size: 0.8rem; color: var(--text-muted);">Founder Profile • Member ID: TOV-0001</p>
+            <div style="display: flex; gap: 0.4rem; margin-top: 0.35rem;">
+              <span class="badge badge-vitality">Founding Cohort</span>
+              <span class="badge badge-primary">Sovereign Vault Active</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;">
+          <div style="background: var(--surface-elevated); border: 1px solid var(--border); padding: 1.15rem; border-radius: var(--radius-md);">
+            <h4 style="font-size: 0.9rem; font-weight: 700; margin-bottom: 0.5rem;">👤 Biological Record</h4>
+            <div style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.8;" id="profile-bio-record">
+              <div>DOB: <strong>14/08/1992 (34 Yrs)</strong></div>
+              <div>Height: <strong>178 cm</strong> | Weight: <strong>74 kg</strong></div>
+              <div>Location: <strong>Mumbai, India</strong></div>
+            </div>
+          </div>
+
+          <div style="background: var(--surface-elevated); border: 1px solid var(--border); padding: 1.15rem; border-radius: var(--radius-md);">
+            <h4 style="font-size: 0.9rem; font-weight: 700; margin-bottom: 0.5rem;">🔗 Connected Wearables & Labs</h4>
+            <div style="font-size: 0.8rem; color: var(--text-muted); line-height: 1.8;">
+              <div>Apple Health: <span style="color: var(--vitality); font-weight: 700;">Connected</span></div>
+              <div>Whoop 4.0: <span style="color: var(--vitality); font-weight: 700;">Live Sync</span></div>
+              <div>LabCorp Blood Panel: <span style="color: var(--luminous); font-weight: 700;">Active</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <button class="btn-primary" onclick="startSurvey(true)">Edit Intake Survey</button>
+          <button class="btn-primary" style="background: var(--surface-elevated); border: 1px solid var(--border); color: var(--text-main);" onclick="alert('Exporting Sovereign Health Record (FHIR JSON format)...')">Export Health Record (JSON)</button>
+        </div>
+      </div>
+    </section>
 
   </main>
 
-  <!-- Clean Minimal Footer -->
-  <footer>
-    <div>
-      <span style="font-family: 'Ubuntu', sans-serif; font-weight: 500; color: var(--text-main);">tovelu</span>
-      <span>© 2026 Tovelu Inc. • Toward better health.</span>
+  <!-- ==================== MOBILE BOTTOM NAVIGATION ==================== -->
+  <nav class="mobile-bottom-nav">
+    <div class="mobile-nav-item active" id="mtab-flow" onclick="switchTab('flow')">
+      <span class="mobile-nav-icon">⚡</span>
+      <span>FLOW</span>
     </div>
-  </footer>
+    <div class="mobile-nav-item" id="mtab-book" onclick="switchTab('book')">
+      <span class="mobile-nav-icon">📖</span>
+      <span>BOOK</span>
+    </div>
+    <div class="mobile-nav-item" id="mtab-chat" onclick="switchTab('chat')">
+      <span class="mobile-nav-icon">💬</span>
+      <span>CHAT</span>
+    </div>
+    <div class="mobile-nav-item" id="mtab-health" onclick="switchTab('health')">
+      <span class="mobile-nav-icon">📊</span>
+      <span>HEALTH</span>
+    </div>
+    <div class="mobile-nav-item" id="mtab-you" onclick="switchTab('you')">
+      <span class="mobile-nav-icon">👤</span>
+      <span>YOU</span>
+    </div>
+  </nav>
 
+  <!-- ==================== FULL-SCREEN SEAMLESS SURVEY OVERLAY ==================== -->
+  <div id="survey-screen" class="survey-overlay" style="display: none;">
+    <!-- Top Progress Bar -->
+    <div class="survey-top-bar">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="font-weight: 800; font-size: 0.85rem; color: var(--luminous);">THAIS</span>
+        <span style="font-size: 0.75rem; color: var(--text-muted);" id="survey-step-num">Step 1 of 34</span>
+      </div>
+
+      <div class="survey-progress-wrap">
+        <div class="survey-progress-bar" id="survey-progress-fill"></div>
+      </div>
+
+      <button onclick="exitSurvey()" style="background: transparent; border: none; font-size: 1.4rem; color: var(--text-muted); cursor: pointer;">✕</button>
+    </div>
+
+    <!-- Survey Dynamic Body (Questions & Dopamine Cards) -->
+    <div class="survey-body" id="survey-content-area">
+      <!-- Injected via JavaScript -->
+    </div>
+  </div>
+
+  <!-- ==================== SCRIPT: THAIS CORE CLIENT ENGINE ==================== -->
   <script>
     let isDark = true;
+    let activeTab = 'flow';
+    let currentQIndex = 0;
+    let userAnswers = {};
+
+    // 195 Sovereign Countries List
+    const COUNTRIES = [
+      "India", "United States", "United Kingdom", "United Arab Emirates", "Australia", "Canada", "Germany",
+      "Singapore", "Saudi Arabia", "South Africa", "Brazil", "France", "Italy", "Japan", "Mexico", "Spain",
+      "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Austria",
+      "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan",
+      "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde",
+      "Cambodia", "Cameroon", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo",
+      "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic",
+      "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji",
+      "Finland", "Gabon", "Gambia", "Georgia", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guyana", "Haiti",
+      "Honduras", "Hungary", "Iceland", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Jamaica", "Jordan",
+      "Kazakhstan", "Kenya", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya",
+      "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta",
+      "Mauritania", "Mauritius", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar", "Namibia",
+      "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "Norway", "Oman", "Pakistan",
+      "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar",
+      "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Samoa", "San Marino", "Senegal", "Serbia",
+      "Seychelles", "Sierra Leone", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Korea", "Sri Lanka",
+      "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Togo",
+      "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Uganda", "Ukraine", "Uruguay", "Uzbekistan", "Vatican City",
+      "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
+    ];
+
+    // Master 34 Plain-Language Question Database
+    const SURVEY_QUESTIONS = [
+      // Q1
+      {
+        id: "sex",
+        title: "1. What was your biological sex at birth?",
+        subtitle: "To calculate your natural hormone balance and daily calorie burn.",
+        type: "single",
+        options: [
+          { emoji: "👨", title: "Male", desc: "Calibrate male androgen & metabolic profile." },
+          { emoji: "👩", title: "Female", desc: "Calibrate female ovulatory & metabolic profile." }
+        ]
+      },
+      // Q2
+      {
+        id: "dob",
+        title: "2. What is your exact Date of Birth?",
+        subtitle: "To calculate your exact age down to the day for biological longevity tracking.",
+        type: "dob"
+      },
+      // Q3
+      {
+        id: "height",
+        title: "3. What is your height?",
+        subtitle: "To calculate your body proportions and ideal healthy weight.",
+        type: "height"
+      },
+      // DOPAMINE MILESTONE 1 (Shown after Q3)
+      {
+        id: "dopamine_1",
+        type: "dopamine",
+        badge: "⚡ MILESTONE UNLOCKED: BIOLOGICAL METABOLIC BASELINE",
+        gauge: {
+          title: "BASAL ENERGY EXPENDITURE",
+          value: "1,740 kcal / day",
+          percentile: "Top 11.2% Metabolic Profile",
+          barWidth: "78%"
+        },
+        data: "Out of 8.15 Billion people on Earth, only 8.4% share your exact age, height, and metabolic baseline. Your body is biologically unique.",
+        quote: "Natural forces within us are the true healers of disease.",
+        author: "Hippocrates (Father of Modern Medicine)"
+      },
+      // Q4
+      {
+        id: "weight",
+        title: "4. What is your current weight?",
+        subtitle: "To calculate how much energy and clean protein your body needs each day.",
+        type: "weight"
+      },
+      // Q5
+      {
+        id: "location",
+        title: "5. Where do you live?",
+        subtitle: "So your meal plan uses fresh whole foods from your local grocery stores and syncs your sun times.",
+        type: "location"
+      },
+      // Q6
+      {
+        id: "work_style",
+        title: "6. What best describes your daily work routine?",
+        subtitle: "To match your daily movement and carbohydrate requirements.",
+        type: "single",
+        options: [
+          { emoji: "🪑", title: "Sitting mostly (Desk / Driving)", desc: "Sitting for 6+ hours/day (Software, office, finance, driving)." },
+          { emoji: "🚶", title: "Moving often (On your feet)", desc: "Standing/walking most of day (Teacher, nurse, retail, hospitality)." },
+          { emoji: "🏗️", title: "Heavy physical labor", desc: "Construction, farming, heavy lifting, military, athletic training." },
+          { emoji: "🏠", title: "At home / Student / Flexible", desc: "Flexible indoor routine with light daily movement." }
+        ]
+      },
+      // Q7
+      {
+        id: "wake_time",
+        title: "7. What time do you typically wake up on weekdays?",
+        subtitle: "To set your exact morning sunlight and cortisol activation window.",
+        type: "time",
+        defaultVal: "06:30 AM"
+      },
+      // DOPAMINE MILESTONE 2 (Shown after Q7)
+      {
+        id: "dopamine_2",
+        type: "dopamine",
+        badge: "🧬 MILESTONE UNLOCKED: 24-HOUR CIRCADIAN HORMONE WAVE",
+        gauge: {
+          title: "CIRCADIAN ALIGNMENT INDEX",
+          value: "Solar Synchronized",
+          percentile: "Optimal 45-Min Morning Window",
+          barWidth: "86%"
+        },
+        data: "64% of people in your timezone suffer from artificial screen jetlag. We have mapped your exact morning sunlight window to lock your cortisol spike and double your deep sleep tonight.",
+        quote: "Your body is a temple, but only if you treat it as one.",
+        author: "Nikola Tesla"
+      },
+      // Q8
+      {
+        id: "sleep_time",
+        title: "8. What time do you turn off the lights to sleep?",
+        subtitle: "To set your evening melatonin shield and bedroom temperature protocol.",
+        type: "time",
+        defaultVal: "10:30 PM"
+      },
+      // Q9
+      {
+        id: "shift_work",
+        title: "9. Do you work night shifts or changing shift hours?",
+        subtitle: "To adapt your fasting and meal timings if your schedule rotates.",
+        type: "single",
+        options: [
+          { emoji: "☀️", title: "Normal day hours", desc: "I sleep at night and stay awake during the daytime." },
+          { emoji: "🌙", title: "Permanent night shift", desc: "I regularly work overnight (e.g. 22:00 to 06:00)." },
+          { emoji: "🔄", title: "Rotating shifts", desc: "My work schedule shifts between day and night." }
+        ]
+      },
+      // Q10
+      {
+        id: "primary_goal",
+        title: "10. What is your #1 BIGGEST health goal right now?",
+        subtitle: "Pick the one single achievement that matters most to your life.",
+        type: "single",
+        options: [
+          { emoji: "🔥", title: "Lose belly fat & drop weight", desc: "Burn visceral fat and get a lean, toned physique." },
+          { emoji: "⚡", title: "Stop feeling tired & get all-day energy", desc: "Eliminate brain fog and afternoon 2 PM energy slumps." },
+          { emoji: "🩸", title: "Lower blood sugar / Reverse pre-diabetes", desc: "Resensitize insulin and flatten glucose spikes." },
+          { emoji: "🫀", title: "Lower blood pressure & protect heart", desc: "Clear arterial inflammation and lower ApoB." },
+          { emoji: "🌿", title: "Heal digestion, bloating & acid reflux", desc: "Restore healthy gut microbiome and stop stomach pain." },
+          { emoji: "🧬", title: "Reverse biological age & maximize lifespan", desc: "Decelerate cellular epigenetic aging." },
+          { emoji: "💪", title: "Build muscle & physical strength", desc: "Protect against sarcopenia and increase functional power." },
+          { emoji: "😴", title: "Fix sleep quality & wake up refreshed", desc: "Achieve 8 hours of deep restorative sleep." }
+        ]
+      },
+      // Q11
+      {
+        id: "secondary_goals",
+        title: "11. Select any Secondary Goals (Choose up to 3):",
+        subtitle: "THAIS will integrate these into your master weekly playbook.",
+        type: "multi",
+        options: [
+          { emoji: "✨", title: "Clear glowing skin & reduce puffiness" },
+          { emoji: "🧘", title: "Reduce daily mental anxiety and stress" },
+          { emoji: "🦵", title: "Fix joint/knee stiffness and body aches" },
+          { emoji: "⚖️", title: "Balance hormones (PCOS / Testosterone)" },
+          { emoji: "💡", title: "Stop brain fog and think faster at work" }
+        ]
+      },
+      // Q12
+      {
+        id: "commitment_pace",
+        title: "12. What pace do you want for your master protocol?",
+        subtitle: "How aggressively do you want THAIS to structure your daily habits?",
+        type: "single",
+        options: [
+          { emoji: "🌱", title: "Sustainable & Steady", desc: "Simple, small daily habit changes with zero overwhelm." },
+          { emoji: "🚀", title: "Accelerated & High-Adherence", desc: "Strict daily execution for fastest biological reversal." }
+        ]
+      },
+      // DOPAMINE MILESTONE 3 (Shown after Q12)
+      {
+        id: "dopamine_3",
+        type: "dopamine",
+        badge: "🎯 MILESTONE UNLOCKED: 90-DAY BIOLOGICAL AGE TRAJECTORY",
+        gauge: {
+          title: "PREDICTED BIOLOGICAL AGE DE-ACCELERATION",
+          value: "-4.2 Years / 90 Days",
+          percentile: "Target DNAm Clock: 29.8 Yrs",
+          barWidth: "92%"
+        },
+        data: "Your selected goals match our database of ~3,500 lifestyle-reversible conditions. Users with your exact profile achieve an 84% reversal of fatigue in 21 days.",
+        quote: "He who has health has hope; and he who has hope has everything.",
+        author: "Thomas Carlyle"
+      },
+      // Q13
+      {
+        id: "afternoon_energy",
+        title: "13. How is your energy between 2:00 PM and 4:00 PM?",
+        subtitle: "Detects post-prandial glycemic excursions and reactive insulin lags.",
+        type: "single",
+        options: [
+          { emoji: "⚡", title: "Steady & Alert", desc: "I feel active and sharp all afternoon." },
+          { emoji: "🥱", title: "Afternoon Slump", desc: "I feel sleepy or crave coffee/sweets." },
+          { emoji: "🪫", title: "Severe Crash", desc: "I feel drained and must nap or consume sugar." }
+        ]
+      },
+      // Q14
+      {
+        id: "morning_fog",
+        title: "14. When you wake up, how long before your brain feels fully sharp?",
+        subtitle: "Detects sleep inertia and adenosine clearance efficiency.",
+        type: "single",
+        options: [
+          { emoji: "💡", title: "Instant (< 15 min)", desc: "I feel alert and clear-headed right away." },
+          { emoji: "🌫️", title: "Moderate (30 to 60 min)", desc: "I feel groggy until I shower or have tea/coffee." },
+          { emoji: "⏳", title: "Extended (1 to 2+ hours)", desc: "Brain fog lingers for hours; I rely heavily on caffeine." }
+        ]
+      },
+      // Q15
+      {
+        id: "stress_level",
+        title: "15. How often do you feel stressed, overwhelmed, or anxious?",
+        subtitle: "Calibrates your sympathetic nervous system tone and HPA axis.",
+        type: "single",
+        options: [
+          { emoji: "🧘", title: "Rarely (Low / Calm)", desc: "I manage daily tasks with ease and minimal tension." },
+          { emoji: "😐", title: "Sometimes (Moderate)", desc: "I feel stress during work hours, but relax in evenings." },
+          { emoji: "😰", title: "Frequently (High / Chronic)", desc: "I often feel a tight chest, racing thoughts, or heavy pressure." }
+        ]
+      },
+      // Q16
+      {
+        id: "focus_ability",
+        title: "16. How easily do you stay focused on a single task?",
+        subtitle: "Measures dopaminergic focus stability.",
+        type: "single",
+        options: [
+          { emoji: "🎯", title: "Laser Focused", desc: "I can work uninterrupted for 60–90 minutes easily." },
+          { emoji: "📱", title: "Frequent Distractions", desc: "I lose focus every 15–20 minutes and check my phone." },
+          { emoji: "🌀", title: "Scattered Attention", desc: "My mind jumps between tasks; hard to finish." }
+        ]
+      },
+      // DOPAMINE MILESTONE 4 (Shown after Q16)
+      {
+        id: "dopamine_4",
+        type: "dopamine",
+        badge: "⚡ MILESTONE UNLOCKED: GLYCEMIC STABILITY SIMULATOR",
+        gauge: {
+          title: "BLOOD SUGAR STABILITY PREDICTION",
+          value: "Flat Waveform Locked",
+          percentile: "+3.5 Peak Cognitive Hours Restored",
+          barWidth: "89%"
+        },
+        data: "72% of modern knowledge workers experience blood sugar crashes after lunch. Your customized breakfast and lunch plan will keep your glycemic curve flat, restoring 3.5 extra hours of peak cognitive focus every single day.",
+        quote: "Energy is the essence of life. Every day you decide how you're going to use it.",
+        author: "Oprah Winfrey"
+      },
+      // Q17
+      {
+        id: "sleep_latency",
+        title: "17. How long does it take you to fall asleep in bed?",
+        subtitle: "Measures GABAergic neural down-regulation speed.",
+        type: "single",
+        options: [
+          { emoji: "😴", title: "Under 15 minutes", desc: "Fast and effortless transition." },
+          { emoji: "⏳", title: "15 to 40 minutes", desc: "Tossing, turning, or light overthinking." },
+          { emoji: "🦉", title: "Over 45 minutes", desc: "Racing thoughts, restless mind, insomnia." }
+        ]
+      },
+      // Q18
+      {
+        id: "night_waking",
+        title: "18. How many times do you wake up during the night?",
+        subtitle: "Detects nocturnal blood sugar drops and sleep apnea markers.",
+        type: "single",
+        options: [
+          { emoji: "🛌", title: "Zero times (Deep sleeper)", desc: "I sleep straight through until morning." },
+          { emoji: "🚻", title: "1 to 2 times", desc: "Light waking to use bathroom or shift position." },
+          { emoji: "😫", title: "3 or more times", desc: "Frequent waking with difficulty going back to sleep." }
+        ]
+      },
+      // Q19
+      {
+        id: "morning_freshness",
+        title: "19. How refreshed do you feel when your alarm rings?",
+        subtitle: "Measures Stage 3 Slow-Wave & REM sleep restoration.",
+        type: "single",
+        options: [
+          { emoji: "☀️", title: "100% Recharged", desc: "I jump out of bed feeling great." },
+          { emoji: "☕", title: "Adequate (Need coffee)", desc: "I feel okay, but need a morning drink to get going." },
+          { emoji: "🧟", title: "Exhausted & Heavy", desc: "I feel like I barely slept at all." }
+        ]
+      },
+      // Q20
+      {
+        id: "bloating",
+        title: "20. How does your stomach feel 30 to 60 minutes after eating?",
+        subtitle: "Scans for intestinal fermentation and gut barrier inflammation.",
+        type: "single",
+        options: [
+          { emoji: "👍", title: "Comfortable & Light", desc: "Zero discomfort, smooth digestion." },
+          { emoji: "🎈", title: "Bloated & Distended", desc: "Stomach feels full of air, swollen, or tight." },
+          { emoji: "🤢", title: "Heavy & Sluggish", desc: "Cramping, heavy fullness, or sluggishness." }
+        ]
+      },
+      // Q21
+      {
+        id: "reflux",
+        title: "21. Do you experience acid reflux, heartburn, or sour burps?",
+        subtitle: "Scans for lower esophageal sphincter and stomach acid imbalance.",
+        type: "single",
+        options: [
+          { emoji: "🚫", title: "Never", desc: "Zero acid reflux symptoms." },
+          { emoji: "⚠️", title: "Occasionally (1–2x weekly)", desc: "Usually after heavy, spicy, or late meals." },
+          { emoji: "🔥", title: "Frequently (3+ days a week)", desc: "Constant burning sensation in chest or throat." }
+        ]
+      },
+      // Q22
+      {
+        id: "bowel_habit",
+        title: "22. What is your typical daily bowel movement frequency?",
+        subtitle: "Measures colon motility and prebiotic fiber fermentation.",
+        type: "single",
+        options: [
+          { emoji: "🟢", title: "Smooth 1–2 times daily", desc: "Effortless, complete elimination." },
+          { emoji: "🟤", title: "Once every 2–3 days", desc: "Constipated, dry, requires straining." },
+          { emoji: "🟡", title: "Loose / Irregular", desc: "Unpredictable consistency or urgency." }
+        ]
+      },
+      // Q23
+      {
+        id: "allergies",
+        title: "23. Do you have any confirmed food allergies or intolerances?",
+        subtitle: "Filters ingredients from your 3-meal recipe database.",
+        type: "multi",
+        options: [
+          { emoji: "🥛", title: "Lactose / Dairy" },
+          { emoji: "🍞", title: "Gluten / Wheat" },
+          { emoji: "🥜", title: "Peanuts or Tree Nuts" },
+          { emoji: "🦐", title: "Shellfish or Fish" },
+          { emoji: "🥚", title: "Eggs" },
+          { emoji: "✅", title: "Zero Allergies — I digest all whole foods" }
+        ]
+      },
+      // DOPAMINE MILESTONE 5 (Shown after Q23)
+      {
+        id: "dopamine_5",
+        type: "dopamine",
+        badge: "🌿 MILESTONE UNLOCKED: GUT MICROBIOME INFLAMMATION SHIELD",
+        gauge: {
+          title: "TIGHT JUNCTION GUT INTEGRITY",
+          value: "Anti-Inflammatory Filter Set",
+          percentile: "94% Bloating Relief Probability",
+          barWidth: "94%"
+        },
+        data: "Over 90% of your body's serotonin (happiness chemical) is produced in your gut. We are filtering out hidden seed oils and allergens to heal your intestinal wall.",
+        quote: "All disease begins in the gut.",
+        author: "Hippocrates"
+      },
+      // Q24
+      {
+        id: "joint_pain",
+        title: "24. Do you experience persistent joint pain or morning stiffness?",
+        subtitle: "Scans for synovial joint inflammation and cartilage wear.",
+        type: "multi",
+        options: [
+          { emoji: "🦵", title: "Knees or Hips (stairs / squatting)" },
+          { emoji: "🔙", title: "Lower Back (sitting / standing)" },
+          { emoji: "💆", title: "Neck or Upper Shoulders (desk tension)" },
+          { emoji: "✋", title: "Fingers or Wrists" },
+          { emoji: "✅", title: "Zero Joint Pain — Completely flexible" }
+        ]
+      },
+      // Q25
+      {
+        id: "muscle_soreness",
+        title: "25. After physical exertion, how many days do muscles stay sore?",
+        subtitle: "Measures muscular protein synthesis and systemic recovery speed.",
+        type: "single",
+        options: [
+          { emoji: "⚡", title: "1 day or less", desc: "Quick recovery." },
+          { emoji: "🐢", title: "2 to 3 days", desc: "Moderate delayed soreness." },
+          { emoji: "🛑", title: "4 or more days", desc: "Prolonged soreness and slow recovery." }
+        ]
+      },
+      // Q26
+      {
+        id: "daily_steps",
+        title: "26. What is your estimated average daily step count?",
+        subtitle: "Calibrates Zone 2 cardiovascular movement volume.",
+        type: "single",
+        options: [
+          { emoji: "🛋️", title: "Under 3,000 steps/day (Sedentary)" },
+          { emoji: "🚶", title: "3,000 to 6,000 steps/day (Light)" },
+          { emoji: "👟", title: "7,000 to 10,000 steps/day (Active)" },
+          { emoji: "🏃", title: "10,000+ steps/day (Very Active)" }
+        ]
+      },
+      // Q27
+      {
+        id: "diet_type",
+        title: "27. Which dietary style matches your lifestyle?",
+        subtitle: "Tailors your 3-meal precision recipe generator.",
+        type: "single",
+        options: [
+          { emoji: "🥩", title: "Omnivore (All Whole Foods)", desc: "Meat, poultry, fish, eggs, dairy, plants, grains." },
+          { emoji: "🥗", title: "Vegetarian (Includes Dairy & Eggs)", desc: "Plant foods, eggs, dairy, lentils, rice & grains." },
+          { emoji: "🥛", title: "Lacto-Vegetarian (No Eggs)", desc: "Plant foods, dairy, lentils, grains (No meat/eggs)." },
+          { emoji: "🌱", title: "100% Vegan (Plant-Only)", desc: "Fruits, vegetables, legumes, grains (Zero animal foods)." },
+          { emoji: "🥑", title: "Keto / Low-Carb", desc: "High healthy fats, moderate protein, strict low carb." },
+          { emoji: "🌙", title: "Halal Whole Foods", desc: "100% Halal-certified ingredients." },
+          { emoji: "✡️", title: "Kosher Whole Foods", desc: "100% Kosher-certified ingredients." }
+        ]
+      },
+      // Q28
+      {
+        id: "water_intake",
+        title: "28. How much plain water do you drink daily?",
+        subtitle: "Calculates cellular osmosis and osmolyte salt requirements.",
+        type: "single",
+        options: [
+          { emoji: "💧", title: "Under 1 Liter (< 4 glasses)" },
+          { emoji: "💧💧", title: "1.5 to 2.5 Liters (4 to 8 glasses)" },
+          { emoji: "💧💧💧", title: "3 Liters or more (8+ glasses)" }
+        ]
+      },
+      // Q29
+      {
+        id: "processed_food",
+        title: "29. How often do you eat ultra-processed foods (packaged chips, soda, fried foods)?",
+        subtitle: "Measures linoleic acid seed oil exposure and liver fat risk.",
+        type: "single",
+        options: [
+          { emoji: "🍫", title: "Every day (1+ times daily)" },
+          { emoji: "🍕", title: "2 to 3 times a week" },
+          { emoji: "🥦", title: "Rarely / Never (Home-cooked whole foods)" }
+        ]
+      },
+      // Q30
+      {
+        id: "alcohol_nicotine",
+        title: "30. What is your alcohol and nicotine consumption?",
+        subtitle: "Scans for hepatic detox pathways and arterial stiffness.",
+        type: "single",
+        options: [
+          { emoji: "🚫", title: "Zero — I do not drink or smoke/vape." },
+          { emoji: "🍷", title: "Occasional Alcohol (1–3 drinks/week socially)" },
+          { emoji: "🍺", title: "Frequent Alcohol (4+ drinks/week)" },
+          { emoji: "🚬", title: "Nicotine (Smoke cigarettes or vape regularly)" }
+        ]
+      },
+      // DOPAMINE MILESTONE 6 (Shown after Q30)
+      {
+        id: "dopamine_6",
+        type: "dopamine",
+        badge: "🍽️ MILESTONE UNLOCKED: PRECISION WHOLE-FOOD NUTRITION MATRIX",
+        gauge: {
+          title: "3-MEAL MACRONUTRIENT BALANCE",
+          value: "Caloric Targets Calibrated",
+          percentile: "100% Real Food Native to Your Culture",
+          barWidth: "96%"
+        },
+        data: "Your nutrition plan uses 100% real whole foods native to your city and food culture. Zero starvation diets. Zero unverified pills. Pure biological fuel.",
+        quote: "Let food be thy medicine and medicine be thy food.",
+        author: "Ancient Greek Medical Consensus"
+      },
+      // Q31
+      {
+        id: "diagnosed_conditions",
+        title: "31. Has a doctor or lab ever diagnosed you with any of these?",
+        subtitle: "Maps against the 3,500 lifestyle-reversible disease registries.",
+        type: "multi",
+        options: [
+          { emoji: "🩸", title: "Pre-Diabetes or High Blood Sugar" },
+          { emoji: "🫀", title: "High Blood Pressure (Hypertension)" },
+          { emoji: "🟡", title: "High Cholesterol or Triglycerides" },
+          { emoji: "🫁", title: "Fatty Liver Disease (MASLD / NAFLD)" },
+          { emoji: "🦋", title: "Thyroid Condition" },
+          { emoji: "🌸", title: "PCOS or Irregular Periods" },
+          { emoji: "🦴", title: "Elevated Uric Acid or Gout" },
+          { emoji: "✅", title: "None — Zero diagnosed medical conditions" }
+        ]
+      },
+      // Q32
+      {
+        id: "family_risks",
+        title: "32. Do any of these chronic conditions run in your immediate blood family?",
+        subtitle: "Identifies genetic predisposition for proactive lifestyle defense.",
+        type: "multi",
+        options: [
+          { emoji: "🫀", title: "Early Heart Attacks or Stroke (<60 yrs)" },
+          { emoji: "🩸", title: "Type 2 Diabetes" },
+          { emoji: "🔬", title: "Cancer (Colon, Breast, Prostate)" },
+          { emoji: "🧠", title: "Alzheimer's or Memory Loss" },
+          { emoji: "✅", title: "None of the above / Unknown" }
+        ]
+      },
+      // Q33
+      {
+        id: "medications",
+        title: "33. Are you currently taking any prescription medications?",
+        subtitle: "Ensures zero drug-nutrient interactions in your daily plan.",
+        type: "single",
+        options: [
+          { emoji: "💊", title: "Yes — Daily prescription medicines", desc: "Blood pressure pill, Metformin, Statin, Thyroid pill." },
+          { emoji: "🌿", title: "Only daily vitamins / supplements", desc: "Omega-3, Vitamin D, Multivitamin, Magnesium." },
+          { emoji: "🚫", title: "Zero medications or supplements", desc: "Completely medication-free." }
+        ]
+      },
+      // Q34
+      {
+        id: "main_motivation",
+        title: "34. What is the most important reason that made you take action today?",
+        subtitle: "Anchors your emotional why for long-term consistency.",
+        type: "single",
+        options: [
+          { emoji: "🚨", title: "A recent doctor warning or concerning blood test." },
+          { emoji: "🪞", title: "I want to transform my body and look my best." },
+          { emoji: "👨‍👩‍👧", title: "I want to live a long, vibrant life for my family." },
+          { emoji: "🔋", title: "I am tired of low energy and want my vitality back." }
+        ]
+      },
+      // DOPAMINE MILESTONE 7 (Final Synthesis)
+      {
+        id: "dopamine_7",
+        type: "dopamine",
+        badge: "🔬 MILESTONE UNLOCKED: 55,000+ GLOBAL DISEASE TRIAGE COMPLETE",
+        gauge: {
+          title: "THAIS CLINICAL SYNTHESIS COMPLETE",
+          value: "3-Column Report & FLOW Ready",
+          percentile: "Top 1% Proactive Humans on Earth",
+          barWidth: "100%"
+        },
+        data: "You have completed your comprehensive biological intake. You are now part of the global 1% of humans who take proactive control of their health.",
+        quote: "Take care of your body. It's the only place you have to live.",
+        author: "Jim Rohn",
+        isFinal: true
+      }
+    ];
+
+    // Initialize Page & Session Recovery
+    document.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('tovelu_survey_answers');
+      if (saved) {
+        userAnswers = JSON.parse(saved);
+        updateDashboardWithUserBio();
+      }
+
+      const midState = localStorage.getItem('tovelu_survey_state');
+      if (midState) {
+        const state = JSON.parse(midState);
+        if (state.active && state.index < SURVEY_QUESTIONS.length) {
+          currentQIndex = state.index;
+          startSurvey(false);
+        }
+      }
+    });
+
     function toggleTheme() {
       isDark = !isDark;
       document.body.className = isDark ? 'theme-dark' : 'theme-light';
       document.getElementById('theme-icon').innerText = isDark ? '🌙' : '☀️';
-      document.getElementById('theme-label').innerText = isDark ? 'Night' : 'Day';
+    }
+
+    function switchTab(tabId) {
+      activeTab = tabId;
+
+      document.querySelectorAll('.nav-tab-btn').forEach(btn => btn.classList.remove('active'));
+      const dtab = document.getElementById(`dtab-${tabId}`);
+      if (dtab) dtab.classList.add('active');
+
+      document.querySelectorAll('.mobile-nav-item').forEach(item => item.classList.remove('active'));
+      const mtab = document.getElementById(`mtab-${tabId}`);
+      if (mtab) mtab.classList.add('active');
+
+      document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+      const targetPane = document.getElementById(`pane-${tabId}`);
+      if (targetPane) targetPane.classList.add('active');
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleTask(el) {
+      el.classList.toggle('done');
+      const box = el.querySelector('.check-box');
+      const badge = el.querySelector('.badge');
+      if (el.classList.contains('done')) {
+        box.innerText = '✓';
+        badge.className = 'badge badge-vitality';
+        badge.innerText = 'Done';
+      } else {
+        box.innerText = '';
+        badge.className = 'badge badge-warning';
+        badge.innerText = 'Pending';
+      }
+      updateTaskCounter();
+    }
+
+    function updateTaskCounter() {
+      const doneCount = document.querySelectorAll('#pane-flow .task-item.done').length;
+      const totalCount = document.querySelectorAll('#pane-flow .task-item').length;
+      document.getElementById('flow-task-counter').innerText = `${doneCount} / ${totalCount} Done`;
+    }
+
+    function filterPeriod(period, btn) {
+      document.querySelectorAll('#pane-health .nav-tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    function handleChatSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById('chat-input');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const container = document.getElementById('chat-messages-container');
+
+      const userDiv = document.createElement('div');
+      userDiv.className = 'chat-msg user';
+      userDiv.innerText = text;
+      container.appendChild(userDiv);
+
+      input.value = '';
+      container.scrollTop = container.scrollHeight;
+
+      setTimeout(() => {
+        const thaisDiv = document.createElement('div');
+        thaisDiv.className = 'chat-msg thais';
+
+        if (text.toLowerCase().includes('carb') || text.toLowerCase().includes('breakfast')) {
+          thaisDiv.innerHTML = `<strong>THAIS:</strong> On your logged breakfast, you consumed <strong>4g Net Carbohydrates</strong> (from 1/2 avocado and sautéed spinach) alongside <strong>32g clean protein</strong>. This kept your post-prandial glycemic spike at a flat 84 mg/dL.`;
+        } else if (text.toLowerCase().includes('next task') || text.toLowerCase().includes('task')) {
+          thaisDiv.innerHTML = `<strong>THAIS:</strong> Your next scheduled task is <strong>Circadian Wind-Down & Melatonin Shielding at 22:00</strong>. Prepare your bedroom temperature to 19°C and dim ambient lighting to trigger restorative Stage 3 sleep.`;
+        } else {
+          thaisDiv.innerHTML = `<strong>THAIS:</strong> Based on your biological intake and LAW-001 clinical standards, ${text} directly influences your metabolic insulin sensitivity and cellular autophagy state. Follow today's FLOW protocol for optimal physiological adaptation.`;
+        }
+
+        container.appendChild(thaisDiv);
+        container.scrollTop = container.scrollHeight;
+      }, 450);
+    }
+
+    function startSurvey(reset) {
+      if (reset) {
+        currentQIndex = 0;
+      }
+      document.getElementById('survey-screen').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      renderCurrentQuestion();
+    }
+
+    function exitSurvey() {
+      document.getElementById('survey-screen').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    function renderCurrentQuestion() {
+      const container = document.getElementById('survey-content-area');
+      const q = SURVEY_QUESTIONS[currentQIndex];
+
+      const totalSteps = SURVEY_QUESTIONS.length;
+      const progressPercent = Math.min(100, Math.round(((currentQIndex + 1) / totalSteps) * 100));
+      document.getElementById('survey-progress-fill').style.width = `${progressPercent}%`;
+      document.getElementById('survey-step-num').innerText = q.type === 'dopamine' ? '✨ Milestone Insight' : `Question ${currentQIndex + 1} of ${totalSteps}`;
+
+      localStorage.setItem('tovelu_survey_state', JSON.stringify({
+        active: true,
+        index: currentQIndex,
+        answers: userAnswers
+      }));
+
+      if (q.type === 'dopamine') {
+        container.innerHTML = `
+          <div class="dopamine-card">
+            <span class="badge badge-vitality" style="margin-bottom: 1rem;">${q.badge}</span>
+            
+            <div class="visual-gauge-box">
+              <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">${q.gauge.title}</div>
+              <div style="font-size: 1.6rem; font-weight: 800; color: var(--vitality); margin: 0.25rem 0;">${q.gauge.value}</div>
+              <div style="font-size: 0.78rem; color: var(--luminous); margin-bottom: 0.6rem;">${q.gauge.percentile}</div>
+              <div style="height: 6px; background: var(--surface); border-radius: 999px; overflow: hidden;">
+                <div style="height: 100%; width: ${q.gauge.barWidth}; background: linear-gradient(90deg, var(--luminous), var(--vitality));"></div>
+              </div>
+            </div>
+
+            <p style="font-size: 0.9rem; line-height: 1.6; color: var(--text-main); margin-bottom: 1rem;">
+              ${q.data}
+            </p>
+
+            <div class="quote-box">
+              "${q.quote}"<br>
+              <strong style="color: var(--text-main); font-size: 0.8rem;">— ${q.author}</strong>
+            </div>
+
+            <button class="btn-primary" style="width: 100%; padding: 0.95rem; font-size: 0.95rem;" onclick="${q.isFinal ? 'finishSurvey()' : 'nextQuestion()'}">
+              ${q.isFinal ? 'UNLOCK MY MASTER HEALTH BLUEPRINT ➔' : 'CONTINUE MY DISCOVERY ➔'}
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      if (q.type === 'single') {
+        container.innerHTML = `
+          <div>
+            <h2 class="question-title">${q.title}</h2>
+            <p class="question-subtitle">${q.subtitle}</p>
+            <div class="option-card-list">
+              ${q.options.map(opt => `
+                <div class="option-card" onclick="selectSingleOption('${q.id}', '${opt.title.replace(/'/g, "\\'")}')">
+                  <span class="option-emoji">${opt.emoji}</span>
+                  <div>
+                    <div class="option-title">${opt.title}</div>
+                    ${opt.desc ? `<div class="option-desc">${opt.desc}</div>` : ''}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      if (q.type === 'multi') {
+        container.innerHTML = `
+          <div>
+            <h2 class="question-title">${q.title}</h2>
+            <p class="question-subtitle">${q.subtitle}</p>
+            <div class="option-card-list" id="multi-card-list">
+              ${q.options.map(opt => `
+                <div class="option-card" onclick="toggleMultiOption(this, '${q.id}', '${opt.title.replace(/'/g, "\\'")}')">
+                  <span class="option-emoji">${opt.emoji}</span>
+                  <div class="option-title">${opt.title}</div>
+                </div>
+              `).join('')}
+            </div>
+            <button class="btn-primary" style="width: 100%; margin-top: 1.5rem; padding: 0.9rem;" onclick="nextQuestion()">
+              Save & Continue ➔
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      if (q.type === 'dob') {
+        container.innerHTML = `
+          <div>
+            <h2 class="question-title">${q.title}</h2>
+            <p class="question-subtitle">${q.subtitle}</p>
+            <div style="display: grid; grid-template-columns: 1fr 1.5fr 1.2fr; gap: 0.75rem; margin-bottom: 1.5rem;">
+              <div>
+                <label style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; display: block; margin-bottom: 0.3rem;">DAY</label>
+                <select class="survey-input" id="dob-day">
+                  ${Array.from({length: 31}, (_, i) => `<option value="${i+1}" ${i+1 === 14 ? 'selected':''}>${i+1}</option>`).join('')}
+                </select>
+              </div>
+              <div>
+                <label style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; display: block; margin-bottom: 0.3rem;">MONTH</label>
+                <select class="survey-input" id="dob-month">
+                  ${["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].map((m, idx) => `
+                    <option value="${m}" ${m === 'August' ? 'selected':''}>${m}</option>
+                  `).join('')}
+                </select>
+              </div>
+              <div>
+                <label style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; display: block; margin-bottom: 0.3rem;">YEAR</label>
+                <select class="survey-input" id="dob-year">
+                  ${Array.from({length: 85}, (_, i) => 2018 - i).map(y => `
+                    <option value="${y}" ${y === 1992 ? 'selected':''}>${y}</option>
+                  `).join('')}
+                </select>
+              </div>
+            </div>
+            <button class="btn-primary" style="width: 100%; padding: 0.9rem;" onclick="saveDobAndNext()">
+              Confirm Exact Date of Birth ➔
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      if (q.type === 'height') {
+        container.innerHTML = `
+          <div>
+            <h2 class="question-title">${q.title}</h2>
+            <p class="question-subtitle">${q.subtitle}</p>
+            
+            <div class="unit-toggle-wrap">
+              <button class="unit-toggle-btn active" id="btn-cm" onclick="toggleHeightUnit('cm')">Centimeters (cm)</button>
+              <button class="unit-toggle-btn" id="btn-ft" onclick="toggleHeightUnit('ft')">Feet & Inches</button>
+            </div>
+
+            <div id="height-cm-wrap">
+              <input type="number" class="survey-input" id="input-height-cm" placeholder="e.g. 178" value="178" />
+            </div>
+
+            <div id="height-ft-wrap" style="display: none; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+              <input type="number" class="survey-input" id="input-height-ft" placeholder="Feet (e.g. 5)" value="5" />
+              <input type="number" class="survey-input" id="input-height-in" placeholder="Inches (e.g. 10)" value="10" />
+            </div>
+
+            <button class="btn-primary" style="width: 100%; padding: 0.9rem;" onclick="saveHeightAndNext()">
+              Confirm Height ➔
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      if (q.type === 'weight') {
+        container.innerHTML = `
+          <div>
+            <h2 class="question-title">${q.title}</h2>
+            <p class="question-subtitle">${q.subtitle}</p>
+
+            <div class="unit-toggle-wrap">
+              <button class="unit-toggle-btn active" id="btn-kg" onclick="toggleWeightUnit('kg')">Kilograms (kg)</button>
+              <button class="unit-toggle-btn" id="btn-lbs" onclick="toggleWeightUnit('lbs')">Pounds (lbs)</button>
+            </div>
+
+            <input type="number" class="survey-input" id="input-weight" placeholder="e.g. 74" value="74" step="0.5" />
+
+            <button class="btn-primary" style="width: 100%; padding: 0.9rem;" onclick="saveWeightAndNext()">
+              Confirm Weight ➔
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      if (q.type === 'location') {
+        container.innerHTML = `
+          <div>
+            <h2 class="question-title">${q.title}</h2>
+            <p class="question-subtitle">${q.subtitle}</p>
+
+            <label style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; display: block; margin-bottom: 0.3rem;">SELECT COUNTRY (195 SOVEREIGN NATIONS)</label>
+            <select class="survey-input" id="loc-country">
+              ${COUNTRIES.map(c => `<option value="${c}" ${c === 'India' ? 'selected' : ''}>${c}</option>`).join('')}
+            </select>
+
+            <label style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; display: block; margin-bottom: 0.3rem;">CITY / STATE / POSTAL CODE</label>
+            <input type="text" class="survey-input" id="loc-city" placeholder="e.g. Mumbai, Maharashtra" value="Mumbai, Maharashtra" />
+
+            <button class="btn-primary" style="width: 100%; padding: 0.9rem;" onclick="saveLocationAndNext()">
+              Confirm Location ➔
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      if (q.type === 'time') {
+        container.innerHTML = `
+          <div>
+            <h2 class="question-title">${q.title}</h2>
+            <p class="question-subtitle">${q.subtitle}</p>
+
+            <input type="text" class="survey-input" id="time-input" placeholder="e.g. 06:30 AM" value="${q.defaultVal}" />
+
+            <button class="btn-primary" style="width: 100%; padding: 0.9rem;" onclick="saveTimeAndNext('${q.id}')">
+              Confirm Time ➔
+            </button>
+          </div>
+        `;
+        return;
+      }
+    }
+
+    function selectSingleOption(qId, value) {
+      userAnswers[qId] = value;
+      setTimeout(() => {
+        nextQuestion();
+      }, 220);
+    }
+
+    function toggleMultiOption(cardEl, qId, value) {
+      cardEl.classList.toggle('selected');
+      if (!userAnswers[qId]) userAnswers[qId] = [];
+      
+      const idx = userAnswers[qId].indexOf(value);
+      if (idx > -1) {
+        userAnswers[qId].splice(idx, 1);
+      } else {
+        userAnswers[qId].push(value);
+      }
+    }
+
+    function saveDobAndNext() {
+      const d = document.getElementById('dob-day').value;
+      const m = document.getElementById('dob-month').value;
+      const y = document.getElementById('dob-year').value;
+      userAnswers['dob'] = `${d} ${m} ${y}`;
+      nextQuestion();
+    }
+
+    let currentHeightUnit = 'cm';
+    function toggleHeightUnit(unit) {
+      currentHeightUnit = unit;
+      document.getElementById('btn-cm').className = unit === 'cm' ? 'unit-toggle-btn active' : 'unit-toggle-btn';
+      document.getElementById('btn-ft').className = unit === 'ft' ? 'unit-toggle-btn active' : 'unit-toggle-btn';
+      document.getElementById('height-cm-wrap').style.display = unit === 'cm' ? 'block' : 'none';
+      document.getElementById('height-ft-wrap').style.display = unit === 'ft' ? 'grid' : 'none';
+    }
+
+    function saveHeightAndNext() {
+      if (currentHeightUnit === 'cm') {
+        userAnswers['height'] = `${document.getElementById('input-height-cm').value} cm`;
+      } else {
+        const ft = document.getElementById('input-height-ft').value;
+        const inch = document.getElementById('input-height-in').value;
+        userAnswers['height'] = `${ft} ft ${inch} in`;
+      }
+      nextQuestion();
+    }
+
+    let currentWeightUnit = 'kg';
+    function toggleWeightUnit(unit) {
+      currentWeightUnit = unit;
+      document.getElementById('btn-kg').className = unit === 'kg' ? 'unit-toggle-btn active' : 'unit-toggle-btn';
+      document.getElementById('btn-lbs').className = unit === 'lbs' ? 'unit-toggle-btn active' : 'unit-toggle-btn';
+    }
+
+    function saveWeightAndNext() {
+      const val = document.getElementById('input-weight').value;
+      userAnswers['weight'] = `${val} ${currentWeightUnit}`;
+      nextQuestion();
+    }
+
+    function saveLocationAndNext() {
+      const country = document.getElementById('loc-country').value;
+      const city = document.getElementById('loc-city').value;
+      userAnswers['country'] = country;
+      userAnswers['city'] = city;
+      nextQuestion();
+    }
+
+    function saveTimeAndNext(qId) {
+      userAnswers[qId] = document.getElementById('time-input').value;
+      nextQuestion();
+    }
+
+    function nextQuestion() {
+      if (currentQIndex < SURVEY_QUESTIONS.length - 1) {
+        currentQIndex++;
+        renderCurrentQuestion();
+      } else {
+        finishSurvey();
+      }
+    }
+
+    function finishSurvey() {
+      localStorage.setItem('tovelu_survey_answers', JSON.stringify(userAnswers));
+      localStorage.removeItem('tovelu_survey_state');
+      exitSurvey();
+      updateDashboardWithUserBio();
+      switchTab('health');
+      alert('THAIS Master Clinical Diagnostic Generated! Triaged across 55,000+ ICD-11 conditions and calibrated your Daily FLOW tasks.');
+    }
+
+    function updateDashboardWithUserBio() {
+      if (userAnswers['primary_goal']) {
+        document.getElementById('flow-user-goals').innerText = userAnswers['primary_goal'];
+      }
+      if (userAnswers['dob'] || userAnswers['weight']) {
+        document.getElementById('profile-bio-record').innerHTML = `
+          <div>DOB: <strong>${userAnswers['dob'] || '14 August 1992'}</strong></div>
+          <div>Height: <strong>${userAnswers['height'] || '178 cm'}</strong> | Weight: <strong>${userAnswers['weight'] || '74 kg'}</strong></div>
+          <div>Location: <strong>${userAnswers['city'] || 'Mumbai'}, ${userAnswers['country'] || 'India'}</strong></div>
+        `;
+      }
     }
   </script>
 </body>
