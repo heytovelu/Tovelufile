@@ -1,78 +1,84 @@
 /**
- * GOOGLE GEMINI DESIGN SYSTEM (TDS-GEMINI) FOR TOVELU HEALTH AI
- * 100% Google Gemini AI Aesthetic, Typography, Voice Waveforms & Component Matrix
+ * APPLE DESIGN SYSTEM (TDS-APPLE HIG) FOR TOVELU HEALTH
+ * Inspired by Apple Health, iOS 18, and Apple Intelligence
  * Supreme Constitutional Governance: LAW-001
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Google+Sans:wght@400;500;700&family=Google+Sans+Text:wght@400;500;700&family=Google+Sans+Display:wght@400;500;700;800&family=Ubuntu:wght@500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Ubuntu:wght@500;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
 :root {
-  /* ==================== 1. GOOGLE GEMINI COLOR SYSTEM ==================== */
-  /* Gemini Holographic Sparkle Palette */
-  --gemini-sparkle-blue: #1A73E8;
-  --gemini-sparkle-sky: #8AB4F8;
-  --gemini-sparkle-purple: #9B72CB;
-  --gemini-sparkle-pink: #D96570;
-  --gemini-sparkle-coral: #FF8BCB;
-  --gemini-vitality-emerald: #059669;
+  /* ==================== 1. APPLE SYSTEM PALETTES ==================== */
+  /* Apple System Colors */
+  --apple-blue: #0071E3;
+  --apple-blue-hover: #0077ED;
+  --apple-blue-subtle: rgba(0, 113, 227, 0.1);
 
-  /* Master Gemini Multi-Color Gradients */
-  --gemini-gradient-text: linear-gradient(74deg, #4285F4 0%, #9B72CB 9%, #D96570 20%, #D96570 24%, #8AB4F8 35%, #4285F4 44%, #9B72CB 50%, #D96570 56%, #8AB4F8 75%, #4285F4 100%);
-  --gemini-gradient-sparkle: linear-gradient(135deg, #1A73E8 0%, #8AB4F8 30%, #C58AF9 65%, #FF8BCB 100%);
-  --gemini-gradient-btn: linear-gradient(135deg, #1A73E8 0%, #6875F5 50%, #9B72CB 100%);
-  --gemini-glow-radial: radial-gradient(circle at 50% 0%, rgba(138, 180, 248, 0.22) 0%, transparent 65%);
+  --apple-health-green: #34C759;
+  --apple-health-green-subtle: rgba(52, 199, 89, 0.12);
 
-  /* Gemini Light Theme Surfaces (Day Porcelain) */
-  --gemini-bg: #F0F4F9;
-  --gemini-surface: #FFFFFF;
-  --gemini-surface-hover: #F8FAFD;
-  --gemini-surface-container: #E1E7EE;
-  --gemini-surface-container-high: #D3E3FD;
-  --gemini-border: #E3E8EF;
-  --gemini-border-subtle: #EEF2F6;
+  --apple-indigo: #5856D6;
+  --apple-purple: #AF52DE;
+  --apple-pink: #FF2D55;
+  --apple-orange: #FF9500;
+  --apple-yellow: #FFCC00;
+  --apple-teal: #30B0C7;
 
-  --gemini-text-main: #1F1F1F;
-  --gemini-text-muted: #444746;
-  --gemini-text-subtle: #747775;
+  /* Apple Intelligence Siri Glow Gradient */
+  --apple-siri-gradient: linear-gradient(135deg, #0071E3 0%, #AF52DE 40%, #FF2D55 70%, #FF9500 100%);
+  --apple-ring-move: #FF2D55;
+  --apple-ring-exercise: #30D158;
+  --apple-ring-stand: #00C7BE;
 
-  /* Corner Squircles */
-  --gemini-radius-sm: 8px;
-  --gemini-radius-md: 16px;
-  --gemini-radius-lg: 24px;
-  --gemini-radius-xl: 32px;
-  --gemini-radius-full: 9999px;
+  /* Light Theme (Apple Porcelain Canvas) */
+  --apple-bg: #F5F5F7;
+  --apple-surface: #FFFFFF;
+  --apple-surface-secondary: #F5F5F7;
+  --apple-surface-tertiary: #E5E5EA;
+  --apple-border: rgba(0, 0, 0, 0.08);
+  --apple-border-subtle: rgba(0, 0, 0, 0.04);
 
-  /* Shadows */
-  --gemini-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
-  --gemini-shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
-  --gemini-shadow-glow: 0 0 32px rgba(66, 133, 244, 0.15);
+  --apple-text-main: #1D1D1F;
+  --apple-text-secondary: #86868B;
+  --apple-text-tertiary: #AEAEB2;
+
+  /* Apple Squircle Radii */
+  --apple-radius-sm: 10px;
+  --apple-radius-md: 16px;
+  --apple-radius-lg: 22px;
+  --apple-radius-xl: 28px;
+  --apple-radius-full: 9999px;
+
+  /* Apple Shadows */
+  --apple-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --apple-shadow-md: 0 8px 24px -4px rgba(0, 0, 0, 0.08);
+  --apple-shadow-lg: 0 16px 36px -6px rgba(0, 0, 0, 0.12);
 }
 
-/* Dark Theme (Google Gemini Dark #131314) */
+/* Apple Dark Mode (Pure OLED Jet Black #000000) */
 [data-theme="dark"], .tds-theme-dark {
-  --gemini-bg: #131314;
-  --gemini-surface: #1E1F20;
-  --gemini-surface-hover: #282A2C;
-  --gemini-surface-container: #282A2C;
-  --gemini-surface-container-high: #333537;
-  --gemini-border: #333537;
-  --gemini-border-subtle: #282A2C;
+  --apple-bg: #000000;
+  --apple-surface: #1C1C1E;
+  --apple-surface-secondary: #2C2C2E;
+  --apple-surface-tertiary: #3A3A3C;
+  --apple-border: rgba(255, 255, 255, 0.12);
+  --apple-border-subtle: rgba(255, 255, 255, 0.06);
 
-  --gemini-text-main: #E3E3E3;
-  --gemini-text-muted: #C4C7C5;
-  --gemini-text-subtle: #8E918F;
+  --apple-text-main: #F5F5F7;
+  --apple-text-secondary: #86868B;
+  --apple-text-tertiary: #636366;
 
-  --gemini-glow-radial: radial-gradient(circle at 50% 0%, rgba(138, 180, 248, 0.15) 0%, transparent 65%);
-  --gemini-shadow-glow: 0 0 32px rgba(138, 180, 248, 0.12);
+  --apple-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.5);
+  --apple-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.7);
+  --apple-shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.9);
 }
 
-/* ==================== 2. GEMINI TYPOGRAPHY & SPARKLE ANIMATIONS ==================== */
+/* ==================== 2. APPLE TYPOGRAPHY & ANIMATIONS ==================== */
 .material-symbols-outlined {
   font-family: 'Material Symbols Outlined';
   font-weight: normal;
   font-style: normal;
-  font-size: 24px;
+  font-size: 22px;
   line-height: 1;
   letter-spacing: normal;
   text-transform: none;
@@ -84,264 +90,159 @@
   vertical-align: middle;
 }
 
-/* Shimmering Gemini Gradient Text */
-.gemini-gradient-heading {
-  background: var(--gemini-gradient-text);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: geminiShimmer 8s linear infinite;
-  display: inline-block;
+/* Apple Siri Glow Perimeter Animation */
+@keyframes siriGlowPulse {
+  0% { filter: drop-shadow(0 0 12px rgba(0, 113, 227, 0.4)); }
+  50% { filter: drop-shadow(0 0 24px rgba(175, 82, 222, 0.7)); }
+  100% { filter: drop-shadow(0 0 12px rgba(0, 113, 227, 0.4)); }
+}
+.apple-siri-glow {
+  animation: siriGlowPulse 4s ease-in-out infinite;
 }
 
-@keyframes geminiShimmer {
-  to { background-position: 200% center; }
-}
-
-/* Gemini Sparkle Icon */
-.gemini-sparkle-svg {
-  background: var(--gemini-gradient-sparkle);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-block;
-}
-
-/* Breathing Mitosis Logo Pulse */
-@keyframes bioPulse {
-  0% { transform: scale(1); filter: drop-shadow(0 0 3px rgba(5, 150, 105, 0.3)); }
-  50% { transform: scale(1.05); filter: drop-shadow(0 0 12px rgba(16, 185, 129, 0.5)); }
-  100% { transform: scale(1); filter: drop-shadow(0 0 3px rgba(5, 150, 105, 0.3)); }
-}
-.tovelu-mitosis-anim {
-  animation: bioPulse 3s ease-in-out infinite;
-}
-
-/* Gemini Live Voice Orb (Pulsating 4-Color Fluid) */
-.gemini-live-orb {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: var(--gemini-gradient-sparkle);
-  box-shadow: 0 0 24px rgba(66, 133, 244, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #FFFFFF;
-  animation: geminiOrbPulse 2.5s ease-in-out infinite;
-  cursor: pointer;
-  border: none;
-}
-
-@keyframes geminiOrbPulse {
-  0% { transform: scale(1); box-shadow: 0 0 16px rgba(66, 133, 244, 0.4); }
-  50% { transform: scale(1.08); box-shadow: 0 0 32px rgba(197, 138, 249, 0.7); }
-  100% { transform: scale(1); box-shadow: 0 0 16px rgba(66, 133, 244, 0.4); }
-}
-
-/* ==================== 3. GEMINI UI COMPONENTS ==================== */
-/* Gemini Prompt Input Box */
-.gemini-prompt-box {
-  background: var(--gemini-surface-container);
-  border-radius: var(--gemini-radius-xl);
-  padding: 14px 22px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
-  position: relative;
-  box-shadow: var(--gemini-shadow-md);
-}
-.gemini-prompt-box:focus-within {
-  background: var(--gemini-surface);
-  box-shadow: var(--gemini-shadow-md), 0 0 0 2px var(--gemini-sparkle-blue);
-}
-
-.gemini-prompt-input {
-  flex: 1;
-  background: transparent;
-  border: none;
-  outline: none;
-  font-family: 'Google Sans Text', sans-serif;
-  font-size: 16px;
-  color: var(--gemini-text-main);
-}
-.gemini-prompt-input::placeholder {
-  color: var(--gemini-text-subtle);
-}
-
-/* Gemini Suggestion Card */
-.gemini-action-card {
-  background: var(--gemini-surface);
-  border-radius: var(--gemini-radius-md);
-  padding: 18px 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 140px;
-  cursor: pointer;
-  user-select: none;
-  transition: all 0.2s;
-  box-shadow: var(--gemini-shadow-sm);
-  border: 1px solid var(--gemini-border-subtle);
-}
-.gemini-action-card:hover {
-  background: var(--gemini-surface-hover);
-  box-shadow: var(--gemini-shadow-md);
-  transform: translateY(-2px);
-  border-color: var(--gemini-sparkle-blue);
-}
-
-/* Gemini Pill Button */
-.gemini-btn {
+/* Apple Button */
+.apple-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  height: 44px;
+  height: 48px;
   padding: 0 24px;
-  border-radius: var(--gemini-radius-full);
-  font-family: 'Google Sans Text', sans-serif;
-  font-weight: 500;
-  font-size: 14px;
+  border-radius: var(--apple-radius-full);
+  font-family: -apple-system, BlinkMacSystemFont, 'Plus Jakarta Sans', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
   cursor: pointer;
   user-select: none;
   text-decoration: none;
   border: none;
   outline: none;
-  transition: all 0.2s;
+  transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
   touch-action: manipulation;
 }
-.gemini-btn:active {
+.apple-btn:active {
   transform: scale(0.97);
 }
 
-.gemini-btn-primary {
-  background: var(--gemini-gradient-btn);
+.apple-btn-primary {
+  background: var(--apple-blue);
   color: #FFFFFF;
-  box-shadow: 0 4px 16px rgba(26, 115, 232, 0.35);
 }
-.gemini-btn-primary:hover {
-  filter: brightness(1.08);
-}
-
-.gemini-btn-tonal {
-  background: var(--gemini-surface-container);
-  color: var(--gemini-text-main);
-}
-.gemini-btn-tonal:hover {
-  background: var(--gemini-border);
+.apple-btn-primary:hover {
+  background: var(--apple-blue-hover);
 }
 
-/* Gemini Response Card */
-.gemini-response-card {
-  background: var(--gemini-surface);
-  border-radius: var(--gemini-radius-lg);
-  padding: 24px;
-  border: 1px solid var(--gemini-border-subtle);
-  box-shadow: var(--gemini-shadow-sm);
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+.apple-btn-health {
+  background: var(--apple-health-green);
+  color: #FFFFFF;
+  box-shadow: 0 4px 16px rgba(52, 199, 89, 0.35);
 }
 
-/* 1-Tap Option Cards */
-.gemini-option-card {
-  background: var(--gemini-surface);
-  border: 2px solid var(--gemini-border);
-  border-radius: var(--gemini-radius-md);
-  padding: 14px 18px;
+.apple-btn-secondary {
+  background: var(--apple-surface-secondary);
+  color: var(--apple-text-main);
+  border: 1px solid var(--apple-border);
+}
+.apple-btn-secondary:hover {
+  background: var(--apple-surface-tertiary);
+}
+
+/* Apple Health Card */
+.apple-card {
+  background: var(--apple-surface);
+  border-radius: var(--apple-radius-xl);
+  padding: 22px;
+  box-shadow: var(--apple-shadow-sm);
+  border: 1px solid var(--apple-border-subtle);
+  transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.apple-card:hover {
+  box-shadow: var(--apple-shadow-md);
+}
+
+/* Apple Segmented Control */
+.apple-segmented-control {
+  background: var(--apple-surface-secondary);
+  padding: 3px;
+  border-radius: var(--apple-radius-sm);
+  display: inline-flex;
+  gap: 2px;
+  border: 1px solid var(--apple-border);
+}
+.apple-segment-btn {
+  padding: 6px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--apple-text-secondary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.apple-segment-btn.active {
+  background: var(--apple-surface);
+  color: var(--apple-text-main);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Apple iOS Grouped Cell (1-Tap Selection) */
+.apple-list-cell {
+  background: var(--apple-surface);
+  border: 1.5px solid var(--apple-border);
+  border-radius: var(--apple-radius-md);
+  padding: 16px 18px;
   display: flex;
   align-items: center;
   gap: 14px;
   cursor: pointer;
   user-select: none;
-  touch-action: manipulation;
   transition: all 0.15s;
 }
-.gemini-option-card:hover {
-  border-color: var(--gemini-sparkle-blue);
-  background: var(--gemini-surface-hover);
+.apple-list-cell:hover {
+  background: var(--apple-surface-secondary);
 }
-.gemini-option-card.selected {
-  background: var(--gemini-surface-container-high);
-  border-color: var(--gemini-sparkle-blue);
-  box-shadow: 0 0 0 1px var(--gemini-sparkle-blue), var(--gemini-shadow-sm);
+.apple-list-cell.selected {
+  background: var(--apple-blue-subtle);
+  border-color: var(--apple-blue);
 }
 
-.gemini-check-circle {
+.apple-check-box {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  border: 2px solid var(--gemini-border);
+  border: 2px solid var(--apple-text-tertiary);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 12px;
   font-weight: 800;
-  flex-shrink: 0;
-  background: var(--gemini-surface);
+  background: var(--apple-surface);
 }
-.gemini-option-card.selected .gemini-check-circle {
-  background: var(--gemini-sparkle-blue);
-  border-color: var(--gemini-sparkle-blue);
+.apple-list-cell.selected .apple-check-box {
+  background: var(--apple-blue);
+  border-color: var(--apple-blue);
   color: #FFFFFF;
 }
 
-/* Preset Chips */
-.gemini-chip {
+/* Apple Preset Chips */
+.apple-chip {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   padding: 6px 14px;
-  border-radius: var(--gemini-radius-full);
+  border-radius: var(--apple-radius-full);
   font-size: 13px;
   font-weight: 600;
-  background: var(--gemini-surface-container);
-  color: var(--gemini-text-main);
+  background: var(--apple-surface-secondary);
+  color: var(--apple-text-main);
+  border: 1px solid var(--apple-border);
   cursor: pointer;
   user-select: none;
   transition: all 0.15s;
 }
-.gemini-chip.active {
-  background: var(--gemini-sparkle-blue);
+.apple-chip.active {
+  background: var(--apple-blue);
+  border-color: var(--apple-blue);
   color: #FFFFFF;
-}
-
-/* 5-Tab Navigation Bar */
-.gemini-nav-bar {
-  height: 76px;
-  background: var(--gemini-surface);
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  padding: 0 16px;
-  border-top: 1px solid var(--gemini-border);
-}
-.gemini-nav-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  text-decoration: none;
-  color: var(--gemini-text-muted);
-  font-family: 'Google Sans Text', sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
-}
-.gemini-nav-indicator {
-  width: 60px;
-  height: 30px;
-  border-radius: var(--gemini-radius-full);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-}
-.gemini-nav-item.active .gemini-nav-indicator {
-  background: var(--gemini-gradient-btn);
-  color: #FFFFFF;
-}
-.gemini-nav-item.active {
-  color: var(--gemini-text-main);
 }
