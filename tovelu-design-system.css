@@ -1,0 +1,358 @@
+/**
+ * TOVELU UNIVERSAL DESIGN SYSTEM (TDS-1.0) CSS FRAMEWORK
+ * Supreme Constitutional Governance: LAW-001 (Scientific, Medical & Legal Verification)
+ * Built for 8.15 Billion Humans on Earth
+ */
+
+/* ==================== 1. DESIGN TOKENS (LIGHT & DARK) ==================== */
+:root {
+  /* Brand Core Palettes */
+  --tds-primary: #1D4ED8;
+  --tds-primary-hover: #1E40AF;
+  --tds-primary-subtle: #EFF6FF;
+  --tds-primary-border: #BFDBFE;
+  --tds-primary-glow: rgba(29, 78, 216, 0.16);
+
+  --tds-secondary: #0284C7;
+  --tds-secondary-hover: #0369A1;
+  --tds-secondary-subtle: #E0F2FE;
+
+  --tds-vitality: #059669;
+  --tds-vitality-glow: #10B981;
+  --tds-vitality-subtle: #ECFDF5;
+  --tds-vitality-border: #A7F3D0;
+
+  --tds-warning: #D97706;
+  --tds-warning-subtle: #FFFBEB;
+  --tds-warning-border: #FDE68A;
+
+  --tds-danger: #DC2626;
+  --tds-danger-subtle: #FEF2F2;
+  --tds-danger-border: #FECACA;
+
+  /* Surfaces (Light Theme - Default) */
+  --tds-canvas: #F8FAFC;
+  --tds-surface: #FFFFFF;
+  --tds-surface-elevated: #F1F5F9;
+  --tds-surface-active: #E2E8F0;
+  --tds-border: #E2E8F0;
+  --tds-border-subtle: #F1F5F9;
+  --tds-border-focus: #38BDF8;
+
+  --tds-text-main: #0F172A;
+  --tds-text-muted: #475569;
+  --tds-text-subtle: #94A3B8;
+
+  /* Elevation Shadows */
+  --tds-shadow-0: none;
+  --tds-shadow-1: 0 1px 3px rgba(15, 23, 42, 0.05);
+  --tds-shadow-2: 0 4px 14px -2px rgba(15, 23, 42, 0.08);
+  --tds-shadow-3: 0 12px 30px -4px rgba(15, 23, 42, 0.12);
+  --tds-shadow-modal: 0 20px 45px -8px rgba(15, 23, 42, 0.2);
+
+  /* Radius Continuous Curves */
+  --tds-radius-none: 0px;
+  --tds-radius-xs: 4px;
+  --tds-radius-sm: 8px;
+  --tds-radius-md: 14px;
+  --tds-radius-lg: 20px;
+  --tds-radius-xl: 28px;
+  --tds-radius-full: 9999px;
+
+  /* Spacing Grid (8pt System) */
+  --tds-space-1: 4px;
+  --tds-space-2: 8px;
+  --tds-space-3: 12px;
+  --tds-space-4: 16px;
+  --tds-space-5: 20px;
+  --tds-space-6: 24px;
+  --tds-space-8: 32px;
+  --tds-space-10: 40px;
+  --tds-space-12: 48px;
+  --tds-space-16: 64px;
+  --tds-space-24: 96px;
+
+  /* Motion & Easing */
+  --tds-ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
+  --tds-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --tds-duration-instant: 100ms;
+  --tds-duration-quick: 180ms;
+  --tds-duration-standard: 280ms;
+}
+
+/* Dark Theme Overrides */
+[data-theme="dark"], .tds-theme-dark {
+  --tds-canvas: #080B11;
+  --tds-surface: #0E131F;
+  --tds-surface-elevated: #151D2E;
+  --tds-surface-active: #1C273C;
+  --tds-border: #1F2C42;
+  --tds-border-subtle: #162032;
+  --tds-border-focus: #0EA5E9;
+
+  --tds-text-main: #F8FAFC;
+  --tds-text-muted: #94A3B8;
+  --tds-text-subtle: #64748B;
+
+  --tds-primary-subtle: rgba(29, 78, 216, 0.16);
+  --tds-primary-border: #1E40AF;
+  --tds-vitality-subtle: rgba(16, 185, 129, 0.15);
+  --tds-vitality-border: #059669;
+  --tds-warning-subtle: rgba(245, 158, 11, 0.15);
+  --tds-danger-subtle: rgba(239, 68, 68, 0.15);
+
+  --tds-shadow-1: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --tds-shadow-2: 0 6px 18px rgba(0, 0, 0, 0.6);
+  --tds-shadow-3: 0 14px 35px rgba(0, 0, 0, 0.8);
+}
+
+/* ==================== 2. TYPOGRAPHY CLASSES ==================== */
+.tds-font-wordmark {
+  font-family: 'Ubuntu', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.tds-display-lg { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: clamp(2rem, 5vw, 2.75rem); line-height: 1.15; letter-spacing: -0.03em; }
+.tds-display-md { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: clamp(1.75rem, 4vw, 2.25rem); line-height: 1.2; letter-spacing: -0.03em; }
+.tds-headline-lg { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: clamp(1.35rem, 3.5vw, 1.65rem); line-height: 1.25; letter-spacing: -0.02em; }
+.tds-headline-md { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: clamp(1.15rem, 3vw, 1.35rem); line-height: 1.3; letter-spacing: -0.015em; }
+.tds-title-lg { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 1.05rem; line-height: 1.35; }
+.tds-title-md { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; font-size: 0.95rem; line-height: 1.4; }
+
+.tds-body-lg { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 1rem; line-height: 1.5; }
+.tds-body-md { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 0.88rem; line-height: 1.5; }
+.tds-body-sm { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 0.78rem; line-height: 1.45; }
+
+.tds-label-lg { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.88rem; line-height: 1.2; }
+.tds-label-md { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.75rem; line-height: 1.2; }
+.tds-label-micro { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 0.68rem; line-height: 1; text-transform: uppercase; letter-spacing: 0.05em; }
+
+/* ==================== 3. BUTTONS & INTERACTIVE TRIGGERS ==================== */
+.tds-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--tds-space-2);
+  padding: 0.85rem 1.4rem;
+  border-radius: var(--tds-radius-md);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.92rem;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  transition: background var(--tds-duration-quick) var(--tds-ease-emphasized),
+              transform var(--tds-duration-instant) var(--tds-ease-emphasized),
+              box-shadow var(--tds-duration-quick) var(--tds-ease-emphasized);
+  min-height: 48px;
+  border: none;
+  text-decoration: none;
+}
+.tds-btn:active {
+  transform: scale(0.985);
+}
+
+.tds-btn-primary {
+  background: var(--tds-primary);
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px var(--tds-primary-glow);
+}
+.tds-btn-primary:hover {
+  background: var(--tds-primary-hover);
+}
+
+.tds-btn-tonal {
+  background: var(--tds-surface-elevated);
+  border: 1.5px solid var(--tds-border);
+  color: var(--tds-text-main);
+}
+.tds-btn-tonal:hover {
+  background: var(--tds-surface-active);
+}
+
+.tds-btn-outline {
+  background: transparent;
+  border: 2px solid var(--tds-border);
+  color: var(--tds-text-main);
+}
+.tds-btn-outline:hover {
+  border-color: var(--tds-primary);
+  background: var(--tds-primary-subtle);
+  color: var(--tds-primary);
+}
+
+.tds-btn-vitality {
+  background: var(--tds-vitality);
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.25);
+}
+.tds-btn-vitality:hover {
+  background: #047857;
+}
+
+.tds-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ==================== 4. CARDS & SELECTION SURFACES ==================== */
+.tds-card {
+  background: var(--tds-surface);
+  border: 1.5px solid var(--tds-border);
+  border-radius: var(--tds-radius-lg);
+  padding: clamp(1.25rem, 3.5vw, 1.75rem);
+  box-shadow: var(--tds-shadow-1);
+  transition: all var(--tds-duration-quick) var(--tds-ease-emphasized);
+}
+.tds-card-elevated {
+  box-shadow: var(--tds-shadow-2);
+}
+
+/* 1-Tap Option Card */
+.tds-option-card {
+  background: var(--tds-surface);
+  border: 2px solid var(--tds-border);
+  border-radius: var(--tds-radius-md);
+  padding: 0.95rem 1.15rem;
+  display: flex;
+  align-items: center;
+  gap: var(--tds-space-3);
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  transition: all var(--tds-duration-quick) var(--tds-ease-emphasized);
+  box-shadow: var(--tds-shadow-1);
+}
+.tds-option-card:hover {
+  border-color: var(--tds-border-focus);
+  background: var(--tds-primary-subtle);
+}
+.tds-option-card:active {
+  transform: scale(0.99);
+}
+.tds-option-card.selected {
+  border-color: var(--tds-primary);
+  background: var(--tds-primary-subtle);
+  box-shadow: 0 0 0 1px var(--tds-primary), var(--tds-shadow-2);
+}
+
+.tds-check-circle {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--tds-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 800;
+  flex-shrink: 0;
+  background: var(--tds-surface);
+  transition: all var(--tds-duration-instant);
+}
+.tds-option-card.selected .tds-check-circle {
+  background: var(--tds-primary);
+  border-color: var(--tds-primary);
+  color: #FFFFFF;
+}
+
+/* ==================== 5. FORM CONTROLS & PICKERS ==================== */
+.tds-input {
+  width: 100%;
+  background: var(--tds-surface);
+  border: 2px solid var(--tds-border);
+  color: var(--tds-text-main);
+  padding: 0.85rem 1.1rem;
+  border-radius: var(--tds-radius-md);
+  font-size: 0.95rem;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  box-shadow: var(--tds-shadow-1);
+  transition: border-color var(--tds-duration-quick);
+  min-height: 48px;
+}
+.tds-input:focus {
+  border-color: var(--tds-primary);
+  box-shadow: 0 0 0 3px var(--tds-primary-glow);
+}
+
+/* Preset Chips */
+.tds-preset-chip {
+  background: var(--tds-surface-elevated);
+  border: 1.5px solid var(--tds-border);
+  color: var(--tds-text-main);
+  padding: 0.45rem 0.85rem;
+  border-radius: var(--tds-radius-full);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  transition: all var(--tds-duration-instant);
+}
+.tds-preset-chip:hover {
+  border-color: var(--tds-primary);
+  color: var(--tds-primary);
+  background: var(--tds-primary-subtle);
+}
+.tds-preset-chip.active {
+  background: var(--tds-primary);
+  border-color: var(--tds-primary);
+  color: #FFFFFF;
+  box-shadow: var(--tds-shadow-1);
+}
+
+/* Badges */
+.tds-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--tds-radius-full);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.tds-badge-vitality { background: var(--tds-vitality-subtle); color: var(--tds-vitality); border: 1px solid var(--tds-vitality-border); }
+.tds-badge-primary { background: var(--tds-primary-subtle); color: var(--tds-primary); border: 1px solid var(--tds-primary-border); }
+.tds-badge-warning { background: var(--tds-warning-subtle); color: var(--tds-warning); border: 1px solid var(--tds-warning-border); }
+.tds-badge-danger { background: var(--tds-danger-subtle); color: var(--tds-danger); border: 1px solid var(--tds-danger-border); }
+
+/* ==================== 6. HEALTH CLINICAL COMPONENTS ==================== */
+/* Biomarker Gauge */
+.tds-gauge-card {
+  background: var(--tds-surface-elevated);
+  border: 1px solid var(--tds-border);
+  border-radius: var(--tds-radius-md);
+  padding: 1.25rem;
+}
+.tds-gauge-track {
+  height: 8px;
+  background: var(--tds-border);
+  border-radius: var(--tds-radius-full);
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+.tds-gauge-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--tds-secondary), var(--tds-vitality));
+  border-radius: var(--tds-radius-full);
+  transition: width 0.4s var(--tds-ease-emphasized);
+}
+
+/* 3-Column Diagnostic Triage Card */
+.tds-triage-card {
+  background: var(--tds-surface);
+  border: 1.5px solid var(--tds-border);
+  border-radius: var(--tds-radius-md);
+  padding: 1rem 1.15rem;
+  margin-bottom: 0.75rem;
+  box-shadow: var(--tds-shadow-1);
+}
+.tds-triage-card.tier-1 { border-left: 4.5px solid var(--tds-vitality); }
+.tds-triage-card.tier-2 { border-left: 4.5px solid var(--tds-warning); }
+.tds-triage-card.tier-3 { border-left: 4.5px solid var(--tds-danger); }
