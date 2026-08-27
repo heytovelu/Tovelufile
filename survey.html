@@ -16,7 +16,7 @@
       --primary: #1D4ED8;
       --primary-hover: #1E40AF;
       --primary-subtle: #EFF6FF;
-      --primary-glow: rgba(29, 78, 216, 0.15);
+      --primary-border: #BFDBFE;
       --luminous: #0284C7;
       --luminous-light: #E0F2FE;
       --vitality: #059669;
@@ -36,12 +36,12 @@
       --text-subtle: #94A3B8;
       
       --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05);
-      --shadow-md: 0 4px 16px -2px rgba(15, 23, 42, 0.08);
-      --shadow-lg: 0 12px 32px -4px rgba(15, 23, 42, 0.12);
+      --shadow-md: 0 4px 14px -2px rgba(15, 23, 42, 0.08);
+      --shadow-lg: 0 12px 30px -4px rgba(15, 23, 42, 0.12);
 
-      --radius-sm: 10px;
-      --radius-md: 16px;
-      --radius-lg: 24px;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
       --radius-full: 9999px;
     }
 
@@ -78,8 +78,8 @@
 
     /* Sticky Clean Header */
     header.survey-header {
-      height: 64px;
-      background: rgba(255, 255, 255, 0.96);
+      height: 60px;
+      background: rgba(255, 255, 255, 0.98);
       border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
@@ -88,7 +88,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 clamp(0.75rem, 3vw, 1.5rem);
-      backdrop-filter: blur(16px);
+      backdrop-filter: blur(12px);
       gap: 0.75rem;
     }
 
@@ -100,13 +100,13 @@
       flex-shrink: 0;
     }
     .brand-icon-wrap {
-      width: 30px;
-      height: 30px;
+      width: 28px;
+      height: 28px;
     }
     .brand-wordmark-txt {
       font-family: 'Ubuntu', sans-serif;
       font-weight: 500;
-      font-size: 22px;
+      font-size: 21px;
       color: var(--text-main);
       line-height: 1;
       letter-spacing: -0.01em;
@@ -120,7 +120,7 @@
       gap: 3px;
     }
     .survey-progress-track {
-      height: 7px;
+      height: 6px;
       background: var(--surface-active);
       border-radius: var(--radius-full);
       overflow: hidden;
@@ -130,22 +130,22 @@
       width: 5%;
       background: linear-gradient(90deg, var(--luminous), var(--primary));
       border-radius: var(--radius-full);
-      transition: width 0.3s ease;
+      transition: width 0.2s ease-out;
     }
     .survey-step-indicator {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 700;
       color: var(--text-muted);
       display: flex;
       justify-content: space-between;
     }
 
-    /* Main Container with generous bottom padding so footer never blocks content */
+    /* Main Container */
     .survey-main {
-      max-width: 640px;
+      max-width: 620px;
       width: 100%;
       margin: 0 auto;
-      padding: clamp(1.25rem, 4vw, 2.25rem) clamp(1rem, 3vw, 1.5rem) 130px clamp(1rem, 3vw, 1.5rem);
+      padding: 1.25rem clamp(0.9rem, 3vw, 1.25rem) 140px clamp(0.9rem, 3vw, 1.25rem);
       flex: 1;
       display: flex;
       flex-direction: column;
@@ -153,33 +153,28 @@
     }
 
     .question-card-wrapper {
-      animation: fadeIn 0.25s ease-out;
       width: 100%;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
     }
 
     .question-title {
-      font-size: clamp(1.25rem, 4.5vw, 1.55rem);
+      font-size: clamp(1.2rem, 4vw, 1.45rem);
       font-weight: 800;
       color: var(--text-main);
       line-height: 1.3;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.35rem;
     }
     .question-subtitle {
-      font-size: clamp(0.82rem, 2.8vw, 0.9rem);
+      font-size: clamp(0.8rem, 2.5vw, 0.88rem);
       color: var(--text-muted);
-      margin-bottom: 1.5rem;
-      line-height: 1.5;
+      margin-bottom: 1.25rem;
+      line-height: 1.45;
     }
 
     /* Option Cards */
     .option-card-list {
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
+      gap: 0.65rem;
       width: 100%;
     }
 
@@ -187,27 +182,28 @@
       background: var(--surface);
       border: 2px solid var(--border);
       border-radius: var(--radius-md);
-      padding: clamp(0.9rem, 2.5vw, 1.15rem) clamp(1rem, 3vw, 1.25rem);
+      padding: 0.9rem 1.1rem;
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 0.85rem;
       cursor: pointer;
-      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
       user-select: none;
       box-shadow: var(--shadow-sm);
       touch-action: manipulation;
+      transition: background 0.1s, border-color 0.1s, transform 0.1s;
     }
     .option-card:hover {
       border-color: var(--border-focus);
       background: var(--primary-subtle);
     }
     .option-card:active {
-      transform: scale(0.985);
+      transform: scale(0.99);
+      background: var(--primary-subtle);
     }
     .option-card.selected {
       border-color: var(--primary);
       background: var(--primary-subtle);
-      box-shadow: 0 0 0 1px var(--primary), var(--shadow-md);
+      box-shadow: 0 0 0 1px var(--primary);
     }
 
     .option-check-circle {
@@ -218,11 +214,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 800;
       flex-shrink: 0;
       background: white;
-      transition: all 0.15s;
+      transition: all 0.1s;
     }
     .option-card.selected .option-check-circle {
       background: var(--primary);
@@ -231,19 +227,57 @@
     }
 
     .option-emoji {
-      font-size: 1.45rem;
+      font-size: 1.4rem;
       flex-shrink: 0;
     }
     .option-title {
       font-weight: 700;
-      font-size: clamp(0.9rem, 3vw, 0.98rem);
+      font-size: clamp(0.88rem, 2.8vw, 0.95rem);
       color: var(--text-main);
     }
     .option-desc {
-      font-size: clamp(0.75rem, 2.5vw, 0.82rem);
+      font-size: clamp(0.74rem, 2.3vw, 0.8rem);
       color: var(--text-muted);
       margin-top: 2px;
       line-height: 1.35;
+    }
+
+    /* Custom Tag / Allergy Input Box */
+    .custom-input-box {
+      margin-top: 1rem;
+      background: var(--surface);
+      border: 2px dashed var(--primary-border);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+    }
+    .custom-input-row {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .tag-pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+    }
+    .tag-pill {
+      background: var(--primary);
+      color: white;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-full);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .tag-pill-remove {
+      cursor: pointer;
+      opacity: 0.8;
+    }
+    .tag-pill-remove:hover {
+      opacity: 1;
     }
 
     /* Clean Input Controls */
@@ -252,47 +286,43 @@
       background: var(--surface);
       border: 2px solid var(--border);
       color: var(--text-main);
-      padding: 0.9rem 1.1rem;
+      padding: 0.85rem 1rem;
       border-radius: var(--radius-md);
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-family: 'Inter', sans-serif;
       outline: none;
       box-shadow: var(--shadow-sm);
-      transition: all 0.2s;
-      appearance: none;
-      -webkit-appearance: none;
+      transition: border-color 0.15s;
     }
     .survey-input:focus {
       border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.12);
     }
 
-    /* Visual 1-Tap Time Picker Elements */
+    /* Visual 1-Tap Time Picker */
     .time-picker-grid {
       display: grid;
       grid-template-columns: 1fr 1fr 1.1fr;
-      gap: 0.6rem;
-      margin-bottom: 1.25rem;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
       width: 100%;
     }
     .time-unit-col {
       display: flex;
       flex-direction: column;
-      gap: 0.35rem;
+      gap: 0.3rem;
     }
     .time-unit-label {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 800;
       color: var(--text-muted);
       text-transform: uppercase;
-      letter-spacing: 0.04em;
     }
     .time-select {
       background: var(--surface);
       border: 2px solid var(--border);
       border-radius: var(--radius-md);
-      padding: 0.85rem 0.75rem;
-      font-size: 1.05rem;
+      padding: 0.8rem 0.6rem;
+      font-size: 1rem;
       font-weight: 700;
       color: var(--text-main);
       outline: none;
@@ -303,31 +333,30 @@
       border-color: var(--primary);
     }
 
-    /* Quick Preset Chips */
     .preset-chips-title {
-      font-size: 0.75rem;
-      font-weight: 700;
+      font-size: 0.72rem;
+      font-weight: 800;
       color: var(--text-muted);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.4rem;
       text-transform: uppercase;
     }
     .preset-chips-wrap {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1.25rem;
+      gap: 0.45rem;
+      margin-bottom: 1.1rem;
     }
     .preset-chip {
       background: var(--surface-elevated);
       border: 1.5px solid var(--border);
       color: var(--text-main);
-      padding: 0.45rem 0.85rem;
+      padding: 0.4rem 0.75rem;
       border-radius: var(--radius-full);
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 700;
       cursor: pointer;
-      transition: all 0.15s;
       user-select: none;
+      transition: background 0.1s, color 0.1s, border-color 0.1s;
     }
     .preset-chip:hover {
       border-color: var(--primary);
@@ -344,21 +373,20 @@
     .unit-toggle-wrap {
       display: flex;
       background: var(--surface-active);
-      padding: 0.25rem;
+      padding: 0.2rem;
       border-radius: var(--radius-full);
       width: fit-content;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1rem;
     }
     .unit-toggle-btn {
       background: transparent;
       border: none;
       color: var(--text-muted);
-      padding: 0.4rem 1rem;
+      padding: 0.35rem 0.9rem;
       border-radius: var(--radius-full);
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 700;
       cursor: pointer;
-      transition: all 0.2s;
     }
     .unit-toggle-btn.active {
       background: white;
@@ -372,19 +400,19 @@
       bottom: 0;
       left: 0;
       width: 100vw;
-      background: rgba(255, 255, 255, 0.97);
+      background: rgba(255, 255, 255, 0.98);
       border-top: 1px solid var(--border);
-      padding: 0.85rem clamp(1rem, 3vw, 1.5rem);
-      padding-bottom: max(0.85rem, env(safe-area-inset-bottom, 0.85rem));
+      padding: 0.75rem clamp(0.9rem, 3vw, 1.25rem);
+      padding-bottom: max(0.75rem, env(safe-area-inset-bottom, 0.75rem));
       display: flex;
       align-items: center;
       justify-content: center;
-      backdrop-filter: blur(16px);
+      backdrop-filter: blur(12px);
       z-index: 100;
-      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 -4px 18px rgba(0, 0, 0, 0.05);
     }
     .bottom-nav-inner {
-      max-width: 640px;
+      max-width: 620px;
       width: 100%;
       display: flex;
       align-items: center;
@@ -396,17 +424,17 @@
       background: var(--surface-elevated);
       border: 1.5px solid var(--border);
       color: var(--text-main);
-      padding: 0.85rem 1.25rem;
+      padding: 0.85rem 1.2rem;
       border-radius: var(--radius-md);
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 700;
       font-size: 0.88rem;
       cursor: pointer;
-      transition: all 0.15s;
       display: inline-flex;
       align-items: center;
-      gap: 0.35rem;
+      gap: 0.3rem;
       flex-shrink: 0;
+      touch-action: manipulation;
     }
     .btn-back:hover:not(:disabled) {
       background: var(--surface-active);
@@ -426,20 +454,20 @@
       font-weight: 800;
       font-size: 0.92rem;
       cursor: pointer;
-      transition: all 0.15s;
       display: inline-flex;
       align-items: center;
       gap: 0.45rem;
-      box-shadow: 0 4px 14px rgba(29, 78, 216, 0.3);
+      box-shadow: 0 4px 12px rgba(29, 78, 216, 0.3);
       flex: 1;
       justify-content: center;
-      max-width: 360px;
+      max-width: 380px;
+      touch-action: manipulation;
     }
     .btn-continue:hover {
       background: var(--primary-hover);
     }
     .btn-continue:active {
-      transform: scale(0.985);
+      transform: scale(0.99);
     }
 
     /* Dopamine Interstitial Cards */
@@ -447,22 +475,17 @@
       background: var(--surface);
       border: 2px solid var(--border);
       border-radius: var(--radius-lg);
-      padding: clamp(1.5rem, 4vw, 2.25rem) clamp(1.25rem, 3.5vw, 1.75rem);
+      padding: clamp(1.25rem, 4vw, 2rem) clamp(1rem, 3.5vw, 1.5rem);
       box-shadow: var(--shadow-lg);
       text-align: center;
-      animation: popIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    @keyframes popIn {
-      from { opacity: 0; transform: scale(0.96); }
-      to { opacity: 1; transform: scale(1); }
     }
 
     .badge {
       display: inline-flex;
       align-items: center;
-      padding: 0.35rem 0.85rem;
+      padding: 0.3rem 0.8rem;
       border-radius: var(--radius-full);
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 800;
       letter-spacing: 0.04em;
       text-transform: uppercase;
@@ -475,20 +498,32 @@
       background: var(--surface-elevated);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
-      padding: 1.15rem;
-      margin: 1.25rem 0;
+      padding: 1.1rem;
+      margin: 1.1rem 0;
       text-align: left;
     }
     .quote-box {
-      border-left: 3.5px solid var(--primary);
+      border-left: 3px solid var(--primary);
       background: var(--primary-subtle);
-      padding: 0.85rem 1.1rem;
+      padding: 0.75rem 1rem;
       border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-      margin: 1.25rem 0;
+      margin: 1.1rem 0;
       text-align: left;
       font-style: italic;
       color: var(--text-muted);
-      font-size: 0.86rem;
+      font-size: 0.85rem;
+    }
+
+    .alert-banner {
+      background: #FEF2F2;
+      border: 1px solid #FECACA;
+      color: #991B1B;
+      padding: 0.65rem 0.9rem;
+      border-radius: var(--radius-md);
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      display: none;
     }
   </style>
 </head>
@@ -531,6 +566,7 @@
 
   <!-- Main Question Area -->
   <main class="survey-main">
+    <div id="survey-alert" class="alert-banner">Please select at least one option to continue.</div>
     <div class="question-card-wrapper" id="survey-content-area">
       <!-- Dynamic Question Content Injected Here -->
     </div>
@@ -682,24 +718,24 @@
         ]
       },
       {
-        id: "primary_goal",
-        title: "10. What is your #1 BIGGEST health goal right now?",
-        subtitle: "Pick the one single achievement that matters most to your life.",
-        type: "single",
+        id: "primary_goals",
+        title: "10. What are your major health goals? (Select all that apply)",
+        subtitle: "Choose all goals you want THAIS to target in your daily protocol.",
+        type: "multi",
         options: [
-          { emoji: "🔥", title: "Lose belly fat & drop weight", desc: "Burn visceral fat and get a lean, toned physique." },
-          { emoji: "⚡", title: "Stop feeling tired & get all-day energy", desc: "Eliminate brain fog and afternoon 2 PM energy slumps." },
-          { emoji: "🩸", title: "Lower blood sugar / Reverse pre-diabetes", desc: "Resensitize insulin and flatten glucose spikes." },
-          { emoji: "🫀", title: "Lower blood pressure & protect heart", desc: "Clear arterial inflammation and lower ApoB." },
-          { emoji: "🌿", title: "Heal digestion, bloating & acid reflux", desc: "Restore healthy gut microbiome and stop stomach pain." },
-          { emoji: "🧬", title: "Reverse biological age & maximize lifespan", desc: "Decelerate cellular epigenetic aging." },
-          { emoji: "💪", title: "Build muscle & physical strength", desc: "Protect against sarcopenia and increase functional power." },
-          { emoji: "😴", title: "Fix sleep quality & wake up refreshed", desc: "Achieve 8 hours of deep restorative sleep." }
+          { emoji: "🔥", title: "Lose belly fat & drop weight" },
+          { emoji: "⚡", title: "Stop feeling tired & get all-day energy" },
+          { emoji: "🩸", title: "Lower blood sugar / Reverse pre-diabetes" },
+          { emoji: "🫀", title: "Lower blood pressure & protect heart" },
+          { emoji: "🌿", title: "Heal digestion, bloating & acid reflux" },
+          { emoji: "🧬", title: "Reverse biological age & maximize lifespan" },
+          { emoji: "💪", title: "Build muscle & physical strength" },
+          { emoji: "😴", title: "Fix sleep quality & wake up refreshed" }
         ]
       },
       {
         id: "secondary_goals",
-        title: "11. Select any Secondary Goals (Choose up to 3):",
+        title: "11. Select any Secondary Goals (Choose all that apply):",
         subtitle: "THAIS will integrate these into your master weekly playbook.",
         type: "multi",
         options: [
@@ -860,15 +896,16 @@
       },
       {
         id: "allergies",
-        title: "23. Do you have any confirmed food allergies or intolerances?",
-        subtitle: "Filters ingredients from your 3-meal recipe database.",
-        type: "multi",
+        title: "23. Do you have any food allergies or intolerances?",
+        subtitle: "Select from the list or add your own custom food items below.",
+        type: "allergies_custom",
         options: [
           { emoji: "🥛", title: "Lactose / Dairy" },
           { emoji: "🍞", title: "Gluten / Wheat" },
           { emoji: "🥜", title: "Peanuts or Tree Nuts" },
           { emoji: "🦐", title: "Shellfish or Fish" },
           { emoji: "🥚", title: "Eggs" },
+          { emoji: "🌱", title: "Soy / Soybeans" },
           { emoji: "✅", title: "Zero Allergies — I digest all whole foods" }
         ]
       },
@@ -1057,16 +1094,19 @@
     document.addEventListener('DOMContentLoaded', () => {
       const midState = localStorage.getItem('tovelu_survey_state');
       if (midState) {
-        const state = JSON.parse(midState);
-        if (state.index < SURVEY_QUESTIONS.length) {
-          currentQIndex = state.index;
-          userAnswers = state.answers || {};
-        }
+        try {
+          const state = JSON.parse(midState);
+          if (state && typeof state.index === 'number' && state.index < SURVEY_QUESTIONS.length) {
+            currentQIndex = state.index;
+            userAnswers = state.answers || {};
+          }
+        } catch(e) {}
       }
       renderCurrentQuestion();
     });
 
     function renderCurrentQuestion() {
+      hideAlert();
       const container = document.getElementById('survey-content-area');
       const q = SURVEY_QUESTIONS[currentQIndex];
 
@@ -1110,7 +1150,7 @@
           </div>
         `;
         document.getElementById('btn-next').innerText = q.isFinal ? 'UNLOCK MY HEALTH BLUEPRINT ➔' : 'CONTINUE MY DISCOVERY ➔';
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo(0, 0);
         return;
       }
 
@@ -1139,7 +1179,7 @@
             </div>
           </div>
         `;
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo(0, 0);
         return;
       }
 
@@ -1163,7 +1203,53 @@
             </div>
           </div>
         `;
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo(0, 0);
+        return;
+      }
+
+      // Render Allergies with Custom Add Option (Q23)
+      if (q.type === 'allergies_custom') {
+        const customList = userAnswers['allergies_custom_list'] || [];
+        container.innerHTML = `
+          <div>
+            <h2 class="question-title">${q.title}</h2>
+            <p class="question-subtitle">${q.subtitle}</p>
+            <div class="option-card-list">
+              ${q.options.map(opt => {
+                const isSelected = userAnswers[q.id] && userAnswers[q.id].includes(opt.title);
+                return `
+                  <div class="option-card ${isSelected ? 'selected' : ''}" onclick="toggleMultiCard(this, '${q.id}', '${opt.title.replace(/'/g, "\\'")}')">
+                    <div class="option-check-circle">${isSelected ? '✓' : ''}</div>
+                    <span class="option-emoji">${opt.emoji}</span>
+                    <div class="option-title" style="flex: 1;">${opt.title}</div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+
+            <!-- Manual Custom Allergy Input -->
+            <div class="custom-input-box">
+              <label style="font-size: 0.78rem; font-weight: 800; color: var(--primary); text-transform: uppercase; display: flex; align-items: center; gap: 0.35rem;">
+                <span>✍️</span> Have an allergy not listed above? Type it here:
+              </label>
+              <div class="custom-input-row">
+                <input type="text" class="survey-input" id="custom-allergy-input" placeholder="e.g. Strawberries, Sesame, Nightshades..." onkeydown="if(event.key==='Enter'){addCustomAllergy(); event.preventDefault();}" />
+                <button type="button" class="btn-back" style="background: var(--primary); color: white; border: none; padding: 0.85rem 1rem;" onclick="addCustomAllergy()">
+                  + Add
+                </button>
+              </div>
+              <div class="tag-pill-list" id="custom-allergy-tags">
+                ${customList.map((tag, idx) => `
+                  <span class="tag-pill">
+                    ${tag}
+                    <span class="tag-pill-remove" onclick="removeCustomAllergy(${idx})">✕</span>
+                  </span>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+        `;
+        window.scrollTo(0, 0);
         return;
       }
 
@@ -1187,7 +1273,7 @@
               `).join('')}
             </div>
 
-            <div style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); margin-bottom: 0.5rem; text-transform: uppercase;">
+            <div style="font-size: 0.72rem; font-weight: 800; color: var(--text-muted); margin-bottom: 0.4rem; text-transform: uppercase;">
               OR SELECT EXACT TIME:
             </div>
 
@@ -1218,7 +1304,7 @@
             </div>
           </div>
         `;
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo(0, 0);
         return;
       }
 
@@ -1229,24 +1315,24 @@
           <div>
             <h2 class="question-title">${q.title}</h2>
             <p class="question-subtitle">${q.subtitle}</p>
-            <div style="display: grid; grid-template-columns: 1fr 1.4fr 1.2fr; gap: 0.6rem; margin-bottom: 1.25rem;">
+            <div style="display: grid; grid-template-columns: 1fr 1.4fr 1.2fr; gap: 0.5rem; margin-bottom: 1.25rem;">
               <div>
-                <label style="font-size: 0.72rem; color: var(--text-muted); font-weight: 800; display: block; margin-bottom: 0.35rem;">DAY</label>
-                <select class="survey-input" id="dob-day" style="padding: 0.85rem 0.5rem; text-align: center;">
+                <label style="font-size: 0.7rem; color: var(--text-muted); font-weight: 800; display: block; margin-bottom: 0.3rem;">DAY</label>
+                <select class="survey-input" id="dob-day" style="padding: 0.8rem 0.4rem; text-align: center;">
                   ${Array.from({length: 31}, (_, i) => `<option value="${i+1}" ${String(i+1) === savedDob[0] ? 'selected':''}>${i+1}</option>`).join('')}
                 </select>
               </div>
               <div>
-                <label style="font-size: 0.72rem; color: var(--text-muted); font-weight: 800; display: block; margin-bottom: 0.35rem;">MONTH</label>
-                <select class="survey-input" id="dob-month" style="padding: 0.85rem 0.5rem; text-align: center;">
+                <label style="font-size: 0.7rem; color: var(--text-muted); font-weight: 800; display: block; margin-bottom: 0.3rem;">MONTH</label>
+                <select class="survey-input" id="dob-month" style="padding: 0.8rem 0.4rem; text-align: center;">
                   ${["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].map(m => `
                     <option value="${m}" ${m === savedDob[1] ? 'selected':''}>${m}</option>
                   `).join('')}
                 </select>
               </div>
               <div>
-                <label style="font-size: 0.72rem; color: var(--text-muted); font-weight: 800; display: block; margin-bottom: 0.35rem;">YEAR</label>
-                <select class="survey-input" id="dob-year" style="padding: 0.85rem 0.5rem; text-align: center;">
+                <label style="font-size: 0.7rem; color: var(--text-muted); font-weight: 800; display: block; margin-bottom: 0.3rem;">YEAR</label>
+                <select class="survey-input" id="dob-year" style="padding: 0.8rem 0.4rem; text-align: center;">
                   ${Array.from({length: 85}, (_, i) => 2018 - i).map(y => `
                     <option value="${y}" ${String(y) === savedDob[2] ? 'selected':''}>${y}</option>
                   `).join('')}
@@ -1255,7 +1341,7 @@
             </div>
           </div>
         `;
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo(0, 0);
         return;
       }
 
@@ -1275,13 +1361,13 @@
               <input type="number" class="survey-input" id="input-height-cm" placeholder="e.g. 178" value="${userAnswers['height_num'] || '178'}" inputmode="numeric" />
             </div>
 
-            <div id="height-ft-wrap" style="display: none; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+            <div id="height-ft-wrap" style="display: none; grid-template-columns: 1fr 1fr; gap: 0.6rem;">
               <input type="number" class="survey-input" id="input-height-ft" placeholder="Feet (e.g. 5)" value="5" inputmode="numeric" />
               <input type="number" class="survey-input" id="input-height-in" placeholder="Inches (e.g. 10)" value="10" inputmode="numeric" />
             </div>
           </div>
         `;
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo(0, 0);
         return;
       }
 
@@ -1300,7 +1386,7 @@
             <input type="number" class="survey-input" id="input-weight" placeholder="e.g. 74" value="${userAnswers['weight_num'] || '74'}" step="0.5" inputmode="decimal" />
           </div>
         `;
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo(0, 0);
         return;
       }
 
@@ -1311,16 +1397,16 @@
             <h2 class="question-title">${q.title}</h2>
             <p class="question-subtitle">${q.subtitle}</p>
 
-            <label style="font-size: 0.72rem; color: var(--text-muted); font-weight: 800; display: block; margin-bottom: 0.35rem;">SELECT COUNTRY (195 SOVEREIGN NATIONS)</label>
+            <label style="font-size: 0.7rem; color: var(--text-muted); font-weight: 800; display: block; margin-bottom: 0.3rem;">SELECT COUNTRY (195 SOVEREIGN NATIONS)</label>
             <select class="survey-input" id="loc-country">
               ${COUNTRIES.map(c => `<option value="${c}" ${c === (userAnswers['country'] || 'India') ? 'selected' : ''}>${c}</option>`).join('')}
             </select>
 
-            <label style="font-size: 0.72rem; color: var(--text-muted); font-weight: 800; display: block; margin-bottom: 0.35rem; margin-top: 1rem;">CITY / STATE / POSTAL CODE</label>
+            <label style="font-size: 0.7rem; color: var(--text-muted); font-weight: 800; display: block; margin-bottom: 0.3rem; margin-top: 0.85rem;">CITY / STATE / POSTAL CODE</label>
             <input type="text" class="survey-input" id="loc-city" placeholder="e.g. Mumbai, Maharashtra" value="${userAnswers['city'] || 'Mumbai, Maharashtra'}" />
           </div>
         `;
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo(0, 0);
         return;
       }
     }
@@ -1337,6 +1423,7 @@
       if (check) check.innerText = '✓';
 
       userAnswers[qId] = value;
+      hideAlert();
     }
 
     function toggleMultiCard(cardEl, qId, value) {
@@ -1355,6 +1442,41 @@
       } else {
         userAnswers[qId].push(value);
       }
+      hideAlert();
+    }
+
+    function addCustomAllergy() {
+      const input = document.getElementById('custom-allergy-input');
+      const val = input.value.trim();
+      if (!val) return;
+
+      if (!userAnswers['allergies_custom_list']) userAnswers['allergies_custom_list'] = [];
+      if (!userAnswers['allergies_custom_list'].includes(val)) {
+        userAnswers['allergies_custom_list'].push(val);
+      }
+      input.value = '';
+
+      // Update tags UI instantly
+      const tagsWrap = document.getElementById('custom-allergy-tags');
+      tagsWrap.innerHTML = userAnswers['allergies_custom_list'].map((tag, idx) => `
+        <span class="tag-pill">
+          ${tag}
+          <span class="tag-pill-remove" onclick="removeCustomAllergy(${idx})">✕</span>
+        </span>
+      `).join('');
+    }
+
+    function removeCustomAllergy(idx) {
+      if (userAnswers['allergies_custom_list']) {
+        userAnswers['allergies_custom_list'].splice(idx, 1);
+        const tagsWrap = document.getElementById('custom-allergy-tags');
+        tagsWrap.innerHTML = userAnswers['allergies_custom_list'].map((tag, i) => `
+          <span class="tag-pill">
+            ${tag}
+            <span class="tag-pill-remove" onclick="removeCustomAllergy(${i})">✕</span>
+          </span>
+        `).join('');
+      }
     }
 
     function selectTimePreset(qId, presetVal) {
@@ -1368,6 +1490,7 @@
         if (document.getElementById('time-minute')) document.getElementById('time-minute').value = parts[2].padStart(2, '0');
         if (document.getElementById('time-period')) document.getElementById('time-period').value = parts[3].toUpperCase();
       }
+      hideAlert();
     }
 
     function updateTimeFromPickers(qId) {
@@ -1379,6 +1502,18 @@
       document.querySelectorAll('.preset-chip').forEach(c => {
         c.classList.toggle('active', c.innerText === formatted);
       });
+      hideAlert();
+    }
+
+    function showAlert(msg) {
+      const el = document.getElementById('survey-alert');
+      el.innerText = msg;
+      el.style.display = 'block';
+    }
+
+    function hideAlert() {
+      const el = document.getElementById('survey-alert');
+      if (el) el.style.display = 'none';
     }
 
     function saveCurrentInputs() {
@@ -1451,8 +1586,15 @@
 
       saveCurrentInputs();
 
+      // Check single select validation without freezing alerts
       if (q && q.type === 'single' && !userAnswers[q.id]) {
-        alert('Please select an option to continue.');
+        showAlert('Please select an option above to continue.');
+        return;
+      }
+
+      // Check multi select validation
+      if (q && q.type === 'multi' && (!userAnswers[q.id] || userAnswers[q.id].length === 0)) {
+        showAlert('Please select at least one option to continue.');
         return;
       }
 
