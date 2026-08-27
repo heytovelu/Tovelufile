@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>tovelu — THAIS Health Intelligence Intake (New User Survey)</title>
+  <title>tovelu — THAIS Health Intelligence Intake</title>
   
   <!-- Locked Brand Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,35 +12,36 @@
   
   <style>
     :root {
-      /* Locked 100-Year Universal Palette */
+      /* Pristine Medical-Grade Light Theme (Default) */
       --primary: #1D4ED8;
       --primary-hover: #1E40AF;
-      --primary-glow: #2563EB;
-      --luminous: #0EA5E9;
-      --luminous-glow: rgba(14, 165, 233, 0.22);
-      --vitality: #10B981;
-      --vitality-deep: #059669;
-      --vitality-glow: rgba(16, 185, 129, 0.2);
-      --warning: #F59E0B;
-      --warning-glow: rgba(245, 158, 11, 0.18);
-      --danger: #EF4444;
-      
-      --canvas: #080B11;
-      --surface: #0E131F;
-      --surface-elevated: #151D2E;
-      --surface-active: #1C273C;
-      --border: #1F2C42;
-      --border-subtle: #162032;
-      --text-main: #F8FAFC;
-      --text-muted: #94A3B8;
-      --text-subtle: #64748B;
-      --card-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.6);
-      --nav-bg: rgba(14, 19, 31, 0.92);
+      --primary-subtle: #EFF6FF;
+      --luminous: #0284C7;
+      --luminous-light: #E0F2FE;
+      --vitality: #059669;
+      --vitality-light: #ECFDF5;
+      --warning: #D97706;
+      --warning-light: #FFFBEB;
+      --danger: #DC2626;
 
-      --radius-sm: 8px;
-      --radius-md: 14px;
-      --radius-lg: 20px;
-      --radius-xl: 26px;
+      --canvas: #F8FAFC;
+      --surface: #FFFFFF;
+      --surface-elevated: #F1F5F9;
+      --surface-active: #E2E8F0;
+      --border: #E2E8F0;
+      --border-focus: #38BDF8;
+      
+      --text-main: #0F172A;
+      --text-muted: #475569;
+      --text-subtle: #94A3B8;
+      
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 4px 14px -2px rgba(15, 23, 42, 0.07);
+      --shadow-lg: 0 12px 30px -4px rgba(15, 23, 42, 0.09);
+
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
       --radius-full: 9999px;
     }
 
@@ -60,7 +61,7 @@
       display: flex;
       flex-direction: column;
       overflow-x: hidden;
-      -webkit-overflow-scrolling: touch;
+      -webkit-font-smoothing: antialiased;
     }
 
     h1, h2, h3, h4, .brand-heading {
@@ -69,10 +70,10 @@
       letter-spacing: -0.03em;
     }
 
-    /* Top Sticky Header */
+    /* Sticky Clean Header */
     header.survey-header {
-      height: 64px;
-      background: var(--nav-bg);
+      height: 68px;
+      background: rgba(255, 255, 255, 0.95);
       border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
@@ -80,125 +81,187 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 1.25rem;
+      padding: 0 1.5rem;
       backdrop-filter: blur(16px);
     }
 
     .brand-header-lockup {
       display: flex;
       align-items: center;
-      gap: 9px;
+      gap: 10px;
       text-decoration: none;
     }
     .brand-icon-wrap {
-      width: 32px;
-      height: 32px;
+      width: 34px;
+      height: 34px;
     }
     .brand-wordmark-txt {
       font-family: 'Ubuntu', sans-serif;
       font-weight: 500;
-      font-size: 24px;
+      font-size: 25.5px;
       color: var(--text-main);
       line-height: 1;
       letter-spacing: -0.01em;
     }
 
-    .survey-progress-wrap {
+    .survey-progress-container {
       flex: 1;
-      max-width: 480px;
-      margin: 0 1.25rem;
-      height: 7px;
-      background: var(--surface-elevated);
+      max-width: 440px;
+      margin: 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .survey-progress-track {
+      height: 8px;
+      background: var(--surface-active);
       border-radius: var(--radius-full);
       overflow: hidden;
-      border: 1px solid var(--border);
     }
     .survey-progress-bar {
       height: 100%;
       width: 5%;
-      background: linear-gradient(90deg, var(--luminous), var(--vitality));
+      background: linear-gradient(90deg, var(--luminous), var(--primary));
+      border-radius: var(--radius-full);
       transition: width 0.35s ease;
     }
+    .survey-step-indicator {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+    }
 
-    .survey-body {
-      max-width: 640px;
+    /* Main Container */
+    .survey-main {
+      max-width: 680px;
       width: 100%;
       margin: 0 auto;
-      padding: 2.25rem 1.25rem 4rem 1.25rem;
+      padding: 2.5rem 1.25rem 7rem 1.25rem;
       flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
 
-    /* Question Cards & Options */
+    .question-card-wrapper {
+      animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     .question-title {
-      font-size: 1.45rem;
+      font-size: 1.6rem;
       font-weight: 800;
+      color: var(--text-main);
       line-height: 1.3;
-      margin-bottom: 0.45rem;
+      margin-bottom: 0.5rem;
     }
     .question-subtitle {
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       color: var(--text-muted);
       margin-bottom: 1.75rem;
       line-height: 1.5;
     }
 
+    /* Option Cards */
     .option-card-list {
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
+      gap: 0.85rem;
     }
 
     .option-card {
       background: var(--surface);
-      border: 1.5px solid var(--border);
+      border: 2px solid var(--border);
       border-radius: var(--radius-md);
-      padding: 1.1rem 1.25rem;
+      padding: 1.15rem 1.35rem;
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 1.1rem;
       cursor: pointer;
-      transition: all 0.18s ease;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       user-select: none;
+      box-shadow: var(--shadow-sm);
     }
     .option-card:hover {
-      border-color: var(--luminous);
-      background: var(--surface-elevated);
-      transform: translateY(-1px);
+      border-color: var(--border-focus);
+      background: var(--primary-subtle);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
     }
     .option-card:active {
-      transform: scale(0.985);
+      transform: scale(0.99);
     }
     .option-card.selected {
       border-color: var(--primary);
-      background: rgba(29, 78, 216, 0.12);
-      box-shadow: 0 0 0 1px var(--primary);
+      background: var(--primary-subtle);
+      box-shadow: 0 0 0 1px var(--primary), var(--shadow-md);
+    }
+
+    .option-check-circle {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 800;
+      flex-shrink: 0;
+      background: white;
+      transition: all 0.2s;
+    }
+    .option-card.selected .option-check-circle {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
     }
 
     .option-emoji {
-      font-size: 1.4rem;
+      font-size: 1.6rem;
       flex-shrink: 0;
     }
     .option-title {
       font-weight: 700;
-      font-size: 0.95rem;
+      font-size: 1rem;
       color: var(--text-main);
     }
     .option-desc {
-      font-size: 0.78rem;
+      font-size: 0.82rem;
       color: var(--text-muted);
-      margin-top: 2px;
+      margin-top: 3px;
       line-height: 1.4;
+    }
+
+    /* Input Controls */
+    .survey-input {
+      width: 100%;
+      background: var(--surface);
+      border: 2px solid var(--border);
+      color: var(--text-main);
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius-md);
+      font-size: 1.05rem;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s;
+    }
+    .survey-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(29, 78, 216, 0.1);
     }
 
     .unit-toggle-wrap {
       display: flex;
-      background: var(--surface-elevated);
+      background: var(--surface-active);
       padding: 0.25rem;
       border-radius: var(--radius-full);
-      border: 1px solid var(--border);
       width: fit-content;
       margin-bottom: 1.25rem;
     }
@@ -206,121 +269,160 @@
       background: transparent;
       border: none;
       color: var(--text-muted);
-      padding: 0.35rem 1rem;
+      padding: 0.45rem 1.15rem;
       border-radius: var(--radius-full);
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       font-weight: 700;
       cursor: pointer;
       transition: all 0.2s;
     }
     .unit-toggle-btn.active {
-      background: var(--primary);
-      color: white;
+      background: white;
+      color: var(--primary);
+      box-shadow: var(--shadow-sm);
     }
 
-    .survey-input {
+    /* Fixed Bottom Action Bar */
+    .bottom-nav-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100vw;
+      background: rgba(255, 255, 255, 0.95);
+      border-top: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      backdrop-filter: blur(16px);
+      z-index: 90;
+    }
+    .bottom-nav-inner {
+      max-width: 680px;
       width: 100%;
-      background: var(--surface);
-      border: 1.5px solid var(--border);
-      color: var(--text-main);
-      padding: 0.9rem 1.15rem;
-      border-radius: var(--radius-md);
-      font-size: 1rem;
-      font-family: 'Inter', sans-serif;
-      outline: none;
-      margin-bottom: 1rem;
-      transition: border-color 0.2s;
-    }
-    .survey-input:focus {
-      border-color: var(--luminous);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
     }
 
-    .btn-primary {
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 0.85rem 1.5rem;
+    .btn-back {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+      padding: 0.85rem 1.4rem;
       border-radius: var(--radius-md);
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 700;
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       cursor: pointer;
       transition: all 0.2s;
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      box-shadow: 0 4px 15px rgba(29, 78, 216, 0.35);
+      gap: 0.4rem;
     }
-    .btn-primary:hover {
+    .btn-back:hover:not(:disabled) {
+      background: var(--surface-active);
+    }
+    .btn-back:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .btn-continue {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.85rem 1.75rem;
+      border-radius: var(--radius-md);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 14px rgba(29, 78, 216, 0.35);
+      flex: 1;
+      max-width: 320px;
+      justify-content: center;
+    }
+    .btn-continue:hover {
       background: var(--primary-hover);
       transform: translateY(-1px);
     }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.25rem 0.75rem;
-      border-radius: var(--radius-full);
-      font-size: 0.72rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    .badge-vitality {
-      background: rgba(16, 185, 129, 0.15);
-      color: var(--vitality);
-      border: 1px solid rgba(16, 185, 129, 0.3);
+    .btn-continue:disabled {
+      background: var(--surface-active);
+      color: var(--text-subtle);
+      box-shadow: none;
+      cursor: not-allowed;
     }
 
     /* Dopamine Interstitial Cards */
     .dopamine-card {
       background: var(--surface);
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius-xl);
-      padding: 2.25rem 1.75rem;
-      box-shadow: var(--card-shadow);
+      border: 2px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem 2rem;
+      box-shadow: var(--shadow-lg);
       text-align: center;
-      animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      animation: popIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
     @keyframes popIn {
-      from { opacity: 0; transform: scale(0.94); }
+      from { opacity: 0; transform: scale(0.95); }
       to { opacity: 1; transform: scale(1); }
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.35rem 0.9rem;
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      background: var(--vitality-light);
+      color: var(--vitality);
+      border: 1px solid rgba(5, 150, 105, 0.25);
     }
 
     .visual-gauge-box {
       background: var(--surface-elevated);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
-      padding: 1.25rem;
+      padding: 1.35rem;
       margin: 1.5rem 0;
       text-align: left;
     }
     .quote-box {
-      border-left: 3px solid var(--vitality);
-      padding-left: 1rem;
+      border-left: 3.5px solid var(--primary);
+      background: var(--primary-subtle);
+      padding: 1rem 1.25rem;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
       margin: 1.5rem 0;
       text-align: left;
       font-style: italic;
       color: var(--text-muted);
-      font-size: 0.88rem;
+      font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
+  <!-- Sticky Clean Header -->
   <header class="survey-header">
     <div class="brand-header-lockup">
       <div class="brand-icon-wrap">
         <svg width="100%" height="100%" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M50 16 C28 16, 16 32, 16 50 C16 68, 28 84, 50 84 C38 72, 34 58, 34 50 C34 42, 38 28, 50 16 Z" fill="url(#h-l)"/>
           <path d="M50 16 C72 16, 84 32, 84 50 C84 68, 72 84, 50 84 C62 72, 66 58, 66 50 C66 42, 62 28, 50 16 Z" fill="url(#h-r)"/>
-          <circle cx="50" cy="50" r="8" fill="#10B981"/>
+          <circle cx="50" cy="50" r="8" fill="#059669"/>
           <defs>
             <linearGradient id="h-l" x1="16" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#38BDF8"/>
+              <stop stop-color="#0284C7"/>
               <stop offset="1" stop-color="#1D4ED8"/>
             </linearGradient>
             <linearGradient id="h-r" x1="84" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse">
@@ -333,20 +435,36 @@
       <span class="brand-wordmark-txt">tovelu</span>
     </div>
 
-    <!-- Progress Bar -->
-    <div class="survey-progress-wrap">
-      <div class="survey-progress-bar" id="survey-progress-fill"></div>
-    </div>
-
-    <div style="font-size: 0.78rem; font-weight: 700; color: var(--luminous);" id="survey-step-num">
-      Question 1 of 34
+    <!-- Live Progress Bar -->
+    <div class="survey-progress-container">
+      <div class="survey-step-indicator">
+        <span id="step-name">Question 1</span>
+        <span id="step-progress-percent">3%</span>
+      </div>
+      <div class="survey-progress-track">
+        <div class="survey-progress-bar" id="survey-progress-fill"></div>
+      </div>
     </div>
   </header>
 
-  <!-- Survey Body Area -->
-  <main class="survey-body" id="survey-content-area">
-    <!-- Injected dynamically via script -->
+  <!-- Main Question Area -->
+  <main class="survey-main">
+    <div class="question-card-wrapper" id="survey-content-area">
+      <!-- Dynamic Question Content Injected Here -->
+    </div>
   </main>
+
+  <!-- Sticky Bottom Navigation Bar (Back + Continue) -->
+  <footer class="bottom-nav-bar" id="bottom-nav-container">
+    <div class="bottom-nav-inner">
+      <button class="btn-back" id="btn-prev" onclick="prevQuestion()" disabled>
+        ‹ Back
+      </button>
+      <button class="btn-continue" id="btn-next" onclick="nextQuestion()">
+        Continue ➔
+      </button>
+    </div>
+  </footer>
 
   <script>
     let currentQIndex = 0;
@@ -379,11 +497,11 @@
       {
         id: "sex",
         title: "1. What was your biological sex at birth?",
-        subtitle: "To calculate your natural hormone balance and daily calorie burn.",
+        subtitle: "To calculate your natural hormone balance, basal metabolism, and daily calorie burn.",
         type: "single",
         options: [
-          { emoji: "👨", title: "Male", desc: "Calibrate male androgen & metabolic profile." },
-          { emoji: "👩", title: "Female", desc: "Calibrate female ovulatory & metabolic profile." }
+          { emoji: "👨", title: "Male", desc: "Calibrate male androgen & metabolic rate baseline." },
+          { emoji: "👩", title: "Female", desc: "Calibrate female ovulatory & metabolic rate baseline." }
         ]
       },
       {
@@ -867,7 +985,10 @@
       const totalSteps = SURVEY_QUESTIONS.length;
       const progressPercent = Math.min(100, Math.round(((currentQIndex + 1) / totalSteps) * 100));
       document.getElementById('survey-progress-fill').style.width = `${progressPercent}%`;
-      document.getElementById('survey-step-num').innerText = q.type === 'dopamine' ? '✨ Milestone Insight' : `Question ${currentQIndex + 1} of ${totalSteps}`;
+      document.getElementById('step-name').innerText = q.type === 'dopamine' ? '✨ Milestone Insight' : `Question ${currentQIndex + 1} of ${totalSteps}`;
+      document.getElementById('step-progress-percent').innerText = `${progressPercent}%`;
+
+      document.getElementById('btn-prev').disabled = (currentQIndex === 0);
 
       localStorage.setItem('tovelu_survey_state', JSON.stringify({
         active: true,
@@ -878,33 +999,33 @@
       if (q.type === 'dopamine') {
         container.innerHTML = `
           <div class="dopamine-card">
-            <span class="badge badge-vitality" style="margin-bottom: 1rem;">${q.badge}</span>
+            <span class="badge" style="margin-bottom: 1rem;">${q.badge}</span>
             
             <div class="visual-gauge-box">
               <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">${q.gauge.title}</div>
-              <div style="font-size: 1.6rem; font-weight: 800; color: var(--vitality); margin: 0.25rem 0;">${q.gauge.value}</div>
-              <div style="font-size: 0.78rem; color: var(--luminous); margin-bottom: 0.6rem;">${q.gauge.percentile}</div>
-              <div style="height: 6px; background: var(--surface); border-radius: 999px; overflow: hidden;">
+              <div style="font-size: 1.8rem; font-weight: 800; color: var(--vitality); margin: 0.25rem 0;">${q.gauge.value}</div>
+              <div style="font-size: 0.8rem; color: var(--luminous); font-weight: 700; margin-bottom: 0.75rem;">${q.gauge.percentile}</div>
+              <div style="height: 8px; background: var(--border); border-radius: 999px; overflow: hidden;">
                 <div style="height: 100%; width: ${q.gauge.barWidth}; background: linear-gradient(90deg, var(--luminous), var(--vitality));"></div>
               </div>
             </div>
 
-            <p style="font-size: 0.9rem; line-height: 1.6; color: var(--text-main); margin-bottom: 1rem;">
+            <p style="font-size: 0.95rem; line-height: 1.6; color: var(--text-main); margin-bottom: 1rem;">
               ${q.data}
             </p>
 
             <div class="quote-box">
               "${q.quote}"<br>
-              <strong style="color: var(--text-main); font-size: 0.8rem;">— ${q.author}</strong>
+              <strong style="color: var(--text-main); font-size: 0.85rem;">— ${q.author}</strong>
             </div>
-
-            <button class="btn-primary" style="width: 100%; padding: 0.95rem; font-size: 0.95rem;" onclick="${q.isFinal ? 'finishSurvey()' : 'nextQuestion()'}">
-              ${q.isFinal ? 'UNLOCK MY MASTER HEALTH BLUEPRINT ➔' : 'CONTINUE MY DISCOVERY ➔'}
-            </button>
           </div>
         `;
+        document.getElementById('btn-next').innerText = q.isFinal ? 'UNLOCK MY HEALTH BLUEPRINT ➔' : 'CONTINUE MY DISCOVERY ➔';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
       }
+
+      document.getElementById('btn-next').innerText = 'Continue ➔';
 
       if (q.type === 'single') {
         container.innerHTML = `
@@ -912,18 +1033,23 @@
             <h2 class="question-title">${q.title}</h2>
             <p class="question-subtitle">${q.subtitle}</p>
             <div class="option-card-list">
-              ${q.options.map(opt => `
-                <div class="option-card" onclick="selectSingleOption('${q.id}', '${opt.title.replace(/'/g, "\\'")}')">
-                  <span class="option-emoji">${opt.emoji}</span>
-                  <div>
-                    <div class="option-title">${opt.title}</div>
-                    ${opt.desc ? `<div class="option-desc">${opt.desc}</div>` : ''}
+              ${q.options.map(opt => {
+                const isSelected = userAnswers[q.id] === opt.title;
+                return `
+                  <div class="option-card ${isSelected ? 'selected' : ''}" onclick="selectSingleCard(this, '${q.id}', '${opt.title.replace(/'/g, "\\'")}')">
+                    <div class="option-check-circle">${isSelected ? '✓' : ''}</div>
+                    <span class="option-emoji">${opt.emoji}</span>
+                    <div style="flex: 1;">
+                      <div class="option-title">${opt.title}</div>
+                      ${opt.desc ? `<div class="option-desc">${opt.desc}</div>` : ''}
+                    </div>
                   </div>
-                </div>
-              `).join('')}
+                `;
+              }).join('')}
             </div>
           </div>
         `;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
       }
 
@@ -932,56 +1058,57 @@
           <div>
             <h2 class="question-title">${q.title}</h2>
             <p class="question-subtitle">${q.subtitle}</p>
-            <div class="option-card-list" id="multi-card-list">
-              ${q.options.map(opt => `
-                <div class="option-card" onclick="toggleMultiOption(this, '${q.id}', '${opt.title.replace(/'/g, "\\'")}')">
-                  <span class="option-emoji">${opt.emoji}</span>
-                  <div class="option-title">${opt.title}</div>
-                </div>
-              `).join('')}
+            <div class="option-card-list">
+              ${q.options.map(opt => {
+                const isSelected = userAnswers[q.id] && userAnswers[q.id].includes(opt.title);
+                return `
+                  <div class="option-card ${isSelected ? 'selected' : ''}" onclick="toggleMultiCard(this, '${q.id}', '${opt.title.replace(/'/g, "\\'")}')">
+                    <div class="option-check-circle">${isSelected ? '✓' : ''}</div>
+                    <span class="option-emoji">${opt.emoji}</span>
+                    <div class="option-title" style="flex: 1;">${opt.title}</div>
+                  </div>
+                `;
+              }).join('')}
             </div>
-            <button class="btn-primary" style="width: 100%; margin-top: 1.5rem; padding: 0.9rem;" onclick="nextQuestion()">
-              Save & Continue ➔
-            </button>
           </div>
         `;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
       }
 
       if (q.type === 'dob') {
+        const savedDob = userAnswers['dob'] ? userAnswers['dob'].split(' ') : ['14', 'August', '1992'];
         container.innerHTML = `
           <div>
             <h2 class="question-title">${q.title}</h2>
             <p class="question-subtitle">${q.subtitle}</p>
             <div style="display: grid; grid-template-columns: 1fr 1.5fr 1.2fr; gap: 0.75rem; margin-bottom: 1.5rem;">
               <div>
-                <label style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; display: block; margin-bottom: 0.3rem;">DAY</label>
+                <label style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; display: block; margin-bottom: 0.35rem;">DAY</label>
                 <select class="survey-input" id="dob-day">
-                  ${Array.from({length: 31}, (_, i) => `<option value="${i+1}" ${i+1 === 14 ? 'selected':''}>${i+1}</option>`).join('')}
+                  ${Array.from({length: 31}, (_, i) => `<option value="${i+1}" ${String(i+1) === savedDob[0] ? 'selected':''}>${i+1}</option>`).join('')}
                 </select>
               </div>
               <div>
-                <label style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; display: block; margin-bottom: 0.3rem;">MONTH</label>
+                <label style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; display: block; margin-bottom: 0.35rem;">MONTH</label>
                 <select class="survey-input" id="dob-month">
-                  ${["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].map((m, idx) => `
-                    <option value="${m}" ${m === 'August' ? 'selected':''}>${m}</option>
+                  ${["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].map(m => `
+                    <option value="${m}" ${m === savedDob[1] ? 'selected':''}>${m}</option>
                   `).join('')}
                 </select>
               </div>
               <div>
-                <label style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; display: block; margin-bottom: 0.3rem;">YEAR</label>
+                <label style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; display: block; margin-bottom: 0.35rem;">YEAR</label>
                 <select class="survey-input" id="dob-year">
                   ${Array.from({length: 85}, (_, i) => 2018 - i).map(y => `
-                    <option value="${y}" ${y === 1992 ? 'selected':''}>${y}</option>
+                    <option value="${y}" ${String(y) === savedDob[2] ? 'selected':''}>${y}</option>
                   `).join('')}
                 </select>
               </div>
             </div>
-            <button class="btn-primary" style="width: 100%; padding: 0.9rem;" onclick="saveDobAndNext()">
-              Confirm Exact Date of Birth ➔
-            </button>
           </div>
         `;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
       }
 
@@ -997,19 +1124,16 @@
             </div>
 
             <div id="height-cm-wrap">
-              <input type="number" class="survey-input" id="input-height-cm" placeholder="e.g. 178" value="178" />
+              <input type="number" class="survey-input" id="input-height-cm" placeholder="e.g. 178" value="${userAnswers['height_num'] || '178'}" />
             </div>
 
             <div id="height-ft-wrap" style="display: none; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
               <input type="number" class="survey-input" id="input-height-ft" placeholder="Feet (e.g. 5)" value="5" />
               <input type="number" class="survey-input" id="input-height-in" placeholder="Inches (e.g. 10)" value="10" />
             </div>
-
-            <button class="btn-primary" style="width: 100%; padding: 0.9rem;" onclick="saveHeightAndNext()">
-              Confirm Height ➔
-            </button>
           </div>
         `;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
       }
 
@@ -1024,13 +1148,10 @@
               <button class="unit-toggle-btn" id="btn-lbs" onclick="toggleWeightUnit('lbs')">Pounds (lbs)</button>
             </div>
 
-            <input type="number" class="survey-input" id="input-weight" placeholder="e.g. 74" value="74" step="0.5" />
-
-            <button class="btn-primary" style="width: 100%; padding: 0.9rem;" onclick="saveWeightAndNext()">
-              Confirm Weight ➔
-            </button>
+            <input type="number" class="survey-input" id="input-weight" placeholder="e.g. 74" value="${userAnswers['weight_num'] || '74'}" step="0.5" />
           </div>
         `;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
       }
 
@@ -1040,19 +1161,16 @@
             <h2 class="question-title">${q.title}</h2>
             <p class="question-subtitle">${q.subtitle}</p>
 
-            <label style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; display: block; margin-bottom: 0.3rem;">SELECT COUNTRY (195 SOVEREIGN NATIONS)</label>
+            <label style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; display: block; margin-bottom: 0.35rem;">SELECT COUNTRY (195 SOVEREIGN NATIONS)</label>
             <select class="survey-input" id="loc-country">
-              ${COUNTRIES.map(c => `<option value="${c}" ${c === 'India' ? 'selected' : ''}>${c}</option>`).join('')}
+              ${COUNTRIES.map(c => `<option value="${c}" ${c === (userAnswers['country'] || 'India') ? 'selected' : ''}>${c}</option>`).join('')}
             </select>
 
-            <label style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; display: block; margin-bottom: 0.3rem;">CITY / STATE / POSTAL CODE</label>
-            <input type="text" class="survey-input" id="loc-city" placeholder="e.g. Mumbai, Maharashtra" value="Mumbai, Maharashtra" />
-
-            <button class="btn-primary" style="width: 100%; padding: 0.9rem;" onclick="saveLocationAndNext()">
-              Confirm Location ➔
-            </button>
+            <label style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; display: block; margin-bottom: 0.35rem; margin-top: 1rem;">CITY / STATE / POSTAL CODE</label>
+            <input type="text" class="survey-input" id="loc-city" placeholder="e.g. Mumbai, Maharashtra" value="${userAnswers['city'] || 'Mumbai, Maharashtra'}" />
           </div>
         `;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
       }
 
@@ -1061,29 +1179,38 @@
           <div>
             <h2 class="question-title">${q.title}</h2>
             <p class="question-subtitle">${q.subtitle}</p>
-
-            <input type="text" class="survey-input" id="time-input" placeholder="e.g. 06:30 AM" value="${q.defaultVal}" />
-
-            <button class="btn-primary" style="width: 100%; padding: 0.9rem;" onclick="saveTimeAndNext('${q.id}')">
-              Confirm Time ➔
-            </button>
+            <input type="text" class="survey-input" id="time-input" placeholder="e.g. 06:30 AM" value="${userAnswers[q.id] || q.defaultVal}" />
           </div>
         `;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
       }
     }
 
-    function selectSingleOption(qId, value) {
+    function selectSingleCard(cardEl, qId, value) {
+      document.querySelectorAll('.option-card').forEach(c => {
+        c.classList.remove('selected');
+        const check = c.querySelector('.option-check-circle');
+        if (check) check.innerText = '';
+      });
+
+      cardEl.classList.add('selected');
+      const check = cardEl.querySelector('.option-check-circle');
+      if (check) check.innerText = '✓';
+
       userAnswers[qId] = value;
-      setTimeout(() => {
-        nextQuestion();
-      }, 220);
     }
 
-    function toggleMultiOption(cardEl, qId, value) {
+    function toggleMultiCard(cardEl, qId, value) {
       cardEl.classList.toggle('selected');
+      const check = cardEl.querySelector('.option-check-circle');
+      if (cardEl.classList.contains('selected')) {
+        if (check) check.innerText = '✓';
+      } else {
+        if (check) check.innerText = '';
+      }
+
       if (!userAnswers[qId]) userAnswers[qId] = [];
-      
       const idx = userAnswers[qId].indexOf(value);
       if (idx > -1) {
         userAnswers[qId].splice(idx, 1);
@@ -1092,12 +1219,35 @@
       }
     }
 
-    function saveDobAndNext() {
-      const d = document.getElementById('dob-day').value;
-      const m = document.getElementById('dob-month').value;
-      const y = document.getElementById('dob-year').value;
-      userAnswers['dob'] = `${d} ${m} ${y}`;
-      nextQuestion();
+    function saveCurrentInputs() {
+      const q = SURVEY_QUESTIONS[currentQIndex];
+      if (!q) return;
+
+      if (q.type === 'dob') {
+        const d = document.getElementById('dob-day').value;
+        const m = document.getElementById('dob-month').value;
+        const y = document.getElementById('dob-year').value;
+        userAnswers['dob'] = `${d} ${m} ${y}`;
+      } else if (q.type === 'height') {
+        if (currentHeightUnit === 'cm') {
+          const val = document.getElementById('input-height-cm').value;
+          userAnswers['height_num'] = val;
+          userAnswers['height'] = `${val} cm`;
+        } else {
+          const ft = document.getElementById('input-height-ft').value;
+          const inch = document.getElementById('input-height-in').value;
+          userAnswers['height'] = `${ft} ft ${inch} in`;
+        }
+      } else if (q.type === 'weight') {
+        const val = document.getElementById('input-weight').value;
+        userAnswers['weight_num'] = val;
+        userAnswers['weight'] = `${val} ${currentWeightUnit}`;
+      } else if (q.type === 'location') {
+        userAnswers['country'] = document.getElementById('loc-country').value;
+        userAnswers['city'] = document.getElementById('loc-city').value;
+      } else if (q.type === 'time') {
+        userAnswers[q.id] = document.getElementById('time-input').value;
+      }
     }
 
     let currentHeightUnit = 'cm';
@@ -1109,17 +1259,6 @@
       document.getElementById('height-ft-wrap').style.display = unit === 'ft' ? 'grid' : 'none';
     }
 
-    function saveHeightAndNext() {
-      if (currentHeightUnit === 'cm') {
-        userAnswers['height'] = `${document.getElementById('input-height-cm').value} cm`;
-      } else {
-        const ft = document.getElementById('input-height-ft').value;
-        const inch = document.getElementById('input-height-in').value;
-        userAnswers['height'] = `${ft} ft ${inch} in`;
-      }
-      nextQuestion();
-    }
-
     let currentWeightUnit = 'kg';
     function toggleWeightUnit(unit) {
       currentWeightUnit = unit;
@@ -1127,26 +1266,29 @@
       document.getElementById('btn-lbs').className = unit === 'lbs' ? 'unit-toggle-btn active' : 'unit-toggle-btn';
     }
 
-    function saveWeightAndNext() {
-      const val = document.getElementById('input-weight').value;
-      userAnswers['weight'] = `${val} ${currentWeightUnit}`;
-      nextQuestion();
-    }
-
-    function saveLocationAndNext() {
-      const country = document.getElementById('loc-country').value;
-      const city = document.getElementById('loc-city').value;
-      userAnswers['country'] = country;
-      userAnswers['city'] = city;
-      nextQuestion();
-    }
-
-    function saveTimeAndNext(qId) {
-      userAnswers[qId] = document.getElementById('time-input').value;
-      nextQuestion();
+    function prevQuestion() {
+      if (currentQIndex > 0) {
+        saveCurrentInputs();
+        currentQIndex--;
+        renderCurrentQuestion();
+      }
     }
 
     function nextQuestion() {
+      const q = SURVEY_QUESTIONS[currentQIndex];
+      
+      if (q && q.type === 'dopamine' && q.isFinal) {
+        finishSurvey();
+        return;
+      }
+
+      saveCurrentInputs();
+
+      if (q && q.type === 'single' && !userAnswers[q.id]) {
+        alert('Please select an option to continue.');
+        return;
+      }
+
       if (currentQIndex < SURVEY_QUESTIONS.length - 1) {
         currentQIndex++;
         renderCurrentQuestion();

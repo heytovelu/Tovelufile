@@ -120,7 +120,7 @@
       letter-spacing: -0.01em;
     }
 
-    /* Desktop Navigation Tabs (5 Core Sections: FLOW, BOOK, CHAT, HEALTH, YOU) */
+    /* Desktop Navigation Tabs (5 Core Sections) */
     .desktop-nav {
       display: flex;
       align-items: center;
@@ -661,7 +661,7 @@
     }
   </style>
 </head>
-<body class="theme-dark">
+<body class="theme-light">
 
   <!-- ==================== HEADER ==================== -->
   <header class="app-header">
@@ -1696,14 +1696,18 @@
       }
     ];
 
+    let isDark = false;
+
     // Initialize Page & Session Recovery
     document.addEventListener('DOMContentLoaded', () => {
+      // Check if user has answered survey before
       const saved = localStorage.getItem('tovelu_survey_answers');
       if (saved) {
         userAnswers = JSON.parse(saved);
         updateDashboardWithUserBio();
       }
 
+      // Check if user left mid-survey
       const midState = localStorage.getItem('tovelu_survey_state');
       if (midState) {
         const state = JSON.parse(midState);
@@ -1723,14 +1727,17 @@
     function switchTab(tabId) {
       activeTab = tabId;
 
+      // Update Desktop Tabs
       document.querySelectorAll('.nav-tab-btn').forEach(btn => btn.classList.remove('active'));
       const dtab = document.getElementById(`dtab-${tabId}`);
       if (dtab) dtab.classList.add('active');
 
+      // Update Mobile Tabs
       document.querySelectorAll('.mobile-nav-item').forEach(item => item.classList.remove('active'));
       const mtab = document.getElementById(`mtab-${tabId}`);
       if (mtab) mtab.classList.add('active');
 
+      // Update Panes
       document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
       const targetPane = document.getElementById(`pane-${tabId}`);
       if (targetPane) targetPane.classList.add('active');
@@ -1798,6 +1805,9 @@
       }, 450);
     }
 
+    // ==========================================================================
+    // SURVEY / INTAKE LOGIC & AUTO-SAVE
+    // ==========================================================================
     function startSurvey(reset) {
       if (reset) {
         currentQIndex = 0;
@@ -1816,17 +1826,20 @@
       const container = document.getElementById('survey-content-area');
       const q = SURVEY_QUESTIONS[currentQIndex];
 
+      // Update Top Progress Bar
       const totalSteps = SURVEY_QUESTIONS.length;
       const progressPercent = Math.min(100, Math.round(((currentQIndex + 1) / totalSteps) * 100));
       document.getElementById('survey-progress-fill').style.width = `${progressPercent}%`;
       document.getElementById('survey-step-num').innerText = q.type === 'dopamine' ? '✨ Milestone Insight' : `Question ${currentQIndex + 1} of ${totalSteps}`;
 
+      // Save state in localStorage for persistent session resume
       localStorage.setItem('tovelu_survey_state', JSON.stringify({
         active: true,
         index: currentQIndex,
         answers: userAnswers
       }));
 
+      // Render Dopamine Card
       if (q.type === 'dopamine') {
         container.innerHTML = `
           <div class="dopamine-card">
@@ -1858,6 +1871,7 @@
         return;
       }
 
+      // Render Standard Single-Select Question
       if (q.type === 'single') {
         container.innerHTML = `
           <div>
@@ -1879,6 +1893,7 @@
         return;
       }
 
+      // Render Multi-Select Question
       if (q.type === 'multi') {
         container.innerHTML = `
           <div>
@@ -1900,6 +1915,7 @@
         return;
       }
 
+      // Render Date of Birth (Exact DOB Picker)
       if (q.type === 'dob') {
         container.innerHTML = `
           <div>
@@ -1937,6 +1953,7 @@
         return;
       }
 
+      // Render Height (Metric / Imperial)
       if (q.type === 'height') {
         container.innerHTML = `
           <div>
@@ -1965,6 +1982,7 @@
         return;
       }
 
+      // Render Weight (kg / lbs)
       if (q.type === 'weight') {
         container.innerHTML = `
           <div>
@@ -1986,6 +2004,7 @@
         return;
       }
 
+      // Render Location (195 Sovereign Countries Dropdown + City)
       if (q.type === 'location') {
         container.innerHTML = `
           <div>
@@ -2008,6 +2027,7 @@
         return;
       }
 
+      // Render Time Selector
       if (q.type === 'time') {
         container.innerHTML = `
           <div>
