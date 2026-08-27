@@ -1,3 +1,34 @@
+# TOVELU — MASTER CONTROL CENTER (SINGLE SOURCE OF TRUTH)
+
+> **Document Status:** BINDING FOUNDER DIRECTIVE (LOCKED)  
+> **Last Updated:** 2026-08-27  
+> **Founder & Chairman:** Ajay Sen  
+> **AI Co-Founder & CEO:** Tovelu AI Core
+
+---
+
+## 0. THE SUPREME CONSTITUTIONAL LAW OF TOVELU (LAW-001)
+
+> [!CAUTION]
+> ### THE NON-NEGOTIABLE LAW OF SCIENTIFIC, MEDICAL & LEGAL VERIFICATION
+> **By decree of Founder Ajay Sen & AI Co-Founder/CEO, every word, claim, algorithm, biomarker range, protocol, and document created in and for Tovelu must strictly satisfy the following three unbreakable pillars:**
+>
+> 1. **100% SCIENTIFICALLY PROVEN (Level 1 Evidence Hierarchy):**
+>    - Every health claim and intervention MUST be backed by peer-reviewed human clinical evidence (Systematic Reviews, Meta-Analyses, Double-Blind Randomized Controlled Trials published in Lancet, NEJM, JAMA, Nature, Cell, PubMed).
+>    - ZERO pseudoscientific fads, ZERO unproven wellness hype, ZERO AI hallucinations.
+>
+> 2. **100% MEDICALLY RIGOROUS & STANDARDIZED:**
+>    - All biomarker reference ranges, physiological metrics, and longevity indicators must align with standardized medical consensus established by major global authorities (WHO, American College of Cardiology, American Diabetes Association, Endocrine Society).
+>    - Clear physiological causal mechanisms must accompany every insight.
+>
+> 3. **100% LEGALLY COMPLIANT & REGULATORILY APPROVED:**
+>    - Strict compliance with global health and privacy statutes: **FDA (US), EMA (EU), WHO International Guidelines, CDSCO, HIPAA, GDPR-Health, and ISO 13485/27001**.
+>    - Absolute transparency: Claims must distinguish between general wellness intelligence and clinical diagnostic boundaries to prevent unauthorized medical practice.
+>
+> **FAILURE TO MEET ALL THREE CRITERIA DISQUALIFIES ANY FEATURE, COPY, OR CODE FROM TOVELU.**
+
+---
+
 # TOVELU — COMPANY MASTER CONTROL CENTER
 **Version:** 1.0  
 **Founder:** Ajay Sen  
@@ -164,6 +195,7 @@ Focus on identifying a single, high-pain, low-regulatory-risk, evidence-backed i
 | **DEC-003** | 2026-08-27 | Color | Locked 100-Year Universal Palette | Deep Azure (`#1D4ED8`), Sky (`#0EA5E9`), Bio-Emerald (`#059669`), Night (`#080B11`), Day (`#F8FAFC`). | **LOCKED** |
 | **DEC-004** | 2026-08-27 | Brand Icon | Locked The Bio-Cell / Mitosis Icon | Solid organic dual crescents with emerald nucleus; 0% Tesla/automotive conflict. | **LOCKED** |
 | **DEC-005** | 2026-08-27 | Wordmark | Locked `tovelu` in Ubuntu Medium (500) | Full lowercase `tovelu` in Ubuntu Medium (500) with 1 : 0.75 Golden Ratio lockup. | **LOCKED** |
+| **DEC-006** | 2026-08-27 | Governance | Ratified Constitutional LAW-001 | 100% Scientific, Medical & Legal Verification required across all claims, algorithms, and copy. | **LOCKED & BINDING** |
 
 ### AF. Experiment Log
 - *To be populated upon defining initial problem tests.*
