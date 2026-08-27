@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>tovelu — THAIS Health Intelligence Intake (New User Survey)</title>
+  
+  <!-- Locked Brand Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Ubuntu:wght@500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      /* Locked 100-Year Universal Palette */
+      --primary: #1D4ED8;
+      --primary-hover: #1E40AF;
+      --primary-glow: #2563EB;
+      --luminous: #0EA5E9;
+      --luminous-glow: rgba(14, 165, 233, 0.22);
+      --vitality: #10B981;
+      --vitality-deep: #059669;
+      --vitality-glow: rgba(16, 185, 129, 0.2);
+      --warning: #F59E0B;
+      --warning-glow: rgba(245, 158, 11, 0.18);
+      --danger: #EF4444;
+      
+      --canvas: #080B11;
+      --surface: #0E131F;
+      --surface-elevated: #151D2E;
+      --surface-active: #1C273C;
+      --border: #1F2C42;
+      --border-subtle: #162032;
+      --text-main: #F8FAFC;
+      --text-muted: #94A3B8;
+      --text-subtle: #64748B;
+      --card-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.6);
+      --nav-bg: rgba(14, 19, 31, 0.92);
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-xl: 26px;
+      --radius-full: 9999px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--canvas);
+      color: var(--text-main);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    h1, h2, h3, h4, .brand-heading {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    /* Top Sticky Header */
+    header.survey-header {
+      height: 64px;
+      background: var(--nav-bg);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.25rem;
+      backdrop-filter: blur(16px);
+    }
+
+    .brand-header-lockup {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      text-decoration: none;
+    }
+    .brand-icon-wrap {
+      width: 32px;
+      height: 32px;
+    }
+    .brand-wordmark-txt {
+      font-family: 'Ubuntu', sans-serif;
+      font-weight: 500;
+      font-size: 24px;
+      color: var(--text-main);
+      line-height: 1;
+      letter-spacing: -0.01em;
+    }
+
+    .survey-progress-wrap {
+      flex: 1;
+      max-width: 480px;
+      margin: 0 1.25rem;
+      height: 7px;
+      background: var(--surface-elevated);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .survey-progress-bar {
+      height: 100%;
+      width: 5%;
+      background: linear-gradient(90deg, var(--luminous), var(--vitality));
+      transition: width 0.35s ease;
+    }
+
+    .survey-body {
+      max-width: 640px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2.25rem 1.25rem 4rem 1.25rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* Question Cards & Options */
+    .question-title {
+      font-size: 1.45rem;
+      font-weight: 800;
+      line-height: 1.3;
+      margin-bottom: 0.45rem;
+    }
+    .question-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1.75rem;
+      line-height: 1.5;
+    }
+
+    .option-card-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .option-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      user-select: none;
+    }
+    .option-card:hover {
+      border-color: var(--luminous);
+      background: var(--surface-elevated);
+      transform: translateY(-1px);
+    }
+    .option-card:active {
+      transform: scale(0.985);
+    }
+    .option-card.selected {
+      border-color: var(--primary);
+      background: rgba(29, 78, 216, 0.12);
+      box-shadow: 0 0 0 1px var(--primary);
+    }
+
+    .option-emoji {
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+    .option-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--text-main);
+    }
+    .option-desc {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+      line-height: 1.4;
+    }
+
+    .unit-toggle-wrap {
+      display: flex;
+      background: var(--surface-elevated);
+      padding: 0.25rem;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border);
+      width: fit-content;
+      margin-bottom: 1.25rem;
+    }
+    .unit-toggle-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 0.35rem 1rem;
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .unit-toggle-btn.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    .survey-input {
+      width: 100%;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      color: var(--text-main);
+      padding: 0.9rem 1.15rem;
+      border-radius: var(--radius-md);
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      margin-bottom: 1rem;
+      transition: border-color 0.2s;
+    }
+    .survey-input:focus {
+      border-color: var(--luminous);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.85rem 1.5rem;
+      border-radius: var(--radius-md);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.92rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 15px rgba(29, 78, 216, 0.35);
+    }
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: var(--radius-full);
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .badge-vitality {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--vitality);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    /* Dopamine Interstitial Cards */
+    .dopamine-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 2.25rem 1.75rem;
+      box-shadow: var(--card-shadow);
+      text-align: center;
+      animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.94); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .visual-gauge-box {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+      text-align: left;
+    }
+    .quote-box {
+      border-left: 3px solid var(--vitality);
+      padding-left: 1rem;
+      margin: 1.5rem 0;
+      text-align: left;
+      font-style: italic;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="survey-header">
+    <div class="brand-header-lockup">
+      <div class="brand-icon-wrap">
+        <svg width="100%" height="100%" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M50 16 C28 16, 16 32, 16 50 C16 68, 28 84, 50 84 C38 72, 34 58, 34 50 C34 42, 38 28, 50 16 Z" fill="url(#h-l)"/>
+          <path d="M50 16 C72 16, 84 32, 84 50 C84 68, 72 84, 50 84 C62 72, 66 58, 66 50 C66 42, 62 28, 50 16 Z" fill="url(#h-r)"/>
+          <circle cx="50" cy="50" r="8" fill="#10B981"/>
+          <defs>
+            <linearGradient id="h-l" x1="16" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#38BDF8"/>
+              <stop offset="1" stop-color="#1D4ED8"/>
+            </linearGradient>
+            <linearGradient id="h-r" x1="84" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#059669"/>
+              <stop offset="1" stop-color="#10B981"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <span class="brand-wordmark-txt">tovelu</span>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="survey-progress-wrap">
+      <div class="survey-progress-bar" id="survey-progress-fill"></div>
+    </div>
+
+    <div style="font-size: 0.78rem; font-weight: 700; color: var(--luminous);" id="survey-step-num">
+      Question 1 of 34
+    </div>
+  </header>
+
+  <!-- Survey Body Area -->
+  <main class="survey-body" id="survey-content-area">
+    <!-- Injected dynamically via script -->
+  </main>
+
+  <script>
+    let currentQIndex = 0;
+    let userAnswers = {};
+
+    const COUNTRIES = [
+      "India", "United States", "United Kingdom", "United Arab Emirates", "Australia", "Canada", "Germany",
+      "Singapore", "Saudi Arabia", "South Africa", "Brazil", "France", "Italy", "Japan", "Mexico", "Spain",
+      "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", "Austria",
+      "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan",
+      "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde",
+      "Cambodia", "Cameroon", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo",
+      "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic",
+      "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji",
+      "Finland", "Gabon", "Gambia", "Georgia", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guyana", "Haiti",
+      "Honduras", "Hungary", "Iceland", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Jamaica", "Jordan",
+      "Kazakhstan", "Kenya", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya",
+      "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta",
+      "Mauritania", "Mauritius", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar", "Namibia",
+      "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea", "Norway", "Oman", "Pakistan",
+      "Palestine", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar",
+      "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", "Samoa", "San Marino", "Senegal", "Serbia",
+      "Seychelles", "Sierra Leone", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Korea", "Sri Lanka",
+      "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Togo",
+      "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Uganda", "Ukraine", "Uruguay", "Uzbekistan", "Vatican City",
+      "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
+    ];
+
+    const SURVEY_QUESTIONS = [
+      {
+        id: "sex",
+        title: "1. What was your biological sex at birth?",
+        subtitle: "To calculate your natural hormone balance and daily calorie burn.",
+        type: "single",
+        options: [
+          { emoji: "👨", title: "Male", desc: "Calibrate male androgen & metabolic profile." },
+          { emoji: "👩", title: "Female", desc: "Calibrate female ovulatory & metabolic profile." }
+        ]
+      },
+      {
+        id: "dob",
+        title: "2. What is your exact Date of Birth?",
+        subtitle: "To calculate your exact age down to the day for biological longevity tracking.",
+        type: "dob"
+      },
+      {
+        id: "height",
+        title: "3. What is your height?",
+        subtitle: "To calculate your body proportions and ideal healthy weight.",
+        type: "height"
+      },
+      {
+        id: "dopamine_1",
+        type: "dopamine",
+        badge: "⚡ MILESTONE UNLOCKED: BIOLOGICAL METABOLIC BASELINE",
+        gauge: {
+          title: "BASAL ENERGY EXPENDITURE",
+          value: "1,740 kcal / day",
+          percentile: "Top 11.2% Metabolic Profile",
+          barWidth: "78%"
+        },
+        data: "Out of 8.15 Billion people on Earth, only 8.4% share your exact age, height, and metabolic baseline. Your body is biologically unique.",
+        quote: "Natural forces within us are the true healers of disease.",
+        author: "Hippocrates (Father of Modern Medicine)"
+      },
+      {
+        id: "weight",
+        title: "4. What is your current weight?",
+        subtitle: "To calculate how much energy and clean protein your body needs each day.",
+        type: "weight"
+      },
+      {
+        id: "location",
+        title: "5. Where do you live?",
+        subtitle: "So your meal plan uses fresh whole foods from your local grocery stores and syncs your sun times.",
+        type: "location"
+      },
+      {
+        id: "work_style",
+        title: "6. What best describes your daily work routine?",
+        subtitle: "To match your daily movement and carbohydrate requirements.",
+        type: "single",
+        options: [
+          { emoji: "🪑", title: "Sitting mostly (Desk / Driving)", desc: "Sitting for 6+ hours/day (Software, office, finance, driving)." },
+          { emoji: "🚶", title: "Moving often (On your feet)", desc: "Standing/walking most of day (Teacher, nurse, retail, hospitality)." },
+          { emoji: "🏗️", title: "Heavy physical labor", desc: "Construction, farming, heavy lifting, military, athletic training." },
+          { emoji: "🏠", title: "At home / Student / Flexible", desc: "Flexible indoor routine with light daily movement." }
+        ]
+      },
+      {
+        id: "wake_time",
+        title: "7. What time do you typically wake up on weekdays?",
+        subtitle: "To set your exact morning sunlight and cortisol activation window.",
+        type: "time",
+        defaultVal: "06:30 AM"
+      },
+      {
+        id: "dopamine_2",
+        type: "dopamine",
+        badge: "🧬 MILESTONE UNLOCKED: 24-HOUR CIRCADIAN HORMONE WAVE",
+        gauge: {
+          title: "CIRCADIAN ALIGNMENT INDEX",
+          value: "Solar Synchronized",
+          percentile: "Optimal 45-Min Morning Window",
+          barWidth: "86%"
+        },
+        data: "64% of people in your timezone suffer from artificial screen jetlag. We have mapped your exact morning sunlight window to lock your cortisol spike and double your deep sleep tonight.",
+        quote: "Your body is a temple, but only if you treat it as one.",
+        author: "Nikola Tesla"
+      },
+      {
+        id: "sleep_time",
+        title: "8. What time do you turn off the lights to sleep?",
+        subtitle: "To set your evening melatonin shield and bedroom temperature protocol.",
+        type: "time",
+        defaultVal: "10:30 PM"
+      },
+      {
+        id: "shift_work",
+        title: "9. Do you work night shifts or changing shift hours?",
+        subtitle: "To adapt your fasting and meal timings if your schedule rotates.",
+        type: "single",
+        options: [
+          { emoji: "☀️", title: "Normal day hours", desc: "I sleep at night and stay awake during the daytime." },
+          { emoji: "🌙", title: "Permanent night shift", desc: "I regularly work overnight (e.g. 22:00 to 06:00)." },
+          { emoji: "🔄", title: "Rotating shifts", desc: "My work schedule shifts between day and night." }
+        ]
+      },
+      {
+        id: "primary_goal",
+        title: "10. What is your #1 BIGGEST health goal right now?",
+        subtitle: "Pick the one single achievement that matters most to your life.",
+        type: "single",
+        options: [
+          { emoji: "🔥", title: "Lose belly fat & drop weight", desc: "Burn visceral fat and get a lean, toned physique." },
+          { emoji: "⚡", title: "Stop feeling tired & get all-day energy", desc: "Eliminate brain fog and afternoon 2 PM energy slumps." },
+          { emoji: "🩸", title: "Lower blood sugar / Reverse pre-diabetes", desc: "Resensitize insulin and flatten glucose spikes." },
+          { emoji: "🫀", title: "Lower blood pressure & protect heart", desc: "Clear arterial inflammation and lower ApoB." },
+          { emoji: "🌿", title: "Heal digestion, bloating & acid reflux", desc: "Restore healthy gut microbiome and stop stomach pain." },
+          { emoji: "🧬", title: "Reverse biological age & maximize lifespan", desc: "Decelerate cellular epigenetic aging." },
+          { emoji: "💪", title: "Build muscle & physical strength", desc: "Protect against sarcopenia and increase functional power." },
+          { emoji: "😴", title: "Fix sleep quality & wake up refreshed", desc: "Achieve 8 hours of deep restorative sleep." }
+        ]
+      },
+      {
+        id: "secondary_goals",
+        title: "11. Select any Secondary Goals (Choose up to 3):",
+        subtitle: "THAIS will integrate these into your master weekly playbook.",
+        type: "multi",
+        options: [
+          { emoji: "✨", title: "Clear glowing skin & reduce puffiness" },
+          { emoji: "🧘", title: "Reduce daily mental anxiety and stress" },
+          { emoji: "🦵", title: "Fix joint/knee stiffness and body aches" },
+          { emoji: "⚖️", title: "Balance hormones (PCOS / Testosterone)" },
+          { emoji: "💡", title: "Stop brain fog and think faster at work" }
+        ]
+      },
+      {
+        id: "commitment_pace",
+        title: "12. What pace do you want for your master protocol?",
+        subtitle: "How aggressively do you want THAIS to structure your daily habits?",
+        type: "single",
+        options: [
+          { emoji: "🌱", title: "Sustainable & Steady", desc: "Simple, small daily habit changes with zero overwhelm." },
+          { emoji: "🚀", title: "Accelerated & High-Adherence", desc: "Strict daily execution for fastest biological reversal." }
+        ]
+      },
+      {
+        id: "dopamine_3",
+        type: "dopamine",
+        badge: "🎯 MILESTONE UNLOCKED: 90-DAY BIOLOGICAL AGE TRAJECTORY",
+        gauge: {
+          title: "PREDICTED BIOLOGICAL AGE DE-ACCELERATION",
+          value: "-4.2 Years / 90 Days",
+          percentile: "Target DNAm Clock: 29.8 Yrs",
+          barWidth: "92%"
+        },
+        data: "Your selected goals match our database of ~3,500 lifestyle-reversible conditions. Users with your exact profile achieve an 84% reversal of fatigue in 21 days.",
+        quote: "He who has health has hope; and he who has hope has everything.",
+        author: "Thomas Carlyle"
+      },
+      {
+        id: "afternoon_energy",
+        title: "13. How is your energy between 2:00 PM and 4:00 PM?",
+        subtitle: "Detects post-prandial glycemic excursions and reactive insulin lags.",
+        type: "single",
+        options: [
+          { emoji: "⚡", title: "Steady & Alert", desc: "I feel active and sharp all afternoon." },
+          { emoji: "🥱", title: "Afternoon Slump", desc: "I feel sleepy or crave coffee/sweets." },
+          { emoji: "🪫", title: "Severe Crash", desc: "I feel drained and must nap or consume sugar." }
+        ]
+      },
+      {
+        id: "morning_fog",
+        title: "14. When you wake up, how long before your brain feels fully sharp?",
+        subtitle: "Detects sleep inertia and adenosine clearance efficiency.",
+        type: "single",
+        options: [
+          { emoji: "💡", title: "Instant (< 15 min)", desc: "I feel alert and clear-headed right away." },
+          { emoji: "🌫️", title: "Moderate (30 to 60 min)", desc: "I feel groggy until I shower or have tea/coffee." },
+          { emoji: "⏳", title: "Extended (1 to 2+ hours)", desc: "Brain fog lingers for hours; I rely heavily on caffeine." }
+        ]
+      },
+      {
+        id: "stress_level",
+        title: "15. How often do you feel stressed, overwhelmed, or anxious?",
+        subtitle: "Calibrates your sympathetic nervous system tone and HPA axis.",
+        type: "single",
+        options: [
+          { emoji: "🧘", title: "Rarely (Low / Calm)", desc: "I manage daily tasks with ease and minimal tension." },
+          { emoji: "😐", title: "Sometimes (Moderate)", desc: "I feel stress during work hours, but relax in evenings." },
+          { emoji: "😰", title: "Frequently (High / Chronic)", desc: "I often feel a tight chest, racing thoughts, or heavy pressure." }
+        ]
+      },
+      {
+        id: "focus_ability",
+        title: "16. How easily do you stay focused on a single task?",
+        subtitle: "Measures dopaminergic focus stability.",
+        type: "single",
+        options: [
+          { emoji: "🎯", title: "Laser Focused", desc: "I can work uninterrupted for 60–90 minutes easily." },
+          { emoji: "📱", title: "Frequent Distractions", desc: "I lose focus every 15–20 minutes and check my phone." },
+          { emoji: "🌀", title: "Scattered Attention", desc: "My mind jumps between tasks; hard to finish." }
+        ]
+      },
+      {
+        id: "dopamine_4",
+        type: "dopamine",
+        badge: "⚡ MILESTONE UNLOCKED: GLYCEMIC STABILITY SIMULATOR",
+        gauge: {
+          title: "BLOOD SUGAR STABILITY PREDICTION",
+          value: "Flat Waveform Locked",
+          percentile: "+3.5 Peak Cognitive Hours Restored",
+          barWidth: "89%"
+        },
+        data: "72% of modern knowledge workers experience blood sugar crashes after lunch. Your customized breakfast and lunch plan will keep your glycemic curve flat, restoring 3.5 extra hours of peak cognitive focus every single day.",
+        quote: "Energy is the essence of life. Every day you decide how you're going to use it.",
+        author: "Oprah Winfrey"
+      },
+      {
+        id: "sleep_latency",
+        title: "17. How long does it take you to fall asleep in bed?",
+        subtitle: "Measures GABAergic neural down-regulation speed.",
+        type: "single",
+        options: [
+          { emoji: "😴", title: "Under 15 minutes", desc: "Fast and effortless transition." },
+          { emoji: "⏳", title: "15 to 40 minutes", desc: "Tossing, turning, or light overthinking." },
+          { emoji: "🦉", title: "Over 45 minutes", desc: "Racing thoughts, restless mind, insomnia." }
+        ]
+      },
+      {
+        id: "night_waking",
+        title: "18. How many times do you wake up during the night?",
+        subtitle: "Detects nocturnal blood sugar drops and sleep apnea markers.",
+        type: "single",
+        options: [
+          { emoji: "🛌", title: "Zero times (Deep sleeper)", desc: "I sleep straight through until morning." },
+          { emoji: "🚻", title: "1 to 2 times", desc: "Light waking to use bathroom or shift position." },
+          { emoji: "😫", title: "3 or more times", desc: "Frequent waking with difficulty going back to sleep." }
+        ]
+      },
+      {
+        id: "morning_freshness",
+        title: "19. How refreshed do you feel when your alarm rings?",
+        subtitle: "Measures Stage 3 Slow-Wave & REM sleep restoration.",
+        type: "single",
+        options: [
+          { emoji: "☀️", title: "100% Recharged", desc: "I jump out of bed feeling great." },
+          { emoji: "☕", title: "Adequate (Need coffee)", desc: "I feel okay, but need a morning drink to get going." },
+          { emoji: "🧟", title: "Exhausted & Heavy", desc: "I feel like I barely slept at all." }
+        ]
+      },
+      {
+        id: "bloating",
+        title: "20. How does your stomach feel 30 to 60 minutes after eating?",
+        subtitle: "Scans for intestinal fermentation and gut barrier inflammation.",
+        type: "single",
+        options: [
+          { emoji: "👍", title: "Comfortable & Light", desc: "Zero discomfort, smooth digestion." },
+          { emoji: "🎈", title: "Bloated & Distended", desc: "Stomach feels full of air, swollen, or tight." },
+          { emoji: "🤢", title: "Heavy & Sluggish", desc: "Cramping, heavy fullness, or sluggishness." }
+        ]
+      },
+      {
+        id: "reflux",
+        title: "21. Do you experience acid reflux, heartburn, or sour burps?",
+        subtitle: "Scans for lower esophageal sphincter and stomach acid imbalance.",
+        type: "single",
+        options: [
+          { emoji: "🚫", title: "Never", desc: "Zero acid reflux symptoms." },
+          { emoji: "⚠️", title: "Occasionally (1–2x weekly)", desc: "Usually after heavy, spicy, or late meals." },
+          { emoji: "🔥", title: "Frequently (3+ days a week)", desc: "Constant burning sensation in chest or throat." }
+        ]
+      },
+      {
+        id: "bowel_habit",
+        title: "22. What is your typical daily bowel movement frequency?",
+        subtitle: "Measures colon motility and prebiotic fiber fermentation.",
+        type: "single",
+        options: [
+          { emoji: "🟢", title: "Smooth 1–2 times daily", desc: "Effortless, complete elimination." },
+          { emoji: "🟤", title: "Once every 2–3 days", desc: "Constipated, dry, requires straining." },
+          { emoji: "🟡", title: "Loose / Irregular", desc: "Unpredictable consistency or urgency." }
+        ]
+      },
+      {
+        id: "allergies",
+        title: "23. Do you have any confirmed food allergies or intolerances?",
+        subtitle: "Filters ingredients from your 3-meal recipe database.",
+        type: "multi",
+        options: [
+          { emoji: "🥛", title: "Lactose / Dairy" },
+          { emoji: "🍞", title: "Gluten / Wheat" },
+          { emoji: "🥜", title: "Peanuts or Tree Nuts" },
+          { emoji: "🦐", title: "Shellfish or Fish" },
+          { emoji: "🥚", title: "Eggs" },
+          { emoji: "✅", title: "Zero Allergies — I digest all whole foods" }
+        ]
+      },
+      {
+        id: "dopamine_5",
+        type: "dopamine",
+        badge: "🌿 MILESTONE UNLOCKED: GUT MICROBIOME INFLAMMATION SHIELD",
+        gauge: {
+          title: "TIGHT JUNCTION GUT INTEGRITY",
+          value: "Anti-Inflammatory Filter Set",
+          percentile: "94% Bloating Relief Probability",
+          barWidth: "94%"
+        },
+        data: "Over 90% of your body's serotonin (happiness chemical) is produced in your gut. We are filtering out hidden seed oils and allergens to heal your intestinal wall.",
+        quote: "All disease begins in the gut.",
+        author: "Hippocrates"
+      },
+      {
+        id: "joint_pain",
+        title: "24. Do you experience persistent joint pain or morning stiffness?",
+        subtitle: "Scans for synovial joint inflammation and cartilage wear.",
+        type: "multi",
+        options: [
+          { emoji: "🦵", title: "Knees or Hips (stairs / squatting)" },
+          { emoji: "🔙", title: "Lower Back (sitting / standing)" },
+          { emoji: "💆", title: "Neck or Upper Shoulders (desk tension)" },
+          { emoji: "✋", title: "Fingers or Wrists" },
+          { emoji: "✅", title: "Zero Joint Pain — Completely flexible" }
+        ]
+      },
+      {
+        id: "muscle_soreness",
+        title: "25. After physical exertion, how many days do muscles stay sore?",
+        subtitle: "Measures muscular protein synthesis and systemic recovery speed.",
+        type: "single",
+        options: [
+          { emoji: "⚡", title: "1 day or less", desc: "Quick recovery." },
+          { emoji: "🐢", title: "2 to 3 days", desc: "Moderate delayed soreness." },
+          { emoji: "🛑", title: "4 or more days", desc: "Prolonged soreness and slow recovery." }
+        ]
+      },
+      {
+        id: "daily_steps",
+        title: "26. What is your estimated average daily step count?",
+        subtitle: "Calibrates Zone 2 cardiovascular movement volume.",
+        type: "single",
+        options: [
+          { emoji: "🛋️", title: "Under 3,000 steps/day (Sedentary)" },
+          { emoji: "🚶", title: "3,000 to 6,000 steps/day (Light)" },
+          { emoji: "👟", title: "7,000 to 10,000 steps/day (Active)" },
+          { emoji: "🏃", title: "10,000+ steps/day (Very Active)" }
+        ]
+      },
+      {
+        id: "diet_type",
+        title: "27. Which dietary style matches your lifestyle?",
+        subtitle: "Tailors your 3-meal precision recipe generator.",
+        type: "single",
+        options: [
+          { emoji: "🥩", title: "Omnivore (All Whole Foods)", desc: "Meat, poultry, fish, eggs, dairy, plants, grains." },
+          { emoji: "🥗", title: "Vegetarian (Includes Dairy & Eggs)", desc: "Plant foods, eggs, dairy, lentils, rice & grains." },
+          { emoji: "🥛", title: "Lacto-Vegetarian (No Eggs)", desc: "Plant foods, dairy, lentils, grains (No meat/eggs)." },
+          { emoji: "🌱", title: "100% Vegan (Plant-Only)", desc: "Fruits, vegetables, legumes, grains (Zero animal foods)." },
+          { emoji: "🥑", title: "Keto / Low-Carb", desc: "High healthy fats, moderate protein, strict low carb." },
+          { emoji: "🌙", title: "Halal Whole Foods", desc: "100% Halal-certified ingredients." },
+          { emoji: "✡️", title: "Kosher Whole Foods", desc: "100% Kosher-certified ingredients." }
+        ]
+      },
+      {
+        id: "water_intake",
+        title: "28. How much plain water do you drink daily?",
+        subtitle: "Calculates cellular osmosis and osmolyte salt requirements.",
+        type: "single",
+        options: [
+          { emoji: "💧", title: "Under 1 Liter (< 4 glasses)" },
+          { emoji: "💧💧", title: "1.5 to 2.5 Liters (4 to 8 glasses)" },
+          { emoji: "💧💧💧", title: "3 Liters or more (8+ glasses)" }
+        ]
+      },
+      {
+        id: "processed_food",
+        title: "29. How often do you eat ultra-processed foods (packaged chips, soda, fried foods)?",
+        subtitle: "Measures linoleic acid seed oil exposure and liver fat risk.",
+        type: "single",
+        options: [
+          { emoji: "🍫", title: "Every day (1+ times daily)" },
+          { emoji: "🍕", title: "2 to 3 times a week" },
+          { emoji: "🥦", title: "Rarely / Never (Home-cooked whole foods)" }
+        ]
+      },
+      {
+        id: "alcohol_nicotine",
+        title: "30. What is your alcohol and nicotine consumption?",
+        subtitle: "Scans for hepatic detox pathways and arterial stiffness.",
+        type: "single",
+        options: [
+          { emoji: "🚫", title: "Zero — I do not drink or smoke/vape." },
+          { emoji: "🍷", title: "Occasional Alcohol (1–3 drinks/week socially)" },
+          { emoji: "🍺", title: "Frequent Alcohol (4+ drinks/week)" },
+          { emoji: "🚬", title: "Nicotine (Smoke cigarettes or vape regularly)" }
+        ]
+      },
+      {
+        id: "dopamine_6",
+        type: "dopamine",
+        badge: "🍽️ MILESTONE UNLOCKED: PRECISION WHOLE-FOOD NUTRITION MATRIX",
+        gauge: {
+          title: "3-MEAL MACRONUTRIENT BALANCE",
+          value: "Caloric Targets Calibrated",
+          percentile: "100% Real Food Native to Your Culture",
+          barWidth: "96%"
+        },
+        data: "Your nutrition plan uses 100% real whole foods native to your city and food culture. Zero starvation diets. Zero unverified pills. Pure biological fuel.",
+        quote: "Let food be thy medicine and medicine be thy food.",
+        author: "Ancient Greek Medical Consensus"
+      },
+      {
+        id: "diagnosed_conditions",
+        title: "31. Has a doctor or lab ever diagnosed you with any of these?",
+        subtitle: "Maps against the 3,500 lifestyle-reversible disease registries.",
+        type: "multi",
+        options: [
+          { emoji: "🩸", title: "Pre-Diabetes or High Blood Sugar" },
+          { emoji: "🫀", title: "High Blood Pressure (Hypertension)" },
+          { emoji: "🟡", title: "High Cholesterol or Triglycerides" },
+          { emoji: "🫁", title: "Fatty Liver Disease (MASLD / NAFLD)" },
+          { emoji: "🦋", title: "Thyroid Condition" },
+          { emoji: "🌸", title: "PCOS or Irregular Periods" },
+          { emoji: "🦴", title: "Elevated Uric Acid or Gout" },
+          { emoji: "✅", title: "None — Zero diagnosed medical conditions" }
+        ]
+      },
+      {
+        id: "family_risks",
+        title: "32. Do any of these chronic conditions run in your immediate blood family?",
+        subtitle: "Identifies genetic predisposition for proactive lifestyle defense.",
+        type: "multi",
+        options: [
+          { emoji: "🫀", title: "Early Heart Attacks or Stroke (<60 yrs)" },
+          { emoji: "🩸", title: "Type 2 Diabetes" },
+          { emoji: "🔬", title: "Cancer (Colon, Breast, Prostate)" },
+          { emoji: "🧠", title: "Alzheimer's or Memory Loss" },
+          { emoji: "✅", title: "None of the above / Unknown" }
+        ]
+      },
+      {
+        id: "medications",
+        title: "33. Are you currently taking any prescription medications?",
+        subtitle: "Ensures zero drug-nutrient interactions in your daily plan.",
+        type: "single",
+        options: [
+          { emoji: "💊", title: "Yes — Daily prescription medicines", desc: "Blood pressure pill, Metformin, Statin, Thyroid pill." },
+          { emoji: "🌿", title: "Only daily vitamins / supplements", desc: "Omega-3, Vitamin D, Multivitamin, Magnesium." },
+          { emoji: "🚫", title: "Zero medications or supplements", desc: "Completely medication-free." }
+        ]
+      },
+      {
+        id: "main_motivation",
+        title: "34. What is the most important reason that made you take action today?",
+        subtitle: "Anchors your emotional why for long-term consistency.",
+        type: "single",
+        options: [
+          { emoji: "🚨", title: "A recent doctor warning or concerning blood test." },
+          { emoji: "🪞", title: "I want to transform my body and look my best." },
+          { emoji: "👨‍👩‍👧", title: "I want to live a long, vibrant life for my family." },
+          { emoji: "🔋", title: "I am tired of low energy and want my vitality back." }
+        ]
+      },
+      {
+        id: "dopamine_7",
+        type: "dopamine",
+        badge: "🔬 MILESTONE UNLOCKED: 55,000+ GLOBAL DISEASE TRIAGE COMPLETE",
+        gauge: {
+          title: "THAIS CLINICAL SYNTHESIS COMPLETE",
+          value: "3-Column Report & FLOW Ready",
+          percentile: "Top 1% Proactive Humans on Earth",
+          barWidth: "100%"
+        },
+        data: "You have completed your comprehensive biological intake. You are now part of the global 1% of humans who take proactive control of their health.",
+        quote: "Take care of your body. It's the only place you have to live.",
+        author: "Jim Rohn",
+        isFinal: true
+      }
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const midState = localStorage.getItem('tovelu_survey_state');
+      if (midState) {
+        const state = JSON.parse(midState);
+        if (state.index < SURVEY_QUESTIONS.length) {
+          currentQIndex = state.index;
+          userAnswers = state.answers || {};
+        }
+      }
+      renderCurrentQuestion();
+    });
+
+    function renderCurrentQuestion() {
+      const container = document.getElementById('survey-content-area');
+      const q = SURVEY_QUESTIONS[currentQIndex];
+
+      const totalSteps = SURVEY_QUESTIONS.length;
+      const progressPercent = Math.min(100, Math.round(((currentQIndex + 1) / totalSteps) * 100));
+      document.getElementById('survey-progress-fill').style.width = `${progressPercent}%`;
+      document.getElementById('survey-step-num').innerText = q.type === 'dopamine' ? '✨ Milestone Insight' : `Question ${currentQIndex + 1} of ${totalSteps}`;
+
+      localStorage.setItem('tovelu_survey_state', JSON.stringify({
+        active: true,
+        index: currentQIndex,
+        answers: userAnswers
+      }));
+
+      if (q.type === 'dopamine') {
+        container.innerHTML = `
+          <div class="dopamine-card">
+            <span class="badge badge-vitality" style="margin-bottom: 1rem;">${q.badge}</span>
+            
+            <div class="visual-gauge-box">
+              <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase;">${q.gauge.title}</div>
+              <div style="font-size: 1.6rem; font-weight: 800; color: var(--vitality); margin: 0.25rem 0;">${q.gauge.value}</div>
+              <div style="font-size: 0.78rem; color: var(--luminous); margin-bottom: 0.6rem;">${q.gauge.percentile}</div>
+              <div style="height: 6px; background: var(--surface); border-radius: 999px; overflow: hidden;">
+                <div style="height: 100%; width: ${q.gauge.barWidth}; background: linear-gradient(90deg, var(--luminous), var(--vitality));"></div>
+              </div>
+            </div>
+
+            <p style="font-size: 0.9rem; line-height: 1.6; color: var(--text-main); margin-bottom: 1rem;">
+              ${q.data}
+            </p>
+
+            <div class="quote-box">
+              "${q.quote}"<br>
+              <strong style="color: var(--text-main); font-size: 0.8rem;">— ${q.author}</strong>
+            </div>
+
+            <button class="btn-primary" style="width: 100%; padding: 0.95rem; font-size: 0.95rem;" onclick="${q.isFinal ? 'finishSurvey()' : 'nextQuestion()'}">
+              ${q.isFinal ? 'UNLOCK MY MASTER HEALTH BLUEPRINT ➔' : 'CONTINUE MY DISCOVERY ➔'}
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      if (q.type === 'single') {
+        container.innerHTML = `
+          <div>
+            <h2 class="question-title">${q.title}</h2>
+            <p class="question-subtitle">${q.subtitle}</p>
+            <div class="option-card-list">
+              ${q.options.map(opt => `
+                <div class="option-card" onclick="selectSingleOption('${q.id}', '${opt.title.replace(/'/g, "\\'")}')">
+                  <span class="option-emoji">${opt.emoji}</span>
+                  <div>
+                    <div class="option-title">${opt.title}</div>
+                    ${opt.desc ? `<div class="option-desc">${opt.desc}</div>` : ''}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      if (q.type === 'multi') {
+        container.innerHTML = `
+          <div>
+            <h2 class="question-title">${q.title}</h2>
+            <p class="question-subtitle">${q.subtitle}</p>
+            <div class="option-card-list" id="multi-card-list">
+              ${q.options.map(opt => `
+                <div class="option-card" onclick="toggleMultiOption(this, '${q.id}', '${opt.title.replace(/'/g, "\\'")}')">
+                  <span class="option-emoji">${opt.emoji}</span>
+                  <div class="option-title">${opt.title}</div>
+                </div>
+              `).join('')}
+            </div>
+            <button class="btn-primary" style="width: 100%; margin-top: 1.5rem; padding: 0.9rem;" onclick="nextQuestion()">
+              Save & Continue ➔
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      if (q.type === 'dob') {
+        container.innerHTML = `
+          <div>
+            <h2 class="question-title">${q.title}</h2>
+            <p class="question-subtitle">${q.subtitle}</p>
+            <div style="display: grid; grid-template-columns: 1fr 1.5fr 1.2fr; gap: 0.75rem; margin-bottom: 1.5rem;">
+              <div>
+                <label style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; display: block; margin-bottom: 0.3rem;">DAY</label>
+                <select class="survey-input" id="dob-day">
+                  ${Array.from({length: 31}, (_, i) => `<option value="${i+1}" ${i+1 === 14 ? 'selected':''}>${i+1}</option>`).join('')}
+                </select>
+              </div>
+              <div>
+                <label style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; display: block; margin-bottom: 0.3rem;">MONTH</label>
+                <select class="survey-input" id="dob-month">
+                  ${["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].map((m, idx) => `
+                    <option value="${m}" ${m === 'August' ? 'selected':''}>${m}</option>
+                  `).join('')}
+                </select>
+              </div>
+              <div>
+                <label style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; display: block; margin-bottom: 0.3rem;">YEAR</label>
+                <select class="survey-input" id="dob-year">
+                  ${Array.from({length: 85}, (_, i) => 2018 - i).map(y => `
+                    <option value="${y}" ${y === 1992 ? 'selected':''}>${y}</option>
+                  `).join('')}
+                </select>
+              </div>
+            </div>
+            <button class="btn-primary" style="width: 100%; padding: 0.9rem;" onclick="saveDobAndNext()">
+              Confirm Exact Date of Birth ➔
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      if (q.type === 'height') {
+        container.innerHTML = `
+          <div>
+            <h2 class="question-title">${q.title}</h2>
+            <p class="question-subtitle">${q.subtitle}</p>
+            
+            <div class="unit-toggle-wrap">
+              <button class="unit-toggle-btn active" id="btn-cm" onclick="toggleHeightUnit('cm')">Centimeters (cm)</button>
+              <button class="unit-toggle-btn" id="btn-ft" onclick="toggleHeightUnit('ft')">Feet & Inches</button>
+            </div>
+
+            <div id="height-cm-wrap">
+              <input type="number" class="survey-input" id="input-height-cm" placeholder="e.g. 178" value="178" />
+            </div>
+
+            <div id="height-ft-wrap" style="display: none; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+              <input type="number" class="survey-input" id="input-height-ft" placeholder="Feet (e.g. 5)" value="5" />
+              <input type="number" class="survey-input" id="input-height-in" placeholder="Inches (e.g. 10)" value="10" />
+            </div>
+
+            <button class="btn-primary" style="width: 100%; padding: 0.9rem;" onclick="saveHeightAndNext()">
+              Confirm Height ➔
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      if (q.type === 'weight') {
+        container.innerHTML = `
+          <div>
+            <h2 class="question-title">${q.title}</h2>
+            <p class="question-subtitle">${q.subtitle}</p>
+
+            <div class="unit-toggle-wrap">
+              <button class="unit-toggle-btn active" id="btn-kg" onclick="toggleWeightUnit('kg')">Kilograms (kg)</button>
+              <button class="unit-toggle-btn" id="btn-lbs" onclick="toggleWeightUnit('lbs')">Pounds (lbs)</button>
+            </div>
+
+            <input type="number" class="survey-input" id="input-weight" placeholder="e.g. 74" value="74" step="0.5" />
+
+            <button class="btn-primary" style="width: 100%; padding: 0.9rem;" onclick="saveWeightAndNext()">
+              Confirm Weight ➔
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      if (q.type === 'location') {
+        container.innerHTML = `
+          <div>
+            <h2 class="question-title">${q.title}</h2>
+            <p class="question-subtitle">${q.subtitle}</p>
+
+            <label style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; display: block; margin-bottom: 0.3rem;">SELECT COUNTRY (195 SOVEREIGN NATIONS)</label>
+            <select class="survey-input" id="loc-country">
+              ${COUNTRIES.map(c => `<option value="${c}" ${c === 'India' ? 'selected' : ''}>${c}</option>`).join('')}
+            </select>
+
+            <label style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; display: block; margin-bottom: 0.3rem;">CITY / STATE / POSTAL CODE</label>
+            <input type="text" class="survey-input" id="loc-city" placeholder="e.g. Mumbai, Maharashtra" value="Mumbai, Maharashtra" />
+
+            <button class="btn-primary" style="width: 100%; padding: 0.9rem;" onclick="saveLocationAndNext()">
+              Confirm Location ➔
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      if (q.type === 'time') {
+        container.innerHTML = `
+          <div>
+            <h2 class="question-title">${q.title}</h2>
+            <p class="question-subtitle">${q.subtitle}</p>
+
+            <input type="text" class="survey-input" id="time-input" placeholder="e.g. 06:30 AM" value="${q.defaultVal}" />
+
+            <button class="btn-primary" style="width: 100%; padding: 0.9rem;" onclick="saveTimeAndNext('${q.id}')">
+              Confirm Time ➔
+            </button>
+          </div>
+        `;
+        return;
+      }
+    }
+
+    function selectSingleOption(qId, value) {
+      userAnswers[qId] = value;
+      setTimeout(() => {
+        nextQuestion();
+      }, 220);
+    }
+
+    function toggleMultiOption(cardEl, qId, value) {
+      cardEl.classList.toggle('selected');
+      if (!userAnswers[qId]) userAnswers[qId] = [];
+      
+      const idx = userAnswers[qId].indexOf(value);
+      if (idx > -1) {
+        userAnswers[qId].splice(idx, 1);
+      } else {
+        userAnswers[qId].push(value);
+      }
+    }
+
+    function saveDobAndNext() {
+      const d = document.getElementById('dob-day').value;
+      const m = document.getElementById('dob-month').value;
+      const y = document.getElementById('dob-year').value;
+      userAnswers['dob'] = `${d} ${m} ${y}`;
+      nextQuestion();
+    }
+
+    let currentHeightUnit = 'cm';
+    function toggleHeightUnit(unit) {
+      currentHeightUnit = unit;
+      document.getElementById('btn-cm').className = unit === 'cm' ? 'unit-toggle-btn active' : 'unit-toggle-btn';
+      document.getElementById('btn-ft').className = unit === 'ft' ? 'unit-toggle-btn active' : 'unit-toggle-btn';
+      document.getElementById('height-cm-wrap').style.display = unit === 'cm' ? 'block' : 'none';
+      document.getElementById('height-ft-wrap').style.display = unit === 'ft' ? 'grid' : 'none';
+    }
+
+    function saveHeightAndNext() {
+      if (currentHeightUnit === 'cm') {
+        userAnswers['height'] = `${document.getElementById('input-height-cm').value} cm`;
+      } else {
+        const ft = document.getElementById('input-height-ft').value;
+        const inch = document.getElementById('input-height-in').value;
+        userAnswers['height'] = `${ft} ft ${inch} in`;
+      }
+      nextQuestion();
+    }
+
+    let currentWeightUnit = 'kg';
+    function toggleWeightUnit(unit) {
+      currentWeightUnit = unit;
+      document.getElementById('btn-kg').className = unit === 'kg' ? 'unit-toggle-btn active' : 'unit-toggle-btn';
+      document.getElementById('btn-lbs').className = unit === 'lbs' ? 'unit-toggle-btn active' : 'unit-toggle-btn';
+    }
+
+    function saveWeightAndNext() {
+      const val = document.getElementById('input-weight').value;
+      userAnswers['weight'] = `${val} ${currentWeightUnit}`;
+      nextQuestion();
+    }
+
+    function saveLocationAndNext() {
+      const country = document.getElementById('loc-country').value;
+      const city = document.getElementById('loc-city').value;
+      userAnswers['country'] = country;
+      userAnswers['city'] = city;
+      nextQuestion();
+    }
+
+    function saveTimeAndNext(qId) {
+      userAnswers[qId] = document.getElementById('time-input').value;
+      nextQuestion();
+    }
+
+    function nextQuestion() {
+      if (currentQIndex < SURVEY_QUESTIONS.length - 1) {
+        currentQIndex++;
+        renderCurrentQuestion();
+      } else {
+        finishSurvey();
+      }
+    }
+
+    function finishSurvey() {
+      localStorage.setItem('tovelu_survey_answers', JSON.stringify(userAnswers));
+      localStorage.removeItem('tovelu_survey_state');
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>
