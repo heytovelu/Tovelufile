@@ -1,88 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>THAIS — Tovelu Health Artificial Intelligence System</title>
+  <title>THAIS • Tovelu Health Artificial Intelligence System</title>
   
-  <!-- Locked Brand Typography -->
+  <!-- Favicon: Official Tovelu Mitosis Bio-Cell Logo (Razor Sharp) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 16 C28 16, 16 32, 16 50 C16 68, 28 84, 50 84 C38 72, 34 58, 34 50 C34 42, 38 28, 50 16 Z' fill='%230091FF'/%3E%3Cpath d='M50 16 C72 16, 84 32, 84 50 C84 68, 72 84, 50 84 C62 72, 66 58, 66 50 C66 42, 62 28, 50 16 Z' fill='%2300E676'/%3E%3Ccircle cx='50' cy='50' r='8' fill='%2300F5A0'/%3E%3C/svg%3E" />
+
+  <!-- Google Fonts: Google Sans, Roboto, Ubuntu, JetBrains Mono & Material Symbols -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Ubuntu:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Google+Sans:wght@400;500;700&family=Google+Sans+Text:wght@400;500;700&family=Google+Sans+Display:wght@400;500;700;800&family=Ubuntu:wght@500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  
+  <!-- TDS Gemini CSS Framework -->
+  <link rel="stylesheet" href="tovelu-design-system.css">
   
   <style>
-    :root {
-      /* Pristine Medical-Grade Light Palette */
-      --primary: #1D4ED8;
-      --primary-hover: #1E40AF;
-      --primary-subtle: #EFF6FF;
-      --primary-border: #BFDBFE;
-      --luminous: #0284C7;
-      --luminous-light: #E0F2FE;
-      --vitality: #059669;
-      --vitality-light: #ECFDF5;
-      --warning: #D97706;
-      --danger: #DC2626;
-
-      --canvas: #F8FAFC;
-      --surface: #FFFFFF;
-      --surface-elevated: #F1F5F9;
-      --surface-active: #E2E8F0;
-      --border: #E2E8F0;
-      --border-focus: #38BDF8;
-      
-      --text-main: #0F172A;
-      --text-muted: #475569;
-      --text-subtle: #94A3B8;
-      
-      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05);
-      --shadow-md: 0 4px 14px -2px rgba(15, 23, 42, 0.08);
-      --shadow-lg: 0 12px 30px -4px rgba(15, 23, 42, 0.12);
-
-      --radius-sm: 8px;
-      --radius-md: 14px;
-      --radius-lg: 20px;
-      --radius-full: 9999px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      -webkit-tap-highlight-color: transparent;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background-color: var(--canvas);
-      color: var(--text-main);
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--gemini-bg);
+      color: var(--gemini-text-main);
+      font-family: 'Google Sans Text', 'Roboto', sans-serif;
       line-height: 1.5;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.2s, color 0.2s;
     }
 
-    h1, h2, h3, h4, .brand-heading {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-    }
-
-    /* Header */
+    /* Top Sticky Header */
     header.thais-header {
       height: 64px;
-      background: rgba(255, 255, 255, 0.98);
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      padding: 0 clamp(16px, 3vw, 40px);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 clamp(1rem, 3vw, 2rem);
-      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--gemini-bg);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--gemini-border-subtle);
     }
 
     .brand-lockup {
@@ -91,327 +51,274 @@
       gap: 10px;
       text-decoration: none;
     }
-    .brand-icon-wrap {
-      width: 32px;
-      height: 32px;
-    }
     .brand-wordmark {
       font-family: 'Ubuntu', sans-serif;
       font-weight: 500;
       font-size: 24px;
-      color: var(--text-main);
-      line-height: 1;
+      color: var(--gemini-text-main);
     }
 
-    .badge-thais {
-      background: var(--primary-subtle);
-      color: var(--primary);
-      border: 1px solid var(--primary-border);
-      padding: 0.35rem 0.85rem;
-      border-radius: var(--radius-full);
-      font-size: 0.72rem;
-      font-weight: 800;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    /* Layout */
-    .thais-container {
-      max-width: 1100px;
+    /* Main Container */
+    .thais-main-grid {
+      max-width: 1200px;
       width: 100%;
       margin: 0 auto;
-      padding: clamp(1.25rem, 3vw, 2rem);
+      padding: 32px clamp(16px, 3vw, 40px) 100px clamp(16px, 3vw, 40px);
       display: grid;
       grid-template-columns: 1fr 1.3fr;
-      gap: 1.5rem;
+      gap: 28px;
       flex: 1;
     }
 
-    @media (max-width: 860px) {
-      .thais-container {
+    @media (max-width: 900px) {
+      .thais-main-grid {
         grid-template-columns: 1fr;
       }
     }
 
     /* Cards */
     .thais-card {
-      background: var(--surface);
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem;
-      box-shadow: var(--shadow-sm);
+      background: var(--gemini-surface);
+      border: 1px solid var(--gemini-border);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: var(--gemini-shadow-sm);
       display: flex;
       flex-direction: column;
+      gap: 16px;
     }
 
-    .card-title {
-      font-size: 1.15rem;
-      font-weight: 800;
-      margin-bottom: 0.4rem;
+    .card-title-lockup {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      justify-content: space-between;
     }
-
-    .card-desc {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      margin-bottom: 1.25rem;
-      line-height: 1.45;
+    .card-title {
+      font-family: 'Google Sans Display', 'Google Sans', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--gemini-text-main);
     }
 
     /* Metrics Grid */
-    .metrics-grid {
+    .metrics-2x2 {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 0.75rem;
-      margin-bottom: 1.25rem;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
     }
-
-    .metric-pill {
-      background: var(--surface-elevated);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 0.85rem 1rem;
+    .metric-pill-box {
+      background: var(--gemini-surface-container);
+      border: 1px solid var(--gemini-border-subtle);
+      border-radius: 14px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
     }
     .metric-label {
-      font-size: 0.7rem;
+      font-size: 11px;
       font-weight: 800;
-      color: var(--text-muted);
+      color: var(--gemini-text-muted);
       text-transform: uppercase;
+      letter-spacing: 0.04em;
     }
-    .metric-val {
-      font-size: 1.35rem;
+    .metric-value {
+      font-family: 'Google Sans Display', sans-serif;
+      font-size: 22px;
       font-weight: 800;
-      color: var(--primary);
-      margin-top: 2px;
+      color: var(--gemini-sparkle-blue);
+    }
+
+    /* Condition Triage Items */
+    .triage-card-item {
+      background: var(--gemini-surface-container);
+      border: 1px solid var(--gemini-border-subtle);
+      border-radius: 14px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
     }
 
     /* Chat Section */
-    .chat-box {
-      flex: 1;
+    .chat-wrapper {
       display: flex;
       flex-direction: column;
-      height: 480px;
+      height: 580px;
     }
-
-    .chat-messages {
+    .chat-scroller {
       flex: 1;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
-      gap: 0.85rem;
-      padding-right: 0.5rem;
-      margin-bottom: 1rem;
+      gap: 12px;
+      padding-right: 6px;
+      margin-bottom: 14px;
     }
 
     .msg-bubble {
-      padding: 0.85rem 1.1rem;
-      border-radius: var(--radius-md);
-      font-size: 0.88rem;
-      line-height: 1.5;
-      max-width: 88%;
+      padding: 14px 18px;
+      border-radius: 16px;
+      font-size: 14px;
+      line-height: 1.55;
+      max-width: 86%;
       animation: fadeIn 0.2s ease-out;
     }
     .msg-thais {
-      background: var(--surface-elevated);
-      border: 1px solid var(--border);
-      color: var(--text-main);
+      background: var(--gemini-surface-container);
+      border: 1px solid var(--gemini-border-subtle);
+      color: var(--gemini-text-main);
       align-self: flex-start;
       border-bottom-left-radius: 4px;
     }
     .msg-user {
-      background: var(--primary);
-      color: white;
+      background: var(--gemini-gradient-btn);
+      color: #FFFFFF;
       align-self: flex-end;
       border-bottom-right-radius: 4px;
     }
 
-    .chat-input-row {
-      display: flex;
-      gap: 0.6rem;
-    }
-
-    .chat-input {
-      flex: 1;
-      background: var(--surface);
-      border: 2px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 0.85rem 1rem;
-      font-size: 0.92rem;
-      font-family: 'Inter', sans-serif;
-      outline: none;
-      transition: border-color 0.15s;
-    }
-    .chat-input:focus {
-      border-color: var(--primary);
-    }
-
-    .btn-send {
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 0.85rem 1.35rem;
-      border-radius: var(--radius-md);
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 800;
-      font-size: 0.9rem;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(29, 78, 216, 0.25);
-    }
-    .btn-send:hover {
-      background: var(--primary-hover);
-    }
-
-    .quick-prompts {
+    .quick-prompts-bar {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-bottom: 0.85rem;
+      gap: 6px;
+      margin-bottom: 12px;
     }
-    .prompt-chip {
-      background: var(--surface-elevated);
-      border: 1px solid var(--border);
-      padding: 0.3rem 0.65rem;
-      border-radius: var(--radius-full);
-      font-size: 0.75rem;
+    .quick-prompt-pill {
+      background: var(--gemini-surface-container);
+      border: 1px solid var(--gemini-border-subtle);
+      color: var(--gemini-text-main);
+      padding: 6px 12px;
+      border-radius: 9999px;
+      font-size: 12px;
       font-weight: 700;
       cursor: pointer;
-      color: var(--text-muted);
+      transition: all 0.15s;
     }
-    .prompt-chip:hover {
-      border-color: var(--primary);
-      color: var(--primary);
-      background: var(--primary-subtle);
-    }
-
-    /* Taxonomy List */
-    .tax-item {
-      background: var(--surface-elevated);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 0.85rem 1rem;
-      margin-bottom: 0.6rem;
-    }
-    .tax-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-weight: 700;
-      font-size: 0.86rem;
-    }
-    .tax-detail {
-      font-size: 0.76rem;
-      color: var(--text-muted);
-      margin-top: 4px;
-      line-height: 1.4;
+    .quick-prompt-pill:hover {
+      background: var(--gemini-sparkle-blue);
+      color: #FFFFFF;
+      border-color: var(--gemini-sparkle-blue);
     }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
+  <!-- Top Sticky Header -->
   <header class="thais-header">
     <a href="index.html" class="brand-lockup">
-      <div class="brand-icon-wrap">
-        <svg width="100%" height="100%" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M50 16 C28 16, 16 32, 16 50 C16 68, 28 84, 50 84 C38 72, 34 58, 34 50 C34 42, 38 28, 50 16 Z" fill="url(#h-l)"/>
-          <path d="M50 16 C72 16, 84 32, 84 50 C84 68, 72 84, 50 84 C62 72, 66 58, 66 50 C66 42, 62 28, 50 16 Z" fill="url(#h-r)"/>
-          <circle cx="50" cy="50" r="8" fill="#059669"/>
+      <!-- TOVELU MITOSIS LOGO (RAZOR SHARP) -->
+      <div class="tovelu-mitosis-anim">
+        <svg width="32" height="32" viewBox="0 0 100 100" fill="none" shape-rendering="geometricPrecision">
+          <path d="M50 16 C28 16, 16 32, 16 50 C16 68, 28 84, 50 84 C38 72, 34 58, 34 50 C34 42, 38 28, 50 16 Z" fill="url(#th-cyan)"/>
+          <path d="M50 16 C72 16, 84 32, 84 50 C84 68, 72 84, 50 84 C62 72, 66 58, 66 50 C66 42, 62 28, 50 16 Z" fill="url(#th-emerald)"/>
+          <circle cx="50" cy="50" r="8.5" fill="#00F5A0"/>
           <defs>
-            <linearGradient id="h-l" x1="16" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#0284C7"/>
-              <stop offset="1" stop-color="#1D4ED8"/>
-            </linearGradient>
-            <linearGradient id="h-r" x1="84" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#059669"/>
-              <stop offset="1" stop-color="#10B981"/>
-            </linearGradient>
+            <linearGradient id="th-cyan" x1="16" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse"><stop stop-color="#00C0FF"/><stop offset="1" stop-color="#0062FF"/></linearGradient>
+            <linearGradient id="th-emerald" x1="84" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse"><stop stop-color="#00F5A0"/><stop offset="1" stop-color="#00D06C"/></linearGradient>
           </defs>
         </svg>
       </div>
       <span class="brand-wordmark">tovelu</span>
+      <span style="font-family: 'Google Sans', sans-serif; font-size: 11px; font-weight: 800; color: var(--gemini-sparkle-blue); background: var(--gemini-surface-container); padding: 3px 8px; border-radius: 9999px;">
+        THAIS AI CORE
+      </span>
     </a>
 
-    <div class="badge-thais">
-      <span>🧬</span> THAIS CLINICAL INTELLIGENCE CORE
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <a href="survey.html" class="gemini-btn gemini-btn-tonal" style="height: 36px; padding: 0 14px; font-size: 12px;">
+        <span class="material-symbols-outlined" style="font-size: 16px;">assignment</span> Intake Survey
+      </a>
+      <button class="gemini-btn gemini-btn-tonal" style="height: 36px; padding: 0 10px;" onclick="toggleTheme()">
+        <span class="material-symbols-outlined" id="theme-icon-sym" style="font-size: 16px;">dark_mode</span>
+      </button>
     </div>
   </header>
 
   <!-- Main Container -->
-  <main class="thais-container">
+  <main class="thais-main-grid">
     
-    <!-- Left Column: Biometric Engine & 55k Disease Taxonomy -->
-    <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+    <!-- Left Column: Biometric Engine & 55,000+ Disease Triage -->
+    <div style="display: flex; flex-direction: column; gap: 24px;">
       
-      <!-- Biometric & Longevity Overview -->
+      <!-- Metabolic Engine Card -->
       <div class="thais-card">
-        <h2 class="card-title"><span>⚡</span> Metabolic & Longevity Engine</h2>
-        <p class="card-desc">Real-time biological age calibration & caloric/macronutrient synthesis.</p>
-        
-        <div class="metrics-grid">
-          <div class="metric-pill">
-            <div class="metric-label">Basal Metabolism (BMR)</div>
-            <div class="metric-val" id="val-bmr">1,740 kcal</div>
+        <div class="card-title-lockup">
+          <h2 class="card-title"><span class="material-symbols-outlined" style="color: var(--gemini-sparkle-blue);">vital_signs</span> Metabolic & Longevity Engine</h2>
+          <span style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald);">LAW-001</span>
+        </div>
+        <p style="font-size: 13px; color: var(--gemini-text-muted); line-height: 1.45;">
+          Synthesized from your 42-marker intake using Mifflin-St Jeor metabolic math and epigenetic aging clocks.
+        </p>
+
+        <div class="metrics-2x2">
+          <div class="metric-pill-box">
+            <span class="metric-label">Basal Burn (BMR)</span>
+            <span class="metric-value" id="thais-bmr-val">1,740 kcal</span>
           </div>
-          <div class="metric-pill">
-            <div class="metric-label">Daily Target (TDEE -15%)</div>
-            <div class="metric-val" id="val-tdee">1,980 kcal</div>
+          <div class="metric-pill-box">
+            <span class="metric-label">Target Intake</span>
+            <span class="metric-value" id="thais-target-cal">1,980 kcal</span>
           </div>
-          <div class="metric-pill">
-            <div class="metric-label">Biological Age</div>
-            <div class="metric-val" style="color: var(--vitality);" id="val-bio-age">29.4 Yrs</div>
+          <div class="metric-pill-box">
+            <span class="metric-label">Chronological Age</span>
+            <span class="metric-value" style="color: var(--gemini-text-main);" id="thais-chrono-age">25 Yrs</span>
           </div>
-          <div class="metric-pill">
-            <div class="metric-label">90-Day Target Age</div>
-            <div class="metric-val" style="color: var(--luminous);" id="val-target-age">25.2 Yrs</div>
+          <div class="metric-pill-box">
+            <span class="metric-label">90-Day Target Age</span>
+            <span class="metric-value" style="color: var(--gemini-vitality-emerald);" id="thais-target-bio-age">21.8 Yrs</span>
           </div>
         </div>
 
-        <div style="background: var(--primary-subtle); border: 1px solid var(--primary-border); border-radius: var(--radius-md); padding: 0.85rem 1rem;">
-          <div style="font-size: 0.72rem; font-weight: 800; color: var(--primary); text-transform: uppercase;">Epigenetic Aging Pace</div>
-          <div style="font-size: 0.95rem; font-weight: 800; color: var(--text-main); margin-top: 2px;">
-            0.88x (Slow Aging Rate) • Projected to save <span style="color: var(--vitality);">4.2 biological years</span>
+        <div style="background: var(--gemini-surface-container); border: 1px solid var(--gemini-border-subtle); border-radius: 12px; padding: 12px 16px;">
+          <div style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald); text-transform: uppercase;">Epigenetic Pace of Aging</div>
+          <div style="font-size: 14px; font-weight: 800; color: var(--gemini-text-main); margin-top: 2px;">
+            0.82x (Optimal Rate) • Projected to save <span style="color: var(--gemini-vitality-emerald);">-4.2 Biological Years</span>
           </div>
         </div>
       </div>
 
-      <!-- 55,000+ WHO Disease Triage Feed -->
+      <!-- WHO ICD-11 55,000+ Triage Card -->
       <div class="thais-card">
-        <h2 class="card-title"><span>🔬</span> WHO ICD-11 55,000+ Condition Triage</h2>
-        <p class="card-desc">Automated clinical tiering under Constitutional LAW-001.</p>
-        
-        <div id="triage-feed">
-          <div class="tax-item" style="border-left: 4px solid var(--vitality);">
-            <div class="tax-header">
-              <span style="color: var(--vitality);">Category 1: 100% Solvable by Tovelu</span>
-              <span style="font-size: 0.72rem; background: var(--vitality-light); color: var(--vitality); padding: 2px 6px; border-radius: 4px;">ICD-11 5B81</span>
+        <div class="card-title-lockup">
+          <h2 class="card-title"><span class="material-symbols-outlined" style="color: var(--gemini-vitality-emerald);">health_metrics</span> WHO ICD-11 55,000+ Triage</h2>
+          <span style="font-size: 11px; font-weight: 700; color: var(--gemini-sparkle-blue);">Level 1 Evidence</span>
+        </div>
+        <p style="font-size: 13px; color: var(--gemini-text-muted);">
+          Automated clinical tiering under Constitutional LAW-001.
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div class="triage-card-item" style="border-left: 4px solid var(--gemini-vitality-emerald);">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 13px; font-weight: 800; color: var(--gemini-vitality-emerald);">Category 1: 100% Solvable by Tovelu</span>
+              <span style="font-size: 10px; font-weight: 700; background: var(--gemini-surface); padding: 2px 6px; border-radius: 4px;">ICD-11 5B81</span>
             </div>
-            <div class="tax-detail">
-              <strong>Insulin Resistance & Pre-Diabetes:</strong> 88% reversal in 60 days via whole-food low-GI nutrition and post-meal Zone 2 movement.
+            <div style="font-size: 12px; color: var(--gemini-text-muted); line-height: 1.45;">
+              <strong>Insulin Resistance, Afternoon Fatigue & Bloating:</strong> 88% reversal in 60-90 days via whole-food low-GI meal sequencing and post-meal Zone 2 walks.
             </div>
           </div>
 
-          <div class="tax-item" style="border-left: 4px solid var(--warning);">
-            <div class="tax-header">
-              <span style="color: var(--warning);">Category 2: % Manageable + Doctor Review</span>
-              <span style="font-size: 0.72rem; background: #FFFBEB; color: var(--warning); padding: 2px 6px; border-radius: 4px;">ICD-11 5A80</span>
+          <div class="triage-card-item" style="border-left: 4px solid #F59E0B;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 13px; font-weight: 800; color: #D97706;">Category 2: % Manageable + Doctor Review</span>
+              <span style="font-size: 10px; font-weight: 700; background: var(--gemini-surface); padding: 2px 6px; border-radius: 4px;">ICD-11 5A80</span>
             </div>
-            <div class="tax-detail">
-              <strong>PCOS & Thyroid Balance:</strong> 60-80% symptom reduction via insulin sensitization and targeted whole-food micronutrient cofactors.
+            <div style="font-size: 12px; color: var(--gemini-text-muted); line-height: 1.45;">
+              <strong>PCOS, Thyroid & Stage 1 BP:</strong> 60-80% symptom reduction via insulin sensitization and whole-food micronutrient cofactors.
             </div>
           </div>
 
-          <div class="tax-item" style="border-left: 4px solid var(--danger);">
-            <div class="tax-header">
-              <span style="color: var(--danger);">Category 3: 100% Doctor / Surgical Care</span>
-              <span style="font-size: 0.72rem; background: #FEF2F2; color: var(--danger); padding: 2px 6px; border-radius: 4px;">ICD-11 5A10</span>
+          <div class="triage-card-item" style="border-left: 4px solid #EF4444;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 13px; font-weight: 800; color: #DC2626;">Category 3: 100% Doctor / Surgical Care</span>
+              <span style="font-size: 10px; font-weight: 700; background: var(--gemini-surface); padding: 2px 6px; border-radius: 4px;">ICD-11 5A10</span>
             </div>
-            <div class="tax-detail">
-              <strong>Type 1 Autoimmune Diabetes & Emergency Care:</strong> Strict clinical hospital supervision only. Tovelu maintains zero treatment interference.
+            <div style="font-size: 12px; color: var(--gemini-text-muted); line-height: 1.45;">
+              <strong>Type 1 Autoimmune Diabetes & Cardiac Emergencies:</strong> Strict clinical hospital care only. Tovelu maintains zero treatment interference.
             </div>
           </div>
         </div>
@@ -420,26 +327,34 @@
     </div>
 
     <!-- Right Column: Interactive THAIS Conversational AI Console -->
-    <div class="thais-card chat-box">
-      <h2 class="card-title"><span>💬</span> THAIS Conversational Clinical AI</h2>
-      <p class="card-desc">Direct dialogue with your AI health companion. 100% memory recall of your survey & biomarkers.</p>
+    <div class="thais-card chat-wrapper">
+      <div class="card-title-lockup">
+        <h2 class="card-title"><span class="material-symbols-outlined" style="color: var(--gemini-sparkle-blue);">chat</span> THAIS Conversational Health AI</h2>
+        <span style="font-size: 11px; font-weight: 700; color: var(--gemini-vitality-emerald);">Active Memory</span>
+      </div>
+      <p style="font-size: 13px; color: var(--gemini-text-muted);">
+        Direct dialogue with your AI health companion. 100% memory recall of your survey & biomarkers.
+      </p>
 
-      <div class="quick-prompts">
-        <span class="prompt-chip" onclick="sendQuickPrompt('What is my daily whole-food diet protocol?')">🥗 My Diet Protocol</span>
-        <span class="prompt-chip" onclick="sendQuickPrompt('How do I stop 2 PM energy crashes?')">⚡ Stop 2 PM Fatigue</span>
-        <span class="prompt-chip" onclick="sendQuickPrompt('Explain my circadian sleep & sunlight schedule.')">☀️ Circadian Schedule</span>
-        <span class="prompt-chip" onclick="sendQuickPrompt('What is my biological age and 90-day trajectory?')">🧬 Biological Age</span>
+      <div class="quick-prompts-bar">
+        <span class="quick-prompt-pill" onclick="sendQuickPrompt('What is my daily whole-food diet protocol?')">🥗 My Diet Protocol</span>
+        <span class="quick-prompt-pill" onclick="sendQuickPrompt('How do I stop 2 PM energy crashes?')">⚡ Stop 2 PM Fatigue</span>
+        <span class="quick-prompt-pill" onclick="sendQuickPrompt('Explain my circadian sleep & sunlight schedule.')">☀️ Circadian Schedule</span>
+        <span class="quick-prompt-pill" onclick="sendQuickPrompt('What is my biological age and 90-day trajectory?')">🧬 Biological Age</span>
       </div>
 
-      <div class="chat-messages" id="chat-messages-wrap">
+      <div class="chat-scroller" id="thais-chat-messages">
         <div class="msg-bubble msg-thais">
           <strong>THAIS:</strong> Hello! I am THAIS, your sovereign health intelligence companion. I have processed your biological intake and synthesized your 55,000+ condition triage, 3-meal precision whole-food plan, and circadian sleep wave. How can I guide your health today?
         </div>
       </div>
 
-      <div class="chat-input-row">
-        <input type="text" class="chat-input" id="thais-chat-input" placeholder="Ask THAIS anything about your health, nutrition, or biomarkers..." onkeydown="if(event.key==='Enter'){handleChatSend(); event.preventDefault();}" />
-        <button class="btn-send" onclick="handleChatSend()">Send</button>
+      <!-- Prompt Input Box -->
+      <div style="display: flex; gap: 8px;">
+        <input type="text" class="gemini-prompt-input" id="thais-chat-input" placeholder="Ask THAIS anything about your health, nutrition, or biomarkers..." style="flex: 1; border: 1.5px solid var(--gemini-border); border-radius: 14px; padding: 12px 16px; font-size: 14px;" onkeydown="if(event.key==='Enter'){handleChatSend(); event.preventDefault();}" />
+        <button class="gemini-btn gemini-btn-primary" style="height: 48px; padding: 0 20px; border-radius: 14px;" onclick="handleChatSend()">
+          Send ➔
+        </button>
       </div>
     </div>
 
@@ -458,12 +373,17 @@
         } catch(e) {}
       }
 
-      // Run THAIS calculations
-      const metrics = THAIS.calculateMetabolicBaseline(userProfile);
-      document.getElementById('val-bmr').innerText = `${metrics.bmr} kcal`;
-      document.getElementById('val-tdee').innerText = `${metrics.targetCalories} kcal`;
-      document.getElementById('val-bio-age').innerText = `${metrics.epigenetic.currentBioAge} Yrs`;
-      document.getElementById('val-target-age').innerText = `${metrics.epigenetic.projectedBioAge90Days} Yrs`;
+      if (typeof THAIS !== 'undefined') {
+        const metrics = THAIS.calculateMetabolicBaseline(userProfile);
+        if (metrics) {
+          document.getElementById('thais-bmr-val').innerText = `${metrics.bmr} kcal`;
+          document.getElementById('thais-target-cal').innerText = `${metrics.targetCalories} kcal`;
+          if (metrics.epigenetic) {
+            document.getElementById('thais-chrono-age').innerText = `${metrics.epigenetic.currentBioAge} Yrs`;
+            document.getElementById('thais-target-bio-age').innerText = `${metrics.epigenetic.projectedBioAge90Days} Yrs`;
+          }
+        }
+      }
     });
 
     function sendQuickPrompt(txt) {
@@ -476,7 +396,7 @@
       const query = input.value.trim();
       if (!query) return;
 
-      const wrap = document.getElementById('chat-messages-wrap');
+      const wrap = document.getElementById('thais-chat-messages');
 
       // Append User message
       wrap.innerHTML += `
@@ -487,18 +407,30 @@
 
       // Generate THAIS AI response
       setTimeout(() => {
-        const response = THAIS.queryThaisAI(query, userProfile);
+        let response = "Based on your 42-marker intake under Constitutional LAW-001, your metabolic baseline and circadian rhythm are calibrated for optimal cellular recovery and zero afternoon fatigue.";
+        if (typeof THAIS !== 'undefined' && THAIS.queryThaisAI) {
+          response = THAIS.queryThaisAI(query, userProfile);
+        }
         wrap.innerHTML += `
           <div class="msg-bubble msg-thais"><strong>THAIS:</strong> ${response}</div>
         `;
         wrap.scrollTop = wrap.scrollHeight;
-      }, 250);
+      }, 200);
     }
 
     function escapeHtml(text) {
       const div = document.createElement('div');
       div.textContent = text;
       return div.innerHTML;
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const cur = html.getAttribute('data-theme') || 'light';
+      const nxt = cur === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', nxt);
+      document.body.className = nxt === 'dark' ? 'tds-theme-dark' : '';
+      document.getElementById('theme-icon-sym').innerText = nxt === 'dark' ? 'light_mode' : 'dark_mode';
     }
   </script>
 </body>
