@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>Tovelu • Mobile Web App</title>
+  <title>Tovelu • Lifelong Health Intelligence</title>
   
   <!-- PWA Manifest & Meta Tags -->
   <link rel="manifest" href="manifest.json" />
@@ -79,7 +79,7 @@
       color: var(--gemini-text-main);
     }
 
-    /* App Main Body */
+    /* App Main Scroll Content */
     .app-scroll-content {
       flex: 1;
       padding: 16px 16px 100px 16px;
@@ -97,6 +97,48 @@
       animation: fadeIn 0.2s ease-out;
     }
     .tab-pane.active {
+      display: flex;
+    }
+
+    /* Segmented Sub-Nav Toggle (DAY vs WEEK/BOOK) */
+    .segmented-toggle-wrap {
+      display: flex;
+      background: var(--gemini-surface-container);
+      padding: 4px;
+      border-radius: 9999px;
+      border: 1px solid var(--gemini-border-subtle);
+      width: 100%;
+    }
+    .segmented-toggle-btn {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--gemini-text-muted);
+      padding: 8px 16px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.15s;
+    }
+    .segmented-toggle-btn.active {
+      background: var(--gemini-surface);
+      color: var(--gemini-sparkle-blue);
+      box-shadow: var(--gemini-shadow-sm);
+    }
+
+    /* Sub-Views within FLOW */
+    .flow-sub-view {
+      display: none;
+      flex-direction: column;
+      gap: 16px;
+      animation: fadeIn 0.2s ease-out;
+    }
+    .flow-sub-view.active {
       display: flex;
     }
 
@@ -147,7 +189,7 @@
       color: #FFFFFF;
     }
 
-    /* Fixed Bottom App Navigation */
+    /* Fixed Bottom App Navigation (4 Main Tabs: FLOW, CHAT, HEALTH, YOU) */
     nav.app-bottom-nav {
       position: fixed;
       bottom: 0;
@@ -158,7 +200,7 @@
       backdrop-filter: blur(20px);
       border-top: 1px solid var(--gemini-border-subtle);
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       z-index: 100;
       padding-bottom: env(safe-area-inset-bottom);
     }
@@ -183,7 +225,8 @@
     }
     .nav-label {
       font-size: 10px;
-      font-weight: 700;
+      font-weight: 800;
+      letter-spacing: 0.02em;
     }
 
     /* Chat Messages in App */
@@ -220,7 +263,7 @@
 
   <div class="app-shell">
     
-    <!-- App Header -->
+    <!-- Top Bar -->
     <header class="app-topbar">
       <a href="#" class="brand-lockup" onclick="switchAppTab('flow')">
         <!-- TOVELU MITOSIS LOGO (RAZOR SHARP) -->
@@ -251,13 +294,13 @@
     <!-- App Main Scroll Content -->
     <div class="app-scroll-content">
       
-      <!-- PWA Install Prompt Banner (Visible on mobile browser) -->
+      <!-- PWA Install Prompt Banner (Available on mobile browsers) -->
       <div id="pwa-install-card" class="pwa-install-banner" style="display: none;">
         <div style="display: flex; align-items: center; gap: 10px;">
           <span class="material-symbols-outlined" style="font-size: 24px; color: var(--gemini-sparkle-blue);">install_mobile</span>
           <div>
             <div style="font-size: 13px; font-weight: 800; color: var(--gemini-text-main);">Install Tovelu App</div>
-            <div style="font-size: 11px; color: var(--gemini-text-muted);">Install for instant offline access and daily habit reminders.</div>
+            <div style="font-size: 11px; color: var(--gemini-text-muted);">Install for offline access & daily habit reminders.</div>
           </div>
         </div>
         <button class="gemini-btn gemini-btn-primary" id="btn-pwa-install" style="height: 34px; padding: 0 12px; font-size: 12px;" onclick="triggerPWAInstall()">
@@ -265,122 +308,199 @@
         </button>
       </div>
 
-      <!-- ==================== TAB 1: FLOW (DAILY PROTOCOL) ==================== -->
+      <!-- ==================== 1. TAB: FLOW (DAY | WEEK TOGGLE) ==================== -->
       <section id="pane-flow" class="tab-pane active">
         
-        <!-- Daily Progress Header Card -->
-        <div class="gemini-card" style="background: linear-gradient(135deg, rgba(0, 192, 255, 0.08), rgba(0, 245, 160, 0.08));">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <span style="font-size: 10px; font-weight: 800; color: var(--gemini-vitality-emerald); background: var(--gemini-surface); padding: 3px 8px; border-radius: 9999px;">
-              PROTOCOL ACTIVE • DAY 1
-            </span>
-            <span style="font-size: 11px; font-weight: 700; color: var(--gemini-sparkle-blue);" id="flow-compliance-pct">75% Done</span>
-          </div>
-          <div style="font-family: 'Google Sans Display', sans-serif; font-size: 22px; font-weight: 800; margin-top: 6px;">
-            Today's Circadian Flow
-          </div>
-          <p style="font-size: 12px; color: var(--gemini-text-muted); margin-top: 2px;">
-            Calibrated from your 42-marker intake for all-day energy and deep sleep.
-          </p>
+        <!-- Segmented 2-Option Toggle: DAY vs WEEK (BOOK) -->
+        <div class="segmented-toggle-wrap">
+          <button class="segmented-toggle-btn active" id="btn-flow-day" onclick="switchFlowSubView('day')">
+            <span class="material-symbols-outlined" style="font-size: 16px;">today</span> DAY
+          </button>
+          <button class="segmented-toggle-btn" id="btn-flow-week" onclick="switchFlowSubView('week')">
+            <span class="material-symbols-outlined" style="font-size: 16px;">menu_book</span> WEEK (BOOK)
+          </button>
         </div>
 
-        <!-- Task Checklist -->
-        <div style="display: flex; flex-direction: column; gap: 10px;">
-          <div style="font-size: 11px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase;">1. Daily Micro-Habits</div>
+        <!-- ---------------- SUB-VIEW 1: DAY (TODAY'S EXECUTION) ---------------- -->
+        <div id="subview-flow-day" class="flow-sub-view active">
+          
+          <!-- Daily Progress Header Card -->
+          <div class="gemini-card" style="background: linear-gradient(135deg, rgba(0, 192, 255, 0.08), rgba(0, 245, 160, 0.08));">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 10px; font-weight: 800; color: var(--gemini-vitality-emerald); background: var(--gemini-surface); padding: 3px 8px; border-radius: 9999px;">
+                PROTOCOL ACTIVE • DAY 18
+              </span>
+              <span style="font-size: 11px; font-weight: 700; color: var(--gemini-sparkle-blue);" id="flow-compliance-pct">75% Done</span>
+            </div>
+            <div style="font-family: 'Google Sans Display', sans-serif; font-size: 22px; font-weight: 800; margin-top: 6px;">
+              Today's Execution Flow
+            </div>
+            <p style="font-size: 12px; color: var(--gemini-text-muted); margin-top: 2px;">
+              Targeting: <strong style="color: var(--gemini-text-main);">Energy Stabilization, Gut Healing & Deep Sleep</strong>.
+            </p>
+          </div>
 
-          <div class="app-task-card completed" onclick="toggleTaskCard(this)">
-            <div class="app-task-checkbox">✓</div>
-            <div style="flex: 1;">
-              <div style="font-size: 13px; font-weight: 700;">🌅 Morning Sunlight (15 Mins)</div>
-              <div style="font-size: 11px; color: var(--gemini-text-muted);">Step outside within 45m of waking to sync cortisol & melatonin clocks.</div>
+          <!-- Micro-Habit Tasks Checklist -->
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div style="font-size: 11px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase;">1. Daily Micro-Habits</div>
+              <span style="font-size: 11px; font-weight: 700; color: var(--gemini-sparkle-blue);">Auto-synced</span>
+            </div>
+
+            <div class="app-task-card completed" onclick="toggleTaskCard(this)">
+              <div class="app-task-checkbox">✓</div>
+              <div style="flex: 1;">
+                <div style="font-size: 13px; font-weight: 700;">🌅 Morning Sunlight (15 Mins)</div>
+                <div style="font-size: 11px; color: var(--gemini-text-muted);">Expose eyes to natural sunlight within 45m of waking for SCN cortisol sync.</div>
+              </div>
+            </div>
+
+            <div class="app-task-card completed" onclick="toggleTaskCard(this)">
+              <div class="app-task-checkbox">✓</div>
+              <div style="flex: 1;">
+                <div style="font-size: 13px; font-weight: 700;">💧 Cellular Osmolyte Hydration</div>
+                <div style="font-size: 11px; color: var(--gemini-text-muted);">500ml water + mineral pinch upon waking to rehydrate adrenal cells.</div>
+              </div>
+            </div>
+
+            <div class="app-task-card completed" onclick="toggleTaskCard(this)">
+              <div class="app-task-checkbox">✓</div>
+              <div style="flex: 1;">
+                <div style="font-size: 13px; font-weight: 700;">🚶 Post-Lunch Glucose Clearance (12 Mins)</div>
+                <div style="font-size: 11px; color: var(--gemini-text-muted);">Brisk Zone 2 walk after lunch to eliminate 2 PM energy crashes.</div>
+              </div>
+            </div>
+
+            <div class="app-task-card" onclick="toggleTaskCard(this)">
+              <div class="app-task-checkbox">✓</div>
+              <div style="flex: 1;">
+                <div style="font-size: 13px; font-weight: 700;">🌙 Circadian Wind-Down & Melatonin Shield</div>
+                <div style="font-size: 11px; color: var(--gemini-text-muted);">Cut blue light 60m before bed; bedroom at 19°C. (Scheduled for 22:00)</div>
+              </div>
             </div>
           </div>
 
-          <div class="app-task-card completed" onclick="toggleTaskCard(this)">
-            <div class="app-task-checkbox">✓</div>
-            <div style="flex: 1;">
-              <div style="font-size: 13px; font-weight: 700;">💧 Cellular Osmolyte Hydration</div>
-              <div style="font-size: 11px; color: var(--gemini-text-muted);">500ml water upon waking to rehydrate adrenal cells.</div>
+          <!-- 3-Meal Whole-Food Diet Plan -->
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div style="font-size: 11px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase;">2. Precision 3-Meal Diet</div>
+              <span style="font-size: 11px; font-weight: 700; color: var(--gemini-vitality-emerald);">0% Seed Oils</span>
+            </div>
+
+            <div class="gemini-card" style="padding: 14px;">
+              <div style="display: flex; justify-content: space-between; font-size: 11px; font-weight: 800; color: var(--gemini-sparkle-blue);">
+                <span>🍳 BREAKFAST (08:30 AM)</span>
+                <span>32g Protein • Flat Glycemic</span>
+              </div>
+              <div style="font-size: 13px; font-weight: 700; margin-top: 4px;">Pasture-Raised Eggs / Paneer + Sautéed Spinach</div>
+              <div style="font-size: 11px; color: var(--gemini-text-muted);">Cooked in pure desi ghee with 1/2 avocado and zero refined oils.</div>
+            </div>
+
+            <div class="gemini-card" style="padding: 14px;">
+              <div style="display: flex; justify-content: space-between; font-size: 11px; font-weight: 800; color: var(--gemini-sparkle-blue);">
+                <span>🥗 LUNCH (01:30 PM)</span>
+                <span>48g Protein • High Omega-3</span>
+              </div>
+              <div style="font-size: 13px; font-weight: 700; margin-top: 4px;">Mediterranean Wild Salmon / Sprouted Lentils Bowl</div>
+              <div style="font-size: 11px; color: var(--gemini-text-muted);">Fiber first (green salad), protein second, complex carbs last.</div>
+            </div>
+
+            <div class="gemini-card" style="padding: 14px;">
+              <div style="display: flex; justify-content: space-between; font-size: 11px; font-weight: 800; color: var(--gemini-sparkle-blue);">
+                <span>🍲 DINNER (07:30 PM)</span>
+                <span>40g Protein • Deep REM Aid</span>
+              </div>
+              <div style="font-size: 13px; font-weight: 700; margin-top: 4px;">Grass-Fed Stew / Tofu & Roasted Asparagus</div>
+              <div style="font-size: 11px; color: var(--gemini-text-muted);">Tryptophan-rich for deep restorative delta sleep; eaten 3h before bed.</div>
             </div>
           </div>
 
-          <div class="app-task-card completed" onclick="toggleTaskCard(this)">
-            <div class="app-task-checkbox">✓</div>
-            <div style="flex: 1;">
-              <div style="font-size: 13px; font-weight: 700;">🚶 Post-Lunch Glucose Clearance (12 Mins)</div>
-              <div style="font-size: 11px; color: var(--gemini-text-muted);">Zone 2 walk after lunch to eliminate 2 PM energy crashes.</div>
+        </div>
+
+        <!-- ---------------- SUB-VIEW 2: WEEK (BOOK - PLAYBOOK & RULES) ---------------- -->
+        <div id="subview-flow-week" class="flow-sub-view">
+          
+          <!-- Master Weekly Playbook Header -->
+          <div class="gemini-card" style="background: linear-gradient(135deg, rgba(0, 192, 255, 0.08), rgba(0, 245, 160, 0.08));">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 10px; font-weight: 800; color: var(--gemini-sparkle-blue); background: var(--gemini-surface); padding: 3px 8px; border-radius: 9999px;">
+                WEEKLY PLAYBOOK • WEEK 3
+              </span>
+              <span style="font-size: 10px; font-weight: 800; color: var(--gemini-vitality-emerald);">LEVEL 1 EVIDENCE</span>
+            </div>
+            <div style="font-family: 'Google Sans Display', sans-serif; font-size: 20px; font-weight: 800; margin-top: 6px;">
+              Insulin Resensitization & Fat Adaptation
+            </div>
+            <p style="font-size: 12px; color: var(--gemini-text-muted); margin-top: 2px;">
+              Training your cellular mitochondria to burn stored body fat during morning fasting hours.
+            </p>
+          </div>
+
+          <!-- Non-Negotiable Rules -->
+          <div class="gemini-card" style="padding: 16px;">
+            <div style="font-size: 13px; font-weight: 800; color: var(--gemini-sparkle-blue); margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+              <span class="material-symbols-outlined" style="font-size: 18px;">fact_check</span> Non-Negotiable Weekly Rules
+            </div>
+            <ul style="font-size: 12px; color: var(--gemini-text-muted); line-height: 1.6; padding-left: 18px;">
+              <li><strong>Zero Liquid Sugars:</strong> No soda, packaged fruit juices, or sweetened coffees.</li>
+              <li><strong>90-Min Caffeine Delay:</strong> Wait at least 90 minutes after waking before your first cup of tea or coffee to prevent afternoon crashes.</li>
+              <li><strong>35g Protein Rule:</strong> Consume a minimum of 35g protein at both breakfast and dinner to preserve lean muscle and trigger satiety hormones.</li>
+            </ul>
+          </div>
+
+          <!-- Weekly Obstacles & Solutions -->
+          <div class="gemini-card" style="padding: 16px;">
+            <div style="font-size: 13px; font-weight: 800; color: #D97706; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+              <span class="material-symbols-outlined" style="font-size: 18px;">warning</span> Obstacles & High-Stress Solutions
+            </div>
+            <ul style="font-size: 12px; color: var(--gemini-text-muted); line-height: 1.6; padding-left: 18px;">
+              <li><strong>Sugar Craving at 16:00:</strong> Drink 300ml sparkling water + 1 tbsp raw apple cider vinegar.</li>
+              <li><strong>Restaurant Dining:</strong> Ask for food cooked in butter or olive oil; replace fries with steamed greens or salad.</li>
+            </ul>
+          </div>
+
+          <!-- Weekly Smart Grocery Matrix -->
+          <div class="gemini-card" style="padding: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+              <div style="font-size: 13px; font-weight: 800; color: var(--gemini-text-main);">🛒 Weekly Smart Grocery Matrix</div>
+              <span style="font-size: 11px; font-weight: 700; color: var(--gemini-sparkle-blue);">Export ➔</span>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 10px; font-size: 12px;">
+              <div style="background: var(--gemini-surface-container); padding: 10px 12px; border-radius: 10px;">
+                <strong style="color: var(--gemini-text-main);">🥩 Clean Proteins:</strong>
+                <div style="color: var(--gemini-text-muted); margin-top: 2px;">Pasture-raised eggs, wild salmon (600g), grass-fed paneer / lentils.</div>
+              </div>
+              <div style="background: var(--gemini-surface-container); padding: 10px 12px; border-radius: 10px;">
+                <strong style="color: var(--gemini-text-main);">🥦 Longevity Greens:</strong>
+                <div style="color: var(--gemini-text-muted); margin-top: 2px;">Organic baby spinach, broccoli sprouts (sulforaphane), avocado & asparagus.</div>
+              </div>
+              <div style="background: var(--gemini-surface-container); padding: 10px 12px; border-radius: 10px;">
+                <strong style="color: var(--gemini-text-main);">🧈 Pure Cooking Fats:</strong>
+                <div style="color: var(--gemini-text-muted); margin-top: 2px;">Desi A2 cow ghee, extra virgin olive oil, raw walnuts & pumpkin seeds.</div>
+              </div>
             </div>
           </div>
 
-          <div class="app-task-card" onclick="toggleTaskCard(this)">
-            <div class="app-task-checkbox">✓</div>
-            <div style="flex: 1;">
-              <div style="font-size: 13px; font-weight: 700;">🌙 Circadian Wind-Down & Dim Lights</div>
-              <div style="font-size: 11px; color: var(--gemini-text-muted);">Turn off bright overhead bulbs 60m before bed. (Scheduled for 22:00)</div>
-            </div>
-          </div>
         </div>
 
       </section>
 
-      <!-- ==================== TAB 2: MEALS (WHOLE FOOD NUTRITION) ==================== -->
-      <section id="pane-meals" class="tab-pane">
-        <div class="gemini-card">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <div style="font-size: 11px; font-weight: 800; color: var(--gemini-sparkle-blue); text-transform: uppercase;">100% Whole-Food Protocol</div>
-            <span style="font-size: 10px; font-weight: 800; background: var(--gemini-surface-container); padding: 3px 8px; border-radius: 9999px;">0% Seed Oils</span>
-          </div>
-          <div style="font-family: 'Google Sans Display', sans-serif; font-size: 20px; font-weight: 800; margin-top: 4px;">
-            Daily Precision Nutrition
-          </div>
-          <div style="font-size: 12px; color: var(--gemini-text-muted);">Target: <strong id="meal-calorie-target">1,980 kcal</strong> • <strong id="meal-protein-target">130g Protein</strong></div>
-        </div>
-
-        <div style="display: flex; flex-direction: column; gap: 10px;">
-          <div class="gemini-card" style="padding: 14px;">
-            <div style="display: flex; justify-content: space-between; font-size: 12px; font-weight: 800; color: var(--gemini-sparkle-blue);">
-              <span>🍳 BREAKFAST (08:30 AM)</span>
-              <span>420 kcal • 32g Protein</span>
-            </div>
-            <div style="font-size: 13px; font-weight: 700; margin-top: 4px;">Pasteure-Raised Eggs / Paneer + Sautéed Greens</div>
-            <div style="font-size: 11px; color: var(--gemini-text-muted);">Cooked in pure desi ghee with spinach, avocado, and zero refined oils.</div>
-          </div>
-
-          <div class="gemini-card" style="padding: 14px;">
-            <div style="display: flex; justify-content: space-between; font-size: 12px; font-weight: 800; color: var(--gemini-sparkle-blue);">
-              <span>🥗 LUNCH (01:30 PM)</span>
-              <span>750 kcal • 48g Protein</span>
-            </div>
-            <div style="font-size: 13px; font-weight: 700; margin-top: 4px;">Grilled Chicken / Sprouted Lentils & Brown Rice Bowl</div>
-            <div style="font-size: 11px; color: var(--gemini-text-muted);">High-fiber pre-load salad first, protein second, complex carbs last.</div>
-          </div>
-
-          <div class="gemini-card" style="padding: 14px;">
-            <div style="display: flex; justify-content: space-between; font-size: 12px; font-weight: 800; color: var(--gemini-sparkle-blue);">
-              <span>🍲 DINNER (07:30 PM)</span>
-              <span>620 kcal • 40g Protein</span>
-            </div>
-            <div style="font-size: 13px; font-weight: 700; margin-top: 4px;">Wild Salmon / Tofu Stir-Fry & Steamed Sweet Potato</div>
-            <div style="font-size: 11px; color: var(--gemini-text-muted);">Light evening digestion window; finished 3+ hours before bedtime.</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ==================== TAB 3: THAIS AI CHAT ==================== -->
+      <!-- ==================== 2. TAB: CHAT (THAIS AI COMPANION) ==================== -->
       <section id="pane-chat" class="tab-pane">
         <div class="gemini-card" style="padding: 14px;">
           <div style="display: flex; justify-content: space-between; align-items: center;">
-            <div style="font-size: 11px; font-weight: 800; color: var(--gemini-sparkle-blue);">THAIS HEALTH AI</div>
+            <div style="font-size: 12px; font-weight: 800; color: var(--gemini-sparkle-blue);">THAIS HEALTH INTELLIGENCE AI</div>
             <span style="font-size: 10px; font-weight: 800; color: var(--gemini-vitality-emerald);">Active Memory</span>
           </div>
           <div style="font-size: 12px; color: var(--gemini-text-muted); margin-top: 2px;">
-            Ask questions about your protocol, meal logging, or symptom checks.
+            Ask THAIS anything about your protocol, meal logging, or symptom checks.
           </div>
         </div>
 
         <div class="app-chat-scroller" id="app-chat-messages">
           <div class="app-msg-bubble app-msg-thais">
-            <strong>THAIS:</strong> Hello! I have processed your 42-marker intake survey. How can I guide your execution today?
+            <strong>THAIS:</strong> Hello! I have processed your complete 42-marker intake survey and calibrated your daily execution protocol. How can I guide your health today?
           </div>
         </div>
 
@@ -392,12 +512,12 @@
         </div>
       </section>
 
-      <!-- ==================== TAB 4: HEALTH & BIOMARKERS ==================== -->
+      <!-- ==================== 3. TAB: HEALTH (METABOLIC & BIOMARKERS) ==================== -->
       <section id="pane-health" class="tab-pane">
         <div class="gemini-card">
           <div style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald); text-transform: uppercase;">Live Metabolic Telemetry</div>
           <div style="font-family: 'Google Sans Display', sans-serif; font-size: 22px; font-weight: 800; margin-top: 4px;">
-            Biological Age: <span style="color: var(--gemini-sparkle-blue);" id="app-bio-age">25.0 Yrs</span>
+            Biological Age: <span style="color: var(--gemini-sparkle-blue);" id="app-bio-age">20.8 Yrs</span>
           </div>
           <div style="font-size: 12px; color: var(--gemini-text-muted);">Chronological Age: <span id="app-chrono-age">25 Yrs</span> • Aging Pace: <strong>0.82x</strong></div>
         </div>
@@ -413,55 +533,67 @@
           </div>
         </div>
 
+        <!-- 55k WHO ICD-11 Triage Cards -->
         <div class="gemini-card" style="padding: 14px;">
-          <div style="font-size: 12px; font-weight: 800; color: var(--gemini-text-main);">Clinical Verification (LAW-001)</div>
-          <div style="font-size: 11px; color: var(--gemini-text-muted); margin-top: 4px;">
-            All metabolic math verified against WHO ICD-11 guidelines and Mifflin-St Jeor formulas.
+          <div style="font-size: 12px; font-weight: 800; color: var(--gemini-text-main); margin-bottom: 8px;">WHO ICD-11 55,000+ Triage Summary</div>
+          <div style="display: flex; flex-direction: column; gap: 8px; font-size: 11px;">
+            <div style="border-left: 3px solid var(--gemini-vitality-emerald); padding-left: 8px;">
+              <strong style="color: var(--gemini-vitality-emerald);">Category 1 (100% Solvable):</strong> Insulin Resistance, Bloating, 2 PM Crash (ICD-11 5B81).
+            </div>
+            <div style="border-left: 3px solid #F59E0B; padding-left: 8px;">
+              <strong style="color: #D97706;">Category 2 (Manageable):</strong> PCOS, Thyroid & Stage 1 BP support.
+            </div>
+            <div style="border-left: 3px solid #EF4444; padding-left: 8px;">
+              <strong style="color: #DC2626;">Category 3 (Doctor Care):</strong> Type 1 Diabetes & Emergency Hospital Care.
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- ==================== TAB 5: PROFILE & SETTINGS ==================== -->
-      <section id="pane-profile" class="tab-pane">
+      <!-- ==================== 4. TAB: YOU (PROFILE & SURVEY) ==================== -->
+      <section id="pane-you" class="tab-pane">
         <div class="gemini-card" style="text-align: center; padding: 20px;">
           <div style="width: 56px; height: 56px; border-radius: 50%; background: var(--gemini-surface-container); margin: 0 auto 10px auto; display: flex; align-items: center; justify-content: center; font-size: 24px;">
             👤
           </div>
           <div style="font-family: 'Google Sans Display', sans-serif; font-size: 18px; font-weight: 800;" id="app-profile-name">Tovelu Member</div>
-          <div style="font-size: 12px; color: var(--gemini-text-muted);">42 Clinical Precision Markers Calibrated</div>
+          <div style="font-size: 12px; color: var(--gemini-text-muted);">42 Clinical Precision Markers Active</div>
         </div>
 
-        <div style="display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: flex; flex-direction: column; gap: 10px;">
           <a href="survey.html" class="gemini-btn gemini-btn-primary" style="height: 44px; text-decoration: none; justify-content: center;">
-            Retake 42-Marker Survey ➔
+            Retake 42-Marker Intake Survey ➔
           </a>
           <a href="thais.html" class="gemini-btn gemini-btn-tonal" style="height: 44px; text-decoration: none; justify-content: center;">
-            Open THAIS Intelligence Console ➔
+            Open Full THAIS AI Console ➔
           </a>
+        </div>
+
+        <div class="gemini-card" style="padding: 14px; margin-top: 10px;">
+          <div style="font-size: 12px; font-weight: 800; color: var(--gemini-text-main);">Supreme Constitutional Law (LAW-001)</div>
+          <div style="font-size: 11px; color: var(--gemini-text-muted); margin-top: 4px; line-height: 1.45;">
+            100% Scientifically Proven • 100% Medically Rigorous • 100% Legally Compliant & Regulatory Approved.
+          </div>
         </div>
       </section>
 
     </div>
 
-    <!-- Fixed Bottom App Navigation Bar -->
+    <!-- Fixed Bottom App Navigation (4 Main Tabs: FLOW, CHAT, HEALTH, YOU) -->
     <nav class="app-bottom-nav">
       <button class="nav-item-btn active" id="btn-tab-flow" onclick="switchAppTab('flow')">
         <span class="material-symbols-outlined" style="font-size: 22px;">bolt</span>
         <span class="nav-label">FLOW</span>
       </button>
-      <button class="nav-item-btn" id="btn-tab-meals" onclick="switchAppTab('meals')">
-        <span class="material-symbols-outlined" style="font-size: 22px;">restaurant</span>
-        <span class="nav-label">MEALS</span>
-      </button>
       <button class="nav-item-btn" id="btn-tab-chat" onclick="switchAppTab('chat')">
         <span class="material-symbols-outlined" style="font-size: 22px;">chat</span>
-        <span class="nav-label">THAIS</span>
+        <span class="nav-label">CHAT</span>
       </button>
       <button class="nav-item-btn" id="btn-tab-health" onclick="switchAppTab('health')">
         <span class="material-symbols-outlined" style="font-size: 22px;">vital_signs</span>
         <span class="nav-label">HEALTH</span>
       </button>
-      <button class="nav-item-btn" id="btn-tab-profile" onclick="switchAppTab('profile')">
+      <button class="nav-item-btn" id="btn-tab-you" onclick="switchAppTab('you')">
         <span class="material-symbols-outlined" style="font-size: 22px;">account_circle</span>
         <span class="nav-label">YOU</span>
       </button>
@@ -509,6 +641,7 @@
       }
     }
 
+    // Main 4-Tab Navigation (FLOW, CHAT, HEALTH, YOU)
     function switchAppTab(tabId) {
       document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
       document.querySelectorAll('.nav-item-btn').forEach(b => b.classList.remove('active'));
@@ -516,6 +649,17 @@
       const pane = document.getElementById(`pane-${tabId}`);
       const btn = document.getElementById(`btn-tab-${tabId}`);
       if (pane) pane.classList.add('active');
+      if (btn) btn.classList.add('active');
+    }
+
+    // FLOW Sub-Views: DAY vs WEEK (BOOK)
+    function switchFlowSubView(subId) {
+      document.querySelectorAll('.flow-sub-view').forEach(v => v.classList.remove('active'));
+      document.querySelectorAll('.segmented-toggle-btn').forEach(b => b.classList.remove('active'));
+
+      const view = document.getElementById(`subview-flow-${subId}`);
+      const btn = document.getElementById(`btn-flow-${subId}`);
+      if (view) view.classList.add('active');
       if (btn) btn.classList.add('active');
     }
 
