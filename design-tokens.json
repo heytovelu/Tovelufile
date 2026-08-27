@@ -1,80 +1,56 @@
 {
-  "$schema": "https://json.schemastore.org/design-tokens",
-  "name": "Tovelu Universal Design Tokens",
-  "version": "1.2.0",
-  "status": "LOCKED",
+  "name": "Tovelu Gemini Design System Tokens",
+  "version": "2.0.0",
+  "governance": "LAW-001",
   "brand": {
-    "name": "tovelu",
-    "casing": "lowercase",
-    "wordmark": {
-      "fontFamily": "Ubuntu, -apple-system, BlinkMacSystemFont, sans-serif",
-      "fontWeight": 500,
-      "letterSpacing": "-0.01em",
-      "style": "Humanist Modern"
+    "logo": "The Bio-Cell Mitosis (Dual organic crescents with center vitality nucleus)",
+    "wordmark": "tovelu",
+    "font_wordmark": "Ubuntu 500"
+  },
+  "color": {
+    "gemini_sparkle_blue": "#1A73E8",
+    "gemini_sparkle_sky": "#8AB4F8",
+    "gemini_sparkle_purple": "#9B72CB",
+    "gemini_sparkle_pink": "#D96570",
+    "gemini_vitality_emerald": "#059669",
+    "light": {
+      "bg": "#F0F4F9",
+      "surface": "#FFFFFF",
+      "surface_container": "#E1E7EE",
+      "border": "#E3E8EF",
+      "text_main": "#1F1F1F",
+      "text_muted": "#444746",
+      "text_subtle": "#747775"
     },
-    "icon": {
-      "name": "The Bio-Cell / Mitosis",
-      "symbolism": "Living Cell Genesis, Proactive Health Mitosis, Vitality Nucleus",
-      "geometry": "Dual organic crescents with center nucleus",
-      "aspectRatio": "1:1"
-    },
-    "lockup": {
-      "standardRatio": "1:0.75",
-      "description": "Wordmark height is exactly 75% of the Icon height",
-      "clearSpaceRule": "1x width of lowercase 'o' (~0.35x icon width)",
-      "verticalAlignment": "Cap-Height / x-Height optical centroid"
+    "dark": {
+      "bg": "#131314",
+      "surface": "#1E1F20",
+      "surface_container": "#282A2C",
+      "border": "#333537",
+      "text_main": "#E3E3E3",
+      "text_muted": "#C4C7C5",
+      "text_subtle": "#8E918F"
     }
   },
   "typography": {
-    "displayHeadings": {
-      "fontFamily": "Plus Jakarta Sans, sans-serif",
-      "weights": {
-        "bold": 700,
-        "extraBold": 800
-      },
-      "usage": "Marketing headers, H1-H3 titles, hero statements"
+    "display": {
+      "font": "Google Sans Display",
+      "weights": [700, 800]
     },
-    "bodyAndUI": {
-      "fontFamily": "Inter, sans-serif",
-      "weights": {
-        "regular": 400,
-        "medium": 500,
-        "semiBold": 600
-      },
-      "usage": "Clinical data tables, body copy, platform dashboards, settings"
+    "titles_and_labels": {
+      "font": "Google Sans, Google Sans Text",
+      "weights": [500, 700]
+    },
+    "body_and_dense_data": {
+      "font": "Roboto, Google Sans Text",
+      "weights": [400, 500]
     }
   },
-  "colors": {
-    "primary": {
-      "azure": {
-        "value": "#1D4ED8",
-        "description": "Primary Clinical Authority & Deep Trust"
-      },
-      "sky": {
-        "value": "#0EA5E9",
-        "description": "Luminous AI Intelligence & Diagnostic Clarity"
-      },
-      "emerald": {
-        "value": "#10B981",
-        "deepValue": "#059669",
-        "description": "Bio-Vitality & Living Cellular Energy"
-      }
-    },
-    "surfaces": {
-      "nightObsidian": {
-        "value": "#080B11",
-        "elevated": "#101622",
-        "border": "#202C3F",
-        "textMain": "#F8FAFC",
-        "textMuted": "#94A3B8"
-      },
-      "dayPorcelain": {
-        "value": "#F8FAFC",
-        "elevated": "#FFFFFF",
-        "border": "#E2E8F0",
-        "textMain": "#0F172A",
-        "textMuted": "#475569"
-      }
-    }
+  "shape": {
+    "radius_sm": "8px",
+    "radius_md": "16px",
+    "radius_lg": "24px",
+    "radius_xl": "32px",
+    "radius_full": "9999px"
   }
 }
