@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <title>TOVELU • Mobile Health Intelligence Intake Survey</title>
+  <title>TOVELU • Mobile Health Intelligence Intake Survey (34 Markers)</title>
   
-  <!-- Favicon: Official Tovelu Mitosis Bio-Cell Logo (Bright Luminous) -->
+  <!-- Favicon: Official Tovelu Mitosis Bio-Cell Logo (Razor Sharp) -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 16 C28 16, 16 32, 16 50 C16 68, 28 84, 50 84 C38 72, 34 58, 34 50 C34 42, 38 28, 50 16 Z' fill='%230091FF'/%3E%3Cpath d='M50 16 C72 16, 84 32, 84 50 C84 68, 72 84, 50 84 C62 72, 66 58, 66 50 C66 42, 62 28, 50 16 Z' fill='%2300E676'/%3E%3Ccircle cx='50' cy='50' r='8' fill='%2300F5A0'/%3E%3C/svg%3E" />
 
   <!-- Google Fonts: Google Sans, Roboto, Ubuntu, JetBrains Mono & Material Symbols -->
@@ -182,7 +182,7 @@
 
     <!-- Progress Indicator -->
     <div style="display: flex; align-items: center; gap: 10px;">
-      <span id="step-name" style="font-size: 11px; font-weight: 700; color: var(--gemini-text-muted);">Q1 of 34</span>
+      <span id="step-name" style="font-size: 11px; font-weight: 700; color: var(--gemini-text-muted);">Q1 of 26</span>
       <button class="gemini-btn gemini-btn-tonal" style="height: 30px; padding: 0 8px; font-size: 11px;" onclick="toggleTheme()">
         <span class="material-symbols-outlined" id="theme-icon-sym" style="font-size: 14px;">dark_mode</span>
       </button>
@@ -191,7 +191,7 @@
 
   <!-- Slim Progress Bar -->
   <div style="width: 100%; height: 3px; background: var(--gemini-surface-container); overflow: hidden;">
-    <div id="survey-progress-fill" style="height: 100%; width: 3%; background: var(--gemini-gradient-btn); transition: width 0.2s;"></div>
+    <div id="survey-progress-fill" style="height: 100%; width: 4%; background: var(--gemini-gradient-btn); transition: width 0.2s;"></div>
   </div>
 
   <!-- Smartphone Frame -->
@@ -225,7 +225,10 @@
 
   </div>
 
-  <!-- Survey Logic -->
+  <!-- Load Master 34-Question Dataset -->
+  <script src="survey-data.js"></script>
+
+  <!-- Survey Controller Script -->
   <script>
     let currentQIndex = 0;
     let userAnswers = {};
@@ -234,106 +237,12 @@
       "India", "United States", "United Kingdom", "United Arab Emirates", "Australia", "Canada", "Germany", "Singapore"
     ];
 
-    const SURVEY_QUESTIONS = [
-      {
-        id: "sex",
-        title: "1. Biological Sex at Birth",
-        subtitle: "To calibrate your natural hormone baseline and basal calorie burn.",
-        type: "single",
-        options: [
-          { emoji: "👨", title: "Male", desc: "Calibrate male androgen & metabolic baseline." },
-          { emoji: "👩", title: "Female", desc: "Calibrate female ovulatory & metabolic baseline." }
-        ]
-      },
-      {
-        id: "dob",
-        title: "2. Date of Birth",
-        subtitle: "To calculate exact chronological age for DNAm biological clock tracking.",
-        type: "dob"
-      },
-      {
-        id: "height",
-        title: "3. Height",
-        subtitle: "Used to determine body surface area and ideal metabolic proportions.",
-        type: "height"
-      },
-      {
-        id: "dopamine_1",
-        type: "dopamine",
-        badge: "⚡ METABOLIC BASELINE",
-        gauge: {
-          title: "BASAL ENERGY EXPENDITURE (BMR)",
-          value: "1,740 kcal / day",
-          percentile: "Top 11.2% Metabolic Profile",
-          barWidth: "78%"
-        },
-        data: "Only 8.4% of humans share your exact metabolic profile. Your biology is unique.",
-        quote: "Natural forces within us are the true healers of disease.",
-        author: "Hippocrates"
-      },
-      {
-        id: "weight",
-        title: "4. Current Weight",
-        subtitle: "Used to calculate daily protein absorption and basal metabolic expenditure.",
-        type: "weight"
-      },
-      {
-        id: "dietary_lifestyle",
-        title: "5. Dietary Lifestyle",
-        subtitle: "We calibrate a 100% whole-food, zero-seed-oil plan tailored to you.",
-        type: "single",
-        options: [
-          { emoji: "🥩", title: "Omnivore / Whole Foods", desc: "Meat, fish, eggs, fruits, vegetables, dairy." },
-          { emoji: "🌱", title: "Vegetarian", desc: "Plant-based plus dairy and eggs." },
-          { emoji: "🌿", title: "Pure Vegan", desc: "100% plant-based whole foods." }
-        ]
-      },
-      {
-        id: "time_wake",
-        title: "6. Wake Up Time",
-        subtitle: "To calculate your morning cortisol spike and breakfast window.",
-        type: "time_wake"
-      },
-      {
-        id: "time_sleep",
-        title: "7. Bedtime",
-        subtitle: "To calculate your melatonin window and overnight cellular autophagy.",
-        type: "time_sleep"
-      },
-      {
-        id: "primary_goal",
-        title: "8. Primary Health Goal",
-        subtitle: "Your entire 90-day protocol will be calibrated to achieve this outcome first.",
-        type: "single",
-        options: [
-          { emoji: "🔥", title: "Burn Visceral Belly Fat", desc: "Calibrate lipolytic fat oxidation." },
-          { emoji: "⚡", title: "Stop Afternoon Energy Crashes", desc: "Flatten blood glucose spikes." },
-          { emoji: "🧬", title: "Reverse Biological Aging", desc: "De-accelerate DNAm pace of aging." }
-        ]
-      },
-      {
-        id: "dopamine_final",
-        type: "dopamine",
-        isFinal: true,
-        badge: "🎉 INTAKE COMPLETE",
-        gauge: {
-          title: "EPIGENETIC AGE TRAJECTORY",
-          value: "25.8 Yrs (-4.2 Saved)",
-          percentile: "Top 4.8% Regeneration Rate",
-          barWidth: "88%"
-        },
-        data: "All markers verified against WHO ICD-11 logic. Protocol generated.",
-        quote: "Let food be thy medicine.",
-        author: "Hippocrates"
-      }
-    ];
-
     function renderCurrentQuestion() {
-      const q = SURVEY_QUESTIONS[currentQIndex];
+      const q = TOVELU_SURVEY_QUESTIONS[currentQIndex];
       const stage = document.getElementById('survey-content-area');
-      const progress = Math.round(((currentQIndex + 1) / SURVEY_QUESTIONS.length) * 100);
+      const progress = Math.round(((currentQIndex + 1) / TOVELU_SURVEY_QUESTIONS.length) * 100);
 
-      document.getElementById('step-name').innerText = `Q${currentQIndex + 1} of ${SURVEY_QUESTIONS.length}`;
+      document.getElementById('step-name').innerText = `Q${currentQIndex + 1} of ${TOVELU_SURVEY_QUESTIONS.length}`;
       document.getElementById('survey-progress-fill').style.width = `${progress}%`;
       document.getElementById('btn-prev').disabled = currentQIndex === 0;
 
@@ -351,7 +260,7 @@
             <p style="font-size: 12px; color: var(--gemini-text-muted); line-height: 1.5;">${q.data}</p>
           </div>
         `;
-        document.getElementById('btn-next').innerText = q.isFinal ? "Unlock Protocol ➔" : "Next ➔";
+        document.getElementById('btn-next').innerText = q.isFinal ? "Unlock Protocol ➔" : "Next Milestone ➔";
         return;
       }
 
@@ -365,6 +274,25 @@
               const isSel = userAnswers[q.id] === opt.title;
               return `
                 <div class="gemini-option-card ${isSel ? 'selected' : ''}" onclick="selectSingleOption('${q.id}', '${opt.title.replace(/'/g, "\\'")}', this)">
+                  <div class="gemini-check-circle">${isSel ? '✓' : ''}</div>
+                  <span style="font-size: 22px;">${opt.emoji}</span>
+                  <div style="flex: 1;">
+                    <div style="font-family: 'Google Sans', sans-serif; font-weight: 700; font-size: 14px;">${opt.title}</div>
+                    <div style="font-size: 11px; color: var(--gemini-text-muted);">${opt.desc}</div>
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        `;
+      } else if (q.type === 'multi') {
+        if (!userAnswers[q.id]) userAnswers[q.id] = [];
+        optionsHTML = `
+          <div class="option-list">
+            ${q.options.map((opt, i) => {
+              const isSel = userAnswers[q.id].includes(opt.title);
+              return `
+                <div class="gemini-option-card ${isSel ? 'selected' : ''}" onclick="toggleMultiOption('${q.id}', '${opt.title.replace(/'/g, "\\'")}', this)">
                   <div class="gemini-check-circle">${isSel ? '✓' : ''}</div>
                   <span style="font-size: 22px;">${opt.emoji}</span>
                   <div style="flex: 1;">
@@ -393,17 +321,26 @@
       } else if (q.type === 'height') {
         optionsHTML = `
           <div class="gemini-card">
-            <input type="number" class="gemini-prompt-input" id="input-height-cm" placeholder="175 cm" style="border: 1.5px solid var(--gemini-border); border-radius: 12px; padding: 12px; font-size: 18px; font-weight: 700; width: 100%;" value="${userAnswers['height_num'] || '175'}" />
+            <input type="number" class="gemini-prompt-input" id="input-height-cm" placeholder="175 cm" style="border: 1.5px solid var(--gemini-border); border-radius: 12px; padding: 12px; font-size: 18px; font-weight: 700; width: 100%;" value="${userAnswers['height_num'] || '175'}" oninput="userAnswers['height_num']=this.value" />
           </div>
         `;
       } else if (q.type === 'weight') {
         optionsHTML = `
           <div class="gemini-card">
-            <input type="number" class="gemini-prompt-input" id="input-weight" placeholder="70 kg" style="border: 1.5px solid var(--gemini-border); border-radius: 12px; padding: 12px; font-size: 18px; font-weight: 700; width: 100%;" value="${userAnswers['weight_num'] || '70'}" />
+            <input type="number" class="gemini-prompt-input" id="input-weight" placeholder="70 kg" style="border: 1.5px solid var(--gemini-border); border-radius: 12px; padding: 12px; font-size: 18px; font-weight: 700; width: 100%;" value="${userAnswers['weight_num'] || '70'}" oninput="userAnswers['weight_num']=this.value" />
+          </div>
+        `;
+      } else if (q.type === 'location') {
+        optionsHTML = `
+          <div class="gemini-card" style="display: flex; flex-direction: column; gap: 10px;">
+            <select class="time-select" id="loc-country">
+              ${COUNTRIES.map(c => `<option value="${c}">${c}</option>`).join('')}
+            </select>
+            <input type="text" class="gemini-prompt-input" id="loc-city" placeholder="Enter City (e.g. Mumbai, London)" style="border: 1.5px solid var(--gemini-border); border-radius: 12px; padding: 12px; font-size: 14px;" value="${userAnswers['city'] || ''}" />
           </div>
         `;
       } else if (q.type === 'time_wake' || q.type === 'time_sleep') {
-        const presets = q.type === 'time_wake' ? ["06:00 AM", "06:30 AM", "07:00 AM", "07:30 AM"] : ["10:00 PM", "10:30 PM", "11:00 PM", "11:30 PM"];
+        const presets = q.type === 'time_wake' ? ["05:30 AM", "06:00 AM", "06:30 AM", "07:00 AM", "07:30 AM"] : ["09:30 PM", "10:00 PM", "10:30 PM", "11:00 PM", "11:30 PM"];
         optionsHTML = `
           <div class="gemini-card" style="display: flex; flex-direction: column; gap: 12px;">
             <div style="font-weight: 700; font-size: 11px; color: var(--gemini-text-muted); text-transform: uppercase;">1-Tap Presets</div>
@@ -435,6 +372,21 @@
       setTimeout(nextQuestion, 160);
     }
 
+    function toggleMultiOption(qId, title, card) {
+      if (!userAnswers[qId]) userAnswers[qId] = [];
+      const idx = userAnswers[qId].indexOf(title);
+      if (idx > -1) {
+        userAnswers[qId].splice(idx, 1);
+        card.classList.remove('selected');
+        card.querySelector('.gemini-check-circle').innerText = '';
+      } else {
+        userAnswers[qId].push(title);
+        card.classList.add('selected');
+        card.querySelector('.gemini-check-circle').innerText = '✓';
+      }
+      hideAlert();
+    }
+
     function selectTimePreset(qId, val) {
       userAnswers[qId] = val;
       document.querySelectorAll('.gemini-chip').forEach(c => c.classList.toggle('active', c.innerText === val));
@@ -442,14 +394,19 @@
     }
 
     function saveInputs() {
-      const q = SURVEY_QUESTIONS[currentQIndex];
+      const q = TOVELU_SURVEY_QUESTIONS[currentQIndex];
       if (!q) return;
       if (q.type === 'dob') {
         userAnswers['dob'] = `${document.getElementById('dob-day').value} ${document.getElementById('dob-month').value} ${document.getElementById('dob-year').value}`;
       } else if (q.type === 'height') {
-        userAnswers['height'] = `${document.getElementById('input-height-cm').value} cm`;
+        userAnswers['height_num'] = document.getElementById('input-height-cm').value;
+        userAnswers['height'] = `${userAnswers['height_num']} cm`;
       } else if (q.type === 'weight') {
-        userAnswers['weight'] = `${document.getElementById('input-weight').value} kg`;
+        userAnswers['weight_num'] = document.getElementById('input-weight').value;
+        userAnswers['weight'] = `${userAnswers['weight_num']} kg`;
+      } else if (q.type === 'location') {
+        userAnswers['country'] = document.getElementById('loc-country').value;
+        userAnswers['city'] = document.getElementById('loc-city').value;
       }
     }
 
@@ -462,7 +419,7 @@
     }
 
     function nextQuestion() {
-      const q = SURVEY_QUESTIONS[currentQIndex];
+      const q = TOVELU_SURVEY_QUESTIONS[currentQIndex];
       if (q && q.type === 'dopamine' && q.isFinal) {
         finish();
         return;
@@ -472,7 +429,11 @@
         showAlert('Please select an option to continue.');
         return;
       }
-      if (currentQIndex < SURVEY_QUESTIONS.length - 1) {
+      if (q && q.type === 'multi' && (!userAnswers[q.id] || userAnswers[q.id].length === 0)) {
+        showAlert('Please select at least one option to continue.');
+        return;
+      }
+      if (currentQIndex < TOVELU_SURVEY_QUESTIONS.length - 1) {
         currentQIndex++;
         renderCurrentQuestion();
       } else {
