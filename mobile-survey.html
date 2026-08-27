@@ -355,7 +355,7 @@
                 ${["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"].map((m, idx) => `<option value="${idx+1}">${m}</option>`).join('')}
               </select>
               <select class="time-select" id="dob-year" style="flex: 1.2;" onchange="updateCalculatedAgeMobile()">
-                ${Array.from({length: 70}, (_, i) => `<option value="${2024 - i}">${2024 - i}</option>`).join('')}
+                ${Array.from({length: 85}, (_, i) => { const yr = (new Date().getFullYear()) - i; return `<option value="${yr}" ${yr===2001?'selected':''}>${yr}</option>`; }).join('')}
               </select>
             </div>
             <div id="dob-calculated-tag" style="background: var(--gemini-surface-container); padding: 8px; border-radius: 10px; font-size: 12px; font-weight: 700; color: var(--gemini-sparkle-blue); text-align: center;">
@@ -523,9 +523,20 @@
     }
 
     function updateCalculatedAgeMobile() {
-      const y = parseInt(document.getElementById('dob-year').value) || 1995;
-      const age = 2024 - y;
+      const d = parseInt(document.getElementById('dob-day').value) || 1;
+      const m = parseInt(document.getElementById('dob-month').value) || 1;
+      const y = parseInt(document.getElementById('dob-year').value) || 2001;
+      
+      const now = new Date();
+      let age = now.getFullYear() - y;
+      const monthDiff = (now.getMonth() + 1) - m;
+      if (monthDiff < 0 || (monthDiff === 0 && now.getDate() < d)) {
+        age--;
+      }
+      if (age < 0) age = 0;
+
       userAnswers['calculated_age'] = age;
+      userAnswers['dob'] = `${d}/${m}/${y}`;
       const tag = document.getElementById('dob-calculated-tag');
       if (tag) tag.innerText = `👉 Calculated Age: ${age} Years Old`;
     }
