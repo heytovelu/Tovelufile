@@ -579,18 +579,143 @@
       display: inline-block;
       box-shadow: 0 0 8px rgba(0, 208, 108, 0.6);
     }
-    .gemini-core-badge {
-      font-size: 11px;
-      font-weight: 800;
-      color: var(--gemini-sparkle-blue);
+    .gemini-history-btn {
       background: var(--gemini-surface-container);
-      border: 1px solid var(--gemini-border-subtle);
-      padding: 5px 12px;
+      border: 1.5px solid var(--gemini-border-subtle);
+      color: var(--gemini-text-main);
+      padding: 6px 14px;
       border-radius: 9999px;
-      letter-spacing: 0.03em;
+      font-size: 13px;
+      font-weight: 700;
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 6px;
+      cursor: pointer;
+      transition: all 0.15s ease-out;
+      font-family: 'Google Sans', sans-serif;
+    }
+    .gemini-history-btn:hover {
+      background: var(--gemini-surface);
+      border-color: var(--gemini-sparkle-blue);
+      color: var(--gemini-sparkle-blue);
+      box-shadow: 0 2px 8px rgba(0, 98, 255, 0.12);
+    }
+    .gemini-history-btn:active {
+      transform: scale(0.96);
+    }
+
+    /* CHAT HISTORY BY DAY SIDE DRAWER */
+    .chat-history-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(8px);
+      z-index: 1100;
+      display: none;
+      justify-content: flex-end;
+      animation: fadeIn 0.2s ease-out;
+    }
+    .chat-history-overlay.active {
+      display: flex;
+    }
+    .chat-history-drawer {
+      width: 100%;
+      max-width: 400px;
+      height: 100%;
+      background: var(--gemini-bg);
+      box-shadow: -4px 0 30px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      animation: slideInRight 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      border-left: 1px solid var(--gemini-border-subtle);
+    }
+    @keyframes slideInRight {
+      from { transform: translateX(100%); }
+      to { transform: translateX(0); }
+    }
+    .chat-history-header {
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--gemini-border-subtle);
+      background: var(--gemini-surface);
+    }
+    .chat-history-month-wrap {
+      padding: 14px 20px;
+      background: var(--gemini-surface-container);
+      border-bottom: 1px solid var(--gemini-border-subtle);
+    }
+    .chat-history-month-select {
+      width: 100%;
+      height: 44px;
+      border-radius: 12px;
+      border: 1.5px solid var(--gemini-border);
+      padding: 0 14px;
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--gemini-text-main);
+      background: var(--gemini-surface);
+      outline: none;
+      cursor: pointer;
+      font-family: 'Google Sans', sans-serif;
+      transition: border-color 0.2s;
+    }
+    .chat-history-month-select:focus {
+      border-color: var(--gemini-sparkle-blue);
+    }
+    .chat-history-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 20px 30px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .chat-history-day-card {
+      background: var(--gemini-surface);
+      border: 1.5px solid var(--gemini-border-subtle);
+      border-radius: 16px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      cursor: pointer;
+      transition: all 0.15s ease-out;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+      font-family: 'Google Sans', sans-serif;
+    }
+    .chat-history-day-card:hover {
+      border-color: var(--gemini-sparkle-blue);
+      background: rgba(26, 115, 232, 0.04);
+      transform: translateX(-3px);
+      box-shadow: 0 4px 14px rgba(26, 115, 232, 0.1);
+    }
+    .chat-history-day-date {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--gemini-text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .chat-history-day-meta {
+      font-size: 12px;
+      color: var(--gemini-text-muted);
+      margin-top: 3px;
+    }
+    .chat-history-day-tag {
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      background: rgba(0, 208, 108, 0.12);
+      color: var(--gemini-vitality-emerald);
+      flex-shrink: 0;
     }
 
     /* 2. ONLY MESSAGES SCROLL (GENEROUS BREATHING ROOM) */
@@ -1267,10 +1392,10 @@
               </div>
             </div>
           </div>
-          <div class="gemini-core-badge">
-            <span class="material-symbols-outlined" style="font-size: 14px;">psychology</span>
-            <span>Gemini Pro</span>
-          </div>
+          <button class="gemini-history-btn" onclick="openChatHistoryDrawer()" title="View Chat History by Day">
+            <span class="material-symbols-outlined" style="font-size: 16px;">history</span>
+            <span>History</span>
+          </button>
         </div>
 
         <!-- FULL PAGE MESSAGE STREAM (SCROLLABLE ONLY WITH GENEROUS BREATHING ROOM) -->
@@ -1547,6 +1672,49 @@
       <div style="font-size: 11px; color: var(--gemini-text-muted); text-align: center; margin-top: 10px;">
         Constitutional LAW-001 Guaranteed • 100% Scientifically & Medically Verified.
       </div>
+    </div>
+  </div>
+
+  <!-- ==================== CHAT HISTORY BY DAY SIDE DRAWER ==================== -->
+  <div id="chat-history-overlay" class="chat-history-overlay" onclick="if(event.target===this) closeChatHistoryDrawer()">
+    <div class="chat-history-drawer">
+      
+      <!-- Drawer Header -->
+      <div class="chat-history-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div style="width: 36px; height: 36px; border-radius: 12px; background: linear-gradient(135deg, #1A73E8, #7C3AED); display: flex; align-items: center; justify-content: center; color: #fff; box-shadow: 0 4px 12px rgba(26, 115, 232, 0.25);">
+            <span class="material-symbols-outlined" style="font-size: 20px;">history</span>
+          </div>
+          <div>
+            <div style="font-family: 'Google Sans', sans-serif; font-size: 17px; font-weight: 800; color: var(--gemini-text-main);">
+              Chat History
+            </div>
+            <div style="font-size: 11.5px; color: var(--gemini-text-muted);">
+              Browse previous consultations by day
+            </div>
+          </div>
+        </div>
+        <button class="gemini-btn gemini-btn-tonal" style="height: 32px; width: 32px; padding: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center;" onclick="closeChatHistoryDrawer()">✕</button>
+      </div>
+
+      <!-- Choose Month Selector (Top) -->
+      <div class="chat-history-month-wrap">
+        <div style="font-size: 11.5px; font-weight: 800; color: var(--gemini-sparkle-blue); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; display: flex; align-items: center; gap: 5px;">
+          <span class="material-symbols-outlined" style="font-size: 15px;">calendar_month</span>
+          CHOOSE MONTH:
+        </div>
+        <select class="chat-history-month-select" id="chat-history-month-select" onchange="renderChatHistoryByMonth(this.value)">
+          <option value="july_2026" selected>July 2026 (31 Days History Archive)</option>
+          <option value="august_2026">August 2026 (Active Protocol Month)</option>
+          <option value="june_2026">June 2026 (30 Days Baseline Archive)</option>
+        </select>
+      </div>
+
+      <!-- History Items Stream -->
+      <div class="chat-history-list" id="chat-history-list-container">
+        <!-- Dynamically rendered day cards for the selected month -->
+      </div>
+
     </div>
   </div>
 
@@ -2479,6 +2647,205 @@
       const nxt = cur === 'dark' ? 'light' : 'dark';
       html.setAttribute('data-theme', nxt);
       document.body.className = nxt === 'dark' ? 'tds-theme-dark' : '';
+    }
+
+    // --- CHAT HISTORY BY DAY SIDE DRAWER ---
+    function openChatHistoryDrawer() {
+      const overlay = document.getElementById('chat-history-overlay');
+      if (overlay) {
+        overlay.classList.add('active');
+        const select = document.getElementById('chat-history-month-select');
+        renderChatHistoryByMonth(select ? select.value : 'july_2026');
+      }
+    }
+
+    function closeChatHistoryDrawer() {
+      const overlay = document.getElementById('chat-history-overlay');
+      if (overlay) overlay.classList.remove('active');
+    }
+
+    function renderChatHistoryByMonth(monthKey) {
+      const container = document.getElementById('chat-history-list-container');
+      if (!container) return;
+
+      let html = '';
+      if (monthKey === 'july_2026') {
+        // Full 31 Days of July 2026 (exact dates: 31 July down to 1 July)
+        for (let day = 31; day >= 1; day--) {
+          const compliance = Math.min(100, Math.max(78, Math.round(86 + Math.sin(day) * 10)));
+          const protein = Math.round(110 + (day % 15));
+          html += `
+            <div class="chat-history-day-card" onclick="loadDayChatHistory('${day} July 2026', ${compliance}, '35g+ Protein Met • 12-min Walk Logged • Zero Seed Oils')">
+              <div>
+                <div class="chat-history-day-date">
+                  <span class="material-symbols-outlined" style="font-size: 18px; color: var(--gemini-sparkle-blue);">calendar_today</span>
+                  <span>${day} July 2026</span>
+                </div>
+                <div class="chat-history-day-meta">
+                  ${protein}g Protein Logged • Flat Glucose Curve
+                </div>
+              </div>
+              <span class="chat-history-day-tag">${compliance}% Done</span>
+            </div>
+          `;
+        }
+      } else if (monthKey === 'august_2026') {
+        // August 2026 (Active Month: 28 August down to 1 August)
+        for (let day = 28; day >= 1; day--) {
+          const isToday = (day === 28);
+          const compliance = isToday ? 88 : Math.min(100, Math.max(80, Math.round(88 + Math.cos(day) * 9)));
+          html += `
+            <div class="chat-history-day-card" onclick="loadDayChatHistory('${day} August 2026', ${compliance}, '${isToday ? "Active Today: 3/4 Habits Completed • Portion 88%" : "35g Protein Breakfast • Post-Meal Walk 12m • Caffeine Cutoff before 12 PM"}')">
+              <div>
+                <div class="chat-history-day-date">
+                  <span class="material-symbols-outlined" style="font-size: 18px; color: ${isToday ? "var(--gemini-vitality-emerald)" : "var(--gemini-sparkle-blue)"};">calendar_today</span>
+                  <span>${day} August 2026 ${isToday ? "<strong style='color: var(--gemini-vitality-emerald); font-size: 12px; margin-left: 4px;'>(Today)</strong>" : ""}</span>
+                </div>
+                <div class="chat-history-day-meta">
+                  ${isToday ? "Live Execution in Progress" : "Full Protocol Executed • 0% Seed Oils"}
+                </div>
+              </div>
+              <span class="chat-history-day-tag" style="${isToday ? "background: rgba(0, 98, 255, 0.12); color: var(--gemini-sparkle-blue);" : ""}">${compliance}% Done</span>
+            </div>
+          `;
+        }
+      } else if (monthKey === 'june_2026') {
+        // June 2026 (30 Days)
+        for (let day = 30; day >= 1; day--) {
+          const compliance = Math.min(100, Math.max(75, Math.round(84 + Math.sin(day * 2) * 11)));
+          html += `
+            <div class="chat-history-day-card" onclick="loadDayChatHistory('${day} June 2026', ${compliance}, 'Baseline Health Biomarkers Recorded')">
+              <div>
+                <div class="chat-history-day-date">
+                  <span class="material-symbols-outlined" style="font-size: 18px; color: var(--gemini-sparkle-blue);">calendar_today</span>
+                  <span>${day} June 2026</span>
+                </div>
+                <div class="chat-history-day-meta">
+                  Metabolic Baseline Calibration Archive
+                </div>
+              </div>
+              <span class="chat-history-day-tag">${compliance}% Done</span>
+            </div>
+          `;
+        }
+      }
+      container.innerHTML = html;
+    }
+
+    function loadDayChatHistory(dateStr, compliancePct, summaryText) {
+      closeChatHistoryDrawer();
+      const scroller = document.getElementById('app-chat-messages');
+      if (!scroller) return;
+
+      scroller.innerHTML = `
+        <!-- Historical Banner -->
+        <div style="background: var(--gemini-surface); border: 1.5px solid var(--gemini-sparkle-blue); border-radius: 18px; padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; gap: 10px; box-shadow: 0 4px 14px rgba(0, 98, 255, 0.08);">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span class="material-symbols-outlined" style="color: var(--gemini-sparkle-blue); font-size: 22px;">history</span>
+            <div>
+              <div style="font-family: 'Google Sans', sans-serif; font-size: 15px; font-weight: 800; color: var(--gemini-text-main);">
+                Consultation Archive: ${dateStr}
+              </div>
+              <div style="font-size: 12px; color: var(--gemini-text-muted); margin-top: 1px;">
+                ${compliancePct}% Compliance • ${summaryText}
+              </div>
+            </div>
+          </div>
+          <button class="gemini-btn gemini-btn-primary" style="height: 34px; padding: 0 14px; font-size: 12px; font-weight: 800; border-radius: 10px; flex-shrink: 0;" onclick="resetChatToToday()">
+            Back to Today
+          </button>
+        </div>
+
+        <!-- Historical Consultation Log -->
+        <div class="gemini-msg-user">
+          <div>What was my primary breakfast recipe and walk status on ${dateStr}?</div>
+          <div class="gemini-msg-user-footer">
+            <span>08:32 AM</span>
+            <span style="color: var(--gemini-sparkle-blue); font-weight: 800; margin-left: 3px;">✓✓</span>
+          </div>
+        </div>
+
+        <div class="gemini-msg-ai">
+          <div class="gemini-msg-ai-header">
+            <span class="material-symbols-outlined" style="font-size: 18px;">auto_awesome</span>
+            <span>TOVELU INTELLIGENCE • ARCHIVE LOG</span>
+          </div>
+          <div class="gemini-msg-ai-card">
+            <div>
+              📅 <strong>Summary for ${dateStr}:</strong><br><br>
+              🍳 <strong>Breakfast:</strong> 3 Pasture Eggs scrambled in 1 tbsp Pure Desi Ghee + 1/2 Avocado (<strong>36g Clean Protein</strong>).<br>
+              🚶 <strong>Movement:</strong> Completed 12-minute post-meal Zone 2 walk at 09:15 AM (Blood glucose excursion was blunted by 37%).<br>
+              ☕ <strong>Circadian:</strong> Observed 10-Hour Caffeine Cutoff strictly before 12:00 PM.<br><br>
+              ✨ <strong>Daily Score:</strong> <strong>${compliancePct}% Protocol Compliance</strong> logged with 0% industrial seed oils!
+            </div>
+            <div class="gemini-msg-time">
+              <span>08:33 AM</span>
+            </div>
+          </div>
+        </div>
+      `;
+      scroller.scrollTop = 0;
+    }
+
+    function resetChatToToday() {
+      const scroller = document.getElementById('app-chat-messages');
+      if (!scroller) return;
+      scroller.innerHTML = `
+        <!-- Welcome Card from Tovelu Intelligence (Gemini AI) -->
+        <div class="gemini-msg-ai">
+          <div class="gemini-msg-ai-header">
+            <span class="material-symbols-outlined" style="font-size: 18px;">auto_awesome</span>
+            <span>TOVELU INTELLIGENCE</span>
+          </div>
+          <div class="gemini-msg-ai-card">
+            <div>
+              Hello Ajay! I am your <strong>Tovelu Intelligence</strong> companion powered by your 42-marker health calibration and live kitchen pantry.
+            </div>
+            <div style="margin-top: 10px; padding: 12px 14px; background: var(--gemini-surface-container); border-radius: 14px; font-size: 14.5px; border: 1px solid var(--gemini-border-subtle);">
+              📊 <strong>Today's Live Snapshot:</strong> You are currently at <strong>88% Daily Portion Meter</strong> with <strong>3 of 4 morning habits</strong> locked in!
+            </div>
+            <div class="gemini-msg-time">
+              <span>08:30 AM</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Suggested Gemini Prompt Cards -->
+        <div class="gemini-prompts-section" id="assistance-suggest-container">
+          <div class="gemini-prompts-title">
+            <span class="material-symbols-outlined" style="font-size: 16px;">auto_awesome</span>
+            <span>Suggested for your daily protocol:</span>
+          </div>
+          
+          <div class="gemini-prompts-grid">
+            <button class="gemini-prompt-card" onclick="askPresetQuestion('What 15m meal can I cook from my kitchen pantry right now?')">
+              <span>🍳 What 15m high-protein meal can I cook from my pantry?</span>
+              <span class="material-symbols-outlined" style="font-size: 20px; color: var(--gemini-sparkle-blue);">arrow_forward</span>
+            </button>
+            
+            <button class="gemini-prompt-card" onclick="askPresetQuestion('Why do I feel tired around 2:00 PM and how to prevent it?')">
+              <span>⚡ Why do I feel tired at 2:00 PM & how to fix it immediately?</span>
+              <span class="material-symbols-outlined" style="font-size: 20px; color: var(--gemini-sparkle-blue);">arrow_forward</span>
+            </button>
+            
+            <button class="gemini-prompt-card" onclick="askPresetQuestion('When is the exact best time for my 12-min post-meal walk?')">
+              <span>🚶 When is the best time for my 12-min post-meal walk?</span>
+              <span class="material-symbols-outlined" style="font-size: 20px; color: var(--gemini-sparkle-blue);">arrow_forward</span>
+            </button>
+            
+            <button class="gemini-prompt-card" onclick="askPresetQuestion('Can I drink tea or coffee after 12:00 PM today?')">
+              <span>☕ Can I drink tea or coffee after 12:00 PM today?</span>
+              <span class="material-symbols-outlined" style="font-size: 20px; color: var(--gemini-sparkle-blue);">arrow_forward</span>
+            </button>
+
+            <button class="gemini-prompt-card" onclick="askPresetQuestion('What snacks can I eat that will not spike my insulin?')">
+              <span>🥑 What healthy snacks can I eat that won\\'t spike insulin?</span>
+              <span class="material-symbols-outlined" style="font-size: 20px; color: var(--gemini-sparkle-blue);">arrow_forward</span>
+            </button>
+          </div>
+        </div>
+      `;
+      scroller.scrollTop = scroller.scrollHeight;
     }
 
     window.addEventListener('load', () => {
