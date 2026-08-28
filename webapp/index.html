@@ -499,33 +499,78 @@
       letter-spacing: 0.04em;
     }
 
-    /* Chat Messages */
+    /* WhatsApp-Style Health Intelligence Chat Canvas */
+    .whatsapp-chat-container {
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 160px);
+      position: relative;
+    }
     .app-chat-scroller {
-      height: 420px;
+      flex: 1;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      padding: 6px 0;
+      gap: 14px;
+      padding: 16px 12px 14px 12px;
+      background: var(--gemini-surface-container);
+      border-radius: 22px;
+      border: 1px solid var(--gemini-border-subtle);
     }
     .app-msg-bubble {
       padding: 12px 16px;
-      border-radius: 16px;
-      font-size: 13px;
-      line-height: 1.5;
+      border-radius: 18px;
+      font-size: 14.5px;
+      line-height: 1.55;
       max-width: 86%;
+      position: relative;
+      word-break: break-word;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
     }
     .app-msg-thais {
-      background: var(--gemini-surface-container);
+      background: var(--gemini-surface);
       color: var(--gemini-text-main);
       align-self: flex-start;
       border-bottom-left-radius: 4px;
+      border: 1px solid var(--gemini-border-subtle);
     }
     .app-msg-user {
-      background: var(--gemini-gradient-btn);
-      color: #FFFFFF;
+      background: #E7FFDB;
+      color: #111827;
       align-self: flex-end;
       border-bottom-right-radius: 4px;
+      border: 1px solid rgba(0, 208, 108, 0.25);
+    }
+    [data-theme="dark"] .app-msg-user {
+      background: #005C4B;
+      color: #E9EDEF;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .msg-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 4px;
+      font-size: 11px;
+      color: var(--gemini-text-muted);
+      margin-top: 4px;
+    }
+    [data-theme="dark"] .app-msg-user .msg-meta-row {
+      color: rgba(255, 255, 255, 0.6);
+    }
+    
+    /* WhatsApp Bottom Fixed Bar */
+    .whatsapp-bottom-bar {
+      position: sticky;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--gemini-bg);
+      padding: 10px 0 4px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 10;
     }
   </style>
 </head>
@@ -989,30 +1034,85 @@
 
       </section>
 
-      <!-- ==================== 2. TAB: CHAT (THAIS AI HEALTH COMPANION) ==================== -->
-      <section id="pane-chat" class="tab-pane">
-        <div class="gemini-card" style="padding: 14px;">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <div style="font-size: 12px; font-weight: 800; color: var(--gemini-sparkle-blue);">THAIS HEALTH INTELLIGENCE AI</div>
-            <span style="font-size: 10px; font-weight: 800; color: var(--gemini-vitality-emerald);">Active Memory</span>
+      <!-- ==================== 2. TAB: CHAT (WHATSAPP-STYLE THAIS HEALTH COMPANION) ==================== -->
+      <section id="pane-chat" class="tab-pane" style="display: none; flex-direction: column; height: calc(100vh - 150px); padding-bottom: 0;">
+        
+        <!-- WhatsApp Header -->
+        <div style="background: var(--gemini-surface); border: 1.5px solid var(--gemini-border-subtle); border-radius: 20px; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.03);">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div style="position: relative; width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #00C0FF, #0062FF); display: flex; align-items: center; justify-content: center; color: #FFFFFF; font-size: 22px; box-shadow: 0 4px 12px rgba(0, 98, 255, 0.3);">
+              🤖
+              <span style="position: absolute; bottom: 0; right: 0; width: 12px; height: 12px; border-radius: 50%; background: #00D06C; border: 2px solid var(--gemini-surface);"></span>
+            </div>
+            <div>
+              <div style="font-family: 'Google Sans', sans-serif; font-size: 16px; font-weight: 800; color: var(--gemini-text-main); display: flex; align-items: center; gap: 6px;">
+                <span>THAIS Health AI</span>
+                <span style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald); background: rgba(0, 208, 108, 0.12); padding: 1px 7px; border-radius: 9999px;">AI Doctor</span>
+              </div>
+              <div style="font-size: 12px; color: var(--gemini-text-muted); margin-top: 1px;">
+                ● Online • 42 Markers & Pantry Calibrated
+              </div>
+            </div>
           </div>
-          <div style="font-size: 12px; color: var(--gemini-text-muted); margin-top: 2px;">
-            Ask THAIS anything about your protocol, meal logging, or symptom checks.
-          </div>
-        </div>
-
-        <div class="app-chat-scroller" id="app-chat-messages">
-          <div class="app-msg-bubble app-msg-thais">
-            <strong>THAIS:</strong> Hello Ajay! I have processed your complete 42-marker intake survey and saved your kitchen pantry ingredients. How can I assist your health protocol right now?
-          </div>
-        </div>
-
-        <div style="display: flex; gap: 8px;">
-          <input type="text" class="gemini-prompt-input" id="app-chat-input" placeholder="Ask THAIS anything..." style="flex: 1; border: 1.5px solid var(--gemini-border); border-radius: 12px; padding: 10px 14px; font-size: 13px;" onkeydown="if(event.key==='Enter'){sendAppChat(); event.preventDefault();}" />
-          <button class="gemini-btn gemini-btn-primary" style="height: 42px; padding: 0 16px; border-radius: 12px;" onclick="sendAppChat()">
-            Send
+          <button class="gemini-btn gemini-btn-tonal" style="height: 36px; padding: 0 12px; font-size: 12px; font-weight: 800; border-radius: 10px;" onclick="quickSuggestRecipe()">
+            💡 15m Recipe
           </button>
         </div>
+
+        <!-- WhatsApp Quick Prompts Row -->
+        <div style="display: flex; gap: 8px; overflow-x: auto; padding: 4px 2px; scrollbar-width: none;">
+          <span style="cursor: pointer; white-space: nowrap; background: var(--gemini-surface); border: 1.5px solid var(--gemini-border-subtle); color: var(--gemini-text-main); padding: 6px 12px; border-radius: 9999px; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 1px 4px rgba(0,0,0,0.04);" onclick="populateChatPrompt('What should I cook for lunch from my pantry?')">
+            🍳 Cook from Pantry
+          </span>
+          <span style="cursor: pointer; white-space: nowrap; background: var(--gemini-surface); border: 1.5px solid var(--gemini-border-subtle); color: var(--gemini-text-main); padding: 6px 12px; border-radius: 9999px; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 1px 4px rgba(0,0,0,0.04);" onclick="populateChatPrompt('Why do I feel tired around 2:00 PM?')">
+            ⚡ Prevent 2 PM Crash
+          </span>
+          <span style="cursor: pointer; white-space: nowrap; background: var(--gemini-surface); border: 1.5px solid var(--gemini-border-subtle); color: var(--gemini-text-main); padding: 6px 12px; border-radius: 9999px; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 1px 4px rgba(0,0,0,0.04);" onclick="populateChatPrompt('Is seed oil in restaurant paneer bad for insulin resistance?')">
+            🚨 Check Food Safety
+          </span>
+        </div>
+
+        <!-- WhatsApp Messages Wall (Full Scroller) -->
+        <div class="app-chat-scroller" id="app-chat-messages" style="flex: 1; margin: 4px 0;">
+          
+          <!-- Date Chip -->
+          <div style="display: flex; justify-content: center; margin-bottom: 6px;">
+            <span style="background: var(--gemini-surface); border: 1px solid var(--gemini-border-subtle); color: var(--gemini-text-muted); font-size: 11px; font-weight: 800; padding: 4px 14px; border-radius: 9999px; box-shadow: 0 1px 4px rgba(0,0,0,0.04);">
+              TODAY • THURSDAY, AUGUST 28
+            </span>
+          </div>
+
+          <!-- Default THAIS Welcome Message -->
+          <div class="app-msg-bubble app-msg-thais">
+            <div style="font-size: 12px; font-weight: 800; color: #0062FF; margin-bottom: 3px;">
+              THAIS Clinical AI
+            </div>
+            <div>
+              Hello Ajay! I have processed your complete <strong>42-marker intake survey</strong> and calibrated your <strong>Kitchen & Pantry Inventory</strong>.
+            </div>
+            <div style="margin-top: 6px;">
+              You have completed <strong>3 of 4 morning habits</strong> today with an <strong>88% Portion Level Meter</strong>. How can I assist your health protocol right now?
+            </div>
+            <div class="msg-meta-row">
+              <span>08:30 AM</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- WhatsApp Fixed Typing Bottom Bar -->
+        <div class="whatsapp-bottom-bar">
+          <button style="border: none; width: 44px; height: 44px; border-radius: 50%; background: var(--gemini-surface); border: 1.5px solid var(--gemini-border); color: var(--gemini-sparkle-blue); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 22px; flex-shrink: 0;" onclick="openActiveFoodModal('scan')" title="Scan Food Photo">
+            ＋
+          </button>
+          
+          <input type="text" class="gemini-prompt-input" id="app-chat-input" placeholder="Message THAIS..." style="flex: 1; height: 48px; border: 1.5px solid var(--gemini-border); border-radius: 24px; padding: 0 18px; font-size: 15px; font-weight: 500; background: var(--gemini-surface); box-shadow: 0 2px 8px rgba(0,0,0,0.04);" onkeydown="if(event.key==='Enter'){sendAppChat(); event.preventDefault();}" />
+          
+          <button style="border: none; width: 48px; height: 48px; min-width: 48px; border-radius: 50%; background: #00D06C; color: #FFFFFF; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 14px rgba(0, 208, 108, 0.4); flex-shrink: 0; transition: transform 0.15s;" onclick="sendAppChat()" title="Send Message">
+            <span class="material-symbols-outlined" style="font-size: 22px; transform: rotate(-25deg); margin-left: 2px;">send</span>
+          </button>
+        </div>
+
       </section>
 
       <!-- ==================== 3. TAB: HEALTH (METABOLIC & EPIGENETICS) ==================== -->
@@ -1945,24 +2045,65 @@
       if (counter) counter.innerText = `${done.length} / ${all.length} Done`;
     }
 
+    function getCurrentTimeStr() {
+      const now = new Date();
+      return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+
+    function populateChatPrompt(text) {
+      const input = document.getElementById('app-chat-input');
+      if (input) {
+        input.value = text;
+        sendAppChat();
+      }
+    }
+
+    function quickSuggestRecipe() {
+      populateChatPrompt("What 15-minute high-protein meal can I make right now with my kitchen pantry ingredients?");
+    }
+
     function sendAppChat() {
       const input = document.getElementById('app-chat-input');
       const query = input.value.trim();
       if (!query) return;
 
+      const timeStr = getCurrentTimeStr();
       const scroller = document.getElementById('app-chat-messages');
-      scroller.innerHTML += `<div class="app-msg-bubble app-msg-user">${escapeHtml(query)}</div>`;
+
+      // 1. User Message (WhatsApp Green Bubble)
+      scroller.innerHTML += `
+        <div class="app-msg-bubble app-msg-user">
+          <div>${escapeHtml(query)}</div>
+          <div class="msg-meta-row">
+            <span>${timeStr}</span>
+            <span style="color: #34B7F1; font-weight: 800; font-size: 12px; letter-spacing: -1px;">✓✓</span>
+          </div>
+        </div>
+      `;
       input.value = '';
       scroller.scrollTop = scroller.scrollHeight;
 
+      // 2. Typing Indicator or Realistic Response
       setTimeout(() => {
-        let response = "Under Constitutional LAW-001, your metabolic baseline is calibrated for optimal insulin sensitivity. Complete today's FLOW micro-habits to maintain steady energy.";
+        let response = "Under your metabolic baseline, steady protein (35g+) and zero yellow seed oils will optimize insulin resensitization. Let's make sure today's micro-habits are 100% completed!";
         if (typeof THAIS !== 'undefined' && THAIS.queryThaisAI) {
           response = THAIS.queryThaisAI(query, userAnswers);
         }
-        scroller.innerHTML += `<div class="app-msg-bubble app-msg-thais"><strong>THAIS:</strong> ${response}</div>`;
+        
+        const responseTimeStr = getCurrentTimeStr();
+        scroller.innerHTML += `
+          <div class="app-msg-bubble app-msg-thais">
+            <div style="font-size: 12px; font-weight: 800; color: #0062FF; margin-bottom: 3px;">
+              THAIS Clinical AI
+            </div>
+            <div>${response}</div>
+            <div class="msg-meta-row">
+              <span>${responseTimeStr}</span>
+            </div>
+          </div>
+        `;
         scroller.scrollTop = scroller.scrollHeight;
-      }, 200);
+      }, 350);
     }
 
     function escapeHtml(text) {
