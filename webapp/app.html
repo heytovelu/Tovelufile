@@ -499,11 +499,20 @@
       letter-spacing: 0.04em;
     }
 
-    /* Tovelu Assistance Clean Conversation Canvas */
+    /* Tovelu Assistance Clean Conversation Canvas with Fixed Topbar & Bottom Typebar */
+    #pane-chat.tab-pane.active {
+      display: flex !important;
+      flex-direction: column;
+      height: calc(100vh - 190px);
+      max-height: calc(100vh - 190px);
+      padding: 0;
+      gap: 0;
+      overflow: hidden;
+    }
     .tovelu-assistance-window {
       display: flex;
       flex-direction: column;
-      height: calc(100vh - 145px);
+      height: 100%;
       border-radius: 22px;
       overflow: hidden;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
@@ -511,8 +520,9 @@
       background: var(--gemini-surface-container);
     }
 
-    /* TOP BAR: ICON | Tovelu Assistance */
+    /* TOP BAR: FIXED [ ICON | Tovelu Assistance ] */
     .assistance-topbar {
+      flex-shrink: 0;
       background: var(--gemini-surface);
       border-bottom: 1.5px solid var(--gemini-border-subtle);
       padding: 14px 18px;
@@ -551,7 +561,7 @@
       margin-left: 2px;
     }
 
-    /* Chat Scroller */
+    /* ONLY MESSAGES SCROLL */
     .assistance-scroller {
       flex: 1;
       overflow-y: auto;
@@ -560,6 +570,7 @@
       flex-direction: column;
       gap: 12px;
       background: var(--gemini-surface-container);
+      -webkit-overflow-scrolling: touch;
     }
 
     /* Message Bubbles */
@@ -1388,6 +1399,17 @@
       const btn = document.getElementById(`btn-tab-${tabId}`);
       if (pane) pane.classList.add('active');
       if (btn) btn.classList.add('active');
+
+      const scroller = document.querySelector('.app-scroll-content');
+      if (scroller) {
+        if (tabId === 'chat') {
+          scroller.style.overflowY = 'hidden';
+          scroller.style.padding = '12px 18px 105px 18px';
+        } else {
+          scroller.style.overflowY = 'auto';
+          scroller.style.padding = '20px 18px 115px 18px';
+        }
+      }
 
       const topSwitcher = document.getElementById('top-flow-switcher');
       if (topSwitcher) {
