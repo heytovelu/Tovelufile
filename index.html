@@ -1094,93 +1094,88 @@
     </div>
   </div>
 
-  <!-- ==================== DEDICATED FULL-PAGE KITCHEN & PANTRY MANAGER ==================== -->
-  <div id="pantry-modal-overlay" style="display: none; position: fixed; inset: 0; z-index: 99999; background: var(--gemini-bg); overflow-y: auto; flex-direction: column;">
+  <!-- ==================== DEDICATED MOBILE FULL-PAGE KITCHEN & PANTRY MANAGER ==================== -->
+  <div id="pantry-modal-overlay" style="display: none; position: fixed; top: 0; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 520px; z-index: 99999; background: var(--gemini-bg); overflow-y: auto; flex-direction: column; box-shadow: 0 0 50px rgba(0,0,0,0.25); border-left: 1px solid var(--gemini-border-subtle); border-right: 1px solid var(--gemini-border-subtle);">
     
-    <!-- Full-Page Header -->
-    <div style="position: sticky; top: 0; z-index: 100; background: var(--gemini-surface); border-bottom: 1.5px solid var(--gemini-border); padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.03);">
-      <div style="display: flex; align-items: center; gap: 10px;">
-        <button class="gemini-btn gemini-btn-tonal" style="height: 38px; padding: 0 12px; font-size: 13px; font-weight: 700; border-radius: 10px;" onclick="closePantryModal()">
-          ← Back to App
+    <!-- Mobile Full-Page Header -->
+    <div style="position: sticky; top: 0; z-index: 100; background: var(--gemini-surface); border-bottom: 1.5px solid var(--gemini-border); padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.03);">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <button class="gemini-btn gemini-btn-tonal" style="height: 36px; padding: 0 10px; font-size: 12px; font-weight: 700; border-radius: 10px;" onclick="closePantryModal()">
+          ← Back
         </button>
         <div>
-          <h2 style="font-family: 'Google Sans Display', sans-serif; font-size: 18px; font-weight: 800; color: var(--gemini-text-main); margin: 0;">
-            🍳 Kitchen & Pantry Inventory
+          <h2 style="font-family: 'Google Sans Display', sans-serif; font-size: 16px; font-weight: 800; color: var(--gemini-text-main); margin: 0;">
+            🍳 Kitchen & Pantry
           </h2>
-          <div style="font-size: 11px; color: var(--gemini-text-muted);">
-            Manage ingredients & quantities for precision 15-minute AI recipes
+          <div style="font-size: 10px; color: var(--gemini-text-muted);">
+            Manage ingredients & quantities
           </div>
         </div>
       </div>
-      <button class="gemini-btn gemini-btn-primary" style="height: 38px; padding: 0 18px; font-size: 13px; font-weight: 800;" onclick="savePantryAndClose()">
+      <button class="gemini-btn gemini-btn-primary" style="height: 36px; padding: 0 14px; font-size: 12px; font-weight: 800;" onclick="savePantryAndClose()">
         Save & Done ✓
       </button>
     </div>
 
-    <!-- Full-Page Body Content Container -->
-    <div style="max-width: 760px; width: 100%; margin: 0 auto; padding: 20px 16px 60px 16px; display: flex; flex-direction: column; gap: 18px;">
+    <!-- Mobile Body Content Container -->
+    <div style="width: 100%; padding: 16px 14px 60px 14px; display: flex; flex-direction: column; gap: 14px;">
       
-      <!-- 1. ADD NEW INGREDIENT & QUANTITY WITH LIVE AUTO-SUGGEST & SPELLING ASSISTANT -->
-      <div class="gemini-card" style="border: 1.5px solid var(--gemini-sparkle-blue); background: var(--gemini-surface); padding: 20px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0, 98, 255, 0.06);">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-          <div style="font-size: 13px; font-weight: 800; color: var(--gemini-sparkle-blue); text-transform: uppercase; letter-spacing: 0.04em;">
-            + ADD NEW INGREDIENT & QUANTITY:
+      <!-- 1. ADD NEW INGREDIENT & QUANTITY (MOBILE OPTIMIZED INPUT CARD) -->
+      <div class="gemini-card" style="border: 1.5px solid var(--gemini-sparkle-blue); background: var(--gemini-surface); padding: 16px; border-radius: 18px; box-shadow: 0 4px 16px rgba(0, 98, 255, 0.05); display: flex; flex-direction: column; gap: 10px;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div style="font-size: 12px; font-weight: 800; color: var(--gemini-sparkle-blue); text-transform: uppercase; letter-spacing: 0.04em;">
+            + ADD NEW INGREDIENT:
           </div>
-          <span style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald); background: rgba(0, 208, 108, 0.1); padding: 2px 8px; border-radius: 9999px;">
-            ✨ Smart Spell Assistant Active
+          <span style="font-size: 10px; font-weight: 800; color: var(--gemini-vitality-emerald); background: rgba(0, 208, 108, 0.1); padding: 2px 7px; border-radius: 9999px;">
+            ✨ Spell Assistant
           </span>
         </div>
 
-        <div style="display: grid; grid-template-columns: 2fr 1.2fr auto; gap: 10px; align-items: flex-start;">
-          <!-- Ingredient Name Input -->
-          <div style="position: relative; display: flex; flex-direction: column; gap: 4px;">
-            <label style="font-size: 11px; font-weight: 800; color: var(--gemini-text-muted);">INGREDIENT NAME:</label>
-            <input type="text" class="gemini-prompt-input" id="custom-pantry-name" placeholder="Type name (e.g. Greek yogurt, Chicken)..." style="width: 100%; border: 1.5px solid var(--gemini-border); border-radius: 12px; padding: 12px 14px; font-size: 14px;" oninput="handlePantryAutoSuggest(this.value)" onkeydown="if(event.key==='Enter'){addCustomPantryItem(); event.preventDefault();}" />
-          </div>
+        <!-- Box 1: Ingredient Name -->
+        <div style="display: flex; flex-direction: column; gap: 3px;">
+          <label style="font-size: 10px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase;">1. Ingredient Name:</label>
+          <input type="text" class="gemini-prompt-input" id="custom-pantry-name" placeholder="e.g., Greek yogurt, Chicken breast..." style="width: 100%; border: 1.5px solid var(--gemini-border); border-radius: 10px; padding: 10px 12px; font-size: 13px;" oninput="handlePantryAutoSuggest(this.value)" onkeydown="if(event.key==='Enter'){addCustomPantryItem(); event.preventDefault();}" />
+        </div>
 
-          <!-- Quantity Input -->
-          <div style="display: flex; flex-direction: column; gap: 4px;">
-            <label style="font-size: 11px; font-weight: 800; color: var(--gemini-text-muted);">QUANTITY & UNIT:</label>
-            <input type="text" class="gemini-prompt-input" id="custom-pantry-qty" placeholder="Qty (e.g. 500g, 4 pcs, 1L)..." style="width: 100%; border: 1.5px solid var(--gemini-border); border-radius: 12px; padding: 12px 14px; font-size: 14px;" onkeydown="if(event.key==='Enter'){addCustomPantryItem(); event.preventDefault();}" />
+        <!-- Box 2: Quantity & Add Button Row -->
+        <div style="display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: flex-end;">
+          <div style="display: flex; flex-direction: column; gap: 3px;">
+            <label style="font-size: 10px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase;">2. Quantity & Unit:</label>
+            <input type="text" class="gemini-prompt-input" id="custom-pantry-qty" placeholder="e.g., 500g, 4 pcs, 1L" style="width: 100%; border: 1.5px solid var(--gemini-border); border-radius: 10px; padding: 10px 12px; font-size: 13px;" onkeydown="if(event.key==='Enter'){addCustomPantryItem(); event.preventDefault();}" />
           </div>
-
-          <!-- Add Button -->
-          <div style="display: flex; flex-direction: column; gap: 4px;">
-            <label style="font-size: 11px; font-weight: 800; opacity: 0;">ACTION</label>
-            <button class="gemini-btn gemini-btn-primary" style="height: 46px; padding: 0 20px; font-size: 14px; font-weight: 800; border-radius: 12px;" onclick="addCustomPantryItem()">
-              + Add to List
-            </button>
-          </div>
+          <button class="gemini-btn gemini-btn-primary" style="height: 42px; padding: 0 16px; font-size: 13px; font-weight: 800; border-radius: 10px;" onclick="addCustomPantryItem()">
+            + Add to List
+          </button>
         </div>
 
         <!-- Live Instant Auto-Suggest Results Area -->
-        <div id="pantry-suggestions-box" style="display: none; margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--gemini-border-subtle);">
-          <div style="font-size: 11px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase; margin-bottom: 6px;">
-            💡 Tap to auto-fill spelling & suggested quantity:
+        <div id="pantry-suggestions-box" style="display: none; margin-top: 6px; padding-top: 8px; border-top: 1px dashed var(--gemini-border-subtle);">
+          <div style="font-size: 10px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase; margin-bottom: 6px;">
+            💡 Tap to auto-fill spelling & quantity:
           </div>
           <div style="display: flex; flex-wrap: wrap; gap: 6px;" id="pantry-suggestions-chips"></div>
         </div>
       </div>
 
       <!-- 2. STRUCTURED INGREDIENTS LIST WITH QUANTITIES AND STATUS -->
-      <div class="gemini-card" style="padding: 20px; border-radius: 20px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+      <div class="gemini-card" style="padding: 16px; border-radius: 18px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
           <div>
-            <div style="font-size: 14px; font-weight: 800; color: var(--gemini-text-main);">
-              📋 Stocked Ingredients & Quantity List
+            <div style="font-size: 13px; font-weight: 800; color: var(--gemini-text-main);">
+              📋 Stocked Ingredients List
             </div>
-            <div style="font-size: 11px; color: var(--gemini-text-muted);">
-              Tap to toggle item in/out of kitchen or edit exact amount stored
+            <div style="font-size: 10px; color: var(--gemini-text-muted);">
+              Tap toggle to add/remove or edit quantity
             </div>
           </div>
-          <span style="font-size: 12px; font-weight: 800; color: var(--gemini-sparkle-blue); background: var(--gemini-surface-container); padding: 4px 12px; border-radius: 9999px;" id="pantry-stocked-counter">
-            6 Selected
+          <span style="font-size: 11px; font-weight: 800; color: var(--gemini-sparkle-blue); background: var(--gemini-surface-container); padding: 3px 10px; border-radius: 9999px;" id="pantry-stocked-counter">
+            6 In Pantry
           </span>
         </div>
 
-        <!-- Full List Container -->
+        <!-- Full Mobile List Container -->
         <div style="display: flex; flex-direction: column; gap: 8px;" id="pantry-modal-chips">
-          <!-- Dynamically populated by renderPantryModalList() as a full vertical list -->
+          <!-- Dynamically populated by renderPantryModalList() as a clean vertical list -->
         </div>
       </div>
 
@@ -1595,37 +1590,35 @@
       if (counter) counter.innerText = `${selectedCount} In Pantry`;
 
       modalList.innerHTML = myPantryItems.map((item, idx) => `
-        <div style="display: grid; grid-template-columns: auto 1fr auto auto auto; gap: 12px; align-items: center; background: ${item.selected ? 'rgba(0, 208, 108, 0.08)' : 'var(--gemini-surface)'}; border: 1.5px solid ${item.selected ? 'var(--gemini-vitality-emerald)' : 'var(--gemini-border-subtle)'}; border-radius: 14px; padding: 12px 14px; transition: all 0.2s;">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; background: ${item.selected ? 'rgba(0, 208, 108, 0.08)' : 'var(--gemini-surface)'}; border: 1.5px solid ${item.selected ? 'var(--gemini-vitality-emerald)' : 'var(--gemini-border-subtle)'}; border-radius: 14px; padding: 10px 12px; transition: all 0.2s;">
           
-          <!-- Food Icon -->
-          <div style="width: 38px; height: 38px; border-radius: 10px; background: ${item.selected ? 'rgba(0, 208, 108, 0.15)' : 'var(--gemini-surface-container)'}; display: flex; align-items: center; justify-content: center; font-size: 20px;">
-            ${item.icon}
-          </div>
-
-          <!-- Ingredient Name -->
-          <div>
-            <div style="font-family: 'Google Sans', sans-serif; font-size: 14px; font-weight: 800; color: var(--gemini-text-main);">
-              ${item.name}
+          <!-- Left: Food Icon & Name -->
+          <div style="display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1;">
+            <div style="width: 36px; height: 36px; min-width: 36px; border-radius: 10px; background: ${item.selected ? 'rgba(0, 208, 108, 0.15)' : 'var(--gemini-surface-container)'}; display: flex; align-items: center; justify-content: center; font-size: 18px;">
+              ${item.icon}
             </div>
-            <div style="font-size: 11px; color: var(--gemini-text-muted);">
-              Whole Food Clinical Staple
+            <div style="min-width: 0;">
+              <div style="font-family: 'Google Sans', sans-serif; font-size: 13px; font-weight: 800; color: var(--gemini-text-main); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                ${item.name}
+              </div>
+              <div style="font-size: 10px; color: var(--gemini-text-muted);">
+                Clinical Whole Food
+              </div>
             </div>
           </div>
 
-          <!-- Quantity Input & Unit -->
-          <div style="display: flex; align-items: center; gap: 4px;">
-            <input type="text" value="${item.qty}" style="width: 90px; text-align: center; border: 1.5px solid var(--gemini-border); border-radius: 8px; padding: 6px 8px; font-size: 12px; font-weight: 800; background: var(--gemini-surface); color: var(--gemini-text-main);" onchange="updatePantryItemQty(${idx}, this.value)" />
+          <!-- Right: Quantity + Toggle Pill + Delete Button -->
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <input type="text" value="${item.qty}" style="width: 68px; text-align: center; border: 1.5px solid var(--gemini-border); border-radius: 8px; padding: 4px 6px; font-size: 11px; font-weight: 800; background: var(--gemini-surface); color: var(--gemini-text-main);" onchange="updatePantryItemQty(${idx}, this.value)" title="Edit quantity" />
+
+            <button style="border: none; cursor: pointer; height: 32px; padding: 0 10px; border-radius: 9999px; font-size: 11px; font-weight: 800; display: flex; align-items: center; gap: 2px; background: ${item.selected ? 'var(--gemini-vitality-emerald)' : 'var(--gemini-surface-container)'}; color: ${item.selected ? '#FFFFFF' : 'var(--gemini-text-muted)'}; box-shadow: ${item.selected ? '0 2px 6px rgba(0, 208, 108, 0.25)' : 'none'}; white-space: nowrap;" onclick="togglePantryItem(${idx})">
+              ${item.selected ? '✓ In Pantry' : '＋ Add'}
+            </button>
+
+            <button style="border: none; background: transparent; cursor: pointer; color: var(--gemini-text-muted); font-size: 14px; padding: 4px;" onclick="removePantryItem(${idx})" title="Delete ingredient">
+              ✕
+            </button>
           </div>
-
-          <!-- In Pantry Toggle Button -->
-          <button style="border: none; cursor: pointer; height: 34px; padding: 0 14px; border-radius: 9999px; font-size: 12px; font-weight: 800; display: flex; align-items: center; gap: 4px; background: ${item.selected ? 'var(--gemini-vitality-emerald)' : 'var(--gemini-surface-container)'}; color: ${item.selected ? '#FFFFFF' : 'var(--gemini-text-muted)'}; box-shadow: ${item.selected ? '0 2px 8px rgba(0, 208, 108, 0.3)' : 'none'};" onclick="togglePantryItem(${idx})">
-            ${item.selected ? '✓ In Pantry' : '＋ Add'}
-          </button>
-
-          <!-- Remove Item Button -->
-          <button style="border: none; background: transparent; cursor: pointer; color: var(--gemini-text-muted); font-size: 16px; padding: 4px;" onclick="removePantryItem(${idx})" title="Delete ingredient">
-            ✕
-          </button>
         </div>
       `).join('');
     }
