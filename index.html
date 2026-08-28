@@ -568,138 +568,148 @@
 
           </div>
 
-          <!-- 3. UNIFIED DYNAMIC FOOD INTELLIGENCE CARD (ALL IN ONE SECTION) -->
-          <div id="dynamic-meal-card" class="app-meal-card theme-breakfast" style="border-radius: 22px; padding: 20px; display: flex; flex-direction: column; gap: 16px; transition: all 0.2s; box-shadow: 0 4px 20px rgba(0, 98, 255, 0.05);">
-            
-            <!-- Card Header: Title & Seed Oils Goal -->
+          <!-- 3. FOOD INTELLIGENCE (SUBHEADING OUTSIDE ABOVE CARD) -->
+          <div style="display: flex; flex-direction: column; gap: 12px;">
             <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div style="font-size: 11px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase; letter-spacing: 0.04em;">
+              <div style="font-size: 13px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase; letter-spacing: 0.05em;">
                 🍽️ Meals & Food Intelligence
               </div>
-              <span style="font-size: 10px; font-weight: 800; color: var(--gemini-vitality-emerald); background: var(--gemini-surface); border: 1px solid rgba(0, 208, 108, 0.2); padding: 3px 8px; border-radius: 9999px;">
+              <span style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald); background: var(--gemini-surface-container); border: 1px solid rgba(0, 208, 108, 0.2); padding: 4px 10px; border-radius: 9999px;">
                 0% Seed Oils Goal
               </span>
             </div>
 
-            <!-- 3-Way Meal Selector (Inside Card) -->
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: var(--gemini-surface-container); padding: 4px; border-radius: 14px; border: 1px solid var(--gemini-border-subtle);">
-              <button class="meal-tab-pill active" id="pill-meal-breakfast" onclick="selectActiveMealView('Breakfast')">
-                🍳 Breakfast
-              </button>
-              <button class="meal-tab-pill" id="pill-meal-lunch" onclick="selectActiveMealView('Lunch')">
-                🥗 Lunch
-              </button>
-              <button class="meal-tab-pill" id="pill-meal-dinner" onclick="selectActiveMealView('Dinner')">
-                🍲 Dinner
-              </button>
-            </div>
+            <!-- Single Unified Dynamic Meal Card -->
+            <div id="dynamic-meal-card" class="app-meal-card theme-breakfast" style="border-radius: 22px; padding: 20px; display: flex; flex-direction: column; gap: 16px; transition: all 0.2s; box-shadow: 0 4px 20px rgba(0, 98, 255, 0.05);">
+              
+              <!-- 3-Way Meal Selector (Inside Card at the Top) -->
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: var(--gemini-surface-container); padding: 4px; border-radius: 14px; border: 1px solid var(--gemini-border-subtle);">
+                <button class="meal-tab-pill active" id="pill-meal-breakfast" onclick="selectActiveMealView('Breakfast')">
+                  🍳 Breakfast
+                </button>
+                <button class="meal-tab-pill" id="pill-meal-lunch" onclick="selectActiveMealView('Lunch')">
+                  🥗 Lunch
+                </button>
+                <button class="meal-tab-pill" id="pill-meal-dinner" onclick="selectActiveMealView('Dinner')">
+                  🍲 Dinner
+                </button>
+              </div>
 
-            <!-- Active Meal Status & Calorie Target Row -->
-            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-              <div>
-                <span id="active-meal-badge" style="font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 9999px; text-transform: uppercase;">
-                  ACTIVE TIME WINDOW • 08:30 AM
-                </span>
-                <div id="active-meal-title" style="font-family: 'Google Sans', sans-serif; font-size: 16px; font-weight: 800; margin-top: 6px; color: var(--gemini-text-main);">
-                  🍳 Breakfast Target
+              <!-- Active Meal Status & Calorie Target Row -->
+              <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                <div>
+                  <span id="active-meal-badge" style="font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 9999px; text-transform: uppercase;">
+                    ACTIVE TIME WINDOW • 08:30 AM
+                  </span>
+                  <div id="active-meal-title" style="font-family: 'Google Sans', sans-serif; font-size: 16px; font-weight: 800; margin-top: 6px; color: var(--gemini-text-main);">
+                    🍳 Breakfast Target
+                  </div>
+                </div>
+                <div id="active-meal-logged-status" style="font-size: 12px; font-weight: 800; color: var(--gemini-sparkle-blue); text-align: right;">
+                  420 kcal Target
                 </div>
               </div>
-              <div id="active-meal-logged-status" style="font-size: 12px; font-weight: 800; color: var(--gemini-sparkle-blue); text-align: right;">
-                420 kcal Target
-              </div>
-            </div>
 
-            <!-- 4-Nutrient Targets in Grams: Protein, Carbs, Fat, Vitamins -->
-            <div id="active-meal-grams-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; background: var(--gemini-surface); border: 1px solid var(--gemini-border); padding: 12px 8px; border-radius: 14px; text-align: center;">
-              <div>
-                <div style="font-size: 10px; font-weight: 800; color: #0062FF;">🥩 Protein</div>
-                <div id="meal-gram-protein" style="font-family: 'Google Sans Display', sans-serif; font-size: 15px; font-weight: 800; margin-top: 2px;">35g</div>
+              <!-- 4-Nutrient Targets in Grams: Protein, Carbs, Fat, Vitamins -->
+              <div id="active-meal-grams-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; background: var(--gemini-surface); border: 1px solid var(--gemini-border); padding: 12px 8px; border-radius: 14px; text-align: center;">
+                <div>
+                  <div style="font-size: 10px; font-weight: 800; color: #0062FF;">🥩 Protein</div>
+                  <div id="meal-gram-protein" style="font-family: 'Google Sans Display', sans-serif; font-size: 15px; font-weight: 800; margin-top: 2px;">35g</div>
+                </div>
+                <div>
+                  <div style="font-size: 10px; font-weight: 800; color: #D97706;">🍠 Carbs</div>
+                  <div id="meal-gram-carbs" style="font-family: 'Google Sans Display', sans-serif; font-size: 15px; font-weight: 800; margin-top: 2px;">15g</div>
+                </div>
+                <div>
+                  <div style="font-size: 10px; font-weight: 800; color: #9333EA;">🧈 Fat</div>
+                  <div id="meal-gram-fat" style="font-family: 'Google Sans Display', sans-serif; font-size: 15px; font-weight: 800; margin-top: 2px;">12g</div>
+                </div>
+                <div>
+                  <div style="font-size: 10px; font-weight: 800; color: #00D06C;">🥦 Vitamin</div>
+                  <div id="meal-gram-vitamin" style="font-family: 'Google Sans Display', sans-serif; font-size: 15px; font-weight: 800; margin-top: 2px;">100%</div>
+                </div>
               </div>
-              <div>
-                <div style="font-size: 10px; font-weight: 800; color: #D97706;">🍠 Carbs</div>
-                <div id="meal-gram-carbs" style="font-family: 'Google Sans Display', sans-serif; font-size: 15px; font-weight: 800; margin-top: 2px;">15g</div>
-              </div>
-              <div>
-                <div style="font-size: 10px; font-weight: 800; color: #9333EA;">🧈 Fat</div>
-                <div id="meal-gram-fat" style="font-family: 'Google Sans Display', sans-serif; font-size: 15px; font-weight: 800; margin-top: 2px;">12g</div>
-              </div>
-              <div>
-                <div style="font-size: 10px; font-weight: 800; color: #00D06C;">🥦 Vitamin</div>
-                <div id="meal-gram-vitamin" style="font-family: 'Google Sans Display', sans-serif; font-size: 15px; font-weight: 800; margin-top: 2px;">100%</div>
-              </div>
-            </div>
 
-            <!-- 3 Consumption Pathways: SCAN | MANUALLY | ASK AI -->
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
-              <button class="meal-mode-btn" onclick="openActiveFoodModal('scan')">
-                <span class="material-symbols-outlined" style="font-size: 20px;">photo_camera</span>
-                <span style="font-size: 12px; font-weight: 800;">Scan / Photo</span>
-              </button>
-              <button class="meal-mode-btn" onclick="openActiveFoodModal('manual')">
-                <span class="material-symbols-outlined" style="font-size: 20px;">edit_note</span>
-                <span style="font-size: 12px; font-weight: 800;">Manually</span>
-              </button>
-              <button class="meal-mode-btn" onclick="openActiveFoodModal('ask_ai')">
-                <span class="material-symbols-outlined" style="font-size: 20px;">auto_awesome</span>
-                <span style="font-size: 12px; font-weight: 800;">Ask AI</span>
-              </button>
-            </div>
+              <!-- 3 Consumption Pathways: SCAN | MANUALLY | ASK AI -->
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+                <button class="meal-mode-btn" onclick="openActiveFoodModal('scan')">
+                  <span class="material-symbols-outlined" style="font-size: 20px;">photo_camera</span>
+                  <span style="font-size: 12px; font-weight: 800;">Scan / Photo</span>
+                </button>
+                <button class="meal-mode-btn" onclick="openActiveFoodModal('manual')">
+                  <span class="material-symbols-outlined" style="font-size: 20px;">edit_note</span>
+                  <span style="font-size: 12px; font-weight: 800;">Manually</span>
+                </button>
+                <button class="meal-mode-btn" onclick="openActiveFoodModal('ask_ai')">
+                  <span class="material-symbols-outlined" style="font-size: 20px;">auto_awesome</span>
+                  <span style="font-size: 12px; font-weight: 800;">Ask AI</span>
+                </button>
+              </div>
 
+            </div>
           </div>
 
-          <!-- 4. TODAY'S TASKS (1, 2, 3) -->
-          <div style="display: flex; flex-direction: column; gap: 10px;">
+          <!-- 4. TODAY'S TASKS (SUBHEADING OUTSIDE ABOVE CARDS) -->
+          <div style="display: flex; flex-direction: column; gap: 12px;">
             <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div style="font-size: 11px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase;">
+              <div style="font-size: 13px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase; letter-spacing: 0.05em;">
                 ✅ Today's Circadian Tasks
               </div>
-              <span style="font-size: 11px; font-weight: 700; color: var(--gemini-sparkle-blue);" id="flow-task-counter">3 / 4 Done</span>
+              <span style="font-size: 12px; font-weight: 800; color: var(--gemini-sparkle-blue); background: rgba(0, 98, 255, 0.08); padding: 4px 10px; border-radius: 9999px;" id="flow-task-counter">3 / 4 Done</span>
             </div>
 
             <div class="app-task-card completed" onclick="toggleTaskCard(this)">
               <div class="app-task-checkbox">✓</div>
               <div style="flex: 1;">
-                <div style="font-size: 13px; font-weight: 700;">1. 🌅 Morning Photobiomodulation (15 Mins)</div>
-                <div style="font-size: 11px; color: var(--gemini-text-muted);">Expose eyes to natural sunlight within 45m of waking. (SCN cortisol sync)</div>
+                <div style="font-size: 14px; font-weight: 800;">1. 🌅 Morning Photobiomodulation (15 Mins)</div>
+                <div style="font-size: 12px; color: var(--gemini-text-muted); margin-top: 2px;">Expose eyes to natural sunlight within 45m of waking. (SCN cortisol sync)</div>
               </div>
             </div>
 
             <div class="app-task-card completed" onclick="toggleTaskCard(this)">
               <div class="app-task-checkbox">✓</div>
               <div style="flex: 1;">
-                <div style="font-size: 13px; font-weight: 700;">2. 💧 Cellular Osmolyte Hydration</div>
-                <div style="font-size: 11px; color: var(--gemini-text-muted);">500ml water + Celtic sea salt pinch upon waking.</div>
+                <div style="font-size: 14px; font-weight: 800;">2. 💧 Cellular Osmolyte Hydration</div>
+                <div style="font-size: 12px; color: var(--gemini-text-muted); margin-top: 2px;">500ml water + Celtic sea salt pinch upon waking.</div>
               </div>
             </div>
 
             <div class="app-task-card completed" onclick="toggleTaskCard(this)">
               <div class="app-task-checkbox">✓</div>
               <div style="flex: 1;">
-                <div style="font-size: 13px; font-weight: 700;">3. 🚶 Post-Lunch Glucose Clearance Walk (12 Mins)</div>
-                <div style="font-size: 11px; color: var(--gemini-text-muted);">Brisk walking within 20m of eating to lower glucose spike by 34%.</div>
+                <div style="font-size: 14px; font-weight: 800;">3. 🚶 Post-Lunch Glucose Clearance Walk (12 Mins)</div>
+                <div style="font-size: 12px; color: var(--gemini-text-muted); margin-top: 2px;">Brisk walking within 20m of eating to lower glucose spike by 34%.</div>
               </div>
             </div>
 
             <div class="app-task-card" onclick="toggleTaskCard(this)">
               <div class="app-task-checkbox">✓</div>
               <div style="flex: 1;">
-                <div style="font-size: 13px; font-weight: 700;">4. 🌙 Circadian Wind-Down & Melatonin Shield</div>
-                <div style="font-size: 11px; color: var(--gemini-text-muted);">Cut blue light 60m before bed; bedroom at 19°C. (Scheduled for 22:00)</div>
+                <div style="font-size: 14px; font-weight: 800;">4. 🌙 Circadian Wind-Down & Melatonin Shield</div>
+                <div style="font-size: 12px; color: var(--gemini-text-muted); margin-top: 2px;">Cut blue light 60m before bed; bedroom at 19°C. (Scheduled for 22:00)</div>
               </div>
             </div>
           </div>
 
-          <!-- 5. TODAY'S CLINICAL NOTE / SUGGESTION -->
-          <div class="gemini-card" style="background: linear-gradient(135deg, rgba(0, 192, 255, 0.08), rgba(0, 245, 160, 0.08)); border-left: 4px solid var(--gemini-sparkle-blue);">
-            <div style="font-size: 10px; font-weight: 800; color: var(--gemini-sparkle-blue); text-transform: uppercase; margin-bottom: 2px;">
-              💡 THAIS CLINICAL NOTE OF THE DAY
+          <!-- 5. TODAY'S CLINICAL NOTE (SUBHEADING OUTSIDE ABOVE CARD) -->
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div style="font-size: 13px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase; letter-spacing: 0.05em;">
+                💡 THAIS Clinical Note of the Day
+              </div>
+              <span style="font-size: 11px; font-weight: 800; color: var(--gemini-sparkle-blue); background: var(--gemini-surface-container); padding: 4px 10px; border-radius: 9999px;">
+                Metabolic Focus
+              </span>
             </div>
-            <div style="font-size: 13px; font-weight: 700; color: var(--gemini-text-main); margin-bottom: 4px;">
-              The 90-Minute Caffeine Delay Rule
+
+            <div class="gemini-card" style="background: linear-gradient(135deg, rgba(0, 192, 255, 0.08), rgba(0, 245, 160, 0.08)); border-left: 4px solid var(--gemini-sparkle-blue); border-radius: 20px; padding: 20px;">
+              <div style="font-size: 15px; font-weight: 800; color: var(--gemini-text-main); margin-bottom: 6px;">
+                The 90-Minute Caffeine Delay Rule
+              </div>
+              <p style="font-size: 13px; color: var(--gemini-text-muted); line-height: 1.55;">
+                Delaying your first cup of coffee or tea by 90 minutes allows your brain's adenosine levels to clear naturally, completely preventing the common 2:00 PM afternoon energy crash.
+              </p>
             </div>
-            <p style="font-size: 12px; color: var(--gemini-text-muted); line-height: 1.5;">
-              Delaying your first cup of coffee or tea by 90 minutes allows your brain's adenosine levels to clear naturally, completely preventing the common 2:00 PM afternoon energy crash.
-            </p>
           </div>
 
         </div>
