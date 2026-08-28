@@ -151,13 +151,13 @@
 
     /* Sub-Views within FLOW */
     .flow-sub-view {
-      display: none;
+      display: none !important;
       flex-direction: column;
       gap: 22px;
       animation: fadeIn 0.2s ease-out;
     }
     .flow-sub-view.active {
-      display: flex;
+      display: flex !important;
     }
 
     /* Meal Card with 3 Input Modes (Scan | Manually | Ask AI) */
@@ -755,7 +755,7 @@
         </div>
 
         <!-- ---------------- SUB-VIEW 2: WEEK (BOOK - PLAYBOOK & KITCHEN INVENTORY) ---------------- -->
-        <div id="subview-flow-week" class="flow-sub-view" style="display: flex; flex-direction: column; gap: 22px;">
+        <div id="subview-flow-week" class="flow-sub-view">
           
           <!-- 1. WEEKLY PROGRESS & SCORECARD (TOP HERO) -->
           <div class="gemini-card" style="background: linear-gradient(135deg, rgba(0, 192, 255, 0.1), rgba(0, 245, 160, 0.1)); border-radius: 22px; padding: 22px;">
