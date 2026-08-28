@@ -580,14 +580,31 @@
                     ACTIVE TIME WINDOW • 08:30 AM
                   </span>
                   <div id="active-meal-title" style="font-family: 'Google Sans', sans-serif; font-size: 16px; font-weight: 800; margin-top: 6px; color: var(--gemini-text-main);">
-                    🍳 Breakfast Intake
-                  </div>
-                  <div id="active-meal-desc" style="font-size: 12px; color: var(--gemini-text-muted); margin-top: 2px;">
-                    Choose how to log or get your breakfast: Scan a photo, enter manually, or ask AI.
+                    🍳 Breakfast Target
                   </div>
                 </div>
-                <div id="active-meal-logged-status" style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald); text-align: right;">
-                  Target: 35g Protein
+                <div id="active-meal-logged-status" style="font-size: 12px; font-weight: 800; color: var(--gemini-sparkle-blue); text-align: right;">
+                  420 kcal Target
+                </div>
+              </div>
+
+              <!-- 4-Nutrient Targets in Grams: Protein, Carbs, Fat, Vitamins -->
+              <div id="active-meal-grams-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; background: var(--gemini-surface); border: 1px solid var(--gemini-border); padding: 10px 8px; border-radius: 14px; text-align: center;">
+                <div>
+                  <div style="font-size: 10px; font-weight: 800; color: #0062FF;">🥩 Protein</div>
+                  <div id="meal-gram-protein" style="font-family: 'Google Sans Display', sans-serif; font-size: 15px; font-weight: 800; margin-top: 2px;">35g</div>
+                </div>
+                <div>
+                  <div style="font-size: 10px; font-weight: 800; color: #D97706;">🍠 Carbs</div>
+                  <div id="meal-gram-carbs" style="font-family: 'Google Sans Display', sans-serif; font-size: 15px; font-weight: 800; margin-top: 2px;">15g</div>
+                </div>
+                <div>
+                  <div style="font-size: 10px; font-weight: 800; color: #9333EA;">🧈 Fat</div>
+                  <div id="meal-gram-fat" style="font-family: 'Google Sans Display', sans-serif; font-size: 15px; font-weight: 800; margin-top: 2px;">12g</div>
+                </div>
+                <div>
+                  <div style="font-size: 10px; font-weight: 800; color: #00D06C;">🥦 Vitamin</div>
+                  <div id="meal-gram-vitamin" style="font-family: 'Google Sans Display', sans-serif; font-size: 15px; font-weight: 800; margin-top: 2px;">100%</div>
                 </div>
               </div>
 
@@ -996,31 +1013,37 @@
       if (btn) btn.classList.add('active');
     }
 
-    // Dynamic Time-Aware Meal Switcher Logic
+    // Dynamic Time-Aware Meal Switcher Logic (Target Grams)
     const mealData = {
       'Breakfast': {
         badge: 'ACTIVE TIME WINDOW • 08:30 AM',
-        title: '🍳 Breakfast Intake',
-        desc: 'Choose how to log or get your breakfast: Scan a photo, enter manually, or ask AI.',
-        target: 'Target: 35g Protein',
-        theme: 'theme-breakfast',
-        calories: 420
+        title: '🍳 Breakfast Target',
+        targetCal: '420 kcal Target',
+        protein: '35g',
+        carbs: '15g',
+        fat: '12g',
+        vitamin: '100%',
+        theme: 'theme-breakfast'
       },
       'Lunch': {
         badge: 'ACTIVE TIME WINDOW • 01:30 PM',
-        title: '🥗 Lunch Intake',
-        desc: 'Choose how to log or get your lunch: Scan a photo, enter manually, or ask AI.',
-        target: 'Target: 48g Protein',
-        theme: 'theme-lunch',
-        calories: 680
+        title: '🥗 Lunch Target',
+        targetCal: '680 kcal Target',
+        protein: '48g',
+        carbs: '35g',
+        fat: '14g',
+        vitamin: '100%',
+        theme: 'theme-lunch'
       },
       'Dinner': {
         badge: 'ACTIVE TIME WINDOW • 07:30 PM',
-        title: '🍲 Dinner Intake',
-        desc: 'Choose how to log or get your dinner: Scan a photo, enter manually, or ask AI.',
-        target: 'Target: 40g Protein',
-        theme: 'theme-dinner',
-        calories: 520
+        title: '🍲 Dinner Target',
+        targetCal: '520 kcal Target',
+        protein: '40g',
+        carbs: '20g',
+        fat: '10g',
+        vitamin: '100%',
+        theme: 'theme-dinner'
       }
     };
 
@@ -1036,8 +1059,11 @@
         card.className = `app-meal-card ${data.theme}`;
         document.getElementById('active-meal-badge').innerText = data.badge;
         document.getElementById('active-meal-title').innerText = data.title;
-        document.getElementById('active-meal-desc').innerText = data.desc;
-        document.getElementById('active-meal-logged-status').innerText = data.target;
+        document.getElementById('active-meal-logged-status').innerText = data.targetCal;
+        document.getElementById('meal-gram-protein').innerText = data.protein;
+        document.getElementById('meal-gram-carbs').innerText = data.carbs;
+        document.getElementById('meal-gram-fat').innerText = data.fat;
+        document.getElementById('meal-gram-vitamin').innerText = data.vitamin;
       }
     }
 
