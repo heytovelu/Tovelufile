@@ -358,8 +358,9 @@
       position: relative;
       background: var(--gemini-surface);
       border: 1.5px solid var(--gemini-border-subtle);
-      border-radius: 22px;
-      height: 84px;
+      border-radius: 20px;
+      height: 74px;
+      min-height: 74px;
       display: flex;
       align-items: center;
       padding: 0 14px;
@@ -396,8 +397,8 @@
     /* Task text inside the card */
     .task-text-container {
       position: absolute;
-      left: 78px;
-      right: 60px;
+      left: 70px;
+      right: 56px;
       display: flex;
       flex-direction: column;
       gap: 3px;
@@ -453,8 +454,8 @@
     .task-sliding-icon {
       position: absolute;
       left: 10px;
-      width: 52px;
-      height: 52px;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -1408,34 +1409,37 @@
         font-weight: 800 !important;
       }
 
-      /* Task List Items */
+      /* Task List Items (Increased Height & Clear Breathing Room) */
       #dynamic-tasks-list {
-        gap: 8px !important;
+        gap: 12px !important;
       }
-      .task-slide-card {
-        padding: 8px 10px !important;
-        border-radius: 14px !important;
-        min-height: 52px !important;
-        gap: 8px !important;
+      .app-task-card {
+        height: 72px !important;
+        min-height: 72px !important;
+        border-radius: 18px !important;
+        padding: 0 12px !important;
       }
-      .task-meta-box {
-        gap: 1px !important;
+      .task-sliding-icon {
+        width: 46px !important;
+        height: 46px !important;
+        border-radius: 50% !important;
+      }
+      .task-sliding-icon .material-symbols-outlined {
+        font-size: 22px !important;
+      }
+      .task-text-container {
+        left: 68px !important;
+        right: 52px !important;
+        gap: 3px !important;
       }
       .task-title-text {
-        font-size: 12.5px !important;
+        font-size: 13.5px !important;
         font-weight: 700 !important;
         line-height: 1.25 !important;
       }
-      .task-sub-label {
-        font-size: 10px !important;
-      }
-      .task-sliding-icon {
-        width: 32px !important;
-        height: 32px !important;
-        border-radius: 10px !important;
-      }
-      .task-sliding-icon .material-symbols-outlined {
-        font-size: 16px !important;
+      .task-time-badge {
+        font-size: 10.5px !important;
+        padding: 2px 7px !important;
       }
 
       /* Clinical Note */
