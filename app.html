@@ -472,7 +472,7 @@
       backdrop-filter: blur(20px);
       border-top: 1px solid var(--gemini-border-subtle);
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       z-index: 1000;
       padding-bottom: env(safe-area-inset-bottom);
       pointer-events: auto;
@@ -1175,7 +1175,7 @@
         <span style="font-size: 11px; font-weight: 800; color: var(--gemini-sparkle-blue); background: var(--gemini-surface-container); border: 1px solid var(--gemini-border-subtle); padding: 4px 10px; border-radius: 9999px; letter-spacing: 0.04em;">
           DAY 4 / WEEK 3
         </span>
-        <div class="profile-avatar-btn" onclick="openProfileModal()" title="Your Profile">
+        <div class="profile-avatar-btn" onclick="switchAppTab('you')" title="Your Profile (YOU)">
           <span class="material-symbols-outlined" style="font-size: 20px;">account_circle</span>
         </div>
       </div>
@@ -2098,23 +2098,168 @@
           </div>
         </div>
 
+      <!-- ==================== 4. TAB: YOU (MEMBER PROFILE & BIOMETRIC SETTINGS) ==================== -->
+      <section id="pane-you" class="tab-pane">
+        
+        <div class="health-container">
+          
+          <!-- 1. USER PROFILE IDENTITY HERO -->
+          <div class="health-patient-card">
+            <div style="display: flex; align-items: center; gap: 16px;">
+              <div style="width: 64px; height: 64px; border-radius: 20px; background: linear-gradient(135deg, #1A73E8 0%, #7C3AED 50%, #00F5A0 100%); display: flex; align-items: center; justify-content: center; color: #FFFFFF; box-shadow: 0 6px 18px rgba(26, 115, 232, 0.35); flex-shrink: 0;">
+                <span class="material-symbols-outlined" style="font-size: 34px;">person</span>
+              </div>
+              <div style="flex: 1;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <h2 style="font-family: 'Google Sans Display', sans-serif; font-size: 20px; font-weight: 800; color: var(--gemini-text-main); margin: 0;">
+                    Ajay Sen
+                  </h2>
+                  <span class="health-pill-tag health-pill-emerald" style="font-size: 10.5px;">PRO</span>
+                </div>
+                <div style="font-size: 12.5px; color: var(--gemini-text-muted); margin-top: 2px;">
+                  Tier 1 Precision Metabolic Protocol • Day 18 / 90
+                </div>
+              </div>
+            </div>
+
+            <!-- Biometric Summary Badges -->
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; background: var(--gemini-surface-container); padding: 12px 10px; border-radius: 14px; border: 1px solid var(--gemini-border-subtle); text-align: center;">
+              <div>
+                <div style="font-size: 10px; font-weight: 700; color: var(--gemini-text-muted); text-transform: uppercase;">Age</div>
+                <div style="font-size: 14px; font-weight: 800; color: var(--gemini-text-main); margin-top: 2px;">25 Yrs</div>
+              </div>
+              <div>
+                <div style="font-size: 10px; font-weight: 700; color: var(--gemini-text-muted); text-transform: uppercase;">Sex</div>
+                <div style="font-size: 14px; font-weight: 800; color: var(--gemini-text-main); margin-top: 2px;">Male</div>
+              </div>
+              <div>
+                <div style="font-size: 10px; font-weight: 700; color: var(--gemini-text-muted); text-transform: uppercase;">Height</div>
+                <div style="font-size: 14px; font-weight: 800; color: var(--gemini-text-main); margin-top: 2px;">175 cm</div>
+              </div>
+              <div>
+                <div style="font-size: 10px; font-weight: 700; color: var(--gemini-text-muted); text-transform: uppercase;">Weight</div>
+                <div style="font-size: 14px; font-weight: 800; color: var(--gemini-text-main); margin-top: 2px;">70 kg</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. CLINICAL TARGETS & PROTOCOL CALIBRATIONS -->
+          <div class="gemini-card" style="padding: 18px 20px;">
+            <div style="font-family: 'Google Sans', sans-serif; font-size: 16px; font-weight: 800; color: var(--gemini-text-main); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+              <span class="material-symbols-outlined" style="color: var(--gemini-sparkle-blue); font-size: 20px;">tune</span>
+              <span>Your Daily Protocol Targets</span>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: var(--gemini-surface-container); border-radius: 12px;">
+                <div>
+                  <div style="font-size: 13.5px; font-weight: 700; color: var(--gemini-text-main);">Daily Calorie Budget</div>
+                  <div style="font-size: 11px; color: var(--gemini-text-muted);">15% Metabolic Deficit Target</div>
+                </div>
+                <span style="font-family: 'Google Sans Display', sans-serif; font-size: 16px; font-weight: 800; color: var(--gemini-sparkle-blue);">1,500 kcal</span>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: var(--gemini-surface-container); border-radius: 12px;">
+                <div>
+                  <div style="font-size: 13.5px; font-weight: 700; color: var(--gemini-text-main);">Protein Floor Target</div>
+                  <div style="font-size: 11px; color: var(--gemini-text-muted);">Muscle mass & satiety protection</div>
+                </div>
+                <span style="font-family: 'Google Sans Display', sans-serif; font-size: 16px; font-weight: 800; color: var(--gemini-vitality-emerald);">117g / day</span>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: var(--gemini-surface-container); border-radius: 12px;">
+                <div>
+                  <div style="font-size: 13.5px; font-weight: 700; color: var(--gemini-text-main);">Caffeine Cutoff Rule</div>
+                  <div style="font-size: 11px; color: var(--gemini-text-muted);">10-Hour sleep adenosine clearance</div>
+                </div>
+                <span style="font-family: 'Google Sans Display', sans-serif; font-size: 16px; font-weight: 800; color: var(--gemini-text-main);">12:00 PM</span>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: var(--gemini-surface-container); border-radius: 12px;">
+                <div>
+                  <div style="font-size: 13.5px; font-weight: 700; color: var(--gemini-text-main);">Industrial Seed Oils</div>
+                  <div style="font-size: 11px; color: var(--gemini-text-muted);">Zero linoleic oxidation rule</div>
+                </div>
+                <span style="font-family: 'Google Sans Display', sans-serif; font-size: 16px; font-weight: 800; color: var(--gemini-vitality-emerald);">0% (Eliminated)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. ACTIONS & PROTOCOL TOOLS -->
+          <div class="gemini-card" style="padding: 18px 20px;">
+            <div style="font-family: 'Google Sans', sans-serif; font-size: 16px; font-weight: 800; color: var(--gemini-text-main); margin-bottom: 12px;">
+              ⚙️ Account & Intake Tools
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <button class="gemini-btn gemini-btn-primary" style="height: 46px; justify-content: space-between; padding: 0 16px; border-radius: 14px;" onclick="openPantryModal()">
+                <span style="display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 14px;">
+                  <span class="material-symbols-outlined" style="font-size: 20px;">kitchen</span>
+                  Manage Kitchen & Pantry
+                </span>
+                <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
+              </button>
+
+              <a href="survey.html" class="gemini-btn gemini-btn-tonal" style="height: 46px; justify-content: space-between; padding: 0 16px; text-decoration: none; border-radius: 14px; color: var(--gemini-text-main);">
+                <span style="display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 14px;">
+                  <span class="material-symbols-outlined" style="font-size: 20px;">assignment</span>
+                  Retake 42-Marker Intake Survey
+                </span>
+                <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
+              </a>
+
+              <a href="thais.html" class="gemini-btn gemini-btn-tonal" style="height: 46px; justify-content: space-between; padding: 0 16px; text-decoration: none; border-radius: 14px; color: var(--gemini-text-main);">
+                <span style="display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 14px;">
+                  <span class="material-symbols-outlined" style="font-size: 20px;">terminal</span>
+                  Open Full THAIS AI Console
+                </span>
+                <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
+              </a>
+
+              <button class="gemini-btn gemini-btn-tonal" style="height: 46px; justify-content: space-between; padding: 0 16px; border-radius: 14px; color: var(--gemini-text-main);" onclick="toggleTheme()">
+                <span style="display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 14px;">
+                  <span class="material-symbols-outlined" style="font-size: 20px;">dark_mode</span>
+                  Toggle Dark / Light Theme
+                </span>
+                <span class="material-symbols-outlined" style="font-size: 18px;">sync</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 4. LAW-001 CONSTITUTIONAL VERIFICATION BADGE -->
+          <div style="background: rgba(0, 208, 108, 0.06); border: 1px solid rgba(0, 208, 108, 0.2); border-radius: 16px; padding: 14px 16px; text-align: center;">
+            <div style="font-size: 12px; font-weight: 800; color: var(--gemini-vitality-emerald); display: flex; align-items: center; justify-content: center; gap: 6px;">
+              <span class="material-symbols-outlined" style="font-size: 16px;">verified</span>
+              Constitutional LAW-001 Guaranteed
+            </div>
+            <div style="font-size: 11px; color: var(--gemini-text-muted); margin-top: 3px;">
+              100% Peer-Reviewed Scientific Consensus & WHO ICD-11 Calibrated.
+            </div>
+          </div>
+
+        </div>
+
       </section>
 
     </div>
 
-    <!-- ==================== FIXED BOTTOM NAVIGATION (3 CORE TABS) ==================== -->
+    <!-- ==================== FIXED BOTTOM NAVIGATION (4 CORE TABS: FLOW | HEALTH | CHAT | YOU) ==================== -->
     <nav class="app-bottom-nav">
       <button class="nav-item-btn active" id="btn-tab-flow" onclick="switchAppTab('flow')">
         <span class="material-symbols-outlined" style="font-size: 22px;">bolt</span>
         <span class="nav-label">FLOW</span>
       </button>
+      <button class="nav-item-btn" id="btn-tab-health" onclick="switchAppTab('health')">
+        <span class="material-symbols-outlined" style="font-size: 22px;">vital_signs</span>
+        <span class="nav-label">HEALTH</span>
+      </button>
       <button class="nav-item-btn" id="btn-tab-chat" onclick="switchAppTab('chat')">
         <span class="material-symbols-outlined" style="font-size: 22px;">chat</span>
         <span class="nav-label">CHAT</span>
       </button>
-      <button class="nav-item-btn" id="btn-tab-health" onclick="switchAppTab('health')">
-        <span class="material-symbols-outlined" style="font-size: 22px;">vital_signs</span>
-        <span class="nav-label">HEALTH</span>
+      <button class="nav-item-btn" id="btn-tab-you" onclick="switchAppTab('you')">
+        <span class="material-symbols-outlined" style="font-size: 22px;">person</span>
+        <span class="nav-label">YOU</span>
       </button>
     </nav>
 
