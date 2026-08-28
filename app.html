@@ -1070,7 +1070,7 @@
       </div>
 
       <!-- ==================== 3. TAB: CHAT (TOVELU INTELLIGENCE) ==================== -->
-      <div id="pane-chat" class="tab-view">
+      <div id="pane-chat" class="tab-view pb-16">
         <div class="px-container-padding py-6"><div class="flex flex-col w-full relative gap-margin-md">
 <!-- AI Companion Header & Greeting -->
 <div class="flex flex-col gap-4">
@@ -1432,6 +1432,18 @@
       </div>
     </nav>
 
+  <!-- ==================== FIXED FLOATING CHAT COMPOSER (NEVER SCROLLS) ==================== -->
+  <div id="fixed-chat-composer" class="fixed bottom-16 max-w-[440px] w-full z-40 px-4 py-2 bg-surface/90 backdrop-blur-md border-t border-surface-container/60 shadow-[0_-2px_12px_rgba(0,0,0,0.04)]" style="display: none;">
+    <div class="bg-surface-container-lowest border border-outline-variant/40 rounded-full p-1.5 pl-4 flex items-center shadow-md gap-2">
+      <span class="material-symbols-outlined text-outline text-[20px] shrink-0">add_circle</span>
+      <input id="fixed-chat-input" class="flex-1 bg-transparent border-none outline-none font-body-md text-[14px] text-on-surface placeholder:text-outline w-full min-w-0" placeholder="Ask Tovelu Intelligence..." type="text" autocomplete="off" onkeydown="if(event.key==='Enter'){sendAppChatMessage(); event.preventDefault();}" />
+      <button onclick="sendAppChatMessage()" class="w-9 h-9 rounded-full bg-primary flex items-center justify-center shrink-0 hover:bg-primary-container transition-colors shadow-sm cursor-pointer">
+        <span class="material-symbols-outlined text-on-primary text-[18px]">arrow_upward</span>
+      </button>
+    </div>
+  </div>
+
+
     <!-- ─── INTERACTIVE FOOD INTELLIGENCE BOTTOM SHEET MODAL ─── -->
     <div id="food-modal" class="modal-overlay" onclick="if(event.target===this) closeFoodModal()">
       <div class="modal-sheet">
@@ -1469,6 +1481,10 @@
       const targetNav = document.getElementById('nav-' + tabId);
 
       if (targetPane) targetPane.classList.add('active');
+      const fixedComposer = document.getElementById('fixed-chat-composer');
+      if (fixedComposer) {
+        fixedComposer.style.display = (tabId === 'chat') ? 'block' : 'none';
+      }
       if (targetNav) {
         targetNav.classList.add('active', 'text-primary', 'font-bold');
         targetNav.classList.remove('text-on-surface-variant');
@@ -1606,7 +1622,7 @@
         const txt = (b.innerText || '').trim();
         if (txt.includes('What 15m') || txt.includes('Why do I feel') || txt.includes('When is the best') || txt.includes('Can I drink tea')) {
           b.onclick = () => {
-            const input = document.querySelector('#pane-chat input');
+            const input = document.getElementById('fixed-chat-input') || document.querySelector('#pane-chat input');
             if (input) {
               input.value = txt;
               sendAppChatMessage();
