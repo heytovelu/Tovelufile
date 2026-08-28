@@ -5,121 +5,21 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    {
-      "source": "/",
-      "has": [
-        {
-          "type": "host",
-          "value": "app.tovelu.store"
-        }
-      ],
-      "destination": "/app.html"
-    },
-    {
-      "source": "/(.*)",
-      "has": [
-        {
-          "type": "host",
-          "value": "app.tovelu.store"
-        }
-      ],
-      "destination": "/app.html"
-    },
-    {
-      "source": "/",
-      "has": [
-        {
-          "type": "host",
-          "value": "tovelu.store"
-        }
-      ],
-      "destination": "/sales.html"
-    },
-    {
-      "source": "/",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.tovelu.store"
-        }
-      ],
-      "destination": "/sales.html"
-    },
-    {
-      "source": "/app",
-      "destination": "/app.html"
-    },
-    {
-      "source": "/sales",
-      "destination": "/sales.html"
-    },
-    {
-      "source": "/survey",
-      "destination": "/survey.html"
-    },
-    {
-      "source": "/report",
-      "destination": "/report.html"
-    },
-    {
-      "source": "/checkout",
-      "destination": "/checkout.html"
-    },
-    {
-      "source": "/pricing",
-      "destination": "/checkout.html"
-    },
-    {
-      "source": "/thais",
-      "destination": "/thais.html"
-    },
-    {
-      "source": "/download",
-      "destination": "/download.html"
-    }
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/app", "destination": "/index.html" },
+    { "source": "/survey", "destination": "/survey.html" },
+    { "source": "/report", "destination": "/report.html" },
+    { "source": "/checkout", "destination": "/checkout.html" },
+    { "source": "/thais", "destination": "/thais.html" },
+    { "source": "/download", "destination": "/download.html" }
   ],
   "headers": [
     {
-      "source": "/sw.js",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=0, must-revalidate"
-        },
-        {
-          "key": "Service-Worker-Allowed",
-          "value": "/"
-        }
-      ]
-    },
-    {
-      "source": "/manifest.json",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/manifest+json"
-        },
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "*"
-        }
-      ]
-    },
-    {
       "source": "/(.*)",
       "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "SAMEORIGIN"
-        },
-        {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
-        }
+        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" },
+        { "key": "Pragma", "value": "no-cache" },
+        { "key": "Expires", "value": "0" }
       ]
     }
   ]
