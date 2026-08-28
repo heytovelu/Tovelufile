@@ -342,68 +342,101 @@
       border-color: var(--gemini-vitality-emerald);
     }
 
-    /* Clean Task Cards */
+    /* Full Card Start-to-End Icon Slider Task Track */
     .app-task-card {
+      position: relative;
       background: var(--gemini-surface);
-      border: 1px solid var(--gemini-border);
-      border-radius: 20px;
-      padding: 16px 18px;
+      border: 1.5px solid var(--gemini-border);
+      border-radius: 22px;
+      height: 72px;
       display: flex;
       align-items: center;
-      gap: 16px;
+      padding: 0 12px;
+      overflow: hidden;
+      user-select: none;
+      touch-action: pan-y;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
-      transition: all 0.2s;
+      transition: border-color 0.25s, background 0.25s, box-shadow 0.25s;
     }
     .app-task-card:hover {
       border-color: var(--gemini-sparkle-blue);
     }
     .app-task-card.completed {
       background: var(--gemini-surface-container);
-      border-color: rgba(0, 208, 108, 0.35);
+      border-color: var(--gemini-vitality-emerald);
+    }
+
+    /* Green dynamic drag fill behind the sliding icon */
+    .task-drag-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 0%;
+      background: linear-gradient(90deg, rgba(0, 245, 160, 0.15), rgba(0, 208, 108, 0.35));
+      pointer-events: none;
+      transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .app-task-card.completed .task-drag-fill {
+      width: 100% !important;
+      background: linear-gradient(90deg, rgba(0, 245, 160, 0.2), rgba(0, 208, 108, 0.25));
+    }
+
+    /* Task text inside the card */
+    .task-text-container {
+      position: absolute;
+      left: 72px;
+      right: 56px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      pointer-events: none;
+      z-index: 2;
+      transition: opacity 0.2s;
     }
     .app-task-card.completed .task-title-text {
       color: var(--gemini-text-muted);
     }
 
-    /* Icon-Only Swipe / Swap Capsule Switch */
-    .task-icon-switch {
-      position: relative;
-      width: 64px;
-      height: 38px;
-      background: var(--gemini-surface-container);
-      border: 1.5px solid var(--gemini-border);
-      border-radius: 9999px;
-      padding: 3px;
-      cursor: pointer;
-      flex-shrink: 0;
-      user-select: none;
-      touch-action: pan-y;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .task-icon-switch.completed {
-      background: rgba(0, 245, 160, 0.25);
-      border-color: var(--gemini-vitality-emerald);
-    }
-    .task-icon-knob {
+    /* Target destination slot at the End (Right) */
+    .task-end-target {
       position: absolute;
-      top: 3px;
-      left: 3px;
-      width: 30px;
-      height: 30px;
+      right: 12px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2px dashed var(--gemini-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.5;
+      transition: all 0.2s;
+    }
+    .app-task-card.completed .task-end-target {
+      border: none;
+      opacity: 0;
+    }
+
+    /* The Draggable Task Icon Knob (Starts at Left, Swipes to Right End) */
+    .task-sliding-icon {
+      position: absolute;
+      left: 10px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s;
       cursor: grab;
+      z-index: 3;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s;
     }
-    .task-icon-knob:active {
+    .task-sliding-icon:active {
       cursor: grabbing;
-    }
-    .task-icon-switch.completed .task-icon-knob {
-      transform: translateX(26px);
-      background: var(--gemini-vitality-emerald) !important;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
     }
 
     /* Fixed Bottom App Navigation (3 Core Tabs: FLOW | CHAT | HEALTH) */
@@ -669,7 +702,7 @@
 
           </div>
 
-          <!-- 4. TODAY'S TASKS (ICON-ONLY SWIPE / SWAP SWITCH) -->
+          <!-- 4. TODAY'S TASKS (SLIDE ICON FROM START TO END) -->
           <div style="display: flex; flex-direction: column; gap: 12px;">
             <div style="display: flex; justify-content: space-between; align-items: center;">
               <div style="font-size: 13px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase; letter-spacing: 0.05em;">
@@ -680,69 +713,77 @@
 
             <!-- Task 1: Sunlight -->
             <div class="app-task-card completed" id="task-card-1">
-              <div class="task-icon-switch completed" data-task-id="1" data-base-icon="light_mode" data-base-bg="linear-gradient(135deg, #F59E0B, #D97706)">
-                <div class="task-icon-knob" style="background: var(--gemini-vitality-emerald);">
-                  <span class="material-symbols-outlined knob-icon" style="font-size: 18px; color: #FFFFFF;">check</span>
-                </div>
+              <div class="task-drag-fill"></div>
+              <div class="task-sliding-icon" data-task-id="1" data-base-icon="light_mode" data-base-bg="linear-gradient(135deg, #F59E0B, #D97706)" style="background: var(--gemini-vitality-emerald);">
+                <span class="material-symbols-outlined knob-icon" style="font-size: 22px; color: #FFFFFF;">check</span>
               </div>
-              <div style="flex: 1; display: flex; flex-direction: column; gap: 3px;">
-                <div class="task-title-text" style="font-family: 'Google Sans', sans-serif; font-size: 15px; font-weight: 800; color: var(--gemini-text-main);">
+              <div class="task-text-container">
+                <div class="task-title-text" style="font-family: 'Google Sans', sans-serif; font-size: 14px; font-weight: 800; color: var(--gemini-text-main);">
                   Sit under sunlight for 15 minutes
                 </div>
-                <div style="font-size: 12px; color: var(--gemini-text-muted);">
-                  Within 45 minutes of waking up for clean all-day energy
+                <div style="font-size: 11px; color: var(--gemini-text-muted);">
+                  Within 45m of waking for morning energy
                 </div>
+              </div>
+              <div class="task-end-target">
+                <span class="material-symbols-outlined" style="font-size: 18px; color: var(--gemini-text-muted);">arrow_forward</span>
               </div>
             </div>
 
             <!-- Task 2: Hydration -->
             <div class="app-task-card completed" id="task-card-2">
-              <div class="task-icon-switch completed" data-task-id="2" data-base-icon="water_drop" data-base-bg="linear-gradient(135deg, #00C0FF, #0062FF)">
-                <div class="task-icon-knob" style="background: var(--gemini-vitality-emerald);">
-                  <span class="material-symbols-outlined knob-icon" style="font-size: 18px; color: #FFFFFF;">check</span>
-                </div>
+              <div class="task-drag-fill"></div>
+              <div class="task-sliding-icon" data-task-id="2" data-base-icon="water_drop" data-base-bg="linear-gradient(135deg, #00C0FF, #0062FF)" style="background: var(--gemini-vitality-emerald);">
+                <span class="material-symbols-outlined knob-icon" style="font-size: 22px; color: #FFFFFF;">check</span>
               </div>
-              <div style="flex: 1; display: flex; flex-direction: column; gap: 3px;">
-                <div class="task-title-text" style="font-family: 'Google Sans', sans-serif; font-size: 15px; font-weight: 800; color: var(--gemini-text-main);">
+              <div class="task-text-container">
+                <div class="task-title-text" style="font-family: 'Google Sans', sans-serif; font-size: 14px; font-weight: 800; color: var(--gemini-text-main);">
                   Drink a glass of mineral water
                 </div>
-                <div style="font-size: 12px; color: var(--gemini-text-muted);">
-                  Add a pinch of salt upon waking to hydrate your cells
+                <div style="font-size: 11px; color: var(--gemini-text-muted);">
+                  Add a pinch of salt upon waking
                 </div>
+              </div>
+              <div class="task-end-target">
+                <span class="material-symbols-outlined" style="font-size: 18px; color: var(--gemini-text-muted);">arrow_forward</span>
               </div>
             </div>
 
             <!-- Task 3: Walk -->
             <div class="app-task-card completed" id="task-card-3">
-              <div class="task-icon-switch completed" data-task-id="3" data-base-icon="directions_walk" data-base-bg="linear-gradient(135deg, #00F5A0, #00D06C)">
-                <div class="task-icon-knob" style="background: var(--gemini-vitality-emerald);">
-                  <span class="material-symbols-outlined knob-icon" style="font-size: 18px; color: #FFFFFF;">check</span>
-                </div>
+              <div class="task-drag-fill"></div>
+              <div class="task-sliding-icon" data-task-id="3" data-base-icon="directions_walk" data-base-bg="linear-gradient(135deg, #00F5A0, #00D06C)" style="background: var(--gemini-vitality-emerald);">
+                <span class="material-symbols-outlined knob-icon" style="font-size: 22px; color: #FFFFFF;">check</span>
               </div>
-              <div style="flex: 1; display: flex; flex-direction: column; gap: 3px;">
-                <div class="task-title-text" style="font-family: 'Google Sans', sans-serif; font-size: 15px; font-weight: 800; color: var(--gemini-text-main);">
+              <div class="task-text-container">
+                <div class="task-title-text" style="font-family: 'Google Sans', sans-serif; font-size: 14px; font-weight: 800; color: var(--gemini-text-main);">
                   Take a 12-minute walk after lunch
                 </div>
-                <div style="font-size: 12px; color: var(--gemini-text-muted);">
-                  Helps smooth your blood sugar and prevent afternoon sluggishness
+                <div style="font-size: 11px; color: var(--gemini-text-muted);">
+                  Smooths glucose & prevents crash
                 </div>
+              </div>
+              <div class="task-end-target">
+                <span class="material-symbols-outlined" style="font-size: 18px; color: var(--gemini-text-muted);">arrow_forward</span>
               </div>
             </div>
 
             <!-- Task 4: Screen Wind-Down -->
             <div class="app-task-card" id="task-card-4">
-              <div class="task-icon-switch" data-task-id="4" data-base-icon="bedtime" data-base-bg="linear-gradient(135deg, #8B5CF6, #6366F1)">
-                <div class="task-icon-knob" style="background: linear-gradient(135deg, #8B5CF6, #6366F1);">
-                  <span class="material-symbols-outlined knob-icon" style="font-size: 18px; color: #FFFFFF;">bedtime</span>
-                </div>
+              <div class="task-drag-fill"></div>
+              <div class="task-sliding-icon" data-task-id="4" data-base-icon="bedtime" data-base-bg="linear-gradient(135deg, #8B5CF6, #6366F1)" style="background: linear-gradient(135deg, #8B5CF6, #6366F1);">
+                <span class="material-symbols-outlined knob-icon" style="font-size: 22px; color: #FFFFFF;">bedtime</span>
               </div>
-              <div style="flex: 1; display: flex; flex-direction: column; gap: 3px;">
-                <div class="task-title-text" style="font-family: 'Google Sans', sans-serif; font-size: 15px; font-weight: 800; color: var(--gemini-text-main);">
+              <div class="task-text-container">
+                <div class="task-title-text" style="font-family: 'Google Sans', sans-serif; font-size: 14px; font-weight: 800; color: var(--gemini-text-main);">
                   Turn off bright screens 1 hour before bed
                 </div>
-                <div style="font-size: 12px; color: var(--gemini-text-muted);">
-                  Helps your mind prepare for deep restful sleep
+                <div style="font-size: 11px; color: var(--gemini-text-muted);">
+                  Slide icon to end to complete ➔
                 </div>
+              </div>
+              <div class="task-end-target">
+                <span class="material-symbols-outlined" style="font-size: 18px; color: var(--gemini-text-muted);">arrow_forward</span>
               </div>
             </div>
           </div>
@@ -1371,68 +1412,102 @@
       document.getElementById('profile-modal-overlay').style.display = 'none';
     }
 
-    // Icon-Only Swipe / Swap Switch Controller (Thumb & Cursor Gestures)
+    // Full Start-to-End Icon Drag Slider Controller (Thumb & Mouse Cursor)
     function initTaskSwipeGestures() {
-      document.querySelectorAll('.task-icon-switch').forEach(sw => {
-        const card = sw.closest('.app-task-card');
-        const knob = sw.querySelector('.task-icon-knob');
-        const iconSpan = sw.querySelector('.knob-icon');
-        const baseIcon = sw.getAttribute('data-base-icon') || 'task';
-        const baseBg = sw.getAttribute('data-base-bg') || 'linear-gradient(135deg, #00C0FF, #0062FF)';
+      const cards = document.querySelectorAll('#subview-flow-day .app-task-card');
+      
+      cards.forEach(card => {
+        const icon = card.querySelector('.task-sliding-icon');
+        const fill = card.querySelector('.task-drag-fill');
+        const iconSpan = icon ? icon.querySelector('.knob-icon') : null;
+        const baseIcon = icon ? (icon.getAttribute('data-base-icon') || 'task') : 'task';
+        const baseBg = icon ? (icon.getAttribute('data-base-bg') || 'linear-gradient(135deg, #00C0FF, #0062FF)') : '';
 
-        let startX = 0;
-        let currentX = 0;
-        let isDragging = false;
-        const threshold = 14;
+        if (!icon || !fill) return;
 
-        function applyState(isCompleted) {
+        function getMaxOffset() {
+          return Math.max(0, card.offsetWidth - icon.offsetWidth - 20);
+        }
+
+        function setPosition(isCompleted, animated = true) {
+          const max = getMaxOffset();
+          const transition = animated ? 'transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s' : 'none';
+          const fillTransition = animated ? 'width 0.25s cubic-bezier(0.16, 1, 0.3, 1)' : 'none';
+          
+          icon.style.transition = transition;
+          fill.style.transition = fillTransition;
+
           if (isCompleted) {
-            sw.classList.add('completed');
-            if (card) card.classList.add('completed');
+            card.classList.add('completed');
+            icon.style.transform = `translateX(${max}px)`;
+            fill.style.width = '100%';
             if (iconSpan) iconSpan.innerText = 'check';
-            if (knob) knob.style.background = 'var(--gemini-vitality-emerald)';
+            icon.style.background = 'var(--gemini-vitality-emerald)';
           } else {
-            sw.classList.remove('completed');
-            if (card) card.classList.remove('completed');
+            card.classList.remove('completed');
+            icon.style.transform = 'translateX(0px)';
+            fill.style.width = '0%';
             if (iconSpan) iconSpan.innerText = baseIcon;
-            if (knob) knob.style.background = baseBg;
+            icon.style.background = baseBg;
           }
           updateTaskCounter();
         }
 
-        // Touch Swipe (Thumb)
-        sw.addEventListener('touchstart', (e) => {
+        // Initialize position on load
+        setPosition(card.classList.contains('completed'), false);
+
+        let startX = 0;
+        let startTransform = 0;
+        let isDragging = false;
+
+        // Touch Events (Thumb Drag from Start to End)
+        icon.addEventListener('touchstart', (e) => {
           startX = e.touches[0].clientX;
-          currentX = startX;
+          startTransform = card.classList.contains('completed') ? getMaxOffset() : 0;
           isDragging = true;
+          icon.style.transition = 'none';
+          fill.style.transition = 'none';
         }, { passive: true });
 
-        sw.addEventListener('touchmove', (e) => {
+        icon.addEventListener('touchmove', (e) => {
           if (!isDragging) return;
-          currentX = e.touches[0].clientX;
+          const currentX = e.touches[0].clientX;
+          const delta = currentX - startX;
+          const max = getMaxOffset();
+          let newOffset = Math.max(0, Math.min(max, startTransform + delta));
+          icon.style.transform = `translateX(${newOffset}px)`;
+          fill.style.width = `${Math.min(100, (newOffset + 30) / card.offsetWidth * 100)}%`;
         }, { passive: true });
 
-        sw.addEventListener('touchend', () => {
+        icon.addEventListener('touchend', (e) => {
           if (!isDragging) return;
           isDragging = false;
-          const diff = currentX - startX;
-          if (Math.abs(diff) > threshold) {
-            applyState(diff > 0);
+          const max = getMaxOffset();
+          const currentMatrix = new WebKitCSSMatrix(window.getComputedStyle(icon).transform);
+          const currentOffset = currentMatrix.m41;
+          
+          if (currentOffset > max * 0.5) {
+            setPosition(true);
           } else {
-            // Tap fallback
-            applyState(!sw.classList.contains('completed'));
+            setPosition(false);
           }
         });
 
-        // Mouse Drag / Click (Cursor)
-        sw.addEventListener('mousedown', (e) => {
+        // Mouse Events (Cursor Drag from Start to End)
+        icon.addEventListener('mousedown', (e) => {
           startX = e.clientX;
-          currentX = startX;
+          startTransform = card.classList.contains('completed') ? getMaxOffset() : 0;
           isDragging = true;
+          icon.style.transition = 'none';
+          fill.style.transition = 'none';
 
           const onMouseMove = (ev) => {
             if (!isDragging) return;
-            currentX = ev.clientX;
+            const delta = ev.clientX - startX;
+            const max = getMaxOffset();
+            let newOffset = Math.max(0, Math.min(max, startTransform + delta));
+            icon.style.transform = `translateX(${newOffset}px)`;
+            fill.style.width = `${Math.min(100, (newOffset + 30) / card.offsetWidth * 100)}%`;
           };
 
           const onMouseUp = () => {
@@ -1440,16 +1515,39 @@
             isDragging = false;
             window.removeEventListener('mousemove', onMouseMove);
             window.removeEventListener('mouseup', onMouseUp);
-            const diff = currentX - startX;
-            if (Math.abs(diff) > threshold) {
-              applyState(diff > 0);
+            const max = getMaxOffset();
+            const currentMatrix = new WebKitCSSMatrix(window.getComputedStyle(icon).transform);
+            const currentOffset = currentMatrix.m41;
+            
+            if (currentOffset > max * 0.5) {
+              setPosition(true);
             } else {
-              applyState(!sw.classList.contains('completed'));
+              setPosition(false);
             }
           };
 
           window.addEventListener('mousemove', onMouseMove);
           window.addEventListener('mouseup', onMouseUp);
+        });
+
+        // Click / Tap Toggle Fallback
+        icon.addEventListener('click', (e) => {
+          const max = getMaxOffset();
+          const currentMatrix = new WebKitCSSMatrix(window.getComputedStyle(icon).transform);
+          const currentOffset = currentMatrix.m41;
+          if (currentOffset <= 5 || Math.abs(currentOffset - max) <= 5) {
+            setPosition(!card.classList.contains('completed'));
+          }
+        });
+      });
+
+      window.addEventListener('resize', () => {
+        cards.forEach(card => {
+          const icon = card.querySelector('.task-sliding-icon');
+          if (icon && card.classList.contains('completed')) {
+            const max = card.offsetWidth - icon.offsetWidth - 20;
+            icon.style.transform = `translateX(${max}px)`;
+          }
         });
       });
     }
