@@ -396,8 +396,8 @@
     /* Task text inside the card */
     .task-text-container {
       position: relative;
-      margin-left: 56px;
-      margin-right: 48px;
+      margin-left: 68px;
+      margin-right: 68px;
       display: flex;
       flex-direction: column;
       gap: 3px;
@@ -432,12 +432,12 @@
     /* Target destination slot at the End (Right) */
     .task-end-target {
       position: absolute;
-      right: 14px;
-      top: 50%;
-      margin-top: -24px;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
+      right: 8px;
+      top: 8px;
+      bottom: 8px;
+      width: 60px;
+      height: calc(100% - 16px);
+      border-radius: 16px;
       border: 2px dashed var(--gemini-border);
       display: flex;
       align-items: center;
@@ -455,20 +455,23 @@
     /* The Draggable Task Icon Knob (Starts at Left, Swipes to Right End) */
     .task-sliding-icon {
       position: absolute;
-      left: 12px;
-      top: 50%;
-      margin-top: -24px;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
+      left: 8px;
+      top: 8px;
+      bottom: 8px;
+      width: 60px;
+      height: calc(100% - 16px);
+      border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: grab;
       z-index: 3;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
       transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s;
       will-change: transform;
+    }
+    .task-sliding-icon .knob-icon {
+      font-size: 28px !important;
     }
     .task-sliding-icon:active {
       cursor: grabbing;
@@ -1413,28 +1416,40 @@
         font-weight: 800 !important;
       }
 
-      /* Task List Items (Expansive Height for Crystal-Clear Text) */
+      /* Task List Items (Full-Height Sliding Knob & Crystal-Clear Text) */
       #dynamic-tasks-list {
         gap: 14px !important;
       }
       .app-task-card {
-        min-height: 86px !important;
+        min-height: 90px !important;
         height: auto !important;
-        border-radius: 20px !important;
+        border-radius: 22px !important;
         padding: 12px 14px !important;
       }
       .task-sliding-icon {
-        width: 44px !important;
-        height: 44px !important;
-        margin-top: -22px !important;
-        border-radius: 50% !important;
+        left: 8px !important;
+        top: 8px !important;
+        bottom: 8px !important;
+        width: 58px !important;
+        height: calc(100% - 16px) !important;
+        border-radius: 16px !important;
+        margin-top: 0 !important;
       }
-      .task-sliding-icon .material-symbols-outlined {
-        font-size: 20px !important;
+      .task-sliding-icon .knob-icon {
+        font-size: 26px !important;
+      }
+      .task-end-target {
+        right: 8px !important;
+        top: 8px !important;
+        bottom: 8px !important;
+        width: 58px !important;
+        height: calc(100% - 16px) !important;
+        border-radius: 16px !important;
+        margin-top: 0 !important;
       }
       .task-text-container {
-        margin-left: 50px !important;
-        margin-right: 40px !important;
+        margin-left: 64px !important;
+        margin-right: 64px !important;
         gap: 3px !important;
       }
       .task-title-text {
@@ -1444,7 +1459,7 @@
       }
       .task-time-badge {
         font-size: 10px !important;
-        padding: 2px 7px !important;
+        padding: 2.5px 7px !important;
       }
 
       /* Clinical Note */
@@ -1846,12 +1861,12 @@
           </div><!-- /flow-col-left -->
             <div class="flow-col-right">
           <!-- 4. TODAY'S TASKS (DYNAMIC PROTOCOL ENGINE) -->
-          <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 22px;">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div style="font-size: 14px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase; letter-spacing: 0.05em;">
-                ✅ Today's Tasks
+          <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 28px !important; margin-bottom: 32px !important;">
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 4px 2px; margin-bottom: 6px;">
+              <div style="font-size: 15px; font-weight: 800; color: var(--gemini-text-main); text-transform: uppercase; letter-spacing: 0.04em; display: flex; align-items: center; gap: 6px;">
+                <span>✅ Today's Tasks</span>
               </div>
-              <span style="font-size: 13px; font-weight: 800; color: var(--gemini-sparkle-blue); background: rgba(0, 98, 255, 0.1); padding: 4px 12px; border-radius: 9999px;" id="flow-task-counter">3 / 4 Done</span>
+              <span style="font-size: 12.5px; font-weight: 800; color: var(--gemini-sparkle-blue); background: rgba(0, 98, 255, 0.1); padding: 5px 14px; border-radius: 9999px; border: 1px solid rgba(0, 98, 255, 0.18);" id="flow-task-counter">3 / 4 Done</span>
             </div>
 
             <!-- Dynamic Tasks Container (Supports 2, 4, 8, 20+ tasks based on user plan) -->
@@ -3687,14 +3702,14 @@
 
           if (isCompleted) {
             card.classList.add('completed');
-            icon.style.transform = `translate(${max}px, -50%)`;
+            icon.style.transform = `translateX(${max}px)`;
             fill.style.width = '100%';
             if (iconSpan) iconSpan.innerText = 'check';
             icon.style.background = 'var(--gemini-vitality-emerald)';
             if (taskData) taskData.completed = true;
           } else {
             card.classList.remove('completed');
-            icon.style.transform = 'translate(0px, -50%)';
+            icon.style.transform = 'translateX(0px)';
             fill.style.width = '0%';
             if (iconSpan) iconSpan.innerText = baseIcon;
             icon.style.background = baseBg;
@@ -3725,7 +3740,7 @@
           const delta = currentX - startX;
           const max = getMaxOffset();
           let newOffset = Math.max(0, Math.min(max, startTransform + delta));
-          icon.style.transform = `translate(${newOffset}px, -50%)`;
+          icon.style.transform = `translateX(${newOffset}px)`;
           fill.style.width = `${Math.min(100, (newOffset + 30) / card.offsetWidth * 100)}%`;
         }, { passive: true });
 
@@ -3756,7 +3771,7 @@
             const delta = ev.clientX - startX;
             const max = getMaxOffset();
             let newOffset = Math.max(0, Math.min(max, startTransform + delta));
-            icon.style.transform = `translate(${newOffset}px, -50%)`;
+            icon.style.transform = `translateX(${newOffset}px)`;
             fill.style.width = `${Math.min(100, (newOffset + 30) / card.offsetWidth * 100)}%`;
           };
 
