@@ -499,78 +499,226 @@
       letter-spacing: 0.04em;
     }
 
-    /* WhatsApp-Style Health Intelligence Chat Canvas */
-    .whatsapp-chat-container {
+    /* Authentic WhatsApp UI Canvas */
+    .whatsapp-window {
       display: flex;
       flex-direction: column;
-      height: calc(100vh - 160px);
-      position: relative;
-    }
-    .app-chat-scroller {
-      flex: 1;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      padding: 16px 12px 14px 12px;
-      background: var(--gemini-surface-container);
-      border-radius: 22px;
+      height: calc(100vh - 145px);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
       border: 1px solid var(--gemini-border-subtle);
+      background: #ECE5DD;
     }
-    .app-msg-bubble {
-      padding: 12px 16px;
-      border-radius: 18px;
-      font-size: 14.5px;
-      line-height: 1.55;
-      max-width: 86%;
-      position: relative;
-      word-break: break-word;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    [data-theme="dark"] .whatsapp-window {
+      background: #0B141A;
     }
-    .app-msg-thais {
-      background: var(--gemini-surface);
-      color: var(--gemini-text-main);
-      align-self: flex-start;
-      border-bottom-left-radius: 4px;
-      border: 1px solid var(--gemini-border-subtle);
-    }
-    .app-msg-user {
-      background: #E7FFDB;
-      color: #111827;
-      align-self: flex-end;
-      border-bottom-right-radius: 4px;
-      border: 1px solid rgba(0, 208, 108, 0.25);
-    }
-    [data-theme="dark"] .app-msg-user {
-      background: #005C4B;
-      color: #E9EDEF;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    .msg-meta-row {
+
+    /* WhatsApp Header */
+    .whatsapp-header {
+      background: #075E54;
+      color: #FFFFFF;
+      padding: 10px 14px;
       display: flex;
       align-items: center;
-      justify-content: flex-end;
-      gap: 4px;
+      justify-content: space-between;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+      z-index: 10;
+    }
+    [data-theme="dark"] .whatsapp-header {
+      background: #202C33;
+    }
+    .whatsapp-header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+    .whatsapp-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #128C7E;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: #FFFFFF;
+    }
+    .whatsapp-contact-name {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #FFFFFF;
+      line-height: 1.2;
+    }
+    .whatsapp-contact-status {
+      font-size: 12px;
+      color: #D1F4BB;
+    }
+    [data-theme="dark"] .whatsapp-contact-status {
+      color: #8696A0;
+    }
+    .whatsapp-header-icons {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: #FFFFFF;
+      opacity: 0.9;
+    }
+
+    /* WhatsApp Message Scroller Wallpaper */
+    .whatsapp-scroller {
+      flex: 1;
+      overflow-y: auto;
+      padding: 14px 14px 10px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background-color: #EFE7DE;
+      background-image: radial-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 0);
+      background-size: 16px 16px;
+    }
+    [data-theme="dark"] .whatsapp-scroller {
+      background-color: #0B141A;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 0);
+    }
+
+    /* Date Pill */
+    .whatsapp-date-pill {
+      align-self: center;
+      background: rgba(255, 255, 255, 0.92);
+      color: #54656F;
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 8px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+      margin: 4px 0 8px 0;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+    [data-theme="dark"] .whatsapp-date-pill {
+      background: #182229;
+      color: #8696A0;
+    }
+
+    /* WhatsApp Bubbles */
+    .wa-bubble {
+      max-width: 82%;
+      padding: 8px 12px 6px 12px;
+      font-size: 15px;
+      line-height: 1.45;
+      position: relative;
+      word-break: break-word;
+      box-shadow: 0 1px 1px rgba(11, 20, 26, 0.13);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+    .wa-bubble-incoming {
+      align-self: flex-start;
+      background: #FFFFFF;
+      color: #111B21;
+      border-radius: 0 10px 10px 10px;
+    }
+    [data-theme="dark"] .wa-bubble-incoming {
+      background: #202C33;
+      color: #E9EDEF;
+    }
+    .wa-bubble-outgoing {
+      align-self: flex-end;
+      background: #D9FDD3;
+      color: #111B21;
+      border-radius: 10px 0 10px 10px;
+    }
+    [data-theme="dark"] .wa-bubble-outgoing {
+      background: #005C4B;
+      color: #E9EDEF;
+    }
+    .wa-time {
+      float: right;
       font-size: 11px;
-      color: var(--gemini-text-muted);
+      color: #667781;
+      margin-left: 10px;
       margin-top: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
     }
-    [data-theme="dark"] .app-msg-user .msg-meta-row {
-      color: rgba(255, 255, 255, 0.6);
+    [data-theme="dark"] .wa-time {
+      color: #8696A0;
     }
-    
-    /* WhatsApp Bottom Fixed Bar */
-    .whatsapp-bottom-bar {
-      position: sticky;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: var(--gemini-bg);
-      padding: 10px 0 4px 0;
+    .wa-ticks {
+      color: #53BDEB;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: -2px;
+    }
+
+    /* WhatsApp Bottom Typing Bar */
+    .whatsapp-typebar {
+      padding: 8px 10px;
       display: flex;
       align-items: center;
       gap: 8px;
-      z-index: 10;
+      background: #F0F2F5;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    [data-theme="dark"] .whatsapp-typebar {
+      background: #202C33;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .wa-input-pill {
+      flex: 1;
+      background: #FFFFFF;
+      border-radius: 24px;
+      padding: 0 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      height: 46px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+    }
+    [data-theme="dark"] .wa-input-pill {
+      background: #2A3942;
+    }
+    .wa-input-pill input {
+      border: none;
+      outline: none;
+      background: transparent;
+      font-size: 15px;
+      color: #111B21;
+      flex: 1;
+      font-family: inherit;
+    }
+    [data-theme="dark"] .wa-input-pill input {
+      color: #E9EDEF;
+    }
+    .wa-action-icon {
+      color: #54656F;
+      font-size: 20px;
+      cursor: pointer;
+      user-select: none;
+    }
+    [data-theme="dark"] .wa-action-icon {
+      color: #8696A0;
+    }
+    .wa-send-btn {
+      width: 46px;
+      height: 46px;
+      min-width: 46px;
+      border-radius: 50%;
+      background: #00A884;
+      border: none;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      transition: transform 0.15s;
+    }
+    .wa-send-btn:active {
+      transform: scale(0.95);
     }
   </style>
 </head>
@@ -1034,83 +1182,67 @@
 
       </section>
 
-      <!-- ==================== 2. TAB: CHAT (WHATSAPP-STYLE THAIS HEALTH COMPANION) ==================== -->
-      <section id="pane-chat" class="tab-pane" style="height: calc(100vh - 150px); padding-bottom: 0;">
+      <!-- ==================== 2. TAB: CHAT (AUTHENTIC WHATSAPP UI) ==================== -->
+      <section id="pane-chat" class="tab-pane" style="padding-bottom: 0;">
         
-        <!-- WhatsApp Header -->
-        <div style="background: var(--gemini-surface); border: 1.5px solid var(--gemini-border-subtle); border-radius: 20px; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.03);">
-          <div style="display: flex; align-items: center; gap: 12px;">
-            <div style="position: relative; width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, #00C0FF, #0062FF); display: flex; align-items: center; justify-content: center; color: #FFFFFF; font-size: 22px; box-shadow: 0 4px 12px rgba(0, 98, 255, 0.3);">
-              🤖
-              <span style="position: absolute; bottom: 0; right: 0; width: 12px; height: 12px; border-radius: 50%; background: #00D06C; border: 2px solid var(--gemini-surface);"></span>
-            </div>
-            <div>
-              <div style="font-family: 'Google Sans', sans-serif; font-size: 16px; font-weight: 800; color: var(--gemini-text-main); display: flex; align-items: center; gap: 6px;">
-                <span>THAIS Health AI</span>
-                <span style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald); background: rgba(0, 208, 108, 0.12); padding: 1px 7px; border-radius: 9999px;">AI Doctor</span>
+        <div class="whatsapp-window">
+          
+          <!-- Authentic WhatsApp Top Header -->
+          <div class="whatsapp-header">
+            <div class="whatsapp-header-left" onclick="switchAppTab('flow')">
+              <span class="material-symbols-outlined" style="font-size: 22px;">arrow_back</span>
+              <div class="whatsapp-avatar">
+                🤖
               </div>
-              <div style="font-size: 12px; color: var(--gemini-text-muted); margin-top: 1px;">
-                ● Online • 42 Markers & Pantry Calibrated
+              <div>
+                <div class="whatsapp-contact-name">THAIS</div>
+                <div class="whatsapp-contact-status">online</div>
               </div>
             </div>
-          </div>
-          <button class="gemini-btn gemini-btn-tonal" style="height: 36px; padding: 0 12px; font-size: 12px; font-weight: 800; border-radius: 10px;" onclick="quickSuggestRecipe()">
-            💡 15m Recipe
-          </button>
-        </div>
 
-        <!-- WhatsApp Quick Prompts Row -->
-        <div style="display: flex; gap: 8px; overflow-x: auto; padding: 4px 2px; scrollbar-width: none;">
-          <span style="cursor: pointer; white-space: nowrap; background: var(--gemini-surface); border: 1.5px solid var(--gemini-border-subtle); color: var(--gemini-text-main); padding: 6px 12px; border-radius: 9999px; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 1px 4px rgba(0,0,0,0.04);" onclick="populateChatPrompt('What should I cook for lunch from my pantry?')">
-            🍳 Cook from Pantry
-          </span>
-          <span style="cursor: pointer; white-space: nowrap; background: var(--gemini-surface); border: 1.5px solid var(--gemini-border-subtle); color: var(--gemini-text-main); padding: 6px 12px; border-radius: 9999px; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 1px 4px rgba(0,0,0,0.04);" onclick="populateChatPrompt('Why do I feel tired around 2:00 PM?')">
-            ⚡ Prevent 2 PM Crash
-          </span>
-          <span style="cursor: pointer; white-space: nowrap; background: var(--gemini-surface); border: 1.5px solid var(--gemini-border-subtle); color: var(--gemini-text-main); padding: 6px 12px; border-radius: 9999px; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 1px 4px rgba(0,0,0,0.04);" onclick="populateChatPrompt('Is seed oil in restaurant paneer bad for insulin resistance?')">
-            🚨 Check Food Safety
-          </span>
-        </div>
-
-        <!-- WhatsApp Messages Wall (Full Scroller) -->
-        <div class="app-chat-scroller" id="app-chat-messages" style="flex: 1; margin: 4px 0;">
-          
-          <!-- Date Chip -->
-          <div style="display: flex; justify-content: center; margin-bottom: 6px;">
-            <span style="background: var(--gemini-surface); border: 1px solid var(--gemini-border-subtle); color: var(--gemini-text-muted); font-size: 11px; font-weight: 800; padding: 4px 14px; border-radius: 9999px; box-shadow: 0 1px 4px rgba(0,0,0,0.04);">
-              TODAY • THURSDAY, AUGUST 28
-            </span>
-          </div>
-
-          <!-- Default THAIS Welcome Message -->
-          <div class="app-msg-bubble app-msg-thais">
-            <div style="font-size: 12px; font-weight: 800; color: #0062FF; margin-bottom: 3px;">
-              THAIS Clinical AI
-            </div>
-            <div>
-              Hello Ajay! I have processed your complete <strong>42-marker intake survey</strong> and calibrated your <strong>Kitchen & Pantry Inventory</strong>.
-            </div>
-            <div style="margin-top: 6px;">
-              You have completed <strong>3 of 4 morning habits</strong> today with an <strong>88% Portion Level Meter</strong>. How can I assist your health protocol right now?
-            </div>
-            <div class="msg-meta-row">
-              <span>08:30 AM</span>
+            <div class="whatsapp-header-icons">
+              <span class="material-symbols-outlined" style="font-size: 22px; cursor: pointer;">videocam</span>
+              <span class="material-symbols-outlined" style="font-size: 20px; cursor: pointer;">call</span>
+              <span class="material-symbols-outlined" style="font-size: 22px; cursor: pointer;">more_vert</span>
             </div>
           </div>
 
-        </div>
+          <!-- WhatsApp Chat Wall Scroller -->
+          <div class="whatsapp-scroller" id="app-chat-messages">
+            
+            <!-- Floating Date Pill -->
+            <div class="whatsapp-date-pill">TODAY</div>
 
-        <!-- WhatsApp Fixed Typing Bottom Bar -->
-        <div class="whatsapp-bottom-bar">
-          <button style="border: none; width: 44px; height: 44px; border-radius: 50%; background: var(--gemini-surface); border: 1.5px solid var(--gemini-border); color: var(--gemini-sparkle-blue); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 22px; flex-shrink: 0;" onclick="openActiveFoodModal('scan')" title="Scan Food Photo">
-            ＋
-          </button>
-          
-          <input type="text" class="gemini-prompt-input" id="app-chat-input" placeholder="Message THAIS..." style="flex: 1; height: 48px; border: 1.5px solid var(--gemini-border); border-radius: 24px; padding: 0 18px; font-size: 15px; font-weight: 500; background: var(--gemini-surface); box-shadow: 0 2px 8px rgba(0,0,0,0.04);" onkeydown="if(event.key==='Enter'){sendAppChat(); event.preventDefault();}" />
-          
-          <button style="border: none; width: 48px; height: 48px; min-width: 48px; border-radius: 50%; background: #00D06C; color: #FFFFFF; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 14px rgba(0, 208, 108, 0.4); flex-shrink: 0; transition: transform 0.15s;" onclick="sendAppChat()" title="Send Message">
-            <span class="material-symbols-outlined" style="font-size: 22px; transform: rotate(-25deg); margin-left: 2px;">send</span>
-          </button>
+            <!-- THAIS First Welcome Bubble -->
+            <div class="wa-bubble wa-bubble-incoming">
+              Hello Ajay! I have processed your complete 42-marker intake survey and calibrated your kitchen pantry.
+              <br><br>
+              You completed 3 of 4 habits today with an 88% portion score. How can I assist your health right now?
+              <div class="wa-time">
+                <span>08:30</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- WhatsApp Fixed Bottom Typing Bar -->
+          <div class="whatsapp-typebar">
+            
+            <div class="wa-input-pill">
+              <span class="material-symbols-outlined wa-action-icon">sentiment_satisfied</span>
+              
+              <input type="text" id="app-chat-input" placeholder="Message" autocomplete="off" onkeydown="if(event.key==='Enter'){sendAppChat(); event.preventDefault();}" />
+              
+              <span class="material-symbols-outlined wa-action-icon" onclick="openActiveFoodModal('manual')" title="Attach note">attach_file</span>
+              <span class="material-symbols-outlined wa-action-icon" onclick="openActiveFoodModal('scan')" title="Camera Scan">photo_camera</span>
+            </div>
+
+            <button class="wa-send-btn" onclick="sendAppChat()" title="Send">
+              <span class="material-symbols-outlined" style="font-size: 22px; transform: rotate(-25deg); margin-left: 2px;">send</span>
+            </button>
+
+          </div>
+
         </div>
 
       </section>
@@ -2072,18 +2204,18 @@
 
       // 1. User Message (WhatsApp Green Bubble)
       scroller.innerHTML += `
-        <div class="app-msg-bubble app-msg-user">
-          <div>${escapeHtml(query)}</div>
-          <div class="msg-meta-row">
+        <div class="wa-bubble wa-bubble-outgoing">
+          ${escapeHtml(query)}
+          <div class="wa-time">
             <span>${timeStr}</span>
-            <span style="color: #34B7F1; font-weight: 800; font-size: 12px; letter-spacing: -1px;">✓✓</span>
+            <span class="wa-ticks">✓✓</span>
           </div>
         </div>
       `;
       input.value = '';
       scroller.scrollTop = scroller.scrollHeight;
 
-      // 2. Typing Indicator or Realistic Response
+      // 2. Typing Indicator / AI Response
       setTimeout(() => {
         let response = "Under your metabolic baseline, steady protein (35g+) and zero yellow seed oils will optimize insulin resensitization. Let's make sure today's micro-habits are 100% completed!";
         if (typeof THAIS !== 'undefined' && THAIS.queryThaisAI) {
@@ -2092,18 +2224,15 @@
         
         const responseTimeStr = getCurrentTimeStr();
         scroller.innerHTML += `
-          <div class="app-msg-bubble app-msg-thais">
-            <div style="font-size: 12px; font-weight: 800; color: #0062FF; margin-bottom: 3px;">
-              THAIS Clinical AI
-            </div>
-            <div>${response}</div>
-            <div class="msg-meta-row">
+          <div class="wa-bubble wa-bubble-incoming">
+            ${response}
+            <div class="wa-time">
               <span>${responseTimeStr}</span>
             </div>
           </div>
         `;
         scroller.scrollTop = scroller.scrollHeight;
-      }, 350);
+      }, 300);
     }
 
     function escapeHtml(text) {
