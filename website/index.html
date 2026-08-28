@@ -1225,13 +1225,46 @@
       transform: scale(0.98);
     }
   
-    
-    
     /* ==========================================================================
-       AUTHENTIC UNIVERSAL MOBILE APP SYSTEM (FOR ALL DEVICES)
+       GOOGLE MATERIAL 3 — EXACT MOBILE APP SIZING SPECIFICATION
+       Source: m3.material.io + Apple HIG + Top Play Store / App Store audit
        ========================================================================== */
     :root {
       --app-shell-max-width: 480px;
+      /* M3 Type Scale Tokens (sp = px at 1x density) */
+      --m3-display-medium: 45px;
+      --m3-headline-medium: 28px;
+      --m3-headline-small: 24px;
+      --m3-title-large: 22px;
+      --m3-title-medium: 16px;
+      --m3-title-small: 14px;
+      --m3-body-large: 16px;
+      --m3-body-medium: 14px;
+      --m3-body-small: 12px;
+      --m3-label-large: 14px;
+      --m3-label-medium: 12px;
+      --m3-label-small: 11px;
+      /* M3 Spacing (4dp grid) */
+      --m3-spacing-xs: 4px;
+      --m3-spacing-sm: 8px;
+      --m3-spacing-md: 12px;
+      --m3-spacing-std: 16px;
+      --m3-spacing-lg: 24px;
+      --m3-spacing-xl: 32px;
+      /* M3 Shape */
+      --m3-shape-small: 12px;
+      --m3-shape-medium: 16px;
+      --m3-shape-large: 28px;
+      --m3-shape-full: 9999px;
+      /* M3 Component Heights */
+      --m3-top-app-bar: 64px;
+      --m3-bottom-nav: 80px;
+      --m3-button-height: 40px;
+      --m3-fab-height: 56px;
+      --m3-input-height: 56px;
+      --m3-touch-target: 48px;
+      --m3-icon-standard: 24px;
+      --m3-icon-small: 18px;
     }
 
     body {
@@ -1242,10 +1275,12 @@
       justify-content: center;
       min-height: 100vh;
       font-family: "Google Sans Text", "Roboto", sans-serif;
+      font-size: var(--m3-body-medium);
+      line-height: 20px;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* The Smartphone App Container */
+    /* ── App Shell Container ── */
     .app-shell {
       width: 100% !important;
       max-width: var(--app-shell-max-width) !important;
@@ -1260,9 +1295,9 @@
       overflow-x: hidden !important;
     }
 
-    /* Fixed Sticky Top Header Bar */
+    /* ── M3 Top App Bar (64dp) ── */
     header.app-topbar {
-      height: 52px !important;
+      height: var(--m3-top-app-bar) !important;
       width: 100% !important;
       max-width: var(--app-shell-max-width) !important;
       position: sticky !important;
@@ -1271,24 +1306,26 @@
       background: var(--gemini-bg) !important;
       backdrop-filter: blur(20px) !important;
       border-bottom: 1px solid var(--gemini-border-subtle) !important;
-      padding: 0 14px !important;
+      padding: 0 var(--m3-spacing-std) !important;
       display: flex !important;
       align-items: center !important;
       justify-content: space-between !important;
     }
     .brand-wordmark {
-      font-size: 19px !important;
+      font-size: var(--m3-title-large) !important;
+      font-weight: 500 !important;
     }
     #app-header-day-tag {
-      font-size: 10px !important;
-      padding: 3px 8px !important;
+      font-size: var(--m3-label-small) !important;
+      padding: var(--m3-spacing-xs) var(--m3-spacing-sm) !important;
+      font-weight: 500 !important;
     }
     .profile-avatar-btn {
-      width: 32px !important;
-      height: 32px !important;
+      width: 36px !important;
+      height: 36px !important;
     }
 
-    /* Fixed Bottom Navigation (Always Visible on ALL Devices) */
+    /* ── M3 Bottom Navigation Bar (80dp) ── */
     .app-bottom-nav {
       position: fixed !important;
       bottom: 0 !important;
@@ -1296,7 +1333,7 @@
       transform: translateX(-50%) !important;
       width: 100% !important;
       max-width: var(--app-shell-max-width) !important;
-      height: 58px !important;
+      height: var(--m3-bottom-nav) !important;
       background: var(--gemini-surface) !important;
       border-top: 1px solid var(--gemini-border-subtle) !important;
       display: grid !important;
@@ -1304,7 +1341,7 @@
       align-items: center !important;
       z-index: 9999 !important;
       padding-bottom: max(env(safe-area-inset-bottom), 4px) !important;
-      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.06) !important;
+      box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.06) !important;
     }
     .nav-item-btn {
       background: transparent !important;
@@ -1313,9 +1350,11 @@
       flex-direction: column !important;
       align-items: center !important;
       justify-content: center !important;
-      gap: 2px !important;
+      gap: var(--m3-spacing-xs) !important;
       color: var(--gemini-text-muted) !important;
       cursor: pointer !important;
+      min-height: var(--m3-touch-target) !important;
+      min-width: var(--m3-touch-target) !important;
       transition: all 0.15s !important;
     }
     .nav-item-btn.active {
@@ -1325,22 +1364,23 @@
       font-variation-settings: "FILL" 1 !important;
     }
     .nav-item-btn .material-symbols-outlined {
-      font-size: 21px !important;
+      font-size: var(--m3-icon-standard) !important;
     }
     .nav-label {
-      font-size: 9.5px !important;
-      font-weight: 800 !important;
-      letter-spacing: 0.02em !important;
+      font-size: var(--m3-label-medium) !important;
+      font-weight: 500 !important;
+      letter-spacing: 0.5px !important;
     }
 
-    /* Main Scroll Content Area */
+    /* ── Main Scroll Content (16dp margins, 16dp section gaps) ── */
     .app-scroll-content {
-      padding: 12px 14px 90px 14px !important;
+      padding: var(--m3-spacing-std) var(--m3-spacing-std) 100px var(--m3-spacing-std) !important;
       width: 100% !important;
       box-sizing: border-box !important;
+      gap: var(--m3-spacing-std) !important;
     }
 
-    /* Single Column Mobile Stacking for All Elements */
+    /* ── Single Column Stacking ── */
     .m3-flow-grid,
     .m3-you-grid,
     .health-panels-grid,
@@ -1350,100 +1390,161 @@
     .you-col-right {
       display: flex !important;
       flex-direction: column !important;
-      gap: 24px !important;
+      gap: var(--m3-spacing-std) !important;
       width: 100% !important;
     }
 
-    /* Mobile Cards Hierarchy */
+    /* ── Tab Panes & Sub-Views ── */
+    .tab-pane {
+      gap: var(--m3-spacing-std) !important;
+    }
+    .flow-sub-view {
+      gap: var(--m3-spacing-std) !important;
+    }
+
+    /* ── M3 Cards (16dp padding, 16dp radius) ── */
     .gemini-card, .app-meal-card, .health-patient-card {
-      padding: 16px 14px !important;
-      border-radius: 18px !important;
-      gap: 12px !important;
-      margin-bottom: 22px !important;
+      padding: var(--m3-spacing-std) !important;
+      border-radius: var(--m3-shape-medium) !important;
+      gap: var(--m3-spacing-md) !important;
+      margin-bottom: 0 !important;
       width: 100% !important;
       box-sizing: border-box !important;
     }
 
-    /* Typography Hierarchy (Native Mobile Specs) */
+    /* ── M3 Typography Applied ── */
+    /* Headline Medium (28sp) — Hero big numbers */
     .gemini-card h1, .gemini-card [style*="font-size: 24px"] {
-      font-size: 18px !important;
-      line-height: 1.25 !important;
+      font-size: var(--m3-headline-medium) !important;
+      line-height: 36px !important;
+      font-weight: 400 !important;
     }
+    /* Body Medium (14sp) — Standard body text */
     .gemini-card [style*="font-size: 14px"] {
-      font-size: 12px !important;
+      font-size: var(--m3-body-medium) !important;
+      line-height: 20px !important;
     }
 
-    /* Donut Calorie Gauge (76px) */
+    /* ── Donut Calorie Gauge (48dp M3 circular indicator) ── */
     [style*="width: 120px; height: 120px"], .calorie-gauge-wrap {
-      width: 76px !important;
-      height: 76px !important;
+      width: 80px !important;
+      height: 80px !important;
     }
     [style*="width: 120px; height: 120px"] svg, .calorie-gauge-wrap svg {
-      width: 76px !important;
-      height: 76px !important;
-    }
-    [style*="font-size: 18px"][style*="88%"], [style*="font-size: 30px"][style*="88%"] {
-      font-size: 16px !important;
+      width: 80px !important;
+      height: 80px !important;
     }
 
-    /* Primary Action Buttons (56px Thumb-Friendly) */
+    /* ── M3 Buttons (40dp standard, 14sp label) ── */
     .meal-mode-btn {
-      height: 56px !important;
-      min-height: 56px !important;
-      border-radius: 14px !important;
-      gap: 4px !important;
+      height: var(--m3-button-height) !important;
+      min-height: var(--m3-touch-target) !important;
+      border-radius: 20px !important;
+      gap: var(--m3-spacing-sm) !important;
       background: var(--gemini-surface) !important;
       border: 1.5px solid var(--gemini-border-subtle) !important;
     }
     .meal-mode-btn .material-symbols-outlined {
-      font-size: 22px !important;
+      font-size: var(--m3-icon-standard) !important;
     }
-    .meal-mode-btn [style*="font-size: 13px"], .meal-mode-btn span {
-      font-size: 11.5px !important;
-      font-weight: 800 !important;
+    .meal-mode-btn span {
+      font-size: var(--m3-label-large) !important;
+      font-weight: 500 !important;
     }
 
-    /* Task Items (Full Height Knob & Clear Text) */
+    /* ── M3 Task Cards ── */
     #dynamic-tasks-list {
-      gap: 14px !important;
+      gap: var(--m3-spacing-sm) !important;
     }
     .app-task-card {
-      min-height: 90px !important;
+      min-height: 72px !important;
       height: auto !important;
-      border-radius: 20px !important;
-      padding: 12px 14px !important;
+      border-radius: var(--m3-shape-medium) !important;
+      padding: var(--m3-spacing-md) var(--m3-spacing-std) !important;
     }
     .task-sliding-icon, .task-end-target {
-      left: 8px !important;
-      top: 8px !important;
-      bottom: 8px !important;
-      width: 58px !important;
+      left: var(--m3-spacing-sm) !important;
+      top: var(--m3-spacing-sm) !important;
+      bottom: var(--m3-spacing-sm) !important;
+      width: 56px !important;
       height: calc(100% - 16px) !important;
-      border-radius: 14px !important;
+      border-radius: var(--m3-shape-small) !important;
     }
     .task-text-container {
-      margin-left: 64px !important;
-      margin-right: 64px !important;
-      gap: 3px !important;
+      margin-left: 68px !important;
+      margin-right: 68px !important;
+      gap: 2px !important;
     }
     .task-title-text {
-      font-size: 13.5px !important;
-      font-weight: 800 !important;
+      font-size: var(--m3-title-small) !important;
+      font-weight: 500 !important;
+      line-height: 20px !important;
     }
     .task-time-badge {
-      font-size: 10px !important;
-      padding: 2.5px 7px !important;
+      font-size: var(--m3-label-small) !important;
+      padding: 2px var(--m3-spacing-sm) !important;
+      font-weight: 500 !important;
     }
 
-    /* Chat Edge-to-Edge inside Mobile Container */
+    /* ── M3 Chat (edge-to-edge between top bar and bottom nav) ── */
     #pane-chat.tab-pane.active {
-      top: 52px !important;
-      bottom: 58px !important;
+      top: var(--m3-top-app-bar) !important;
+      bottom: var(--m3-bottom-nav) !important;
       width: 100% !important;
       max-width: var(--app-shell-max-width) !important;
       left: 50% !important;
       transform: translateX(-50%) !important;
       border-radius: 0 !important;
+    }
+
+    /* ── M3 Segmented Button (DAY | WEEK switcher) ── */
+    .top-switcher-btn {
+      height: var(--m3-button-height) !important;
+      font-size: var(--m3-label-large) !important;
+      font-weight: 500 !important;
+      letter-spacing: 0.1px !important;
+      border-radius: var(--m3-shape-full) !important;
+    }
+
+    /* ── M3 Health Panel Cards ── */
+    .health-panel-card {
+      border-radius: var(--m3-shape-medium) !important;
+      padding: var(--m3-spacing-std) !important;
+    }
+    .health-panel-name span {
+      font-size: var(--m3-title-small) !important;
+      font-weight: 500 !important;
+    }
+    .health-metric-label {
+      font-size: var(--m3-body-small) !important;
+    }
+    .health-metric-val {
+      font-size: var(--m3-title-medium) !important;
+      font-weight: 500 !important;
+    }
+
+    /* ── M3 Icon Sizing ── */
+    .material-symbols-outlined {
+      font-size: var(--m3-icon-standard);
+    }
+
+    /* ── M3 Chips / Pills ── */
+    .pantry-chip {
+      height: 32px !important;
+      font-size: var(--m3-label-large) !important;
+      font-weight: 500 !important;
+      border-radius: var(--m3-spacing-sm) !important;
+      padding: 0 var(--m3-spacing-md) !important;
+    }
+
+    /* ── M3 Progress Indicator (4dp track) ── */
+    .health-trajectory-bar-wrap {
+      height: 4px !important;
+      border-radius: 2px !important;
+    }
+    .health-trajectory-bar-fill {
+      height: 4px !important;
+      border-radius: 2px !important;
     }
 
   </style>
