@@ -346,12 +346,12 @@
     .app-task-card {
       position: relative;
       background: var(--gemini-surface);
-      border: 1.5px solid var(--gemini-border);
+      border: 1.5px solid var(--gemini-border-subtle);
       border-radius: 22px;
-      height: 76px;
+      height: 84px;
       display: flex;
       align-items: center;
-      padding: 0 12px;
+      padding: 0 14px;
       overflow: hidden;
       user-select: none;
       touch-action: pan-y;
@@ -385,26 +385,26 @@
     /* Task text inside the card */
     .task-text-container {
       position: absolute;
-      left: 74px;
-      right: 56px;
+      left: 78px;
+      right: 60px;
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 3px;
       pointer-events: none;
       z-index: 2;
       transition: opacity 0.2s;
     }
     .task-time-badge {
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 800;
       color: var(--gemini-sparkle-blue);
       background: var(--gemini-surface-container);
       border: 1px solid var(--gemini-border-subtle);
-      padding: 1px 6px;
+      padding: 2px 8px;
       border-radius: 6px;
       display: inline-flex;
       align-items: center;
-      gap: 3px;
+      gap: 4px;
       width: fit-content;
       margin-bottom: 2px;
       letter-spacing: 0.02em;
@@ -420,9 +420,9 @@
     /* Target destination slot at the End (Right) */
     .task-end-target {
       position: absolute;
-      right: 12px;
-      width: 50px;
-      height: 50px;
+      right: 14px;
+      width: 52px;
+      height: 52px;
       border-radius: 50%;
       border: 2px dashed var(--gemini-border);
       display: flex;
@@ -583,46 +583,45 @@
           
           <!-- UNIFIED HERO CARD: GREETING + PROTOCOL STATUS + CALORIE & PORTION LEVEL METER -->
           <div class="gemini-card" style="background: linear-gradient(135deg, rgba(0, 192, 255, 0.08), rgba(0, 245, 160, 0.06), rgba(255, 255, 255, 0.98)); border: 1.5px solid rgba(0, 98, 255, 0.15); border-radius: 22px; padding: 20px; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 4px 20px rgba(0, 98, 255, 0.06);">
-            
-            <!-- Header: Protocol Status & Compliance -->
+                       <!-- Top Meta Status Row -->
             <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald); background: var(--gemini-surface); padding: 4px 10px; border-radius: 9999px; border: 1px solid rgba(0, 208, 108, 0.2);">
+              <span style="font-size: 12px; font-weight: 800; color: var(--gemini-vitality-emerald); background: rgba(0, 208, 108, 0.12); padding: 4px 12px; border-radius: 9999px; letter-spacing: 0.04em;">
                 ● PROTOCOL ACTIVE • DAY 18
               </span>
-              <span style="font-size: 11px; font-weight: 800; color: var(--gemini-sparkle-blue); background: rgba(0, 98, 255, 0.08); padding: 4px 10px; border-radius: 9999px;" id="flow-compliance-pct">
+              <span style="font-size: 13px; font-weight: 800; color: var(--gemini-sparkle-blue); background: rgba(0, 98, 255, 0.1); padding: 4px 12px; border-radius: 9999px;" id="flow-compliance-pct">
                 75% Done
               </span>
             </div>
 
             <!-- Greeting & Focus -->
-            <div>
-              <div style="font-family: 'Google Sans Display', sans-serif; font-size: 22px; font-weight: 800; color: var(--gemini-text-main); letter-spacing: -0.01em;">
+            <div style="margin-top: 2px;">
+              <div style="font-family: 'Google Sans Display', sans-serif; font-size: 24px; font-weight: 800; color: var(--gemini-text-main); letter-spacing: -0.01em;">
                 Good morning, Ajay 👋
               </div>
-              <p style="font-size: 12px; color: var(--gemini-text-muted); margin-top: 2px;">
+              <p style="font-size: 14px; color: var(--gemini-text-muted); margin-top: 4px; line-height: 1.5;">
                 Thursday, 28 August 2026 • Targeting <strong style="color: var(--gemini-sparkle-blue);">Energy Stabilization & Gut Healing</strong>
               </p>
             </div>
 
             <!-- Unified Calorie & 100% Portion Level Meter (Enlarged) -->
-            <div style="display: flex; align-items: center; justify-content: space-between; background: var(--gemini-surface); border: 1.5px solid var(--gemini-border-subtle); border-radius: 20px; padding: 18px 20px; gap: 16px; box-shadow: 0 4px 16px rgba(0, 98, 255, 0.05);">
+            <div style="display: flex; align-items: center; justify-content: space-between; background: var(--gemini-surface); border: 1.5px solid var(--gemini-border-subtle); border-radius: 22px; padding: 20px 22px; gap: 16px; box-shadow: 0 4px 20px rgba(0, 98, 255, 0.05);">
               
               <!-- Left Info: Calories & Target -->
               <div style="display: flex; flex-direction: column; gap: 6px;">
-                <div style="font-size: 11px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase; letter-spacing: 0.05em;">
+                <div style="font-size: 12px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase; letter-spacing: 0.06em;">
                   TODAY'S CALORIE INTAKE
                 </div>
-                <div style="font-family: 'Google Sans Display', sans-serif; font-size: 30px; font-weight: 800; color: var(--gemini-text-main); line-height: 1.1;">
-                  1,323 <span style="font-size: 16px; font-weight: 700; color: var(--gemini-text-muted);">/ 1,500 kcal</span>
+                <div style="font-family: 'Google Sans Display', sans-serif; font-size: 32px; font-weight: 800; color: var(--gemini-text-main); line-height: 1.1;">
+                  1,323 <span style="font-size: 18px; font-weight: 700; color: var(--gemini-text-muted);">/ 1,500 kcal</span>
                 </div>
-                <div style="font-size: 11px; font-weight: 700; color: var(--gemini-vitality-emerald); display: flex; align-items: center; gap: 4px; margin-top: 2px;">
+                <div style="font-size: 13px; font-weight: 700; color: var(--gemini-vitality-emerald); display: flex; align-items: center; gap: 6px; margin-top: 4px;">
                   <span>✓ Flat Glycemic Curve</span> • <span>0% Seed Oils</span>
                 </div>
               </div>
 
-              <!-- Right: Significantly Enlarged Circular Calorie Meter (116px) -->
-              <div style="position: relative; width: 116px; height: 116px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
-                <svg width="116" height="116" viewBox="0 0 100 100">
+              <!-- Right: Circular Calorie Meter (120px) -->
+              <div style="position: relative; width: 120px; height: 120px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;">
+                <svg width="120" height="120" viewBox="0 0 100 100">
                   <defs>
                     <linearGradient id="hero-meter-grad" x1="0%" y1="0%" x2="100%" y2="100%">
                       <stop offset="0%" stop-color="#00C0FF"/>
@@ -635,7 +634,7 @@
                   <circle cx="50" cy="50" r="38" fill="none" stroke="url(#hero-meter-grad)" stroke-width="12" stroke-linecap="round" stroke-dasharray="210 239" stroke-dashoffset="0" transform="rotate(-90 50 50)"/>
                 </svg>
                 <div style="position: absolute; display: flex; align-items: center; justify-content: center;">
-                  <span style="font-family: 'Google Sans Display', sans-serif; font-size: 28px; font-weight: 800; color: var(--gemini-sparkle-blue);">88%</span>
+                  <span style="font-family: 'Google Sans Display', sans-serif; font-size: 30px; font-weight: 800; color: var(--gemini-sparkle-blue);">88%</span>
                 </div>
               </div>
 
@@ -644,27 +643,27 @@
           </div>
 
           <!-- 3. UNIFIED DYNAMIC FOOD INTELLIGENCE CARD -->
-          <div id="dynamic-meal-card" class="app-meal-card theme-breakfast" style="border-radius: 22px; padding: 20px; display: flex; flex-direction: column; gap: 16px; transition: all 0.2s; box-shadow: 0 4px 20px rgba(0, 98, 255, 0.05);">
+          <div id="dynamic-meal-card" class="app-meal-card theme-breakfast" style="border-radius: 22px; padding: 22px; display: flex; flex-direction: column; gap: 18px; transition: all 0.2s; box-shadow: 0 4px 20px rgba(0, 98, 255, 0.05);">
             
             <!-- Card Header: Title & Seed Oils Goal (Inside Card) -->
             <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div style="font-size: 11px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase; letter-spacing: 0.04em;">
+              <div style="font-size: 12px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase; letter-spacing: 0.05em;">
                 🍽️ Meals & Food Intelligence
               </div>
-              <span style="font-size: 10px; font-weight: 800; color: var(--gemini-vitality-emerald); background: var(--gemini-surface); border: 1px solid rgba(0, 208, 108, 0.2); padding: 3px 8px; border-radius: 9999px;">
+              <span style="font-size: 12px; font-weight: 800; color: var(--gemini-vitality-emerald); background: var(--gemini-surface); border: 1px solid rgba(0, 208, 108, 0.3); padding: 4px 10px; border-radius: 9999px;">
                 0% Seed Oils Goal
               </span>
             </div>
 
             <!-- 3-Way Meal Selector (Inside Card) -->
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: var(--gemini-surface-container); padding: 4px; border-radius: 14px; border: 1px solid var(--gemini-border-subtle);">
-              <button class="meal-tab-pill active" id="pill-meal-breakfast" onclick="selectActiveMealView('Breakfast')">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: var(--gemini-surface-container); padding: 4px; border-radius: 16px; border: 1px solid var(--gemini-border-subtle);">
+              <button class="meal-tab-pill active" id="pill-meal-breakfast" style="height: 44px; font-size: 14px; font-weight: 800;" onclick="selectActiveMealView('Breakfast')">
                 🍳 Breakfast
               </button>
-              <button class="meal-tab-pill" id="pill-meal-lunch" onclick="selectActiveMealView('Lunch')">
+              <button class="meal-tab-pill" id="pill-meal-lunch" style="height: 44px; font-size: 14px; font-weight: 800;" onclick="selectActiveMealView('Lunch')">
                 🥗 Lunch
               </button>
-              <button class="meal-tab-pill" id="pill-meal-dinner" onclick="selectActiveMealView('Dinner')">
+              <button class="meal-tab-pill" id="pill-meal-dinner" style="height: 44px; font-size: 14px; font-weight: 800;" onclick="selectActiveMealView('Dinner')">
                 🍲 Dinner
               </button>
             </div>
@@ -672,83 +671,83 @@
             <!-- Active Meal Status & Calorie Target Row -->
             <div style="display: flex; justify-content: space-between; align-items: flex-start;">
               <div>
-                <span id="active-meal-badge" style="font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 9999px; text-transform: uppercase;">
+                <span id="active-meal-badge" style="font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 9999px; text-transform: uppercase; letter-spacing: 0.03em;">
                   ACTIVE TIME WINDOW • 08:30 AM
                 </span>
-                <div id="active-meal-title" style="font-family: 'Google Sans', sans-serif; font-size: 16px; font-weight: 800; margin-top: 6px; color: var(--gemini-text-main);">
+                <div id="active-meal-title" style="font-family: 'Google Sans', sans-serif; font-size: 18px; font-weight: 800; margin-top: 6px; color: var(--gemini-text-main);">
                   🍳 Breakfast Target
                 </div>
               </div>
-              <div id="active-meal-logged-status" style="font-size: 12px; font-weight: 800; color: var(--gemini-sparkle-blue); text-align: right;">
+              <div id="active-meal-logged-status" style="font-size: 14px; font-weight: 800; color: var(--gemini-sparkle-blue); text-align: right;">
                 420 kcal Target
               </div>
             </div>
 
             <!-- 4-Nutrient Targets in Grams: Protein, Carbs, Fat, Vitamins -->
-            <div id="active-meal-grams-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; background: var(--gemini-surface); border: 1px solid var(--gemini-border); padding: 12px 8px; border-radius: 14px; text-align: center;">
+            <div id="active-meal-grams-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; background: var(--gemini-surface); border: 1px solid var(--gemini-border-subtle); padding: 14px 10px; border-radius: 16px; text-align: center;">
               <div>
-                <div style="font-size: 10px; font-weight: 800; color: #0062FF;">🥩 Protein</div>
-                <div id="meal-gram-protein" style="font-family: 'Google Sans Display', sans-serif; font-size: 15px; font-weight: 800; margin-top: 2px;">35g</div>
+                <div style="font-size: 12px; font-weight: 800; color: #0062FF;">🥩 Protein</div>
+                <div id="meal-gram-protein" style="font-family: 'Google Sans Display', sans-serif; font-size: 18px; font-weight: 800; margin-top: 4px;">35g</div>
               </div>
               <div>
-                <div style="font-size: 10px; font-weight: 800; color: #D97706;">🍠 Carbs</div>
-                <div id="meal-gram-carbs" style="font-family: 'Google Sans Display', sans-serif; font-size: 15px; font-weight: 800; margin-top: 2px;">15g</div>
+                <div style="font-size: 12px; font-weight: 800; color: #D97706;">🍠 Carbs</div>
+                <div id="meal-gram-carbs" style="font-family: 'Google Sans Display', sans-serif; font-size: 18px; font-weight: 800; margin-top: 4px;">15g</div>
               </div>
               <div>
-                <div style="font-size: 10px; font-weight: 800; color: #9333EA;">🧈 Fat</div>
-                <div id="meal-gram-fat" style="font-family: 'Google Sans Display', sans-serif; font-size: 15px; font-weight: 800; margin-top: 2px;">12g</div>
+                <div style="font-size: 12px; font-weight: 800; color: #9333EA;">🧈 Fat</div>
+                <div id="meal-gram-fat" style="font-family: 'Google Sans Display', sans-serif; font-size: 18px; font-weight: 800; margin-top: 4px;">12g</div>
               </div>
               <div>
-                <div style="font-size: 10px; font-weight: 800; color: #00D06C;">🥦 Vitamin</div>
-                <div id="meal-gram-vitamin" style="font-family: 'Google Sans Display', sans-serif; font-size: 15px; font-weight: 800; margin-top: 2px;">100%</div>
+                <div style="font-size: 12px; font-weight: 800; color: #00D06C;">🥦 Vitamin</div>
+                <div id="meal-gram-vitamin" style="font-family: 'Google Sans Display', sans-serif; font-size: 18px; font-weight: 800; margin-top: 4px;">100%</div>
               </div>
             </div>
 
             <!-- 3 Consumption Pathways: SCAN | MANUALLY | ASK AI -->
             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
-              <button class="meal-mode-btn" onclick="openActiveFoodModal('scan')">
-                <span class="material-symbols-outlined" style="font-size: 20px;">photo_camera</span>
-                <span style="font-size: 12px; font-weight: 800;">Scan / Photo</span>
+              <button class="meal-mode-btn" style="height: 68px;" onclick="openActiveFoodModal('scan')">
+                <span class="material-symbols-outlined" style="font-size: 24px;">photo_camera</span>
+                <span style="font-size: 13px; font-weight: 800;">Scan / Photo</span>
               </button>
-              <button class="meal-mode-btn" onclick="openActiveFoodModal('manual')">
-                <span class="material-symbols-outlined" style="font-size: 20px;">edit_note</span>
-                <span style="font-size: 12px; font-weight: 800;">Manually</span>
+              <button class="meal-mode-btn" style="height: 68px;" onclick="openActiveFoodModal('manual')">
+                <span class="material-symbols-outlined" style="font-size: 24px;">edit_note</span>
+                <span style="font-size: 13px; font-weight: 800;">Manually</span>
               </button>
-              <button class="meal-mode-btn" onclick="openActiveFoodModal('ask_ai')">
-                <span class="material-symbols-outlined" style="font-size: 20px;">auto_awesome</span>
-                <span style="font-size: 12px; font-weight: 800;">Ask AI</span>
+              <button class="meal-mode-btn" style="height: 68px;" onclick="openActiveFoodModal('ask_ai')">
+                <span class="material-symbols-outlined" style="font-size: 24px;">auto_awesome</span>
+                <span style="font-size: 13px; font-weight: 800;">Ask AI</span>
               </button>
             </div>
 
           </div>
 
           <!-- 4. TODAY'S TASKS (DYNAMIC PROTOCOL ENGINE) -->
-          <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="display: flex; flex-direction: column; gap: 14px;">
             <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div style="font-size: 13px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase; letter-spacing: 0.05em;">
+              <div style="font-size: 14px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase; letter-spacing: 0.05em;">
                 ✅ Today's Tasks
               </div>
-              <span style="font-size: 12px; font-weight: 800; color: var(--gemini-sparkle-blue); background: rgba(0, 98, 255, 0.08); padding: 4px 10px; border-radius: 9999px;" id="flow-task-counter">3 / 4 Done</span>
+              <span style="font-size: 13px; font-weight: 800; color: var(--gemini-sparkle-blue); background: rgba(0, 98, 255, 0.1); padding: 4px 12px; border-radius: 9999px;" id="flow-task-counter">3 / 4 Done</span>
             </div>
 
             <!-- Dynamic Tasks Container (Supports 2, 4, 8, 20+ tasks based on user plan) -->
-            <div id="dynamic-tasks-list" style="display: flex; flex-direction: column; gap: 12px;"></div>
+            <div id="dynamic-tasks-list" style="display: flex; flex-direction: column; gap: 14px;"></div>
           </div>
 
           <!-- 5. TODAY'S CLINICAL NOTE (HEADER INSIDE CARD) -->
-          <div class="gemini-card" style="background: linear-gradient(135deg, rgba(0, 192, 255, 0.08), rgba(0, 245, 160, 0.08)); border-left: 4px solid var(--gemini-sparkle-blue); border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 6px;">
+          <div class="gemini-card" style="background: linear-gradient(135deg, rgba(0, 192, 255, 0.08), rgba(0, 245, 160, 0.08)); border-left: 4px solid var(--gemini-sparkle-blue); border-radius: 22px; padding: 22px; display: flex; flex-direction: column; gap: 8px;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
-              <div style="font-size: 11px; font-weight: 800; color: var(--gemini-sparkle-blue); text-transform: uppercase; letter-spacing: 0.04em;">
+              <div style="font-size: 12px; font-weight: 800; color: var(--gemini-sparkle-blue); text-transform: uppercase; letter-spacing: 0.05em;">
                 💡 THAIS CLINICAL NOTE OF THE DAY
               </div>
-              <span style="font-size: 10px; font-weight: 800; color: var(--gemini-sparkle-blue); background: var(--gemini-surface); border: 1px solid rgba(0, 98, 255, 0.2); padding: 2px 8px; border-radius: 9999px;">
+              <span style="font-size: 11px; font-weight: 800; color: var(--gemini-sparkle-blue); background: var(--gemini-surface); border: 1px solid rgba(0, 98, 255, 0.25); padding: 3px 10px; border-radius: 9999px;">
                 Metabolic Focus
               </span>
             </div>
-            <div style="font-size: 15px; font-weight: 800; color: var(--gemini-text-main);">
+            <div style="font-family: 'Google Sans', sans-serif; font-size: 17px; font-weight: 800; color: var(--gemini-text-main);">
               The 90-Minute Caffeine Delay Rule
             </div>
-            <p style="font-size: 13px; color: var(--gemini-text-muted); line-height: 1.55;">
+            <p style="font-size: 14px; color: var(--gemini-text-muted); line-height: 1.6; margin: 0;">
               Delaying your first cup of coffee or tea by 90 minutes allows your brain's adenosine levels to clear naturally, completely preventing the common 2:00 PM afternoon energy crash.
             </p>
           </div>
@@ -759,39 +758,42 @@
         <div id="subview-flow-week" class="flow-sub-view">
           
           <!-- 1. WEEKLY PROGRESS & SCORECARD (TOP HERO) -->
-          <div class="gemini-card" style="background: linear-gradient(135deg, rgba(0, 192, 255, 0.1), rgba(0, 245, 160, 0.1));">
+          <div class="gemini-card" style="background: linear-gradient(135deg, rgba(0, 192, 255, 0.1), rgba(0, 245, 160, 0.1)); border-radius: 22px; padding: 22px;">
             <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span style="font-size: 10px; font-weight: 800; color: var(--gemini-sparkle-blue); background: var(--gemini-surface); padding: 3px 8px; border-radius: 9999px;">
+              <span style="font-size: 12px; font-weight: 800; color: var(--gemini-sparkle-blue); background: var(--gemini-surface); padding: 4px 10px; border-radius: 9999px; border: 1px solid var(--gemini-border-subtle);">
                 WEEKLY SCORECARD • WEEK 3
               </span>
-              <span style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald);">91% Compliance</span>
+              <span style="font-size: 13px; font-weight: 800; color: var(--gemini-vitality-emerald);">91% Compliance</span>
             </div>
-            <div style="font-family: 'Google Sans Display', sans-serif; font-size: 20px; font-weight: 800; margin-top: 6px;">
+            <div style="font-family: 'Google Sans Display', sans-serif; font-size: 22px; font-weight: 800; margin-top: 8px; line-height: 1.25;">
               Insulin Resensitization & Fat Adaptation
             </div>
             <!-- Professional Dashboard 7-Day Telemetry Chart -->
-            <div style="background: var(--gemini-surface); border: 1.5px solid var(--gemini-border-subtle); border-radius: 20px; padding: 20px 16px; margin: 16px 0 12px 0; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.03);">
+            <div style="background: var(--gemini-surface); border: 1.5px solid var(--gemini-border-subtle); border-radius: 20px; padding: 22px 18px; margin: 18px 0 14px 0; display: flex; flex-direction: column; gap: 18px; box-shadow: 0 4px 20px rgba(0,0,0,0.03);">
               
               <!-- Dashboard KPI Top Row -->
-              <div style="display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 12px; border-bottom: 1px solid var(--gemini-border-subtle);">
+              <div style="display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 14px; border-bottom: 1px solid var(--gemini-border-subtle);">
                 <div>
-                  <div style="font-size: 11px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase; letter-spacing: 0.05em;">
+                  <div style="font-size: 12px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase; letter-spacing: 0.05em;">
                     📊 Protocol Execution Index
                   </div>
-                  <div style="display: flex; align-items: baseline; gap: 8px; margin-top: 4px;">
-                    <span style="font-family: 'Google Sans Display', sans-serif; font-size: 32px; font-weight: 800; color: var(--gemini-text-main); line-height: 1;">87.5%</span>
-                    <span style="font-size: 12px; font-weight: 800; color: var(--gemini-vitality-emerald); background: rgba(0, 208, 108, 0.12); padding: 2px 8px; border-radius: 9999px;">+6.4% vs Wk 2 ↗</span>
+                  <div style="display: flex; align-items: baseline; gap: 10px; margin-top: 4px;">
+                    <span style="font-family: 'Google Sans Display', sans-serif; font-size: 36px; font-weight: 800; color: var(--gemini-text-main); line-height: 1;">87.5%</span>
+                    <span style="font-size: 13px; font-weight: 800; color: var(--gemini-vitality-emerald); background: rgba(0, 208, 108, 0.12); padding: 3px 10px; border-radius: 9999px;">+6.4% vs Wk 2 ↗</span>
                   </div>
                 </div>
                 <div style="text-align: right;">
-                  <span style="font-size: 12px; font-weight: 800; color: var(--gemini-sparkle-blue); background: var(--gemini-surface-container); padding: 4px 10px; border-radius: 9999px; border: 1px solid var(--gemini-border-subtle);">
+                  <span style="font-size: 13px; font-weight: 800; color: var(--gemini-sparkle-blue); background: var(--gemini-surface-container); padding: 5px 12px; border-radius: 9999px; border: 1px solid var(--gemini-border-subtle);">
                     🔥 3 Days Flawless
                   </span>
                 </div>
               </div>
 
               <!-- High-Precision 160px Bar Chart Area with Gridlines -->
-              <div style="position: relative; height: 160px; display: flex; flex-direction: column; justify-content: flex-end; padding-top: 14px;">
+              <div style="position: relative; height: 165px; display: flex; flex-direction: column; justify-content: flex-end; padding-top: 14px;">
+                
+                <!-- Background Grid Reference Lines -->
+                <div style="position: relative; height: 165px; display: flex; flex-direction: column; justify-content: flex-end; padding-top: 14px;">
                 
                 <!-- Background Grid Reference Lines -->
                 <div style="position: absolute; top: 14px; left: 0; right: 0; bottom: 30px; display: flex; flex-direction: column; justify-content: space-between; pointer-events: none; opacity: 0.35;">
@@ -805,62 +807,62 @@
                   
                   <!-- Monday: 95% -->
                   <div class="week-chart-col" id="col-mon" style="display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; gap: 6px; cursor: pointer;" onclick="selectWeekDayReport('Monday', 95, '100% (1,500 kcal)', '4 / 4 Done (100%)', 'Optimal (Flat Curve)', 'mon')">
-                    <span style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald);">95%</span>
+                    <span style="font-size: 12px; font-weight: 800; color: var(--gemini-vitality-emerald);">95%</span>
                     <div style="width: 100%; max-width: 36px; height: 95px; background: var(--gemini-surface-container); border-radius: 12px; display: flex; align-items: flex-end; padding: 3px;">
                       <div style="width: 100%; height: 95%; background: linear-gradient(180deg, #00F5A0, #00D06C); border-radius: 9px; box-shadow: 0 4px 10px rgba(0, 208, 108, 0.35);"></div>
                     </div>
-                    <span style="font-size: 11px; font-weight: 800; color: var(--gemini-text-muted);">MON</span>
+                    <span style="font-size: 12px; font-weight: 800; color: var(--gemini-text-muted);">MON</span>
                   </div>
 
                   <!-- Tuesday: 92% -->
                   <div class="week-chart-col" id="col-tue" style="display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; gap: 6px; cursor: pointer;" onclick="selectWeekDayReport('Tuesday', 92, '95% (1,425 kcal)', '4 / 4 Done (100%)', 'Optimal (Flat Curve)', 'tue')">
-                    <span style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald);">92%</span>
+                    <span style="font-size: 12px; font-weight: 800; color: var(--gemini-vitality-emerald);">92%</span>
                     <div style="width: 100%; max-width: 36px; height: 95px; background: var(--gemini-surface-container); border-radius: 12px; display: flex; align-items: flex-end; padding: 3px;">
                       <div style="width: 100%; height: 92%; background: linear-gradient(180deg, #00F5A0, #00D06C); border-radius: 9px; box-shadow: 0 4px 10px rgba(0, 208, 108, 0.35);"></div>
                     </div>
-                    <span style="font-size: 11px; font-weight: 800; color: var(--gemini-text-muted);">TUE</span>
+                    <span style="font-size: 12px; font-weight: 800; color: var(--gemini-text-muted);">TUE</span>
                   </div>
 
                   <!-- Wednesday: 88% -->
                   <div class="week-chart-col" id="col-wed" style="display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; gap: 6px; cursor: pointer;" onclick="selectWeekDayReport('Wednesday', 88, '88% (1,320 kcal)', '3 / 4 Done (75%)', 'Optimal (Flat Curve)', 'wed')">
-                    <span style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald);">88%</span>
+                    <span style="font-size: 12px; font-weight: 800; color: var(--gemini-vitality-emerald);">88%</span>
                     <div style="width: 100%; max-width: 36px; height: 95px; background: var(--gemini-surface-container); border-radius: 12px; display: flex; align-items: flex-end; padding: 3px;">
                       <div style="width: 100%; height: 88%; background: linear-gradient(180deg, #00F5A0, #00D06C); border-radius: 9px; box-shadow: 0 4px 10px rgba(0, 208, 108, 0.35);"></div>
                     </div>
-                    <span style="font-size: 11px; font-weight: 800; color: var(--gemini-text-muted);">WED</span>
+                    <span style="font-size: 12px; font-weight: 800; color: var(--gemini-text-muted);">WED</span>
                   </div>
 
                   <!-- Thursday: 75% (TODAY ACTIVE) -->
                   <div class="week-chart-col active-col" id="col-thu" style="display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; gap: 6px; cursor: pointer;" onclick="selectWeekDayReport('Thursday (Today)', 75, '88% (1,323 kcal)', '3 / 4 Done (75%)', 'Optimal (Flat Curve)', 'thu')">
-                    <span style="font-size: 11px; font-weight: 800; color: var(--gemini-sparkle-blue);">75%</span>
+                    <span style="font-size: 12px; font-weight: 800; color: var(--gemini-sparkle-blue);">75%</span>
                     <div style="width: 100%; max-width: 36px; height: 95px; background: rgba(0, 98, 255, 0.12); border: 2px solid var(--gemini-sparkle-blue); border-radius: 12px; display: flex; align-items: flex-end; padding: 3px; box-shadow: 0 0 12px rgba(0, 98, 255, 0.25);">
                       <div style="width: 100%; height: 75%; background: linear-gradient(180deg, #00C0FF, #0062FF); border-radius: 8px; box-shadow: 0 4px 12px rgba(0, 98, 255, 0.45);"></div>
                     </div>
-                    <span style="font-size: 11px; font-weight: 800; color: #FFFFFF; background: var(--gemini-sparkle-blue); padding: 1px 6px; border-radius: 6px;">THU</span>
+                    <span style="font-size: 12px; font-weight: 800; color: #FFFFFF; background: var(--gemini-sparkle-blue); padding: 2px 7px; border-radius: 6px;">THU</span>
                   </div>
 
                   <!-- Friday: Pending -->
                   <div style="display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; gap: 6px; opacity: 0.4;">
-                    <span style="font-size: 11px; font-weight: 700; color: var(--gemini-text-muted);">--</span>
+                    <span style="font-size: 12px; font-weight: 700; color: var(--gemini-text-muted);">--</span>
                     <div style="width: 100%; max-width: 36px; height: 95px; background: var(--gemini-surface-container); border: 1.5px dashed var(--gemini-border); border-radius: 12px; display: flex; align-items: flex-end; padding: 3px;">
                     </div>
-                    <span style="font-size: 11px; font-weight: 700; color: var(--gemini-text-muted);">FRI</span>
+                    <span style="font-size: 12px; font-weight: 700; color: var(--gemini-text-muted);">FRI</span>
                   </div>
 
                   <!-- Saturday: Pending -->
                   <div style="display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; gap: 6px; opacity: 0.4;">
-                    <span style="font-size: 11px; font-weight: 700; color: var(--gemini-text-muted);">--</span>
+                    <span style="font-size: 12px; font-weight: 700; color: var(--gemini-text-muted);">--</span>
                     <div style="width: 100%; max-width: 36px; height: 95px; background: var(--gemini-surface-container); border: 1.5px dashed var(--gemini-border); border-radius: 12px; display: flex; align-items: flex-end; padding: 3px;">
                     </div>
-                    <span style="font-size: 11px; font-weight: 700; color: var(--gemini-text-muted);">SAT</span>
+                    <span style="font-size: 12px; font-weight: 700; color: var(--gemini-text-muted);">SAT</span>
                   </div>
 
                   <!-- Sunday: Pending -->
                   <div style="display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; gap: 6px; opacity: 0.4;">
-                    <span style="font-size: 11px; font-weight: 700; color: var(--gemini-text-muted);">--</span>
+                    <span style="font-size: 12px; font-weight: 700; color: var(--gemini-text-muted);">--</span>
                     <div style="width: 100%; max-width: 36px; height: 95px; background: var(--gemini-surface-container); border: 1.5px dashed var(--gemini-border); border-radius: 12px; display: flex; align-items: flex-end; padding: 3px;">
                     </div>
-                    <span style="font-size: 11px; font-weight: 700; color: var(--gemini-text-muted);">SUN</span>
+                    <span style="font-size: 12px; font-weight: 700; color: var(--gemini-text-muted);">SUN</span>
                   </div>
 
                 </div>
@@ -868,56 +870,56 @@
               </div>
 
               <!-- Professional 3-Metric Live Telemetry Inspector Card -->
-              <div style="background: var(--gemini-surface-container); border: 1px solid var(--gemini-border-subtle); border-radius: 16px; padding: 14px; display: flex; flex-direction: column; gap: 10px;">
+              <div style="background: var(--gemini-surface-container); border: 1px solid var(--gemini-border-subtle); border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 12px;">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
-                  <div style="font-size: 12px; font-weight: 800; color: var(--gemini-text-main);" id="inspector-day-title">
+                  <div style="font-size: 14px; font-weight: 800; color: var(--gemini-text-main);" id="inspector-day-title">
                     📅 Thursday Performance Breakdown (Today)
                   </div>
-                  <span style="font-size: 12px; font-weight: 800; color: var(--gemini-sparkle-blue);" id="inspector-day-score">
+                  <span style="font-size: 13px; font-weight: 800; color: var(--gemini-sparkle-blue);" id="inspector-day-score">
                     75% Execution
                   </span>
                 </div>
 
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;">
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
                   <!-- Metric 1: Food & Calories -->
-                  <div style="background: var(--gemini-surface); padding: 10px 8px; border-radius: 10px; border: 1px solid var(--gemini-border-subtle); text-align: center;">
-                    <div style="font-size: 10px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase;">🥗 Nutrition</div>
-                    <div style="font-size: 13px; font-weight: 800; color: var(--gemini-text-main); margin-top: 3px;" id="inspector-food-val">88% Target</div>
+                  <div style="background: var(--gemini-surface); padding: 12px 10px; border-radius: 12px; border: 1px solid var(--gemini-border-subtle); text-align: center;">
+                    <div style="font-size: 11px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase;">🥗 Nutrition</div>
+                    <div style="font-size: 14px; font-weight: 800; color: var(--gemini-text-main); margin-top: 4px;" id="inspector-food-val">88% Target</div>
                   </div>
 
                   <!-- Metric 2: Tasks Completed -->
-                  <div style="background: var(--gemini-surface); padding: 10px 8px; border-radius: 10px; border: 1px solid var(--gemini-border-subtle); text-align: center;">
-                    <div style="font-size: 10px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase;">✅ Tasks</div>
-                    <div style="font-size: 13px; font-weight: 800; color: var(--gemini-vitality-emerald); margin-top: 3px;" id="inspector-tasks-val">3 / 4 Done</div>
+                  <div style="background: var(--gemini-surface); padding: 12px 10px; border-radius: 12px; border: 1px solid var(--gemini-border-subtle); text-align: center;">
+                    <div style="font-size: 11px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase;">✅ Tasks</div>
+                    <div style="font-size: 14px; font-weight: 800; color: var(--gemini-vitality-emerald); margin-top: 4px;" id="inspector-tasks-val">3 / 4 Done</div>
                   </div>
 
                   <!-- Metric 3: Glycemic / Metabolic Stability -->
-                  <div style="background: var(--gemini-surface); padding: 10px 8px; border-radius: 10px; border: 1px solid var(--gemini-border-subtle); text-align: center;">
-                    <div style="font-size: 10px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase;">🧬 Curve</div>
-                    <div style="font-size: 13px; font-weight: 800; color: var(--gemini-sparkle-blue); margin-top: 3px;" id="inspector-curve-val">Optimal Flat</div>
+                  <div style="background: var(--gemini-surface); padding: 12px 10px; border-radius: 12px; border: 1px solid var(--gemini-border-subtle); text-align: center;">
+                    <div style="font-size: 11px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase;">🧬 Curve</div>
+                    <div style="font-size: 14px; font-weight: 800; color: var(--gemini-sparkle-blue); margin-top: 4px;" id="inspector-curve-val">Optimal Flat</div>
                   </div>
                 </div>
               </div>
 
             </div>
-            <div style="font-size: 11px; color: var(--gemini-vitality-emerald); font-weight: 700;">
+            <div style="font-size: 13px; color: var(--gemini-vitality-emerald); font-weight: 700; line-height: 1.5;">
               ⚡ Projected Epigenetic Gain: -0.3 Biological Years Saved This Week.
             </div>
           </div>
 
           <!-- 2. NON-NEGOTIABLE WEEKLY RULES: WHAT TO DO & WHAT TO AVOID -->
-          <div class="gemini-card" style="padding: 16px;">
-            <div style="font-size: 13px; font-weight: 800; color: var(--gemini-text-main); margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
-              <span class="material-symbols-outlined" style="font-size: 18px; color: var(--gemini-sparkle-blue);">gavel</span>
+          <div class="gemini-card" style="padding: 20px; border-radius: 22px;">
+            <div style="font-size: 16px; font-weight: 800; color: var(--gemini-text-main); margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+              <span class="material-symbols-outlined" style="font-size: 22px; color: var(--gemini-sparkle-blue);">gavel</span>
               Non-Negotiable Rules of Week 3
             </div>
 
             <!-- What to Do -->
-            <div style="margin-bottom: 12px;">
-              <div style="font-size: 12px; font-weight: 800; color: var(--gemini-vitality-emerald); margin-bottom: 4px; display: flex; align-items: center; gap: 4px;">
+            <div style="margin-bottom: 14px;">
+              <div style="font-size: 13px; font-weight: 800; color: var(--gemini-vitality-emerald); margin-bottom: 6px; display: flex; align-items: center; gap: 4px;">
                 <span>✅ WHAT TO DO:</span>
               </div>
-              <ul style="font-size: 12px; color: var(--gemini-text-muted); line-height: 1.6; padding-left: 18px;">
+              <ul style="font-size: 14px; color: var(--gemini-text-muted); line-height: 1.65; padding-left: 20px; margin: 0;">
                 <li><strong>35g Protein Threshold:</strong> Eat 35g+ clean protein at breakfast within 90 minutes of waking.</li>
                 <li><strong>Post-Meal Zone 2 Walk:</strong> Walk briskly for 12 minutes immediately following your largest meal.</li>
                 <li><strong>10-Hour Caffeine Cutoff:</strong> Finish all tea, coffee, or caffeine before 12:00 PM.</li>
@@ -926,10 +928,10 @@
 
             <!-- What to Avoid -->
             <div>
-              <div style="font-size: 12px; font-weight: 800; color: #DC2626; margin-bottom: 4px; display: flex; align-items: center; gap: 4px;">
+              <div style="font-size: 13px; font-weight: 800; color: #DC2626; margin-bottom: 6px; display: flex; align-items: center; gap: 4px;">
                 <span>❌ WHAT TO AVOID:</span>
               </div>
-              <ul style="font-size: 12px; color: var(--gemini-text-muted); line-height: 1.6; padding-left: 18px;">
+              <ul style="font-size: 14px; color: var(--gemini-text-muted); line-height: 1.65; padding-left: 20px; margin: 0;">
                 <li><strong>Zero Liquid Sugar:</strong> No sweetened chai, soda, energy drinks, or packaged juices.</li>
                 <li><strong>Zero Yellow Seed Oils:</strong> Eliminate sunflower, soybean, palm, and canola cooking oils.</li>
                 <li><strong>Zero Screens in Bed:</strong> Turn off mobile screens 60 minutes before bedtime.</li>
@@ -938,48 +940,48 @@
           </div>
 
           <!-- 3. WEEKLY GUIDES & CHALLENGES WITH SOLUTIONS -->
-          <div class="gemini-card" style="padding: 16px;">
-            <div style="font-size: 13px; font-weight: 800; color: #D97706; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
-              <span class="material-symbols-outlined" style="font-size: 18px;">psychology_alt</span>
+          <div class="gemini-card" style="padding: 20px; border-radius: 22px;">
+            <div style="font-size: 16px; font-weight: 800; color: #D97706; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+              <span class="material-symbols-outlined" style="font-size: 22px;">psychology_alt</span>
               Weekly Challenges & Clinical Solutions
             </div>
 
-            <div style="display: flex; flex-direction: column; gap: 10px; font-size: 12px;">
-              <div style="background: var(--gemini-surface-container); padding: 12px; border-radius: 12px;">
-                <strong style="color: var(--gemini-text-main);">⚠️ Challenge: 4:00 PM Sugar & Chai Craving</strong>
-                <div style="color: var(--gemini-text-muted); margin-top: 4px;">
-                  <strong>👉 Solution:</strong> Drink 300ml sparkling water with 1 tbsp raw apple cider vinegar and eat 6 raw walnuts.
+            <div style="display: flex; flex-direction: column; gap: 12px; font-size: 14px;">
+              <div style="background: var(--gemini-surface-container); padding: 14px 16px; border-radius: 14px; line-height: 1.6;">
+                <strong style="color: var(--gemini-text-main); font-size: 15px;">⚠️ Challenge: 4:00 PM Sugar & Chai Craving</strong>
+                <div style="color: var(--gemini-text-muted); margin-top: 6px;">
+                  <strong style="color: var(--gemini-text-main);">👉 Solution:</strong> Drink 300ml sparkling water with 1 tbsp raw apple cider vinegar and eat 6 raw walnuts.
                 </div>
               </div>
 
-              <div style="background: var(--gemini-surface-container); padding: 12px; border-radius: 12px;">
-                <strong style="color: var(--gemini-text-main);">⚠️ Challenge: Social Dining with Friends</strong>
-                <div style="color: var(--gemini-text-muted); margin-top: 4px;">
-                  <strong>👉 Solution:</strong> Order tandoori or grilled protein cooked without seed oil; request double greens instead of fries or naan.
+              <div style="background: var(--gemini-surface-container); padding: 14px 16px; border-radius: 14px; line-height: 1.6;">
+                <strong style="color: var(--gemini-text-main); font-size: 15px;">⚠️ Challenge: Social Dining with Friends</strong>
+                <div style="color: var(--gemini-text-muted); margin-top: 6px;">
+                  <strong style="color: var(--gemini-text-main);">👉 Solution:</strong> Order tandoori or grilled protein cooked without seed oil; request double greens instead of fries or naan.
                 </div>
               </div>
             </div>
           </div>
 
           <!-- 4. MY KITCHEN & PANTRY INVENTORY (PLACED AT BOTTOM WITH INGREDIENT QUANTITIES) -->
-          <div class="gemini-card" style="border: 1.5px dashed var(--gemini-sparkle-blue); background: var(--gemini-surface-container);">
+          <div class="gemini-card" style="border: 1.5px dashed var(--gemini-sparkle-blue); background: var(--gemini-surface-container); padding: 20px; border-radius: 22px;">
             <div style="display: flex; justify-content: space-between; align-items: center;">
               <div>
-                <div style="font-size: 13px; font-weight: 800; color: var(--gemini-text-main); display: flex; align-items: center; gap: 6px;">
-                  <span class="material-symbols-outlined" style="color: var(--gemini-sparkle-blue); font-size: 20px;">kitchen</span>
+                <div style="font-family: 'Google Sans', sans-serif; font-size: 16px; font-weight: 800; color: var(--gemini-text-main); display: flex; align-items: center; gap: 8px;">
+                  <span class="material-symbols-outlined" style="color: var(--gemini-sparkle-blue); font-size: 22px;">kitchen</span>
                   My Kitchen & Pantry Inventory
                 </div>
-                <div style="font-size: 11px; color: var(--gemini-text-muted); margin-top: 2px;">
-                  Manage your stocked ingredients & quantities so AI suggests recipes with zero grocery runs!
+                <div style="font-size: 13px; color: var(--gemini-text-muted); margin-top: 4px; line-height: 1.5;">
+                  Manage stocked ingredients & quantities for zero grocery-run AI recipes.
                 </div>
               </div>
-              <button class="gemini-btn gemini-btn-primary" style="height: 36px; padding: 0 14px; font-size: 12px;" onclick="openPantryModal()">
+              <button class="gemini-btn gemini-btn-primary" style="height: 40px; padding: 0 16px; font-size: 13px; font-weight: 800; border-radius: 12px;" onclick="openPantryModal()">
                 + Manage / Edit
               </button>
             </div>
 
             <!-- Pantry Chips Display with Quantities -->
-            <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px;" id="pantry-chips-display">
+            <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px;" id="pantry-chips-display">
               <!-- Dynamically populated by renderPantryDisplay() -->
             </div>
           </div>
@@ -1745,19 +1747,19 @@
         <div class="app-task-card ${t.completed ? 'completed' : ''}" id="task-card-${t.id}" data-task-id="${t.id}">
           <div class="task-drag-fill"></div>
           <div class="task-sliding-icon" data-task-id="${t.id}" data-base-icon="${t.icon}" data-base-bg="${t.bg}" style="background: ${t.completed ? 'var(--gemini-vitality-emerald)' : t.bg};">
-            <span class="material-symbols-outlined knob-icon" style="font-size: 22px; color: #FFFFFF;">${t.completed ? 'check' : t.icon}</span>
+            <span class="material-symbols-outlined knob-icon" style="font-size: 24px; color: #FFFFFF;">${t.completed ? 'check' : t.icon}</span>
           </div>
           <div class="task-text-container">
             <span class="task-time-badge">${t.timeBadge}</span>
-            <div class="task-title-text" style="font-family: 'Google Sans', sans-serif; font-size: 14px; font-weight: 800; color: var(--gemini-text-main);">
+            <div class="task-title-text" style="font-family: 'Google Sans', sans-serif; font-size: 15px; font-weight: 800; color: var(--gemini-text-main); line-height: 1.25;">
               ${t.title}
             </div>
-            <div style="font-size: 11px; color: var(--gemini-text-muted);">
+            <div style="font-size: 13px; color: var(--gemini-text-muted); line-height: 1.4; margin-top: 1px;">
               ${t.subtitle}
             </div>
           </div>
           <div class="task-end-target">
-            <span class="material-symbols-outlined" style="font-size: 18px; color: var(--gemini-text-muted);">arrow_forward</span>
+            <span class="material-symbols-outlined" style="font-size: 20px; color: var(--gemini-text-muted);">arrow_forward</span>
           </div>
         </div>
       `).join('');
