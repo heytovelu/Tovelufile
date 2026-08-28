@@ -28,15 +28,14 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background-color: var(--gemini-bg, #F8FAFC);
-      color: var(--gemini-text-main, #0F172A);
-      font-family: 'Google Sans Text', 'Roboto', sans-serif;
-      line-height: 1.45;
+      background-color: #F8F9FA;
+      color: #111827;
+      font-family: 'Google Sans Text', 'Roboto', -apple-system, sans-serif;
+      line-height: 1.4;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      transition: background-color 0.2s, color 0.2s;
     }
 
     /* Universal Responsive Smartphone App Frame */
@@ -44,25 +43,24 @@
       width: 100%;
       max-width: 440px;
       min-height: 100vh;
-      background: var(--gemini-surface, #FFFFFF);
+      background: #FFFFFF;
       display: flex;
       flex-direction: column;
       position: relative;
-      border-left: 1px solid var(--gemini-border-subtle, rgba(0, 98, 255, 0.08));
-      border-right: 1px solid var(--gemini-border-subtle, rgba(0, 98, 255, 0.08));
-      box-shadow: 0 0 50px rgba(0, 98, 255, 0.05);
+      border-left: 1px solid #E5E7EB;
+      border-right: 1px solid #E5E7EB;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.04);
     }
 
     /* 1. Top Header: [ Full Logo | Bell Icon | Profile Icon ] */
-    header.tds-topbar {
+    header.wireframe-topbar {
       height: 64px;
       padding: 0 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid var(--gemini-border-subtle, #F1F5F9);
-      background: var(--gemini-surface, #FFFFFF);
-      backdrop-filter: blur(20px);
+      border-bottom: 1px solid #E5E7EB;
+      background: #FFFFFF;
       position: sticky;
       top: 0;
       z-index: 100;
@@ -75,61 +73,45 @@
       text-decoration: none;
     }
     .brand-wordmark {
-      font-family: 'Ubuntu', sans-serif;
-      font-weight: 500;
+      font-family: 'Google Sans Display', 'Ubuntu', sans-serif;
+      font-weight: 800;
       font-size: 24px;
-      color: var(--gemini-text-main, #0F172A);
-      letter-spacing: -0.01em;
+      color: #111827;
+      letter-spacing: -0.02em;
     }
     .top-actions-wrap {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 16px;
     }
     .top-icon-btn {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: var(--gemini-surface-container, #F1F5F9);
-      border: 1px solid var(--gemini-border-subtle, #E2E8F0);
-      color: var(--gemini-text-main, #0F172A);
+      background: none;
+      border: none;
+      color: #111827;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.15s;
-    }
-    .top-icon-btn:hover {
-      background: rgba(0, 98, 255, 0.08);
-      color: var(--gemini-sparkle-blue, #0062FF);
-      border-color: var(--gemini-sparkle-blue, #0062FF);
+      padding: 4px;
     }
 
     /* 2. Date & Status Ribbon Sub-header */
     .date-status-ribbon {
-      height: 38px;
-      border-bottom: 1px solid var(--gemini-border-subtle, #F1F5F9);
+      height: 40px;
+      border-bottom: 1px solid #E5E7EB;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 0 16px;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 800;
-      letter-spacing: 0.06em;
-      color: var(--gemini-text-muted, #64748B);
-      background: var(--gemini-surface-container, #F8FAFC);
-    }
-    .ribbon-badge-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--gemini-vitality-emerald, #00D06C);
-      margin-right: 6px;
-      box-shadow: 0 0 8px rgba(0, 208, 108, 0.6);
+      letter-spacing: 0.05em;
+      color: #111827;
+      background: #FFFFFF;
     }
     .ribbon-divider {
-      margin: 0 16px;
-      color: #CBD5E1;
+      margin: 0 20px;
+      color: #D1D5DB;
       font-weight: 400;
     }
 
@@ -139,7 +121,7 @@
       padding: 20px 16px 100px 16px;
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 20px;
       overflow-y: auto;
     }
 
@@ -147,7 +129,7 @@
     .tab-pane {
       display: none;
       flex-direction: column;
-      gap: 18px;
+      gap: 20px;
       animation: fadeIn 0.2s ease-out;
     }
     .tab-pane.active {
@@ -158,7 +140,7 @@
     .flow-sub-view {
       display: none;
       flex-direction: column;
-      gap: 18px;
+      gap: 20px;
       animation: fadeIn 0.2s ease-out;
     }
     .flow-sub-view.active {
@@ -169,12 +151,12 @@
     .day-week-capsules-wrap {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      gap: 14px;
     }
     .capsule-btn {
-      height: 48px;
+      height: 52px;
       border-radius: 16px;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 800;
       letter-spacing: 0.04em;
       cursor: pointer;
@@ -184,42 +166,40 @@
       transition: all 0.15s;
     }
     .capsule-btn.active {
-      background: var(--gemini-gradient-btn, linear-gradient(135deg, #00C0FF 0%, #0062FF 100%));
+      background: #111827;
       color: #FFFFFF;
-      border: none;
-      box-shadow: 0 4px 14px rgba(0, 98, 255, 0.25);
+      border: 1.5px solid #111827;
     }
     .capsule-btn.inactive {
-      background: var(--gemini-surface-container, #F1F5F9);
-      color: var(--gemini-text-muted, #64748B);
-      border: 1px solid var(--gemini-border-subtle, #E2E8F0);
+      background: #FFFFFF;
+      color: #111827;
+      border: 1.5px solid #111827;
     }
 
     /* 4. Hero Telemetry & Calorie Donut (Side-by-Side) */
     .hero-telemetry-row {
       display: grid;
-      grid-template-columns: 1.1fr 1fr;
+      grid-template-columns: 1.15fr 1fr;
       gap: 12px;
       align-items: stretch;
     }
 
     /* Left Card: Calorie Donut */
     .calorie-donut-card {
-      background: linear-gradient(135deg, rgba(0, 192, 255, 0.06), rgba(0, 245, 160, 0.05));
-      border: 1px solid var(--gemini-border, #E2E8F0);
+      border: 1.5px solid #111827;
       border-radius: 20px;
-      padding: 18px 12px;
+      padding: 20px 14px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 12px;
-      box-shadow: var(--gemini-shadow-sm, 0 1px 3px rgba(0,0,0,0.04));
+      gap: 14px;
+      background: #FFFFFF;
     }
     .donut-visual-wrap {
       position: relative;
-      width: 98px;
-      height: 98px;
+      width: 104px;
+      height: 104px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -227,42 +207,41 @@
     .donut-center-pct {
       position: absolute;
       font-family: 'Google Sans Display', sans-serif;
-      font-size: 22px;
+      font-size: 24px;
       font-weight: 800;
-      color: var(--gemini-sparkle-blue, #0062FF);
+      color: #111827;
     }
     .donut-calories-val {
       font-family: 'Google Sans Display', sans-serif;
       font-size: 16px;
       font-weight: 800;
-      color: var(--gemini-text-main, #0F172A);
+      color: #111827;
       text-align: center;
       line-height: 1.25;
     }
     .donut-calories-val span {
       display: block;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 700;
-      color: var(--gemini-text-muted, #64748B);
+      color: #4B5563;
     }
 
     /* Right Column: 3 Pill Progress Meters with + Buttons */
     .metrics-col-wrap {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
       justify-content: space-between;
     }
     .metric-wireframe-pill {
-      background: var(--gemini-surface, #FFFFFF);
-      border: 1px solid var(--gemini-border, #E2E8F0);
-      border-radius: 16px;
+      border: 1.5px solid #111827;
+      border-radius: 18px;
       padding: 10px 12px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
-      box-shadow: var(--gemini-shadow-sm, 0 1px 3px rgba(0,0,0,0.02));
+      background: #FFFFFF;
+      gap: 6px;
     }
     .metric-info-side {
       display: flex;
@@ -271,15 +250,16 @@
       flex: 1;
     }
     .mini-slider-track {
-      width: 54px;
-      height: 6px;
-      background: var(--gemini-surface-container, #E2E8F0);
+      width: 60px;
+      height: 8px;
+      background: #E5E7EB;
       border-radius: 9999px;
       overflow: hidden;
       display: flex;
     }
     .mini-slider-fill {
       height: 100%;
+      background: #111827;
       border-radius: 9999px;
     }
     .mini-slider-row {
@@ -288,50 +268,45 @@
       gap: 6px;
       font-size: 11px;
       font-weight: 800;
-      color: var(--gemini-text-main, #0F172A);
+      color: #111827;
     }
     .metric-label-txt {
       font-size: 11px;
       font-weight: 800;
-      color: var(--gemini-text-main, #0F172A);
+      color: #111827;
       white-space: nowrap;
     }
     .metric-plus-btn {
-      width: 26px;
-      height: 26px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
-      background: var(--gemini-surface-container, #F1F5F9);
-      border: 1px solid var(--gemini-border-subtle, #E2E8F0);
+      background: none;
+      border: none;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--gemini-sparkle-blue, #0062FF);
-      font-size: 16px;
-      font-weight: 800;
-      transition: all 0.15s;
+      color: #111827;
     }
     .metric-plus-btn:hover {
-      background: var(--gemini-sparkle-blue, #0062FF);
-      color: #FFFFFF;
-      border-color: var(--gemini-sparkle-blue, #0062FF);
+      background: #F3F4F6;
     }
 
-    /* 5. 3 MEAL BUTTONS: [ BREAKFAST ][ LUNCH ][ DINNER ] */
+    /* 5. 3 Meal Buttons: [ BREAKFAST ][ LUNCH ][ DINNER ] */
     .meals-3-row {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
+      gap: 10px;
     }
     .meal-block-btn {
-      height: 60px;
-      border-radius: 16px;
-      background: var(--gemini-surface, #FFFFFF);
-      border: 1.5px solid var(--gemini-border, #E2E8F0);
-      color: var(--gemini-text-main, #0F172A);
-      font-size: 11px;
+      height: 64px;
+      border-radius: 18px;
+      background: #111827;
+      color: #FFFFFF;
+      border: none;
+      font-size: 12px;
       font-weight: 800;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.03em;
       cursor: pointer;
       display: flex;
       flex-direction: column;
@@ -339,22 +314,14 @@
       justify-content: center;
       gap: 2px;
       transition: all 0.15s;
-      box-shadow: var(--gemini-shadow-sm, 0 1px 3px rgba(0,0,0,0.03));
     }
     .meal-block-btn:hover {
-      border-color: var(--gemini-sparkle-blue, #0062FF);
-      color: var(--gemini-sparkle-blue, #0062FF);
+      background: #1F2937;
       transform: translateY(-1px);
     }
     .meal-block-btn.logged {
-      background: linear-gradient(135deg, rgba(0, 245, 160, 0.15), rgba(0, 208, 108, 0.1));
-      border-color: var(--gemini-vitality-emerald, #00D06C);
-      color: var(--gemini-vitality-emerald, #00D06C);
-    }
-    .meal-sub-kcal {
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--gemini-text-muted, #64748B);
+      background: #00D06C;
+      color: #FFFFFF;
     }
 
     /* 6. Tasks Section Header */
@@ -368,15 +335,12 @@
       font-family: 'Google Sans', sans-serif;
       font-size: 15px;
       font-weight: 800;
-      color: var(--gemini-text-main, #0F172A);
+      color: #111827;
     }
     .tasks-swipe-hint {
       font-size: 11px;
       font-weight: 700;
-      color: var(--gemini-vitality-emerald, #00D06C);
-      display: flex;
-      align-items: center;
-      gap: 2px;
+      color: #6B7280;
     }
 
     /* 7. Distinct Circadian Task Card with Overlapping Sun Badge */
@@ -384,57 +348,56 @@
       position: relative;
       display: flex;
       align-items: center;
-      padding-left: 26px;
+      padding-left: 28px;
       margin-top: 4px;
     }
     .circadian-sun-badge {
       position: absolute;
       left: 0;
-      width: 52px;
-      height: 52px;
+      width: 56px;
+      height: 56px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #00C0FF, #0062FF);
+      background: #111827;
       border: 3px solid #FFFFFF;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #FFFFFF;
       z-index: 2;
-      box-shadow: 0 4px 12px rgba(0, 98, 255, 0.25);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
     }
     .circadian-task-pill {
       flex: 1;
-      background: var(--gemini-surface, #FFFFFF);
-      border: 1px solid var(--gemini-border, #E2E8F0);
-      border-radius: 18px;
-      padding: 14px 16px 14px 34px;
+      border: 1.5px solid #111827;
+      border-radius: 20px;
+      padding: 14px 16px 14px 38px;
+      background: #FFFFFF;
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 3px;
       cursor: pointer;
       transition: all 0.15s;
-      box-shadow: var(--gemini-shadow-sm, 0 1px 3px rgba(0,0,0,0.03));
     }
     .circadian-task-pill.completed {
-      background: var(--gemini-surface-container, #F8FAFC);
-      border-color: var(--gemini-vitality-emerald, #00D06C);
+      background: #F9FAFB;
+      opacity: 0.85;
     }
     .task-primary-title {
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 800;
-      color: var(--gemini-text-main, #0F172A);
+      color: #111827;
     }
     .task-time-subtitle {
       font-size: 11px;
       font-weight: 700;
-      color: var(--gemini-text-muted, #64748B);
+      color: #4B5563;
     }
 
     /* Food Intelligence Modal */
     .food-modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(15, 23, 42, 0.45);
+      background: rgba(0, 0, 0, 0.5);
       backdrop-filter: blur(8px);
       z-index: 200;
       display: none;
@@ -444,7 +407,7 @@
     .food-modal-sheet {
       width: 100%;
       max-width: 440px;
-      background: var(--gemini-surface, #FFFFFF);
+      background: #FFFFFF;
       border-top-left-radius: 24px;
       border-top-right-radius: 24px;
       padding: 24px 20px 36px 20px;
@@ -467,9 +430,8 @@
       width: 100%;
       max-width: 440px;
       height: 64px;
-      background: var(--gemini-surface, #FFFFFF);
-      backdrop-filter: blur(20px);
-      border-top: 1px solid var(--gemini-border-subtle, #F1F5F9);
+      background: #FFFFFF;
+      border-top: 1px solid #E5E7EB;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       z-index: 100;
@@ -483,12 +445,12 @@
       align-items: center;
       justify-content: center;
       gap: 2px;
-      color: var(--gemini-text-muted, #64748B);
+      color: #6B7280;
       cursor: pointer;
       transition: all 0.15s;
     }
     .nav-item-btn.active {
-      color: var(--gemini-sparkle-blue, #0062FF);
+      color: #111827;
     }
     .nav-item-btn.active .material-symbols-outlined {
       font-variation-settings: 'FILL' 1;
@@ -505,17 +467,17 @@
   <div class="app-shell">
     
     <!-- ==================== 1. TOP BAR: [ FULL LOGO | BELL | PROFILE ] ==================== -->
-    <header class="tds-topbar">
-      <!-- Full Mitosis Logo + Wordmark -->
+    <header class="wireframe-topbar">
+      <!-- Full Logo -->
       <a href="#" class="brand-lockup" onclick="switchAppTab('flow')">
         <div class="tovelu-mitosis-anim">
           <svg width="30" height="30" viewBox="0 0 100 100" fill="none" shape-rendering="geometricPrecision">
-            <path d="M50 16 C28 16, 16 32, 16 50 C16 68, 28 84, 50 84 C38 72, 34 58, 34 50 C34 42, 38 28, 50 16 Z" fill="url(#tds-cyan)"/>
-            <path d="M50 16 C72 16, 84 32, 84 50 C84 68, 72 84, 50 84 C62 72, 66 58, 66 50 C66 42, 62 28, 50 16 Z" fill="url(#tds-emerald)"/>
+            <path d="M50 16 C28 16, 16 32, 16 50 C16 68, 28 84, 50 84 C38 72, 34 58, 34 50 C34 42, 38 28, 50 16 Z" fill="url(#w-cyan)"/>
+            <path d="M50 16 C72 16, 84 32, 84 50 C84 68, 72 84, 50 84 C62 72, 66 58, 66 50 C66 42, 62 28, 50 16 Z" fill="url(#w-emerald)"/>
             <circle cx="50" cy="50" r="8.5" fill="#00F5A0"/>
             <defs>
-              <linearGradient id="tds-cyan" x1="16" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse"><stop stop-color="#00C0FF"/><stop offset="1" stop-color="#0062FF"/></linearGradient>
-              <linearGradient id="tds-emerald" x1="84" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse"><stop stop-color="#00F5A0"/><stop offset="1" stop-color="#00D06C"/></linearGradient>
+              <linearGradient id="w-cyan" x1="16" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse"><stop stop-color="#00C0FF"/><stop offset="1" stop-color="#0062FF"/></linearGradient>
+              <linearGradient id="w-emerald" x1="84" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse"><stop stop-color="#00F5A0"/><stop offset="1" stop-color="#00D06C"/></linearGradient>
             </defs>
           </svg>
         </div>
@@ -525,17 +487,16 @@
       <!-- Right Action Icons: Notification Bell & Profile Avatar -->
       <div class="top-actions-wrap">
         <button class="top-icon-btn" onclick="alert('No new notifications.')" title="Notifications">
-          <span class="material-symbols-outlined" style="font-size: 20px;">notifications</span>
+          <span class="material-symbols-outlined" style="font-size: 26px;">notifications</span>
         </button>
         <button class="top-icon-btn" onclick="openProfileModal()" title="Your Profile">
-          <span class="material-symbols-outlined" style="font-size: 22px;">person</span>
+          <span class="material-symbols-outlined" style="font-size: 28px;">person</span>
         </button>
       </div>
     </header>
 
     <!-- ==================== 2. DATE & STATUS RIBBON ==================== -->
     <div class="date-status-ribbon">
-      <span class="ribbon-badge-dot"></span>
       <span>24 AUG 2026</span>
       <span class="ribbon-divider">|</span>
       <span>DAY 4 - WEEK 8</span>
@@ -566,17 +527,11 @@
             <!-- Left: Calorie Donut Card -->
             <div class="calorie-donut-card">
               <div class="donut-visual-wrap">
-                <svg width="98" height="98" viewBox="0 0 100 100">
-                  <defs>
-                    <linearGradient id="donut-grad" x1="0" y1="0" x2="1" y2="1">
-                      <stop offset="0%" stop-color="#00C0FF" />
-                      <stop offset="100%" stop-color="#0062FF" />
-                    </linearGradient>
-                  </defs>
+                <svg width="104" height="104" viewBox="0 0 100 100">
                   <!-- Background Track -->
-                  <circle cx="50" cy="50" r="38" fill="none" stroke="rgba(0, 98, 255, 0.08)" stroke-width="13"/>
+                  <circle cx="50" cy="50" r="38" fill="none" stroke="#E5E7EB" stroke-width="14"/>
                   <!-- 81% Progress Fill Arc -->
-                  <circle cx="50" cy="50" r="38" fill="none" stroke="url(#donut-grad)" stroke-width="13" stroke-linecap="round" stroke-dasharray="193 238" stroke-dashoffset="0" transform="rotate(-90 50 50)"/>
+                  <circle cx="50" cy="50" r="38" fill="none" stroke="#111827" stroke-width="14" stroke-linecap="round" stroke-dasharray="193 238" stroke-dashoffset="0" transform="rotate(-90 50 50)"/>
                 </svg>
                 <div class="donut-center-pct">81%</div>
               </div>
@@ -593,9 +548,9 @@
                 <div class="metric-info-side">
                   <div class="mini-slider-row">
                     <div class="mini-slider-track">
-                      <div class="mini-slider-fill" style="width: 71%; background: linear-gradient(90deg, #00F5A0, #00D06C);"></div>
+                      <div class="mini-slider-fill" style="width: 71%;"></div>
                     </div>
-                    <span style="color: var(--gemini-vitality-emerald, #00D06C);">71%</span>
+                    <span>71%</span>
                   </div>
                   <div class="metric-label-txt" id="txt-walk-meter">3869/8,000 Walk</div>
                 </div>
@@ -607,9 +562,9 @@
                 <div class="metric-info-side">
                   <div class="mini-slider-row">
                     <div class="mini-slider-track">
-                      <div class="mini-slider-fill" style="width: 71%; background: linear-gradient(90deg, #00C0FF, #0062FF);"></div>
+                      <div class="mini-slider-fill" style="width: 71%;"></div>
                     </div>
-                    <span style="color: var(--gemini-sparkle-blue, #0062FF);">71%</span>
+                    <span>71%</span>
                   </div>
                   <div class="metric-label-txt" id="txt-water-meter">2.3/4.5 Water</div>
                 </div>
@@ -621,9 +576,9 @@
                 <div class="metric-info-side">
                   <div class="mini-slider-row">
                     <div class="mini-slider-track">
-                      <div class="mini-slider-fill" style="width: 71%; background: linear-gradient(90deg, #8B5CF6, #6366F1);"></div>
+                      <div class="mini-slider-fill" style="width: 71%;"></div>
                     </div>
-                    <span style="color: #8B5CF6;">71%</span>
+                    <span>71%</span>
                   </div>
                   <div class="metric-label-txt">6.5/8 Hour Sleep</div>
                 </div>
@@ -637,15 +592,12 @@
           <div class="meals-3-row">
             <button class="meal-block-btn" id="btn-meal-b" onclick="openFoodModal('Breakfast')">
               <span>BREAKFAST</span>
-              <span class="meal-sub-kcal" id="sub-kcal-b">420 kcal</span>
             </button>
             <button class="meal-block-btn" id="btn-meal-l" onclick="openFoodModal('Lunch')">
               <span>LUNCH</span>
-              <span class="meal-sub-kcal" id="sub-kcal-l">580 kcal</span>
             </button>
             <button class="meal-block-btn" id="btn-meal-d" onclick="openFoodModal('Dinner')">
               <span>DINNER</span>
-              <span class="meal-sub-kcal" id="sub-kcal-d">480 kcal</span>
             </button>
           </div>
 
@@ -660,8 +612,8 @@
             
             <!-- Task 1: 10 Minute Morning Sunlight -->
             <div class="circadian-task-container">
-              <div class="circadian-sun-badge" style="background: linear-gradient(135deg, #F59E0B, #D97706); box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);">
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <div class="circadian-sun-badge">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <circle cx="12" cy="12" r="5"></circle>
                   <line x1="12" y1="1" x2="12" y2="3"></line>
                   <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -681,13 +633,17 @@
 
             <!-- Task 2: Breakfast & 30g+ Protein -->
             <div class="circadian-task-container">
-              <div class="circadian-sun-badge" style="background: linear-gradient(135deg, #00C0FF, #0062FF); box-shadow: 0 4px 12px rgba(0, 98, 255, 0.25);">
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
-                  <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
-                  <line x1="6" y1="1" x2="6" y2="4"></line>
-                  <line x1="10" y1="1" x2="10" y2="4"></line>
-                  <line x1="14" y1="1" x2="14" y2="4"></line>
+              <div class="circadian-sun-badge">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="5"></circle>
+                  <line x1="12" y1="1" x2="12" y2="3"></line>
+                  <line x1="12" y1="21" x2="12" y2="23"></line>
+                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                  <line x1="1" y1="12" x2="3" y2="12"></line>
+                  <line x1="21" y1="12" x2="23" y2="12"></line>
+                  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                 </svg>
               </div>
               <div class="circadian-task-pill" onclick="toggleTaskPill(this)">
@@ -698,8 +654,8 @@
 
             <!-- Task 3: 12-Minute Post-Lunch Zone 2 Walk -->
             <div class="circadian-task-container">
-              <div class="circadian-sun-badge" style="background: linear-gradient(135deg, #00F5A0, #00D06C); box-shadow: 0 4px 12px rgba(0, 208, 108, 0.25);">
-                <span class="material-symbols-outlined" style="font-size: 26px;">directions_walk</span>
+              <div class="circadian-sun-badge">
+                <span class="material-symbols-outlined" style="font-size: 28px;">directions_walk</span>
               </div>
               <div class="circadian-task-pill" onclick="toggleTaskPill(this)">
                 <div class="task-primary-title">12-Minute Post-Lunch Walk</div>
@@ -714,25 +670,20 @@
         <!-- ---------------- SUB-VIEW: WEEK (BOOK / PLAYBOOK) ---------------- -->
         <div id="subview-flow-week" class="flow-sub-view">
           
-          <div class="gemini-card" style="background: linear-gradient(135deg, rgba(0, 192, 255, 0.08), rgba(0, 245, 160, 0.08));">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span style="font-size: 10px; font-weight: 800; color: var(--gemini-sparkle-blue, #0062FF); background: #FFFFFF; padding: 3px 8px; border-radius: 9999px;">
-                WEEKLY PLAYBOOK • WEEK 8
-              </span>
-              <span style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald, #00D06C);">91% Compliance</span>
+          <div style="border: 1.5px solid #111827; border-radius: 20px; padding: 20px; background: #FFFFFF;">
+            <div style="font-size: 11px; font-weight: 800; color: #6B7280; text-transform: uppercase;">Weekly Playbook</div>
+            <div style="font-family: 'Google Sans Display', sans-serif; font-size: 20px; font-weight: 800; margin-top: 4px;">
+              Week 8: Deep Cellular Rejuvenation
             </div>
-            <div style="font-family: 'Google Sans Display', sans-serif; font-size: 20px; font-weight: 800; margin-top: 6px;">
-              Deep Cellular Rejuvenation
-            </div>
-            <div style="font-size: 12px; color: var(--gemini-text-muted, #64748B); margin-top: 4px; line-height: 1.5;">
+            <div style="font-size: 12px; color: #4B5563; margin-top: 6px; line-height: 1.5;">
               Training your mitochondria to maximize fat-oxidation and anchor restorative sleep.
             </div>
           </div>
 
-          <div style="border: 1.5px dashed var(--gemini-sparkle-blue, #0062FF); border-radius: 18px; padding: 16px; background: var(--gemini-surface-container, #F8FAFC); display: flex; justify-content: space-between; align-items: center;">
+          <div style="border: 1.5px dashed #111827; border-radius: 18px; padding: 16px; background: #F9FAFB; display: flex; justify-content: space-between; align-items: center;">
             <div>
               <div style="font-size: 13px; font-weight: 800;">🍳 Kitchen & Pantry Inventory</div>
-              <div style="font-size: 11px; color: var(--gemini-text-muted, #64748B);">Add ingredients available at home for Ask AI.</div>
+              <div style="font-size: 11px; color: #6B7280;">Add ingredients available at home for Ask AI.</div>
             </div>
             <button class="capsule-btn active" style="height: 38px; padding: 0 16px; font-size: 12px;" onclick="openPantryModal()">
               Manage
@@ -740,13 +691,13 @@
           </div>
 
           <!-- Non-Negotiable Rules -->
-          <div class="gemini-card" style="padding: 16px;">
-            <div style="font-size: 13px; font-weight: 800; margin-bottom: 10px; color: var(--gemini-text-main, #0F172A);">📋 Non-Negotiable Rules: Week 8</div>
-            <div style="font-size: 12px; color: var(--gemini-text-main, #0F172A); line-height: 1.6;">
-              <strong style="color: var(--gemini-vitality-emerald, #00D06C);">✅ WHAT TO DO:</strong><br/>
+          <div style="border: 1.5px solid #111827; border-radius: 20px; padding: 18px; background: #FFFFFF;">
+            <div style="font-size: 13px; font-weight: 800; margin-bottom: 10px;">📋 Non-Negotiable Rules: Week 8</div>
+            <div style="font-size: 12px; color: #111827; line-height: 1.6;">
+              <strong>✅ WHAT TO DO:</strong><br/>
               • 30g+ Clean Protein within 60m of waking.<br/>
               • 12-min walk after lunch for flat glucose.<br/><br/>
-              <strong style="color: #DC2626;">❌ WHAT TO AVOID:</strong><br/>
+              <strong>❌ WHAT TO AVOID:</strong><br/>
               • 0% Liquid Sugar & 0% Seed Oils.<br/>
               • No screens 60m before bed.
             </div>
@@ -758,41 +709,41 @@
 
       <!-- ==================== TAB 2: CHAT (THAIS AI) ==================== -->
       <section id="pane-chat" class="tab-pane">
-        <div class="gemini-card" style="padding: 16px;">
-          <div style="font-size: 13px; font-weight: 800; color: var(--gemini-sparkle-blue, #0062FF);">THAIS Clinical Health Companion</div>
-          <div style="font-size: 12px; color: var(--gemini-text-muted, #64748B); margin-top: 2px;">Ask anything about your calories, portion meter, or meal guidance.</div>
+        <div style="border: 1.5px solid #111827; border-radius: 18px; padding: 16px;">
+          <div style="font-size: 13px; font-weight: 800;">THAIS Clinical Health Companion</div>
+          <div style="font-size: 12px; color: #6B7280; margin-top: 2px;">Ask anything about your calories, portion meter, or meal guidance.</div>
         </div>
 
         <div style="height: 380px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;" id="chat-scroller">
-          <div style="background: var(--gemini-surface-container, #F1F5F9); padding: 12px 16px; border-radius: 16px; font-size: 13px; max-width: 86%;">
+          <div style="background: #F3F4F6; padding: 12px 16px; border-radius: 16px; font-size: 13px; max-width: 86%;">
             <strong>THAIS:</strong> Hello Alex! You have completed 1,240 of 1,940 kcal today (81% Portion Completion). How can I assist your protocol right now?
           </div>
         </div>
 
         <div style="display: flex; gap: 8px;">
-          <input type="text" id="chat-input-field" placeholder="Ask THAIS anything..." style="flex: 1; border: 1.5px solid var(--gemini-border, #E2E8F0); border-radius: 12px; padding: 10px 14px; font-size: 13px;" onkeydown="if(event.key==='Enter'){sendChatMsg(); event.preventDefault();}" />
+          <input type="text" id="chat-input-field" placeholder="Ask THAIS anything..." style="flex: 1; border: 1.5px solid #111827; border-radius: 12px; padding: 10px 14px; font-size: 13px;" onkeydown="if(event.key==='Enter'){sendChatMsg(); event.preventDefault();}" />
           <button class="capsule-btn active" style="height: 42px; padding: 0 16px; border-radius: 12px;" onclick="sendChatMsg()">Send</button>
         </div>
       </section>
 
       <!-- ==================== TAB 3: HEALTH (METABOLIC & EPIGENETICS) ==================== -->
       <section id="pane-health" class="tab-pane">
-        <div class="gemini-card" style="padding: 20px;">
-          <div style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald, #00D06C); text-transform: uppercase;">Epigenetic Telemetry</div>
-          <div style="font-family: 'Google Sans Display', sans-serif; font-size: 24px; font-weight: 800; margin-top: 4px; color: var(--gemini-sparkle-blue, #0062FF);">
+        <div style="border: 1.5px solid #111827; border-radius: 20px; padding: 20px;">
+          <div style="font-size: 11px; font-weight: 800; color: #6B7280; text-transform: uppercase;">Epigenetic Telemetry</div>
+          <div style="font-family: 'Google Sans Display', sans-serif; font-size: 24px; font-weight: 800; margin-top: 4px;">
             Biological Age: 20.8 Yrs
           </div>
-          <div style="font-size: 12px; color: var(--gemini-text-muted, #64748B);">Chronological Age: 25 Yrs • Aging Pace: <strong>0.82x</strong></div>
+          <div style="font-size: 12px; color: #4B5563;">Chronological Age: 25 Yrs • Aging Pace: <strong>0.82x</strong></div>
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-          <div class="gemini-card" style="padding: 14px;">
-            <div style="font-size: 10px; font-weight: 800; color: var(--gemini-text-muted, #64748B); text-transform: uppercase;">Basal Metabolic Rate</div>
+          <div style="border: 1.5px solid #111827; border-radius: 16px; padding: 14px;">
+            <div style="font-size: 10px; font-weight: 800; color: #6B7280; text-transform: uppercase;">Basal Metabolic Rate</div>
             <div style="font-size: 18px; font-weight: 800; margin-top: 2px;">1,740 kcal</div>
           </div>
-          <div class="gemini-card" style="padding: 14px;">
-            <div style="font-size: 10px; font-weight: 800; color: var(--gemini-text-muted, #64748B); text-transform: uppercase;">WHO ICD-11 Triage</div>
-            <div style="font-size: 18px; font-weight: 800; color: var(--gemini-vitality-emerald, #00D06C); margin-top: 2px;">88% Solvable</div>
+          <div style="border: 1.5px solid #111827; border-radius: 16px; padding: 14px;">
+            <div style="font-size: 10px; font-weight: 800; color: #6B7280; text-transform: uppercase;">WHO ICD-11 Triage</div>
+            <div style="font-size: 18px; font-weight: 800; color: #00D06C; margin-top: 2px;">88% Solvable</div>
           </div>
         </div>
       </section>
@@ -824,7 +775,7 @@
         <h3 id="food-modal-title" style="font-family: 'Google Sans Display', sans-serif; font-size: 18px; font-weight: 800;">
           Log Meal
         </h3>
-        <button class="top-icon-btn" onclick="closeFoodModal()">✕</button>
+        <button class="metric-plus-btn" style="font-size: 18px;" onclick="closeFoodModal()">✕</button>
       </div>
 
       <!-- 3 Input Modes: Scan | Manually | Ask AI -->
@@ -845,20 +796,20 @@
         <h3 style="font-family: 'Google Sans Display', sans-serif; font-size: 18px; font-weight: 800;">
           🍳 My Kitchen Inventory
         </h3>
-        <button class="top-icon-btn" onclick="closePantryModal()">✕</button>
+        <button class="metric-plus-btn" onclick="closePantryModal()">✕</button>
       </div>
-      <p style="font-size: 12px; color: var(--gemini-text-muted, #64748B);">Add ingredients available in your home kitchen so Ask AI can generate 15-minute whole-food meals!</p>
+      <p style="font-size: 12px; color: #4B5563;">Add ingredients available in your home kitchen so Ask AI can generate 15-minute whole-food meals!</p>
       
       <div style="display: flex; gap: 8px;">
-        <input type="text" id="custom-pantry-item" placeholder="Add ingredient..." style="flex: 1; border: 1.5px solid var(--gemini-border, #E2E8F0); border-radius: 12px; padding: 10px; font-size: 13px;" />
+        <input type="text" id="custom-pantry-item" placeholder="Add ingredient..." style="flex: 1; border: 1.5px solid #111827; border-radius: 12px; padding: 10px; font-size: 13px;" />
         <button class="capsule-btn active" style="height: 40px; padding: 0 16px;" onclick="addPantryChip()">+ Add</button>
       </div>
 
       <div style="display: flex; flex-wrap: wrap; gap: 6px;" id="pantry-chips-wrap">
-        <span style="border: 1px solid var(--gemini-vitality-emerald, #00D06C); padding: 6px 12px; border-radius: 9999px; font-size: 12px; font-weight: 700; background: rgba(0, 245, 160, 0.12); color: var(--gemini-vitality-emerald, #00D06C);">🍳 Eggs (12)</span>
-        <span style="border: 1px solid var(--gemini-vitality-emerald, #00D06C); padding: 6px 12px; border-radius: 9999px; font-size: 12px; font-weight: 700; background: rgba(0, 245, 160, 0.12); color: var(--gemini-vitality-emerald, #00D06C);">🧈 Desi Ghee</span>
-        <span style="border: 1px solid var(--gemini-vitality-emerald, #00D06C); padding: 6px 12px; border-radius: 9999px; font-size: 12px; font-weight: 700; background: rgba(0, 245, 160, 0.12); color: var(--gemini-vitality-emerald, #00D06C);">🥬 Spinach</span>
-        <span style="border: 1px solid var(--gemini-vitality-emerald, #00D06C); padding: 6px 12px; border-radius: 9999px; font-size: 12px; font-weight: 700; background: rgba(0, 245, 160, 0.12); color: var(--gemini-vitality-emerald, #00D06C);">🥑 Avocado</span>
+        <span style="border: 1.5px solid #111827; padding: 6px 12px; border-radius: 9999px; font-size: 12px; font-weight: 700; background: #111827; color: white;">🍳 Eggs (12)</span>
+        <span style="border: 1.5px solid #111827; padding: 6px 12px; border-radius: 9999px; font-size: 12px; font-weight: 700; background: #111827; color: white;">🧈 Desi Ghee</span>
+        <span style="border: 1.5px solid #111827; padding: 6px 12px; border-radius: 9999px; font-size: 12px; font-weight: 700; background: #111827; color: white;">🥬 Spinach</span>
+        <span style="border: 1.5px solid #111827; padding: 6px 12px; border-radius: 9999px; font-size: 12px; font-weight: 700; background: #111827; color: white;">🥑 Avocado</span>
       </div>
 
       <button class="capsule-btn active" style="width: 100%; height: 46px; margin-top: 10px;" onclick="closePantryModal()">Save Kitchen Pantry ➔</button>
@@ -919,10 +870,10 @@
       const area = document.getElementById('food-modal-content-area');
       if (mode === 'scan') {
         area.innerHTML = `
-          <div style="border: 2px dashed var(--gemini-sparkle-blue, #0062FF); border-radius: 16px; padding: 20px; text-align: center; background: rgba(0, 192, 255, 0.04);">
-            <span class="material-symbols-outlined" style="font-size: 36px; color: var(--gemini-sparkle-blue, #0062FF);">add_a_photo</span>
+          <div style="border: 2px dashed #111827; border-radius: 16px; padding: 20px; text-align: center;">
+            <span class="material-symbols-outlined" style="font-size: 36px; color: #111827;">add_a_photo</span>
             <div style="font-size: 13px; font-weight: 800; margin-top: 4px;">Snap or Upload Photo</div>
-            <div style="font-size: 11px; color: var(--gemini-text-muted, #64748B);">Cooked dish, raw ingredients, or restaurant menu.</div>
+            <div style="font-size: 11px; color: #6B7280;">Cooked dish, raw ingredients, or restaurant menu.</div>
             <button class="capsule-btn active" style="height: 38px; padding: 0 18px; margin: 10px auto 0 auto;" onclick="logMealConfirm(420, 32)">
               Upload & Analyze ➔
             </button>
@@ -930,17 +881,17 @@
         `;
       } else if (mode === 'manual') {
         area.innerHTML = `
-          <textarea placeholder="Type what you ate or ingredients available..." style="width: 100%; border: 1.5px solid var(--gemini-border, #E2E8F0); border-radius: 14px; padding: 12px; font-size: 13px; min-height: 80px;"></textarea>
+          <textarea placeholder="Type what you ate or ingredients available..." style="width: 100%; border: 1.5px solid #111827; border-radius: 14px; padding: 12px; font-size: 13px; min-height: 80px;"></textarea>
           <button class="capsule-btn active" style="height: 42px; width: 100%;" onclick="logMealConfirm(420, 32)">
             Analyze & Log ${activeMeal} ➔
           </button>
         `;
       } else if (mode === 'ask_ai') {
         area.innerHTML = `
-          <div class="gemini-card" style="padding: 14px; background: var(--gemini-surface-container, #F8FAFC); border-left: 4px solid var(--gemini-vitality-emerald, #00D06C);">
-            <div style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald, #00D06C);">THAIS AI RECOMMENDATION</div>
+          <div style="border: 1.5px solid #111827; border-radius: 16px; padding: 14px; background: #F9FAFB;">
+            <div style="font-size: 11px; font-weight: 800; color: #00D06C;">THAIS AI RECOMMENDATION</div>
             <div style="font-size: 14px; font-weight: 800; margin: 4px 0;">Pasture Eggs Scramble with Sautéed Spinach</div>
-            <div style="font-size: 11px; color: var(--gemini-text-muted, #64748B);">Using your kitchen inventory. 32g Protein • 0% Seed Oils • 420 kcal.</div>
+            <div style="font-size: 11px; color: #4B5563;">Using your kitchen inventory. 32g Protein • 0% Seed Oils • 420 kcal.</div>
           </div>
           <button class="capsule-btn active" style="height: 42px; width: 100%; margin-top: 4px;" onclick="logMealConfirm(420, 32)">
             ✓ I Ate This — Log to Portion Meter
@@ -955,7 +906,7 @@
       const btn = document.getElementById(btnMap[activeMeal]);
       if (btn) {
         btn.classList.add('logged');
-        btn.innerHTML = `<span>✓ LOGGED</span><span class="meal-sub-kcal">${protein}g Pro</span>`;
+        btn.innerHTML = `<span>✓ ${activeMeal.toUpperCase()} LOGGED</span>`;
       }
       alert(`${activeMeal} logged successfully! +${protein}g Protein added to your daily portion.`);
     }
@@ -971,7 +922,7 @@
       if (!inp.value.trim()) return;
       const wrap = document.getElementById('pantry-chips-wrap');
       const s = document.createElement('span');
-      s.style = "border: 1px solid var(--gemini-vitality-emerald, #00D06C); padding: 6px 12px; border-radius: 9999px; font-size: 12px; font-weight: 700; background: rgba(0, 245, 160, 0.12); color: var(--gemini-vitality-emerald, #00D06C);";
+      s.style = "border: 1.5px solid #111827; padding: 6px 12px; border-radius: 9999px; font-size: 12px; font-weight: 700; background: #111827; color: white;";
       s.innerText = `✨ ${inp.value.trim()}`;
       wrap.appendChild(s);
       inp.value = '';
@@ -986,7 +937,7 @@
       const val = inp.value.trim();
       if (!val) return;
       const scroller = document.getElementById('chat-scroller');
-      scroller.innerHTML += `<div style="background: var(--gemini-sparkle-blue, #0062FF); color: white; padding: 12px 16px; border-radius: 16px; font-size: 13px; max-width: 86%; align-self: flex-end;">${val}</div>`;
+      scroller.innerHTML += `<div style="background: #111827; color: white; padding: 12px 16px; border-radius: 16px; font-size: 13px; max-width: 86%; align-self: flex-end;">${val}</div>`;
       inp.value = '';
       scroller.scrollTop = scroller.scrollHeight;
 
@@ -995,7 +946,7 @@
         if (typeof THAIS !== 'undefined' && THAIS.queryThaisAI) {
           resp = THAIS.queryThaisAI(val, {});
         }
-        scroller.innerHTML += `<div style="background: var(--gemini-surface-container, #F1F5F9); padding: 12px 16px; border-radius: 16px; font-size: 13px; max-width: 86%;"><strong>THAIS:</strong> ${resp}</div>`;
+        scroller.innerHTML += `<div style="background: #F3F4F6; padding: 12px 16px; border-radius: 16px; font-size: 13px; max-width: 86%;"><strong>THAIS:</strong> ${resp}</div>`;
         scroller.scrollTop = scroller.scrollHeight;
       }, 200);
     }
