@@ -1216,6 +1216,141 @@
     .you-tool-link:active {
       transform: scale(0.98);
     }
+  
+    /* ==========================================================================
+       GOOGLE MATERIAL 3 (M3) ADAPTIVE RESPONSIVE SYSTEM
+       ========================================================================== */
+    .desktop-nav-pills {
+      display: none;
+      align-items: center;
+      gap: 6px;
+      background: var(--gemini-surface-container);
+      padding: 4px 6px;
+      border-radius: 9999px;
+      border: 1px solid var(--gemini-border-subtle);
+    }
+    .desktop-nav-btn {
+      background: transparent;
+      border: none;
+      color: var(--gemini-text-muted);
+      height: 38px;
+      padding: 0 16px;
+      border-radius: 9999px;
+      font-family: "Google Sans", sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+    }
+    .desktop-nav-btn:hover {
+      color: var(--gemini-text-main);
+      background: rgba(0, 0, 0, 0.04);
+    }
+    .desktop-nav-btn.active {
+      background: var(--gemini-surface);
+      color: var(--gemini-sparkle-blue);
+      box-shadow: 0 2px 8px rgba(0, 98, 255, 0.12);
+    }
+
+    @media (max-width: 839px) {
+      /* COMPACT (NATIVE MOBILE PHONE EXPERIENCE) */
+      .app-shell {
+        max-width: 100%;
+        min-height: 100vh;
+        box-shadow: none;
+      }
+      .desktop-nav-pills {
+        display: none !important;
+      }
+      .app-bottom-nav {
+        display: grid !important;
+      }
+      .app-scroll-content {
+        padding: 12px 14px 105px 14px;
+      }
+      .m3-flow-grid,
+      .m3-you-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+    }
+
+    @media (min-width: 840px) {
+      /* EXPANDED (DESKTOP & TABLET WEB APP EXPERIENCE) */
+      body {
+        padding: 24px 20px;
+        background-color: var(--gemini-surface-container);
+      }
+      .app-shell {
+        max-width: 1200px;
+        border-radius: 28px;
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08);
+        border: 1px solid var(--gemini-border-subtle);
+        overflow: hidden;
+      }
+      header.app-topbar {
+        height: 72px;
+        padding: 0 28px;
+        border-top-left-radius: 28px;
+        border-top-right-radius: 28px;
+      }
+      .desktop-nav-pills {
+        display: flex !important;
+      }
+      .app-bottom-nav {
+        display: none !important;
+      }
+      .app-scroll-content {
+        padding: 26px 32px 60px 32px;
+        min-height: calc(100vh - 120px);
+      }
+      .m3-flow-grid {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 24px;
+        align-items: start;
+      }
+      .flow-col-left, .flow-col-right {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      .health-panels-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+      .m3-you-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        align-items: start;
+      }
+      .you-col-left, .you-col-right {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+      #pane-chat.tab-pane.active {
+        top: 72px;
+        bottom: 0;
+        max-width: 900px;
+        margin: 0 auto;
+        border-radius: 24px;
+      }
+      .gemini-chat-topbar {
+        margin: 16px 20px 8px 20px;
+      }
+      .gemini-chat-typebar {
+        bottom: 20px;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -1241,6 +1376,27 @@
       </a>
 
       <!-- Right Header Group: Dynamic DAY 1 / WEEK 1 + Profile Avatar -->
+      
+      <!-- Google M3 Desktop Navigation Pills (Visible on Tablet & Desktop >= 840px) -->
+      <nav class="desktop-nav-pills">
+        <button class="desktop-nav-btn active" id="btn-desk-tab-flow" onclick="switchAppTab('flow')">
+          <span class="material-symbols-outlined" style="font-size: 19px;">bolt</span>
+          <span>FLOW</span>
+        </button>
+        <button class="desktop-nav-btn" id="btn-desk-tab-health" onclick="switchAppTab('health')">
+          <span class="material-symbols-outlined" style="font-size: 19px;">ecg_heart</span>
+          <span>HEALTH</span>
+        </button>
+        <button class="desktop-nav-btn" id="btn-desk-tab-chat" onclick="switchAppTab('chat')">
+          <span class="material-symbols-outlined" style="font-size: 19px;">chat_spark</span>
+          <span>CHAT</span>
+        </button>
+        <button class="desktop-nav-btn" id="btn-desk-tab-you" onclick="switchAppTab('you')">
+          <span class="material-symbols-outlined" style="font-size: 19px;">person</span>
+          <span>YOU</span>
+        </button>
+      </nav>
+
       <div style="display: flex; align-items: center; gap: 8px;">
         <span id="app-header-day-tag" style="font-size: 11px; font-weight: 800; color: var(--gemini-sparkle-blue); background: var(--gemini-surface-container); border: 1px solid var(--gemini-border-subtle); padding: 4px 10px; border-radius: 9999px; letter-spacing: 0.04em;">
           DAY 1 / WEEK 1
@@ -1283,7 +1439,8 @@
         
         <!-- ---------------- SUB-VIEW 1: DAY (TODAY'S EXECUTION) ---------------- -->
         <div id="subview-flow-day" class="flow-sub-view active">
-          
+          <div class="m3-flow-grid">
+            <div class="flow-col-left">
           <!-- UNIFIED HERO CARD: GREETING + PROTOCOL STATUS + CALORIE & PORTION LEVEL METER -->
           <div class="gemini-card" style="background: linear-gradient(135deg, rgba(0, 192, 255, 0.08), rgba(0, 245, 160, 0.06), rgba(255, 255, 255, 0.98)); border: 1.5px solid rgba(0, 98, 255, 0.15); border-radius: 22px; padding: 20px; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 4px 20px rgba(0, 98, 255, 0.06);">
                        <!-- Top Meta Status Row -->
@@ -1424,6 +1581,8 @@
 
           </div>
 
+          </div><!-- /flow-col-left -->
+            <div class="flow-col-right">
           <!-- 4. TODAY'S TASKS (DYNAMIC PROTOCOL ENGINE) -->
           <div style="display: flex; flex-direction: column; gap: 14px;">
             <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -1455,6 +1614,10 @@
             </p>
           </div>
 
+        </div>
+
+        </div><!-- /flow-col-right -->
+          </div><!-- /m3-flow-grid -->
         </div>
 
         <!-- ---------------- SUB-VIEW 2: WEEK (BOOK - PLAYBOOK & KITCHEN INVENTORY) ---------------- -->
@@ -2188,7 +2351,8 @@
       <section id="pane-you" class="tab-pane">
         
         <div class="health-container">
-          
+          <div class="m3-you-grid">
+            <div class="you-col-left">
           <!-- 1. EXECUTIVE MEMBER IDENTITY & LONGEVITY HERO -->
           <div class="health-patient-card">
             <div style="display: flex; align-items: center; justify-content: space-between;">
@@ -2354,6 +2518,8 @@
             </button>
           </div>
 
+          </div><!-- /you-col-left -->
+            <div class="you-col-right">
           <!-- 5. SMART BIOWEARABLES & DEVICE ECOSYSTEM -->
           <div class="gemini-card" style="padding: 18px 20px;">
             <div style="font-family: 'Google Sans', sans-serif; font-size: 16px; font-weight: 800; color: var(--gemini-text-main); margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;">
@@ -2476,7 +2642,8 @@
               <strong>Tovelu Health OS v3.2.0 • Build 2026.08.28</strong>
             </div>
           </div>
-
+            </div><!-- /you-col-right -->
+          </div><!-- /m3-you-grid -->
         </div>
 
       </section>
@@ -2684,6 +2851,9 @@
 
       const pane = document.getElementById(`pane-${tabId}`);
       const btn = document.getElementById(`btn-tab-${tabId}`);
+      document.querySelectorAll('.desktop-nav-btn').forEach(b => b.classList.remove('active'));
+      const deskBtn = document.getElementById(`btn-desk-tab-${tabId}`);
+      if (deskBtn) deskBtn.classList.add('active');
       if (pane) pane.classList.add('active');
       if (btn) btn.classList.add('active');
 
