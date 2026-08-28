@@ -6,6 +6,16 @@
   "trailingSlash": false,
   "rewrites": [
     {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "app.tovelu.store"
+        }
+      ],
+      "destination": "/app.html"
+    },
+    {
       "source": "/(.*)",
       "has": [
         {
@@ -36,16 +46,12 @@
       "destination": "/sales.html"
     },
     {
-      "source": "/sales",
-      "destination": "/sales.html"
-    },
-    {
-      "source": "/website",
-      "destination": "/sales.html"
-    },
-    {
       "source": "/app",
       "destination": "/app.html"
+    },
+    {
+      "source": "/sales",
+      "destination": "/sales.html"
     },
     {
       "source": "/survey",
@@ -70,10 +76,6 @@
     {
       "source": "/download",
       "destination": "/download.html"
-    },
-    {
-      "source": "/",
-      "destination": "/sales.html"
     }
   ],
   "headers": [

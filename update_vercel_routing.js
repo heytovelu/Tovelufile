@@ -9,6 +9,16 @@ const vercelConfig = {
   "rewrites": [
     // Subdomain Host: app.tovelu.store -> serves the mobile web app (app.html)
     {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "app.tovelu.store"
+        }
+      ],
+      "destination": "/app.html"
+    },
+    {
       "source": "/(.*)",
       "has": [
         {
@@ -18,7 +28,7 @@ const vercelConfig = {
       ],
       "destination": "/app.html"
     },
-    // Root Domain Host: tovelu.store -> serves the website landing page (sales.html)
+    // Root Domain Host: tovelu.store & www.tovelu.store -> serves website (sales.html)
     {
       "source": "/",
       "has": [
@@ -40,17 +50,14 @@ const vercelConfig = {
       "destination": "/sales.html"
     },
     // Core routes
-    { "source": "/sales", "destination": "/sales.html" },
-    { "source": "/website", "destination": "/sales.html" },
     { "source": "/app", "destination": "/app.html" },
+    { "source": "/sales", "destination": "/sales.html" },
     { "source": "/survey", "destination": "/survey.html" },
     { "source": "/report", "destination": "/report.html" },
     { "source": "/checkout", "destination": "/checkout.html" },
     { "source": "/pricing", "destination": "/checkout.html" },
     { "source": "/thais", "destination": "/thais.html" },
-    { "source": "/download", "destination": "/download.html" },
-    // Fallback default
-    { "source": "/", "destination": "/sales.html" }
+    { "source": "/download", "destination": "/download.html" }
   ],
   "headers": [
     {
@@ -105,4 +112,8 @@ fs.writeFileSync("/media/nikita/New Volume/Tovelufile/vercel.json", jsonStr, "ut
 fs.writeFileSync("/media/nikita/New Volume/Tovelufile/webapp/vercel.json", jsonStr, "utf8");
 fs.writeFileSync("/media/nikita/New Volume/Tovelufile/website/vercel.json", jsonStr, "utf8");
 
-console.log("Successfully configured host-based rewrites in vercel.json!");
+// Ensure webapp/index.html is app.html and website/index.html is sales.html
+fs.copyFileSync("/media/nikita/New Volume/Tovelufile/app.html", "/media/nikita/New Volume/Tovelufile/webapp/index.html");
+fs.copyFileSync("/media/nikita/New Volume/Tovelufile/sales.html", "/media/nikita/New Volume/Tovelufile/website/index.html");
+
+console.log("Updated vercel.json and mirror directories!");
