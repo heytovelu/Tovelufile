@@ -13,7 +13,7 @@
   <meta name="apple-mobile-web-app-title" content="Tovelu" />
   <link rel="apple-touch-icon" href="brand-assets/tovelu-icon-color.svg" />
 
-  <!-- Favicon: Official Tovelu Mitosis Bio-Cell Logo (Razor Sharp) -->
+  <!-- Favicon: Official Tovelu Mitosis Bio-Cell Logo -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 16 C28 16, 16 32, 16 50 C16 68, 28 84, 50 84 C38 72, 34 58, 34 50 C34 42, 38 28, 50 16 Z' fill='%230091FF'/%3E%3Cpath d='M50 16 C72 16, 84 32, 84 50 C84 68, 72 84, 50 84 C62 72, 66 58, 66 50 C66 42, 62 28, 50 16 Z' fill='%2300E676'/%3E%3Ccircle cx='50' cy='50' r='8' fill='%2300F5A0'/%3E%3C/svg%3E" />
 
   <!-- Google Fonts: Google Sans, Roboto, Ubuntu, JetBrains Mono & Material Symbols -->
@@ -28,109 +28,100 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background-color: var(--gemini-bg);
-      color: var(--gemini-text-main);
-      font-family: 'Google Sans Text', 'Roboto', sans-serif;
-      line-height: 1.5;
+      background-color: #F8F9FA;
+      color: #111827;
+      font-family: 'Google Sans Text', 'Roboto', -apple-system, sans-serif;
+      line-height: 1.4;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      transition: background-color 0.2s, color 0.2s;
     }
 
-    /* Universal Responsive App Shell */
+    /* Universal Responsive Smartphone App Frame */
     .app-shell {
       width: 100%;
-      max-width: 520px;
+      max-width: 440px;
       min-height: 100vh;
-      background: var(--gemini-bg);
+      background: #FFFFFF;
       display: flex;
       flex-direction: column;
       position: relative;
-      box-shadow: 0 0 40px rgba(0, 0, 0, 0.06);
+      border-left: 1px solid #E5E7EB;
+      border-right: 1px solid #E5E7EB;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.04);
     }
 
-    /* Fixed Top App Bar: [ FULL LOGO | DAY/WEEK | PROFILE ] */
-    header.app-topbar {
-      height: 60px;
-      padding: 0 16px;
+    /* 1. Top Header: [ Full Logo | Bell Icon | Profile Icon ] */
+    header.wireframe-topbar {
+      height: 64px;
+      padding: 0 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      border-bottom: 1px solid #E5E7EB;
+      background: #FFFFFF;
       position: sticky;
       top: 0;
       z-index: 100;
-      background: var(--gemini-bg);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--gemini-border-subtle);
     }
 
     .brand-lockup {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       text-decoration: none;
     }
     .brand-wordmark {
-      font-family: 'Ubuntu', sans-serif;
-      font-weight: 500;
-      font-size: 22px;
-      color: var(--gemini-text-main);
-    }
-
-    /* Top Bar Segmented Switcher (DAY | WEEK) */
-    .top-switcher-wrap {
-      display: inline-flex;
-      background: var(--gemini-surface-container);
-      padding: 3px;
-      border-radius: 9999px;
-      border: 1px solid var(--gemini-border-subtle);
-    }
-    .top-switcher-btn {
-      background: transparent;
-      border: none;
-      color: var(--gemini-text-muted);
-      padding: 6px 16px;
-      border-radius: 9999px;
-      font-size: 11px;
+      font-family: 'Google Sans Display', 'Ubuntu', sans-serif;
       font-weight: 800;
-      letter-spacing: 0.04em;
+      font-size: 24px;
+      color: #111827;
+      letter-spacing: -0.02em;
+    }
+    .top-actions-wrap {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .top-icon-btn {
+      background: none;
+      border: none;
+      color: #111827;
       cursor: pointer;
-      transition: all 0.15s;
-    }
-    .top-switcher-btn.active {
-      background: var(--gemini-surface);
-      color: var(--gemini-sparkle-blue);
-      box-shadow: var(--gemini-shadow-sm);
-    }
-
-    /* Profile Avatar Button */
-    .profile-avatar-btn {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: var(--gemini-surface-container);
-      border: 1.5px solid var(--gemini-border);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 15px;
-      cursor: pointer;
-      color: var(--gemini-text-main);
-      transition: all 0.15s;
+      padding: 4px;
     }
-    .profile-avatar-btn:hover {
-      border-color: var(--gemini-sparkle-blue);
+
+    /* 2. Date & Status Ribbon Sub-header */
+    .date-status-ribbon {
+      height: 40px;
+      border-bottom: 1px solid #E5E7EB;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 16px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: #111827;
+      background: #FFFFFF;
+    }
+    .ribbon-divider {
+      margin: 0 20px;
+      color: #D1D5DB;
+      font-weight: 400;
     }
 
     /* App Main Scroll Content */
     .app-scroll-content {
       flex: 1;
-      padding: 16px 16px 100px 16px;
+      padding: 20px 16px 100px 16px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 20px;
       overflow-y: auto;
     }
 
@@ -138,7 +129,7 @@
     .tab-pane {
       display: none;
       flex-direction: column;
-      gap: 16px;
+      gap: 20px;
       animation: fadeIn 0.2s ease-out;
     }
     .tab-pane.active {
@@ -149,92 +140,260 @@
     .flow-sub-view {
       display: none;
       flex-direction: column;
-      gap: 16px;
+      gap: 20px;
       animation: fadeIn 0.2s ease-out;
     }
     .flow-sub-view.active {
       display: flex;
     }
 
-    /* Meal Card with 3 Input Modes (Scan | Manually | Ask AI) */
-    .app-meal-card {
-      background: var(--gemini-surface);
-      border: 1px solid var(--gemini-border);
-      border-radius: 18px;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      box-shadow: var(--gemini-shadow-sm);
+    /* 3. DAY / WEEK Large Capsule Switchers */
+    .day-week-capsules-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
     }
-    .meal-card-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-    }
-    .meal-title {
-      font-family: 'Google Sans', sans-serif;
+    .capsule-btn {
+      height: 52px;
+      border-radius: 16px;
       font-size: 14px;
       font-weight: 800;
-      color: var(--gemini-text-main);
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
     }
-    .meal-modes-row {
+    .capsule-btn.active {
+      background: #111827;
+      color: #FFFFFF;
+      border: 1.5px solid #111827;
+    }
+    .capsule-btn.inactive {
+      background: #FFFFFF;
+      color: #111827;
+      border: 1.5px solid #111827;
+    }
+
+    /* 4. Hero Telemetry & Calorie Donut (Side-by-Side) */
+    .hero-telemetry-row {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-top: 4px;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 12px;
+      align-items: stretch;
     }
-    .meal-mode-btn {
-      background: var(--gemini-surface-container);
-      border: 1px solid var(--gemini-border-subtle);
-      border-radius: 12px;
-      padding: 10px 6px;
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--gemini-text-main);
+
+    /* Left Card: Calorie Donut */
+    .calorie-donut-card {
+      border: 1.5px solid #111827;
+      border-radius: 20px;
+      padding: 20px 14px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 4px;
-      cursor: pointer;
-      transition: all 0.15s;
+      justify-content: center;
+      gap: 14px;
+      background: #FFFFFF;
     }
-    .meal-mode-btn:hover, .meal-mode-btn.active {
-      background: var(--gemini-surface);
-      border-color: var(--gemini-sparkle-blue);
-      color: var(--gemini-sparkle-blue);
-      box-shadow: var(--gemini-shadow-sm);
+    .donut-visual-wrap {
+      position: relative;
+      width: 104px;
+      height: 104px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .donut-center-pct {
+      position: absolute;
+      font-family: 'Google Sans Display', sans-serif;
+      font-size: 24px;
+      font-weight: 800;
+      color: #111827;
+    }
+    .donut-calories-val {
+      font-family: 'Google Sans Display', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      color: #111827;
+      text-align: center;
+      line-height: 1.25;
+    }
+    .donut-calories-val span {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      color: #4B5563;
     }
 
-    /* Category Selection Pills for Food Modal */
-    .food-type-selector {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 6px;
-      background: var(--gemini-surface-container);
-      padding: 4px;
-      border-radius: 12px;
-      margin-bottom: 12px;
+    /* Right Column: 3 Pill Progress Meters with + Buttons */
+    .metrics-col-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      justify-content: space-between;
     }
-    .food-type-pill {
-      background: transparent;
-      border: none;
-      padding: 8px 4px;
-      border-radius: 8px;
+    .metric-wireframe-pill {
+      border: 1.5px solid #111827;
+      border-radius: 18px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #FFFFFF;
+      gap: 6px;
+    }
+    .metric-info-side {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+    }
+    .mini-slider-track {
+      width: 60px;
+      height: 8px;
+      background: #E5E7EB;
+      border-radius: 9999px;
+      overflow: hidden;
+      display: flex;
+    }
+    .mini-slider-fill {
+      height: 100%;
+      background: #111827;
+      border-radius: 9999px;
+    }
+    .mini-slider-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
       font-size: 11px;
       font-weight: 800;
-      color: var(--gemini-text-muted);
-      cursor: pointer;
-      text-align: center;
-      transition: all 0.15s;
+      color: #111827;
     }
-    .food-type-pill.active {
-      background: var(--gemini-surface);
-      color: var(--gemini-sparkle-blue);
-      box-shadow: var(--gemini-shadow-sm);
+    .metric-label-txt {
+      font-size: 11px;
+      font-weight: 800;
+      color: #111827;
+      white-space: nowrap;
+    }
+    .metric-plus-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #111827;
+    }
+    .metric-plus-btn:hover {
+      background: #F3F4F6;
     }
 
-    /* Modal / Bottom Sheet */
+    /* 5. 3 Meal Buttons: [ BREAKFAST ][ LUNCH ][ DINNER ] */
+    .meals-3-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .meal-block-btn {
+      height: 64px;
+      border-radius: 18px;
+      background: #111827;
+      color: #FFFFFF;
+      border: none;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      transition: all 0.15s;
+    }
+    .meal-block-btn:hover {
+      background: #1F2937;
+      transform: translateY(-1px);
+    }
+    .meal-block-btn.logged {
+      background: #00D06C;
+      color: #FFFFFF;
+    }
+
+    /* 6. Tasks Section Header */
+    .tasks-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 4px;
+    }
+    .tasks-title-txt {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      color: #111827;
+    }
+    .tasks-swipe-hint {
+      font-size: 11px;
+      font-weight: 700;
+      color: #6B7280;
+    }
+
+    /* 7. Distinct Circadian Task Card with Overlapping Sun Badge */
+    .circadian-task-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding-left: 28px;
+      margin-top: 4px;
+    }
+    .circadian-sun-badge {
+      position: absolute;
+      left: 0;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: #111827;
+      border: 3px solid #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      z-index: 2;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+    .circadian-task-pill {
+      flex: 1;
+      border: 1.5px solid #111827;
+      border-radius: 20px;
+      padding: 14px 16px 14px 38px;
+      background: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .circadian-task-pill.completed {
+      background: #F9FAFB;
+      opacity: 0.85;
+    }
+    .task-primary-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: #111827;
+    }
+    .task-time-subtitle {
+      font-size: 11px;
+      font-weight: 700;
+      color: #4B5563;
+    }
+
+    /* Food Intelligence Modal */
     .food-modal-overlay {
       position: fixed;
       inset: 0;
@@ -247,8 +406,8 @@
     }
     .food-modal-sheet {
       width: 100%;
-      max-width: 520px;
-      background: var(--gemini-surface);
+      max-width: 440px;
+      background: #FFFFFF;
       border-top-left-radius: 24px;
       border-top-right-radius: 24px;
       padding: 24px 20px 36px 20px;
@@ -264,83 +423,20 @@
       to { transform: translateY(0); }
     }
 
-    /* Pantry Tags */
-    .pantry-tags-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    .pantry-chip {
-      background: var(--gemini-surface-container);
-      border: 1px solid var(--gemini-border-subtle);
-      color: var(--gemini-text-main);
-      padding: 6px 12px;
-      border-radius: 9999px;
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      transition: all 0.15s;
-    }
-    .pantry-chip.selected {
-      background: var(--gemini-vitality-emerald);
-      color: #FFFFFF;
-      border-color: var(--gemini-vitality-emerald);
-    }
-
-    /* Task Item */
-    .app-task-card {
-      background: var(--gemini-surface);
-      border: 1px solid var(--gemini-border);
-      border-radius: 16px;
-      padding: 14px 16px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      cursor: pointer;
-      transition: all 0.15s;
-    }
-    .app-task-card.completed {
-      background: var(--gemini-surface-container);
-      opacity: 0.85;
-    }
-    .app-task-checkbox {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      border: 2px solid var(--gemini-border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 13px;
-      color: transparent;
-      transition: all 0.15s;
-    }
-    .app-task-card.completed .app-task-checkbox {
-      background: var(--gemini-vitality-emerald);
-      border-color: var(--gemini-vitality-emerald);
-      color: #FFFFFF;
-    }
-
-    /* Fixed Bottom App Navigation (3 Core Tabs: FLOW | CHAT | HEALTH) */
+    /* Fixed Bottom Navigation (3 Core Tabs: FLOW | CHAT | HEALTH) */
     nav.app-bottom-nav {
       position: fixed;
       bottom: 0;
       width: 100%;
-      max-width: 520px;
+      max-width: 440px;
       height: 64px;
-      background: var(--gemini-bg);
-      backdrop-filter: blur(20px);
-      border-top: 1px solid var(--gemini-border-subtle);
+      background: #FFFFFF;
+      border-top: 1px solid #E5E7EB;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       z-index: 100;
       padding-bottom: env(safe-area-inset-bottom);
     }
-
     .nav-item-btn {
       background: transparent;
       border: none;
@@ -349,12 +445,12 @@
       align-items: center;
       justify-content: center;
       gap: 2px;
-      color: var(--gemini-text-muted);
+      color: #6B7280;
       cursor: pointer;
       transition: all 0.15s;
     }
     .nav-item-btn.active {
-      color: var(--gemini-sparkle-blue);
+      color: #111827;
     }
     .nav-item-btn.active .material-symbols-outlined {
       font-variation-settings: 'FILL' 1;
@@ -364,404 +460,246 @@
       font-weight: 800;
       letter-spacing: 0.03em;
     }
-
-    /* Chat Messages */
-    .app-chat-scroller {
-      height: 420px;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      padding: 6px 0;
-    }
-    .app-msg-bubble {
-      padding: 12px 16px;
-      border-radius: 16px;
-      font-size: 13px;
-      line-height: 1.5;
-      max-width: 86%;
-    }
-    .app-msg-thais {
-      background: var(--gemini-surface-container);
-      color: var(--gemini-text-main);
-      align-self: flex-start;
-      border-bottom-left-radius: 4px;
-    }
-    .app-msg-user {
-      background: var(--gemini-gradient-btn);
-      color: #FFFFFF;
-      align-self: flex-end;
-      border-bottom-right-radius: 4px;
-    }
   </style>
 </head>
 <body>
 
   <div class="app-shell">
     
-    <!-- ==================== FIXED TOP APP BAR: [ FULL LOGO | DAY/WEEK | PROFILE ] ==================== -->
-    <header class="app-topbar">
-      <!-- Full Mitosis Logo + Wordmark -->
+    <!-- ==================== 1. TOP BAR: [ FULL LOGO | BELL | PROFILE ] ==================== -->
+    <header class="wireframe-topbar">
+      <!-- Full Logo -->
       <a href="#" class="brand-lockup" onclick="switchAppTab('flow')">
         <div class="tovelu-mitosis-anim">
-          <svg width="28" height="28" viewBox="0 0 100 100" fill="none" shape-rendering="geometricPrecision">
-            <path d="M50 16 C28 16, 16 32, 16 50 C16 68, 28 84, 50 84 C38 72, 34 58, 34 50 C34 42, 38 28, 50 16 Z" fill="url(#t-cyan)"/>
-            <path d="M50 16 C72 16, 84 32, 84 50 C84 68, 72 84, 50 84 C62 72, 66 58, 66 50 C66 42, 62 28, 50 16 Z" fill="url(#t-emerald)"/>
+          <svg width="30" height="30" viewBox="0 0 100 100" fill="none" shape-rendering="geometricPrecision">
+            <path d="M50 16 C28 16, 16 32, 16 50 C16 68, 28 84, 50 84 C38 72, 34 58, 34 50 C34 42, 38 28, 50 16 Z" fill="url(#w-cyan)"/>
+            <path d="M50 16 C72 16, 84 32, 84 50 C84 68, 72 84, 50 84 C62 72, 66 58, 66 50 C66 42, 62 28, 50 16 Z" fill="url(#w-emerald)"/>
             <circle cx="50" cy="50" r="8.5" fill="#00F5A0"/>
             <defs>
-              <linearGradient id="t-cyan" x1="16" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse"><stop stop-color="#00C0FF"/><stop offset="1" stop-color="#0062FF"/></linearGradient>
-              <linearGradient id="t-emerald" x1="84" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse"><stop stop-color="#00F5A0"/><stop offset="1" stop-color="#00D06C"/></linearGradient>
+              <linearGradient id="w-cyan" x1="16" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse"><stop stop-color="#00C0FF"/><stop offset="1" stop-color="#0062FF"/></linearGradient>
+              <linearGradient id="w-emerald" x1="84" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse"><stop stop-color="#00F5A0"/><stop offset="1" stop-color="#00D06C"/></linearGradient>
             </defs>
           </svg>
         </div>
         <span class="brand-wordmark">tovelu</span>
       </a>
 
-      <!-- DAY / WEEK Top Switcher -->
-      <div class="top-switcher-wrap" id="top-flow-switcher">
-        <button class="top-switcher-btn active" id="btn-top-day" onclick="switchFlowSubView('day')">DAY</button>
-        <button class="top-switcher-btn" id="btn-top-week" onclick="switchFlowSubView('week')">WEEK</button>
-      </div>
-
-      <!-- Profile Avatar Button -->
-      <div class="profile-avatar-btn" onclick="openProfileModal()" title="Your Profile">
-        <span class="material-symbols-outlined" style="font-size: 20px;">account_circle</span>
+      <!-- Right Action Icons: Notification Bell & Profile Avatar -->
+      <div class="top-actions-wrap">
+        <button class="top-icon-btn" onclick="alert('No new notifications.')" title="Notifications">
+          <span class="material-symbols-outlined" style="font-size: 26px;">notifications</span>
+        </button>
+        <button class="top-icon-btn" onclick="openProfileModal()" title="Your Profile">
+          <span class="material-symbols-outlined" style="font-size: 28px;">person</span>
+        </button>
       </div>
     </header>
+
+    <!-- ==================== 2. DATE & STATUS RIBBON ==================== -->
+    <div class="date-status-ribbon">
+      <span>24 AUG 2026</span>
+      <span class="ribbon-divider">|</span>
+      <span>DAY 4 - WEEK 8</span>
+    </div>
 
     <!-- App Main Scroll Content -->
     <div class="app-scroll-content">
       
-      <!-- ==================== 1. TAB: FLOW (DAY | WEEK) ==================== -->
+      <!-- ==================== TAB 1: FLOW ==================== -->
       <section id="pane-flow" class="tab-pane active">
         
-        <!-- ---------------- SUB-VIEW 1: DAY (TODAY'S EXECUTION) ---------------- -->
+        <!-- 3. DAY / WEEK LARGE CAPSULE BUTTONS -->
+        <div class="day-week-capsules-wrap">
+          <button class="capsule-btn active" id="btn-capsule-day" onclick="switchFlowSubView('day')">
+            DAY
+          </button>
+          <button class="capsule-btn inactive" id="btn-capsule-week" onclick="switchFlowSubView('week')">
+            WEEK
+          </button>
+        </div>
+
+        <!-- ---------------- SUB-VIEW: DAY ---------------- -->
         <div id="subview-flow-day" class="flow-sub-view active">
           
-          <!-- 1. GREETING WITH NAME & CURRENT DATE BANNER -->
-          <div class="gemini-card" style="background: linear-gradient(135deg, rgba(0, 192, 255, 0.08), rgba(0, 245, 160, 0.08));">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald); background: var(--gemini-surface); padding: 3px 8px; border-radius: 9999px;">
-                PROTOCOL ACTIVE • DAY 18
-              </span>
-              <span style="font-size: 11px; font-weight: 700; color: var(--gemini-sparkle-blue);" id="flow-compliance-pct">75% Done</span>
-            </div>
-            <div style="font-family: 'Google Sans Display', sans-serif; font-size: 22px; font-weight: 800; margin-top: 6px;">
-              Good morning, Ajay 👋
-            </div>
-            <p style="font-size: 12px; color: var(--gemini-text-muted); margin-top: 2px;">
-              Thursday, 28 August 2026 • Targeting <strong style="color: var(--gemini-text-main);">Energy Stabilization & Gut Healing</strong>
-            </p>
-          </div>
-
-          <!-- 2. PORTION LEVEL METER (THE TOVELU BIO-PLATE PROGRESS) -->
-          <div class="gemini-card">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald); text-transform: uppercase;">
-                🥗 Today's Portion Level Meter
-              </div>
-              <span style="font-size: 10px; font-weight: 700; color: var(--gemini-sparkle-blue);">Flat Glycemic Ratio</span>
-            </div>
+          <!-- 4. HERO TELEMETRY & CALORIE DONUT ROW -->
+          <div class="hero-telemetry-row">
             
-            <div style="display: flex; align-items: center; gap: 16px; margin-top: 10px;">
-              <!-- Circular Bio-Plate Visual -->
-              <div style="width: 96px; height: 96px; position: relative; flex-shrink: 0;">
-                <svg width="96" height="96" viewBox="0 0 100 100">
-                  <circle cx="50" cy="50" r="40" fill="none" stroke="var(--gemini-surface-container)" stroke-width="12"/>
-                  <!-- 50% Greens/Fiber (Emerald) -->
-                  <circle cx="50" cy="50" r="40" fill="none" stroke="#00F5A0" stroke-width="12" stroke-dasharray="125 251" stroke-dashoffset="0"/>
-                  <!-- 30% Clean Protein (Cyan/Blue) -->
-                  <circle cx="50" cy="50" r="40" fill="none" stroke="#0062FF" stroke-width="12" stroke-dasharray="75 251" stroke-dashoffset="-125"/>
-                  <!-- 15% Slow Carbs (Amber) -->
-                  <circle cx="50" cy="50" r="40" fill="none" stroke="#F59E0B" stroke-width="12" stroke-dasharray="38 251" stroke-dashoffset="-200"/>
-                  <!-- 5% Pure Fats (Purple) -->
-                  <circle cx="50" cy="50" r="40" fill="none" stroke="#A855F7" stroke-width="12" stroke-dasharray="13 251" stroke-dashoffset="-238"/>
+            <!-- Left: Calorie Donut Card -->
+            <div class="calorie-donut-card">
+              <div class="donut-visual-wrap">
+                <svg width="104" height="104" viewBox="0 0 100 100">
+                  <!-- Background Track -->
+                  <circle cx="50" cy="50" r="38" fill="none" stroke="#E5E7EB" stroke-width="14"/>
+                  <!-- 81% Progress Fill Arc -->
+                  <circle cx="50" cy="50" r="38" fill="none" stroke="#111827" stroke-width="14" stroke-linecap="round" stroke-dasharray="193 238" stroke-dashoffset="0" transform="rotate(-90 50 50)"/>
                 </svg>
-                <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: var(--gemini-text-main);">
-                  PLATE
-                </div>
+                <div class="donut-center-pct">81%</div>
               </div>
-
-              <!-- Portion Slices Breakdown -->
-              <div style="flex: 1; display: flex; flex-direction: column; gap: 4px; font-size: 11px;">
-                <div style="display: flex; justify-content: space-between;">
-                  <span style="color: #00D06C; font-weight: 700;">🥦 50% Greens & Fiber</span>
-                  <span style="font-weight: 700; color: var(--gemini-text-main);" id="pct-greens">65% Filled</span>
-                </div>
-                <div style="display: flex; justify-content: space-between;">
-                  <span style="color: #0062FF; font-weight: 700;">🥩 30% Clean Protein</span>
-                  <span style="font-weight: 700; color: var(--gemini-text-main);" id="pct-protein">75% (110g/145g)</span>
-                </div>
-                <div style="display: flex; justify-content: space-between;">
-                  <span style="color: #D97706; font-weight: 700;">🍠 15% Complex Carbs</span>
-                  <span style="font-weight: 700; color: var(--gemini-text-main);">40% (45g/80g)</span>
-                </div>
-                <div style="display: flex; justify-content: space-between;">
-                  <span style="color: #9333EA; font-weight: 700;">🧈 5% Natural Fats</span>
-                  <span style="font-weight: 700; color: var(--gemini-text-main);">Desi Ghee / Olive</span>
-                </div>
+              <div class="donut-calories-val">
+                1,240 / 1,940
+                <span>kcal</span>
               </div>
             </div>
+
+            <!-- Right: 3 Metric Sliders with + Buttons -->
+            <div class="metrics-col-wrap">
+              <!-- Walk -->
+              <div class="metric-wireframe-pill">
+                <div class="metric-info-side">
+                  <div class="mini-slider-row">
+                    <div class="mini-slider-track">
+                      <div class="mini-slider-fill" style="width: 71%;"></div>
+                    </div>
+                    <span>71%</span>
+                  </div>
+                  <div class="metric-label-txt" id="txt-walk-meter">3869/8,000 Walk</div>
+                </div>
+                <button class="metric-plus-btn" onclick="quickAddWalk()" title="Add Walk">+</button>
+              </div>
+
+              <!-- Water -->
+              <div class="metric-wireframe-pill">
+                <div class="metric-info-side">
+                  <div class="mini-slider-row">
+                    <div class="mini-slider-track">
+                      <div class="mini-slider-fill" style="width: 71%;"></div>
+                    </div>
+                    <span>71%</span>
+                  </div>
+                  <div class="metric-label-txt" id="txt-water-meter">2.3/4.5 Water</div>
+                </div>
+                <button class="metric-plus-btn" onclick="quickAddWater()" title="Add 250ml Water">+</button>
+              </div>
+
+              <!-- Sleep -->
+              <div class="metric-wireframe-pill">
+                <div class="metric-info-side">
+                  <div class="mini-slider-row">
+                    <div class="mini-slider-track">
+                      <div class="mini-slider-fill" style="width: 71%;"></div>
+                    </div>
+                    <span>71%</span>
+                  </div>
+                  <div class="metric-label-txt">6.5/8 Hour Sleep</div>
+                </div>
+                <button class="metric-plus-btn" onclick="alert('Sleep synced from wearable: 6.5 Hours recorded.')" title="Log Sleep">+</button>
+              </div>
+            </div>
+
           </div>
 
-          <!-- 3. FOOD INTELLIGENCE (BREAKFAST | LUNCH | DINNER with SCAN, MANUALLY, ASK AI) -->
-          <div style="display: flex; flex-direction: column; gap: 10px;">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div style="font-size: 11px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase;">
-                🍽️ Meals & Food Intelligence
-              </div>
-              <span style="font-size: 10px; font-weight: 800; color: var(--gemini-vitality-emerald); background: var(--gemini-surface-container); padding: 2px 8px; border-radius: 9999px;">
-                0% Seed Oils Goal
-              </span>
-            </div>
-
-            <!-- Breakfast Card -->
-            <div class="app-meal-card">
-              <div class="meal-card-header">
-                <div>
-                  <span style="font-size: 11px; font-weight: 800; color: var(--gemini-sparkle-blue);">🍳 BREAKFAST • 08:30 AM</span>
-                  <div class="meal-title" style="margin-top: 2px;">Savory Pasture Eggs / Paneer + Greens</div>
-                </div>
-                <span style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald);" id="status-breakfast-tag">✓ 32g Protein Logged</span>
-              </div>
-              
-              <!-- 3 Consumption Pathways: Scan | Manually | Ask AI -->
-              <div class="meal-modes-row">
-                <button class="meal-mode-btn" onclick="openFoodModal('scan', 'Breakfast')">
-                  <span class="material-symbols-outlined" style="font-size: 18px;">photo_camera</span>
-                  <span>Scan / Photo</span>
-                </button>
-                <button class="meal-mode-btn" onclick="openFoodModal('manual', 'Breakfast')">
-                  <span class="material-symbols-outlined" style="font-size: 18px;">edit_note</span>
-                  <span>Manually</span>
-                </button>
-                <button class="meal-mode-btn" onclick="openFoodModal('ask_ai', 'Breakfast')">
-                  <span class="material-symbols-outlined" style="font-size: 18px;">auto_awesome</span>
-                  <span>Ask AI</span>
-                </button>
-              </div>
-            </div>
-
-            <!-- Lunch Card -->
-            <div class="app-meal-card">
-              <div class="meal-card-header">
-                <div>
-                  <span style="font-size: 11px; font-weight: 800; color: var(--gemini-sparkle-blue);">🥗 LUNCH • 01:30 PM</span>
-                  <div class="meal-title" style="margin-top: 2px;">Mediterranean Salmon / Sprouted Lentil Bowl</div>
-                </div>
-                <span style="font-size: 11px; font-weight: 700; color: var(--gemini-text-muted);" id="status-lunch-tag">Target: 48g Protein</span>
-              </div>
-
-              <!-- 3 Consumption Pathways -->
-              <div class="meal-modes-row">
-                <button class="meal-mode-btn" onclick="openFoodModal('scan', 'Lunch')">
-                  <span class="material-symbols-outlined" style="font-size: 18px;">photo_camera</span>
-                  <span>Scan / Photo</span>
-                </button>
-                <button class="meal-mode-btn" onclick="openFoodModal('manual', 'Lunch')">
-                  <span class="material-symbols-outlined" style="font-size: 18px;">edit_note</span>
-                  <span>Manually</span>
-                </button>
-                <button class="meal-mode-btn" onclick="openFoodModal('ask_ai', 'Lunch')">
-                  <span class="material-symbols-outlined" style="font-size: 18px;">auto_awesome</span>
-                  <span>Ask AI</span>
-                </button>
-              </div>
-            </div>
-
-            <!-- Dinner Card -->
-            <div class="app-meal-card">
-              <div class="meal-card-header">
-                <div>
-                  <span style="font-size: 11px; font-weight: 800; color: var(--gemini-sparkle-blue);">🍲 DINNER • 07:30 PM</span>
-                  <div class="meal-title" style="margin-top: 2px;">Slow Bone Broth Stew & Steamed Sweet Potato</div>
-                </div>
-                <span style="font-size: 11px; font-weight: 700; color: var(--gemini-text-muted);" id="status-dinner-tag">Target: 40g Protein</span>
-              </div>
-
-              <!-- 3 Consumption Pathways -->
-              <div class="meal-modes-row">
-                <button class="meal-mode-btn" onclick="openFoodModal('scan', 'Dinner')">
-                  <span class="material-symbols-outlined" style="font-size: 18px;">photo_camera</span>
-                  <span>Scan / Photo</span>
-                </button>
-                <button class="meal-mode-btn" onclick="openFoodModal('manual', 'Dinner')">
-                  <span class="material-symbols-outlined" style="font-size: 18px;">edit_note</span>
-                  <span>Manually</span>
-                </button>
-                <button class="meal-mode-btn" onclick="openFoodModal('ask_ai', 'Dinner')">
-                  <span class="material-symbols-outlined" style="font-size: 18px;">auto_awesome</span>
-                  <span>Ask AI</span>
-                </button>
-              </div>
-            </div>
+          <!-- 5. 3 MEAL BUTTONS: [ BREAKFAST ][ LUNCH ][ DINNER ] -->
+          <div class="meals-3-row">
+            <button class="meal-block-btn" id="btn-meal-b" onclick="openFoodModal('Breakfast')">
+              <span>BREAKFAST</span>
+            </button>
+            <button class="meal-block-btn" id="btn-meal-l" onclick="openFoodModal('Lunch')">
+              <span>LUNCH</span>
+            </button>
+            <button class="meal-block-btn" id="btn-meal-d" onclick="openFoodModal('Dinner')">
+              <span>DINNER</span>
+            </button>
           </div>
 
-          <!-- 4. TODAY'S TASKS (1, 2, 3) -->
-          <div style="display: flex; flex-direction: column; gap: 10px;">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div style="font-size: 11px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase;">
-                ✅ Today's Circadian Tasks
-              </div>
-              <span style="font-size: 11px; font-weight: 700; color: var(--gemini-sparkle-blue);" id="flow-task-counter">3 / 4 Done</span>
-            </div>
-
-            <div class="app-task-card completed" onclick="toggleTaskCard(this)">
-              <div class="app-task-checkbox">✓</div>
-              <div style="flex: 1;">
-                <div style="font-size: 13px; font-weight: 700;">1. 🌅 Morning Photobiomodulation (15 Mins)</div>
-                <div style="font-size: 11px; color: var(--gemini-text-muted);">Expose eyes to natural sunlight within 45m of waking. (SCN cortisol sync)</div>
-              </div>
-            </div>
-
-            <div class="app-task-card completed" onclick="toggleTaskCard(this)">
-              <div class="app-task-checkbox">✓</div>
-              <div style="flex: 1;">
-                <div style="font-size: 13px; font-weight: 700;">2. 💧 Cellular Osmolyte Hydration</div>
-                <div style="font-size: 11px; color: var(--gemini-text-muted);">500ml water + Celtic sea salt pinch upon waking.</div>
-              </div>
-            </div>
-
-            <div class="app-task-card completed" onclick="toggleTaskCard(this)">
-              <div class="app-task-checkbox">✓</div>
-              <div style="flex: 1;">
-                <div style="font-size: 13px; font-weight: 700;">3. 🚶 Post-Lunch Glucose Clearance Walk (12 Mins)</div>
-                <div style="font-size: 11px; color: var(--gemini-text-muted);">Brisk walking within 20m of eating to lower glucose spike by 34%.</div>
-              </div>
-            </div>
-
-            <div class="app-task-card" onclick="toggleTaskCard(this)">
-              <div class="app-task-checkbox">✓</div>
-              <div style="flex: 1;">
-                <div style="font-size: 13px; font-weight: 700;">4. 🌙 Circadian Wind-Down & Melatonin Shield</div>
-                <div style="font-size: 11px; color: var(--gemini-text-muted);">Cut blue light 60m before bed; bedroom at 19°C. (Scheduled for 22:00)</div>
-              </div>
-            </div>
+          <!-- 6. TASKS SECTION HEADER -->
+          <div class="tasks-header-row">
+            <div class="tasks-title-txt">Alex, Your Todays Tasks</div>
+            <div class="tasks-swipe-hint">Swipe Icon ➔</div>
           </div>
 
-          <!-- 5. TODAY'S CLINICAL NOTE / SUGGESTION -->
-          <div class="gemini-card" style="background: linear-gradient(135deg, rgba(0, 192, 255, 0.08), rgba(0, 245, 160, 0.08)); border-left: 4px solid var(--gemini-sparkle-blue);">
-            <div style="font-size: 10px; font-weight: 800; color: var(--gemini-sparkle-blue); text-transform: uppercase; margin-bottom: 2px;">
-              💡 THAIS CLINICAL NOTE OF THE DAY
+          <!-- 7. CIRCADIAN TASK CARDS (SUN BADGE OVERLAY) -->
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            
+            <!-- Task 1: 10 Minute Morning Sunlight -->
+            <div class="circadian-task-container">
+              <div class="circadian-sun-badge">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="5"></circle>
+                  <line x1="12" y1="1" x2="12" y2="3"></line>
+                  <line x1="12" y1="21" x2="12" y2="23"></line>
+                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                  <line x1="1" y1="12" x2="3" y2="12"></line>
+                  <line x1="21" y1="12" x2="23" y2="12"></line>
+                  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+              </div>
+              <div class="circadian-task-pill" onclick="toggleTaskPill(this)">
+                <div class="task-primary-title">10 Minute morning sunlight</div>
+                <div class="task-time-subtitle">07:30 AM - 08:30 AM</div>
+              </div>
             </div>
-            <div style="font-size: 13px; font-weight: 700; color: var(--gemini-text-main); margin-bottom: 4px;">
-              The 90-Minute Caffeine Delay Rule
+
+            <!-- Task 2: Breakfast & 30g+ Protein -->
+            <div class="circadian-task-container">
+              <div class="circadian-sun-badge">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="5"></circle>
+                  <line x1="12" y1="1" x2="12" y2="3"></line>
+                  <line x1="12" y1="21" x2="12" y2="23"></line>
+                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                  <line x1="1" y1="12" x2="3" y2="12"></line>
+                  <line x1="21" y1="12" x2="23" y2="12"></line>
+                  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+              </div>
+              <div class="circadian-task-pill" onclick="toggleTaskPill(this)">
+                <div class="task-primary-title">Breakfast & 30g+ protein</div>
+                <div class="task-time-subtitle">09:00 AM - 10:00 AM</div>
+              </div>
             </div>
-            <p style="font-size: 12px; color: var(--gemini-text-muted); line-height: 1.5;">
-              Delaying your first cup of coffee or tea by 90 minutes allows your brain's adenosine levels to clear naturally, completely preventing the common 2:00 PM afternoon energy crash.
-            </p>
+
+            <!-- Task 3: 12-Minute Post-Lunch Zone 2 Walk -->
+            <div class="circadian-task-container">
+              <div class="circadian-sun-badge">
+                <span class="material-symbols-outlined" style="font-size: 28px;">directions_walk</span>
+              </div>
+              <div class="circadian-task-pill" onclick="toggleTaskPill(this)">
+                <div class="task-primary-title">12-Minute Post-Lunch Walk</div>
+                <div class="task-time-subtitle">01:45 PM - 02:15 PM</div>
+              </div>
+            </div>
+
           </div>
 
         </div>
 
-        <!-- ---------------- SUB-VIEW 2: WEEK (BOOK - PLAYBOOK & KITCHEN INVENTORY) ---------------- -->
+        <!-- ---------------- SUB-VIEW: WEEK (BOOK / PLAYBOOK) ---------------- -->
         <div id="subview-flow-week" class="flow-sub-view">
           
-          <!-- 1. WEEKLY PROGRESS & SCORECARD (TOP HERO) -->
-          <div class="gemini-card" style="background: linear-gradient(135deg, rgba(0, 192, 255, 0.1), rgba(0, 245, 160, 0.1));">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span style="font-size: 10px; font-weight: 800; color: var(--gemini-sparkle-blue); background: var(--gemini-surface); padding: 3px 8px; border-radius: 9999px;">
-                WEEKLY SCORECARD • WEEK 3
-              </span>
-              <span style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald);">91% Compliance</span>
+          <div style="border: 1.5px solid #111827; border-radius: 20px; padding: 20px; background: #FFFFFF;">
+            <div style="font-size: 11px; font-weight: 800; color: #6B7280; text-transform: uppercase;">Weekly Playbook</div>
+            <div style="font-family: 'Google Sans Display', sans-serif; font-size: 20px; font-weight: 800; margin-top: 4px;">
+              Week 8: Deep Cellular Rejuvenation
             </div>
-            <div style="font-family: 'Google Sans Display', sans-serif; font-size: 20px; font-weight: 800; margin-top: 6px;">
-              Insulin Resensitization & Fat Adaptation
-            </div>
-            <div style="display: flex; gap: 6px; margin: 10px 0 6px 0;">
-              <div style="flex: 1; text-align: center; background: var(--gemini-vitality-emerald); color: white; padding: 6px 0; border-radius: 8px; font-size: 10px; font-weight: 800;">M ✓</div>
-              <div style="flex: 1; text-align: center; background: var(--gemini-vitality-emerald); color: white; padding: 6px 0; border-radius: 8px; font-size: 10px; font-weight: 800;">T ✓</div>
-              <div style="flex: 1; text-align: center; background: var(--gemini-vitality-emerald); color: white; padding: 6px 0; border-radius: 8px; font-size: 10px; font-weight: 800;">W ✓</div>
-              <div style="flex: 1; text-align: center; background: var(--gemini-sparkle-blue); color: white; padding: 6px 0; border-radius: 8px; font-size: 10px; font-weight: 800;">TH (Today)</div>
-              <div style="flex: 1; text-align: center; background: var(--gemini-surface-container); color: var(--gemini-text-muted); padding: 6px 0; border-radius: 8px; font-size: 10px; font-weight: 700;">F</div>
-              <div style="flex: 1; text-align: center; background: var(--gemini-surface-container); color: var(--gemini-text-muted); padding: 6px 0; border-radius: 8px; font-size: 10px; font-weight: 700;">SA</div>
-              <div style="flex: 1; text-align: center; background: var(--gemini-surface-container); color: var(--gemini-text-muted); padding: 6px 0; border-radius: 8px; font-size: 10px; font-weight: 700;">SU</div>
-            </div>
-            <div style="font-size: 11px; color: var(--gemini-vitality-emerald); font-weight: 700;">
-              ⚡ Projected Epigenetic Gain: -0.3 Biological Years Saved This Week.
+            <div style="font-size: 12px; color: #4B5563; margin-top: 6px; line-height: 1.5;">
+              Training your mitochondria to maximize fat-oxidation and anchor restorative sleep.
             </div>
           </div>
 
-          <!-- 2. MY KITCHEN INVENTORY BUTTON (USER ADDS WHAT INGREDIENTS ARE IN KITCHEN) -->
-          <div class="gemini-card" style="border: 1.5px dashed var(--gemini-sparkle-blue); background: var(--gemini-surface-container);">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div>
-                <div style="font-size: 13px; font-weight: 800; color: var(--gemini-text-main); display: flex; align-items: center; gap: 6px;">
-                  <span class="material-symbols-outlined" style="color: var(--gemini-sparkle-blue); font-size: 20px;">kitchen</span>
-                  My Kitchen & Pantry Inventory
-                </div>
-                <div style="font-size: 11px; color: var(--gemini-text-muted); margin-top: 2px;">
-                  Add what you have at home so Ask AI suggests recipes with zero grocery runs!
-                </div>
-              </div>
-              <button class="gemini-btn gemini-btn-primary" style="height: 36px; padding: 0 14px; font-size: 12px;" onclick="openPantryModal()">
-                Manage
-              </button>
-            </div>
-
-            <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px;" id="pantry-chips-display">
-              <span class="pantry-chip selected">🍳 Pasture Eggs (12)</span>
-              <span class="pantry-chip selected">🧈 Pure Desi Ghee</span>
-              <span class="pantry-chip selected">🥬 Baby Spinach</span>
-              <span class="pantry-chip selected">🥑 Avocado</span>
-              <span class="pantry-chip selected">🫘 Organic Lentils</span>
-              <span class="pantry-chip selected">🐟 Wild Salmon</span>
-            </div>
-          </div>
-
-          <!-- 3. NON-NEGOTIABLE WEEKLY RULES: WHAT TO DO & WHAT TO AVOID -->
-          <div class="gemini-card" style="padding: 16px;">
-            <div style="font-size: 13px; font-weight: 800; color: var(--gemini-text-main); margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
-              <span class="material-symbols-outlined" style="font-size: 18px; color: var(--gemini-sparkle-blue);">gavel</span>
-              Non-Negotiable Rules of Week 3
-            </div>
-
-            <!-- What to Do -->
-            <div style="margin-bottom: 12px;">
-              <div style="font-size: 12px; font-weight: 800; color: var(--gemini-vitality-emerald); margin-bottom: 4px; display: flex; align-items: center; gap: 4px;">
-                <span>✅ WHAT TO DO:</span>
-              </div>
-              <ul style="font-size: 12px; color: var(--gemini-text-muted); line-height: 1.6; padding-left: 18px;">
-                <li><strong>35g Protein Threshold:</strong> Eat 35g+ clean protein at breakfast within 90 minutes of waking.</li>
-                <li><strong>Post-Meal Zone 2 Walk:</strong> Walk briskly for 12 minutes immediately following your largest meal.</li>
-                <li><strong>10-Hour Caffeine Cutoff:</strong> Finish all tea, coffee, or caffeine before 12:00 PM.</li>
-              </ul>
-            </div>
-
-            <!-- What to Avoid -->
+          <div style="border: 1.5px dashed #111827; border-radius: 18px; padding: 16px; background: #F9FAFB; display: flex; justify-content: space-between; align-items: center;">
             <div>
-              <div style="font-size: 12px; font-weight: 800; color: #DC2626; margin-bottom: 4px; display: flex; align-items: center; gap: 4px;">
-                <span>❌ WHAT TO AVOID:</span>
-              </div>
-              <ul style="font-size: 12px; color: var(--gemini-text-muted); line-height: 1.6; padding-left: 18px;">
-                <li><strong>Zero Liquid Sugar:</strong> No sweetened chai, soda, energy drinks, or packaged juices.</li>
-                <li><strong>Zero Yellow Seed Oils:</strong> Eliminate sunflower, soybean, palm, and canola cooking oils.</li>
-                <li><strong>Zero Screens in Bed:</strong> Turn off mobile screens 60 minutes before bedtime.</li>
-              </ul>
+              <div style="font-size: 13px; font-weight: 800;">🍳 Kitchen & Pantry Inventory</div>
+              <div style="font-size: 11px; color: #6B7280;">Add ingredients available at home for Ask AI.</div>
             </div>
+            <button class="capsule-btn active" style="height: 38px; padding: 0 16px; font-size: 12px;" onclick="openPantryModal()">
+              Manage
+            </button>
           </div>
 
-          <!-- 4. WEEKLY GUIDES & CHALLENGES WITH SOLUTIONS -->
-          <div class="gemini-card" style="padding: 16px;">
-            <div style="font-size: 13px; font-weight: 800; color: #D97706; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
-              <span class="material-symbols-outlined" style="font-size: 18px;">psychology_alt</span>
-              Weekly Challenges & Clinical Solutions
-            </div>
-
-            <div style="display: flex; flex-direction: column; gap: 10px; font-size: 12px;">
-              <div style="background: var(--gemini-surface-container); padding: 12px; border-radius: 12px;">
-                <strong style="color: var(--gemini-text-main);">⚠️ Challenge: 4:00 PM Sugar & Chai Craving</strong>
-                <div style="color: var(--gemini-text-muted); margin-top: 4px;">
-                  <strong>👉 Solution:</strong> Drink 300ml sparkling water with 1 tbsp raw apple cider vinegar and eat 6 raw walnuts.
-                </div>
-              </div>
-
-              <div style="background: var(--gemini-surface-container); padding: 12px; border-radius: 12px;">
-                <strong style="color: var(--gemini-text-main);">⚠️ Challenge: Social Dining with Friends</strong>
-                <div style="color: var(--gemini-text-muted); margin-top: 4px;">
-                  <strong>👉 Solution:</strong> Order tandoori or grilled protein cooked without seed oil; request double greens instead of fries or naan.
-                </div>
-              </div>
+          <!-- Non-Negotiable Rules -->
+          <div style="border: 1.5px solid #111827; border-radius: 20px; padding: 18px; background: #FFFFFF;">
+            <div style="font-size: 13px; font-weight: 800; margin-bottom: 10px;">📋 Non-Negotiable Rules: Week 8</div>
+            <div style="font-size: 12px; color: #111827; line-height: 1.6;">
+              <strong>✅ WHAT TO DO:</strong><br/>
+              • 30g+ Clean Protein within 60m of waking.<br/>
+              • 12-min walk after lunch for flat glucose.<br/><br/>
+              <strong>❌ WHAT TO AVOID:</strong><br/>
+              • 0% Liquid Sugar & 0% Seed Oils.<br/>
+              • No screens 60m before bed.
             </div>
           </div>
 
@@ -769,66 +707,43 @@
 
       </section>
 
-      <!-- ==================== 2. TAB: CHAT (THAIS AI HEALTH COMPANION) ==================== -->
+      <!-- ==================== TAB 2: CHAT (THAIS AI) ==================== -->
       <section id="pane-chat" class="tab-pane">
-        <div class="gemini-card" style="padding: 14px;">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <div style="font-size: 12px; font-weight: 800; color: var(--gemini-sparkle-blue);">THAIS HEALTH INTELLIGENCE AI</div>
-            <span style="font-size: 10px; font-weight: 800; color: var(--gemini-vitality-emerald);">Active Memory</span>
-          </div>
-          <div style="font-size: 12px; color: var(--gemini-text-muted); margin-top: 2px;">
-            Ask THAIS anything about your protocol, meal logging, or symptom checks.
-          </div>
+        <div style="border: 1.5px solid #111827; border-radius: 18px; padding: 16px;">
+          <div style="font-size: 13px; font-weight: 800;">THAIS Clinical Health Companion</div>
+          <div style="font-size: 12px; color: #6B7280; margin-top: 2px;">Ask anything about your calories, portion meter, or meal guidance.</div>
         </div>
 
-        <div class="app-chat-scroller" id="app-chat-messages">
-          <div class="app-msg-bubble app-msg-thais">
-            <strong>THAIS:</strong> Hello Ajay! I have processed your complete 42-marker intake survey and saved your kitchen pantry ingredients. How can I assist your health protocol right now?
+        <div style="height: 380px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;" id="chat-scroller">
+          <div style="background: #F3F4F6; padding: 12px 16px; border-radius: 16px; font-size: 13px; max-width: 86%;">
+            <strong>THAIS:</strong> Hello Alex! You have completed 1,240 of 1,940 kcal today (81% Portion Completion). How can I assist your protocol right now?
           </div>
         </div>
 
         <div style="display: flex; gap: 8px;">
-          <input type="text" class="gemini-prompt-input" id="app-chat-input" placeholder="Ask THAIS anything..." style="flex: 1; border: 1.5px solid var(--gemini-border); border-radius: 12px; padding: 10px 14px; font-size: 13px;" onkeydown="if(event.key==='Enter'){sendAppChat(); event.preventDefault();}" />
-          <button class="gemini-btn gemini-btn-primary" style="height: 42px; padding: 0 16px; border-radius: 12px;" onclick="sendAppChat()">
-            Send
-          </button>
+          <input type="text" id="chat-input-field" placeholder="Ask THAIS anything..." style="flex: 1; border: 1.5px solid #111827; border-radius: 12px; padding: 10px 14px; font-size: 13px;" onkeydown="if(event.key==='Enter'){sendChatMsg(); event.preventDefault();}" />
+          <button class="capsule-btn active" style="height: 42px; padding: 0 16px; border-radius: 12px;" onclick="sendChatMsg()">Send</button>
         </div>
       </section>
 
-      <!-- ==================== 3. TAB: HEALTH (METABOLIC & EPIGENETICS) ==================== -->
+      <!-- ==================== TAB 3: HEALTH (METABOLIC & EPIGENETICS) ==================== -->
       <section id="pane-health" class="tab-pane">
-        <div class="gemini-card">
-          <div style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald); text-transform: uppercase;">Live Metabolic Telemetry</div>
-          <div style="font-family: 'Google Sans Display', sans-serif; font-size: 22px; font-weight: 800; margin-top: 4px;">
-            Biological Age: <span style="color: var(--gemini-sparkle-blue);" id="app-bio-age">20.8 Yrs</span>
+        <div style="border: 1.5px solid #111827; border-radius: 20px; padding: 20px;">
+          <div style="font-size: 11px; font-weight: 800; color: #6B7280; text-transform: uppercase;">Epigenetic Telemetry</div>
+          <div style="font-family: 'Google Sans Display', sans-serif; font-size: 24px; font-weight: 800; margin-top: 4px;">
+            Biological Age: 20.8 Yrs
           </div>
-          <div style="font-size: 12px; color: var(--gemini-text-muted);">Chronological Age: <span id="app-chrono-age">25 Yrs</span> • Aging Pace: <strong>0.82x (Optimal)</strong></div>
+          <div style="font-size: 12px; color: #4B5563;">Chronological Age: 25 Yrs • Aging Pace: <strong>0.82x</strong></div>
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-          <div class="gemini-card" style="padding: 14px;">
-            <div style="font-size: 10px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase;">Basal Metabolic Burn</div>
-            <div style="font-size: 18px; font-weight: 800; color: var(--gemini-text-main); margin-top: 2px;" id="app-bmr-display">1,740 kcal</div>
+          <div style="border: 1.5px solid #111827; border-radius: 16px; padding: 14px;">
+            <div style="font-size: 10px; font-weight: 800; color: #6B7280; text-transform: uppercase;">Basal Metabolic Rate</div>
+            <div style="font-size: 18px; font-weight: 800; margin-top: 2px;">1,740 kcal</div>
           </div>
-          <div class="gemini-card" style="padding: 14px;">
-            <div style="font-size: 10px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase;">WHO ICD-11 Triage</div>
-            <div style="font-size: 18px; font-weight: 800; color: var(--gemini-vitality-emerald); margin-top: 2px;">88% Solvable</div>
-          </div>
-        </div>
-
-        <!-- 55k WHO ICD-11 Triage Cards -->
-        <div class="gemini-card" style="padding: 14px;">
-          <div style="font-size: 12px; font-weight: 800; color: var(--gemini-text-main); margin-bottom: 8px;">WHO ICD-11 55,000+ Triage Summary</div>
-          <div style="display: flex; flex-direction: column; gap: 8px; font-size: 11px;">
-            <div style="border-left: 3px solid var(--gemini-vitality-emerald); padding-left: 8px;">
-              <strong style="color: var(--gemini-vitality-emerald);">Category 1 (100% Solvable):</strong> Insulin Resistance, Bloating, 2 PM Crash (ICD-11 5B81).
-            </div>
-            <div style="border-left: 3px solid #F59E0B; padding-left: 8px;">
-              <strong style="color: #D97706;">Category 2 (Manageable):</strong> PCOS, Thyroid & Stage 1 BP support (ICD-11 5A80).
-            </div>
-            <div style="border-left: 3px solid #EF4444; padding-left: 8px;">
-              <strong style="color: #DC2626;">Category 3 (Doctor Care):</strong> Type 1 Diabetes & Emergency Hospital Care (ICD-11 5A10).
-            </div>
+          <div style="border: 1.5px solid #111827; border-radius: 16px; padding: 14px;">
+            <div style="font-size: 10px; font-weight: 800; color: #6B7280; text-transform: uppercase;">WHO ICD-11 Triage</div>
+            <div style="font-size: 18px; font-weight: 800; color: #00D06C; margin-top: 2px;">88% Solvable</div>
           </div>
         </div>
       </section>
@@ -853,110 +768,60 @@
 
   </div>
 
-  <!-- ==================== COMPLETE 3-SITUATION FOOD INTELLIGENCE MODAL ==================== -->
+  <!-- ==================== FOOD INTELLIGENCE BOTTOM SHEET ==================== -->
   <div id="food-modal-overlay" class="food-modal-overlay" onclick="if(event.target===this) closeFoodModal()">
     <div class="food-modal-sheet">
       <div style="display: flex; justify-content: space-between; align-items: center;">
         <h3 id="food-modal-title" style="font-family: 'Google Sans Display', sans-serif; font-size: 18px; font-weight: 800;">
-          Food Intelligence Engine
+          Log Meal
         </h3>
-        <button class="gemini-btn gemini-btn-tonal" style="height: 30px; width: 30px; padding: 0; border-radius: 50%;" onclick="closeFoodModal()">✕</button>
+        <button class="metric-plus-btn" style="font-size: 18px;" onclick="closeFoodModal()">✕</button>
       </div>
 
-      <!-- 3 Detection Situation Selector -->
-      <div class="food-type-selector" id="food-type-selector">
-        <button class="food-type-pill active" id="pill-cooked" onclick="setFoodCategory('cooked')">🍲 Cooked Dish</button>
-        <button class="food-type-pill" id="pill-ingredient" onclick="setFoodCategory('ingredient')">🥦 Raw Ingredients</button>
-        <button class="food-type-pill" id="pill-menu" onclick="setFoodCategory('menu')">📜 Restaurant Menu</button>
+      <!-- 3 Input Modes: Scan | Manually | Ask AI -->
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;">
+        <button class="capsule-btn active" style="height: 42px; font-size: 11px;" onclick="selectFoodMode('scan')">📷 Scan</button>
+        <button class="capsule-btn inactive" style="height: 42px; font-size: 11px;" onclick="selectFoodMode('manual')">✍️ Manual</button>
+        <button class="capsule-btn inactive" style="height: 42px; font-size: 11px;" onclick="selectFoodMode('ask_ai')">🤖 Ask AI</button>
       </div>
 
-      <!-- Modal Body Dynamic Area -->
-      <div id="food-modal-body" style="display: flex; flex-direction: column; gap: 14px;"></div>
+      <div id="food-modal-content-area" style="display: flex; flex-direction: column; gap: 12px; margin-top: 6px;"></div>
     </div>
   </div>
 
-  <!-- ==================== KITCHEN PANTRY BOTTOM SHEET MODAL ==================== -->
+  <!-- ==================== PANTRY MODAL ==================== -->
   <div id="pantry-modal-overlay" class="food-modal-overlay" onclick="if(event.target===this) closePantryModal()">
     <div class="food-modal-sheet">
       <div style="display: flex; justify-content: space-between; align-items: center;">
         <h3 style="font-family: 'Google Sans Display', sans-serif; font-size: 18px; font-weight: 800;">
-          🍳 My Kitchen & Pantry Inventory
+          🍳 My Kitchen Inventory
         </h3>
-        <button class="gemini-btn gemini-btn-tonal" style="height: 30px; width: 30px; padding: 0; border-radius: 50%;" onclick="closePantryModal()">✕</button>
+        <button class="metric-plus-btn" onclick="closePantryModal()">✕</button>
       </div>
-      <p style="font-size: 12px; color: var(--gemini-text-muted);">
-        Select or add what ingredients you have in your kitchen right now. THAIS will use these to generate custom 15-minute whole-food meals!
-      </p>
-
+      <p style="font-size: 12px; color: #4B5563;">Add ingredients available in your home kitchen so Ask AI can generate 15-minute whole-food meals!</p>
+      
       <div style="display: flex; gap: 8px;">
-        <input type="text" class="gemini-prompt-input" id="custom-pantry-input" placeholder="Type custom ingredient (e.g., Greek yogurt, chicken)..." style="flex: 1; border: 1.5px solid var(--gemini-border); border-radius: 12px; padding: 10px; font-size: 13px;" onkeydown="if(event.key==='Enter'){addCustomPantryItem(); event.preventDefault();}" />
-        <button class="gemini-btn gemini-btn-primary" style="height: 40px; padding: 0 14px;" onclick="addCustomPantryItem()">+ Add</button>
+        <input type="text" id="custom-pantry-item" placeholder="Add ingredient..." style="flex: 1; border: 1.5px solid #111827; border-radius: 12px; padding: 10px; font-size: 13px;" />
+        <button class="capsule-btn active" style="height: 40px; padding: 0 16px;" onclick="addPantryChip()">+ Add</button>
       </div>
 
-      <div style="font-size: 11px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase;">1-Tap Common Pantry Staples:</div>
-      <div class="pantry-tags-grid" id="pantry-modal-chips">
-        <span class="pantry-chip selected" onclick="togglePantryChip(this)">🍳 Pasture Eggs</span>
-        <span class="pantry-chip selected" onclick="togglePantryChip(this)">🧈 Pure Desi Ghee</span>
-        <span class="pantry-chip selected" onclick="togglePantryChip(this)">🥬 Baby Spinach</span>
-        <span class="pantry-chip selected" onclick="togglePantryChip(this)">🥑 Avocado</span>
-        <span class="pantry-chip selected" onclick="togglePantryChip(this)">🫘 Organic Lentils</span>
-        <span class="pantry-chip selected" onclick="togglePantryChip(this)">🐟 Wild Salmon</span>
-        <span class="pantry-chip" onclick="togglePantryChip(this)">🧀 Fresh Paneer</span>
-        <span class="pantry-chip" onclick="togglePantryChip(this)">🍗 Chicken Breast</span>
-        <span class="pantry-chip" onclick="togglePantryChip(this)">🍠 Sweet Potato</span>
-        <span class="pantry-chip" onclick="togglePantryChip(this)">🫒 Extra Virgin Olive Oil</span>
-        <span class="pantry-chip" onclick="togglePantryChip(this)">🥦 Broccoli</span>
-        <span class="pantry-chip" onclick="togglePantryChip(this)">🧅 Red Onions & Garlic</span>
+      <div style="display: flex; flex-wrap: wrap; gap: 6px;" id="pantry-chips-wrap">
+        <span style="border: 1.5px solid #111827; padding: 6px 12px; border-radius: 9999px; font-size: 12px; font-weight: 700; background: #111827; color: white;">🍳 Eggs (12)</span>
+        <span style="border: 1.5px solid #111827; padding: 6px 12px; border-radius: 9999px; font-size: 12px; font-weight: 700; background: #111827; color: white;">🧈 Desi Ghee</span>
+        <span style="border: 1.5px solid #111827; padding: 6px 12px; border-radius: 9999px; font-size: 12px; font-weight: 700; background: #111827; color: white;">🥬 Spinach</span>
+        <span style="border: 1.5px solid #111827; padding: 6px 12px; border-radius: 9999px; font-size: 12px; font-weight: 700; background: #111827; color: white;">🥑 Avocado</span>
       </div>
 
-      <button class="gemini-btn gemini-btn-primary" style="height: 44px; margin-top: 10px; width: 100%;" onclick="savePantryAndClose()">
-        Save Kitchen Inventory ➔
-      </button>
+      <button class="capsule-btn active" style="width: 100%; height: 46px; margin-top: 10px;" onclick="closePantryModal()">Save Kitchen Pantry ➔</button>
     </div>
   </div>
 
-  <!-- ==================== PROFILE / SETTINGS MODAL ==================== -->
-  <div id="profile-modal-overlay" class="food-modal-overlay" onclick="if(event.target===this) closeProfileModal()">
-    <div class="food-modal-sheet">
-      <div style="display: flex; justify-content: space-between; align-items: center;">
-        <h3 style="font-family: 'Google Sans Display', sans-serif; font-size: 18px; font-weight: 800;">
-          👤 Member Profile & Settings
-        </h3>
-        <button class="gemini-btn gemini-btn-tonal" style="height: 30px; width: 30px; padding: 0; border-radius: 50%;" onclick="closeProfileModal()">✕</button>
-      </div>
-
-      <div class="gemini-card" style="text-align: center; padding: 16px;">
-        <div style="font-family: 'Google Sans Display', sans-serif; font-size: 18px; font-weight: 800;">Ajay Sen</div>
-        <div style="font-size: 12px; color: var(--gemini-vitality-emerald); font-weight: 700;">42 Precision Intake Markers Calibrated</div>
-      </div>
-
-      <div style="display: flex; flex-direction: column; gap: 8px;">
-        <a href="survey.html" class="gemini-btn gemini-btn-primary" style="height: 42px; text-decoration: none; justify-content: center;">
-          Retake 42-Marker Intake Survey ➔
-        </a>
-        <a href="thais.html" class="gemini-btn gemini-btn-tonal" style="height: 42px; text-decoration: none; justify-content: center;">
-          Open Full THAIS AI Console ➔
-        </a>
-        <button class="gemini-btn gemini-btn-tonal" style="height: 42px;" onclick="toggleTheme()">
-          🌓 Toggle Light / Dark Mode
-        </button>
-      </div>
-
-      <div style="font-size: 11px; color: var(--gemini-text-muted); text-align: center; margin-top: 10px;">
-        Constitutional LAW-001 Guaranteed • 100% Scientifically & Medically Verified.
-      </div>
-    </div>
-  </div>
-
-  <!-- PWA Service Worker Registration & App Logic -->
   <script src="thais_engine.js"></script>
   <script>
-    let currentMealTarget = 'Breakfast';
-    let currentInputMode = 'scan'; // 'scan', 'manual', 'ask_ai'
-    let currentFoodCategory = 'cooked'; // 'cooked', 'ingredient', 'menu'
-    let userAnswers = {};
+    let activeMeal = 'Breakfast';
+    let waterLiters = 2.3;
+    let walkSteps = 3869;
 
-    // Tab Switching (FLOW | CHAT | HEALTH)
     function switchAppTab(tabId) {
       document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
       document.querySelectorAll('.nav-item-btn').forEach(b => b.classList.remove('active'));
@@ -965,287 +830,126 @@
       const btn = document.getElementById(`btn-tab-${tabId}`);
       if (pane) pane.classList.add('active');
       if (btn) btn.classList.add('active');
-
-      const topSwitcher = document.getElementById('top-flow-switcher');
-      if (topSwitcher) {
-        topSwitcher.style.display = (tabId === 'flow') ? 'inline-flex' : 'none';
-      }
     }
 
-    // Top Switcher: DAY vs WEEK
     function switchFlowSubView(subId) {
       document.querySelectorAll('.flow-sub-view').forEach(v => v.classList.remove('active'));
-      document.querySelectorAll('.top-switcher-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('btn-capsule-day').className = (subId === 'day') ? 'capsule-btn active' : 'capsule-btn inactive';
+      document.getElementById('btn-capsule-week').className = (subId === 'week') ? 'capsule-btn active' : 'capsule-btn inactive';
 
-      const view = document.getElementById(`subview-flow-${subId}`);
-      const btn = document.getElementById(`btn-top-${subId}`);
-      if (view) view.classList.add('active');
-      if (btn) btn.classList.add('active');
+      const target = document.getElementById(`subview-flow-${subId}`);
+      if (target) target.classList.add('active');
     }
 
-    // Food Intelligence Modal Handlers
-    function openFoodModal(mode, mealName) {
-      currentMealTarget = mealName;
-      currentInputMode = mode;
-      const overlay = document.getElementById('food-modal-overlay');
-      const selector = document.getElementById('food-type-selector');
-      
-      if (mode === 'ask_ai') {
-        selector.style.display = 'none';
-      } else {
-        selector.style.display = 'grid';
-      }
-
-      renderFoodModalContent();
-      overlay.style.display = 'flex';
+    function quickAddWater() {
+      waterLiters = Math.min(4.5, +(waterLiters + 0.25).toFixed(1));
+      document.getElementById('txt-water-meter').innerText = `${waterLiters}/4.5 Water`;
     }
 
-    function setFoodCategory(cat) {
-      currentFoodCategory = cat;
-      document.querySelectorAll('.food-type-pill').forEach(p => p.classList.remove('active'));
-      const activePill = document.getElementById(`pill-${cat}`);
-      if (activePill) activePill.classList.add('active');
-      renderFoodModalContent();
+    function quickAddWalk() {
+      walkSteps = Math.min(8000, walkSteps + 500);
+      document.getElementById('txt-walk-meter').innerText = `${walkSteps}/8,000 Walk`;
     }
 
-    function renderFoodModalContent() {
-      const title = document.getElementById('food-modal-title');
-      const body = document.getElementById('food-modal-body');
-
-      if (currentInputMode === 'ask_ai') {
-        title.innerText = `🤖 THAIS AI Suggestion for ${currentMealTarget}`;
-        body.innerHTML = `
-          <div class="gemini-card" style="background: var(--gemini-surface-container); padding: 16px; border-left: 4px solid var(--gemini-vitality-emerald);">
-            <div style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald); text-transform: uppercase;">
-              Custom Whole-Food Recommendation
-            </div>
-            <div style="font-size: 15px; font-weight: 800; margin: 4px 0;">
-              Savory Pasture Eggs / Paneer + Sautéed Spinach & Desi Ghee
-            </div>
-            <p style="font-size: 12px; color: var(--gemini-text-muted); line-height: 1.45;">
-              Calibrated from your <strong>Kitchen Inventory</strong>. Cooked in pure desi ghee with 1/2 avocado. Delivers <strong>32g protein</strong> with flat glycemic response.
-            </p>
-            <div style="display: flex; gap: 6px; margin-top: 8px;">
-              <span class="macro-tag">32g Protein</span>
-              <span class="macro-tag">0% Seed Oils</span>
-              <span class="macro-tag">15m Cook Time</span>
-            </div>
-          </div>
-          <button class="gemini-btn gemini-btn-primary" style="height: 42px; width: 100%;" onclick="confirmMealLog('${currentMealTarget}', 32)">
-            ✓ I Ate This — Log to Portion Meter
-          </button>
-        `;
-        return;
-      }
-
-      // If Scan or Manual: Render based on selected category (Cooked / Ingredient / Menu)
-      if (currentInputMode === 'scan') {
-        title.innerText = `📷 Scan ${currentMealTarget} (${currentFoodCategory.toUpperCase()})`;
-        body.innerHTML = `
-          <div style="border: 2px dashed var(--gemini-border); border-radius: 16px; padding: 20px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px;">
-            <span class="material-symbols-outlined" style="font-size: 36px; color: var(--gemini-sparkle-blue);">add_a_photo</span>
-            <div style="font-size: 13px; font-weight: 700;">Upload or Snap Photo of ${currentFoodCategory === 'cooked' ? 'Cooked Dish' : currentFoodCategory === 'ingredient' ? 'Raw Ingredients' : 'Restaurant Menu'}</div>
-            <input type="file" accept="image/*" style="display: none;" id="food-file-input" onchange="processCategoryResult()" />
-            <button class="gemini-btn gemini-btn-primary" style="height: 36px; padding: 0 16px;" onclick="document.getElementById('food-file-input').click()">
-              Choose Photo / Open Camera
-            </button>
-          </div>
-          <div id="category-output-area"></div>
-        `;
-      } else if (currentInputMode === 'manual') {
-        title.innerText = `✍️ Enter ${currentMealTarget} Manually`;
-        let placeholder = currentFoodCategory === 'cooked' 
-          ? "Type your cooked dish (e.g., Dal Tadka with 2 Rotis, Paneer Bhurji)..."
-          : currentFoodCategory === 'ingredient'
-          ? "Type ingredients you have (e.g., 3 eggs, spinach, desi ghee, tomato)..."
-          : "Type restaurant dish or paste menu text...";
-
-        body.innerHTML = `
-          <div style="display: flex; flex-direction: column; gap: 10px;">
-            <label style="font-size: 12px; font-weight: 700; color: var(--gemini-text-muted);">
-              ${currentFoodCategory === 'cooked' ? '🍲 Cooked Dish Details:' : currentFoodCategory === 'ingredient' ? '🥦 Raw Ingredients Available:' : '📜 Restaurant Dish / Menu:'}
-            </label>
-            <textarea class="gemini-prompt-input" id="manual-food-input" placeholder="${placeholder}" style="border: 1.5px solid var(--gemini-border); border-radius: 12px; padding: 12px; font-size: 13px; min-height: 80px;"></textarea>
-            <button class="gemini-btn gemini-btn-primary" style="height: 42px;" onclick="processCategoryResult()">
-              Analyze & Generate Guidance ➔
-            </button>
-          </div>
-          <div id="category-output-area"></div>
-        `;
-      }
+    function toggleTaskPill(pill) {
+      pill.classList.toggle('completed');
     }
 
-    function processCategoryResult() {
-      const out = document.getElementById('category-output-area');
-      if (!out) return;
-
-      if (currentFoodCategory === 'cooked') {
-        // SITUATION 1: ALREADY COOKED DISH
-        out.innerHTML = `
-          <div class="gemini-card" style="border-left: 4px solid var(--gemini-vitality-emerald); padding: 14px; margin-top: 10px;">
-            <div style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald); text-transform: uppercase;">
-              ✓ DISH DETECTED: DAL TADKA & PANEER SABZI
-            </div>
-            <div style="margin-top: 8px; font-size: 12px; display: flex; flex-direction: column; gap: 6px;">
-              <div><strong style="color: var(--gemini-vitality-emerald);">🟢 WHAT TO EAT:</strong> 1.5 bowls Dal Tadka + 1 bowl Paneer & Greens.</div>
-              <div><strong style="color: #DC2626;">🔴 WHAT TO AVOID:</strong> Skip refined rotis or sugary chutney.</div>
-              <div><strong style="color: var(--gemini-sparkle-blue);">⚖️ HOW MUCH TO EAT:</strong> Consume all protein & fiber first for flat glucose curve.</div>
-            </div>
-            <button class="gemini-btn gemini-btn-primary" style="height: 38px; width: 100%; margin-top: 12px;" onclick="confirmMealLog(currentMealTarget, 34)">
-              ✓ Confirm & Log to Portion Level Meter (+34g Protein)
-            </button>
-          </div>
-        `;
-      } else if (currentFoodCategory === 'ingredient') {
-        // SITUATION 2: RAW INGREDIENTS
-        out.innerHTML = `
-          <div class="gemini-card" style="border-left: 4px solid var(--gemini-sparkle-blue); padding: 14px; margin-top: 10px;">
-            <div style="font-size: 11px; font-weight: 800; color: var(--gemini-sparkle-blue); text-transform: uppercase;">
-              ✓ RECIPE GENERATED FROM YOUR INGREDIENTS
-            </div>
-            <div style="font-size: 14px; font-weight: 800; margin: 4px 0;">Savory Desi Ghee Scramble with Sautéed Spinach</div>
-            <div style="font-size: 11px; font-weight: 700; color: var(--gemini-vitality-emerald); margin-bottom: 6px;">⏱️ 12 Mins Cook Time • 0% Seed Oils</div>
-            <div style="font-size: 12px; color: var(--gemini-text-muted); line-height: 1.5;">
-              <strong>Step-by-Step Cooking Guide:</strong><br/>
-              1. Heat 1 tbsp desi ghee in a pan over medium flame.<br/>
-              2. Sauté garlic and baby spinach for 2 mins until tender.<br/>
-              3. Crack 3 eggs (or 100g crumbled paneer), add salt & turmeric, scramble gently for 3 mins.<br/>
-              4. Serve warm with 1/2 avocado.
-            </div>
-            <button class="gemini-btn gemini-btn-primary" style="height: 38px; width: 100%; margin-top: 12px;" onclick="confirmMealLog(currentMealTarget, 32)">
-              ✓ I Cooked & Ate This (+32g Protein Logged)
-            </button>
-          </div>
-        `;
-      } else if (currentFoodCategory === 'menu') {
-        // SITUATION 3: RESTAURANT MENU / ONLINE ORDER
-        out.innerHTML = `
-          <div class="gemini-card" style="border-left: 4px solid #F59E0B; padding: 14px; margin-top: 10px;">
-            <div style="font-size: 11px; font-weight: 800; color: #D97706; text-transform: uppercase;">
-              ✓ RESTAURANT MENU SAFETY & ORDER TRIAGE
-            </div>
-            <div style="margin-top: 8px; font-size: 12px; display: flex; flex-direction: column; gap: 6px;">
-              <div><strong style="color: #DC2626;">🚨 SEED OIL WARNING:</strong> Gravy curries contain palm/sunflower oil. Avoid deep-fried items.</div>
-              <div><strong style="color: var(--gemini-vitality-emerald);">🟢 WHAT TO ORDER:</strong> 1 Portion Tandoori Chicken Tikka / Paneer Tikka + Yellow Dal Tadka + Green Salad.</div>
-              <div><strong style="color: var(--gemini-sparkle-blue);">⚖️ HOW MUCH TO ORDER:</strong> 1 Full portion tikka (38g protein). Ask for butter/ghee brush instead of oil.</div>
-            </div>
-            <button class="gemini-btn gemini-btn-primary" style="height: 38px; width: 100%; margin-top: 12px;" onclick="confirmMealLog(currentMealTarget, 38)">
-              ✓ Order Confirmed — Log Meal (+38g Protein)
-            </button>
-          </div>
-        `;
-      }
+    function openFoodModal(mealName) {
+      activeMeal = mealName;
+      document.getElementById('food-modal-title').innerText = `Log ${mealName}`;
+      selectFoodMode('scan');
+      document.getElementById('food-modal-overlay').style.display = 'flex';
     }
 
     function closeFoodModal() {
       document.getElementById('food-modal-overlay').style.display = 'none';
     }
 
-    function confirmMealLog(mealName, proteinGrams) {
-      closeFoodModal();
-      const tag = document.getElementById(`status-${mealName.toLowerCase()}-tag`);
-      if (tag) {
-        tag.innerText = `✓ ${proteinGrams}g Protein Logged`;
-        tag.style.color = 'var(--gemini-vitality-emerald)';
-        tag.style.fontWeight = '800';
+    function selectFoodMode(mode) {
+      const area = document.getElementById('food-modal-content-area');
+      if (mode === 'scan') {
+        area.innerHTML = `
+          <div style="border: 2px dashed #111827; border-radius: 16px; padding: 20px; text-align: center;">
+            <span class="material-symbols-outlined" style="font-size: 36px; color: #111827;">add_a_photo</span>
+            <div style="font-size: 13px; font-weight: 800; margin-top: 4px;">Snap or Upload Photo</div>
+            <div style="font-size: 11px; color: #6B7280;">Cooked dish, raw ingredients, or restaurant menu.</div>
+            <button class="capsule-btn active" style="height: 38px; padding: 0 18px; margin: 10px auto 0 auto;" onclick="logMealConfirm(420, 32)">
+              Upload & Analyze ➔
+            </button>
+          </div>
+        `;
+      } else if (mode === 'manual') {
+        area.innerHTML = `
+          <textarea placeholder="Type what you ate or ingredients available..." style="width: 100%; border: 1.5px solid #111827; border-radius: 14px; padding: 12px; font-size: 13px; min-height: 80px;"></textarea>
+          <button class="capsule-btn active" style="height: 42px; width: 100%;" onclick="logMealConfirm(420, 32)">
+            Analyze & Log ${activeMeal} ➔
+          </button>
+        `;
+      } else if (mode === 'ask_ai') {
+        area.innerHTML = `
+          <div style="border: 1.5px solid #111827; border-radius: 16px; padding: 14px; background: #F9FAFB;">
+            <div style="font-size: 11px; font-weight: 800; color: #00D06C;">THAIS AI RECOMMENDATION</div>
+            <div style="font-size: 14px; font-weight: 800; margin: 4px 0;">Pasture Eggs Scramble with Sautéed Spinach</div>
+            <div style="font-size: 11px; color: #4B5563;">Using your kitchen inventory. 32g Protein • 0% Seed Oils • 420 kcal.</div>
+          </div>
+          <button class="capsule-btn active" style="height: 42px; width: 100%; margin-top: 4px;" onclick="logMealConfirm(420, 32)">
+            ✓ I Ate This — Log to Portion Meter
+          </button>
+        `;
       }
-      alert(`${mealName} successfully logged! +${proteinGrams}g protein added to your Daily Portion Meter.`);
     }
 
-    // Pantry Modal Handlers
+    function logMealConfirm(cal, protein) {
+      closeFoodModal();
+      const btnMap = { 'Breakfast': 'btn-meal-b', 'Lunch': 'btn-meal-l', 'Dinner': 'btn-meal-d' };
+      const btn = document.getElementById(btnMap[activeMeal]);
+      if (btn) {
+        btn.classList.add('logged');
+        btn.innerHTML = `<span>✓ ${activeMeal.toUpperCase()} LOGGED</span>`;
+      }
+      alert(`${activeMeal} logged successfully! +${protein}g Protein added to your daily portion.`);
+    }
+
     function openPantryModal() {
       document.getElementById('pantry-modal-overlay').style.display = 'flex';
     }
     function closePantryModal() {
       document.getElementById('pantry-modal-overlay').style.display = 'none';
     }
-    function togglePantryChip(chip) {
-      chip.classList.toggle('selected');
-    }
-    function addCustomPantryItem() {
-      const input = document.getElementById('custom-pantry-input');
-      const val = input.value.trim();
-      if (!val) return;
-      const wrap = document.getElementById('pantry-modal-chips');
-      const chip = document.createElement('span');
-      chip.className = 'pantry-chip selected';
-      chip.innerText = `✨ ${val}`;
-      chip.onclick = function() { togglePantryChip(this); };
-      wrap.appendChild(chip);
-      input.value = '';
-    }
-    function savePantryAndClose() {
-      const selected = Array.from(document.querySelectorAll('#pantry-modal-chips .pantry-chip.selected')).map(c => c.innerText);
-      const display = document.getElementById('pantry-chips-display');
-      display.innerHTML = selected.map(s => `<span class="pantry-chip selected">${s}</span>`).join('');
-      closePantryModal();
+    function addPantryChip() {
+      const inp = document.getElementById('custom-pantry-item');
+      if (!inp.value.trim()) return;
+      const wrap = document.getElementById('pantry-chips-wrap');
+      const s = document.createElement('span');
+      s.style = "border: 1.5px solid #111827; padding: 6px 12px; border-radius: 9999px; font-size: 12px; font-weight: 700; background: #111827; color: white;";
+      s.innerText = `✨ ${inp.value.trim()}`;
+      wrap.appendChild(s);
+      inp.value = '';
     }
 
-    // Profile Modal
     function openProfileModal() {
-      document.getElementById('profile-modal-overlay').style.display = 'flex';
-    }
-    function closeProfileModal() {
-      document.getElementById('profile-modal-overlay').style.display = 'none';
+      alert('Member: Alex Sen\n42 Precision Markers Calibrated\nSupreme Constitutional LAW-001 Verified.');
     }
 
-    function toggleTaskCard(card) {
-      card.classList.toggle('completed');
-      updateTaskCounter();
-    }
-    function updateTaskCounter() {
-      const all = document.querySelectorAll('#subview-flow-day .app-task-card');
-      const done = document.querySelectorAll('#subview-flow-day .app-task-card.completed');
-      const counter = document.getElementById('flow-task-counter');
-      if (counter) counter.innerText = `${done.length} / ${all.length} Done`;
-    }
-
-    function sendAppChat() {
-      const input = document.getElementById('app-chat-input');
-      const query = input.value.trim();
-      if (!query) return;
-
-      const scroller = document.getElementById('app-chat-messages');
-      scroller.innerHTML += `<div class="app-msg-bubble app-msg-user">${escapeHtml(query)}</div>`;
-      input.value = '';
+    function sendChatMsg() {
+      const inp = document.getElementById('chat-input-field');
+      const val = inp.value.trim();
+      if (!val) return;
+      const scroller = document.getElementById('chat-scroller');
+      scroller.innerHTML += `<div style="background: #111827; color: white; padding: 12px 16px; border-radius: 16px; font-size: 13px; max-width: 86%; align-self: flex-end;">${val}</div>`;
+      inp.value = '';
       scroller.scrollTop = scroller.scrollHeight;
 
       setTimeout(() => {
-        let response = "Under Constitutional LAW-001, your metabolic baseline is calibrated for optimal insulin sensitivity. Complete today's FLOW micro-habits to maintain steady energy.";
+        let resp = "Under Constitutional LAW-001, your 81% portion completion has stabilized your morning insulin. Complete your 12-minute post-lunch walk next.";
         if (typeof THAIS !== 'undefined' && THAIS.queryThaisAI) {
-          response = THAIS.queryThaisAI(query, userAnswers);
+          resp = THAIS.queryThaisAI(val, {});
         }
-        scroller.innerHTML += `<div class="app-msg-bubble app-msg-thais"><strong>THAIS:</strong> ${response}</div>`;
+        scroller.innerHTML += `<div style="background: #F3F4F6; padding: 12px 16px; border-radius: 16px; font-size: 13px; max-width: 86%;"><strong>THAIS:</strong> ${resp}</div>`;
         scroller.scrollTop = scroller.scrollHeight;
       }, 200);
     }
-
-    function escapeHtml(text) {
-      const div = document.createElement('div');
-      div.textContent = text;
-      return div.innerHTML;
-    }
-
-    function toggleTheme() {
-      const html = document.documentElement;
-      const cur = html.getAttribute('data-theme') || 'light';
-      const nxt = cur === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', nxt);
-      document.body.className = nxt === 'dark' ? 'tds-theme-dark' : '';
-    }
-
-    window.addEventListener('load', () => {
-      const saved = localStorage.getItem('tovelu_survey_answers');
-      if (saved) {
-        try {
-          userAnswers = JSON.parse(saved);
-          if (userAnswers['calculated_age']) {
-            document.getElementById('app-chrono-age').innerText = `${userAnswers['calculated_age']} Yrs`;
-            document.getElementById('app-bio-age').innerText = `${Math.max(18, userAnswers['calculated_age'] - 4.2).toFixed(1)} Yrs`;
-          }
-        } catch(e) {}
-      }
-    });
   </script>
 </body>
 </html>
