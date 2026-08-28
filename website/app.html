@@ -206,6 +206,49 @@
       box-shadow: var(--gemini-shadow-sm);
     }
 
+    /* 3-Way Meal Selector Pills */
+    .meal-tab-pill {
+      background: transparent;
+      border: none;
+      padding: 8px 6px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--gemini-text-muted);
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s;
+    }
+    .meal-tab-pill.active {
+      background: var(--gemini-surface);
+      color: var(--gemini-text-main);
+      box-shadow: var(--gemini-shadow-sm);
+    }
+    .theme-breakfast {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(217, 119, 6, 0.04)) !important;
+      border: 1.5px solid rgba(245, 158, 11, 0.4) !important;
+    }
+    .theme-breakfast #active-meal-badge {
+      background: #FEF3C7;
+      color: #B45309;
+    }
+    .theme-lunch {
+      background: linear-gradient(135deg, rgba(0, 245, 160, 0.08), rgba(0, 208, 108, 0.04)) !important;
+      border: 1.5px solid rgba(0, 208, 108, 0.4) !important;
+    }
+    .theme-lunch #active-meal-badge {
+      background: rgba(0, 245, 160, 0.18);
+      color: #008744;
+    }
+    .theme-dinner {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(139, 92, 246, 0.04)) !important;
+      border: 1.5px solid rgba(99, 102, 241, 0.4) !important;
+    }
+    .theme-dinner #active-meal-badge {
+      background: #EEF2FF;
+      color: #4F46E5;
+    }
+
     /* Category Selection Pills for Food Modal */
     .food-type-selector {
       display: grid;
@@ -504,7 +547,7 @@
             </div>
           </div>
 
-          <!-- 3. FOOD INTELLIGENCE (BREAKFAST | LUNCH | DINNER with SCAN, MANUALLY, ASK AI) -->
+          <!-- 3. DYNAMIC TIME-AWARE FOOD INTELLIGENCE (BREAKFAST | LUNCH | DINNER) -->
           <div style="display: flex; flex-direction: column; gap: 10px;">
             <div style="display: flex; justify-content: space-between; align-items: center;">
               <div style="font-size: 11px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase;">
@@ -515,85 +558,55 @@
               </span>
             </div>
 
-            <!-- Breakfast Card -->
-            <div class="app-meal-card">
-              <div class="meal-card-header">
-                <div>
-                  <span style="font-size: 11px; font-weight: 800; color: var(--gemini-sparkle-blue);">🍳 BREAKFAST • 08:30 AM</span>
-                  <div class="meal-title" style="margin-top: 2px;">Savory Pasture Eggs / Paneer + Greens</div>
-                </div>
-                <span style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald);" id="status-breakfast-tag">✓ 32g Protein Logged</span>
-              </div>
+            <!-- 3-Way Meal Selector (Breakfast | Lunch | Dinner) -->
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: var(--gemini-surface-container); padding: 4px; border-radius: 14px;">
+              <button class="meal-tab-pill active" id="pill-meal-breakfast" onclick="selectActiveMealView('Breakfast')">
+                🍳 Breakfast
+              </button>
+              <button class="meal-tab-pill" id="pill-meal-lunch" onclick="selectActiveMealView('Lunch')">
+                🥗 Lunch
+              </button>
+              <button class="meal-tab-pill" id="pill-meal-dinner" onclick="selectActiveMealView('Dinner')">
+                🍲 Dinner
+              </button>
+            </div>
+
+            <!-- Single Focused Dynamic Color-Coded Meal Card -->
+            <div id="dynamic-meal-card" class="app-meal-card theme-breakfast" style="border-radius: 18px; padding: 18px; display: flex; flex-direction: column; gap: 14px; transition: all 0.2s;">
               
-              <!-- 3 Consumption Pathways: Scan | Manually | Ask AI -->
-              <div class="meal-modes-row">
-                <button class="meal-mode-btn" onclick="openFoodModal('scan', 'Breakfast')">
-                  <span class="material-symbols-outlined" style="font-size: 18px;">photo_camera</span>
-                  <span>Scan / Photo</span>
-                </button>
-                <button class="meal-mode-btn" onclick="openFoodModal('manual', 'Breakfast')">
-                  <span class="material-symbols-outlined" style="font-size: 18px;">edit_note</span>
-                  <span>Manually</span>
-                </button>
-                <button class="meal-mode-btn" onclick="openFoodModal('ask_ai', 'Breakfast')">
-                  <span class="material-symbols-outlined" style="font-size: 18px;">auto_awesome</span>
-                  <span>Ask AI</span>
-                </button>
-              </div>
-            </div>
-
-            <!-- Lunch Card -->
-            <div class="app-meal-card">
-              <div class="meal-card-header">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                 <div>
-                  <span style="font-size: 11px; font-weight: 800; color: var(--gemini-sparkle-blue);">🥗 LUNCH • 01:30 PM</span>
-                  <div class="meal-title" style="margin-top: 2px;">Mediterranean Salmon / Sprouted Lentil Bowl</div>
+                  <span id="active-meal-badge" style="font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 9999px; text-transform: uppercase;">
+                    ACTIVE TIME WINDOW • 08:30 AM
+                  </span>
+                  <div id="active-meal-title" style="font-family: 'Google Sans', sans-serif; font-size: 16px; font-weight: 800; margin-top: 6px; color: var(--gemini-text-main);">
+                    Savory Pasture Eggs / Paneer + Sautéed Greens
+                  </div>
+                  <div id="active-meal-desc" style="font-size: 12px; color: var(--gemini-text-muted); margin-top: 2px;">
+                    Cooked in pure desi ghee with 1/2 avocado. Low-GI & 0% refined seed oils.
+                  </div>
                 </div>
-                <span style="font-size: 11px; font-weight: 700; color: var(--gemini-text-muted);" id="status-lunch-tag">Target: 48g Protein</span>
-              </div>
-
-              <!-- 3 Consumption Pathways -->
-              <div class="meal-modes-row">
-                <button class="meal-mode-btn" onclick="openFoodModal('scan', 'Lunch')">
-                  <span class="material-symbols-outlined" style="font-size: 18px;">photo_camera</span>
-                  <span>Scan / Photo</span>
-                </button>
-                <button class="meal-mode-btn" onclick="openFoodModal('manual', 'Lunch')">
-                  <span class="material-symbols-outlined" style="font-size: 18px;">edit_note</span>
-                  <span>Manually</span>
-                </button>
-                <button class="meal-mode-btn" onclick="openFoodModal('ask_ai', 'Lunch')">
-                  <span class="material-symbols-outlined" style="font-size: 18px;">auto_awesome</span>
-                  <span>Ask AI</span>
-                </button>
-              </div>
-            </div>
-
-            <!-- Dinner Card -->
-            <div class="app-meal-card">
-              <div class="meal-card-header">
-                <div>
-                  <span style="font-size: 11px; font-weight: 800; color: var(--gemini-sparkle-blue);">🍲 DINNER • 07:30 PM</span>
-                  <div class="meal-title" style="margin-top: 2px;">Slow Bone Broth Stew & Steamed Sweet Potato</div>
+                <div id="active-meal-logged-status" style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald); text-align: right;">
+                  Target: 35g Protein
                 </div>
-                <span style="font-size: 11px; font-weight: 700; color: var(--gemini-text-muted);" id="status-dinner-tag">Target: 40g Protein</span>
               </div>
 
-              <!-- 3 Consumption Pathways -->
-              <div class="meal-modes-row">
-                <button class="meal-mode-btn" onclick="openFoodModal('scan', 'Dinner')">
-                  <span class="material-symbols-outlined" style="font-size: 18px;">photo_camera</span>
-                  <span>Scan / Photo</span>
+              <!-- 3 Consumption Pathways: SCAN | MANUALLY | ASK AI -->
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;">
+                <button class="meal-mode-btn" onclick="openActiveFoodModal('scan')">
+                  <span class="material-symbols-outlined" style="font-size: 20px;">photo_camera</span>
+                  <span style="font-size: 12px; font-weight: 800;">Scan / Photo</span>
                 </button>
-                <button class="meal-mode-btn" onclick="openFoodModal('manual', 'Dinner')">
-                  <span class="material-symbols-outlined" style="font-size: 18px;">edit_note</span>
-                  <span>Manually</span>
+                <button class="meal-mode-btn" onclick="openActiveFoodModal('manual')">
+                  <span class="material-symbols-outlined" style="font-size: 20px;">edit_note</span>
+                  <span style="font-size: 12px; font-weight: 800;">Manually</span>
                 </button>
-                <button class="meal-mode-btn" onclick="openFoodModal('ask_ai', 'Dinner')">
-                  <span class="material-symbols-outlined" style="font-size: 18px;">auto_awesome</span>
-                  <span>Ask AI</span>
+                <button class="meal-mode-btn" onclick="openActiveFoodModal('ask_ai')">
+                  <span class="material-symbols-outlined" style="font-size: 20px;">auto_awesome</span>
+                  <span style="font-size: 12px; font-weight: 800;">Ask AI</span>
                 </button>
               </div>
+
             </div>
           </div>
 
@@ -983,9 +996,69 @@
       if (btn) btn.classList.add('active');
     }
 
+    // Dynamic Time-Aware Meal Switcher Logic
+    const mealData = {
+      'Breakfast': {
+        badge: 'ACTIVE TIME WINDOW • 08:30 AM',
+        title: 'Savory Pasture Eggs / Paneer + Sautéed Greens',
+        desc: 'Cooked in pure desi ghee with 1/2 avocado. Flat glycemic response & 0% refined seed oils.',
+        target: 'Target: 35g Protein',
+        theme: 'theme-breakfast',
+        calories: 420
+      },
+      'Lunch': {
+        badge: 'ACTIVE TIME WINDOW • 01:30 PM',
+        title: 'Mediterranean Salmon / Sprouted Lentil Bowl',
+        desc: 'Pre-load with green salad, clean protein second, complex carbs last. High Omega-3.',
+        target: 'Target: 48g Protein',
+        theme: 'theme-lunch',
+        calories: 680
+      },
+      'Dinner': {
+        badge: 'ACTIVE TIME WINDOW • 07:30 PM',
+        title: 'Slow Bone Broth Stew & Steamed Sweet Potato',
+        desc: 'Grass-fed protein with turmeric root. Tryptophan-rich for deep restorative sleep.',
+        target: 'Target: 40g Protein',
+        theme: 'theme-dinner',
+        calories: 520
+      }
+    };
+
+    function selectActiveMealView(mealName) {
+      currentMealTarget = mealName;
+      document.querySelectorAll('.meal-tab-pill').forEach(p => p.classList.remove('active'));
+      const pill = document.getElementById(`pill-meal-${mealName.toLowerCase()}`);
+      if (pill) pill.classList.add('active');
+
+      const card = document.getElementById('dynamic-meal-card');
+      const data = mealData[mealName];
+      if (card && data) {
+        card.className = `app-meal-card ${data.theme}`;
+        document.getElementById('active-meal-badge').innerText = data.badge;
+        document.getElementById('active-meal-title').innerText = data.title;
+        document.getElementById('active-meal-desc').innerText = data.desc;
+        document.getElementById('active-meal-logged-status').innerText = data.target;
+      }
+    }
+
+    function initTimeAwareMeal() {
+      const hour = new Date().getHours();
+      if (hour < 12) {
+        selectActiveMealView('Breakfast');
+      } else if (hour < 17) {
+        selectActiveMealView('Lunch');
+      } else {
+        selectActiveMealView('Dinner');
+      }
+    }
+
+    function openActiveFoodModal(mode) {
+      openFoodModal(mode, currentMealTarget);
+    }
+
     // Food Intelligence Modal Handlers
     function openFoodModal(mode, mealName) {
-      currentMealTarget = mealName;
+      currentMealTarget = mealName || currentMealTarget;
       currentInputMode = mode;
       const overlay = document.getElementById('food-modal-overlay');
       const selector = document.getElementById('food-type-selector');
@@ -1235,6 +1308,7 @@
     }
 
     window.addEventListener('load', () => {
+      initTimeAwareMeal();
       const saved = localStorage.getItem('tovelu_survey_answers');
       if (saved) {
         try {
