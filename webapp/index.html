@@ -992,36 +992,36 @@
       transition: width 0.6s ease;
     }
 
-    /* WEEKLY REPORT SWITCHER PILLS */
-    .health-week-nav {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      background: var(--gemini-surface-container);
-      padding: 4px;
-      border-radius: 16px;
-      border: 1px solid var(--gemini-border-subtle);
-    }
-    .health-week-btn {
-      background: transparent;
-      border: none;
-      height: 44px;
-      border-radius: 12px;
-      font-size: 13.5px;
-      font-weight: 800;
-      color: var(--gemini-text-muted);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-      transition: all 0.15s;
-      font-family: 'Google Sans', sans-serif;
-    }
-    .health-week-btn.active {
+    /* CHOOSE WEEK SELECTOR (UPDATES WEEKLY) */
+    .health-week-picker-card {
       background: var(--gemini-surface);
-      color: var(--gemini-sparkle-blue);
-      box-shadow: 0 2px 8px rgba(0, 98, 255, 0.12);
+      border: 1.5px solid var(--gemini-border-subtle);
+      border-radius: 18px;
+      padding: 14px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+    }
+    .health-week-dropdown {
+      width: 100%;
+      height: 48px;
+      border-radius: 14px;
+      border: 1.5px solid var(--gemini-border);
+      padding: 0 16px;
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--gemini-text-main);
+      background: var(--gemini-surface-container);
+      outline: none;
+      cursor: pointer;
+      font-family: 'Google Sans', sans-serif;
+      transition: all 0.2s;
+    }
+    .health-week-dropdown:focus {
+      border-color: var(--gemini-sparkle-blue);
+      background: var(--gemini-surface);
+      box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.15);
     }
 
     /* 6 DEEP CLINICAL BIOMARKER PANELS */
@@ -1782,17 +1782,21 @@
             </div>
           </div>
 
-          <!-- 2. WEEKLY REPORT SWITCHER (WEEK 3 ACTIVE | WEEK 2 | WEEK 1) -->
-          <div class="health-week-nav">
-            <button class="health-week-btn active" id="btn-health-w3" onclick="switchHealthWeek(3)">
-              <span>Week 3 (Active)</span>
-            </button>
-            <button class="health-week-btn" id="btn-health-w2" onclick="switchHealthWeek(2)">
-              <span>Week 2</span>
-            </button>
-            <button class="health-week-btn" id="btn-health-w1" onclick="switchHealthWeek(1)">
-              <span>Week 1</span>
-            </button>
+          <!-- 2. CHOOSE WEEK SELECTOR (UPDATED WEEKLY) -->
+          <div class="health-week-picker-card">
+            <div style="font-size: 11.5px; font-weight: 800; color: var(--gemini-sparkle-blue); text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; justify-content: space-between;">
+              <span style="display: flex; align-items: center; gap: 6px;">
+                <span class="material-symbols-outlined" style="font-size: 16px;">date_range</span>
+                CHOOSE WEEK:
+              </span>
+              <span style="color: var(--gemini-vitality-emerald); font-weight: 800; font-size: 11px;">● Updates Every Week</span>
+            </div>
+            <select class="health-week-dropdown" id="health-week-select" onchange="switchHealthWeek(this.value)">
+              <option value="3" selected>Week 3 (18 Aug 2026 – 24 Aug 2026) • Current Active</option>
+              <option value="2">Week 2 (11 Aug 2026 – 17 Aug 2026) • 88.2% Protocol Compliance</option>
+              <option value="1">Week 1 (04 Aug 2026 – 10 Aug 2026) • 42-Marker Intake Baseline</option>
+              <option value="0">Baseline (28 Jul 2026 – 03 Aug 2026) • Pre-Protocol Telemetry</option>
+            </select>
           </div>
 
           <!-- 3. DEEP CLINICAL BIOMARKER PANELS (6 SPECIALIST MATRICES) -->
@@ -3466,13 +3470,58 @@
             rationale: 'Initial intake revealed afternoon caffeine intake delaying endogenous melatonin release.'
           }
         ]
+      },
+      0: {
+        bioAge: '24.2 Yrs',
+        diff: '▼ 0.8 Years Younger (Pre-Protocol Survey State)',
+        pace: '0.98x',
+        trajWidth: '2%',
+        trajLabel: 'Day 1 / Day 90 (Intake Completed)',
+        panels: [
+          {
+            icon: 'bloodtype', iconColor: 'var(--gemini-sparkle-blue)', name: '1. Endocrine & Glucose Homeostasis', status: 'Intake Survey',
+            m1: ['Fasting Glucose', '98 mg/dL', 'Ref: 70-99'],
+            m2: ['HOMA-IR Score', '1.38', 'Moderate Resistance'],
+            m3: ['Est. HbA1c', '5.6%', 'Ref: < 5.7%'],
+            rationale: 'Initial survey established recurring 2 PM post-meal energy slumps and high glycemic volatility.'
+          },
+          {
+            icon: 'favorite', iconColor: '#EF4444', name: '2. Atherogenic Cardiovascular Profile', status: 'Borderline',
+            m1: ['Trig / HDL Ratio', '1.68', 'Ref: < 1.5'],
+            m2: ['Blood Pressure', '128 / 84', 'Pre-hypertensive'],
+            m3: ['ApoB / ApoA1', '0.86', 'Borderline'],
+            rationale: 'Frequent consumption of restaurant seed oils elevated systemic vascular tone.'
+          },
+          {
+            icon: 'science', iconColor: '#F59E0B', name: '3. Hepatic Detox & Seed Oil Clearance', status: 'Pre-Protocol',
+            m1: ['ALT / AST Ratio', '1.18', 'Subclinical'],
+            m2: ['MASLD Risk', '16%', 'Moderate'],
+            m3: ['Seed Oil Status', 'Active', 'Industrial Seed Oils'],
+            rationale: 'Intake survey found sunflower oil, refined soybean oil, and packaged biscuits in daily consumption.'
+          },
+          {
+            icon: 'spa', iconColor: 'var(--gemini-vitality-emerald)', name: '4. Gut Microbiome & Systemic Inflammation', status: 'Dysbiosis',
+            m1: ['hs-CRP Marker', '1.4 mg/L', 'Mild Low-Grade'],
+            m2: ['Daily Fiber', '18g / day', 'Low'],
+            m3: ['Gut Barrier', 'Permeable', 'Post-Meal Gas'],
+            rationale: 'Reported regular abdominal bloating within 45 minutes of consuming refined flours and seed oils.'
+          },
+          {
+            icon: 'bedtime', iconColor: '#8B5CF6', name: '5. Circadian Neuro-Endocrine Recovery', status: 'Uncalibrated',
+            m1: ['Sunlight Window', 'None', 'Indoors'],
+            m2: ['Caffeine Cutoff', '04:00 PM', 'Late Evening'],
+            m3: ['Deep Sleep', '52m', 'Sub-optimal'],
+            rationale: 'Late evening screen exposure and late coffee impaired sleep architecture and daytime alertness.'
+          }
+        ]
       }
     };
 
     function switchHealthWeek(weekNum) {
-      document.querySelectorAll('.health-week-btn').forEach(btn => btn.classList.remove('active'));
-      const activeBtn = document.getElementById(`btn-health-w${weekNum}`);
-      if (activeBtn) activeBtn.classList.add('active');
+      const select = document.getElementById('health-week-select');
+      if (select && select.value !== String(weekNum)) {
+        select.value = String(weekNum);
+      }
 
       const data = weeklyHealthData[weekNum];
       if (!data) return;
