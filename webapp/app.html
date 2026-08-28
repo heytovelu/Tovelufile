@@ -91,18 +91,22 @@
       background: transparent;
       border: none;
       color: var(--gemini-text-muted);
-      padding: 6px 16px;
-      border-radius: 9999px;
-      font-size: 11px;
+      height: 48px;
+      padding: 0 16px;
+      border-radius: 12px;
+      font-size: 13px;
       font-weight: 800;
       letter-spacing: 0.04em;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       transition: all 0.15s;
     }
     .top-switcher-btn.active {
       background: var(--gemini-surface);
       color: var(--gemini-sparkle-blue);
-      box-shadow: var(--gemini-shadow-sm);
+      box-shadow: 0 2px 8px rgba(0, 98, 255, 0.12);
     }
 
     /* Profile Avatar Button */
@@ -210,19 +214,22 @@
     .meal-tab-pill {
       background: transparent;
       border: none;
-      padding: 8px 6px;
-      border-radius: 10px;
-      font-size: 12px;
+      height: 48px;
+      padding: 0 10px;
+      border-radius: 12px;
+      font-size: 13px;
       font-weight: 800;
       color: var(--gemini-text-muted);
       cursor: pointer;
-      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       transition: all 0.15s;
     }
     .meal-tab-pill.active {
       background: var(--gemini-surface);
       color: var(--gemini-text-main);
-      box-shadow: var(--gemini-shadow-sm);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
     .theme-breakfast {
       background: linear-gradient(135deg, rgba(245, 158, 11, 0.08), rgba(217, 119, 6, 0.04)) !important;
