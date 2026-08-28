@@ -523,17 +523,20 @@
       overflow: hidden;
     }
 
-    /* 1. FIXED TOP BAR (GEMINI STYLE) */
+    /* 1. FIXED FLOATING TOP BAR (SLEEK ROUNDED GEMINI STYLE) */
     .gemini-chat-topbar {
       flex-shrink: 0;
       height: 64px;
-      padding: 0 20px;
+      margin: 12px 14px 4px 14px;
+      padding: 0 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       background: var(--gemini-surface);
       backdrop-filter: blur(25px);
-      border-bottom: 1px solid var(--gemini-border-subtle);
+      border: 1.5px solid var(--gemini-border-subtle);
+      border-radius: 20px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
       z-index: 10;
     }
     .gemini-chat-brand {
@@ -860,31 +863,31 @@
       transform: scale(0.98);
     }
 
-    /* 4. FIXED FLOATING BOTTOM COMPOSER */
+    /* 4. FIXED FLOATING BOTTOM COMPOSER (ROUNDED PILL) */
     .gemini-chat-typebar {
       flex-shrink: 0;
-      padding: 12px 18px 14px 18px;
+      padding: 6px 14px 12px 14px;
       display: flex;
       align-items: center;
       gap: 10px;
-      background: var(--gemini-surface);
-      backdrop-filter: blur(25px);
-      border-top: 1px solid var(--gemini-border-subtle);
+      background: transparent;
+      border-top: none;
       z-index: 10;
     }
     .gemini-composer-box {
       flex: 1;
       display: flex;
       align-items: center;
-      background: var(--gemini-surface-container);
-      border: 1.5px solid var(--gemini-border);
-      border-radius: 28px;
-      padding: 3px 6px 3px 18px;
+      background: var(--gemini-surface);
+      border: 1.5px solid var(--gemini-border-subtle);
+      border-radius: 30px;
+      padding: 4px 6px 4px 18px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
       transition: border-color 0.2s, box-shadow 0.2s;
     }
     .gemini-composer-box:focus-within {
       border-color: var(--gemini-sparkle-blue);
-      box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.15);
+      box-shadow: 0 8px 28px rgba(26, 115, 232, 0.18);
     }
     .gemini-composer-input {
       flex: 1;
