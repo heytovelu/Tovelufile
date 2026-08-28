@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tovelu Visual Studio • Canva-Style Design Inspector & Editor</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Google+Sans+Text:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  
+  <style>
+    :root {
+      --studio-bg: #0F1318;
+      --studio-surface: #181D24;
+      --studio-panel: #1E242C;
+      --studio-border: rgba(255, 255, 255, 0.08);
+      --studio-primary: #00C0FF;
+      --studio-accent: #00D06C;
+      --studio-text: #E3E8EF;
+      --studio-muted: #8B98A5;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Google Sans Text', sans-serif;
+      background: var(--studio-bg);
+      color: var(--studio-text);
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* ─── Top Studio Navbar ─── */
+    .studio-topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 56px;
+      background: var(--studio-surface);
+      border-bottom: 1px solid var(--studio-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      z-index: 1000;
+    }
+
+    .studio-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .device-preset-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--studio-bg);
+      padding: 4px;
+      border-radius: 12px;
+      border: 1px solid var(--studio-border);
+    }
+
+    .preset-btn {
+      background: transparent;
+      border: none;
+      color: var(--studio-muted);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .preset-btn.active, .preset-btn:hover {
+      background: var(--studio-panel);
+      color: #fff;
+    }
+    .preset-btn.active {
+      color: var(--studio-primary);
+      box-shadow: 0 2px 8px rgba(0, 192, 255, 0.15);
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .studio-btn {
+      height: 38px;
+      padding: 0 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .studio-btn-primary {
+      background: linear-gradient(135deg, #00C0FF, #0062FF);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(0, 98, 255, 0.3);
+    }
+    .studio-btn-primary:hover {
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+    }
+
+    .studio-btn-tonal {
+      background: var(--studio-panel);
+      color: var(--studio-text);
+      border: 1px solid var(--studio-border);
+    }
+    .studio-btn-tonal:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    /* ─── Main Workspace Layout ─── */
+    .studio-layout {
+      display: flex;
+      width: 100%;
+      height: calc(100vh - 56px);
+      margin-top: 56px;
+    }
+
+    /* ─── Left Canvas Viewport ─── */
+    .canvas-viewport {
+      flex: 1;
+      background: radial-gradient(circle at center, #18202A 0%, #0A0D12 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: auto;
+      padding: 40px 20px;
+    }
+
+    .device-chassis {
+      position: relative;
+      background: #000;
+      border-radius: 46px;
+      padding: 12px;
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.12), inset 0 0 0 2px rgba(255, 255, 255, 0.08);
+      transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), height 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .device-notch {
+      position: absolute;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90px;
+      height: 22px;
+      background: #000;
+      border-radius: 20px;
+      z-index: 200;
+    }
+
+    .app-frame {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 34px;
+      background: #fff;
+      display: block;
+    }
+
+    .dimension-badge {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--studio-muted);
+    }
+
+    /* ─── Right Canva-Style Controls Inspector ─── */
+    .controls-panel {
+      width: 360px;
+      background: var(--studio-surface);
+      border-left: 1px solid var(--studio-border);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow-y: auto;
+    }
+
+    .panel-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--studio-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--studio-panel);
+    }
+    .panel-header h3 {
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .panel-section {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--studio-border);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .section-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--studio-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .control-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--studio-text);
+      font-weight: 500;
+    }
+    .control-value {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--studio-accent);
+      font-size: 11px;
+    }
+
+    .slider-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    input[type="range"] {
+      flex: 1;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      outline: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--studio-primary);
+      box-shadow: 0 0 10px rgba(0, 192, 255, 0.5);
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+    input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+    }
+
+    /* Live Output Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(10px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-box {
+      width: 100%;
+      max-width: 640px;
+      background: var(--studio-surface);
+      border: 1px solid var(--studio-border);
+      border-radius: 20px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+    .code-preview {
+      background: #0A0D12;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: #A5D6FF;
+      max-height: 280px;
+      overflow-y: auto;
+      white-space: pre;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Studio Navigation Bar -->
+  <header class="studio-topbar">
+    <div class="studio-logo">
+      <span class="material-symbols-outlined" style="color: var(--studio-primary);">draw</span>
+      <span>Tovelu Visual Studio</span>
+      <span style="font-size: 11px; background: rgba(0, 192, 255, 0.15); color: var(--studio-primary); padding: 2px 8px; border-radius: 6px;">Canva Mode</span>
+    </div>
+
+    <!-- Average Mobile App Preset Switcher -->
+    <div class="device-preset-bar">
+      <button class="preset-btn active" onclick="setDevicePreset('avg_standard', 390, 844, this)">
+        <span class="material-symbols-outlined" style="font-size: 16px;">smartphone</span>
+        <span>Standard Mobile (390×844)</span>
+      </button>
+      <button class="preset-btn" onclick="setDevicePreset('compact_android', 360, 800, this)">
+        <span class="material-symbols-outlined" style="font-size: 16px;">phone_android</span>
+        <span>Compact Android (360×800)</span>
+      </button>
+      <button class="preset-btn" onclick="setDevicePreset('large_pro_max', 430, 932, this)">
+        <span class="material-symbols-outlined" style="font-size: 16px;">phone_iphone</span>
+        <span>Pro Max / Plus (430×932)</span>
+      </button>
+    </div>
+
+    <!-- Actions -->
+    <div class="top-actions">
+      <button class="studio-btn studio-btn-tonal" onclick="resetToM3Defaults()">
+        <span class="material-symbols-outlined" style="font-size: 18px;">restart_alt</span>
+        <span>Reset Defaults</span>
+      </button>
+      <button class="studio-btn studio-btn-primary" onclick="exportDesignChanges()">
+        <span class="material-symbols-outlined" style="font-size: 18px;">download</span>
+        <span>Export / Apply Design</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Split Layout -->
+  <div class="studio-layout">
+
+    <!-- Canvas Preview Viewport -->
+    <main class="canvas-viewport">
+      <div class="device-chassis" id="device-chassis" style="width: 390px; height: 844px;">
+        <div class="device-notch"></div>
+        <iframe id="preview-iframe" class="app-frame" src="app.html"></iframe>
+      </div>
+
+      <div class="dimension-badge" id="dimension-badge">
+        Viewport: 390px × 844px • Aspect: 19.5:9 (Average Mobile Standard)
+      </div>
+    </main>
+
+    <!-- Canva-Style Right Controls Panel -->
+    <aside class="controls-panel">
+      <div class="panel-header">
+        <h3>
+          <span class="material-symbols-outlined" style="font-size: 18px; color: var(--studio-primary);">tune</span>
+          <span>Live Size & Layout Editor</span>
+        </h3>
+        <span style="font-size: 11px; color: var(--studio-accent);">Real-Time Sync ⚡</span>
+      </div>
+
+      <!-- 1. Screen & Navigation Sizing -->
+      <div class="panel-section">
+        <div class="section-title">
+          <span class="material-symbols-outlined" style="font-size: 15px;">dock</span>
+          <span>Navigation & Screen Shell</span>
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">
+            <span>Top App Bar Height</span>
+            <span class="control-value" id="val-topbar">64px</span>
+          </div>
+          <div class="slider-row">
+            <input type="range" min="48" max="76" value="64" oninput="updateLiveVar('--m3-top-app-bar', this.value + 'px', 'val-topbar')" />
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">
+            <span>Bottom Navigation Bar Height</span>
+            <span class="control-value" id="val-bottomnav">80px</span>
+          </div>
+          <div class="slider-row">
+            <input type="range" min="54" max="90" value="80" oninput="updateLiveVar('--m3-bottom-nav', this.value + 'px', 'val-bottomnav')" />
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">
+            <span>Screen Edge Margin (Padding)</span>
+            <span class="control-value" id="val-screenpadding">16px</span>
+          </div>
+          <div class="slider-row">
+            <input type="range" min="10" max="24" value="16" oninput="updateLiveVar('--m3-spacing-std', this.value + 'px', 'val-screenpadding')" />
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Typography Scale -->
+      <div class="panel-section">
+        <div class="section-title">
+          <span class="material-symbols-outlined" style="font-size: 15px;">format_size</span>
+          <span>Typography (Font Sizes)</span>
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">
+            <span>Hero Number / Headline Size</span>
+            <span class="control-value" id="val-headlinemedium">28px</span>
+          </div>
+          <div class="slider-row">
+            <input type="range" min="20" max="36" value="28" oninput="updateLiveVar('--m3-headline-medium', this.value + 'px', 'val-headlinemedium')" />
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">
+            <span>Card Titles & Main Greetings</span>
+            <span class="control-value" id="val-titlelarge">22px</span>
+          </div>
+          <div class="slider-row">
+            <input type="range" min="17" max="26" value="22" oninput="updateLiveVar('--m3-title-large', this.value + 'px', 'val-titlelarge')" />
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">
+            <span>Section Headers (e.g. Tasks, Meals)</span>
+            <span class="control-value" id="val-titlemedium">16px</span>
+          </div>
+          <div class="slider-row">
+            <input type="range" min="13" max="20" value="16" oninput="updateLiveVar('--m3-title-medium', this.value + 'px', 'val-titlemedium')" />
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">
+            <span>Body & Description Text</span>
+            <span class="control-value" id="val-bodymedium">14px</span>
+          </div>
+          <div class="slider-row">
+            <input type="range" min="11" max="17" value="14" oninput="updateLiveVar('--m3-body-medium', this.value + 'px', 'val-bodymedium')" />
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">
+            <span>Micro Tags & Timestamps</span>
+            <span class="control-value" id="val-labelsmall">11px</span>
+          </div>
+          <div class="slider-row">
+            <input type="range" min="9" max="13" value="11" oninput="updateLiveVar('--m3-label-small', this.value + 'px', 'val-labelsmall')" />
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Cards & Shapes -->
+      <div class="panel-section">
+        <div class="section-title">
+          <span class="material-symbols-outlined" style="font-size: 15px;">rounded_corner</span>
+          <span>Cards & Corner Radius</span>
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">
+            <span>Card Corner Radius</span>
+            <span class="control-value" id="val-cardradius">16px</span>
+          </div>
+          <div class="slider-row">
+            <input type="range" min="8" max="28" value="16" oninput="updateLiveVar('--m3-shape-medium', this.value + 'px', 'val-cardradius')" />
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">
+            <span>Action Buttons Height</span>
+            <span class="control-value" id="val-buttonheight">40px</span>
+          </div>
+          <div class="slider-row">
+            <input type="range" min="34" max="58" value="40" oninput="updateLiveVar('--m3-button-height', this.value + 'px', 'val-buttonheight')" />
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="control-label">
+            <span>Icons Standard Size</span>
+            <span class="control-value" id="val-iconsize">24px</span>
+          </div>
+          <div class="slider-row">
+            <input type="range" min="18" max="30" value="24" oninput="updateLiveVar('--m3-icon-standard', this.value + 'px', 'val-iconsize')" />
+          </div>
+        </div>
+      </div>
+
+    </aside>
+  </div>
+
+  <!-- Export / Apply Modal -->
+  <div class="modal-overlay" id="export-modal" onclick="if(event.target===this) closeExportModal()">
+    <div class="modal-box">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <h3 style="font-size: 18px; font-weight: 700;">🎨 Your Custom Design Configuration</h3>
+        <button class="studio-btn studio-btn-tonal" style="width: 32px; height: 32px; padding: 0; border-radius: 50%;" onclick="closeExportModal()">✕</button>
+      </div>
+
+      <div style="font-size: 13px; color: var(--studio-muted);">
+        All your visual adjustments have been captured in real-time. Copy the configuration below or ask the AI to apply it!
+      </div>
+
+      <div class="code-preview" id="export-code-box"></div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 10px;">
+        <button class="studio-btn studio-btn-tonal" onclick="copyConfigToClipboard()">
+          <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
+          <span>Copy Configuration</span>
+        </button>
+        <button class="studio-btn studio-btn-primary" onclick="alert('✅ Design configuration copied! Just paste it here and tell the AI: Apply this design to the web app.')">
+          <span class="material-symbols-outlined" style="font-size: 16px;">check_circle</span>
+          <span>Done</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const activeDesignTokens = {
+      '--m3-top-app-bar': '64px',
+      '--m3-bottom-nav': '80px',
+      '--m3-spacing-std': '16px',
+      '--m3-headline-medium': '28px',
+      '--m3-title-large': '22px',
+      '--m3-title-medium': '16px',
+      '--m3-body-medium': '14px',
+      '--m3-label-small': '11px',
+      '--m3-shape-medium': '16px',
+      '--m3-button-height': '40px',
+      '--m3-icon-standard': '24px'
+    };
+
+    function setDevicePreset(id, width, height, btn) {
+      document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      const chassis = document.getElementById('device-chassis');
+      chassis.style.width = width + 'px';
+      chassis.style.height = height + 'px';
+
+      document.getElementById('dimension-badge').innerText = 
+        `Viewport: ${width}px × ${height}px • Real-Time Native Scaling Active`;
+    }
+
+    function updateLiveVar(token, value, labelId) {
+      activeDesignTokens[token] = value;
+      if (labelId) {
+        document.getElementById(labelId).innerText = value;
+      }
+
+      const iframe = document.getElementById('preview-iframe');
+      if (iframe && iframe.contentDocument) {
+        iframe.contentDocument.documentElement.style.setProperty(token, value);
+      }
+    }
+
+    function resetToM3Defaults() {
+      const defaults = {
+        '--m3-top-app-bar': '64px',
+        '--m3-bottom-nav': '80px',
+        '--m3-spacing-std': '16px',
+        '--m3-headline-medium': '28px',
+        '--m3-title-large': '22px',
+        '--m3-title-medium': '16px',
+        '--m3-body-medium': '14px',
+        '--m3-label-small': '11px',
+        '--m3-shape-medium': '16px',
+        '--m3-button-height': '40px',
+        '--m3-icon-standard': '24px'
+      };
+
+      for (const [key, val] of Object.entries(defaults)) {
+        activeDesignTokens[key] = val;
+        const iframe = document.getElementById('preview-iframe');
+        if (iframe && iframe.contentDocument) {
+          iframe.contentDocument.documentElement.style.setProperty(key, val);
+        }
+      }
+      location.reload();
+    }
+
+    function exportDesignChanges() {
+      const cssString = Object.entries(activeDesignTokens)
+        .map(([k, v]) => `  ${k}: ${v};`)
+        .join('\n');
+
+      const fullOutput = `/* TOVELU CUSTOM DESIGN TOKENS (CANVA STUDIO EXPORT) */\n:root {\n${cssString}\n}`;
+      document.getElementById('export-code-box').innerText = fullOutput;
+      document.getElementById('export-modal').style.display = 'flex';
+    }
+
+    function closeExportModal() {
+      document.getElementById('export-modal').style.display = 'none';
+    }
+
+    function copyConfigToClipboard() {
+      const text = document.getElementById('export-code-box').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert('✓ Design tokens copied to clipboard!');
+      });
+    }
+  </script>
+</body>
+</html>
