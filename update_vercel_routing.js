@@ -1,10 +1,13 @@
-{
+const fs = require("fs");
+
+const vercelConfig = {
   "version": 2,
   "framework": null,
   "outputDirectory": ".",
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
+    // Subdomain Host: app.tovelu.store -> serves the mobile web app (app.html)
     {
       "source": "/(.*)",
       "has": [
@@ -15,6 +18,7 @@
       ],
       "destination": "/app.html"
     },
+    // Root Domain Host: tovelu.store -> serves the website landing page (sales.html)
     {
       "source": "/",
       "has": [
@@ -35,46 +39,18 @@
       ],
       "destination": "/sales.html"
     },
-    {
-      "source": "/sales",
-      "destination": "/sales.html"
-    },
-    {
-      "source": "/website",
-      "destination": "/sales.html"
-    },
-    {
-      "source": "/app",
-      "destination": "/app.html"
-    },
-    {
-      "source": "/survey",
-      "destination": "/survey.html"
-    },
-    {
-      "source": "/report",
-      "destination": "/report.html"
-    },
-    {
-      "source": "/checkout",
-      "destination": "/checkout.html"
-    },
-    {
-      "source": "/pricing",
-      "destination": "/checkout.html"
-    },
-    {
-      "source": "/thais",
-      "destination": "/thais.html"
-    },
-    {
-      "source": "/download",
-      "destination": "/download.html"
-    },
-    {
-      "source": "/",
-      "destination": "/sales.html"
-    }
+    // Core routes
+    { "source": "/sales", "destination": "/sales.html" },
+    { "source": "/website", "destination": "/sales.html" },
+    { "source": "/app", "destination": "/app.html" },
+    { "source": "/survey", "destination": "/survey.html" },
+    { "source": "/report", "destination": "/report.html" },
+    { "source": "/checkout", "destination": "/checkout.html" },
+    { "source": "/pricing", "destination": "/checkout.html" },
+    { "source": "/thais", "destination": "/thais.html" },
+    { "source": "/download", "destination": "/download.html" },
+    // Fallback default
+    { "source": "/", "destination": "/sales.html" }
   ],
   "headers": [
     {
@@ -121,4 +97,12 @@
       ]
     }
   ]
-}
+};
+
+const jsonStr = JSON.stringify(vercelConfig, null, 2);
+
+fs.writeFileSync("/media/nikita/New Volume/Tovelufile/vercel.json", jsonStr, "utf8");
+fs.writeFileSync("/media/nikita/New Volume/Tovelufile/webapp/vercel.json", jsonStr, "utf8");
+fs.writeFileSync("/media/nikita/New Volume/Tovelufile/website/vercel.json", jsonStr, "utf8");
+
+console.log("Successfully configured host-based rewrites in vercel.json!");

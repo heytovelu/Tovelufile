@@ -5,14 +5,76 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "rewrites": [
-    { "source": "/survey", "destination": "/survey.html" },
-    { "source": "/report", "destination": "/report.html" },
-    { "source": "/checkout", "destination": "/checkout.html" },
-    { "source": "/pricing", "destination": "/checkout.html" },
-    { "source": "/thais", "destination": "/thais.html" },
-    { "source": "/download", "destination": "/download.html" },
-    { "source": "/app", "destination": "/app.html" },
-    { "source": "/", "destination": "/app.html" }
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "app.tovelu.store"
+        }
+      ],
+      "destination": "/app.html"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "tovelu.store"
+        }
+      ],
+      "destination": "/sales.html"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.tovelu.store"
+        }
+      ],
+      "destination": "/sales.html"
+    },
+    {
+      "source": "/sales",
+      "destination": "/sales.html"
+    },
+    {
+      "source": "/website",
+      "destination": "/sales.html"
+    },
+    {
+      "source": "/app",
+      "destination": "/app.html"
+    },
+    {
+      "source": "/survey",
+      "destination": "/survey.html"
+    },
+    {
+      "source": "/report",
+      "destination": "/report.html"
+    },
+    {
+      "source": "/checkout",
+      "destination": "/checkout.html"
+    },
+    {
+      "source": "/pricing",
+      "destination": "/checkout.html"
+    },
+    {
+      "source": "/thais",
+      "destination": "/thais.html"
+    },
+    {
+      "source": "/download",
+      "destination": "/download.html"
+    },
+    {
+      "source": "/",
+      "destination": "/sales.html"
+    }
   ],
   "headers": [
     {
