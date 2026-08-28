@@ -1226,299 +1226,224 @@
     }
   
     
+    
     /* ==========================================================================
-       GOOGLE MATERIAL 3 & APPLE HIG UNIVERSAL MULTI-DEVICE SIZING ENGINE
+       AUTHENTIC UNIVERSAL MOBILE APP SYSTEM (FOR ALL DEVICES)
        ========================================================================== */
     :root {
-      --app-font-display: "Google Sans Display", sans-serif;
-      --app-font-heading: "Google Sans", sans-serif;
-      --app-font-body: "Google Sans Text", "Roboto", sans-serif;
+      --app-shell-max-width: 480px;
     }
 
-    /* Universal Responsive Base */
-    * {
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
-    }
     body {
-      font-family: var(--app-font-body);
+      background-color: #0E121A;
       margin: 0;
       padding: 0;
-      background-color: var(--gemini-bg);
-      color: var(--gemini-text-main);
       display: flex;
       justify-content: center;
       min-height: 100vh;
+      font-family: "Google Sans Text", "Roboto", sans-serif;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* ==========================================================================
-       1. COMPACT WINDOW CLASS (< 600px / ALL SMARTPHONES: iPhone, Pixel, Galaxy)
-       ========================================================================== */
-    @media (max-width: 599px) {
-      .app-shell {
-        width: 100% !important;
-        max-width: 100% !important;
-        min-height: 100vh !important;
-        box-shadow: none !important;
-        border: none !important;
-        border-radius: 0 !important;
-      }
-      .desktop-nav-pills {
-        display: none !important;
-      }
-      .app-bottom-nav {
-        display: grid !important;
-        height: 58px !important;
-        padding-bottom: max(env(safe-area-inset-bottom), 4px) !important;
-      }
-      .nav-item-btn {
-        gap: 2px !important;
-      }
-      .nav-item-btn .material-symbols-outlined {
-        font-size: 21px !important;
-      }
-      .nav-label {
-        font-size: 9.5px !important;
-        font-weight: 800 !important;
-        letter-spacing: 0.02em !important;
-      }
-
-      /* Compact Top App Bar (52px) */
-      header.app-topbar {
-        height: 52px !important;
-        padding: 0 12px !important;
-      }
-      .brand-wordmark {
-        font-size: 19px !important;
-      }
-      #app-header-day-tag {
-        font-size: 10px !important;
-        padding: 3px 8px !important;
-      }
-      .profile-avatar-btn {
-        width: 32px !important;
-        height: 32px !important;
-      }
-
-      /* Screen Scroll Content */
-      .app-scroll-content {
-        padding: 12px 12px 90px 12px !important;
-      }
-
-      /* Multi-Column Flatten to Single Column Stack */
-      .m3-flow-grid,
-      .m3-you-grid,
-      .health-panels-grid {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 24px !important;
-      }
-      .flow-col-left, .flow-col-right, .you-col-left, .you-col-right {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 24px !important;
-      }
-
-      /* Card Shapes & Internal Paddings (14px - 16px) */
-      .gemini-card, .app-meal-card, .health-patient-card {
-        padding: 16px 14px !important;
-        border-radius: 18px !important;
-        gap: 12px !important;
-        margin-bottom: 22px !important;
-      }
-
-      /* Typography Scale (Compact) */
-      .gemini-card h1, .gemini-card [style*="font-size: 24px"] {
-        font-size: 18px !important;
-        line-height: 1.25 !important;
-      }
-      .gemini-card [style*="font-size: 14px"] {
-        font-size: 12px !important;
-      }
-
-      /* Hero Calorie Section */
-      [style*="TODAY'S CALORIE INTAKE"] {
-        font-size: 10px !important;
-      }
-      [style*="1,323"] {
-        font-size: 22px !important;
-      }
-      [style*="/ 1,500 kcal"] {
-        font-size: 13px !important;
-      }
-
-      /* Donut Ring (76px) */
-      [style*="width: 120px; height: 120px"], .calorie-gauge-wrap {
-        width: 76px !important;
-        height: 76px !important;
-      }
-      [style*="width: 120px; height: 120px"] svg, .calorie-gauge-wrap svg {
-        width: 76px !important;
-        height: 76px !important;
-      }
-      [style*="88%"] {
-        font-size: 16px !important;
-      }
-
-      /* Primary Action Buttons (Thumb Friendly 56px) */
-      .meal-mode-btn {
-        height: 56px !important;
-        min-height: 56px !important;
-        border-radius: 14px !important;
-        gap: 4px !important;
-      }
-      .meal-mode-btn .material-symbols-outlined {
-        font-size: 22px !important;
-      }
-      .meal-mode-btn span {
-        font-size: 11.5px !important;
-        font-weight: 800 !important;
-      }
-
-      /* Task Items (Full Height Knob & Clear Text) */
-      #dynamic-tasks-list {
-        gap: 14px !important;
-      }
-      .app-task-card {
-        min-height: 90px !important;
-        height: auto !important;
-        border-radius: 20px !important;
-        padding: 12px 14px !important;
-      }
-      .task-sliding-icon, .task-end-target {
-        left: 8px !important;
-        top: 8px !important;
-        bottom: 8px !important;
-        width: 58px !important;
-        height: calc(100% - 16px) !important;
-        border-radius: 14px !important;
-      }
-      .task-text-container {
-        margin-left: 64px !important;
-        margin-right: 64px !important;
-        gap: 3px !important;
-      }
-      .task-title-text {
-        font-size: 13.5px !important;
-        font-weight: 800 !important;
-      }
-      .task-time-badge {
-        font-size: 10px !important;
-        padding: 2.5px 7px !important;
-      }
+    /* The Smartphone App Container */
+    .app-shell {
+      width: 100% !important;
+      max-width: var(--app-shell-max-width) !important;
+      min-height: 100vh !important;
+      background: var(--gemini-bg) !important;
+      display: flex !important;
+      flex-direction: column !important;
+      position: relative !important;
+      box-shadow: 0 0 60px rgba(0, 0, 0, 0.45) !important;
+      border-left: 1px solid rgba(255, 255, 255, 0.08) !important;
+      border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+      overflow-x: hidden !important;
     }
 
-    /* ==========================================================================
-       2. MEDIUM WINDOW CLASS (600px – 839px / TABLETS & FOLDABLES)
-       ========================================================================== */
-    @media (min-width: 600px) and (max-width: 839px) {
-      body {
-        padding: 16px 12px;
-        background-color: var(--gemini-surface-container);
-      }
-      .app-shell {
-        max-width: 720px !important;
-        border-radius: 24px !important;
-        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08) !important;
-        border: 1px solid var(--gemini-border-subtle) !important;
-        overflow: hidden;
-      }
-      header.app-topbar {
-        height: 62px !important;
-        padding: 0 20px !important;
-      }
-      .desktop-nav-pills {
-        display: flex !important;
-      }
-      .app-bottom-nav {
-        display: none !important;
-      }
-      .app-scroll-content {
-        padding: 20px 24px 60px 24px !important;
-      }
-      .m3-flow-grid, .m3-you-grid {
-        display: flex;
-        flex-direction: column;
-        gap: 24px;
-      }
-      .health-panels-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 16px;
-      }
+    /* Fixed Sticky Top Header Bar */
+    header.app-topbar {
+      height: 52px !important;
+      width: 100% !important;
+      max-width: var(--app-shell-max-width) !important;
+      position: sticky !important;
+      top: 0 !important;
+      z-index: 100 !important;
+      background: var(--gemini-bg) !important;
+      backdrop-filter: blur(20px) !important;
+      border-bottom: 1px solid var(--gemini-border-subtle) !important;
+      padding: 0 14px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+    }
+    .brand-wordmark {
+      font-size: 19px !important;
+    }
+    #app-header-day-tag {
+      font-size: 10px !important;
+      padding: 3px 8px !important;
+    }
+    .profile-avatar-btn {
+      width: 32px !important;
+      height: 32px !important;
     }
 
-    /* ==========================================================================
-       3. EXPANDED & LARGE WINDOW CLASS (≥ 840px / LAPTOPS, DESKTOPS & 4K)
-       ========================================================================== */
-    @media (min-width: 840px) {
-      body {
-        padding: 24px 20px;
-        background-color: var(--gemini-surface-container);
-      }
-      .app-shell {
-        max-width: 1200px !important;
-        border-radius: 28px !important;
-        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08) !important;
-        border: 1px solid var(--gemini-border-subtle) !important;
-        overflow: hidden;
-      }
-      header.app-topbar {
-        height: 72px !important;
-        padding: 0 28px !important;
-        border-top-left-radius: 28px;
-        border-top-right-radius: 28px;
-      }
-      .desktop-nav-pills {
-        display: flex !important;
-      }
-      .app-bottom-nav {
-        display: none !important;
-      }
-      .app-scroll-content {
-        padding: 28px 32px 60px 32px !important;
-        min-height: calc(100vh - 120px);
-      }
-      .m3-flow-grid {
-        display: grid !important;
-        grid-template-columns: 1.15fr 0.85fr !important;
-        gap: 30px !important;
-        align-items: start !important;
-      }
-      .flow-col-left, .flow-col-right {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 28px !important;
-      }
-      .health-panels-grid {
-        display: grid !important;
-        grid-template-columns: repeat(3, 1fr) !important;
-        gap: 20px !important;
-      }
-      .m3-you-grid {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr !important;
-        gap: 28px !important;
-        align-items: start !important;
-      }
-      .you-col-left, .you-col-right {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 24px !important;
-      }
-      #pane-chat.tab-pane.active {
-        top: 72px !important;
-        bottom: 0 !important;
-        max-width: 920px !important;
-        margin: 0 auto !important;
-        border-radius: 24px !important;
-      }
-      .gemini-chat-topbar {
-        margin: 16px 20px 8px 20px !important;
-      }
-      .gemini-chat-typebar {
-        bottom: 20px !important;
-      }
+    /* Fixed Bottom Navigation (Always Visible on ALL Devices) */
+    .app-bottom-nav {
+      position: fixed !important;
+      bottom: 0 !important;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+      width: 100% !important;
+      max-width: var(--app-shell-max-width) !important;
+      height: 58px !important;
+      background: var(--gemini-surface) !important;
+      border-top: 1px solid var(--gemini-border-subtle) !important;
+      display: grid !important;
+      grid-template-columns: repeat(4, 1fr) !important;
+      align-items: center !important;
+      z-index: 9999 !important;
+      padding-bottom: max(env(safe-area-inset-bottom), 4px) !important;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.06) !important;
+    }
+    .nav-item-btn {
+      background: transparent !important;
+      border: none !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 2px !important;
+      color: var(--gemini-text-muted) !important;
+      cursor: pointer !important;
+      transition: all 0.15s !important;
+    }
+    .nav-item-btn.active {
+      color: var(--gemini-sparkle-blue) !important;
+    }
+    .nav-item-btn.active .material-symbols-outlined {
+      font-variation-settings: "FILL" 1 !important;
+    }
+    .nav-item-btn .material-symbols-outlined {
+      font-size: 21px !important;
+    }
+    .nav-label {
+      font-size: 9.5px !important;
+      font-weight: 800 !important;
+      letter-spacing: 0.02em !important;
+    }
+
+    /* Main Scroll Content Area */
+    .app-scroll-content {
+      padding: 12px 14px 90px 14px !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+    }
+
+    /* Single Column Mobile Stacking for All Elements */
+    .m3-flow-grid,
+    .m3-you-grid,
+    .health-panels-grid,
+    .flow-col-left,
+    .flow-col-right,
+    .you-col-left,
+    .you-col-right {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 24px !important;
+      width: 100% !important;
+    }
+
+    /* Mobile Cards Hierarchy */
+    .gemini-card, .app-meal-card, .health-patient-card {
+      padding: 16px 14px !important;
+      border-radius: 18px !important;
+      gap: 12px !important;
+      margin-bottom: 22px !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+    }
+
+    /* Typography Hierarchy (Native Mobile Specs) */
+    .gemini-card h1, .gemini-card [style*="font-size: 24px"] {
+      font-size: 18px !important;
+      line-height: 1.25 !important;
+    }
+    .gemini-card [style*="font-size: 14px"] {
+      font-size: 12px !important;
+    }
+
+    /* Donut Calorie Gauge (76px) */
+    [style*="width: 120px; height: 120px"], .calorie-gauge-wrap {
+      width: 76px !important;
+      height: 76px !important;
+    }
+    [style*="width: 120px; height: 120px"] svg, .calorie-gauge-wrap svg {
+      width: 76px !important;
+      height: 76px !important;
+    }
+    [style*="font-size: 18px"][style*="88%"], [style*="font-size: 30px"][style*="88%"] {
+      font-size: 16px !important;
+    }
+
+    /* Primary Action Buttons (56px Thumb-Friendly) */
+    .meal-mode-btn {
+      height: 56px !important;
+      min-height: 56px !important;
+      border-radius: 14px !important;
+      gap: 4px !important;
+      background: var(--gemini-surface) !important;
+      border: 1.5px solid var(--gemini-border-subtle) !important;
+    }
+    .meal-mode-btn .material-symbols-outlined {
+      font-size: 22px !important;
+    }
+    .meal-mode-btn [style*="font-size: 13px"], .meal-mode-btn span {
+      font-size: 11.5px !important;
+      font-weight: 800 !important;
+    }
+
+    /* Task Items (Full Height Knob & Clear Text) */
+    #dynamic-tasks-list {
+      gap: 14px !important;
+    }
+    .app-task-card {
+      min-height: 90px !important;
+      height: auto !important;
+      border-radius: 20px !important;
+      padding: 12px 14px !important;
+    }
+    .task-sliding-icon, .task-end-target {
+      left: 8px !important;
+      top: 8px !important;
+      bottom: 8px !important;
+      width: 58px !important;
+      height: calc(100% - 16px) !important;
+      border-radius: 14px !important;
+    }
+    .task-text-container {
+      margin-left: 64px !important;
+      margin-right: 64px !important;
+      gap: 3px !important;
+    }
+    .task-title-text {
+      font-size: 13.5px !important;
+      font-weight: 800 !important;
+    }
+    .task-time-badge {
+      font-size: 10px !important;
+      padding: 2.5px 7px !important;
+    }
+
+    /* Chat Edge-to-Edge inside Mobile Container */
+    #pane-chat.tab-pane.active {
+      top: 52px !important;
+      bottom: 58px !important;
+      width: 100% !important;
+      max-width: var(--app-shell-max-width) !important;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+      border-radius: 0 !important;
     }
 
   </style>
@@ -1548,24 +1473,7 @@
       <!-- Right Header Group: Dynamic DAY 1 / WEEK 1 + Profile Avatar -->
       
       <!-- Google M3 Desktop Navigation Pills (Visible on Tablet & Desktop >= 840px) -->
-      <nav class="desktop-nav-pills">
-        <button class="desktop-nav-btn active" id="btn-desk-tab-flow" onclick="switchAppTab('flow')">
-          <span class="material-symbols-outlined" style="font-size: 19px;">bolt</span>
-          <span>FLOW</span>
-        </button>
-        <button class="desktop-nav-btn" id="btn-desk-tab-health" onclick="switchAppTab('health')">
-          <span class="material-symbols-outlined" style="font-size: 19px;">ecg_heart</span>
-          <span>HEALTH</span>
-        </button>
-        <button class="desktop-nav-btn" id="btn-desk-tab-chat" onclick="switchAppTab('chat')">
-          <span class="material-symbols-outlined" style="font-size: 19px;">chat_spark</span>
-          <span>CHAT</span>
-        </button>
-        <button class="desktop-nav-btn" id="btn-desk-tab-you" onclick="switchAppTab('you')">
-          <span class="material-symbols-outlined" style="font-size: 19px;">person</span>
-          <span>YOU</span>
-        </button>
-      </nav>
+      
 
       <div style="display: flex; align-items: center; gap: 8px;">
         <span id="app-header-day-tag" style="font-size: 11px; font-weight: 800; color: var(--gemini-sparkle-blue); background: var(--gemini-surface-container); border: 1px solid var(--gemini-border-subtle); padding: 4px 10px; border-radius: 9999px; letter-spacing: 0.04em;">
