@@ -1,16 +1,14 @@
 export default function middleware(request) {
   const url = new URL(request.url);
-  const hostname = request.headers.get('host') || '';
+  const hostname = (request.headers.get('host') || '').toLowerCase();
 
-  // If request is from app.tovelu.store -> rewrite to /app.html
+  // If request is from app.tovelu.store -> serve app.html
   if (hostname.includes('app.tovelu.store')) {
     if (url.pathname === '/' || url.pathname === '') {
       return Response.rewrite(new URL('/app.html', request.url));
     }
-  }
-
-  // If request is from tovelu.store or www.tovelu.store -> rewrite to /sales.html (Website)
-  if (hostname === 'tovelu.store' || hostname === 'www.tovelu.store') {
+  } else {
+    // For tovelu.store, www.tovelu.store, or any other root domain -> serve sales.html (Website)
     if (url.pathname === '/' || url.pathname === '') {
       return Response.rewrite(new URL('/sales.html', request.url));
     }
