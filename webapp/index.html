@@ -499,25 +499,23 @@
       letter-spacing: 0.04em;
     }
 
-    /* Tovelu Assistance Clean Conversation Canvas with Fixed Topbar & Bottom Typebar */
+    /* Tovelu Assistance Full Page Chat Canvas (Edge-to-Edge Single Screen) */
     #pane-chat.tab-pane.active {
       display: flex !important;
       flex-direction: column;
-      height: calc(100vh - 190px);
-      max-height: calc(100vh - 190px);
+      position: absolute;
+      top: 60px; /* immediately below fixed top logo bar */
+      bottom: 70px; /* immediately above bottom navigation bar */
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: auto;
       padding: 0;
+      margin: 0;
       gap: 0;
+      background: var(--gemini-bg);
+      z-index: 50;
       overflow: hidden;
-    }
-    .tovelu-assistance-window {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      border-radius: 22px;
-      overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-      border: 1.5px solid var(--gemini-border-subtle);
-      background: var(--gemini-surface-container);
     }
 
     /* TOP BAR: FIXED [ ICON | Tovelu Assistance ] */
@@ -1124,55 +1122,51 @@
 
       </section>
 
-      <!-- ==================== 2. TAB: CHAT (TOVELU ASSISTANCE) ==================== -->
-      <section id="pane-chat" class="tab-pane" style="padding-bottom: 0;">
+      <!-- ==================== 2. TAB: CHAT (FULL SCREEN TOVELU ASSISTANCE) ==================== -->
+      <section id="pane-chat" class="tab-pane">
         
-        <div class="tovelu-assistance-window">
+        <!-- TOP BAR: ICON | Tovelu Assistance (Directly below top logo bar) -->
+        <div class="assistance-topbar">
+          <div class="assistance-icon-badge">
+            <span class="material-symbols-outlined" style="font-size: 22px;">smart_toy</span>
+          </div>
+          <div>
+            <div class="assistance-title">
+              Tovelu Assistance
+              <span class="assistance-status-dot" title="Active"></span>
+            </div>
+            <div style="font-size: 12px; color: var(--gemini-text-muted); margin-top: 1px;">
+              Personal Health & Protocol Intelligence
+            </div>
+          </div>
+        </div>
+
+        <!-- FULL PAGE MESSAGE STREAM (SCROLLABLE ONLY) -->
+        <div class="assistance-scroller" id="app-chat-messages">
           
-          <!-- TOP BAR: ICON | Tovelu Assistance -->
-          <div class="assistance-topbar">
-            <div class="assistance-icon-badge">
-              <span class="material-symbols-outlined" style="font-size: 24px;">smart_toy</span>
-            </div>
+          <!-- Welcome Bubble from Tovelu Assistance -->
+          <div class="assistance-bubble assistance-bubble-incoming">
             <div>
-              <div class="assistance-title">
-                Tovelu Assistance
-                <span class="assistance-status-dot" title="Active"></span>
-              </div>
-              <div style="font-size: 12px; color: var(--gemini-text-muted); margin-top: 1px;">
-                Personal Health & Protocol Intelligence
-              </div>
+              Hello Ajay! I am your <strong>Tovelu Assistance</strong> companion. I have reviewed your 42-marker health survey and your kitchen inventory.
+            </div>
+            <div style="margin-top: 6px;">
+              You are currently at <strong>88% daily portion target</strong> with 3 habits completed today. How can I help you?
+            </div>
+            <div class="assistance-bubble-time">
+              <span>08:30 AM</span>
             </div>
           </div>
 
-          <!-- Chat Wall Scroller -->
-          <div class="assistance-scroller" id="app-chat-messages">
-            
-            <!-- Welcome Bubble from Tovelu Assistance -->
-            <div class="assistance-bubble assistance-bubble-incoming">
-              <div>
-                Hello Ajay! I am your <strong>Tovelu Assistance</strong> companion. I have reviewed your 42-marker health survey and your kitchen inventory.
-              </div>
-              <div style="margin-top: 6px;">
-                You are currently at <strong>88% daily portion target</strong> with 3 habits completed today. How can I help you?
-              </div>
-              <div class="assistance-bubble-time">
-                <span>08:30 AM</span>
-              </div>
-            </div>
+        </div>
 
-          </div>
-
-          <!-- BOTTOM: Message Type Bar with Ask Button -->
-          <div class="assistance-typebar">
-            <input type="text" class="assistance-input" id="app-chat-input" placeholder="Type a message to Tovelu Assistance..." autocomplete="off" onkeydown="if(event.key==='Enter'){sendAppChat(); event.preventDefault();}" />
-            
-            <button class="assistance-ask-btn" onclick="sendAppChat()">
-              <span>Ask</span>
-              <span class="material-symbols-outlined" style="font-size: 18px;">send</span>
-            </button>
-          </div>
-
+        <!-- BOTTOM TYPING BAR WITH ASK BUTTON (Directly above bottom navigation) -->
+        <div class="assistance-typebar">
+          <input type="text" class="assistance-input" id="app-chat-input" placeholder="Type a message to Tovelu Assistance..." autocomplete="off" onkeydown="if(event.key==='Enter'){sendAppChat(); event.preventDefault();}" />
+          
+          <button class="assistance-ask-btn" onclick="sendAppChat()">
+            <span>Ask</span>
+            <span class="material-symbols-outlined" style="font-size: 18px;">send</span>
+          </button>
         </div>
 
       </section>
