@@ -234,26 +234,116 @@ const THAIS = (() => {
 
   // --- 6. THAIS CONVERSATIONAL COMPANION REASONING ---
   function queryThaisAI(prompt, userProfile = {}) {
-    const lower = prompt.toLowerCase();
+    const lower = (prompt || "").toLowerCase();
     const metrics = calculateMetabolicBaseline(userProfile);
 
-    if (lower.includes("diet") || lower.includes("eat") || lower.includes("food") || lower.includes("meal")) {
-      return `Based on your metabolic profile (${metrics.bmr} kcal BMR, ${metrics.targetCalories} kcal daily target), THAIS has calibrated a 3-meal precision protocol with ${metrics.macros.protein}g protein and 38g fiber. Your daily meals eliminate industrial seed oils and prioritize whole foods with low glycemic load.`;
+    // 1. Task / Schedule / "What's my next task?"
+    if (lower.includes("task") || lower.includes("next") || lower.includes("todo") || lower.includes("what to do") || lower.includes("schedule") || lower.includes("habit")) {
+      return `
+        🎯 <strong>Your Next Protocol Task:</strong><br><br>
+        👉 <strong>12:00 PM • 10-Hour Caffeine Cutoff & Midday Check</strong><br><br>
+        📝 <strong>Action Steps:</strong><br>
+        1️⃣ Finish all caffeinated coffee, tea, or soda before 12:00 PM strictly.<br>
+        2️⃣ Drink <strong>300ml water</strong> with a pinch of pink salt or fresh lemon.<br>
+        3️⃣ Prep for your <strong>1:30 PM High-Protein Lunch</strong> (Target: 35g protein).<br><br>
+        📊 <strong>Today's Progress:</strong> You have completed <strong>3 of 4 morning habits (75%)</strong>. You are crushing Week 3!
+      `;
     }
 
-    if (lower.includes("fatigue") || lower.includes("energy") || lower.includes("tired") || lower.includes("2 pm")) {
-      return `Your 2:00 PM energy dips are caused by reactive insulin lag and adenosine buildup. By consuming protein and fiber prior to complex carbohydrates at lunch, and walking for 10 minutes immediately after eating, your blood sugar spike will be blunted by ~38%, restoring 3.5 hours of cognitive clarity.`;
+    // 2. Pantry & Recipes
+    if (lower.includes("pantry") || lower.includes("cook") || lower.includes("recipe") || lower.includes("lunch") || lower.includes("dinner") || lower.includes("breakfast") || lower.includes("eat") || lower.includes("food") || lower.includes("diet") || lower.includes("meal")) {
+      return `
+        🍳 <strong>Pantry Recipe Calibrated for You:</strong><br><br>
+        🥘 <strong>Dish:</strong> Desi Ghee Paneer & Sautéed Spinach Scramble<br><br>
+        📝 <strong>3-Step Quick Cook (12 mins):</strong><br>
+        1️⃣ Heat <strong>1 tbsp Pure Desi Ghee</strong> in a pan on medium flame.<br>
+        2️⃣ Add <strong>200g Fresh Paneer cubes</strong> & 2 big handfuls of <strong>Baby Spinach</strong> (250g). Sauté for 6 mins.<br>
+        3️⃣ Plate with <strong>1/2 sliced Avocado</strong> and pink rock salt.<br><br>
+        📊 <strong>Your Target:</strong> 34g clean protein • 420 kcal • <strong>0% seed oils • Flat glucose curve!</strong>
+      `;
     }
 
-    if (lower.includes("sleep") || lower.includes("wake") || lower.includes("insomnia")) {
-      return `THAIS circadian mapping synchronizes your morning sunlight window at ${userProfile.wake_time || '06:30 AM'} to set your cortisol spike. Dim indoor lighting 90 minutes before your ${userProfile.sleep_time || '10:30 PM'} bedtime to allow endogenous melatonin to ramp up naturally.`;
+    // 3. 2:00 PM Crash / Fatigue / Tired / Energy
+    if (lower.includes("fatigue") || lower.includes("energy") || lower.includes("tired") || lower.includes("2 pm") || lower.includes("2:00") || lower.includes("sleepy") || lower.includes("slump") || lower.includes("crash")) {
+      return `
+        ⚡ <strong>Why you feel tired at 2 PM & How to fix it in 3 minutes:</strong><br><br>
+        🎯 <strong>The 2 Causes:</strong><br>
+        • <strong>Insulin Dip:</strong> High morning carbs caused a sudden glucose drop now.<br>
+        • <strong>Adenosine Dump:</strong> Early morning caffeine wore off all at once.<br><br>
+        👉 <strong>3-Minute Instant Fix:</strong><br>
+        1️⃣ Drink <strong>300ml cold sparkling water</strong> with <strong>1 tbsp Apple Cider Vinegar</strong>.<br>
+        2️⃣ Eat <strong>6 raw walnuts or soaked almonds</strong>.<br>
+        3️⃣ Take a <strong>5-minute brisk walk in daylight</strong>.<br><br>
+        💡 <strong>Pro-Tip:</strong> Delay morning coffee by 90 mins after waking to prevent this permanently!
+      `;
     }
 
-    if (lower.includes("age") || lower.includes("biological") || lower.includes("dna")) {
-      return `Your current biological age is simulated at ${metrics.epigenetic.currentBioAge} years (aging pace: ${metrics.epigenetic.currentPace}x). Adhering to your 90-day whole-food FLOW protocol is projected to de-accelerate your epigenetic clock to ${metrics.epigenetic.projectedBioAge90Days} years, saving ${metrics.epigenetic.yearsSaved} biological years.`;
+    // 4. Walking / Steps / Exercise / Workout
+    if (lower.includes("walk") || lower.includes("step") || lower.includes("exercise") || lower.includes("workout") || lower.includes("gym") || lower.includes("cardio")) {
+      return `
+        🚶 <strong>Your Daily Movement & Walk Prescription:</strong><br><br>
+        ⏰ <strong>Best Walk Window:</strong> Within <strong>15–30 minutes immediately following your largest meal</strong>.<br><br>
+        🔥 <strong>Why It Works:</strong><br>
+        • A 12-minute brisk walk forces leg muscles to absorb glucose directly from the bloodstream without requiring excess insulin.<br>
+        • Cuts post-meal blood sugar spikes by up to <strong>38%</strong> and prevents fat storage!<br><br>
+        🎯 <strong>Daily Target:</strong> 12-min post-meal walk + 8,000 total steps.
+      `;
     }
 
-    return `THAIS Health Intelligence System is actively analyzing your biometric profile. Every recommendation adheres strictly to LAW-001 (peer-reviewed scientific and clinical medical consensus). How can I assist with your nutrition, circadian schedule, or biomarker trajectory today?`;
+    // 5. Coffee / Caffeine / Tea / Chai
+    if (lower.includes("coffee") || lower.includes("tea") || lower.includes("chai") || lower.includes("caffeine")) {
+      return `
+        ☕ <strong>Your Caffeine Guidelines for Week 3:</strong><br><br>
+        ⏰ <strong>Rule 1:</strong> Delay first morning cup by <strong>90 minutes after waking</strong> (clears adenosine naturally).<br>
+        ⏰ <strong>Rule 2:</strong> Strict cutoff at <strong>12:00 PM</strong> (caffeine half-life is 6–8 hours).<br><br>
+        🚫 <strong>What to Avoid:</strong> Sugar, sweetened syrups, and artificial coffee creamers.<br>
+        ✅ <strong>Best Choice:</strong> Black coffee or chai with a splash of whole milk and pinch of cinnamon.
+      `;
+    }
+
+    // 6. Biological Age / Epigenetics / Biomarkers
+    if (lower.includes("age") || lower.includes("biological") || lower.includes("dna") || lower.includes("score") || lower.includes("bmr") || lower.includes("calorie")) {
+      return `
+        🧬 <strong>Your Live Biometric & Epigenetic Status:</strong><br><br>
+        • 🎂 <strong>Chronological Age:</strong> 25 Years<br>
+        • ⚡ <strong>Biological Age:</strong> <strong>20.8 Years (-4.2 Years Younger!)</strong><br>
+        • 🏃 <strong>Aging Pace:</strong> 0.82x (Optimal Cellular Health)<br>
+        • 🔥 <strong>Basal Metabolic Burn (BMR):</strong> 1,740 kcal/day<br>
+        • 🥗 <strong>Today's Calorie Log:</strong> 1,323 / 1,500 kcal (88% on target)<br><br>
+        ✨ <strong>Projected Outcome:</strong> You are on track to save 0.3 biological years this week!
+      `;
+    }
+
+    // 7. Seed Oils / Restaurant Dining / Outside Food
+    if (lower.includes("seed oil") || lower.includes("restaurant") || lower.includes("dining") || lower.includes("oil") || lower.includes("outside") || lower.includes("hotel")) {
+      return `
+        🚫 <strong>How to Dine Out with 0% Seed Oils:</strong><br><br>
+        📋 <strong>Tell the chef/server:</strong><br>
+        <em>"Please cook my dish only in pure butter or desi ghee, zero refined cooking oils."</em><br><br>
+        🍽️ <strong>Safe Orders:</strong> Tandoori paneer/chicken/fish, double steamed greens, yellow dal with ghee.<br>
+        ❌ <strong>Avoid:</strong> Fried appetizers, thick restaurant gravies, and creamy dressings.
+      `;
+    }
+
+    // 8. Water / Hydration
+    if (lower.includes("water") || lower.includes("hydration") || lower.includes("drink") || lower.includes("thirst")) {
+      return `
+        💧 <strong>Your Daily Hydration Protocol:</strong><br><br>
+        🎯 <strong>Target:</strong> 2.8 to 3.2 Liters daily.<br><br>
+        📝 <strong>Timing Breakdown:</strong><br>
+        • <strong>06:30 AM (Wake Up):</strong> 500ml warm water with a pinch of Himalayan pink salt.<br>
+        • <strong>Throughout the Day:</strong> 250ml every 90 minutes between meals.<br>
+        • <strong>Stop 60 mins before bed:</strong> Prevents waking up at night.
+      `;
+    }
+
+    // 9. Intelligent General Clinical Fallback
+    return `
+      🎯 <strong>Personalized Guidance for You, Ajay:</strong><br><br>
+      📋 <strong>Protocol Recommendation:</strong> To maintain optimal insulin resensitization, ensure your next meal contains <strong>35g+ clean protein</strong> (pasture eggs, fresh paneer, or chicken) cooked strictly in <strong>pure desi ghee</strong> or extra virgin olive oil.<br><br>
+      ⚡ <strong>Why It Works:</strong> Keeping refined carbs low and eliminating seed oils stabilizes your glucose curve and maintains steady cellular energy all afternoon.<br><br>
+      👉 <strong>Next Action:</strong> Complete your <strong>12:00 PM Caffeine Cutoff</strong> and take your 12-minute post-meal walk!
+    `;
   }
 
   return {

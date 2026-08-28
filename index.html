@@ -2330,29 +2330,25 @@
       input.value = '';
       scroller.scrollTop = scroller.scrollHeight;
 
-      // 2. Tovelu Assistance AI Response
-      setTimeout(() => {
-        let key = null;
-        const qLower = query.toLowerCase();
-        if (qLower.includes('2:00') || qLower.includes('tired') || qLower.includes('crash')) key = '2pm';
-        else if (qLower.includes('walk') || qLower.includes('12-min')) key = 'walk';
-        else if (qLower.includes('tea') || qLower.includes('coffee') || qLower.includes('12:00') || qLower.includes('caffeine')) key = 'coffee';
-        else if (qLower.includes('snack') || qLower.includes('insulin')) key = 'snacks';
-        else if (qLower.includes('seed oil') || qLower.includes('restaurant') || qLower.includes('oil')) key = 'seed oil';
-        else if (qLower.includes('pantry') || qLower.includes('cook') || qLower.includes('recipe') || qLower.includes('lunch') || qLower.includes('dinner') || qLower.includes('breakfast')) key = 'pantry';
+        let response = "";
+        if (typeof THAIS !== 'undefined' && THAIS.queryThaisAI) {
+          response = THAIS.queryThaisAI(query, userAnswers);
+        } else {
+          let key = null;
+          if (qLower.includes('task') || qLower.includes('next') || qLower.includes('schedule')) key = 'pantry';
+          else if (qLower.includes('2:00') || qLower.includes('tired') || qLower.includes('crash')) key = '2pm';
+          else if (qLower.includes('walk') || qLower.includes('12-min')) key = 'walk';
+          else if (qLower.includes('tea') || qLower.includes('coffee') || qLower.includes('12:00') || qLower.includes('caffeine')) key = 'coffee';
+          else if (qLower.includes('snack') || qLower.includes('insulin')) key = 'snacks';
+          else if (qLower.includes('seed oil') || qLower.includes('restaurant') || qLower.includes('oil')) key = 'seed oil';
+          else if (qLower.includes('pantry') || qLower.includes('cook') || qLower.includes('recipe') || qLower.includes('lunch') || qLower.includes('dinner') || qLower.includes('breakfast')) key = 'pantry';
 
-        let response = key ? presetAssistanceAnswers[key] : null;
-        if (!response) {
-          if (typeof THAIS !== 'undefined' && THAIS.queryThaisAI) {
-            response = THAIS.queryThaisAI(query, userAnswers);
-          } else {
-            response = `
-              🎯 <strong>Here is your personalized answer, Ajay:</strong><br><br>
-              📋 <strong>Protocol Action:</strong> Keep your meals centered around <strong>35g+ clean protein</strong> (pasture eggs, paneer, wild fish) cooked strictly in <strong>pure desi ghee</strong> or extra virgin olive oil.<br><br>
-              ⚡ <strong>Why It Works:</strong> Eliminating industrial seed oils and refined carbs keeps your insulin curve flat and protects steady ATP cellular energy throughout the day.<br><br>
-              💡 <strong>Next Step:</strong> Complete today's 12-minute post-meal walk to lock in 100% daily compliance!
-            `;
-          }
+          response = key ? presetAssistanceAnswers[key] : `
+            🎯 <strong>Here is your personalized protocol answer, Ajay:</strong><br><br>
+            📋 <strong>Protocol Action:</strong> Keep your meals centered around <strong>35g+ clean protein</strong> (pasture eggs, paneer, wild fish) cooked strictly in <strong>pure desi ghee</strong> or extra virgin olive oil.<br><br>
+            ⚡ <strong>Why It Works:</strong> Eliminating industrial seed oils and refined carbs keeps your insulin curve flat and protects steady ATP cellular energy throughout the day.<br><br>
+            💡 <strong>Next Step:</strong> Complete today's 12-minute post-meal walk to lock in 100% daily compliance!
+          `;
         }
         
         const responseTimeStr = getCurrentTimeStr();
