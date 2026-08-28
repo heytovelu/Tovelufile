@@ -769,49 +769,90 @@
             <div style="font-family: 'Google Sans Display', sans-serif; font-size: 20px; font-weight: 800; margin-top: 6px;">
               Insulin Resensitization & Fat Adaptation
             </div>
-            <!-- 7-Day Protocol Progress Cards (Enlarged, Clear & Spacious) -->
-            <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin: 14px 0 10px 0;">
-              <!-- Monday (Done) -->
-              <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--gemini-vitality-emerald); color: #FFFFFF; padding: 12px 2px; border-radius: 14px; gap: 4px; box-shadow: 0 2px 8px rgba(0, 208, 108, 0.2);">
-                <span style="font-size: 11px; font-weight: 800; opacity: 0.9;">MON</span>
-                <span style="font-family: 'Google Sans', sans-serif; font-size: 16px; font-weight: 800;">✓</span>
+            <!-- 7-Day Activity & Execution Bar Chart -->
+            <div style="background: var(--gemini-surface); border: 1.5px solid var(--gemini-border-subtle); border-radius: 18px; padding: 16px 14px; margin: 14px 0 10px 0; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.02);">
+              
+              <!-- Chart Header -->
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div style="font-size: 11px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase; letter-spacing: 0.04em;">
+                  📊 7-Day Activity & Habit Completion
+                </div>
+                <span style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald); background: var(--gemini-surface-container); padding: 2px 8px; border-radius: 9999px;">
+                  3 Days Crushed 🔥
+                </span>
               </div>
 
-              <!-- Tuesday (Done) -->
-              <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--gemini-vitality-emerald); color: #FFFFFF; padding: 12px 2px; border-radius: 14px; gap: 4px; box-shadow: 0 2px 8px rgba(0, 208, 108, 0.2);">
-                <span style="font-size: 11px; font-weight: 800; opacity: 0.9;">TUE</span>
-                <span style="font-family: 'Google Sans', sans-serif; font-size: 16px; font-weight: 800;">✓</span>
+              <!-- 7 Vertical Activity Bars (MON - SUN) -->
+              <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; align-items: flex-end; height: 130px; padding-top: 10px; border-bottom: 1.5px solid var(--gemini-border-subtle);">
+                
+                <!-- Monday: 95% -->
+                <div style="display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; gap: 6px; cursor: pointer;" onclick="selectWeekDayReport('MON', 95, 100, 100)">
+                  <span style="font-size: 10px; font-weight: 800; color: var(--gemini-vitality-emerald);">95%</span>
+                  <div style="width: 100%; max-width: 32px; height: 80px; background: var(--gemini-surface-container); border-radius: 10px; display: flex; align-items: flex-end; padding: 2px;">
+                    <div style="width: 100%; height: 95%; background: linear-gradient(180deg, #00F5A0, #00D06C); border-radius: 8px; box-shadow: 0 2px 6px rgba(0, 208, 108, 0.3);"></div>
+                  </div>
+                  <span style="font-size: 10px; font-weight: 800; color: var(--gemini-text-muted);">MON</span>
+                </div>
+
+                <!-- Tuesday: 92% -->
+                <div style="display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; gap: 6px; cursor: pointer;" onclick="selectWeekDayReport('TUE', 92, 95, 100)">
+                  <span style="font-size: 10px; font-weight: 800; color: var(--gemini-vitality-emerald);">92%</span>
+                  <div style="width: 100%; max-width: 32px; height: 80px; background: var(--gemini-surface-container); border-radius: 10px; display: flex; align-items: flex-end; padding: 2px;">
+                    <div style="width: 100%; height: 92%; background: linear-gradient(180deg, #00F5A0, #00D06C); border-radius: 8px; box-shadow: 0 2px 6px rgba(0, 208, 108, 0.3);"></div>
+                  </div>
+                  <span style="font-size: 10px; font-weight: 800; color: var(--gemini-text-muted);">TUE</span>
+                </div>
+
+                <!-- Wednesday: 88% -->
+                <div style="display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; gap: 6px; cursor: pointer;" onclick="selectWeekDayReport('WED', 88, 88, 75)">
+                  <span style="font-size: 10px; font-weight: 800; color: var(--gemini-vitality-emerald);">88%</span>
+                  <div style="width: 100%; max-width: 32px; height: 80px; background: var(--gemini-surface-container); border-radius: 10px; display: flex; align-items: flex-end; padding: 2px;">
+                    <div style="width: 100%; height: 88%; background: linear-gradient(180deg, #00F5A0, #00D06C); border-radius: 8px; box-shadow: 0 2px 6px rgba(0, 208, 108, 0.3);"></div>
+                  </div>
+                  <span style="font-size: 10px; font-weight: 800; color: var(--gemini-text-muted);">WED</span>
+                </div>
+
+                <!-- Thursday: 75% (TODAY ACTIVE) -->
+                <div style="display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; gap: 6px; cursor: pointer;" onclick="selectWeekDayReport('THU (Today)', 75, 88, 75)">
+                  <span style="font-size: 10px; font-weight: 800; color: var(--gemini-sparkle-blue);">75%</span>
+                  <div style="width: 100%; max-width: 32px; height: 80px; background: rgba(0, 98, 255, 0.1); border: 1.5px solid var(--gemini-sparkle-blue); border-radius: 10px; display: flex; align-items: flex-end; padding: 2px;">
+                    <div style="width: 100%; height: 75%; background: linear-gradient(180deg, #00C0FF, #0062FF); border-radius: 8px; box-shadow: 0 2px 8px rgba(0, 98, 255, 0.4);"></div>
+                  </div>
+                  <span style="font-size: 10px; font-weight: 800; color: var(--gemini-sparkle-blue); background: rgba(0, 98, 255, 0.15); padding: 1px 4px; border-radius: 4px;">THU</span>
+                </div>
+
+                <!-- Friday: Pending -->
+                <div style="display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; gap: 6px; opacity: 0.45;">
+                  <span style="font-size: 10px; font-weight: 700; color: var(--gemini-text-muted);">--</span>
+                  <div style="width: 100%; max-width: 32px; height: 80px; background: var(--gemini-surface-container); border: 1px dashed var(--gemini-border); border-radius: 10px; display: flex; align-items: flex-end; padding: 2px;">
+                  </div>
+                  <span style="font-size: 10px; font-weight: 700; color: var(--gemini-text-muted);">FRI</span>
+                </div>
+
+                <!-- Saturday: Pending -->
+                <div style="display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; gap: 6px; opacity: 0.45;">
+                  <span style="font-size: 10px; font-weight: 700; color: var(--gemini-text-muted);">--</span>
+                  <div style="width: 100%; max-width: 32px; height: 80px; background: var(--gemini-surface-container); border: 1px dashed var(--gemini-border); border-radius: 10px; display: flex; align-items: flex-end; padding: 2px;">
+                  </div>
+                  <span style="font-size: 10px; font-weight: 700; color: var(--gemini-text-muted);">SAT</span>
+                </div>
+
+                <!-- Sunday: Pending -->
+                <div style="display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; gap: 6px; opacity: 0.45;">
+                  <span style="font-size: 10px; font-weight: 700; color: var(--gemini-text-muted);">--</span>
+                  <div style="width: 100%; max-width: 32px; height: 80px; background: var(--gemini-surface-container); border: 1px dashed var(--gemini-border); border-radius: 10px; display: flex; align-items: flex-end; padding: 2px;">
+                  </div>
+                  <span style="font-size: 10px; font-weight: 700; color: var(--gemini-text-muted);">SUN</span>
+                </div>
+
               </div>
 
-              <!-- Wednesday (Done) -->
-              <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--gemini-vitality-emerald); color: #FFFFFF; padding: 12px 2px; border-radius: 14px; gap: 4px; box-shadow: 0 2px 8px rgba(0, 208, 108, 0.2);">
-                <span style="font-size: 11px; font-weight: 800; opacity: 0.9;">WED</span>
-                <span style="font-family: 'Google Sans', sans-serif; font-size: 16px; font-weight: 800;">✓</span>
+              <!-- Interactive Day Performance Breakdown Banner -->
+              <div id="weekday-detail-banner" style="font-size: 12px; color: var(--gemini-text-muted); display: flex; justify-content: space-between; align-items: center; background: var(--gemini-surface-container); padding: 8px 12px; border-radius: 10px;">
+                <span id="weekday-detail-title"><strong>📅 Thu (Today):</strong> 88% Food Portions • 3/4 Habits Done</span>
+                <span id="weekday-detail-score" style="font-weight: 800; color: var(--gemini-sparkle-blue);">75% Score</span>
               </div>
 
-              <!-- Thursday (Today Active) -->
-              <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--gemini-sparkle-blue); color: #FFFFFF; padding: 12px 2px; border-radius: 14px; gap: 4px; box-shadow: 0 4px 14px rgba(0, 98, 255, 0.35); border: 2px solid #FFFFFF;">
-                <span style="font-size: 11px; font-weight: 800;">THU</span>
-                <span style="font-size: 10px; font-weight: 800; background: rgba(255, 255, 255, 0.25); padding: 1px 4px; border-radius: 4px; text-transform: uppercase;">TODAY</span>
-              </div>
-
-              <!-- Friday (Upcoming) -->
-              <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--gemini-surface); border: 1.5px solid var(--gemini-border); color: var(--gemini-text-muted); padding: 12px 2px; border-radius: 14px; gap: 4px;">
-                <span style="font-size: 11px; font-weight: 800;">FRI</span>
-                <span style="font-size: 13px; font-weight: 700; opacity: 0.4;">•</span>
-              </div>
-
-              <!-- Saturday (Upcoming) -->
-              <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--gemini-surface); border: 1.5px solid var(--gemini-border); color: var(--gemini-text-muted); padding: 12px 2px; border-radius: 14px; gap: 4px;">
-                <span style="font-size: 11px; font-weight: 800;">SAT</span>
-                <span style="font-size: 13px; font-weight: 700; opacity: 0.4;">•</span>
-              </div>
-
-              <!-- Sunday (Upcoming) -->
-              <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--gemini-surface); border: 1.5px solid var(--gemini-border); color: var(--gemini-text-muted); padding: 12px 2px; border-radius: 14px; gap: 4px;">
-                <span style="font-size: 11px; font-weight: 800;">SUN</span>
-                <span style="font-size: 13px; font-weight: 700; opacity: 0.4;">•</span>
-              </div>
             </div>
             <div style="font-size: 11px; color: var(--gemini-vitality-emerald); font-weight: 700;">
               ⚡ Projected Epigenetic Gain: -0.3 Biological Years Saved This Week.
@@ -1605,6 +1646,16 @@
           }
         });
       });
+    }
+
+    function selectWeekDayReport(dayName, score, portionPct, habitPct) {
+      const title = document.getElementById('weekday-detail-title');
+      const scoreTag = document.getElementById('weekday-detail-score');
+      if (title && scoreTag) {
+        title.innerHTML = `<strong>📅 ${dayName}:</strong> ${portionPct}% Food Portions • ${habitPct}% Habits Done`;
+        scoreTag.innerText = `${score}% Score`;
+        scoreTag.style.color = (score >= 85) ? 'var(--gemini-vitality-emerald)' : 'var(--gemini-sparkle-blue)';
+      }
     }
 
     function updateTaskCounter() {
