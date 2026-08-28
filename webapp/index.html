@@ -992,36 +992,52 @@
       transition: width 0.6s ease;
     }
 
-    /* CHOOSE WEEK SELECTOR (UPDATES WEEKLY) */
-    .health-week-picker-card {
+    /* WEEK | CHOOSE BAR */
+    .health-week-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
       background: var(--gemini-surface);
       border: 1.5px solid var(--gemini-border-subtle);
       border-radius: 18px;
-      padding: 14px 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+      padding: 12px 18px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
     }
-    .health-week-dropdown {
-      width: 100%;
-      height: 48px;
-      border-radius: 14px;
-      border: 1.5px solid var(--gemini-border);
-      padding: 0 16px;
-      font-size: 14.5px;
-      font-weight: 700;
+    .health-week-current-box {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .health-week-current-title {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
       color: var(--gemini-text-main);
+    }
+    .health-choose-btn {
       background: var(--gemini-surface-container);
-      outline: none;
+      border: 1.5px solid var(--gemini-sparkle-blue);
+      color: var(--gemini-sparkle-blue);
+      padding: 8px 18px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 6px;
       cursor: pointer;
       font-family: 'Google Sans', sans-serif;
-      transition: all 0.2s;
+      transition: all 0.15s ease-out;
+      flex-shrink: 0;
     }
-    .health-week-dropdown:focus {
-      border-color: var(--gemini-sparkle-blue);
-      background: var(--gemini-surface);
-      box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.15);
+    .health-choose-btn:hover {
+      background: var(--gemini-sparkle-blue);
+      color: #FFFFFF;
+      box-shadow: 0 4px 14px rgba(26, 115, 232, 0.28);
+    }
+    .health-choose-btn:active {
+      transform: scale(0.96);
     }
 
     /* 6 DEEP CLINICAL BIOMARKER PANELS */
@@ -1782,21 +1798,22 @@
             </div>
           </div>
 
-          <!-- 2. CHOOSE WEEK SELECTOR (UPDATED WEEKLY) -->
-          <div class="health-week-picker-card">
-            <div style="font-size: 11.5px; font-weight: 800; color: var(--gemini-sparkle-blue); text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; justify-content: space-between;">
-              <span style="display: flex; align-items: center; gap: 6px;">
-                <span class="material-symbols-outlined" style="font-size: 16px;">date_range</span>
-                CHOOSE WEEK:
-              </span>
-              <span style="color: var(--gemini-vitality-emerald); font-weight: 800; font-size: 11px;">● Updates Every Week</span>
+          <!-- 2. WEEK | CHOOSE BAR -->
+          <div class="health-week-bar">
+            <div class="health-week-current-box">
+              <div style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald); text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 5px;">
+                <span class="material-symbols-outlined" style="font-size: 14px;">calendar_today</span>
+                <span>WEEK:</span>
+              </div>
+              <div class="health-week-current-title" id="health-current-week-display">
+                Week 3 (18 Aug – 24 Aug 2026)
+              </div>
             </div>
-            <select class="health-week-dropdown" id="health-week-select" onchange="switchHealthWeek(this.value)">
-              <option value="3" selected>Week 3 (18 Aug 2026 – 24 Aug 2026) • Current Active</option>
-              <option value="2">Week 2 (11 Aug 2026 – 17 Aug 2026) • 88.2% Protocol Compliance</option>
-              <option value="1">Week 1 (04 Aug 2026 – 10 Aug 2026) • 42-Marker Intake Baseline</option>
-              <option value="0">Baseline (28 Jul 2026 – 03 Aug 2026) • Pre-Protocol Telemetry</option>
-            </select>
+
+            <button class="health-choose-btn" onclick="openHealthWeekDrawer()" title="Choose previous week report">
+              <span class="material-symbols-outlined" style="font-size: 17px;">event_repeat</span>
+              <span>CHOOSE</span>
+            </button>
           </div>
 
           <!-- 3. DEEP CLINICAL BIOMARKER PANELS (6 SPECIALIST MATRICES) -->
@@ -2036,6 +2053,49 @@
             </button>
           </div>
 
+        </div>
+
+        <!-- ==================== IN-APP CHOOSE WEEK SIDE DRAWER ==================== -->
+        <div id="health-week-overlay" class="chat-history-overlay" onclick="if(event.target===this) closeHealthWeekDrawer()">
+          <div class="chat-history-drawer">
+            
+            <!-- Drawer Header -->
+            <div class="chat-history-header">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div style="width: 36px; height: 36px; border-radius: 12px; background: linear-gradient(135deg, #00D06C, #1A73E8); display: flex; align-items: center; justify-content: center; color: #fff; box-shadow: 0 4px 12px rgba(0, 208, 108, 0.25);">
+                  <span class="material-symbols-outlined" style="font-size: 20px;">date_range</span>
+                </div>
+                <div>
+                  <div style="font-family: 'Google Sans', sans-serif; font-size: 16.5px; font-weight: 800; color: var(--gemini-text-main);">
+                    Choose Week
+                  </div>
+                  <div style="font-size: 11.5px; color: var(--gemini-text-muted);">
+                    Browse weekly clinical reports
+                  </div>
+                </div>
+              </div>
+              <button class="gemini-btn gemini-btn-tonal" style="height: 32px; width: 32px; padding: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center;" onclick="closeHealthWeekDrawer()">✕</button>
+            </div>
+
+            <!-- Choose Month Selector (Top) -->
+            <div class="chat-history-month-wrap">
+              <div style="font-size: 11px; font-weight: 800; color: var(--gemini-sparkle-blue); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; display: flex; align-items: center; gap: 5px;">
+                <span class="material-symbols-outlined" style="font-size: 15px;">calendar_month</span>
+                CHOOSE MONTH:
+              </div>
+              <select class="chat-history-month-select" id="health-month-select" onchange="renderHealthWeeksByMonth(this.value)">
+                <option value="august_2026" selected>August 2026 (Active Month)</option>
+                <option value="july_2026">July 2026 (4 Weeks Archive)</option>
+                <option value="june_2026">June 2026 (Baseline Month)</option>
+              </select>
+            </div>
+
+            <!-- Weekly Cards Stream -->
+            <div class="chat-history-list" id="health-weeks-list-container">
+              <!-- Dynamically populated weeks for selected month -->
+            </div>
+
+          </div>
         </div>
 
       </section>
@@ -3517,10 +3577,149 @@
       }
     };
 
-    function switchHealthWeek(weekNum) {
-      const select = document.getElementById('health-week-select');
-      if (select && select.value !== String(weekNum)) {
-        select.value = String(weekNum);
+    // --- CHOOSE WEEK SIDE DRAWER LOGIC ---
+    function openHealthWeekDrawer() {
+      const overlay = document.getElementById('health-week-overlay');
+      if (overlay) {
+        overlay.classList.add('active');
+        const select = document.getElementById('health-month-select');
+        renderHealthWeeksByMonth(select ? select.value : 'august_2026');
+      }
+    }
+
+    function closeHealthWeekDrawer() {
+      const overlay = document.getElementById('health-week-overlay');
+      if (overlay) overlay.classList.remove('active');
+    }
+
+    function renderHealthWeeksByMonth(monthKey) {
+      const container = document.getElementById('health-weeks-list-container');
+      if (!container) return;
+
+      let html = '';
+      if (monthKey === 'august_2026') {
+        html = `
+          <div class="chat-history-day-card" onclick="selectHealthWeek(3, 'Week 3 (18 Aug – 24 Aug 2026)')">
+            <div>
+              <div class="chat-history-day-date">
+                <span class="material-symbols-outlined" style="font-size: 18px; color: var(--gemini-vitality-emerald);">calendar_month</span>
+                <span>Week 3 • 18 Aug – 24 Aug 2026 <strong style="color: var(--gemini-vitality-emerald); font-size: 11.5px; margin-left: 4px;">(Current)</strong></span>
+              </div>
+              <div class="chat-history-day-meta">
+                All 6 Panels Optimal • 91.4% Protocol Score
+              </div>
+            </div>
+            <span class="chat-history-day-tag">91.4% Done</span>
+          </div>
+
+          <div class="chat-history-day-card" onclick="selectHealthWeek(2, 'Week 2 (11 Aug – 17 Aug 2026)')">
+            <div>
+              <div class="chat-history-day-date">
+                <span class="material-symbols-outlined" style="font-size: 18px; color: var(--gemini-sparkle-blue);">calendar_month</span>
+                <span>Week 2 • 11 Aug – 17 Aug 2026</span>
+              </div>
+              <div class="chat-history-day-meta">
+                Glycemic Stability Achieved • 88.2% Score
+              </div>
+            </div>
+            <span class="chat-history-day-tag">88.2% Done</span>
+          </div>
+
+          <div class="chat-history-day-card" onclick="selectHealthWeek(1, 'Week 1 (04 Aug – 10 Aug 2026)')">
+            <div>
+              <div class="chat-history-day-date">
+                <span class="material-symbols-outlined" style="font-size: 18px; color: var(--gemini-sparkle-blue);">calendar_month</span>
+                <span>Week 1 • 04 Aug – 10 Aug 2026</span>
+              </div>
+              <div class="chat-history-day-meta">
+                42-Marker Intake Baseline Calibrated
+              </div>
+            </div>
+            <span class="chat-history-day-tag">84.0% Done</span>
+          </div>
+        `;
+      } else if (monthKey === 'july_2026') {
+        html = `
+          <div class="chat-history-day-card" onclick="selectHealthWeek(0, 'Week 4 (28 Jul – 03 Aug 2026)')">
+            <div>
+              <div class="chat-history-day-date">
+                <span class="material-symbols-outlined" style="font-size: 18px; color: var(--gemini-sparkle-blue);">calendar_month</span>
+                <span>Week 4 • 28 Jul – 03 Aug 2026</span>
+              </div>
+              <div class="chat-history-day-meta">
+                Pre-Protocol Baseline Assessment Log
+              </div>
+            </div>
+            <span class="chat-history-day-tag">79.0% Done</span>
+          </div>
+
+          <div class="chat-history-day-card" onclick="selectHealthWeek(0, 'Week 3 (21 Jul – 27 Jul 2026)')">
+            <div>
+              <div class="chat-history-day-date">
+                <span class="material-symbols-outlined" style="font-size: 18px; color: var(--gemini-sparkle-blue);">calendar_month</span>
+                <span>Week 3 • 21 Jul – 27 Jul 2026</span>
+              </div>
+              <div class="chat-history-day-meta">
+                Initial Metabolic Risk Screening
+              </div>
+            </div>
+            <span class="chat-history-day-tag">76.5% Done</span>
+          </div>
+
+          <div class="chat-history-day-card" onclick="selectHealthWeek(0, 'Week 2 (14 Jul – 20 Jul 2026)')">
+            <div>
+              <div class="chat-history-day-date">
+                <span class="material-symbols-outlined" style="font-size: 18px; color: var(--gemini-sparkle-blue);">calendar_month</span>
+                <span>Week 2 • 14 Jul – 20 Jul 2026</span>
+              </div>
+              <div class="chat-history-day-meta">
+                Pantry Survey & Biomarker Intake
+              </div>
+            </div>
+            <span class="chat-history-day-tag">75.0% Done</span>
+          </div>
+
+          <div class="chat-history-day-card" onclick="selectHealthWeek(0, 'Week 1 (07 Jul – 13 Jul 2026)')">
+            <div>
+              <div class="chat-history-day-date">
+                <span class="material-symbols-outlined" style="font-size: 18px; color: var(--gemini-sparkle-blue);">calendar_month</span>
+                <span>Week 1 • 07 Jul – 13 Jul 2026</span>
+              </div>
+              <div class="chat-history-day-meta">
+                Patient Account Created & Profile Initialized
+              </div>
+            </div>
+            <span class="chat-history-day-tag">72.0% Done</span>
+          </div>
+        `;
+      } else if (monthKey === 'june_2026') {
+        html = `
+          <div class="chat-history-day-card" onclick="selectHealthWeek(0, 'Week 4 (23 Jun – 29 Jun 2026)')">
+            <div>
+              <div class="chat-history-day-date">
+                <span class="material-symbols-outlined" style="font-size: 18px; color: var(--gemini-sparkle-blue);">calendar_month</span>
+                <span>Week 4 • 23 Jun – 29 Jun 2026</span>
+              </div>
+              <div class="chat-history-day-meta">
+                Pre-Onboarding Telemetry Record
+              </div>
+            </div>
+            <span class="chat-history-day-tag">70.0% Done</span>
+          </div>
+        `;
+      }
+      container.innerHTML = html;
+    }
+
+    function selectHealthWeek(weekNum, weekLabel) {
+      closeHealthWeekDrawer();
+      switchHealthWeek(weekNum, weekLabel);
+    }
+
+    function switchHealthWeek(weekNum, weekLabel) {
+      const displayEl = document.getElementById('health-current-week-display');
+      if (displayEl && weekLabel) {
+        displayEl.innerText = weekLabel;
       }
 
       const data = weeklyHealthData[weekNum];
