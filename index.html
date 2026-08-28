@@ -1598,7 +1598,7 @@
       <section id="pane-flow" class="tab-pane active">
         
         <!-- DAY | WEEK SWITCHER (SHIFTED BELOW TOP BAR & ABOVE FIRST HERO SECTION) -->
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; background: var(--gemini-surface-container); padding: 4px; border-radius: 16px; border: 1px solid var(--gemini-border-subtle); margin-bottom: 22px;">
+        <div id="top-flow-switcher" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; background: var(--gemini-surface-container); padding: 4px; border-radius: 16px; border: 1px solid var(--gemini-border-subtle); margin-bottom: 22px;">
           <button class="top-switcher-btn active" id="btn-top-day" onclick="switchFlowSubView('day')">
             DAY
           </button>
@@ -1999,6 +1999,52 @@
             </div>
           </div>
 
+          
+          <!-- 4. 🛒 WEEKLY CLINICAL GROCERY LIST (SPACIOUS DEDICATED SECTION) -->
+          <div class="gemini-card" style="border: 1.5px solid rgba(0, 208, 108, 0.35); background: linear-gradient(135deg, rgba(0, 208, 108, 0.05), rgba(0, 192, 255, 0.04), var(--gemini-surface)); padding: 22px; border-radius: 24px; display: flex; flex-direction: column; gap: 16px; margin-bottom: 28px; box-shadow: 0 4px 20px rgba(0, 208, 108, 0.06);">
+            
+            <!-- Section Header Row -->
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+              <div>
+                <div style="font-family: 'Google Sans', sans-serif; font-size: 17px; font-weight: 800; color: var(--gemini-text-main); display: flex; align-items: center; gap: 8px;">
+                  <span class="material-symbols-outlined" style="color: var(--gemini-vitality-emerald); font-size: 24px;">shopping_cart</span>
+                  <span>Weekly Clinical Grocery List</span>
+                </div>
+                <div style="font-size: 12px; color: var(--gemini-text-muted); margin-top: 2px;">
+                  Pre-calibrated 100% whole foods required for Week 3 protocol compliance.
+                </div>
+              </div>
+
+              <!-- Quick Header Action Buttons -->
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <button class="gemini-btn gemini-btn-tonal" style="height: 36px; padding: 0 12px; font-size: 12px; font-weight: 800; border-radius: 10px; display: flex; align-items: center; gap: 4px;" onclick="copyGroceryListToClipboard()">
+                  <span class="material-symbols-outlined" style="font-size: 16px;">content_copy</span>
+                  <span>Share / Copy</span>
+                </button>
+                <button class="gemini-btn gemini-btn-primary" style="height: 36px; padding: 0 14px; font-size: 12px; font-weight: 800; border-radius: 10px; display: flex; align-items: center; gap: 4px;" onclick="addCustomGroceryPrompt()">
+                  <span>＋ Add Item</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Progress Meter -->
+            <div style="background: var(--gemini-surface-container); border: 1px solid var(--gemini-border-subtle); border-radius: 14px; padding: 12px 14px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 800; color: var(--gemini-text-muted); margin-bottom: 8px;">
+                <span>SHOPPING PROGRESS</span>
+                <span id="grocery-bought-counter" style="color: var(--gemini-vitality-emerald);">8 / 12 Items Bought (67%)</span>
+              </div>
+              <div style="height: 8px; background: rgba(0,0,0,0.06); border-radius: 9999px; overflow: hidden;">
+                <div id="grocery-progress-bar" style="width: 67%; height: 100%; background: linear-gradient(90deg, #00C0FF, #00D06C); border-radius: 9999px; transition: width 0.3s ease;"></div>
+              </div>
+            </div>
+
+            <!-- Interactive Grocery Checklist Grid -->
+            <div id="weekly-grocery-checklist" style="display: flex; flex-direction: column; gap: 10px;">
+              <!-- Dynamically populated by renderGroceryList() -->
+            </div>
+
+          </div>
+
           <!-- 4. MY KITCHEN & PANTRY INVENTORY (PLACED AT BOTTOM WITH INGREDIENT QUANTITIES) -->
           <div class="gemini-card" style="border: 1.5px dashed var(--gemini-sparkle-blue); background: var(--gemini-surface-container); padding: 22px; border-radius: 22px;">
             <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -2191,7 +2237,7 @@
                   20.8 Yrs
                 </div>
                 <div style="font-size: 13px; color: var(--gemini-vitality-emerald); font-weight: 800; margin-top: 2px;">
-                  ▼ 4.2 Years Younger than Chronological (25 Yrs)
+                  ▼ 4.2 Years Younger than Chronological (<span id="app-chrono-age">25</span> Yrs)
                 </div>
               </div>
               <div style="text-align: right;">
@@ -3487,7 +3533,105 @@
     }
     function savePantryAndClose() {
       renderPantryDisplay();
+      renderGroceryList();
       closePantryModal();
+    }
+
+    const weeklyGroceryItems = [
+      { id: 1, name: "Pasture-Raised Organic Eggs", qty: "12 pcs", cat: "Protein", note: "35g Breakfast Target", bought: true },
+      { id: 2, name: "Fresh Grass-Fed Paneer", qty: "400g", cat: "Protein", note: "Zero-Carb Clean Protein", bought: true },
+      { id: 3, name: "Wild Salmon / Sardines", qty: "250g", cat: "Protein", note: "Omega-3 EPA / DHA", bought: false },
+      { id: 4, name: "Pure A2 Desi Gir Cow Ghee", qty: "500g", cat: "Fats", note: "Butyrate Gut Healing Fuel", bought: true },
+      { id: 5, name: "Extra Virgin Olive Oil (Cold-Pressed)", qty: "500ml", cat: "Fats", note: "High Polyphenol (>300mg/kg)", bought: false },
+      { id: 6, name: "Organic Baby Spinach", qty: "500g", cat: "Greens", note: "Nitric Oxide Vasodilation", bought: true },
+      { id: 7, name: "Fresh Broccoli / Broccolini", qty: "1 head", cat: "Greens", note: "Sulforaphane Detox", bought: false },
+      { id: 8, name: "Fresh Hass Avocados", qty: "4 pcs", cat: "Greens", note: "Monounsaturated Oleic Acid", bought: true },
+      { id: 9, name: "Raw Unfiltered Apple Cider Vinegar", qty: "500ml", cat: "Spices", note: "With Mother (Glycemic Blunter)", bought: true },
+      { id: 10, name: "Pink Himalayan Rock Salt", qty: "200g", cat: "Spices", note: "Unrefined Cellular Hydration", bought: true },
+      { id: 11, name: "Ceylon True Cinnamon Powder", qty: "100g", cat: "Spices", note: "Insulin Sensitivity Activator", bought: false },
+      { id: 12, name: "Raw California Walnuts", qty: "250g", cat: "Fats", note: "Alpha-Linolenic Acid (ALA)", bought: true }
+    ];
+
+    function toggleGroceryItem(id) {
+      const item = weeklyGroceryItems.find(g => g.id === id);
+      if (item) {
+        item.bought = !item.bought;
+        renderGroceryList();
+      }
+    }
+
+    function renderGroceryList() {
+      const container = document.getElementById("weekly-grocery-checklist");
+      const counter = document.getElementById("grocery-bought-counter");
+      const progress = document.getElementById("grocery-progress-bar");
+      if (!container) return;
+
+      const total = weeklyGroceryItems.length;
+      const boughtCount = weeklyGroceryItems.filter(g => g.bought).length;
+      const pct = Math.round((boughtCount / total) * 100);
+
+      if (counter) counter.innerText = boughtCount + " / " + total + " Items Bought (" + pct + "%)";
+      if (progress) progress.style.width = pct + "%";
+
+      container.innerHTML = weeklyGroceryItems.map(item => {
+        const isBought = item.bought ? "bought" : "";
+        const strike = item.bought ? "line-through" : "none";
+        const txtColor = item.bought ? "var(--gemini-text-muted)" : "var(--gemini-text-main)";
+        const chkBg = item.bought ? "var(--gemini-vitality-emerald)" : "transparent";
+        const chkBorder = item.bought ? "var(--gemini-vitality-emerald)" : "var(--gemini-border)";
+        const chkMark = item.bought ? "✓" : "";
+        const tagColor = item.bought ? "var(--gemini-vitality-emerald)" : "var(--gemini-sparkle-blue)";
+        const cardBg = item.bought ? "var(--gemini-surface-container)" : "var(--gemini-surface)";
+
+        return "<div class=\"grocery-item-row " + isBought + "\" onclick=\"toggleGroceryItem(" + item.id + ")\" style=\"display: flex; align-items: center; justify-content: space-between; gap: 12px; background: " + cardBg + "; border: 1.5px solid var(--gemini-border-subtle); padding: 12px 14px; border-radius: 16px; cursor: pointer; transition: all 0.2s; user-select: none;\">" +
+          "<div style=\"display: flex; align-items: center; gap: 12px; min-width: 0; flex: 1;\">" +
+            "<div style=\"width: 24px; height: 24px; border-radius: 8px; border: 2px solid " + chkBorder + "; background: " + chkBg + "; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 14px; font-weight: 900; flex-shrink: 0;\">" +
+              chkMark +
+            "</div>" +
+            "<div style=\"min-width: 0;\">" +
+              "<div style=\"font-family: 'Google Sans', sans-serif; font-size: 14px; font-weight: 700; color: " + txtColor + "; text-decoration: " + strike + ";\">" +
+                item.name +
+              "</div>" +
+              "<div style=\"font-size: 11px; color: var(--gemini-text-muted); margin-top: 2px;\">" +
+                item.note +
+              "</div>" +
+            "</div>" +
+          "</div>" +
+          "<span style=\"font-size: 12px; font-weight: 800; color: " + tagColor + "; background: var(--gemini-surface-container); padding: 4px 10px; border-radius: 8px; border: 1px solid var(--gemini-border-subtle); white-space: nowrap;\">" +
+            item.qty +
+          "</span>" +
+        "</div>";
+      }).join("");
+    }
+
+    function addCustomGroceryPrompt() {
+      const name = prompt("Enter grocery item name (e.g. Organic Chia Seeds):");
+      if (!name || !name.trim()) return;
+      const qty = prompt("Enter quantity (e.g. 200g or 1 pack):", "1 pack") || "1 pack";
+      const newId = weeklyGroceryItems.length ? Math.max(...weeklyGroceryItems.map(g => g.id)) + 1 : 1;
+      weeklyGroceryItems.push({
+        id: newId,
+        name: name.trim(),
+        qty: qty.trim(),
+        cat: "Custom",
+        note: "Member Custom Addition",
+        bought: false
+      });
+      renderGroceryList();
+    }
+
+    function copyGroceryListToClipboard() {
+      const lines = weeklyGroceryItems.map(g => (g.bought ? "[x] " : "[ ] ") + g.name + " (" + g.qty + ") - " + g.note);
+      const text = "🛒 TOVELU WEEK 3 CLINICAL GROCERY LIST:\n\n" + lines.join("\n") + "\n\nPlan: app.tovelu.store";
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(text).then(() => {
+          alert("✓ Grocery list copied to clipboard! You can paste it into WhatsApp or Apple Notes.");
+        }).catch(() => {
+          alert(text);
+        });
+      } else {
+        alert(text);
+      }
     }
 
     // Profile Modal
