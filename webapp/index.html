@@ -523,20 +523,20 @@
       overflow: hidden;
     }
 
-    /* 1. FIXED FLOATING TOP BAR (SLEEK ROUNDED GEMINI STYLE) */
+    /* 1. FIXED FLOATING TOP BAR (BLUISH HERO GRADIENT) */
     .gemini-chat-topbar {
       flex-shrink: 0;
-      height: 64px;
-      margin: 12px 14px 4px 14px;
-      padding: 0 16px;
+      height: 66px;
+      margin: 12px 14px 6px 14px;
+      padding: 0 18px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: var(--gemini-surface);
+      background: linear-gradient(135deg, rgba(0, 192, 255, 0.12), rgba(0, 245, 160, 0.08), rgba(255, 255, 255, 0.98));
       backdrop-filter: blur(25px);
-      border: 1.5px solid var(--gemini-border-subtle);
-      border-radius: 20px;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+      border: 1.5px solid rgba(0, 98, 255, 0.18);
+      border-radius: 22px;
+      box-shadow: 0 4px 20px rgba(0, 98, 255, 0.08);
       z-index: 10;
     }
     .gemini-chat-brand {
@@ -567,7 +567,7 @@
     }
     .gemini-chat-status {
       font-size: 12px;
-      font-weight: 500;
+      font-weight: 600;
       color: var(--gemini-text-muted);
       margin-top: 1px;
       display: flex;
@@ -583,25 +583,27 @@
       box-shadow: 0 0 8px rgba(0, 208, 108, 0.6);
     }
     .gemini-history-btn {
-      background: var(--gemini-surface-container);
-      border: 1.5px solid var(--gemini-border-subtle);
-      color: var(--gemini-text-main);
+      background: rgba(255, 255, 255, 0.9);
+      border: 1.5px solid rgba(0, 98, 255, 0.22);
+      color: var(--gemini-sparkle-blue);
       padding: 6px 14px;
       border-radius: 9999px;
       font-size: 13px;
-      font-weight: 700;
+      font-weight: 800;
       display: flex;
       align-items: center;
       gap: 6px;
       cursor: pointer;
       transition: all 0.15s ease-out;
       font-family: 'Google Sans', sans-serif;
+      box-shadow: 0 2px 6px rgba(0, 98, 255, 0.08);
     }
     .gemini-history-btn:hover {
-      background: var(--gemini-surface);
+      background: #FFFFFF;
       border-color: var(--gemini-sparkle-blue);
       color: var(--gemini-sparkle-blue);
-      box-shadow: 0 2px 8px rgba(0, 98, 255, 0.12);
+      box-shadow: 0 4px 12px rgba(0, 98, 255, 0.18);
+      transform: translateY(-1px);
     }
     .gemini-history-btn:active {
       transform: scale(0.96);
