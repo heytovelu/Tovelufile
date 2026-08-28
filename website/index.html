@@ -604,33 +604,37 @@
       transform: scale(0.96);
     }
 
-    /* CHAT HISTORY BY DAY SIDE DRAWER */
+    /* CHAT HISTORY BY DAY SIDE DRAWER (CONTAINED INSIDE APP FRAME) */
     .chat-history-overlay {
-      position: fixed;
+      position: absolute;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0, 0, 0, 0.45);
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
       backdrop-filter: blur(8px);
-      z-index: 1100;
+      z-index: 200;
       display: none;
       justify-content: flex-end;
+      overflow: hidden;
       animation: fadeIn 0.2s ease-out;
     }
     .chat-history-overlay.active {
       display: flex;
     }
     .chat-history-drawer {
-      width: 100%;
-      max-width: 400px;
+      width: 88%;
+      max-width: 440px;
       height: 100%;
       background: var(--gemini-bg);
-      box-shadow: -4px 0 30px rgba(0, 0, 0, 0.2);
+      box-shadow: -6px 0 25px rgba(0, 0, 0, 0.25);
       display: flex;
       flex-direction: column;
       animation: slideInRight 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      border-left: 1px solid var(--gemini-border-subtle);
+      border-left: 1.5px solid var(--gemini-border-subtle);
+      z-index: 201;
     }
     @keyframes slideInRight {
       from { transform: translateX(100%); }
@@ -1468,6 +1472,49 @@
           </div>
         </div>
 
+        <!-- ==================== IN-APP CHAT HISTORY SIDE DRAWER ==================== -->
+        <div id="chat-history-overlay" class="chat-history-overlay" onclick="if(event.target===this) closeChatHistoryDrawer()">
+          <div class="chat-history-drawer">
+            
+            <!-- Drawer Header -->
+            <div class="chat-history-header">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div style="width: 36px; height: 36px; border-radius: 12px; background: linear-gradient(135deg, #1A73E8, #7C3AED); display: flex; align-items: center; justify-content: center; color: #fff; box-shadow: 0 4px 12px rgba(26, 115, 232, 0.25);">
+                  <span class="material-symbols-outlined" style="font-size: 20px;">history</span>
+                </div>
+                <div>
+                  <div style="font-family: 'Google Sans', sans-serif; font-size: 16.5px; font-weight: 800; color: var(--gemini-text-main);">
+                    Chat History
+                  </div>
+                  <div style="font-size: 11.5px; color: var(--gemini-text-muted);">
+                    Browse daily consultations
+                  </div>
+                </div>
+              </div>
+              <button class="gemini-btn gemini-btn-tonal" style="height: 32px; width: 32px; padding: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center;" onclick="closeChatHistoryDrawer()">✕</button>
+            </div>
+
+            <!-- Choose Month Selector (Top) -->
+            <div class="chat-history-month-wrap">
+              <div style="font-size: 11px; font-weight: 800; color: var(--gemini-sparkle-blue); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; display: flex; align-items: center; gap: 5px;">
+                <span class="material-symbols-outlined" style="font-size: 15px;">calendar_month</span>
+                CHOOSE MONTH:
+              </div>
+              <select class="chat-history-month-select" id="chat-history-month-select" onchange="renderChatHistoryByMonth(this.value)">
+                <option value="july_2026" selected>July 2026 (31 Days Archive)</option>
+                <option value="august_2026">August 2026 (Active Month)</option>
+                <option value="june_2026">June 2026 (30 Days Archive)</option>
+              </select>
+            </div>
+
+            <!-- History Items Stream -->
+            <div class="chat-history-list" id="chat-history-list-container">
+              <!-- Dynamically rendered day cards for the selected month -->
+            </div>
+
+          </div>
+        </div>
+
       </section>
 
       <!-- ==================== 3. TAB: HEALTH (METABOLIC & EPIGENETICS) ==================== -->
@@ -1672,49 +1719,6 @@
       <div style="font-size: 11px; color: var(--gemini-text-muted); text-align: center; margin-top: 10px;">
         Constitutional LAW-001 Guaranteed • 100% Scientifically & Medically Verified.
       </div>
-    </div>
-  </div>
-
-  <!-- ==================== CHAT HISTORY BY DAY SIDE DRAWER ==================== -->
-  <div id="chat-history-overlay" class="chat-history-overlay" onclick="if(event.target===this) closeChatHistoryDrawer()">
-    <div class="chat-history-drawer">
-      
-      <!-- Drawer Header -->
-      <div class="chat-history-header">
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <div style="width: 36px; height: 36px; border-radius: 12px; background: linear-gradient(135deg, #1A73E8, #7C3AED); display: flex; align-items: center; justify-content: center; color: #fff; box-shadow: 0 4px 12px rgba(26, 115, 232, 0.25);">
-            <span class="material-symbols-outlined" style="font-size: 20px;">history</span>
-          </div>
-          <div>
-            <div style="font-family: 'Google Sans', sans-serif; font-size: 17px; font-weight: 800; color: var(--gemini-text-main);">
-              Chat History
-            </div>
-            <div style="font-size: 11.5px; color: var(--gemini-text-muted);">
-              Browse previous consultations by day
-            </div>
-          </div>
-        </div>
-        <button class="gemini-btn gemini-btn-tonal" style="height: 32px; width: 32px; padding: 0; border-radius: 50%; display: flex; align-items: center; justify-content: center;" onclick="closeChatHistoryDrawer()">✕</button>
-      </div>
-
-      <!-- Choose Month Selector (Top) -->
-      <div class="chat-history-month-wrap">
-        <div style="font-size: 11.5px; font-weight: 800; color: var(--gemini-sparkle-blue); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; display: flex; align-items: center; gap: 5px;">
-          <span class="material-symbols-outlined" style="font-size: 15px;">calendar_month</span>
-          CHOOSE MONTH:
-        </div>
-        <select class="chat-history-month-select" id="chat-history-month-select" onchange="renderChatHistoryByMonth(this.value)">
-          <option value="july_2026" selected>July 2026 (31 Days History Archive)</option>
-          <option value="august_2026">August 2026 (Active Protocol Month)</option>
-          <option value="june_2026">June 2026 (30 Days Baseline Archive)</option>
-        </select>
-      </div>
-
-      <!-- History Items Stream -->
-      <div class="chat-history-list" id="chat-history-list-container">
-        <!-- Dynamically rendered day cards for the selected month -->
-      </div>
-
     </div>
   </div>
 
