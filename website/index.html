@@ -905,34 +905,7 @@
             </div>
           </div>
 
-          <!-- 2. MY KITCHEN INVENTORY BUTTON (USER ADDS WHAT INGREDIENTS ARE IN KITCHEN) -->
-          <div class="gemini-card" style="border: 1.5px dashed var(--gemini-sparkle-blue); background: var(--gemini-surface-container);">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div>
-                <div style="font-size: 13px; font-weight: 800; color: var(--gemini-text-main); display: flex; align-items: center; gap: 6px;">
-                  <span class="material-symbols-outlined" style="color: var(--gemini-sparkle-blue); font-size: 20px;">kitchen</span>
-                  My Kitchen & Pantry Inventory
-                </div>
-                <div style="font-size: 11px; color: var(--gemini-text-muted); margin-top: 2px;">
-                  Add what you have at home so Ask AI suggests recipes with zero grocery runs!
-                </div>
-              </div>
-              <button class="gemini-btn gemini-btn-primary" style="height: 36px; padding: 0 14px; font-size: 12px;" onclick="openPantryModal()">
-                Manage
-              </button>
-            </div>
-
-            <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px;" id="pantry-chips-display">
-              <span class="pantry-chip selected">🍳 Pasture Eggs (12)</span>
-              <span class="pantry-chip selected">🧈 Pure Desi Ghee</span>
-              <span class="pantry-chip selected">🥬 Baby Spinach</span>
-              <span class="pantry-chip selected">🥑 Avocado</span>
-              <span class="pantry-chip selected">🫘 Organic Lentils</span>
-              <span class="pantry-chip selected">🐟 Wild Salmon</span>
-            </div>
-          </div>
-
-          <!-- 3. NON-NEGOTIABLE WEEKLY RULES: WHAT TO DO & WHAT TO AVOID -->
+          <!-- 2. NON-NEGOTIABLE WEEKLY RULES: WHAT TO DO & WHAT TO AVOID -->
           <div class="gemini-card" style="padding: 16px;">
             <div style="font-size: 13px; font-weight: 800; color: var(--gemini-text-main); margin-bottom: 12px; display: flex; align-items: center; gap: 6px;">
               <span class="material-symbols-outlined" style="font-size: 18px; color: var(--gemini-sparkle-blue);">gavel</span>
@@ -964,7 +937,7 @@
             </div>
           </div>
 
-          <!-- 4. WEEKLY GUIDES & CHALLENGES WITH SOLUTIONS -->
+          <!-- 3. WEEKLY GUIDES & CHALLENGES WITH SOLUTIONS -->
           <div class="gemini-card" style="padding: 16px;">
             <div style="font-size: 13px; font-weight: 800; color: #D97706; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
               <span class="material-symbols-outlined" style="font-size: 18px;">psychology_alt</span>
@@ -985,6 +958,29 @@
                   <strong>👉 Solution:</strong> Order tandoori or grilled protein cooked without seed oil; request double greens instead of fries or naan.
                 </div>
               </div>
+            </div>
+          </div>
+
+          <!-- 4. MY KITCHEN & PANTRY INVENTORY (PLACED AT BOTTOM WITH INGREDIENT QUANTITIES) -->
+          <div class="gemini-card" style="border: 1.5px dashed var(--gemini-sparkle-blue); background: var(--gemini-surface-container);">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <div style="font-size: 13px; font-weight: 800; color: var(--gemini-text-main); display: flex; align-items: center; gap: 6px;">
+                  <span class="material-symbols-outlined" style="color: var(--gemini-sparkle-blue); font-size: 20px;">kitchen</span>
+                  My Kitchen & Pantry Inventory
+                </div>
+                <div style="font-size: 11px; color: var(--gemini-text-muted); margin-top: 2px;">
+                  Manage your stocked ingredients & quantities so AI suggests recipes with zero grocery runs!
+                </div>
+              </div>
+              <button class="gemini-btn gemini-btn-primary" style="height: 36px; padding: 0 14px; font-size: 12px;" onclick="openPantryModal()">
+                + Manage / Edit
+              </button>
+            </div>
+
+            <!-- Pantry Chips Display with Quantities -->
+            <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px;" id="pantry-chips-display">
+              <!-- Dynamically populated by renderPantryDisplay() -->
             </div>
           </div>
 
@@ -1108,31 +1104,30 @@
         <button class="gemini-btn gemini-btn-tonal" style="height: 30px; width: 30px; padding: 0; border-radius: 50%;" onclick="closePantryModal()">✕</button>
       </div>
       <p style="font-size: 12px; color: var(--gemini-text-muted);">
-        Select or add what ingredients you have in your kitchen right now. THAIS will use these to generate custom 15-minute whole-food meals!
+        Add or customize the ingredients and quantities you currently have at home. THAIS will use these to generate custom 15-minute whole-food meals!
       </p>
 
-      <div style="display: flex; gap: 8px;">
-        <input type="text" class="gemini-prompt-input" id="custom-pantry-input" placeholder="Type custom ingredient (e.g., Greek yogurt, chicken)..." style="flex: 1; border: 1.5px solid var(--gemini-border); border-radius: 12px; padding: 10px; font-size: 13px;" onkeydown="if(event.key==='Enter'){addCustomPantryItem(); event.preventDefault();}" />
-        <button class="gemini-btn gemini-btn-primary" style="height: 40px; padding: 0 14px;" onclick="addCustomPantryItem()">+ Add</button>
+      <!-- Add Custom Ingredient with Quantity Inputs -->
+      <div style="display: flex; flex-direction: column; gap: 8px; background: var(--gemini-surface-container); padding: 12px; border-radius: 14px; border: 1px solid var(--gemini-border-subtle);">
+        <div style="font-size: 11px; font-weight: 800; color: var(--gemini-sparkle-blue); text-transform: uppercase;">
+          + Add New Ingredient & Quantity:
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <input type="text" class="gemini-prompt-input" id="custom-pantry-name" placeholder="Ingredient name (e.g., Greek yogurt, Chicken)" style="flex: 2; border: 1.5px solid var(--gemini-border); border-radius: 10px; padding: 8px 12px; font-size: 13px;" />
+          <input type="text" class="gemini-prompt-input" id="custom-pantry-qty" placeholder="Qty (e.g., 500g, 4 pcs)" style="flex: 1; border: 1.5px solid var(--gemini-border); border-radius: 10px; padding: 8px 12px; font-size: 13px;" />
+          <button class="gemini-btn gemini-btn-primary" style="height: 38px; padding: 0 14px; font-size: 12px;" onclick="addCustomPantryItem()">+ Add</button>
+        </div>
       </div>
 
-      <div style="font-size: 11px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase;">1-Tap Common Pantry Staples:</div>
-      <div class="pantry-tags-grid" id="pantry-modal-chips">
-        <span class="pantry-chip selected" onclick="togglePantryChip(this)">🍳 Pasture Eggs</span>
-        <span class="pantry-chip selected" onclick="togglePantryChip(this)">🧈 Pure Desi Ghee</span>
-        <span class="pantry-chip selected" onclick="togglePantryChip(this)">🥬 Baby Spinach</span>
-        <span class="pantry-chip selected" onclick="togglePantryChip(this)">🥑 Avocado</span>
-        <span class="pantry-chip selected" onclick="togglePantryChip(this)">🫘 Organic Lentils</span>
-        <span class="pantry-chip selected" onclick="togglePantryChip(this)">🐟 Wild Salmon</span>
-        <span class="pantry-chip" onclick="togglePantryChip(this)">🧀 Fresh Paneer</span>
-        <span class="pantry-chip" onclick="togglePantryChip(this)">🍗 Chicken Breast</span>
-        <span class="pantry-chip" onclick="togglePantryChip(this)">🍠 Sweet Potato</span>
-        <span class="pantry-chip" onclick="togglePantryChip(this)">🫒 Extra Virgin Olive Oil</span>
-        <span class="pantry-chip" onclick="togglePantryChip(this)">🥦 Broccoli</span>
-        <span class="pantry-chip" onclick="togglePantryChip(this)">🧅 Red Onions & Garlic</span>
+      <!-- Current Pantry Items with Quantities List -->
+      <div style="font-size: 11px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase; margin-top: 4px;">
+        Stocked Pantry Ingredients (Tap to toggle or edit):
+      </div>
+      <div class="pantry-tags-grid" id="pantry-modal-chips" style="max-height: 220px; overflow-y: auto; padding: 4px 0;">
+        <!-- Dynamically rendered by renderPantryModalList() -->
       </div>
 
-      <button class="gemini-btn gemini-btn-primary" style="height: 44px; margin-top: 10px; width: 100%;" onclick="savePantryAndClose()">
+      <button class="gemini-btn gemini-btn-primary" style="height: 44px; margin-top: 6px; width: 100%;" onclick="savePantryAndClose()">
         Save Kitchen Inventory ➔
       </button>
     </div>
@@ -1444,32 +1439,90 @@
       alert(`${mealName} successfully logged! +${proteinGrams}g protein added to your Daily Portion Meter.`);
     }
 
-    // Pantry Modal Handlers
+    // Kitchen & Pantry Inventory Management with Quantity Tracking
+    let myPantryItems = [
+      { name: "Pasture Eggs", qty: "12 pcs", icon: "🍳", selected: true },
+      { name: "Pure Desi Ghee", qty: "500g", icon: "🧈", selected: true },
+      { name: "Baby Spinach", qty: "250g", icon: "🥬", selected: true },
+      { name: "Avocado", qty: "3 pcs", icon: "🥑", selected: true },
+      { name: "Organic Lentils", qty: "1 kg", icon: "🫘", selected: true },
+      { name: "Wild Salmon", qty: "400g", icon: "🐟", selected: true },
+      { name: "Fresh Paneer", qty: "200g", icon: "🧀", selected: false },
+      { name: "Chicken Breast", qty: "500g", icon: "🍗", selected: false },
+      { name: "Sweet Potato", qty: "4 pcs", icon: "🍠", selected: false },
+      { name: "Extra Virgin Olive Oil", qty: "500ml", icon: "🫒", selected: false },
+      { name: "Broccoli", qty: "1 head", icon: "🥦", selected: false },
+      { name: "Red Onions & Garlic", qty: "1 kg", icon: "🧅", selected: false }
+    ];
+
+    function renderPantryDisplay() {
+      const display = document.getElementById('pantry-chips-display');
+      if (!display) return;
+      const selected = myPantryItems.filter(item => item.selected);
+      display.innerHTML = selected.map(item => `
+        <span class="pantry-chip selected" style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; font-size: 12px; font-weight: 700; border-radius: 9999px;">
+          <span>${item.icon} ${item.name}</span>
+          <span style="background: rgba(0,0,0,0.12); padding: 1px 6px; border-radius: 6px; font-size: 11px; font-weight: 800;">${item.qty}</span>
+        </span>
+      `).join('');
+    }
+
+    function renderPantryModalList() {
+      const modalList = document.getElementById('pantry-modal-chips');
+      if (!modalList) return;
+      modalList.innerHTML = myPantryItems.map((item, idx) => `
+        <div style="display: flex; justify-content: space-between; align-items: center; background: ${item.selected ? 'rgba(0, 208, 108, 0.12)' : 'var(--gemini-surface-container)'}; border: 1.5px solid ${item.selected ? 'var(--gemini-vitality-emerald)' : 'var(--gemini-border)'}; border-radius: 12px; padding: 8px 12px; cursor: pointer; transition: all 0.2s;" onclick="togglePantryItem(${idx})">
+          <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; color: var(--gemini-text-main);">
+            <span style="font-size: 16px;">${item.icon}</span>
+            <span>${item.name}</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 6px;" onclick="event.stopPropagation();">
+            <input type="text" value="${item.qty}" style="width: 75px; text-align: center; border: 1px solid var(--gemini-border); border-radius: 6px; padding: 3px 6px; font-size: 11px; font-weight: 800; background: var(--gemini-surface);" onchange="updatePantryItemQty(${idx}, this.value)" />
+            <span style="font-size: 14px; color: ${item.selected ? 'var(--gemini-vitality-emerald)' : 'var(--gemini-text-muted)'}; font-weight: 800; width: 18px; text-align: center;">${item.selected ? '✓' : '＋'}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function togglePantryItem(idx) {
+      myPantryItems[idx].selected = !myPantryItems[idx].selected;
+      renderPantryModalList();
+    }
+
+    function updatePantryItemQty(idx, newQty) {
+      if (newQty && newQty.trim()) {
+        myPantryItems[idx].qty = newQty.trim();
+      }
+    }
+
+    function addCustomPantryItem() {
+      const nameInput = document.getElementById('custom-pantry-name');
+      const qtyInput = document.getElementById('custom-pantry-qty');
+      const name = nameInput.value.trim();
+      const qty = qtyInput.value.trim() || '1 portion';
+      if (!name) return;
+
+      myPantryItems.unshift({
+        name: name,
+        qty: qty,
+        icon: "✨",
+        selected: true
+      });
+
+      nameInput.value = '';
+      qtyInput.value = '';
+      renderPantryModalList();
+    }
+
     function openPantryModal() {
+      renderPantryModalList();
       document.getElementById('pantry-modal-overlay').style.display = 'flex';
     }
     function closePantryModal() {
       document.getElementById('pantry-modal-overlay').style.display = 'none';
     }
-    function togglePantryChip(chip) {
-      chip.classList.toggle('selected');
-    }
-    function addCustomPantryItem() {
-      const input = document.getElementById('custom-pantry-input');
-      const val = input.value.trim();
-      if (!val) return;
-      const wrap = document.getElementById('pantry-modal-chips');
-      const chip = document.createElement('span');
-      chip.className = 'pantry-chip selected';
-      chip.innerText = `✨ ${val}`;
-      chip.onclick = function() { togglePantryChip(this); };
-      wrap.appendChild(chip);
-      input.value = '';
-    }
     function savePantryAndClose() {
-      const selected = Array.from(document.querySelectorAll('#pantry-modal-chips .pantry-chip.selected')).map(c => c.innerText);
-      const display = document.getElementById('pantry-chips-display');
-      display.innerHTML = selected.map(s => `<span class="pantry-chip selected">${s}</span>`).join('');
+      renderPantryDisplay();
       closePantryModal();
     }
 
@@ -1766,6 +1819,7 @@
     window.addEventListener('load', () => {
       initTimeAwareMeal();
       renderDynamicTasks();
+      renderPantryDisplay();
       const saved = localStorage.getItem('tovelu_survey_answers');
       if (saved) {
         try {
