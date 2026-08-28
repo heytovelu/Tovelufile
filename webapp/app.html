@@ -463,6 +463,8 @@
     nav.app-bottom-nav {
       position: fixed;
       bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
       width: 100%;
       max-width: 520px;
       height: 70px;
@@ -471,8 +473,9 @@
       border-top: 1px solid var(--gemini-border-subtle);
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      z-index: 100;
+      z-index: 1000;
       padding-bottom: env(safe-area-inset-bottom);
+      pointer-events: auto;
     }
 
     .nav-item-btn {
@@ -2327,10 +2330,10 @@
           </div>
         </div>
       `;
-      input.value = '';
-      scroller.scrollTop = scroller.scrollHeight;
-
+      // 2. Tovelu Assistance AI Response
+      setTimeout(() => {
         let response = "";
+        const qLower = query.toLowerCase();
         if (typeof THAIS !== 'undefined' && THAIS.queryThaisAI) {
           response = THAIS.queryThaisAI(query, userAnswers);
         } else {
