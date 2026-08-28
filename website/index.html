@@ -568,19 +568,21 @@
 
           </div>
 
-          <!-- 3. DYNAMIC TIME-AWARE FOOD INTELLIGENCE (BREAKFAST | LUNCH | DINNER) -->
-          <div style="display: flex; flex-direction: column; gap: 10px;">
+          <!-- 3. UNIFIED DYNAMIC FOOD INTELLIGENCE CARD (ALL IN ONE SECTION) -->
+          <div id="dynamic-meal-card" class="app-meal-card theme-breakfast" style="border-radius: 22px; padding: 20px; display: flex; flex-direction: column; gap: 16px; transition: all 0.2s; box-shadow: 0 4px 20px rgba(0, 98, 255, 0.05);">
+            
+            <!-- Card Header: Title & Seed Oils Goal -->
             <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div style="font-size: 11px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase;">
+              <div style="font-size: 11px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase; letter-spacing: 0.04em;">
                 🍽️ Meals & Food Intelligence
               </div>
-              <span style="font-size: 10px; font-weight: 800; color: var(--gemini-vitality-emerald); background: var(--gemini-surface-container); padding: 2px 8px; border-radius: 9999px;">
+              <span style="font-size: 10px; font-weight: 800; color: var(--gemini-vitality-emerald); background: var(--gemini-surface); border: 1px solid rgba(0, 208, 108, 0.2); padding: 3px 8px; border-radius: 9999px;">
                 0% Seed Oils Goal
               </span>
             </div>
 
-            <!-- 3-Way Meal Selector (Breakfast | Lunch | Dinner) -->
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: var(--gemini-surface-container); padding: 4px; border-radius: 14px;">
+            <!-- 3-Way Meal Selector (Inside Card) -->
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; background: var(--gemini-surface-container); padding: 4px; border-radius: 14px; border: 1px solid var(--gemini-border-subtle);">
               <button class="meal-tab-pill active" id="pill-meal-breakfast" onclick="selectActiveMealView('Breakfast')">
                 🍳 Breakfast
               </button>
@@ -592,60 +594,57 @@
               </button>
             </div>
 
-            <!-- Single Focused Dynamic Color-Coded Meal Card -->
-            <div id="dynamic-meal-card" class="app-meal-card theme-breakfast" style="border-radius: 18px; padding: 18px; display: flex; flex-direction: column; gap: 14px; transition: all 0.2s;">
-              
-              <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <div>
-                  <span id="active-meal-badge" style="font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 9999px; text-transform: uppercase;">
-                    ACTIVE TIME WINDOW • 08:30 AM
-                  </span>
-                  <div id="active-meal-title" style="font-family: 'Google Sans', sans-serif; font-size: 16px; font-weight: 800; margin-top: 6px; color: var(--gemini-text-main);">
-                    🍳 Breakfast Target
-                  </div>
-                </div>
-                <div id="active-meal-logged-status" style="font-size: 12px; font-weight: 800; color: var(--gemini-sparkle-blue); text-align: right;">
-                  420 kcal Target
+            <!-- Active Meal Status & Calorie Target Row -->
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+              <div>
+                <span id="active-meal-badge" style="font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 9999px; text-transform: uppercase;">
+                  ACTIVE TIME WINDOW • 08:30 AM
+                </span>
+                <div id="active-meal-title" style="font-family: 'Google Sans', sans-serif; font-size: 16px; font-weight: 800; margin-top: 6px; color: var(--gemini-text-main);">
+                  🍳 Breakfast Target
                 </div>
               </div>
-
-              <!-- 4-Nutrient Targets in Grams: Protein, Carbs, Fat, Vitamins -->
-              <div id="active-meal-grams-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; background: var(--gemini-surface); border: 1px solid var(--gemini-border); padding: 10px 8px; border-radius: 14px; text-align: center;">
-                <div>
-                  <div style="font-size: 10px; font-weight: 800; color: #0062FF;">🥩 Protein</div>
-                  <div id="meal-gram-protein" style="font-family: 'Google Sans Display', sans-serif; font-size: 15px; font-weight: 800; margin-top: 2px;">35g</div>
-                </div>
-                <div>
-                  <div style="font-size: 10px; font-weight: 800; color: #D97706;">🍠 Carbs</div>
-                  <div id="meal-gram-carbs" style="font-family: 'Google Sans Display', sans-serif; font-size: 15px; font-weight: 800; margin-top: 2px;">15g</div>
-                </div>
-                <div>
-                  <div style="font-size: 10px; font-weight: 800; color: #9333EA;">🧈 Fat</div>
-                  <div id="meal-gram-fat" style="font-family: 'Google Sans Display', sans-serif; font-size: 15px; font-weight: 800; margin-top: 2px;">12g</div>
-                </div>
-                <div>
-                  <div style="font-size: 10px; font-weight: 800; color: #00D06C;">🥦 Vitamin</div>
-                  <div id="meal-gram-vitamin" style="font-family: 'Google Sans Display', sans-serif; font-size: 15px; font-weight: 800; margin-top: 2px;">100%</div>
-                </div>
+              <div id="active-meal-logged-status" style="font-size: 12px; font-weight: 800; color: var(--gemini-sparkle-blue); text-align: right;">
+                420 kcal Target
               </div>
-
-              <!-- 3 Consumption Pathways: SCAN | MANUALLY | ASK AI -->
-              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;">
-                <button class="meal-mode-btn" onclick="openActiveFoodModal('scan')">
-                  <span class="material-symbols-outlined" style="font-size: 20px;">photo_camera</span>
-                  <span style="font-size: 12px; font-weight: 800;">Scan / Photo</span>
-                </button>
-                <button class="meal-mode-btn" onclick="openActiveFoodModal('manual')">
-                  <span class="material-symbols-outlined" style="font-size: 20px;">edit_note</span>
-                  <span style="font-size: 12px; font-weight: 800;">Manually</span>
-                </button>
-                <button class="meal-mode-btn" onclick="openActiveFoodModal('ask_ai')">
-                  <span class="material-symbols-outlined" style="font-size: 20px;">auto_awesome</span>
-                  <span style="font-size: 12px; font-weight: 800;">Ask AI</span>
-                </button>
-              </div>
-
             </div>
+
+            <!-- 4-Nutrient Targets in Grams: Protein, Carbs, Fat, Vitamins -->
+            <div id="active-meal-grams-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; background: var(--gemini-surface); border: 1px solid var(--gemini-border); padding: 12px 8px; border-radius: 14px; text-align: center;">
+              <div>
+                <div style="font-size: 10px; font-weight: 800; color: #0062FF;">🥩 Protein</div>
+                <div id="meal-gram-protein" style="font-family: 'Google Sans Display', sans-serif; font-size: 15px; font-weight: 800; margin-top: 2px;">35g</div>
+              </div>
+              <div>
+                <div style="font-size: 10px; font-weight: 800; color: #D97706;">🍠 Carbs</div>
+                <div id="meal-gram-carbs" style="font-family: 'Google Sans Display', sans-serif; font-size: 15px; font-weight: 800; margin-top: 2px;">15g</div>
+              </div>
+              <div>
+                <div style="font-size: 10px; font-weight: 800; color: #9333EA;">🧈 Fat</div>
+                <div id="meal-gram-fat" style="font-family: 'Google Sans Display', sans-serif; font-size: 15px; font-weight: 800; margin-top: 2px;">12g</div>
+              </div>
+              <div>
+                <div style="font-size: 10px; font-weight: 800; color: #00D06C;">🥦 Vitamin</div>
+                <div id="meal-gram-vitamin" style="font-family: 'Google Sans Display', sans-serif; font-size: 15px; font-weight: 800; margin-top: 2px;">100%</div>
+              </div>
+            </div>
+
+            <!-- 3 Consumption Pathways: SCAN | MANUALLY | ASK AI -->
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+              <button class="meal-mode-btn" onclick="openActiveFoodModal('scan')">
+                <span class="material-symbols-outlined" style="font-size: 20px;">photo_camera</span>
+                <span style="font-size: 12px; font-weight: 800;">Scan / Photo</span>
+              </button>
+              <button class="meal-mode-btn" onclick="openActiveFoodModal('manual')">
+                <span class="material-symbols-outlined" style="font-size: 20px;">edit_note</span>
+                <span style="font-size: 12px; font-weight: 800;">Manually</span>
+              </button>
+              <button class="meal-mode-btn" onclick="openActiveFoodModal('ask_ai')">
+                <span class="material-symbols-outlined" style="font-size: 20px;">auto_awesome</span>
+                <span style="font-size: 12px; font-weight: 800;">Ask AI</span>
+              </button>
+            </div>
+
           </div>
 
           <!-- 4. TODAY'S TASKS (1, 2, 3) -->
