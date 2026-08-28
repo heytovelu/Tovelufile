@@ -502,13 +502,15 @@
       letter-spacing: 0.04em;
     }
 
-    /* Tovelu Assistance Full Page Chat Canvas (Edge-to-Edge Single Screen) */
+    /* ==========================================================================
+       GEMINI INTELLIGENCE CHAT SYSTEM (FULL-PAGE EDGE-TO-EDGE CANVAS)
+       ========================================================================== */
     #pane-chat.tab-pane.active {
       display: flex !important;
       flex-direction: column;
       position: absolute;
-      top: 60px; /* immediately below fixed top logo bar */
-      bottom: 70px; /* immediately above bottom navigation bar */
+      top: 60px; /* Flush below fixed top logo bar */
+      bottom: 70px; /* Flush above fixed bottom navigation bar */
       left: 0;
       right: 0;
       width: 100%;
@@ -521,90 +523,153 @@
       overflow: hidden;
     }
 
-    /* TOP BAR: FIXED [ ICON | Tovelu Assistance ] */
-    .assistance-topbar {
+    /* 1. FIXED TOP BAR (GEMINI STYLE) */
+    .gemini-chat-topbar {
       flex-shrink: 0;
+      height: 64px;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       background: var(--gemini-surface);
-      border-bottom: 1.5px solid var(--gemini-border-subtle);
-      padding: 14px 18px;
+      backdrop-filter: blur(25px);
+      border-bottom: 1px solid var(--gemini-border-subtle);
+      z-index: 10;
+    }
+    .gemini-chat-brand {
       display: flex;
       align-items: center;
       gap: 12px;
-      z-index: 10;
     }
-    .assistance-icon-badge {
+    .gemini-sparkle-avatar {
       width: 40px;
       height: 40px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #00C0FF, #0062FF);
+      border-radius: 14px;
+      background: linear-gradient(135deg, #1A73E8 0%, #7C3AED 50%, #00C0FF 100%);
       display: flex;
       align-items: center;
       justify-content: center;
       color: #FFFFFF;
-      font-size: 22px;
-      box-shadow: 0 4px 12px rgba(0, 98, 255, 0.25);
+      box-shadow: 0 4px 14px rgba(26, 115, 232, 0.28);
+      flex-shrink: 0;
     }
-    .assistance-title {
+    .gemini-chat-title {
       font-family: 'Google Sans', sans-serif;
-      font-size: 17px;
+      font-size: 16.5px;
       font-weight: 800;
       color: var(--gemini-text-main);
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
-    .assistance-status-dot {
-      display: inline-block;
-      width: 8px;
-      height: 8px;
+    .gemini-chat-status {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--gemini-text-muted);
+      margin-top: 1px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .gemini-pulse-dot {
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
       background: #00D06C;
-      margin-left: 2px;
+      display: inline-block;
+      box-shadow: 0 0 8px rgba(0, 208, 108, 0.6);
+    }
+    .gemini-core-badge {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--gemini-sparkle-blue);
+      background: var(--gemini-surface-container);
+      border: 1px solid var(--gemini-border-subtle);
+      padding: 5px 12px;
+      border-radius: 9999px;
+      letter-spacing: 0.03em;
+      display: flex;
+      align-items: center;
+      gap: 4px;
     }
 
-    /* ONLY MESSAGES SCROLL */
-    .assistance-scroller {
+    /* 2. ONLY MESSAGES SCROLL (GENEROUS BREATHING ROOM) */
+    .gemini-chat-scroller {
       flex: 1;
       overflow-y: auto;
-      padding: 18px 16px 14px 16px;
+      padding: 24px 20px 20px 20px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      background: var(--gemini-surface-container);
+      gap: 22px;
+      background: var(--gemini-bg);
       -webkit-overflow-scrolling: touch;
     }
 
-    /* Message Bubbles */
-    .assistance-bubble {
-      max-width: 84%;
-      padding: 12px 16px;
-      font-size: 15px;
-      line-height: 1.55;
-      position: relative;
-      word-break: break-word;
-      font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
-    }
-    .assistance-bubble-incoming {
+    /* AI RESPONSE CONTAINER */
+    .gemini-msg-ai {
       align-self: flex-start;
+      width: 100%;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      animation: fadeIn 0.25s ease-out;
+    }
+    .gemini-msg-ai-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12.5px;
+      font-weight: 800;
+      color: var(--gemini-sparkle-blue);
+      letter-spacing: 0.02em;
+    }
+    .gemini-msg-ai-card {
       background: var(--gemini-surface);
+      border: 1.5px solid var(--gemini-border-subtle);
+      border-radius: 20px 20px 20px 6px;
+      padding: 18px 20px;
+      font-size: 15.5px;
+      line-height: 1.68;
       color: var(--gemini-text-main);
-      border-radius: 18px 18px 18px 4px;
-      border: 1px solid var(--gemini-border-subtle);
+      font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+      word-break: break-word;
     }
-    .assistance-bubble-outgoing {
+    .gemini-msg-ai-card strong {
+      font-weight: 800;
+      color: var(--gemini-text-main);
+    }
+    .gemini-msg-time {
+      font-size: 11px;
+      color: var(--gemini-text-muted);
+      margin-top: 6px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    /* USER MESSAGE CONTAINER */
+    .gemini-msg-user {
       align-self: flex-end;
-      background: #E7FFDB;
-      color: #111827;
-      border-radius: 18px 18px 4px 18px;
-      border: 1px solid rgba(0, 208, 108, 0.25);
+      max-width: 85%;
+      background: linear-gradient(135deg, rgba(26, 115, 232, 0.12), rgba(124, 58, 237, 0.08));
+      border: 1.5px solid rgba(26, 115, 232, 0.22);
+      border-radius: 20px 20px 4px 20px;
+      padding: 14px 18px;
+      font-size: 15.5px;
+      line-height: 1.55;
+      font-weight: 600;
+      color: var(--gemini-text-main);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+      word-break: break-word;
+      animation: fadeIn 0.2s ease-out;
     }
-    [data-theme="dark"] .assistance-bubble-outgoing {
-      background: #005C4B;
-      color: #E9EDEF;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+    [data-theme="dark"] .gemini-msg-user {
+      background: linear-gradient(135deg, rgba(26, 115, 232, 0.25), rgba(124, 58, 237, 0.2));
+      border-color: rgba(255, 255, 255, 0.15);
+      color: #F3F4F6;
     }
-    .assistance-bubble-time {
+    .gemini-msg-user-footer {
       display: flex;
       align-items: center;
       justify-content: flex-end;
@@ -613,106 +678,113 @@
       color: var(--gemini-text-muted);
       margin-top: 4px;
     }
-    [data-theme="dark"] .assistance-bubble-outgoing .assistance-bubble-time {
-      color: rgba(255, 255, 255, 0.6);
-    }
 
-    /* Pre-decided Chatbot Suggestion Questions */
-    .assistance-suggest-wrap {
+    /* 3. GEMINI SUGGESTED PROMPT CARDS */
+    .gemini-prompts-section {
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      margin: 4px 0 10px 0;
-      align-self: flex-start;
+      gap: 12px;
+      margin-top: 4px;
       width: 100%;
-      max-width: 95%;
     }
-    .assistance-suggest-title {
-      font-size: 12px;
+    .gemini-prompts-title {
+      font-size: 12.5px;
       font-weight: 800;
       color: var(--gemini-sparkle-blue);
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.06em;
       display: flex;
       align-items: center;
       gap: 6px;
     }
-    .assistance-chip-grid {
+    .gemini-prompts-grid {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
     }
-    .assistance-q-chip {
+    .gemini-prompt-card {
       background: var(--gemini-surface);
       border: 1.5px solid var(--gemini-border-subtle);
-      border-radius: 14px;
-      padding: 12px 14px;
-      font-size: 14px;
-      font-weight: 700;
+      border-radius: 18px;
+      padding: 14px 18px;
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.5;
       color: var(--gemini-text-main);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
+      gap: 12px;
       cursor: pointer;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
-      transition: all 0.15s ease-out;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       text-align: left;
+      font-family: 'Google Sans', sans-serif;
     }
-    .assistance-q-chip:hover {
+    .gemini-prompt-card:hover {
       border-color: var(--gemini-sparkle-blue);
-      background: rgba(0, 98, 255, 0.04);
-      transform: translateX(3px);
+      background: rgba(26, 115, 232, 0.04);
+      transform: translateX(4px);
+      box-shadow: 0 4px 14px rgba(26, 115, 232, 0.1);
     }
-    .assistance-q-chip:active {
+    .gemini-prompt-card:active {
       transform: scale(0.98);
     }
 
-    /* BOTTOM: Message Type Bar with Ask Button */
-    .assistance-typebar {
-      padding: 12px 14px;
+    /* 4. FIXED FLOATING BOTTOM COMPOSER */
+    .gemini-chat-typebar {
+      flex-shrink: 0;
+      padding: 12px 18px 14px 18px;
       display: flex;
       align-items: center;
       gap: 10px;
       background: var(--gemini-surface);
-      border-top: 1.5px solid var(--gemini-border-subtle);
+      backdrop-filter: blur(25px);
+      border-top: 1px solid var(--gemini-border-subtle);
+      z-index: 10;
     }
-    .assistance-input {
+    .gemini-composer-box {
       flex: 1;
-      height: 48px;
-      border: 1.5px solid var(--gemini-border);
-      border-radius: 14px;
-      padding: 0 16px;
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--gemini-text-main);
-      background: var(--gemini-surface-container);
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    .assistance-input:focus {
-      border-color: var(--gemini-sparkle-blue);
-    }
-    .assistance-ask-btn {
-      height: 48px;
-      padding: 0 22px;
-      border-radius: 14px;
-      background: var(--gemini-sparkle-blue);
-      color: #FFFFFF;
-      border: none;
-      font-family: 'Google Sans', sans-serif;
-      font-size: 15px;
-      font-weight: 800;
       display: flex;
       align-items: center;
-      gap: 6px;
+      background: var(--gemini-surface-container);
+      border: 1.5px solid var(--gemini-border);
+      border-radius: 28px;
+      padding: 3px 6px 3px 18px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .gemini-composer-box:focus-within {
+      border-color: var(--gemini-sparkle-blue);
+      box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.15);
+    }
+    .gemini-composer-input {
+      flex: 1;
+      height: 46px;
+      border: none;
+      background: transparent;
+      font-size: 15.5px;
+      font-weight: 500;
+      color: var(--gemini-text-main);
+      outline: none;
+      font-family: 'Google Sans', sans-serif;
+    }
+    .gemini-send-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1A73E8 0%, #7C3AED 100%);
+      color: #FFFFFF;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
-      box-shadow: 0 4px 14px rgba(0, 98, 255, 0.3);
-      transition: transform 0.15s, background 0.15s;
+      box-shadow: 0 4px 14px rgba(26, 115, 232, 0.32);
+      transition: transform 0.15s, box-shadow 0.15s;
       flex-shrink: 0;
     }
-    .assistance-ask-btn:active {
-      transform: scale(0.96);
+    .gemini-send-btn:active {
+      transform: scale(0.92);
     }
   </style>
 </head>
@@ -1176,86 +1248,99 @@
 
       </section>
 
-      <!-- ==================== 2. TAB: CHAT (FULL SCREEN TOVELU ASSISTANCE) ==================== -->
+      <!-- ==================== 2. TAB: CHAT (GEMINI INTELLIGENCE SYSTEM) ==================== -->
       <section id="pane-chat" class="tab-pane">
         
-        <!-- TOP BAR: ICON | Tovelu Assistance (Directly below top logo bar) -->
-        <div class="assistance-topbar">
-          <div class="assistance-icon-badge">
-            <span class="material-symbols-outlined" style="font-size: 22px;">smart_toy</span>
+        <!-- FIXED TOP BAR: [ ✦ Tovelu Intelligence | GEMINI CORE ] -->
+        <div class="gemini-chat-topbar">
+          <div class="gemini-chat-brand">
+            <div class="gemini-sparkle-avatar">
+              <span class="material-symbols-outlined" style="font-size: 22px;">auto_awesome</span>
+            </div>
+            <div>
+              <div class="gemini-chat-title">
+                Tovelu Intelligence
+                <span class="gemini-pulse-dot" title="Active"></span>
+              </div>
+              <div class="gemini-chat-status">
+                42 Biomarkers Calibrated • Real-Time
+              </div>
+            </div>
           </div>
-          <div>
-            <div class="assistance-title">
-              Tovelu Assistance
-              <span class="assistance-status-dot" title="Active"></span>
-            </div>
-            <div style="font-size: 12px; color: var(--gemini-text-muted); margin-top: 1px;">
-              Personal Health & Protocol Intelligence
-            </div>
+          <div class="gemini-core-badge">
+            <span class="material-symbols-outlined" style="font-size: 14px;">psychology</span>
+            <span>Gemini Pro</span>
           </div>
         </div>
 
-        <!-- FULL PAGE MESSAGE STREAM (SCROLLABLE ONLY) -->
-        <div class="assistance-scroller" id="app-chat-messages">
+        <!-- FULL PAGE MESSAGE STREAM (SCROLLABLE ONLY WITH GENEROUS BREATHING ROOM) -->
+        <div class="gemini-chat-scroller" id="app-chat-messages">
           
-          <!-- Welcome Bubble from Tovelu Assistance -->
-          <div class="assistance-bubble assistance-bubble-incoming">
-            <div>
-              Hello Ajay! I am your <strong>Tovelu Assistance</strong> companion. I have reviewed your 42-marker health survey and your kitchen inventory.
+          <!-- Welcome Card from Tovelu Intelligence (Gemini AI) -->
+          <div class="gemini-msg-ai">
+            <div class="gemini-msg-ai-header">
+              <span class="material-symbols-outlined" style="font-size: 18px;">auto_awesome</span>
+              <span>TOVELU INTELLIGENCE</span>
             </div>
-            <div style="margin-top: 6px;">
-              You are currently at <strong>88% daily portion target</strong> with 3 habits completed today. How can I help you?
-            </div>
-            <div class="assistance-bubble-time">
-              <span>08:30 AM</span>
+            <div class="gemini-msg-ai-card">
+              <div>
+                Hello Ajay! I am your <strong>Tovelu Intelligence</strong> companion powered by your 42-marker health calibration and live kitchen pantry.
+              </div>
+              <div style="margin-top: 10px; padding: 12px 14px; background: var(--gemini-surface-container); border-radius: 14px; font-size: 14.5px; border: 1px solid var(--gemini-border-subtle);">
+                📊 <strong>Today's Live Snapshot:</strong> You are currently at <strong>88% Daily Portion Meter</strong> with <strong>3 of 4 morning habits</strong> locked in!
+              </div>
+              <div class="gemini-msg-time">
+                <span>08:30 AM</span>
+              </div>
             </div>
           </div>
 
-          <!-- Suggested Daily Life Questions (Chatbot Prompts) -->
-          <div class="assistance-suggest-wrap" id="assistance-suggest-container">
-            <div class="assistance-suggest-title">
-              <span class="material-symbols-outlined" style="font-size: 16px;">forum</span>
-              Frequently Asked Daily Questions:
+          <!-- Suggested Gemini Prompt Cards -->
+          <div class="gemini-prompts-section" id="assistance-suggest-container">
+            <div class="gemini-prompts-title">
+              <span class="material-symbols-outlined" style="font-size: 16px;">auto_awesome</span>
+              <span>Suggested for your daily protocol:</span>
             </div>
             
-            <div class="assistance-chip-grid">
-              <button class="assistance-q-chip" onclick="askPresetQuestion('What 15m meal can I cook from my kitchen pantry right now?')">
-                <span>🍳 What 15m meal can I cook from my pantry right now?</span>
-                <span class="material-symbols-outlined" style="font-size: 18px; color: var(--gemini-sparkle-blue);">chevron_right</span>
+            <div class="gemini-prompts-grid">
+              <button class="gemini-prompt-card" onclick="askPresetQuestion('What 15m meal can I cook from my kitchen pantry right now?')">
+                <span>🍳 What 15m high-protein meal can I cook from my pantry?</span>
+                <span class="material-symbols-outlined" style="font-size: 20px; color: var(--gemini-sparkle-blue);">arrow_forward</span>
               </button>
               
-              <button class="assistance-q-chip" onclick="askPresetQuestion('Why do I feel tired around 2:00 PM and how to prevent it?')">
-                <span>⚡ Why do I feel tired around 2:00 PM & how to fix it?</span>
-                <span class="material-symbols-outlined" style="font-size: 18px; color: var(--gemini-sparkle-blue);">chevron_right</span>
+              <button class="gemini-prompt-card" onclick="askPresetQuestion('Why do I feel tired around 2:00 PM and how to prevent it?')">
+                <span>⚡ Why do I feel tired at 2:00 PM & how to fix it immediately?</span>
+                <span class="material-symbols-outlined" style="font-size: 20px; color: var(--gemini-sparkle-blue);">arrow_forward</span>
               </button>
               
-              <button class="assistance-q-chip" onclick="askPresetQuestion('When is the exact best time for my 12-min post-meal walk?')">
+              <button class="gemini-prompt-card" onclick="askPresetQuestion('When is the exact best time for my 12-min post-meal walk?')">
                 <span>🚶 When is the best time for my 12-min post-meal walk?</span>
-                <span class="material-symbols-outlined" style="font-size: 18px; color: var(--gemini-sparkle-blue);">chevron_right</span>
+                <span class="material-symbols-outlined" style="font-size: 20px; color: var(--gemini-sparkle-blue);">arrow_forward</span>
               </button>
               
-              <button class="assistance-q-chip" onclick="askPresetQuestion('Can I drink tea or coffee after 12:00 PM today?')">
+              <button class="gemini-prompt-card" onclick="askPresetQuestion('Can I drink tea or coffee after 12:00 PM today?')">
                 <span>☕ Can I drink tea or coffee after 12:00 PM today?</span>
-                <span class="material-symbols-outlined" style="font-size: 18px; color: var(--gemini-sparkle-blue);">chevron_right</span>
+                <span class="material-symbols-outlined" style="font-size: 20px; color: var(--gemini-sparkle-blue);">arrow_forward</span>
               </button>
 
-              <button class="assistance-q-chip" onclick="askPresetQuestion('What snacks can I eat that will not spike my insulin?')">
+              <button class="gemini-prompt-card" onclick="askPresetQuestion('What snacks can I eat that will not spike my insulin?')">
                 <span>🥑 What healthy snacks can I eat that won\'t spike insulin?</span>
-                <span class="material-symbols-outlined" style="font-size: 18px; color: var(--gemini-sparkle-blue);">chevron_right</span>
+                <span class="material-symbols-outlined" style="font-size: 20px; color: var(--gemini-sparkle-blue);">arrow_forward</span>
               </button>
             </div>
           </div>
 
         </div>
 
-        <!-- BOTTOM TYPING BAR WITH ASK BUTTON (Directly above bottom navigation) -->
-        <div class="assistance-typebar">
-          <input type="text" class="assistance-input" id="app-chat-input" placeholder="Type a message to Tovelu Assistance..." autocomplete="off" onkeydown="if(event.key==='Enter'){sendAppChat(); event.preventDefault();}" />
-          
-          <button class="assistance-ask-btn" onclick="sendAppChat()">
-            <span>Ask</span>
-            <span class="material-symbols-outlined" style="font-size: 18px;">send</span>
-          </button>
+        <!-- FIXED FLOATING BOTTOM COMPOSER (Directly above bottom navigation) -->
+        <div class="gemini-chat-typebar">
+          <div class="gemini-composer-box">
+            <input type="text" class="gemini-composer-input" id="app-chat-input" placeholder="Ask Tovelu Intelligence anything..." autocomplete="off" onkeydown="if(event.key==='Enter'){sendAppChat(); event.preventDefault();}" />
+            
+            <button class="gemini-send-btn" onclick="sendAppChat()" title="Send Message">
+              <span class="material-symbols-outlined" style="font-size: 20px;">arrow_upward</span>
+            </button>
+          </div>
         </div>
 
       </section>
@@ -2274,13 +2359,13 @@
       const scroller = document.getElementById('app-chat-messages');
       const timeStr = getCurrentTimeStr();
 
-      // 1. Render user message
+      // 1. Render Gemini User Message
       scroller.innerHTML += `
-        <div class="assistance-bubble assistance-bubble-outgoing">
+        <div class="gemini-msg-user">
           <div>${escapeHtml(queryText)}</div>
-          <div class="assistance-bubble-time">
+          <div class="gemini-msg-user-footer">
             <span>${timeStr}</span>
-            <span style="color: #0062FF; font-weight: 800; margin-left: 2px;">✓✓</span>
+            <span style="color: var(--gemini-sparkle-blue); font-weight: 800; margin-left: 3px;">✓✓</span>
           </div>
         </div>
       `;
@@ -2301,10 +2386,16 @@
       setTimeout(() => {
         const responseTimeStr = getCurrentTimeStr();
         scroller.innerHTML += `
-          <div class="assistance-bubble assistance-bubble-incoming">
-            <div>${answer}</div>
-            <div class="assistance-bubble-time">
-              <span>${responseTimeStr}</span>
+          <div class="gemini-msg-ai">
+            <div class="gemini-msg-ai-header">
+              <span class="material-symbols-outlined" style="font-size: 18px;">auto_awesome</span>
+              <span>TOVELU INTELLIGENCE</span>
+            </div>
+            <div class="gemini-msg-ai-card">
+              <div>${answer}</div>
+              <div class="gemini-msg-time">
+                <span>${responseTimeStr}</span>
+              </div>
             </div>
           </div>
         `;
@@ -2320,17 +2411,20 @@
       const timeStr = getCurrentTimeStr();
       const scroller = document.getElementById('app-chat-messages');
 
-      // 1. User Message
+      // 1. Render Gemini User Message
       scroller.innerHTML += `
-        <div class="assistance-bubble assistance-bubble-outgoing">
+        <div class="gemini-msg-user">
           <div>${escapeHtml(query)}</div>
-          <div class="assistance-bubble-time">
+          <div class="gemini-msg-user-footer">
             <span>${timeStr}</span>
-            <span style="color: #0062FF; font-weight: 800; margin-left: 2px;">✓✓</span>
+            <span style="color: var(--gemini-sparkle-blue); font-weight: 800; margin-left: 3px;">✓✓</span>
           </div>
         </div>
       `;
-      // 2. Tovelu Assistance AI Response
+      input.value = '';
+      scroller.scrollTop = scroller.scrollHeight;
+
+      // 2. Tovelu Intelligence (Gemini AI) Response
       setTimeout(() => {
         let response = "";
         const qLower = query.toLowerCase();
@@ -2356,10 +2450,16 @@
         
         const responseTimeStr = getCurrentTimeStr();
         scroller.innerHTML += `
-          <div class="assistance-bubble assistance-bubble-incoming">
-            <div>${response}</div>
-            <div class="assistance-bubble-time">
-              <span>${responseTimeStr}</span>
+          <div class="gemini-msg-ai">
+            <div class="gemini-msg-ai-header">
+              <span class="material-symbols-outlined" style="font-size: 18px;">auto_awesome</span>
+              <span>TOVELU INTELLIGENCE</span>
+            </div>
+            <div class="gemini-msg-ai-card">
+              <div>${response}</div>
+              <div class="gemini-msg-time">
+                <span>${responseTimeStr}</span>
+              </div>
             </div>
           </div>
         `;
