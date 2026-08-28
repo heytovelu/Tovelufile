@@ -614,6 +614,57 @@
       color: rgba(255, 255, 255, 0.6);
     }
 
+    /* Pre-decided Chatbot Suggestion Questions */
+    .assistance-suggest-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 4px 0 10px 0;
+      align-self: flex-start;
+      width: 100%;
+      max-width: 95%;
+    }
+    .assistance-suggest-title {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--gemini-sparkle-blue);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .assistance-chip-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .assistance-q-chip {
+      background: var(--gemini-surface);
+      border: 1.5px solid var(--gemini-border-subtle);
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--gemini-text-main);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+      transition: all 0.15s ease-out;
+      text-align: left;
+    }
+    .assistance-q-chip:hover {
+      border-color: var(--gemini-sparkle-blue);
+      background: rgba(0, 98, 255, 0.04);
+      transform: translateX(3px);
+    }
+    .assistance-q-chip:active {
+      transform: scale(0.98);
+    }
+
     /* BOTTOM: Message Type Bar with Ask Button */
     .assistance-typebar {
       padding: 12px 14px;
@@ -1154,6 +1205,41 @@
             </div>
             <div class="assistance-bubble-time">
               <span>08:30 AM</span>
+            </div>
+          </div>
+
+          <!-- Suggested Daily Life Questions (Chatbot Prompts) -->
+          <div class="assistance-suggest-wrap" id="assistance-suggest-container">
+            <div class="assistance-suggest-title">
+              <span class="material-symbols-outlined" style="font-size: 16px;">forum</span>
+              Frequently Asked Daily Questions:
+            </div>
+            
+            <div class="assistance-chip-grid">
+              <button class="assistance-q-chip" onclick="askPresetQuestion('What 15m meal can I cook from my kitchen pantry right now?')">
+                <span>🍳 What 15m meal can I cook from my pantry right now?</span>
+                <span class="material-symbols-outlined" style="font-size: 18px; color: var(--gemini-sparkle-blue);">chevron_right</span>
+              </button>
+              
+              <button class="assistance-q-chip" onclick="askPresetQuestion('Why do I feel tired around 2:00 PM and how to prevent it?')">
+                <span>⚡ Why do I feel tired around 2:00 PM & how to fix it?</span>
+                <span class="material-symbols-outlined" style="font-size: 18px; color: var(--gemini-sparkle-blue);">chevron_right</span>
+              </button>
+              
+              <button class="assistance-q-chip" onclick="askPresetQuestion('When is the exact best time for my 12-min post-meal walk?')">
+                <span>🚶 When is the best time for my 12-min post-meal walk?</span>
+                <span class="material-symbols-outlined" style="font-size: 18px; color: var(--gemini-sparkle-blue);">chevron_right</span>
+              </button>
+              
+              <button class="assistance-q-chip" onclick="askPresetQuestion('Can I drink tea or coffee after 12:00 PM today?')">
+                <span>☕ Can I drink tea or coffee after 12:00 PM today?</span>
+                <span class="material-symbols-outlined" style="font-size: 18px; color: var(--gemini-sparkle-blue);">chevron_right</span>
+              </button>
+
+              <button class="assistance-q-chip" onclick="askPresetQuestion('What snacks can I eat that will not spike my insulin?')">
+                <span>🥑 What healthy snacks can I eat that won\'t spike insulin?</span>
+                <span class="material-symbols-outlined" style="font-size: 18px; color: var(--gemini-sparkle-blue);">chevron_right</span>
+              </button>
             </div>
           </div>
 
@@ -2117,16 +2203,55 @@
       return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     }
 
-    function populateChatPrompt(text) {
-      const input = document.getElementById('app-chat-input');
-      if (input) {
-        input.value = text;
-        sendAppChat();
-      }
-    }
+    const presetAssistanceAnswers = {
+      'pantry': "🍳 <strong>Pantry Recipe Recommendation:</strong><br><br>Based on your stocked pantry (Pasture Eggs, Pure Desi Ghee, Baby Spinach, Fresh Paneer, Avocado):<br><br>👉 <strong>12-min Desi Ghee Paneer & Spinach Scramble:</strong> Sauté 200g cubed paneer with 2 handfuls of baby spinach in 1 tbsp pure desi ghee. Top with 1/2 sliced avocado and pink sea salt.<br><br>✨ <strong>Nutrition:</strong> 34g clean protein • 420 kcal • 0g added sugar • <strong>0% industrial seed oils</strong>. Flat glycemic response guaranteed!",
+      '2pm': "⚡ <strong>Why 2:00 PM Energy Crashes Happen & How to Fix:</strong><br><br>1. <strong>Glucose Rebound:</strong> Morning meals high in refined carbs trigger an insulin surge that drops blood sugar by early afternoon.<br>2. <strong>Adenosine Dump:</strong> Drinking coffee right after waking blocks adenosine receptors without clearing them, causing an afternoon crash.<br><br>👉 <strong>Immediate Fix:</strong> Follow the <strong>90-Minute Caffeine Delay</strong> rule, eat 35g+ protein at breakfast, and drink 300ml sparkling water with 1 tbsp apple cider vinegar if an afternoon craving hits.",
+      'walk': "🚶 <strong>Optimal Post-Meal Walk Timing:</strong><br><br>Start your brisk 12-minute Zone 2 walk <strong>within 15 to 30 minutes immediately following your largest meal (lunch or dinner)</strong>.<br><br>🔬 <strong>Clinical Science:</strong> Post-meal ambulation recruits muscle GLUT4 transporters to clear glucose from the bloodstream directly into skeletal muscle fibers, blunting glucose spikes by up to <strong>38%</strong> without demanding excess insulin production.",
+      'coffee': "☕ <strong>10-Hour Caffeine Cutoff Rule:</strong><br><br>Under Week 3 protocol, finish all caffeinated coffee or strong chai <strong>before 12:00 PM</strong>.<br><br>🌙 <strong>Why It Matters:</strong> Caffeine has an average metabolic half-life of 5 to 7 hours. Having caffeine after noon significantly impairs restorative Slow-Wave (Deep) Stage 3/4 sleep, even if you fall asleep on time. Switch to warm herbal infusion or lemon water after 12 PM.",
+      'snacks': "🥑 <strong>Insulin-Neutral Healthy Snacks:</strong><br><br>When between meals, choose whole foods with high lipid/protein density and near-zero glycemic impact:<br><br>• <strong>6 raw walnuts or soaked almonds</strong> (rich in polyphenols)<br>• <strong>1/2 sliced ripe avocado with sea salt</strong><br>• <strong>Cucumber & radish slices with fresh paneer</strong><br>• <strong>1 hard-boiled pasture egg with black pepper</strong><br><br>These satisfy hunger while keeping circulating insulin at baseline.",
+      'seed oil': "🚫 <strong>How to Avoid Seed Oils When Dining Outside:</strong><br><br>1. <strong>Cooking Technique:</strong> Order proteins that are tandoori, grilled, roasted, or steamed rather than fried or curried in generic gravy.<br>2. <strong>Direct Kitchen Request:</strong> Ask: <em>'Please prepare my dish in pure butter or desi ghee, zero refined cooking oils.'</em><br>3. <strong>Smart Carb Swaps:</strong> Replace refined naans or french fries with double steamed veggies or fresh cucumber salad."
+    };
 
-    function quickSuggestRecipe() {
-      populateChatPrompt("What 15-minute high-protein meal can I make right now with my kitchen pantry ingredients?");
+    function askPresetQuestion(queryText) {
+      const scroller = document.getElementById('app-chat-messages');
+      const timeStr = getCurrentTimeStr();
+
+      // 1. Render user message
+      scroller.innerHTML += `
+        <div class="assistance-bubble assistance-bubble-outgoing">
+          <div>${escapeHtml(queryText)}</div>
+          <div class="assistance-bubble-time">
+            <span>${timeStr}</span>
+            <span style="color: #0062FF; font-weight: 800; margin-left: 2px;">✓✓</span>
+          </div>
+        </div>
+      `;
+      scroller.scrollTop = scroller.scrollHeight;
+
+      // 2. Lookup calibrated clinical response
+      let key = 'pantry';
+      const qLower = queryText.toLowerCase();
+      if (qLower.includes('2:00') || qLower.includes('tired') || qLower.includes('crash') || qLower.includes('prevent')) key = '2pm';
+      else if (qLower.includes('walk') || qLower.includes('12-min')) key = 'walk';
+      else if (qLower.includes('tea') || qLower.includes('coffee') || qLower.includes('12:00')) key = 'coffee';
+      else if (qLower.includes('snack') || qLower.includes('insulin')) key = 'snacks';
+      else if (qLower.includes('seed oil') || qLower.includes('restaurant') || qLower.includes('dining')) key = 'seed oil';
+      else if (qLower.includes('pantry') || qLower.includes('cook') || qLower.includes('meal')) key = 'pantry';
+
+      const answer = presetAssistanceAnswers[key];
+
+      setTimeout(() => {
+        const responseTimeStr = getCurrentTimeStr();
+        scroller.innerHTML += `
+          <div class="assistance-bubble assistance-bubble-incoming">
+            <div>${answer}</div>
+            <div class="assistance-bubble-time">
+              <span>${responseTimeStr}</span>
+            </div>
+          </div>
+        `;
+        scroller.scrollTop = scroller.scrollHeight;
+      }, 250);
     }
 
     function sendAppChat() {
@@ -2152,9 +2277,22 @@
 
       // 2. Tovelu Assistance AI Response
       setTimeout(() => {
-        let response = "Based on your health metrics, steady protein (35g+) and zero yellow seed oils will optimize insulin sensitivity. Complete today's micro-habits to maintain high energy!";
-        if (typeof THAIS !== 'undefined' && THAIS.queryThaisAI) {
-          response = THAIS.queryThaisAI(query, userAnswers);
+        let key = null;
+        const qLower = query.toLowerCase();
+        if (qLower.includes('2:00') || qLower.includes('tired') || qLower.includes('crash')) key = '2pm';
+        else if (qLower.includes('walk') || qLower.includes('12-min')) key = 'walk';
+        else if (qLower.includes('tea') || qLower.includes('coffee') || qLower.includes('12:00') || qLower.includes('caffeine')) key = 'coffee';
+        else if (qLower.includes('snack') || qLower.includes('insulin')) key = 'snacks';
+        else if (qLower.includes('seed oil') || qLower.includes('restaurant') || qLower.includes('oil')) key = 'seed oil';
+        else if (qLower.includes('pantry') || qLower.includes('cook') || qLower.includes('recipe') || qLower.includes('lunch') || qLower.includes('dinner') || qLower.includes('breakfast')) key = 'pantry';
+
+        let response = key ? presetAssistanceAnswers[key] : null;
+        if (!response) {
+          if (typeof THAIS !== 'undefined' && THAIS.queryThaisAI) {
+            response = THAIS.queryThaisAI(query, userAnswers);
+          } else {
+            response = "Based on your 42-marker health profile, maintaining steady protein intake (35g+) and eliminating industrial seed oils will optimize cellular insulin sensitivity. Complete today's FLOW micro-habits to maintain peak energy!";
+          }
         }
         
         const responseTimeStr = getCurrentTimeStr();
