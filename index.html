@@ -1587,6 +1587,31 @@
       }
     }
 
+  
+    /* ==========================================================================
+       GLOBAL SECTION SPACING & ELEVATION SEPARATION
+       ========================================================================== */
+    .app-section-spacer {
+      height: 24px;
+      width: 100%;
+    }
+    .flow-sub-view > *,
+    .flow-col-left > *,
+    .flow-col-right > *,
+    .health-container > *,
+    .you-col-left > *,
+    .you-col-right > * {
+      margin-bottom: 22px !important;
+    }
+    .flow-sub-view > *:last-child,
+    .flow-col-left > *:last-child,
+    .flow-col-right > *:last-child,
+    .health-container > *:last-child,
+    .you-col-left > *:last-child,
+    .you-col-right > *:last-child {
+      margin-bottom: 0 !important;
+    }
+
   </style>
 </head>
 <body>
@@ -1664,7 +1689,7 @@
       <section id="pane-flow" class="tab-pane active">
         
         <!-- DAY | WEEK SWITCHER (SHIFTED BELOW TOP BAR & ABOVE FIRST HERO SECTION) -->
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; background: var(--gemini-surface-container); padding: 4px; border-radius: 16px; border: 1px solid var(--gemini-border-subtle);">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; background: var(--gemini-surface-container); padding: 4px; border-radius: 16px; border: 1px solid var(--gemini-border-subtle); margin-bottom: 22px;">
           <button class="top-switcher-btn active" id="btn-top-day" onclick="switchFlowSubView('day')">
             DAY
           </button>
@@ -1678,7 +1703,7 @@
           <div class="m3-flow-grid">
             <div class="flow-col-left">
           <!-- UNIFIED HERO CARD: GREETING + PROTOCOL STATUS + CALORIE & PORTION LEVEL METER -->
-          <div class="gemini-card" style="background: linear-gradient(135deg, rgba(0, 192, 255, 0.08), rgba(0, 245, 160, 0.06), rgba(255, 255, 255, 0.98)); border: 1.5px solid rgba(0, 98, 255, 0.15); border-radius: 22px; padding: 20px; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 4px 20px rgba(0, 98, 255, 0.06);">
+          <div class="gemini-card" style="background: linear-gradient(135deg, rgba(0, 192, 255, 0.08), rgba(0, 245, 160, 0.06), rgba(255, 255, 255, 0.98)); border: 1.5px solid rgba(0, 98, 255, 0.15); border-radius: 22px; padding: 20px; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 4px 20px rgba(0, 98, 255, 0.06); margin-bottom: 22px;">
                        <!-- Top Meta Status Row -->
             <div style="display: flex; justify-content: space-between; align-items: center;">
               <span style="font-size: 12px; font-weight: 800; color: var(--gemini-vitality-emerald); background: rgba(0, 208, 108, 0.12); padding: 4px 12px; border-radius: 9999px; letter-spacing: 0.04em;">
@@ -1740,7 +1765,7 @@
           </div>
 
           <!-- 3. UNIFIED DYNAMIC FOOD INTELLIGENCE CARD -->
-          <div id="dynamic-meal-card" class="app-meal-card theme-breakfast" style="border-radius: 22px; padding: 22px; display: flex; flex-direction: column; gap: 18px; transition: all 0.2s; box-shadow: 0 4px 20px rgba(0, 98, 255, 0.05);">
+          <div id="dynamic-meal-card" class="app-meal-card theme-breakfast" style="border-radius: 22px; padding: 22px; display: flex; flex-direction: column; gap: 18px; transition: all 0.2s; box-shadow: 0 4px 20px rgba(0, 98, 255, 0.05); margin-bottom: 22px;">
             
             <!-- Card Header: Title & Seed Oils Goal (Inside Card) -->
             <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -1821,7 +1846,7 @@
           </div><!-- /flow-col-left -->
             <div class="flow-col-right">
           <!-- 4. TODAY'S TASKS (DYNAMIC PROTOCOL ENGINE) -->
-          <div style="display: flex; flex-direction: column; gap: 14px;">
+          <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 22px;">
             <div style="display: flex; justify-content: space-between; align-items: center;">
               <div style="font-size: 14px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase; letter-spacing: 0.05em;">
                 ✅ Today's Tasks
@@ -1834,7 +1859,7 @@
           </div>
 
           <!-- 5. TODAY'S CLINICAL NOTE (HEADER INSIDE CARD) -->
-          <div class="gemini-card" style="background: linear-gradient(135deg, rgba(0, 192, 255, 0.08), rgba(0, 245, 160, 0.08)); border-left: 4px solid var(--gemini-sparkle-blue); border-radius: 22px; padding: 22px; display: flex; flex-direction: column; gap: 8px;">
+          <div class="gemini-card" style="background: linear-gradient(135deg, rgba(0, 192, 255, 0.08), rgba(0, 245, 160, 0.08)); border-left: 4px solid var(--gemini-sparkle-blue); border-radius: 22px; padding: 22px; display: flex; flex-direction: column; gap: 8px; margin-bottom: 22px;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
               <div style="font-size: 12px; font-weight: 800; color: var(--gemini-sparkle-blue); text-transform: uppercase; letter-spacing: 0.05em;">
                 💡 THAIS CLINICAL NOTE OF THE DAY
@@ -2238,7 +2263,7 @@
         <div class="health-container">
           
           <!-- 1. PATIENT & EPIGENETIC LONGEVITY HERO CARD -->
-          <div class="health-patient-card">
+          <div class="health-patient-card" style="margin-bottom: 22px;">
             <div class="health-patient-meta">
               <span class="health-pill-tag health-pill-emerald">
                 ● CLINICAL TELEMETRY ACTIVE
@@ -2283,7 +2308,7 @@
           </div>
 
           <!-- 2. WEEK | CHOOSE BAR -->
-          <div class="health-week-bar">
+          <div class="health-week-bar" style="margin-bottom: 22px;">
             <div class="health-week-current-box">
               <div style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald); text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; gap: 5px;">
                 <span class="material-symbols-outlined" style="font-size: 14px;">calendar_today</span>
