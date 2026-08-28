@@ -631,7 +631,11 @@
 
     function finish() {
       localStorage.setItem('tovelu_survey_answers', JSON.stringify(userAnswers));
-      window.location.href = "index.html";
+      if (window.top !== window.self) {
+        window.top.location.href = "report.html";
+      } else {
+        window.location.href = "report.html";
+      }
     }
 
     function toggleTheme() {
