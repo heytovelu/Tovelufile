@@ -1369,8 +1369,8 @@
         width: 76px !important;
         height: 76px !important;
       }
-      [style*="font-size: 30px"][style*="88%"] {
-        font-size: 18px !important;
+      [style*="font-size: 30px"][style*="88%"], [style*="font-size: 18px"][style*="88%"] {
+        font-size: 16px !important;
         font-weight: 800 !important;
       }
 
@@ -1393,16 +1393,19 @@
         margin-top: 2px !important;
       }
       .meal-mode-btn {
-        height: 46px !important;
-        border-radius: 12px !important;
-        gap: 2px !important;
+        height: 56px !important;
+        border-radius: 14px !important;
+        gap: 4px !important;
+        background: var(--gemini-surface) !important;
+        border: 1.5px solid var(--gemini-border-subtle) !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04) !important;
       }
       .meal-mode-btn .material-symbols-outlined {
-        font-size: 18px !important;
+        font-size: 22px !important;
       }
       .meal-mode-btn [style*="font-size: 13px"] {
-        font-size: 11px !important;
-        font-weight: 700 !important;
+        font-size: 12px !important;
+        font-weight: 800 !important;
       }
 
       /* Task List Items */
@@ -1698,8 +1701,9 @@
                 <div style="font-family: 'Google Sans Display', sans-serif; font-size: 32px; font-weight: 800; color: var(--gemini-text-main); line-height: 1.1;">
                   1,323 <span style="font-size: 18px; font-weight: 700; color: var(--gemini-text-muted);">/ 1,500 kcal</span>
                 </div>
-                <div style="font-size: 13px; font-weight: 700; color: var(--gemini-vitality-emerald); display: flex; align-items: center; gap: 6px; margin-top: 4px;">
-                  <span>✓ Flat Glycemic Curve</span> • <span>0% Seed Oils</span>
+                <div style="font-size: 11.5px; font-weight: 800; color: var(--gemini-vitality-emerald); display: flex; flex-direction: column; gap: 2px; margin-top: 4px; line-height: 1.35;">
+                  <div>✓ Flat Glycemic Curve</div>
+                  <div>✓ 0% Seed Oils</div>
                 </div>
               </div>
 
@@ -1718,7 +1722,7 @@
                   <circle cx="50" cy="50" r="38" fill="none" stroke="url(#hero-meter-grad)" stroke-width="12" stroke-linecap="round" stroke-dasharray="210 239" stroke-dashoffset="0" transform="rotate(-90 50 50)"/>
                 </svg>
                 <div style="position: absolute; display: flex; align-items: center; justify-content: center;">
-                  <span style="font-family: 'Google Sans Display', sans-serif; font-size: 30px; font-weight: 800; color: var(--gemini-sparkle-blue);">88%</span>
+                  <span style="font-family: 'Google Sans Display', sans-serif; font-size: 18px; font-weight: 800; color: var(--gemini-sparkle-blue);">88%</span>
                 </div>
               </div>
 
@@ -1731,10 +1735,10 @@
             
             <!-- Card Header: Title & Seed Oils Goal (Inside Card) -->
             <div style="display: flex; justify-content: space-between; align-items: center;">
-              <div style="font-size: 12px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase; letter-spacing: 0.05em;">
+              <div style="font-size: 11px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase; letter-spacing: 0.04em;">
                 🍽️ Meals & Food Intelligence
               </div>
-              <span style="font-size: 12px; font-weight: 800; color: var(--gemini-vitality-emerald); background: var(--gemini-surface); border: 1px solid rgba(0, 208, 108, 0.3); padding: 4px 10px; border-radius: 9999px;">
+              <span style="font-size: 10px; font-weight: 800; color: var(--gemini-vitality-emerald); background: var(--gemini-surface); border: 1px solid rgba(0, 208, 108, 0.3); padding: 2.5px 8px; border-radius: 9999px;">
                 0% Seed Oils Goal
               </span>
             </div>
@@ -1755,14 +1759,14 @@
             <!-- Active Meal Status & Calorie Target Row -->
             <div style="display: flex; justify-content: space-between; align-items: flex-start;">
               <div>
-                <span id="active-meal-badge" style="font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 9999px; text-transform: uppercase; letter-spacing: 0.03em;">
+                <span id="active-meal-badge" style="font-size: 9.5px; font-weight: 800; padding: 2.5px 8px; border-radius: 9999px; text-transform: uppercase; letter-spacing: 0.03em;">
                   ACTIVE TIME WINDOW • 08:30 AM
                 </span>
                 <div id="active-meal-title" style="font-family: 'Google Sans', sans-serif; font-size: 18px; font-weight: 800; margin-top: 6px; color: var(--gemini-text-main);">
                   🍳 Breakfast Target
                 </div>
               </div>
-              <div id="active-meal-logged-status" style="font-size: 14px; font-weight: 800; color: var(--gemini-sparkle-blue); text-align: right;">
+              <div id="active-meal-logged-status" style="font-size: 12px; font-weight: 800; color: var(--gemini-sparkle-blue); text-align: right;">
                 420 kcal Target
               </div>
             </div>
@@ -1789,15 +1793,15 @@
 
             <!-- 3 Consumption Pathways: SCAN | MANUALLY | ASK AI -->
             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
-              <button class="meal-mode-btn" style="height: 68px;" onclick="openActiveFoodModal('scan')">
+              <button class="meal-mode-btn" style="height: 56px;" onclick="openActiveFoodModal('scan')">
                 <span class="material-symbols-outlined" style="font-size: 24px;">photo_camera</span>
                 <span style="font-size: 13px; font-weight: 800;">Scan / Photo</span>
               </button>
-              <button class="meal-mode-btn" style="height: 68px;" onclick="openActiveFoodModal('manual')">
+              <button class="meal-mode-btn" style="height: 56px;" onclick="openActiveFoodModal('manual')">
                 <span class="material-symbols-outlined" style="font-size: 24px;">edit_note</span>
                 <span style="font-size: 13px; font-weight: 800;">Manually</span>
               </button>
-              <button class="meal-mode-btn" style="height: 68px;" onclick="openActiveFoodModal('ask_ai')">
+              <button class="meal-mode-btn" style="height: 56px;" onclick="openActiveFoodModal('ask_ai')">
                 <span class="material-symbols-outlined" style="font-size: 24px;">auto_awesome</span>
                 <span style="font-size: 13px; font-weight: 800;">Ask AI</span>
               </button>
