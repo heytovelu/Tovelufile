@@ -1256,29 +1256,253 @@
       box-shadow: 0 2px 8px rgba(0, 98, 255, 0.12);
     }
 
+    
     @media (max-width: 839px) {
-      /* COMPACT (NATIVE MOBILE PHONE EXPERIENCE) */
+      /* ==========================================================================
+         M3 COMPACT: NATIVE MOBILE APP SIZING & TYPOGRAPHY STANDARDS
+         ========================================================================== */
       .app-shell {
-        max-width: 100%;
-        min-height: 100vh;
-        box-shadow: none;
+        max-width: 100% !important;
+        min-height: 100vh !important;
+        box-shadow: none !important;
       }
       .desktop-nav-pills {
         display: none !important;
       }
       .app-bottom-nav {
         display: grid !important;
+        height: 58px !important;
+        padding-bottom: max(env(safe-area-inset-bottom), 4px) !important;
       }
+      .nav-item-btn {
+        gap: 2px !important;
+      }
+      .nav-item-btn .material-symbols-outlined {
+        font-size: 20px !important;
+      }
+      .nav-label {
+        font-size: 9.5px !important;
+        font-weight: 800 !important;
+        letter-spacing: 0.02em !important;
+      }
+
+      /* Compact Top App Bar */
+      header.app-topbar {
+        height: 52px !important;
+        padding: 0 14px !important;
+      }
+      .brand-wordmark {
+        font-size: 19px !important;
+      }
+      #app-header-day-tag {
+        font-size: 10px !important;
+        padding: 3px 8px !important;
+      }
+      .profile-avatar-btn {
+        width: 32px !important;
+        height: 32px !important;
+      }
+      .profile-avatar-btn .material-symbols-outlined {
+        font-size: 17px !important;
+      }
+
+      /* Compact Screen Scroll Area */
       .app-scroll-content {
-        padding: 12px 14px 105px 14px;
+        padding: 10px 12px 85px 12px !important;
       }
-      .m3-flow-grid,
+
+      /* Segmented Day/Week Switcher */
+      .top-switcher-btn {
+        height: 38px !important;
+        font-size: 12px !important;
+        border-radius: 10px !important;
+        padding: 0 10px !important;
+      }
+
+      /* Cards & Containers Hierarchy */
+      .gemini-card {
+        padding: 14px 14px !important;
+        border-radius: 18px !important;
+        gap: 10px !important;
+        margin-bottom: 0 !important;
+      }
+
+      /* Greeting & Header in Hero */
+      .gemini-card h1, .gemini-card .hero-heading,
+      [style*="font-size: 24px"][style*="Good morning"] {
+        font-size: 18px !important;
+        line-height: 1.25 !important;
+      }
+      [style*="font-size: 14px"][style*="Thursday, 28 August"] {
+        font-size: 12px !important;
+        margin-top: 2px !important;
+        line-height: 1.4 !important;
+      }
+
+      /* Hero Calorie Section */
+      [style*="padding: 20px 22px"][style*="TODAY"] {
+        padding: 12px 12px !important;
+        border-radius: 16px !important;
+        gap: 8px !important;
+      }
+      [style*="font-size: 12px"][style*="CALORIE INTAKE"] {
+        font-size: 10px !important;
+        letter-spacing: 0.04em !important;
+      }
+      [style*="font-size: 32px"][style*="1,323"] {
+        font-size: 22px !important;
+      }
+      [style*="font-size: 18px"][style*="1,500 kcal"] {
+        font-size: 13px !important;
+      }
+      [style*="font-size: 13px"][style*="Flat Glycemic Curve"] {
+        font-size: 11px !important;
+        margin-top: 2px !important;
+      }
+
+      /* Donut Ring Meter Scale */
+      [style*="width: 120px; height: 120px"] {
+        width: 76px !important;
+        height: 76px !important;
+      }
+      [style*="width: 120px; height: 120px"] svg {
+        width: 76px !important;
+        height: 76px !important;
+      }
+      [style*="font-size: 30px"][style*="88%"] {
+        font-size: 18px !important;
+        font-weight: 800 !important;
+      }
+
+      /* Meal Selector & Macro Grid */
+      .meal-tab-pill {
+        height: 36px !important;
+        font-size: 12px !important;
+        border-radius: 10px !important;
+      }
+      #active-meal-grams-grid {
+        padding: 8px 6px !important;
+        gap: 4px !important;
+        border-radius: 12px !important;
+      }
+      #active-meal-grams-grid [style*="font-size: 12px"] {
+        font-size: 10px !important;
+      }
+      #active-meal-grams-grid [style*="font-size: 18px"] {
+        font-size: 14px !important;
+        margin-top: 2px !important;
+      }
+      .meal-mode-btn {
+        height: 46px !important;
+        border-radius: 12px !important;
+        gap: 2px !important;
+      }
+      .meal-mode-btn .material-symbols-outlined {
+        font-size: 18px !important;
+      }
+      .meal-mode-btn [style*="font-size: 13px"] {
+        font-size: 11px !important;
+        font-weight: 700 !important;
+      }
+
+      /* Task List Items */
+      #dynamic-tasks-list {
+        gap: 8px !important;
+      }
+      .task-slide-card {
+        padding: 8px 10px !important;
+        border-radius: 14px !important;
+        min-height: 52px !important;
+        gap: 8px !important;
+      }
+      .task-meta-box {
+        gap: 1px !important;
+      }
+      .task-title-text {
+        font-size: 12.5px !important;
+        font-weight: 700 !important;
+        line-height: 1.25 !important;
+      }
+      .task-sub-label {
+        font-size: 10px !important;
+      }
+      .task-sliding-icon {
+        width: 32px !important;
+        height: 32px !important;
+        border-radius: 10px !important;
+      }
+      .task-sliding-icon .material-symbols-outlined {
+        font-size: 16px !important;
+      }
+
+      /* Clinical Note */
+      [style*="border-left: 4px solid var(--gemini-sparkle-blue)"] {
+        padding: 12px 14px !important;
+        border-radius: 14px !important;
+        gap: 4px !important;
+      }
+      [style*="border-left: 4px solid var(--gemini-sparkle-blue)"] [style*="font-size: 17px"] {
+        font-size: 13.5px !important;
+      }
+      [style*="border-left: 4px solid var(--gemini-sparkle-blue)"] p {
+        font-size: 11.5px !important;
+        line-height: 1.45 !important;
+      }
+
+      /* Health Section Cards */
+      .health-patient-card {
+        padding: 14px !important;
+        border-radius: 18px !important;
+        gap: 10px !important;
+      }
+      .health-bio-age-val {
+        font-size: 22px !important;
+      }
+      .health-panels-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .health-panel-card {
+        padding: 12px 14px !important;
+        border-radius: 16px !important;
+      }
+      .health-panel-name {
+        font-size: 13px !important;
+      }
+      .health-panel-name .material-symbols-outlined {
+        font-size: 17px !important;
+      }
+
+      /* You Profile Section */
+      [style*="width: 68px; height: 68px"] {
+        width: 48px !important;
+        height: 48px !important;
+        border-radius: 16px !important;
+      }
+      [style*="width: 68px; height: 68px"] .material-symbols-outlined {
+        font-size: 24px !important;
+      }
+      [style*="font-size: 21px"][style*="Ajay Sen"] {
+        font-size: 17px !important;
+      }
       .m3-you-grid {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+      }
+      .you-col-left, .you-col-right {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+      }
+      .you-tool-link {
+        padding: 10px 12px !important;
+        font-size: 12.5px !important;
+        border-radius: 12px !important;
       }
     }
+
 
     @media (min-width: 840px) {
       /* EXPANDED (DESKTOP & TABLET WEB APP EXPERIENCE) */
