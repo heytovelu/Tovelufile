@@ -2204,12 +2204,67 @@
     }
 
     const presetAssistanceAnswers = {
-      'pantry': "🍳 <strong>Pantry Recipe Recommendation:</strong><br><br>Based on your stocked pantry (Pasture Eggs, Pure Desi Ghee, Baby Spinach, Fresh Paneer, Avocado):<br><br>👉 <strong>12-min Desi Ghee Paneer & Spinach Scramble:</strong> Sauté 200g cubed paneer with 2 handfuls of baby spinach in 1 tbsp pure desi ghee. Top with 1/2 sliced avocado and pink sea salt.<br><br>✨ <strong>Nutrition:</strong> 34g clean protein • 420 kcal • 0g added sugar • <strong>0% industrial seed oils</strong>. Flat glycemic response guaranteed!",
-      '2pm': "⚡ <strong>Why 2:00 PM Energy Crashes Happen & How to Fix:</strong><br><br>1. <strong>Glucose Rebound:</strong> Morning meals high in refined carbs trigger an insulin surge that drops blood sugar by early afternoon.<br>2. <strong>Adenosine Dump:</strong> Drinking coffee right after waking blocks adenosine receptors without clearing them, causing an afternoon crash.<br><br>👉 <strong>Immediate Fix:</strong> Follow the <strong>90-Minute Caffeine Delay</strong> rule, eat 35g+ protein at breakfast, and drink 300ml sparkling water with 1 tbsp apple cider vinegar if an afternoon craving hits.",
-      'walk': "🚶 <strong>Optimal Post-Meal Walk Timing:</strong><br><br>Start your brisk 12-minute Zone 2 walk <strong>within 15 to 30 minutes immediately following your largest meal (lunch or dinner)</strong>.<br><br>🔬 <strong>Clinical Science:</strong> Post-meal ambulation recruits muscle GLUT4 transporters to clear glucose from the bloodstream directly into skeletal muscle fibers, blunting glucose spikes by up to <strong>38%</strong> without demanding excess insulin production.",
-      'coffee': "☕ <strong>10-Hour Caffeine Cutoff Rule:</strong><br><br>Under Week 3 protocol, finish all caffeinated coffee or strong chai <strong>before 12:00 PM</strong>.<br><br>🌙 <strong>Why It Matters:</strong> Caffeine has an average metabolic half-life of 5 to 7 hours. Having caffeine after noon significantly impairs restorative Slow-Wave (Deep) Stage 3/4 sleep, even if you fall asleep on time. Switch to warm herbal infusion or lemon water after 12 PM.",
-      'snacks': "🥑 <strong>Insulin-Neutral Healthy Snacks:</strong><br><br>When between meals, choose whole foods with high lipid/protein density and near-zero glycemic impact:<br><br>• <strong>6 raw walnuts or soaked almonds</strong> (rich in polyphenols)<br>• <strong>1/2 sliced ripe avocado with sea salt</strong><br>• <strong>Cucumber & radish slices with fresh paneer</strong><br>• <strong>1 hard-boiled pasture egg with black pepper</strong><br><br>These satisfy hunger while keeping circulating insulin at baseline.",
-      'seed oil': "🚫 <strong>How to Avoid Seed Oils When Dining Outside:</strong><br><br>1. <strong>Cooking Technique:</strong> Order proteins that are tandoori, grilled, roasted, or steamed rather than fried or curried in generic gravy.<br>2. <strong>Direct Kitchen Request:</strong> Ask: <em>'Please prepare my dish in pure butter or desi ghee, zero refined cooking oils.'</em><br>3. <strong>Smart Carb Swaps:</strong> Replace refined naans or french fries with double steamed veggies or fresh cucumber salad."
+      'pantry': `
+        🍳 <strong>Here is your 12-minute High-Protein Meal from your pantry:</strong><br><br>
+        🥘 <strong>Dish:</strong> Desi Ghee Paneer & Spinach Scramble<br><br>
+        📝 <strong>Quick 3-Step Recipe:</strong><br>
+        1️⃣ Heat <strong>1 tbsp Pure Desi Ghee</strong> in a pan on medium heat.<br>
+        2️⃣ Add <strong>200g cubed Fresh Paneer</strong> & 2 handfuls of <strong>Baby Spinach</strong> (250g). Sauté for 6 minutes.<br>
+        3️⃣ Plate it with <strong>1/2 sliced Avocado</strong> and a pinch of pink rock salt.<br><br>
+        📊 <strong>Your Macros:</strong><br>
+        • 🥩 <strong>34g Clean Protein</strong> (Matches your 35g daily target)<br>
+        • 🥑 <strong>Healthy Fats:</strong> 18g (Pure Ghee + Avocado)<br>
+        • 🚫 <strong>0% Industrial Seed Oils • 0g Sugar Spike</strong>
+      `,
+      '2pm': `
+        ⚡ <strong>Why you feel tired at 2:00 PM & How to fix it right now:</strong><br><br>
+        🎯 <strong>The 2 Root Causes:</strong><br>
+        • <strong>Sugar Rollercoaster:</strong> High morning carbs spiked insulin, causing blood sugar to plummet now.<br>
+        • <strong>Caffeine Crash:</strong> Coffee taken too early blocked adenosine temporarily, and it all flooded back.<br><br>
+        👉 <strong>Your 3-Minute Energy Fix:</strong><br>
+        1️⃣ Drink <strong>300ml cold sparkling water</strong> with <strong>1 tbsp Apple Cider Vinegar</strong>.<br>
+        2️⃣ Eat <strong>6 raw walnuts or soaked almonds</strong> (clean brain fuel).<br>
+        3️⃣ Step into sunlight for <strong>5 minutes of deep breathing</strong>.<br><br>
+        💡 <strong>Pro-Tip:</strong> Delay morning coffee by 90 minutes after waking to stop this permanently!
+      `,
+      'walk': `
+        🚶 <strong>When to take your 12-minute walk for maximum fat burning:</strong><br><br>
+        ⏰ <strong>Exact Best Time:</strong> Within <strong>15 to 30 minutes immediately following your largest meal</strong> (lunch or dinner).<br><br>
+        🔥 <strong>Why this works so well:</strong><br>
+        • Your leg muscles pull sugar directly out of your blood like a sponge without needing extra insulin.<br>
+        • This cuts your post-meal glucose spike by up to <strong>38%</strong> and stops fat storage!<br><br>
+        👟 <strong>What to do:</strong> Walk at a brisk conversational pace (Zone 2) for just 12 minutes. No sweating required.
+      `,
+      'coffee': `
+        ☕ <strong>Can you drink coffee or chai after 12:00 PM?</strong><br><br>
+        ❌ <strong>Direct Answer:</strong> <strong>No, cutoff is strictly 12:00 PM!</strong><br><br>
+        🧠 <strong>Why your body needs this cutoff:</strong><br>
+        • Caffeine stays in your bloodstream for <strong>6 to 8 hours</strong>.<br>
+        • Even if you fall asleep on time, afternoon caffeine destroys your <strong>Deep Slow-Wave Sleep</strong>—so you wake up tired and crave sugar tomorrow.<br><br>
+        🍵 <strong>Drink this instead after 12 PM:</strong><br>
+        • Warm herbal cinnamon water<br>
+        • Lemon sparkling water with pink salt<br>
+        • Fresh ginger cardamom infusion
+      `,
+      'snacks': `
+        🥑 <strong>Best snacks you can eat right now that won't spike insulin:</strong><br><br>
+        ✅ <strong>Top 4 Guilt-Free Snacking Options:</strong><br>
+        1️⃣ <strong>6 Raw Walnuts or Soaked Almonds:</strong> Zero sugar, packed with brain omega-3s.<br>
+        2️⃣ <strong>1/2 Sliced Avocado with sea salt:</strong> Healthy fats that shut down hunger instantly.<br>
+        3️⃣ <strong>Fresh Paneer Cubes (50g):</strong> 10g protein with 0 carbs.<br>
+        4️⃣ <strong>1 Hard-Boiled Pasture Egg:</strong> 6g complete protein.<br><br>
+        🚫 <strong>Avoid:</strong> Biscuits, sweetened yogurt, packaged snacks, and juices.
+      `,
+      'seed oil': `
+        🚫 <strong>How to eat out safely with 0% Seed Oils:</strong><br><br>
+        📋 <strong>Say this exact sentence to the waiter/chef:</strong><br>
+        <em>"Please prepare my food only in pure butter or desi ghee. No refined cooking oils or dalda please."</em><br><br>
+        🍽️ <strong>Safest Dishes to Order:</strong><br>
+        • <strong>Tandoori / Grilled Protein:</strong> Tandoori paneer, grilled chicken, or wild fish.<br>
+        • <strong>Fresh Green Salad:</strong> With fresh lemon & olive oil (skip creamy dressings).<br>
+        • <strong>Steamed Veggies & Yellow Dal with Desi Ghee</strong>.<br><br>
+        ❌ <strong>What to avoid:</strong> Fried starters, thick restaurant gravies, and naans.
+      `
     };
 
     function askPresetQuestion(queryText) {
@@ -2291,7 +2346,12 @@
           if (typeof THAIS !== 'undefined' && THAIS.queryThaisAI) {
             response = THAIS.queryThaisAI(query, userAnswers);
           } else {
-            response = "Based on your 42-marker health profile, maintaining steady protein intake (35g+) and eliminating industrial seed oils will optimize cellular insulin sensitivity. Complete today's FLOW micro-habits to maintain peak energy!";
+            response = `
+              🎯 <strong>Here is your personalized answer, Ajay:</strong><br><br>
+              📋 <strong>Protocol Action:</strong> Keep your meals centered around <strong>35g+ clean protein</strong> (pasture eggs, paneer, wild fish) cooked strictly in <strong>pure desi ghee</strong> or extra virgin olive oil.<br><br>
+              ⚡ <strong>Why It Works:</strong> Eliminating industrial seed oils and refined carbs keeps your insulin curve flat and protects steady ATP cellular energy throughout the day.<br><br>
+              💡 <strong>Next Step:</strong> Complete today's 12-minute post-meal walk to lock in 100% daily compliance!
+            `;
           }
         }
         
