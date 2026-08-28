@@ -131,10 +131,10 @@
     /* App Main Scroll Content */
     .app-scroll-content {
       flex: 1;
-      padding: 16px 16px 100px 16px;
+      padding: 20px 18px 115px 18px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 22px;
       overflow-y: auto;
     }
 
@@ -142,7 +142,7 @@
     .tab-pane {
       display: none;
       flex-direction: column;
-      gap: 16px;
+      gap: 22px;
       animation: fadeIn 0.2s ease-out;
     }
     .tab-pane.active {
@@ -153,7 +153,7 @@
     .flow-sub-view {
       display: none;
       flex-direction: column;
-      gap: 16px;
+      gap: 22px;
       animation: fadeIn 0.2s ease-out;
     }
     .flow-sub-view.active {
@@ -164,12 +164,12 @@
     .app-meal-card {
       background: var(--gemini-surface);
       border: 1px solid var(--gemini-border);
-      border-radius: 18px;
-      padding: 16px;
+      border-radius: 22px;
+      padding: 22px 20px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      box-shadow: var(--gemini-shadow-sm);
+      gap: 16px;
+      box-shadow: 0 4px 20px rgba(0, 98, 255, 0.05);
     }
     .meal-card-header {
       display: flex;
@@ -178,27 +178,29 @@
     }
     .meal-title {
       font-family: 'Google Sans', sans-serif;
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 800;
       color: var(--gemini-text-main);
     }
     .meal-modes-row {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-top: 4px;
+      gap: 10px;
+      margin-top: 6px;
     }
     .meal-mode-btn {
       background: var(--gemini-surface-container);
       border: 1px solid var(--gemini-border-subtle);
-      border-radius: 12px;
-      padding: 10px 6px;
-      font-size: 11px;
-      font-weight: 700;
+      border-radius: 14px;
+      height: 64px;
+      padding: 6px 4px;
+      font-size: 12px;
+      font-weight: 800;
       color: var(--gemini-text-main);
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       gap: 4px;
       cursor: pointer;
       transition: all 0.15s;
@@ -207,7 +209,7 @@
       background: var(--gemini-surface);
       border-color: var(--gemini-sparkle-blue);
       color: var(--gemini-sparkle-blue);
-      box-shadow: var(--gemini-shadow-sm);
+      box-shadow: 0 4px 14px rgba(0, 98, 255, 0.15);
     }
 
     /* 3-Way Meal Selector Pills */
@@ -344,30 +346,37 @@
     .app-task-card {
       background: var(--gemini-surface);
       border: 1px solid var(--gemini-border);
-      border-radius: 16px;
-      padding: 14px 16px;
+      border-radius: 20px;
+      padding: 18px 20px;
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 16px;
       cursor: pointer;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
       transition: all 0.15s;
+    }
+    .app-task-card:hover {
+      border-color: var(--gemini-sparkle-blue);
+      transform: translateY(-1px);
     }
     .app-task-card.completed {
       background: var(--gemini-surface-container);
-      opacity: 0.85;
+      opacity: 0.88;
+      box-shadow: none;
     }
     .app-task-checkbox {
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      border-radius: 10px;
       border: 2px solid var(--gemini-border);
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 800;
-      font-size: 13px;
+      font-size: 15px;
       color: transparent;
       transition: all 0.15s;
+      flex-shrink: 0;
     }
     .app-task-card.completed .app-task-checkbox {
       background: var(--gemini-vitality-emerald);
@@ -381,7 +390,7 @@
       bottom: 0;
       width: 100%;
       max-width: 520px;
-      height: 64px;
+      height: 70px;
       background: var(--gemini-bg);
       backdrop-filter: blur(20px);
       border-top: 1px solid var(--gemini-border-subtle);
@@ -398,7 +407,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 2px;
+      gap: 4px;
       color: var(--gemini-text-muted);
       cursor: pointer;
       transition: all 0.15s;
@@ -412,7 +421,7 @@
     .nav-label {
       font-size: 11px;
       font-weight: 800;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.04em;
     }
 
     /* Chat Messages */
