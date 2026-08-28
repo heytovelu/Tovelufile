@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" class="light">
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Tovelu • Lifelong Health Intelligence</title>
   
   <!-- PWA & Favicon -->
@@ -10,1896 +10,1293 @@
   <meta name="theme-color" content="#0062FF" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 16 C28 16, 16 32, 16 50 C16 68, 28 84, 50 84 C38 72, 34 58, 34 50 C34 42, 38 28, 50 16 Z' fill='%2300C0FF'/%3E%3Cpath d='M50 16 C72 16, 84 32, 84 50 C84 68, 72 84, 50 84 C62 72, 66 58, 66 50 C66 42, 62 28, 50 16 Z' fill='%2300D06C'/%3E%3Ccircle cx='50' cy='50' r='8' fill='%2300F5A0'/%3E%3C/svg%3E" />
 
-  <!-- Fonts: Inter, Geist & Material Symbols -->
+  <!-- Fonts: Inter, Google Sans, Ubuntu & Material Symbols -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Geist:wght@400;500;600;700&family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Ubuntu:wght@500;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
   
-  <!-- Tailwind CSS with Official Tovelu Palette & Stitch Design Tokens -->
+  <!-- Tailwind CSS with TDF-1.0 Tokens -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script id="tailwind-config">
+  <script>
     tailwind.config = {
-      darkMode: "class",
       theme: {
         extend: {
-          "colors": {
-            "surface": "#f9f9fc",
-            "surface-dim": "#dadadc",
-            "surface-bright": "#f9f9fc",
-            "surface-container-lowest": "#ffffff",
-            "surface-container-low": "#f3f3f6",
-            "surface-container": "#eeeef0",
-            "surface-container-high": "#e8e8ea",
-            "surface-container-highest": "#e2e2e5",
-            "on-surface": "#1a1c1e",
-            "on-surface-variant": "#424656",
-            "inverse-surface": "#2f3133",
-            "inverse-on-surface": "#f0f0f3",
-            "outline": "#727687",
-            "outline-variant": "#c2c6d8",
-            "surface-tint": "#0062FF",
-            "primary": "#0062FF",
-            "on-primary": "#ffffff",
-            "primary-container": "#00C0FF",
-            "on-primary-container": "#f8f7ff",
-            "inverse-primary": "#b3c5ff",
-            "secondary": "#00677f",
-            "on-secondary": "#ffffff",
-            "secondary-container": "#00ccf9",
-            "on-secondary-container": "#005266",
-            "tertiary": "#00D06C",
-            "on-tertiary": "#ffffff",
-            "tertiary-container": "#00F5A0",
-            "on-tertiary-container": "#00210c",
-            "error": "#ba1a1a",
-            "on-error": "#ffffff",
-            "error-container": "#ffdad6",
-            "on-error-container": "#93000a",
-            "primary-fixed": "#dae1ff",
-            "primary-fixed-dim": "#b3c5ff",
-            "on-primary-fixed": "#001849",
-            "on-primary-fixed-variant": "#003fa4",
-            "secondary-fixed": "#b7eaff",
-            "secondary-fixed-dim": "#4cd6ff",
-            "on-secondary-fixed": "#001f28",
-            "on-secondary-fixed-variant": "#004e60",
-            "tertiary-fixed": "#61ff97",
-            "tertiary-fixed-dim": "#32e27c",
-            "on-tertiary-fixed": "#00210c",
-            "on-tertiary-fixed-variant": "#005227",
-            "background": "#f9f9fc",
-            "on-background": "#1a1c1e",
-            "surface-variant": "#e2e2e5",
-            "surface-alt": "#F0F4F8",
-            "optimal-green": "#00D06C",
-            "sparkle-blue": "#00C0FF",
-            "alert-amber": "#F59E0B",
-            "warning-red": "#FF4B4B"
+          colors: {
+            brand: {
+              primary: '#0062FF',
+              emerald: '#00D06C',
+              cyan: '#00C0FF',
+              amber: '#F59E0B',
+              critical: '#EF4444'
+            },
+            slate: {
+              canvas: '#F8FAFC',
+              card: '#FFFFFF',
+              subtle: '#F1F5F9',
+              border: 'rgba(0, 0, 0, 0.06)',
+              textMain: '#0F172A',
+              textMuted: '#64748B',
+              textSub: '#94A3B8'
+            }
           },
-          "borderRadius": {
-            "DEFAULT": "0.25rem",
-            "lg": "0.5rem",
-            "xl": "0.75rem",
-            "2xl": "1rem",
-            "full": "9999px"
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            brand: ['Ubuntu', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
           },
-          "spacing": {
-            "gutter": "16px",
-            "container-padding": "20px",
-            "margin-lg": "48px",
-            "unit": "8px",
-            "margin-md": "24px",
-            "margin-sm": "16px"
-          },
-          "fontFamily": {
-            "body-lg": ["Inter", "sans-serif"],
-            "data-metric": ["Geist", "sans-serif"],
-            "headline-lg-mobile": ["Geist", "sans-serif"],
-            "display-lg": ["Geist", "sans-serif"],
-            "body-md": ["Inter", "sans-serif"],
-            "headline-lg": ["Geist", "sans-serif"],
-            "label-sm": ["Geist", "sans-serif"],
-            "brand": ["Ubuntu", "sans-serif"]
+          boxShadow: {
+            'tdf-card': '0 2px 8px -2px rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.02)',
+            'tdf-float': '0 12px 32px -4px rgba(0, 98, 255, 0.12), 0 4px 12px -2px rgba(0, 0, 0, 0.04)',
+            'tdf-knob': '0 3px 8px rgba(0, 98, 255, 0.3)'
           }
         }
       }
-    };
+    }
   </script>
 
   <style>
-    @layer base {
-      html, body {
-        width: 100%;
-        margin: 0;
-        padding: 0;
-        font-family: 'Inter', sans-serif;
-      }
-      body {
-        overscroll-behavior: none;
-        background-color: #0E121A;
-        display: flex;
-        justify-content: center;
-        min-height: 100vh;
-      }
-      .pb-safe {
-        padding-bottom: max(env(safe-area-inset-bottom, 0px), 8px);
-      }
-      .pt-safe {
-        padding-top: max(env(safe-area-inset-top, 0px), 0px);
-      }
+    /* Mobile App Shell & Smooth Scrolling */
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #090D14;
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      user-select: none;
+      -webkit-user-select: none;
     }
+    
     ::-webkit-scrollbar {
       display: none;
     }
-    
-    /* Device Shell Container (Mobile First, Universal on All Screens) */
-    .app-viewport {
+
+    .app-shell {
       width: 100%;
-      max-width: 440px;
+      max-width: 430px;
       min-height: 100vh;
-      background: #f9f9fc;
+      min-height: 100dvh;
+      background: #F8FAFC;
+      margin: 0 auto;
       display: flex;
       flex-direction: column;
       position: relative;
-      box-shadow: 0 0 50px rgba(0, 0, 0, 0.4);
-      border-left: 1px solid rgba(255, 255, 255, 0.08);
-      border-right: 1px solid rgba(255, 255, 255, 0.08);
       overflow-x: hidden;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.4);
     }
 
-    /* Tab Panes */
-    .tab-view {
+    .safe-top {
+      padding-top: max(env(safe-area-inset-top, 0px), 10px);
+    }
+    .safe-bottom {
+      padding-bottom: max(env(safe-area-inset-bottom, 0px), 12px);
+    }
+
+    /* Views Fade Animations */
+    .tab-pane {
       display: none;
-      animation: fadeIn 0.2s ease-out;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
     }
-    .tab-view.active {
+    .tab-pane.active {
       display: block;
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    /* Sub Views (Day vs Week) */
-    .sub-view {
-      display: none;
-      animation: fadeIn 0.2s ease-out;
-    }
-    .sub-view.active {
-      display: block;
+    /* Card Micro-interactions */
+    .tdf-card {
+      background: #FFFFFF;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 20px;
+      box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.04);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
+    .tdf-tap:active {
+      transform: scale(0.98);
     }
-    
-    /* Active Nav Styling */
-    .nav-btn.active {
+
+    /* Bottom Nav Styling */
+    .nav-tab.active {
       color: #0062FF !important;
-      font-weight: 700;
     }
-    .nav-btn.active .material-symbols-outlined {
-      font-variation-settings: 'FILL' 1;
-    }
-
-    /* Meal Themes (Dynamic Color Shift on Click) */
-    .meal-theme-breakfast {
-      background: linear-gradient(135deg, rgba(245, 158, 11, 0.05), rgba(255, 255, 255, 1)) !important;
-      border: 1.5px solid rgba(245, 158, 11, 0.35) !important;
-      box-shadow: 0 4px 20px rgba(245, 158, 11, 0.08) !important;
-    }
-    .meal-theme-lunch {
-      background: linear-gradient(135deg, rgba(0, 208, 108, 0.05), rgba(255, 255, 255, 1)) !important;
-      border: 1.5px solid rgba(0, 208, 108, 0.35) !important;
-      box-shadow: 0 4px 20px rgba(0, 208, 108, 0.08) !important;
-    }
-    .meal-theme-dinner {
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(255, 255, 255, 1)) !important;
-      border: 1.5px solid rgba(99, 102, 241, 0.35) !important;
-      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.08) !important;
+    .nav-tab.active .material-symbols-outlined {
+      font-variation-settings: 'FILL' 1, 'wght' 600;
     }
 
-    /* Modal Sheet */
-    .modal-overlay {
+    /* Slide Knob Mechanics */
+    .swipe-track {
+      position: relative;
+      touch-action: pan-y;
+      user-select: none;
+    }
+    .swipe-knob {
+      cursor: grab;
+      touch-action: none;
+      transition: transform 0.08s ease-out;
+    }
+    .swipe-knob:active {
+      cursor: grabbing;
+    }
+
+    /* Modal Animation */
+    .tdf-drawer-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.55);
-      backdrop-filter: blur(8px);
-      z-index: 100;
-      display: none;
-      align-items: flex-end;
-      justify-content: center;
+      background: rgba(15, 23, 42, 0.5);
+      backdrop-filter: blur(6px);
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
     }
-    .modal-sheet {
-      width: 100%;
-      max-width: 440px;
-      background: #ffffff;
-      border-top-left-radius: 24px;
-      border-top-right-radius: 24px;
-      padding: 24px 20px 36px 20px;
-      max-height: 85vh;
-      overflow-y: auto;
-      box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.15);
-      animation: slideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    .tdf-drawer-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
     }
-    @keyframes slideUp {
-      from { transform: translateY(100%); }
-      to { transform: translateY(0); }
+    .tdf-drawer {
+      transform: translateX(100%);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .tdf-drawer-overlay.open .tdf-drawer {
+      transform: translateX(0);
     }
   </style>
 </head>
-<body>
+<body class="flex justify-center items-center min-h-screen">
 
-  <div class="app-viewport">
-    
-    <!-- ─── TOP STICKY APP BAR (With DAY 4 / WEEK 3 & Mitosis Bio-Cell Logo) ─── -->
-    <header class="fixed top-0 max-w-[440px] w-full z-50 bg-surface/90 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(0,0,0,0.04)] border-b border-surface-container">
-      <div class="h-14 px-gutter flex items-center justify-between">
-        <div class="flex items-center gap-2 cursor-pointer" onclick="switchMainTab('flow')">
-          
-<svg width="28" height="28" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="shrink-0">
-  <defs>
-    <linearGradient id="tovelu-cyan-blue" x1="16" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#00C0FF" />
-      <stop offset="100%" stop-color="#0062FF" />
-    </linearGradient>
-    <linearGradient id="tovelu-mint-emerald" x1="84" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#00F5A0" />
-      <stop offset="100%" stop-color="#00D06C" />
-    </linearGradient>
-  </defs>
-  <path d="M50 16 C28 16, 16 32, 16 50 C16 68, 28 84, 50 84 C38 72, 34 58, 34 50 C34 42, 38 28, 50 16 Z" fill="url(#tovelu-cyan-blue)" />
-  <path d="M50 16 C72 16, 84 32, 84 50 C84 68, 72 84, 50 84 C62 72, 66 58, 66 50 C66 42, 62 28, 50 16 Z" fill="url(#tovelu-mint-emerald)" />
-  <circle cx="50" cy="50" r="8.5" fill="#00F5A0" />
-</svg>
+  <div class="app-shell flex flex-col justify-between">
 
-          <span class="text-on-surface font-brand text-[22px] tracking-tight font-bold">tovelu</span>
+    <!-- ==================== 1. TOP STICKY APP BAR (54px) ==================== -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/60 safe-top">
+      <div class="h-14 px-5 flex items-center justify-between">
+        
+        <!-- Left: Official Mitosis Bio-Cell SVG Logo & Wordmark -->
+        <div class="flex items-center gap-2 cursor-pointer tdf-tap" onclick="switchNav('flow')">
+          <svg width="26" height="26" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="shrink-0">
+            <defs>
+              <linearGradient id="tdf-cyan-blue" x1="16" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#00C0FF" />
+                <stop offset="100%" stop-color="#0062FF" />
+              </linearGradient>
+              <linearGradient id="tdf-mint-emerald" x1="84" y1="16" x2="50" y2="84" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#00F5A0" />
+                <stop offset="100%" stop-color="#00D06C" />
+              </linearGradient>
+            </defs>
+            <path d="M50 16 C28 16, 16 32, 16 50 C16 68, 28 84, 50 84 C38 72, 34 58, 34 50 C34 42, 38 28, 50 16 Z" fill="url(#tdf-cyan-blue)" />
+            <path d="M50 16 C72 16, 84 32, 84 50 C84 68, 72 84, 50 84 C62 72, 66 58, 66 50 C66 42, 62 28, 50 16 Z" fill="url(#tdf-mint-emerald)" />
+            <circle cx="50" cy="50" r="8.5" fill="#00F5A0" />
+          </svg>
+          <span class="font-brand text-[21px] font-bold text-slate-textMain tracking-tight">tovelu</span>
         </div>
-        <div class="flex items-center gap-3">
-          <div class="bg-primary/10 px-3 py-1 rounded-full border border-primary/20">
-            <span class="text-primary font-label-sm text-[11px] uppercase tracking-wider font-bold">DAY 4 / WEEK 3</span>
+
+        <!-- Right: Cycle Badge & Profile Avatar -->
+        <div class="flex items-center gap-2.5">
+          <div class="px-3 py-1 rounded-full bg-brand-primary/10 border border-brand-primary/20 flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-brand-primary animate-pulse"></span>
+            <span class="font-sans text-[11px] font-bold text-brand-primary tracking-wide uppercase">DAY 4 • WEEK 3</span>
           </div>
-          <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0 cursor-pointer shadow-sm shadow-primary/30" onclick="switchMainTab('you')">
-            <span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
-          </div>
+          <button onclick="switchNav('you')" class="w-8 h-8 rounded-full bg-slate-subtle border border-slate-border flex items-center justify-center text-slate-textMain hover:bg-slate-200 transition-colors tdf-tap">
+            <span class="material-symbols-outlined text-[18px]">person</span>
+          </button>
         </div>
+
       </div>
     </header>
 
-    <!-- ─── MAIN CONTENT CONTAINER ─── -->
-    <main class="flex-1 w-full pt-14 pb-20 bg-surface">
+    <!-- ==================== MAIN VIEWPORT FEED ==================== -->
+    <main class="flex-1 overflow-y-auto px-4 pt-3 pb-24 space-y-4">
 
-      <!-- ==================== 1. TAB: FLOW (DAY & WEEK) ==================== -->
-      <div id="pane-flow" class="tab-view active">
+      <!-- ############################################################## -->
+      <!-- TAB 1: FLOW (DAILY INTAKE & WEEKLY DIRECTIVES)                -->
+      <!-- ############################################################## -->
+      <div id="pane-flow" class="tab-pane active space-y-4">
         
-        <!-- Segmented Day | Week Switcher (Stitch Pill Style) -->
-        <div class="flex justify-center pt-5 pb-1 px-container-padding">
-          <div class="inline-flex p-1 bg-surface-container-low rounded-lg border border-outline-variant/20 shadow-sm w-full max-w-[280px]">
-            <button id="btn-sub-day" class="flex-1 py-1.5 rounded-md bg-surface-container-lowest shadow-sm text-primary font-label-sm text-[12px] uppercase tracking-wider font-semibold transition-all" onclick="switchFlowSubView('day')">
-              Day
+        <!-- Segmented Day vs Week Control -->
+        <div class="flex justify-center">
+          <div class="p-1 bg-slate-subtle border border-slate-border rounded-xl flex items-center w-full max-w-[280px]">
+            <button id="tab-sub-day" onclick="switchFlowSub('day')" class="flex-1 py-1.5 rounded-lg bg-white shadow-sm text-brand-primary font-semibold text-[12px] uppercase tracking-wider transition-all">
+              Day Intake
             </button>
-            <button id="btn-sub-week" class="flex-1 py-1.5 rounded-md text-on-surface-variant font-label-sm text-[12px] uppercase tracking-wider hover:bg-surface-container-lowest/50 transition-all" onclick="switchFlowSubView('week')">
-              Week
+            <button id="tab-sub-week" onclick="switchFlowSub('week')" class="flex-1 py-1.5 rounded-lg text-slate-textMuted font-semibold text-[12px] uppercase tracking-wider transition-all">
+              Week Protocol
             </button>
           </div>
         </div>
 
-        <!-- 1A. SUB-VIEW: DAY (FLOW DASHBOARD) -->
-        <div id="subview-day" class="sub-view active">
-          <div class="px-container-padding py-6"><div class="flex flex-col w-full gap-margin-sm">
-<!-- Greeting & Status -->
-<div class="flex flex-col gap-2 pt-2 px-2">
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-1.5 px-3 py-1 bg-optimal-green/10 rounded-full border border-optimal-green/20">
-<div class="w-1.5 h-1.5 rounded-full bg-optimal-green animate-pulse"></div>
-<span class="font-label-sm text-label-sm text-tertiary uppercase tracking-wider">Protocol Active • Day 18</span>
-</div>
-<div class="px-3 py-1 bg-primary-fixed rounded-full">
-<span class="font-label-sm text-label-sm text-on-primary-fixed uppercase">75% Done</span>
-</div>
-</div>
-<div class="mt-2">
-<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Good morning, Ajay <span class="inline-block animate-bounce" style="animation-duration: 2s;">👋</span></h1>
-<p class="font-body-md text-body-md text-on-surface-variant mt-1">Thursday, 28 Aug 2026 • Targeting <span class="text-primary font-semibold">Energy Stabilization &amp; Gut Healing</span></p>
-</div>
-</div>
-<!-- Calorie Meter Card -->
-<div class="bg-surface-container-lowest rounded-xl p-5 shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-surface-container flex justify-between items-center relative overflow-hidden">
-<div class="absolute -right-10 -top-10 w-32 h-32 bg-primary/5 rounded-full blur-2xl pointer-events-none"></div>
-<div class="flex flex-col gap-4 z-10">
-<div class="flex flex-col">
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Today's Calorie Intake</span>
-<div class="flex items-baseline gap-1">
-<span class="font-data-metric text-data-metric text-on-surface">1,323</span>
-<span class="font-body-md text-body-md text-on-surface-variant font-medium">/ 1,500 kcal</span>
-</div>
-</div>
-<div class="flex flex-wrap items-center gap-2">
-<div class="flex items-center gap-1 px-2 py-1 bg-optimal-green/10 rounded-md">
-<span class="material-symbols-outlined text-[14px] text-optimal-green">check</span>
-<span class="font-label-sm text-label-sm text-on-tertiary-fixed-variant">Flat Glycemic Curve</span>
-</div>
-<div class="flex items-center gap-1 px-2 py-1 bg-optimal-green/10 rounded-md">
-<span class="font-label-sm text-label-sm text-on-tertiary-fixed-variant">0% Seed Oils</span>
-</div>
-</div>
-</div>
-<div class="relative w-24 h-24 shrink-0 flex items-center justify-center z-10">
-<svg class="w-full h-full -rotate-90 transform" viewBox="0 0 100 100">
-<circle class="text-surface-container-high" cx="50" cy="50" fill="transparent" r="40" stroke="currentColor" stroke-width="8"></circle>
-<circle class="text-primary" cx="50" cy="50" fill="transparent" r="40" stroke="currentColor" stroke-dasharray="251.2" stroke-dashoffset="30.14" stroke-linecap="round" stroke-width="8"></circle>
-</svg>
-<div class="absolute inset-0 flex items-center justify-center">
-<span class="font-data-metric text-[22px] font-bold text-primary">88%</span>
-</div>
-</div>
-</div>
-<!-- Meals & Food Intelligence -->
-<div id="meal-intelligence-card" class="bg-surface-container-lowest rounded-xl p-5 transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-surface-container flex flex-col gap-5">
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-outline">restaurant</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Meals &amp; Food</span>
-</div>
-<span class="font-label-sm text-label-sm text-tertiary bg-tertiary-container/10 px-2 py-0.5 rounded border border-tertiary/20">0% Seed Oils Goal</span>
-</div>
-<!-- Tabs -->
-<div class="flex bg-surface-container-low rounded-lg p-1">
-<button class="flex-1 py-1.5 px-2 bg-surface-container-lowest rounded shadow-sm flex items-center justify-center gap-1.5 transition-all">
-<span class="text-[14px]">🍳</span>
-<span class="font-label-sm text-label-sm text-on-surface">Breakfast</span>
-</button>
-<button class="flex-1 py-1.5 px-2 rounded flex items-center justify-center gap-1.5 text-on-surface-variant transition-all hover:bg-surface-container-lowest/50">
-<span class="text-[14px] opacity-70">🥗</span>
-<span class="font-label-sm text-label-sm">Lunch</span>
-</button>
-<button class="flex-1 py-1.5 px-2 rounded flex items-center justify-center gap-1.5 text-on-surface-variant transition-all hover:bg-surface-container-lowest/50">
-<span class="text-[14px] opacity-70">🍲</span>
-<span class="font-label-sm text-label-sm">Dinner</span>
-</button>
-</div>
-<!-- Active Meal Target -->
-<div class="flex flex-col gap-3">
-<div class="flex justify-between items-end">
-<div>
-<span id="meal-active-window" class="font-label-sm text-label-sm text-alert-amber uppercase tracking-wider block mb-1">Active Window • 08:30 AM</span>
-<h3 id="meal-target-title" class="font-headline-lg-mobile text-[20px] leading-[28px] font-semibold text-on-surface">Breakfast Target</h3>
-</div>
-<div class="text-right">
-<span id="meal-target-kcal" class="font-label-sm text-label-sm text-primary block font-semibold">420 kcal Target</span>
-</div>
-</div>
-<!-- Macros -->
-<div class="flex justify-between bg-surface-alt rounded-lg p-3 border border-surface-container">
-<div class="flex flex-col items-center">
-<span class="font-label-sm text-[10px] text-error mb-0.5 flex items-center gap-1">🥩 Protein</span>
-<span id="meal-macro-protein" class="font-data-metric text-[18px] text-on-surface">35g</span>
-</div>
-<div class="w-px bg-outline-variant/30"></div>
-<div class="flex flex-col items-center">
-<span class="font-label-sm text-[10px] text-alert-amber mb-0.5 flex items-center gap-1">🍠 Carbs</span>
-<span id="meal-macro-carbs" class="font-data-metric text-[18px] text-on-surface">15g</span>
-</div>
-<div class="w-px bg-outline-variant/30"></div>
-<div class="flex flex-col items-center">
-<span class="font-label-sm text-[10px] text-alert-amber mb-0.5 flex items-center gap-1">🧈 Fat</span>
-<span id="meal-macro-fat" class="font-data-metric text-[18px] text-on-surface">12g</span>
-</div>
-<div class="w-px bg-outline-variant/30"></div>
-<div class="flex flex-col items-center">
-<span class="font-label-sm text-[10px] text-optimal-green mb-0.5 flex items-center gap-1">🥦 Vitamin</span>
-<span class="font-data-metric text-[18px] text-on-surface">100%</span>
-</div>
-</div>
-</div>
-<!-- Actions -->
-<div class="flex gap-2">
-<button class="flex-1 flex flex-col items-center justify-center gap-1 py-3 bg-surface-container-low hover:bg-surface-container rounded-lg transition-colors border border-outline-variant/20">
-<span class="material-symbols-outlined text-on-surface-variant">photo_camera</span>
-<span class="font-label-sm text-[10px] text-on-surface-variant">Scan / Photo</span>
-</button>
-<button class="flex-1 flex flex-col items-center justify-center gap-1 py-3 bg-surface-container-low hover:bg-surface-container rounded-lg transition-colors border border-outline-variant/20">
-<span class="material-symbols-outlined text-on-surface-variant">edit_note</span>
-<span class="font-label-sm text-[10px] text-on-surface-variant">Manually</span>
-</button>
-<button class="flex-1 flex flex-col items-center justify-center gap-1 py-3 bg-primary-container/10 hover:bg-primary-container/20 rounded-lg transition-colors border border-primary/20 text-primary">
-<span class="material-symbols-outlined">auto_awesome</span>
-<span class="font-label-sm text-[10px]">Ask AI</span>
-</button>
-</div>
-</div>
+        <!-- SUBVIEW 1A: DAY -->
+        <div id="flow-sub-day" class="space-y-4">
+          
+          <!-- Calorie & Daily Portion Meter Hero Card -->
+          <div class="tdf-card p-5 relative overflow-hidden">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-brand-primary text-[20px]">nutrition</span>
+                <span class="text-[11px] font-bold uppercase tracking-wider text-slate-textMuted">Daily Calorie & Portion Target</span>
+              </div>
+              <span class="text-[11px] font-bold text-brand-emerald bg-brand-emerald/10 px-2 py-0.5 rounded-full">On Track</span>
+            </div>
 
-<!-- Today's Tasks (Swipe to Check System) -->
-<div class="bg-surface-container-lowest rounded-xl p-5 shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-surface-container flex flex-col gap-4">
-  <div class="flex items-center justify-between">
-    <div class="flex items-center gap-2">
-      <span class="material-symbols-outlined text-optimal-green">check_circle</span>
-      <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Today's Tasks</span>
-    </div>
-    <span id="tasks-done-badge" class="font-label-sm text-label-sm text-primary bg-primary/10 px-2.5 py-0.5 rounded-full border border-primary/20 font-bold">3 / 4 Done</span>
-  </div>
+            <div class="flex items-center justify-between py-1">
+              <div>
+                <div class="flex items-baseline gap-1">
+                  <span class="font-sans text-[34px] font-bold text-slate-textMain tracking-tight">420</span>
+                  <span class="text-[14px] font-semibold text-slate-textMuted">/ 2,100 kcal</span>
+                </div>
+                <p class="text-[12px] text-slate-textMuted mt-0.5">Optimized for metabolic deficit & insulin clearance</p>
+              </div>
 
-  <div class="flex flex-col gap-3" id="swipe-tasks-container">
-    
-    <!-- Task 1 (Completed) -->
-    <div class="task-swipe-card completed relative flex items-center p-3.5 bg-surface-container-lowest rounded-xl border border-optimal-green/30 overflow-hidden select-none" data-completed="true" data-id="1">
-      <div class="task-swipe-fill absolute inset-0 bg-optimal-green/10 pointer-events-none" style="width: 100%;"></div>
-      <div class="task-swipe-knob absolute left-2 top-2 bottom-2 w-11 rounded-lg bg-optimal-green text-white flex items-center justify-center shadow-md z-10">
-        <span class="material-symbols-outlined text-[20px]">wb_sunny</span>
-      </div>
-      <div class="task-content ml-14 mr-10 flex flex-col min-w-0 z-10">
-        <span class="font-label-sm text-[10px] text-tertiary uppercase tracking-wider font-semibold">07:00 AM • Morning</span>
-        <span class="font-body-md text-[14px] leading-tight text-on-surface font-semibold line-clamp-1">Sit under sunlight for 15 minutes</span>
-        <span class="font-body-md text-[12px] text-on-surface-variant line-clamp-1 mt-0.5">Synchronizes morning cortisol & circadian rhythm</span>
-      </div>
-      <div class="task-end-slot absolute right-3 w-7 h-7 rounded-full bg-optimal-green flex items-center justify-center text-white shadow-sm z-10">
-        <span class="material-symbols-outlined text-[16px]">check</span>
-      </div>
-    </div>
+              <!-- Radial Gauge Mini -->
+              <div class="relative w-16 h-16 shrink-0 flex items-center justify-center">
+                <svg class="w-full h-full -rotate-90" viewBox="0 0 36 36">
+                  <circle cx="18" cy="18" r="14.5" fill="none" stroke="#E2E8F0" stroke-width="3" />
+                  <circle cx="18" cy="18" r="14.5" fill="none" stroke="#0062FF" stroke-width="3" stroke-dasharray="91" stroke-dashoffset="72" stroke-linecap="round" />
+                </svg>
+                <span class="absolute text-[12px] font-bold text-slate-textMain">20%</span>
+              </div>
+            </div>
 
-    <!-- Task 2 (Completed) -->
-    <div class="task-swipe-card completed relative flex items-center p-3.5 bg-surface-container-lowest rounded-xl border border-optimal-green/30 overflow-hidden select-none" data-completed="true" data-id="2">
-      <div class="task-swipe-fill absolute inset-0 bg-optimal-green/10 pointer-events-none" style="width: 100%;"></div>
-      <div class="task-swipe-knob absolute left-2 top-2 bottom-2 w-11 rounded-lg bg-optimal-green text-white flex items-center justify-center shadow-md z-10">
-        <span class="material-symbols-outlined text-[20px]">water_drop</span>
-      </div>
-      <div class="task-content ml-14 mr-10 flex flex-col min-w-0 z-10">
-        <span class="font-label-sm text-[10px] text-tertiary uppercase tracking-wider font-semibold">07:15 AM • Hydration</span>
-        <span class="font-body-md text-[14px] leading-tight text-on-surface font-semibold line-clamp-1">Drink a glass of mineral water</span>
-        <span class="font-body-md text-[12px] text-on-surface-variant line-clamp-1 mt-0.5">Hydrates cellular osmolyte channels</span>
-      </div>
-      <div class="task-end-slot absolute right-3 w-7 h-7 rounded-full bg-optimal-green flex items-center justify-center text-white shadow-sm z-10">
-        <span class="material-symbols-outlined text-[16px]">check</span>
-      </div>
-    </div>
+            <!-- Macros Bar -->
+            <div class="grid grid-cols-3 gap-2 mt-4 pt-3 border-t border-slate-100">
+              <div class="p-2 bg-slate-subtle/80 rounded-xl text-center">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-textMuted block">Protein</span>
+                <span class="text-[15px] font-bold text-slate-textMain">35<span class="text-[11px] text-slate-textMuted font-normal">/145g</span></span>
+              </div>
+              <div class="p-2 bg-slate-subtle/80 rounded-xl text-center">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-textMuted block">Carbs</span>
+                <span class="text-[15px] font-bold text-slate-textMain">15<span class="text-[11px] text-slate-textMuted font-normal">/80g</span></span>
+              </div>
+              <div class="p-2 bg-slate-subtle/80 rounded-xl text-center">
+                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-textMuted block">Healthy Fats</span>
+                <span class="text-[15px] font-bold text-slate-textMain">12<span class="text-[11px] text-slate-textMuted font-normal">/65g</span></span>
+              </div>
+            </div>
+          </div>
 
-    <!-- Task 3 (Completed) -->
-    <div class="task-swipe-card completed relative flex items-center p-3.5 bg-surface-container-lowest rounded-xl border border-optimal-green/30 overflow-hidden select-none" data-completed="true" data-id="3">
-      <div class="task-swipe-fill absolute inset-0 bg-optimal-green/10 pointer-events-none" style="width: 100%;"></div>
-      <div class="task-swipe-knob absolute left-2 top-2 bottom-2 w-11 rounded-lg bg-optimal-green text-white flex items-center justify-center shadow-md z-10">
-        <span class="material-symbols-outlined text-[20px]">directions_walk</span>
-      </div>
-      <div class="task-content ml-14 mr-10 flex flex-col min-w-0 z-10">
-        <span class="font-label-sm text-[10px] text-tertiary uppercase tracking-wider font-semibold">12:30 PM • Postprandial</span>
-        <span class="font-body-md text-[14px] leading-tight text-on-surface font-semibold line-clamp-1">Take a 12-minute walk after lunch</span>
-        <span class="font-body-md text-[12px] text-on-surface-variant line-clamp-1 mt-0.5">Blunts post-meal glucose rise by 24%</span>
-      </div>
-      <div class="task-end-slot absolute right-3 w-7 h-7 rounded-full bg-optimal-green flex items-center justify-center text-white shadow-sm z-10">
-        <span class="material-symbols-outlined text-[16px]">check</span>
-      </div>
-    </div>
+          <!-- Active Meal Intelligence Card -->
+          <div id="tdf-meal-card" class="tdf-card p-5 border-l-4 border-l-brand-amber transition-all space-y-4">
+            
+            <!-- Meal Selector Tabs -->
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-1.5 p-1 bg-slate-subtle rounded-xl text-[12px]">
+                <button onclick="setMealMode('breakfast', this)" class="px-3 py-1 rounded-lg bg-white shadow-xs font-bold text-brand-amber transition-all">Breakfast</button>
+                <button onclick="setMealMode('lunch', this)" class="px-3 py-1 rounded-lg text-slate-textMuted font-medium hover:text-slate-textMain transition-all">Lunch</button>
+                <button onclick="setMealMode('dinner', this)" class="px-3 py-1 rounded-lg text-slate-textMuted font-medium hover:text-slate-textMain transition-all">Dinner</button>
+              </div>
+              <span id="meal-window-badge" class="text-[11px] font-bold uppercase tracking-wider text-brand-amber bg-brand-amber/10 px-2 py-0.5 rounded-md">
+                08:30 AM Target
+              </span>
+            </div>
 
-    <!-- Task 4 (Active Swipeable Knob Track) -->
-    <div class="task-swipe-card relative flex items-center p-3.5 bg-surface-container-low rounded-xl border border-outline-variant/30 overflow-hidden select-none touch-pan-y" data-completed="false" data-id="4">
-      <div class="task-swipe-fill absolute inset-0 bg-optimal-green/15 pointer-events-none transition-all duration-100" style="width: 0%;"></div>
-      
-      <!-- Draggable Knob with Bedtime Screen Icon -->
-      <div class="task-swipe-knob absolute left-2 top-2 bottom-2 w-11 rounded-lg bg-primary text-white flex items-center justify-center shadow-md z-20 cursor-grab active:cursor-grabbing transition-transform duration-75">
-        <span class="material-symbols-outlined text-[20px]">devices_off</span>
-      </div>
+            <!-- Target Header -->
+            <div>
+              <h3 id="meal-title" class="font-sans text-[17px] font-bold text-slate-textMain">Savory High-Protein Morning Target</h3>
+              <p id="meal-desc" class="text-[12px] text-slate-textMuted mt-0.5">Front-load 35g protein within 60 mins of waking to lock insulin sensitivity.</p>
+            </div>
 
-      <div class="task-content ml-14 mr-10 flex flex-col min-w-0 z-10 pointer-events-none">
-        <span class="font-label-sm text-[10px] text-primary uppercase tracking-wider font-semibold">10:00 PM • 60m before bed</span>
-        <span class="font-body-md text-[14px] leading-tight text-on-surface font-semibold line-clamp-1">Turn off bright screens 1 hour before bed</span>
-        <span class="font-body-md text-[12px] text-on-surface-variant line-clamp-1 mt-0.5">Protects natural melatonin surge for deep sleep</span>
-      </div>
+            <!-- 3 Clinical Food Action Buttons -->
+            <div class="grid grid-cols-3 gap-2">
+              <button onclick="openFoodSheet('scan')" class="p-3 bg-brand-primary/5 hover:bg-brand-primary/10 border border-brand-primary/20 rounded-xl flex flex-col items-center gap-1.5 text-brand-primary transition-colors tdf-tap">
+                <span class="material-symbols-outlined text-[22px]">photo_camera</span>
+                <span class="text-[11px] font-bold uppercase tracking-wider">Scan / Photo</span>
+              </button>
+              <button onclick="openFoodSheet('manual')" class="p-3 bg-slate-subtle hover:bg-slate-200/70 border border-slate-border rounded-xl flex flex-col items-center gap-1.5 text-slate-textMain transition-colors tdf-tap">
+                <span class="material-symbols-outlined text-[22px]">edit_note</span>
+                <span class="text-[11px] font-bold uppercase tracking-wider">Manually</span>
+              </button>
+              <button onclick="openFoodSheet('ai')" class="p-3 bg-brand-emerald/5 hover:bg-brand-emerald/10 border border-brand-emerald/20 rounded-xl flex flex-col items-center gap-1.5 text-brand-emerald transition-colors tdf-tap">
+                <span class="material-symbols-outlined text-[22px]">smart_toy</span>
+                <span class="text-[11px] font-bold uppercase tracking-wider">Ask AI</span>
+              </button>
+            </div>
+          </div>
 
-      <!-- End Target Destination Slot -->
-      <div class="task-end-slot absolute right-2 top-2 bottom-2 w-10 rounded-lg border-2 border-dashed border-outline-variant/60 flex items-center justify-center text-outline-variant z-10 pointer-events-none">
-        <span class="material-symbols-outlined text-[18px]">east</span>
-      </div>
-    </div>
+          <!-- Today's Tasks (Tactile Swipe-to-Check) -->
+          <div class="tdf-card p-5 space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-brand-emerald text-[20px]">check_circle</span>
+                <span class="text-[11px] font-bold uppercase tracking-wider text-slate-textMuted">Today's Habits</span>
+              </div>
+              <span id="habits-badge" class="text-[11px] font-bold text-brand-primary bg-brand-primary/10 border border-brand-primary/20 px-2 py-0.5 rounded-full">
+                3 / 4 Done
+              </span>
+            </div>
 
-  </div>
-</div>
+            <!-- Task List -->
+            <div class="space-y-2.5">
+              
+              <!-- Habit 1 (Done) -->
+              <div class="p-3 bg-slate-subtle/70 rounded-xl flex items-center justify-between border border-brand-emerald/20">
+                <div class="flex items-center gap-3">
+                  <div class="w-9 h-9 rounded-lg bg-brand-emerald text-white flex items-center justify-center shrink-0 shadow-xs">
+                    <span class="material-symbols-outlined text-[18px]">wb_sunny</span>
+                  </div>
+                  <div>
+                    <span class="text-[10px] font-bold text-brand-emerald uppercase tracking-wider">07:00 AM • Morning</span>
+                    <h4 class="text-[13.5px] font-semibold text-slate-textMain leading-tight">Sit under sunlight for 15 mins</h4>
+                  </div>
+                </div>
+                <div class="w-6 h-6 rounded-full bg-brand-emerald flex items-center justify-center text-white shrink-0">
+                  <span class="material-symbols-outlined text-[14px]">check</span>
+                </div>
+              </div>
 
-<!-- Clinical Note -->
-<div class="relative bg-gradient-to-br from-surface-alt to-surface-container-low rounded-xl p-5 shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-primary/10 overflow-hidden mb-4 flex flex-col gap-3">
-<div class="absolute top-0 left-0 w-1.5 h-full bg-primary rounded-l-xl"></div>
-<div class="absolute -right-8 -top-8 w-32 h-32 bg-primary-fixed/30 rounded-full blur-3xl pointer-events-none"></div>
-<div class="flex justify-between items-start relative z-10">
-<div class="flex items-center gap-1">
-<span class="text-[14px]">💡</span>
-<span class="font-label-sm text-[10px] text-primary font-bold uppercase tracking-widest">Thais Clinical Note</span>
-</div>
-<span class="font-label-sm text-[10px] text-on-primary bg-primary px-2 py-0.5 rounded-full">Metabolic Focus</span>
-</div>
-<div class="relative z-10 flex flex-col gap-2 mt-1">
-<h3 class="font-headline-lg-mobile text-[18px] leading-snug font-bold text-on-surface">The 90-Minute Caffeine Delay Rule</h3>
-<p class="font-body-md text-[14px] leading-relaxed text-on-surface-variant">Delaying your first cup of coffee or tea by 90 minutes allows your brain's adenosine levels to clear naturally, completely preventing the common 2:00 PM afternoon energy crash.</p>
-</div>
-</div>
-</div></div>
+              <!-- Habit 2 (Done) -->
+              <div class="p-3 bg-slate-subtle/70 rounded-xl flex items-center justify-between border border-brand-emerald/20">
+                <div class="flex items-center gap-3">
+                  <div class="w-9 h-9 rounded-lg bg-brand-emerald text-white flex items-center justify-center shrink-0 shadow-xs">
+                    <span class="material-symbols-outlined text-[18px]">water_drop</span>
+                  </div>
+                  <div>
+                    <span class="text-[10px] font-bold text-brand-emerald uppercase tracking-wider">07:15 AM • Hydration</span>
+                    <h4 class="text-[13.5px] font-semibold text-slate-textMain leading-tight">Drink mineralized water with salt</h4>
+                  </div>
+                </div>
+                <div class="w-6 h-6 rounded-full bg-brand-emerald flex items-center justify-center text-white shrink-0">
+                  <span class="material-symbols-outlined text-[14px]">check</span>
+                </div>
+              </div>
+
+              <!-- Habit 3 (Done) -->
+              <div class="p-3 bg-slate-subtle/70 rounded-xl flex items-center justify-between border border-brand-emerald/20">
+                <div class="flex items-center gap-3">
+                  <div class="w-9 h-9 rounded-lg bg-brand-emerald text-white flex items-center justify-center shrink-0 shadow-xs">
+                    <span class="material-symbols-outlined text-[18px]">directions_walk</span>
+                  </div>
+                  <div>
+                    <span class="text-[10px] font-bold text-brand-emerald uppercase tracking-wider">12:30 PM • Postprandial</span>
+                    <h4 class="text-[13.5px] font-semibold text-slate-textMain leading-tight">12-minute post-meal walk</h4>
+                  </div>
+                </div>
+                <div class="w-6 h-6 rounded-full bg-brand-emerald flex items-center justify-center text-white shrink-0">
+                  <span class="material-symbols-outlined text-[14px]">check</span>
+                </div>
+              </div>
+
+              <!-- Habit 4: Interactive Draggable Swipe Track -->
+              <div id="swipe-task-active" class="swipe-track relative p-3 bg-white rounded-xl border border-slate-200 overflow-hidden flex items-center justify-between select-none shadow-xs" data-completed="false">
+                <div id="swipe-progress-fill" class="absolute inset-0 bg-brand-emerald/15 pointer-events-none transition-all duration-75" style="width: 0%;"></div>
+                
+                <!-- Draggable Knob -->
+                <div id="swipe-knob" class="swipe-knob absolute left-2 top-2 bottom-2 w-11 rounded-lg bg-brand-primary text-white flex items-center justify-center shadow-tdf-knob z-20">
+                  <span class="material-symbols-outlined text-[20px]">devices_off</span>
+                </div>
+
+                <div class="ml-14 mr-10 z-10 pointer-events-none">
+                  <span class="text-[10px] font-bold text-brand-primary uppercase tracking-wider">10:00 PM • Bedtime</span>
+                  <h4 class="text-[13.5px] font-semibold text-slate-textMain leading-tight">Melatonin bright screen cutoff</h4>
+                </div>
+
+                <div class="w-8 h-8 rounded-lg border border-dashed border-slate-300 flex items-center justify-center text-slate-400 shrink-0 z-10 pointer-events-none">
+                  <span class="material-symbols-outlined text-[16px]">east</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
         </div>
 
-        <!-- 1B. SUB-VIEW: WEEK (WEEKLY SCORECARD + WHAT TO DO / AVOID / CHALLENGES) -->
-        <div id="subview-week" class="sub-view">
-          <div class="px-container-padding py-6"><div class="flex flex-col w-full gap-margin-sm">
-<div class="flex flex-col gap-unit px-margin-sm py-margin-sm bg-surface-container-lowest rounded-xl shadow-sm">
-<div class="flex items-center justify-between">
-<h1 class="text-on-surface font-headline-lg-mobile text-headline-lg-mobile">Weekly Scorecard</h1>
-<span class="bg-primary/10 text-primary font-label-sm text-label-sm px-2 py-1 rounded-full uppercase tracking-wider">Week 3</span>
-</div>
-<div class="flex items-center gap-2">
-<div class="w-2 h-2 rounded-full bg-optimal-green shadow-[0_0_8px_rgba(0,208,108,0.5)]"></div>
-<span class="text-on-surface-variant font-body-md text-body-md">91% Compliance</span>
-</div>
-<p class="text-on-surface-variant font-body-md text-sm mt-2 border-l-2 border-primary pl-3 bg-surface-alt py-2 rounded-r-lg">Focus: Insulin Resensitization &amp; Fat Adaptation</p>
-</div>
-<div class="grid grid-cols-2 gap-margin-sm">
-<div class="col-span-2 flex flex-col gap-2 p-container-padding bg-primary text-on-primary rounded-xl shadow-md relative overflow-hidden">
-<div class="absolute -right-10 -top-10 w-40 h-40 bg-primary-fixed/20 rounded-full blur-2xl"></div>
-<div class="absolute -left-10 -bottom-10 w-32 h-32 bg-secondary/20 rounded-full blur-xl"></div>
-<span class="font-label-sm text-label-sm uppercase opacity-80 relative z-10">Protocol Execution Index</span>
-<div class="flex items-end gap-3 relative z-10">
-<span class="font-data-metric text-display-lg text-display-lg">87.5%</span>
-<div class="flex items-center text-tertiary-fixed gap-1 bg-tertiary-fixed/10 px-2 py-1 rounded-md mb-2">
-<span class="material-symbols-outlined text-[16px]">trending_up</span>
-<span class="font-label-sm text-label-sm">+6.4% vs Wk 2</span>
-</div>
-</div>
-<div class="mt-4 flex items-center gap-1 relative z-10 w-full h-8">
-<div class="flex-1 flex flex-col gap-1 items-center group">
-<div class="w-full h-2 rounded-full bg-optimal-green/80 transition-all duration-300 group-hover:h-3"></div>
-<span class="text-[10px] font-label-sm text-primary-fixed/70">M</span>
-</div>
-<div class="flex-1 flex flex-col gap-1 items-center group">
-<div class="w-full h-2 rounded-full bg-optimal-green/80 transition-all duration-300 group-hover:h-3"></div>
-<span class="text-[10px] font-label-sm text-primary-fixed/70">T</span>
-</div>
-<div class="flex-1 flex flex-col gap-1 items-center group">
-<div class="w-full h-2 rounded-full bg-optimal-green/60 transition-all duration-300 group-hover:h-3"></div>
-<span class="text-[10px] font-label-sm text-primary-fixed/70">W</span>
-</div>
-<div class="flex-1 flex flex-col gap-1 items-center group relative">
-<div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-surface text-primary text-[10px] font-bold px-1 rounded shadow-sm opacity-0 group-hover:opacity-100 transition-opacity">75%</div>
-<div class="w-full h-2 rounded-full bg-alert-amber transition-all duration-300 group-hover:h-3 relative overflow-hidden">
-<div class="absolute inset-0 bg-white/30 animate-[pulse_2s_ease-in-out_infinite]"></div>
-</div>
-<span class="text-[10px] font-label-sm text-white font-bold">T</span>
-</div>
-<div class="flex-1 flex flex-col gap-1 items-center group">
-<div class="w-full h-2 rounded-full bg-primary-fixed/30 border border-primary-fixed/20 border-dashed"></div>
-<span class="text-[10px] font-label-sm text-primary-fixed/40">F</span>
-</div>
-<div class="flex-1 flex flex-col gap-1 items-center group">
-<div class="w-full h-2 rounded-full bg-primary-fixed/30 border border-primary-fixed/20 border-dashed"></div>
-<span class="text-[10px] font-label-sm text-primary-fixed/40">S</span>
-</div>
-<div class="flex-1 flex flex-col gap-1 items-center group">
-<div class="w-full h-2 rounded-full bg-primary-fixed/30 border border-primary-fixed/20 border-dashed"></div>
-<span class="text-[10px] font-label-sm text-primary-fixed/40">S</span>
-</div>
-</div>
-</div>
-<div class="col-span-2 flex items-center gap-3 p-4 bg-tertiary-container/10 rounded-xl">
-<div class="w-10 h-10 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">eco</span>
-</div>
-<div class="flex flex-col">
-<span class="text-tertiary font-label-sm text-label-sm uppercase">Biological Gain</span>
-<span class="text-on-surface font-body-md font-semibold">Projected Epigenetic Gain: -0.3 Yrs</span>
-</div>
-</div>
-</div>
-<div class="flex flex-col gap-3 bg-surface-container-lowest p-container-padding rounded-xl shadow-sm mt-2">
-<h3 class="text-on-surface font-headline-lg-mobile text-lg font-bold mb-1">Protocol Matrix</h3>
-<div class="flex flex-col gap-3">
-<div class="flex items-center justify-between p-3 bg-surface-alt rounded-lg">
-<div class="flex items-center gap-3">
-<div class="w-8 h-8 rounded-full bg-primary-fixed text-primary flex items-center justify-center">
-<span class="material-symbols-outlined text-[18px]">set_meal</span>
-</div>
-<div class="flex flex-col">
-<span class="text-on-surface font-body-md text-sm font-semibold">Average Protein</span>
-<span class="text-on-surface-variant font-label-sm text-[10px]">118g/day</span>
-</div>
-</div>
-<span class="text-optimal-green font-data-metric text-lg">100%</span>
-</div>
-<div class="flex items-center justify-between p-3 bg-surface-alt rounded-lg">
-<div class="flex items-center gap-3">
-<div class="w-8 h-8 rounded-full bg-optimal-green/20 text-tertiary-container flex items-center justify-center">
-<span class="material-symbols-outlined text-[18px]">opacity</span>
-</div>
-<div class="flex flex-col">
-<span class="text-on-surface font-body-md text-sm font-semibold">Seed Oils</span>
-<span class="text-on-surface-variant font-label-sm text-[10px]">0g total</span>
-</div>
-</div>
-<span class="text-optimal-green font-data-metric text-lg">100%</span>
-</div>
-<div class="flex items-center justify-between p-3 bg-surface-alt rounded-lg">
-<div class="flex items-center gap-3">
-<div class="w-8 h-8 rounded-full bg-secondary-fixed text-secondary flex items-center justify-center">
-<span class="material-symbols-outlined text-[18px]">directions_walk</span>
-</div>
-<div class="flex flex-col">
-<span class="text-on-surface font-body-md text-sm font-semibold">Post-Meal Walks</span>
-<span class="text-on-surface-variant font-label-sm text-[10px]">15m minimum</span>
-</div>
-</div>
-<div class="flex items-center gap-1">
-<span class="text-on-surface font-data-metric text-lg">7<span class="text-sm text-outline">/7</span></span>
-</div>
-</div>
-<div class="flex items-center justify-between p-3 bg-surface-alt rounded-lg">
-<div class="flex items-center gap-3">
-<div class="w-8 h-8 rounded-full bg-alert-amber/20 text-alert-amber flex items-center justify-center">
-<span class="material-symbols-outlined text-[18px]">local_cafe</span>
-</div>
-<div class="flex flex-col">
-<span class="text-on-surface font-body-md text-sm font-semibold">Caffeine Cutoff</span>
-<span class="text-on-surface-variant font-label-sm text-[10px]">2PM target</span>
-</div>
-</div>
-<div class="flex items-center gap-1">
-<span class="text-on-surface font-data-metric text-lg">7<span class="text-sm text-outline">/7</span></span>
-</div>
-</div>
-</div>
-</div>
+        <!-- SUBVIEW 1B: WEEK PROTOCOL -->
+        <div id="flow-sub-week" class="space-y-4" style="display: none;">
+          
+          <!-- Adherence Card -->
+          <div class="tdf-card p-5 flex items-center justify-between">
+            <div>
+              <span class="text-[11px] font-bold uppercase tracking-wider text-slate-textMuted block mb-0.5">Week 3 Compliance</span>
+              <h3 class="text-[24px] font-bold text-slate-textMain">92% Protocol On-Track</h3>
+              <p class="text-[12px] text-slate-textMuted">Biological age reduction trajectory confirmed</p>
+            </div>
+            <div class="w-12 h-12 rounded-full bg-brand-emerald/10 text-brand-emerald flex items-center justify-center font-bold text-[16px]">
+              92%
+            </div>
+          </div>
 
-<!-- ==================== 1. WHAT TO DO (Clinical Directives) ==================== -->
-<div class="flex flex-col gap-3 bg-surface-container-lowest p-container-padding rounded-xl shadow-sm mt-3 border border-optimal-green/20 relative overflow-hidden">
-  <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-optimal-green"></div>
-  <div class="flex items-center justify-between">
-    <div class="flex items-center gap-2">
-      <div class="w-8 h-8 rounded-full bg-optimal-green/10 flex items-center justify-center text-optimal-green shrink-0">
-        <span class="material-symbols-outlined text-[20px]">check_circle</span>
-      </div>
-      <h3 class="text-on-surface font-headline-lg-mobile text-[17px] font-bold">WHAT TO DO</h3>
-    </div>
-    <span class="font-label-sm text-[10px] text-optimal-green bg-optimal-green/10 px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Week 3 Focus</span>
-  </div>
+          <!-- 1. WHAT TO DO (Clinical Directives) -->
+          <div class="tdf-card p-5 border-l-4 border-l-brand-emerald space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-brand-emerald text-[20px]">task_alt</span>
+                <h3 class="text-[15px] font-bold text-slate-textMain uppercase tracking-wider">WHAT TO DO</h3>
+              </div>
+              <span class="text-[10px] font-bold text-brand-emerald bg-brand-emerald/10 px-2 py-0.5 rounded-full">Week 3 Directives</span>
+            </div>
 
-  <div class="flex flex-col gap-2.5 mt-1">
-    <div class="flex items-start gap-3 p-3 bg-surface-alt rounded-lg">
-      <span class="text-optimal-green font-bold text-[14px] mt-0.5">01</span>
-      <div class="flex flex-col">
-        <span class="text-on-surface font-body-md text-[14px] font-semibold">Front-Load 35g+ Protein at Breakfast</span>
-        <span class="text-on-surface-variant font-body-md text-[12px]">Prioritize pasture-raised eggs, grass-fed paneer, or wild fish within 60 mins of waking to steady glucose.</span>
-      </div>
-    </div>
+            <div class="space-y-2">
+              <div class="p-3 bg-slate-subtle/70 rounded-xl flex items-start gap-2.5">
+                <span class="text-[12px] font-bold text-brand-emerald mt-0.5">01</span>
+                <div>
+                  <h4 class="text-[13.5px] font-semibold text-slate-textMain">Front-Load 35g+ Protein at Breakfast</h4>
+                  <p class="text-[12px] text-slate-textMuted">Pasture eggs or paneer within 60 mins of waking to steady glucose receptors.</p>
+                </div>
+              </div>
+              <div class="p-3 bg-slate-subtle/70 rounded-xl flex items-start gap-2.5">
+                <span class="text-[12px] font-bold text-brand-emerald mt-0.5">02</span>
+                <div>
+                  <h4 class="text-[13.5px] font-semibold text-slate-textMain">12-Minute Post-Meal Walk</h4>
+                  <p class="text-[12px] text-slate-textMuted">Activates non-insulin GLUT4 transport, lowering glucose spikes by 24%.</p>
+                </div>
+              </div>
+              <div class="p-3 bg-slate-subtle/70 rounded-xl flex items-start gap-2.5">
+                <span class="text-[12px] font-bold text-brand-emerald mt-0.5">03</span>
+                <div>
+                  <h4 class="text-[13.5px] font-semibold text-slate-textMain">90-Minute Morning Caffeine Delay</h4>
+                  <p class="text-[12px] text-slate-textMuted">Permits natural adenosine clearance to eliminate the 2:00 PM energy crash.</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
-    <div class="flex items-start gap-3 p-3 bg-surface-alt rounded-lg">
-      <span class="text-optimal-green font-bold text-[14px] mt-0.5">02</span>
-      <div class="flex flex-col">
-        <span class="text-on-surface font-body-md text-[14px] font-semibold">12-Minute Post-Meal Walk</span>
-        <span class="text-on-surface-variant font-body-md text-[12px]">Activate GLUT4 receptors without insulin to blunt postprandial glucose spike by up to 24%.</span>
-      </div>
-    </div>
+          <!-- 2. WHAT TO AVOID (Metabolic Toxins) -->
+          <div class="tdf-card p-5 border-l-4 border-l-brand-critical space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-brand-critical text-[20px]">block</span>
+                <h3 class="text-[15px] font-bold text-slate-textMain uppercase tracking-wider">WHAT TO AVOID</h3>
+              </div>
+              <span class="text-[10px] font-bold text-brand-critical bg-brand-critical/10 px-2 py-0.5 rounded-full">Zero Tolerance</span>
+            </div>
 
-    <div class="flex items-start gap-3 p-3 bg-surface-alt rounded-lg">
-      <span class="text-optimal-green font-bold text-[14px] mt-0.5">03</span>
-      <div class="flex flex-col">
-        <span class="text-on-surface font-body-md text-[14px] font-semibold">90-Minute Morning Caffeine Delay</span>
-        <span class="text-on-surface-variant font-body-md text-[12px]">Allow natural adenosine clearance upon waking to eliminate the common 2:00 PM energy crash.</span>
-      </div>
-    </div>
-  </div>
-</div>
+            <div class="space-y-2">
+              <div class="p-3 bg-slate-subtle/70 rounded-xl flex items-start gap-2.5">
+                <span class="text-[12px] font-bold text-brand-critical mt-0.5">✕</span>
+                <div>
+                  <h4 class="text-[13.5px] font-semibold text-slate-textMain">0% Industrial Seed Oils</h4>
+                  <p class="text-[12px] text-slate-textMuted">Zero canola, palm, or sunflower oils. Use pure A2 desi ghee or cold-pressed olive oil.</p>
+                </div>
+              </div>
+              <div class="p-3 bg-slate-subtle/70 rounded-xl flex items-start gap-2.5">
+                <span class="text-[12px] font-bold text-brand-critical mt-0.5">✕</span>
+                <div>
+                  <h4 class="text-[13.5px] font-semibold text-slate-textMain">No Liquid Fructose & Syrups</h4>
+                  <p class="text-[12px] text-slate-textMuted">Protects hepatic mitochondria against de novo lipogenesis and fatty liver.</p>
+                </div>
+              </div>
+              <div class="p-3 bg-slate-subtle/70 rounded-xl flex items-start gap-2.5">
+                <span class="text-[12px] font-bold text-brand-critical mt-0.5">✕</span>
+                <div>
+                  <h4 class="text-[13.5px] font-semibold text-slate-textMain">No Caffeine Past 2:00 PM</h4>
+                  <p class="text-[12px] text-slate-textMuted">8-hour half-life disrupts deep restorative REM sleep architecture.</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
-<!-- ==================== 2. WHAT TO AVOID (Metabolic Toxins) ==================== -->
-<div class="flex flex-col gap-3 bg-surface-container-lowest p-container-padding rounded-xl shadow-sm mt-3 border border-error/20 relative overflow-hidden">
-  <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-error"></div>
-  <div class="flex items-center justify-between">
-    <div class="flex items-center gap-2">
-      <div class="w-8 h-8 rounded-full bg-error/10 flex items-center justify-center text-error shrink-0">
-        <span class="material-symbols-outlined text-[20px]">block</span>
-      </div>
-      <h3 class="text-on-surface font-headline-lg-mobile text-[17px] font-bold">WHAT TO AVOID</h3>
-    </div>
-    <span class="font-label-sm text-[10px] text-error bg-error/10 px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Zero Tolerance</span>
-  </div>
+          <!-- 3. CHALLENGES & SOLUTIONS -->
+          <div class="tdf-card p-5 border-l-4 border-l-brand-primary space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-brand-primary text-[20px]">psychology</span>
+                <h3 class="text-[15px] font-bold text-slate-textMain uppercase tracking-wider">CHALLENGES & SOLUTIONS</h3>
+              </div>
+              <span class="text-[10px] font-bold text-brand-primary bg-brand-primary/10 px-2 py-0.5 rounded-full">Protocol Hacks</span>
+            </div>
 
-  <div class="flex flex-col gap-2.5 mt-1">
-    <div class="flex items-start gap-3 p-3 bg-surface-alt rounded-lg">
-      <span class="text-error font-bold text-[14px] mt-0.5">✕</span>
-      <div class="flex flex-col">
-        <span class="text-on-surface font-body-md text-[14px] font-semibold">0% Industrial Seed Oils</span>
-        <span class="text-on-surface-variant font-body-md text-[12px]">Zero canola, soybean, sunflower, or palm oils. Use pure A2 desi ghee, cold-pressed olive oil, or butter.</span>
-      </div>
-    </div>
+            <div class="space-y-3">
+              <div class="p-3 bg-slate-subtle/70 rounded-xl space-y-1.5">
+                <div class="flex items-center gap-1.5 text-[13px] font-bold text-slate-textMain">
+                  <span>⚠️</span> Challenge: 4:00 PM Dopamine & Sugar Cravings
+                </div>
+                <div class="p-2 bg-brand-emerald/10 rounded-lg text-[12px] text-slate-textMain">
+                  <strong class="text-brand-emerald">Clinical Fix:</strong> 1 glass cold water with 1 tbsp raw ACV + pinch of Himalayan salt, or 10 soaked walnuts.
+                </div>
+              </div>
+              <div class="p-3 bg-slate-subtle/70 rounded-xl space-y-1.5">
+                <div class="flex items-center gap-1.5 text-[13px] font-bold text-slate-textMain">
+                  <span>⚠️</span> Challenge: Dining Out Seed Oil Exposure
+                </div>
+                <div class="p-2 bg-brand-emerald/10 rounded-lg text-[12px] text-slate-textMain">
+                  <strong class="text-brand-emerald">Clinical Fix:</strong> Request tandoori or steamed dishes basted only in pure butter or desi ghee.
+                </div>
+              </div>
+            </div>
+          </div>
 
-    <div class="flex items-start gap-3 p-3 bg-surface-alt rounded-lg">
-      <span class="text-error font-bold text-[14px] mt-0.5">✕</span>
-      <div class="flex flex-col">
-        <span class="text-on-surface font-body-md text-[14px] font-semibold">No Liquid Fructose & Refined Sugars</span>
-        <span class="text-on-surface-variant font-body-md text-[12px]">Avoid fruit juices, sodas, and sweet syrups that overburden hepatic mitochondria and trigger fatty liver.</span>
-      </div>
-    </div>
-
-    <div class="flex items-start gap-3 p-3 bg-surface-alt rounded-lg">
-      <span class="text-error font-bold text-[14px] mt-0.5">✕</span>
-      <div class="flex flex-col">
-        <span class="text-on-surface font-body-md text-[14px] font-semibold">Caffeine Past 2:00 PM</span>
-        <span class="text-on-surface-variant font-body-md text-[12px]">Caffeine has an 8-hour half-life. Afternoon consumption severely fragments deep REM sleep architecture.</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ==================== 3. CHALLENGES & SOLUTIONS (Behavioral Mastery) ==================== -->
-<div class="flex flex-col gap-3 bg-surface-container-lowest p-container-padding rounded-xl shadow-sm mt-3 border border-primary/20 relative overflow-hidden">
-  <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-primary"></div>
-  <div class="flex items-center justify-between">
-    <div class="flex items-center gap-2">
-      <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
-        <span class="material-symbols-outlined text-[20px]">psychology</span>
-      </div>
-      <h3 class="text-on-surface font-headline-lg-mobile text-[17px] font-bold">CHALLENGES & SOLUTIONS</h3>
-    </div>
-    <span class="font-label-sm text-[10px] text-primary bg-primary/10 px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Protocol Hacks</span>
-  </div>
-
-  <div class="flex flex-col gap-3 mt-1">
-    <!-- Challenge 1 -->
-    <div class="p-3.5 bg-surface-alt rounded-lg border border-surface-container flex flex-col gap-2">
-      <div class="flex items-center gap-2">
-        <span class="text-[14px]">⚠️</span>
-        <span class="text-on-surface font-body-md text-[13.5px] font-bold">Challenge: Late Afternoon Sugar Cravings (4:00 PM)</span>
-      </div>
-      <div class="p-2.5 bg-optimal-green/5 border border-optimal-green/20 rounded-md text-[12px] text-on-surface">
-        <span class="font-bold text-optimal-green">💡 Clinical Solution:</span> Drink 1 glass of cold water with 1 tbsp raw apple cider vinegar + pinch of pink salt, or eat 10 soaked walnuts. Blunts dopamine dips instantly.
-      </div>
-    </div>
-
-    <!-- Challenge 2 -->
-    <div class="p-3.5 bg-surface-alt rounded-lg border border-surface-container flex flex-col gap-2">
-      <div class="flex items-center gap-2">
-        <span class="text-[14px]">⚠️</span>
-        <span class="text-on-surface font-body-md text-[13.5px] font-bold">Challenge: Dining Out & Social Meals With Seed Oils</span>
-      </div>
-      <div class="p-2.5 bg-optimal-green/5 border border-optimal-green/20 rounded-md text-[12px] text-on-surface">
-        <span class="font-bold text-optimal-green">💡 Clinical Solution:</span> Request tandoori, grilled, or steamed preparations asked to be basted in pure butter or ghee. Use Tovelu Scan on the restaurant menu!
-      </div>
-    </div>
-
-    <!-- Challenge 3 -->
-    <div class="p-3.5 bg-surface-alt rounded-lg border border-surface-container flex flex-col gap-2">
-      <div class="flex items-center gap-2">
-        <span class="text-[14px]">⚠️</span>
-        <span class="text-on-surface font-body-md text-[13.5px] font-bold">Challenge: Skipping Morning Sunlight on Busy Days</span>
-      </div>
-      <div class="p-2.5 bg-optimal-green/5 border border-optimal-green/20 rounded-md text-[12px] text-on-surface">
-        <span class="font-bold text-optimal-green">💡 Clinical Solution:</span> Combine your 15-min sunlight with your morning hydration walk. Step outside without sunglasses for direct photons on retinal ganglion cells.
-      </div>
-    </div>
-  </div>
-</div>
-
-<button class="mt-4 w-full flex items-center justify-center gap-2 bg-primary text-on-primary font-label-sm text-label-sm uppercase tracking-wider py-4 rounded-xl shadow-md active:scale-[0.98] transition-transform">
-<span class="material-symbols-outlined text-[18px]">download</span>
-    Download Clinical Report (PDF)
-  </button>
-</div></div>
         </div>
 
       </div>
 
-      <!-- ==================== 2. TAB: HEALTH (HEALTH TELEMETRY) ==================== -->
-      <div id="pane-health" class="tab-view">
-        <div class="px-container-padding py-6"><div class="flex flex-col w-full gap-margin-md pb-margin-lg">
-<!-- DNAm Epigenetic Clock Section -->
-<section class="flex flex-col gap-margin-sm">
-<div class="flex items-center justify-between px-unit">
-  <div>
-    <h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface font-bold">Clinical Telemetry</h1>
-    <div class="text-[12px] text-on-surface-variant font-medium mt-0.5">Active Cycle: <span id="current-active-week-label" class="text-primary font-bold">August 2026 • Week 3</span></div>
-  </div>
-  <button onclick="openChooseWeekDrawer()" class="flex items-center gap-1.5 px-3 py-1.5 bg-primary/10 hover:bg-primary/20 text-primary rounded-full border border-primary/20 transition-colors shadow-sm cursor-pointer">
-    <span class="material-symbols-outlined text-[16px]">calendar_month</span>
-    <span class="font-label-sm text-[11px] uppercase tracking-wider font-bold">Choose</span>
-  </button>
-</div>
-<!-- Epigenetic Clock Card -->
-<div class="bg-surface-container-lowest rounded-xl p-container-padding shadow-sm flex flex-col gap-4 relative overflow-hidden">
-<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-optimal-green to-primary"></div>
-<div class="flex flex-col gap-1">
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">DNAm Epigenetic Clock</span>
-<div class="flex items-baseline gap-2">
-<span class="font-display-lg text-display-lg text-on-surface">20.8</span>
-<span class="font-body-lg text-body-lg text-on-surface-variant">Yrs</span>
-</div>
-<div class="flex items-center gap-2 mt-1">
-<span class="material-symbols-outlined text-optimal-green text-[18px]">arrow_downward</span>
-<span class="font-label-sm text-label-sm text-optimal-green">4.2 Years Younger than Chronological</span>
-</div>
-</div>
-<!-- Mini Stats -->
-<div class="flex gap-4">
-<div class="flex flex-col">
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase">Aging Pace</span>
-<span class="font-data-metric text-data-metric text-on-surface">0.82x</span>
-</div>
-</div>
-<!-- Trajectory Chart (SVG) -->
-<div class="w-full h-24 mt-4 relative">
-<span class="absolute top-0 right-0 font-label-sm text-label-sm text-primary">Day 90 Target: 19.6 Yrs</span>
-<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 100 40">
-<!-- Grid lines -->
-<line stroke="#f0f0f3" stroke-width="0.5" x1="0" x2="100" y1="10" y2="10"></line>
-<line stroke="#f0f0f3" stroke-width="0.5" x1="0" x2="100" y1="30" y2="30"></line>
-<!-- Chronological baseline -->
-<line stroke="#c2c6d8" stroke-dasharray="2 2" stroke-width="1" x1="0" x2="100" y1="5" y2="5"></line>
-<!-- Biological Age Curve -->
-<path d="M0,5 Q20,10 40,20 T100,35" fill="none" stroke="#0050cb" stroke-width="2"></path>
-<circle cx="40" cy="20" fill="#00D06C" r="2"></circle>
-</svg>
-</div>
-</div>
-</section>
-<!-- Biomarker Panels Section -->
-<section class="flex flex-col gap-margin-sm">
-<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface px-unit">Biomarker Panels</h2>
-<div class="flex flex-col gap-gutter">
-<!-- 1. Endocrine & Glucose -->
-<div class="bg-surface-container-lowest rounded-xl p-container-padding shadow-sm flex flex-col gap-4">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-full bg-surface-alt flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-primary">bloodtype</span>
-</div>
-<div class="flex flex-col">
-<h3 class="font-body-lg text-body-lg text-on-surface">Endocrine &amp; Glucose</h3>
-<span class="font-label-sm text-label-sm text-optimal-green uppercase">Optimal</span>
-</div>
-</div>
-<div class="grid grid-cols-2 gap-4 mt-2">
-<div class="flex flex-col bg-surface-container-low p-3 rounded-lg">
-<span class="font-label-sm text-label-sm text-on-surface-variant">Fasting Glucose</span>
-<span class="font-data-metric text-data-metric text-on-surface">84 <span class="text-[12px] font-normal text-on-surface-variant">mg/dL</span></span>
-</div>
-<div class="flex flex-col bg-surface-container-low p-3 rounded-lg">
-<span class="font-label-sm text-label-sm text-on-surface-variant">HOMA-IR Score</span>
-<span class="font-data-metric text-data-metric text-on-surface">0.82</span>
-</div>
-</div>
-<div class="bg-primary/5 p-4 rounded-lg mt-2">
-<h4 class="font-label-sm text-label-sm text-primary uppercase mb-1">Doctor's Rationale</h4>
-<p class="font-body-md text-body-md text-on-surface-variant">Insulin sensitivity has resensitized by 34% through 35g+ morning protein pacing and 12-min postprandial walks blunting GLUT4 glucose spikes.</p>
-</div>
-</div>
-<!-- 2. Cardiovascular Profile -->
-<div class="bg-surface-container-lowest rounded-xl p-container-padding shadow-sm flex flex-col gap-4">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-full bg-surface-alt flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-primary">favorite</span>
-</div>
-<div class="flex flex-col">
-<h3 class="font-body-lg text-body-lg text-on-surface">Cardiovascular Profile</h3>
-<span class="font-label-sm text-label-sm text-optimal-green uppercase">Optimal</span>
-</div>
-</div>
-<div class="grid grid-cols-2 gap-4 mt-2">
-<div class="flex flex-col bg-surface-container-low p-3 rounded-lg">
-<span class="font-label-sm text-label-sm text-on-surface-variant">Trig / HDL Ratio</span>
-<span class="font-data-metric text-data-metric text-on-surface">1.12</span>
-</div>
-<div class="flex flex-col bg-surface-container-low p-3 rounded-lg">
-<span class="font-label-sm text-label-sm text-on-surface-variant">Blood Pressure</span>
-<span class="font-data-metric text-data-metric text-on-surface">118<span class="text-[16px] text-on-surface-variant">/76</span></span>
-</div>
-</div>
-<div class="bg-primary/5 p-4 rounded-lg mt-2">
-<h4 class="font-label-sm text-label-sm text-primary uppercase mb-1">Doctor's Rationale</h4>
-<p class="font-body-md text-body-md text-on-surface-variant">Triglyceride-to-HDL ratio of 1.12 confirms absence of small dense LDL particles. Zero trans-fats and high potassium intake protect arterial elasticity.</p>
-</div>
-</div>
-<!-- 3. Hepatic Detox -->
-<div class="bg-surface-container-lowest rounded-xl p-container-padding shadow-sm flex flex-col gap-4">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-full bg-surface-alt flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-primary">science</span>
-</div>
-<div class="flex flex-col">
-<h3 class="font-body-lg text-body-lg text-on-surface">Hepatic Detox</h3>
-<span class="font-label-sm text-label-sm text-optimal-green uppercase">94% Cleared</span>
-</div>
-</div>
-<div class="grid grid-cols-2 gap-4 mt-2">
-<div class="flex flex-col bg-surface-container-low p-3 rounded-lg">
-<span class="font-label-sm text-label-sm text-on-surface-variant">ALT / AST Ratio</span>
-<span class="font-data-metric text-data-metric text-on-surface">0.94</span>
-</div>
-<div class="flex flex-col bg-surface-container-low p-3 rounded-lg">
-<span class="font-label-sm text-label-sm text-on-surface-variant">Seed Oil Status</span>
-<span class="font-data-metric text-data-metric text-on-surface">0%</span>
-</div>
-</div>
-<div class="bg-primary/5 p-4 rounded-lg mt-2">
-<h4 class="font-label-sm text-label-sm text-primary uppercase mb-1">Doctor's Rationale</h4>
-<p class="font-body-md text-body-md text-on-surface-variant">Complete elimination of sunflower, canola, and palm oils prevents hepatic lipid peroxidation and de novo lipogenesis.</p>
-</div>
-</div>
-<!-- 4. Gut Microbiome -->
-<div class="bg-surface-container-lowest rounded-xl p-container-padding shadow-sm flex flex-col gap-4">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-full bg-surface-alt flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-primary">spa</span>
-</div>
-<div class="flex flex-col">
-<h3 class="font-body-lg text-body-lg text-on-surface">Gut Microbiome</h3>
-<span class="font-label-sm text-label-sm text-optimal-green uppercase">Optimal</span>
-</div>
-</div>
-<div class="grid grid-cols-2 gap-4 mt-2">
-<div class="flex flex-col bg-surface-container-low p-3 rounded-lg">
-<span class="font-label-sm text-label-sm text-on-surface-variant">hs-CRP Marker</span>
-<span class="font-data-metric text-data-metric text-on-surface">&lt; 0.5</span>
-</div>
-<div class="flex flex-col bg-surface-container-low p-3 rounded-lg">
-<span class="font-label-sm text-label-sm text-on-surface-variant">Daily Fiber</span>
-<span class="font-data-metric text-data-metric text-on-surface">38g</span>
-</div>
-</div>
-<div class="bg-primary/5 p-4 rounded-lg mt-2">
-<h4 class="font-label-sm text-label-sm text-primary uppercase mb-1">Doctor's Rationale</h4>
-<p class="font-body-md text-body-md text-on-surface-variant">High prebiotic polyphenol intake and zero liquid sugars foster Akkermansia muciniphila growth, maintaining tight intestinal junction integrity.</p>
-</div>
-</div>
-</div>
-</section>
+      <!-- ############################################################## -->
+      <!-- TAB 2: HEALTH (CLINICAL TELEMETRY & 42-BIOMARKERS)           -->
+      <!-- ############################################################## -->
+      <div id="pane-health" class="tab-pane space-y-4">
+        
+        <!-- Header with Choose Week Drawer Trigger -->
+        <div class="flex items-center justify-between px-1">
+          <div>
+            <h2 class="text-[20px] font-bold text-slate-textMain tracking-tight">Clinical Telemetry</h2>
+            <p class="text-[12px] text-slate-textMuted">Cycle: <span id="health-cycle-label" class="text-brand-primary font-bold">August 2026 • Week 3</span></p>
+          </div>
+          <button onclick="toggleTimelineDrawer(true)" class="px-3 py-1.5 rounded-full bg-brand-primary/10 hover:bg-brand-primary/20 text-brand-primary border border-brand-primary/20 flex items-center gap-1.5 transition-colors tdf-tap">
+            <span class="material-symbols-outlined text-[16px]">calendar_month</span>
+            <span class="text-[11px] font-bold uppercase tracking-wider">Choose</span>
+          </button>
+        </div>
 
-      <!-- 5. Renal & Cellular Health -->
-      <div class="bg-surface-container-lowest rounded-xl p-container-padding shadow-sm flex flex-col gap-4">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-surface-alt flex items-center justify-center shrink-0">
-            <span class="material-symbols-outlined text-primary">water_ph</span>
+        <!-- DNAm Epigenetic Clock Hero Card -->
+        <div class="tdf-card p-5 relative overflow-hidden bg-gradient-to-br from-white to-slate-subtle">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-slate-textMuted">DNAm Epigenetic Clock</span>
+            <span class="text-[11px] font-bold text-brand-emerald bg-brand-emerald/10 px-2 py-0.5 rounded-full">Optimal Velocity</span>
           </div>
-          <div class="flex flex-col">
-            <h3 class="font-body-lg text-body-lg text-on-surface font-semibold">Renal &amp; Cellular Filtration</h3>
-            <span class="font-label-sm text-label-sm text-optimal-green uppercase font-semibold">Optimal</span>
-          </div>
-        </div>
-        <div class="grid grid-cols-2 gap-4 mt-1">
-          <div class="flex flex-col bg-surface-container-low p-3 rounded-lg">
-            <span class="font-label-sm text-label-sm text-on-surface-variant">eGFR (Filtration)</span>
-            <span class="font-data-metric text-data-metric text-on-surface">> 90 <span class="text-[12px] font-normal text-on-surface-variant">mL/min</span></span>
-          </div>
-          <div class="flex flex-col bg-surface-container-low p-3 rounded-lg">
-            <span class="font-label-sm text-label-sm text-on-surface-variant">Serum Creatinine</span>
-            <span class="font-data-metric text-data-metric text-on-surface">0.85 <span class="text-[12px] font-normal text-on-surface-variant">mg/dL</span></span>
-          </div>
-        </div>
-        <div class="bg-primary/5 p-4 rounded-lg">
-          <h4 class="font-label-sm text-label-sm text-primary uppercase mb-1 font-bold">Doctor's Rationale</h4>
-          <p class="font-body-md text-[13px] text-on-surface-variant">Glomerular filtration rate is preserved. Blood pressure optimization and mineralized hydration prevent renal microvascular shear stress.</p>
-        </div>
-      </div>
 
-      <!-- 6. Micronutrient & Cellular Hormones -->
-      <div class="bg-surface-container-lowest rounded-xl p-container-padding shadow-sm flex flex-col gap-4">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-surface-alt flex items-center justify-center shrink-0">
-            <span class="material-symbols-outlined text-primary">vital_signs</span>
+          <div class="flex items-baseline gap-2">
+            <span class="text-[44px] font-bold text-slate-textMain tracking-tight">20.8</span>
+            <span class="text-[18px] font-semibold text-slate-textMuted">Years Bio-Age</span>
           </div>
-          <div class="flex flex-col">
-            <h3 class="font-body-lg text-body-lg text-on-surface font-semibold">Micronutrient &amp; Hormones</h3>
-            <span class="font-label-sm text-label-sm text-optimal-green uppercase font-semibold">Optimal</span>
-          </div>
-        </div>
-        <div class="grid grid-cols-2 gap-4 mt-1">
-          <div class="flex flex-col bg-surface-container-low p-3 rounded-lg">
-            <span class="font-label-sm text-label-sm text-on-surface-variant">Vitamin D3</span>
-            <span class="font-data-metric text-data-metric text-on-surface">62 <span class="text-[12px] font-normal text-on-surface-variant">ng/mL</span></span>
-          </div>
-          <div class="flex flex-col bg-surface-container-low p-3 rounded-lg">
-            <span class="font-label-sm text-label-sm text-on-surface-variant">Vitamin B12</span>
-            <span class="font-data-metric text-data-metric text-on-surface">780 <span class="text-[12px] font-normal text-on-surface-variant">pg/mL</span></span>
-          </div>
-        </div>
-        <div class="bg-primary/5 p-4 rounded-lg">
-          <h4 class="font-label-sm text-label-sm text-primary uppercase mb-1 font-bold">Doctor's Rationale</h4>
-          <p class="font-body-md text-[13px] text-on-surface-variant">Vitamin D3 at 62 ng/mL drives optimal genetic transcription, immune modulation, and bone remineralization with healthy morning sunlight.</p>
-        </div>
-      </div>
 
-      <!-- 7. Wearable Autonomic Index -->
-      <div class="bg-surface-container-lowest rounded-xl p-container-padding shadow-sm flex flex-col gap-4">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-surface-alt flex items-center justify-center shrink-0">
-            <span class="material-symbols-outlined text-primary">monitor_heart</span>
+          <div class="flex items-center gap-2 mt-1 text-[13px] font-semibold text-brand-emerald">
+            <span class="material-symbols-outlined text-[18px]">trending_down</span>
+            <span>4.2 Years Younger than Chronological (25.0 Yrs)</span>
           </div>
-          <div class="flex flex-col">
-            <h3 class="font-body-lg text-body-lg text-on-surface font-semibold">Wearable Autonomic Index</h3>
-            <span class="font-label-sm text-label-sm text-optimal-green uppercase font-semibold">Synchronized</span>
-          </div>
-        </div>
-        <div class="grid grid-cols-3 gap-2 mt-1">
-          <div class="flex flex-col bg-surface-container-low p-2.5 rounded-lg text-center">
-            <span class="font-label-sm text-[10px] text-on-surface-variant uppercase">Resting HR</span>
-            <span class="font-data-metric text-[18px] text-on-surface">54 <span class="text-[10px] font-normal text-on-surface-variant">bpm</span></span>
-          </div>
-          <div class="flex flex-col bg-surface-container-low p-2.5 rounded-lg text-center">
-            <span class="font-label-sm text-[10px] text-on-surface-variant uppercase">HRV (SDNN)</span>
-            <span class="font-data-metric text-[18px] text-on-surface">78 <span class="text-[10px] font-normal text-on-surface-variant">ms</span></span>
-          </div>
-          <div class="flex flex-col bg-surface-container-low p-2.5 rounded-lg text-center">
-            <span class="font-label-sm text-[10px] text-on-surface-variant uppercase">Deep Sleep</span>
-            <span class="font-data-metric text-[18px] text-on-surface">1h 48m</span>
+
+          <div class="grid grid-cols-2 gap-3 mt-4 pt-3 border-t border-slate-200/80">
+            <div class="p-2.5 bg-white rounded-xl border border-slate-100">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-slate-textMuted block">Aging Velocity</span>
+              <span class="text-[16px] font-bold text-slate-textMain">0.82x <span class="text-[11px] text-brand-emerald font-semibold">(Pace of Aging)</span></span>
+            </div>
+            <div class="p-2.5 bg-white rounded-xl border border-slate-100">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-slate-textMuted block">90-Day Target</span>
+              <span class="text-[16px] font-bold text-brand-primary">19.6 Yrs</span>
+            </div>
           </div>
         </div>
-        <div class="bg-primary/5 p-4 rounded-lg">
-          <h4 class="font-label-sm text-label-sm text-primary uppercase mb-1 font-bold">Doctor's Rationale</h4>
-          <p class="font-body-md text-[13px] text-on-surface-variant">High heart rate variability (78 ms) indicates strong parasympathetic nervous tone, rapid autonomic recovery, and low systemic stress.</p>
+
+        <!-- 7 Clinical Biomarker Panels -->
+        <div class="space-y-3">
+          
+          <!-- Panel 1: Endocrine -->
+          <div class="tdf-card p-4 space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg bg-brand-primary/10 text-brand-primary flex items-center justify-center">
+                  <span class="material-symbols-outlined text-[18px]">bloodtype</span>
+                </div>
+                <h4 class="text-[14.5px] font-bold text-slate-textMain">Endocrine & Glucose</h4>
+              </div>
+              <span class="text-[11px] font-bold text-brand-emerald bg-brand-emerald/10 px-2 py-0.5 rounded-full">Optimal</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+              <div class="p-2 bg-slate-subtle/80 rounded-lg">
+                <span class="text-[10px] text-slate-textMuted block">Fasting Glucose</span>
+                <span class="text-[15px] font-bold text-slate-textMain">84 <span class="text-[11px] font-normal text-slate-textMuted">mg/dL</span></span>
+              </div>
+              <div class="p-2 bg-slate-subtle/80 rounded-lg">
+                <span class="text-[10px] text-slate-textMuted block">HOMA-IR Score</span>
+                <span class="text-[15px] font-bold text-slate-textMain">0.82</span>
+              </div>
+            </div>
+            <p class="text-[11.5px] text-slate-textMuted leading-relaxed">Doctor's Rationale: Insulin sensitivity restored via morning protein pacing and 12-min GLUT4 post-meal walks.</p>
+          </div>
+
+          <!-- Panel 2: Cardiovascular -->
+          <div class="tdf-card p-4 space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg bg-brand-primary/10 text-brand-primary flex items-center justify-center">
+                  <span class="material-symbols-outlined text-[18px]">favorite</span>
+                </div>
+                <h4 class="text-[14.5px] font-bold text-slate-textMain">Cardiovascular Profile</h4>
+              </div>
+              <span class="text-[11px] font-bold text-brand-emerald bg-brand-emerald/10 px-2 py-0.5 rounded-full">Optimal</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+              <div class="p-2 bg-slate-subtle/80 rounded-lg">
+                <span class="text-[10px] text-slate-textMuted block">Trig / HDL Ratio</span>
+                <span class="text-[15px] font-bold text-slate-textMain">1.12</span>
+              </div>
+              <div class="p-2 bg-slate-subtle/80 rounded-lg">
+                <span class="text-[10px] text-slate-textMuted block">Blood Pressure</span>
+                <span class="text-[15px] font-bold text-slate-textMain">118<span class="text-[11px] font-normal text-slate-textMuted">/76</span></span>
+              </div>
+            </div>
+            <p class="text-[11.5px] text-slate-textMuted leading-relaxed">Doctor's Rationale: Absence of small dense LDL atherogenic particles. Arterial compliance fully preserved.</p>
+          </div>
+
+          <!-- Panel 3: Hepatic -->
+          <div class="tdf-card p-4 space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg bg-brand-primary/10 text-brand-primary flex items-center justify-center">
+                  <span class="material-symbols-outlined text-[18px]">science</span>
+                </div>
+                <h4 class="text-[14.5px] font-bold text-slate-textMain">Hepatic Detox</h4>
+              </div>
+              <span class="text-[11px] font-bold text-brand-emerald bg-brand-emerald/10 px-2 py-0.5 rounded-full">94% Cleared</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+              <div class="p-2 bg-slate-subtle/80 rounded-lg">
+                <span class="text-[10px] text-slate-textMuted block">ALT / AST Ratio</span>
+                <span class="text-[15px] font-bold text-slate-textMain">0.94</span>
+              </div>
+              <div class="p-2 bg-slate-subtle/80 rounded-lg">
+                <span class="text-[10px] text-slate-textMuted block">Seed Oil Status</span>
+                <span class="text-[15px] font-bold text-slate-textMain">0%</span>
+              </div>
+            </div>
+            <p class="text-[11.5px] text-slate-textMuted leading-relaxed">Doctor's Rationale: Elimination of industrial seed oils prevents hepatic lipid peroxidation.</p>
+          </div>
+
+          <!-- Panel 4: Gut Microbiome -->
+          <div class="tdf-card p-4 space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg bg-brand-primary/10 text-brand-primary flex items-center justify-center">
+                  <span class="material-symbols-outlined text-[18px]">spa</span>
+                </div>
+                <h4 class="text-[14.5px] font-bold text-slate-textMain">Gut Microbiome & Barrier</h4>
+              </div>
+              <span class="text-[11px] font-bold text-brand-emerald bg-brand-emerald/10 px-2 py-0.5 rounded-full">Optimal</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+              <div class="p-2 bg-slate-subtle/80 rounded-lg">
+                <span class="text-[10px] text-slate-textMuted block">hs-CRP Marker</span>
+                <span class="text-[15px] font-bold text-slate-textMain">&lt; 0.5 <span class="text-[11px] font-normal text-slate-textMuted">mg/L</span></span>
+              </div>
+              <div class="p-2 bg-slate-subtle/80 rounded-lg">
+                <span class="text-[10px] text-slate-textMuted block">Daily Fiber</span>
+                <span class="text-[15px] font-bold text-slate-textMain">38g</span>
+              </div>
+            </div>
+            <p class="text-[11.5px] text-slate-textMuted leading-relaxed">Doctor's Rationale: Prebiotic fiber fosters Akkermansia muciniphila growth, protecting gut barrier tightness.</p>
+          </div>
+
+          <!-- Panel 5: Renal & Cellular -->
+          <div class="tdf-card p-4 space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg bg-brand-primary/10 text-brand-primary flex items-center justify-center">
+                  <span class="material-symbols-outlined text-[18px]">water_ph</span>
+                </div>
+                <h4 class="text-[14.5px] font-bold text-slate-textMain">Renal & Filtration Index</h4>
+              </div>
+              <span class="text-[11px] font-bold text-brand-emerald bg-brand-emerald/10 px-2 py-0.5 rounded-full">Optimal</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+              <div class="p-2 bg-slate-subtle/80 rounded-lg">
+                <span class="text-[10px] text-slate-textMuted block">eGFR Filtration</span>
+                <span class="text-[15px] font-bold text-slate-textMain">&gt; 90 <span class="text-[11px] font-normal text-slate-textMuted">mL/min</span></span>
+              </div>
+              <div class="p-2 bg-slate-subtle/80 rounded-lg">
+                <span class="text-[10px] text-slate-textMuted block">Serum Creatinine</span>
+                <span class="text-[15px] font-bold text-slate-textMain">0.85 <span class="text-[11px] font-normal text-slate-textMuted">mg/dL</span></span>
+              </div>
+            </div>
+            <p class="text-[11.5px] text-slate-textMuted leading-relaxed">Doctor's Rationale: Glomerular filtration rate is preserved. Mineralized water protects microvascular health.</p>
+          </div>
+
+          <!-- Panel 6: Micronutrients -->
+          <div class="tdf-card p-4 space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg bg-brand-primary/10 text-brand-primary flex items-center justify-center">
+                  <span class="material-symbols-outlined text-[18px]">vital_signs</span>
+                </div>
+                <h4 class="text-[14.5px] font-bold text-slate-textMain">Micronutrients & Hormones</h4>
+              </div>
+              <span class="text-[11px] font-bold text-brand-emerald bg-brand-emerald/10 px-2 py-0.5 rounded-full">Optimal</span>
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+              <div class="p-2 bg-slate-subtle/80 rounded-lg">
+                <span class="text-[10px] text-slate-textMuted block">Vitamin D3</span>
+                <span class="text-[15px] font-bold text-slate-textMain">62 <span class="text-[11px] font-normal text-slate-textMuted">ng/mL</span></span>
+              </div>
+              <div class="p-2 bg-slate-subtle/80 rounded-lg">
+                <span class="text-[10px] text-slate-textMuted block">Vitamin B12</span>
+                <span class="text-[15px] font-bold text-slate-textMain">780 <span class="text-[11px] font-normal text-slate-textMuted">pg/mL</span></span>
+              </div>
+            </div>
+            <p class="text-[11.5px] text-slate-textMuted leading-relaxed">Doctor's Rationale: Vitamin D3 at 62 ng/mL modulates immune function and genetic transcription.</p>
+          </div>
+
+          <!-- Panel 7: Wearables -->
+          <div class="tdf-card p-4 space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg bg-brand-primary/10 text-brand-primary flex items-center justify-center">
+                  <span class="material-symbols-outlined text-[18px]">monitor_heart</span>
+                </div>
+                <h4 class="text-[14.5px] font-bold text-slate-textMain">Wearable Autonomic Index</h4>
+              </div>
+              <span class="text-[11px] font-bold text-brand-emerald bg-brand-emerald/10 px-2 py-0.5 rounded-full">Synchronized</span>
+            </div>
+            <div class="grid grid-cols-3 gap-2 text-center">
+              <div class="p-2 bg-slate-subtle/80 rounded-lg">
+                <span class="text-[10px] text-slate-textMuted block">Resting HR</span>
+                <span class="text-[14px] font-bold text-slate-textMain">54 <span class="text-[10px] font-normal">bpm</span></span>
+              </div>
+              <div class="p-2 bg-slate-subtle/80 rounded-lg">
+                <span class="text-[10px] text-slate-textMuted block">HRV SDNN</span>
+                <span class="text-[14px] font-bold text-slate-textMain">78 <span class="text-[10px] font-normal">ms</span></span>
+              </div>
+              <div class="p-2 bg-slate-subtle/80 rounded-lg">
+                <span class="text-[10px] text-slate-textMuted block">Deep Sleep</span>
+                <span class="text-[14px] font-bold text-slate-textMain">1h 48m</span>
+              </div>
+            </div>
+            <p class="text-[11.5px] text-slate-textMuted leading-relaxed">Doctor's Rationale: High heart rate variability indicates strong parasympathetic autonomic recovery.</p>
+          </div>
+
         </div>
-      </div>
-  
-<!-- Diagnostic Triage Section -->
-<section class="flex flex-col gap-margin-sm mt-4">
-<div class="flex items-center gap-2 px-unit">
-<span class="material-symbols-outlined text-primary">verified_user</span>
-<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Diagnostic Triage</h2>
-</div>
-<div class="flex flex-col gap-4">
-<!-- Category 1 -->
-<div class="bg-surface-container-lowest rounded-xl p-container-padding shadow-sm">
-<h3 class="font-label-sm text-label-sm text-primary uppercase mb-3">Category 1 (100% Solvable Lifestyle)</h3>
-<ul class="flex flex-col gap-3">
-<li class="flex items-start gap-3">
-<div class="w-2 h-2 rounded-full bg-optimal-green mt-2 shrink-0"></div>
-<div>
-<p class="font-body-md text-body-md text-on-surface font-medium">Metabolic Syndrome &amp; Insulin Resistance</p>
-<p class="font-label-sm text-label-sm text-on-surface-variant">ICD-11 5B81 • 92% Reversal Velocity</p>
-</div>
-</li>
-<li class="flex items-start gap-3">
-<div class="w-2 h-2 rounded-full bg-optimal-green mt-2 shrink-0"></div>
-<div>
-<p class="font-body-md text-body-md text-on-surface font-medium">2 PM Energy Slump</p>
-<p class="font-label-sm text-label-sm text-on-surface-variant">ICD-11 5B70 • 100% Solved</p>
-</div>
-</li>
-</ul>
-</div>
-<!-- Category 2 -->
-<div class="bg-surface-container-lowest rounded-xl p-container-padding shadow-sm">
-<h3 class="font-label-sm text-label-sm text-alert-amber uppercase mb-3">Category 2 (Chronic Manageable)</h3>
-<ul class="flex flex-col gap-3">
-<li class="flex items-start gap-3">
-<div class="w-2 h-2 rounded-full bg-alert-amber mt-2 shrink-0"></div>
-<div>
-<p class="font-body-md text-body-md text-on-surface font-medium">Endocrine Support</p>
-<p class="font-label-sm text-label-sm text-on-surface-variant">ICD-11 5A80 / 5A00 • Thyroid stabilization via clean selenium, zinc &amp; healthy fats</p>
-</div>
-</li>
-</ul>
-</div>
-</div>
-</section>
-</div></div>
+
       </div>
 
-      <!-- ==================== 3. TAB: CHAT (TOVELU INTELLIGENCE) ==================== -->
-      <div id="pane-chat" class="tab-view pb-24">
-        <div class="px-container-padding py-6"><div class="flex flex-col w-full relative gap-margin-md">
-<!-- AI Companion Header & Greeting -->
-<div class="flex flex-col gap-4">
-<div class="flex items-center justify-between">
-<div class="flex items-center gap-3">
-<div class="relative w-12 h-12 rounded-full bg-primary-container flex items-center justify-center shadow-sm">
-<span class="material-symbols-outlined text-on-primary-container text-[24px]">auto_awesome</span>
-<div class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-optimal-green rounded-full border-2 border-surface-container-lowest"></div>
-</div>
-<div class="flex flex-col">
-<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface tracking-tight">Tovelu Intelligence</h1>
-<span class="font-label-sm text-label-sm text-outline uppercase tracking-wide">42 Biomarkers Calibrated</span>
-</div>
-</div>
-<button class="flex items-center justify-center w-10 h-10 rounded-full border border-surface-variant text-on-surface-variant bg-surface-container-lowest hover:bg-surface-variant transition-colors shadow-sm">
-<span class="material-symbols-outlined text-[20px]">history</span>
-</button>
-</div>
-<!-- Main Greeting Card -->
-<div class="bg-surface-container-lowest border border-surface-variant rounded-xl p-container-padding shadow-md flex flex-col gap-5 relative overflow-hidden">
-<!-- Decorative background gradient -->
-<div class="absolute -top-10 -right-10 w-40 h-40 bg-primary/5 rounded-full blur-2xl"></div>
-<p class="font-body-lg text-body-lg text-on-surface relative z-10">
-        Hello Ajay! I am your <strong class="font-semibold text-primary">Tovelu Intelligence</strong> companion powered by your 42-marker health calibration and live kitchen pantry.
-      </p>
-<!-- Live Snapshot -->
-<div class="bg-surface-alt rounded-lg p-4 flex flex-col gap-3 relative z-10 border border-surface-variant/50">
-<div class="flex items-center justify-between mb-1">
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider flex items-center gap-1">
-<span class="material-symbols-outlined text-[14px]">bar_chart</span> Live Snapshot
-          </span>
-<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider">08:30 AM</span>
-</div>
-<div class="flex flex-col gap-3">
-<div class="flex items-center gap-3">
-<div class="relative w-10 h-10 shrink-0">
-<svg class="w-full h-full -rotate-90" viewbox="0 0 36 36">
-<path class="text-surface-variant" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3"></path>
-<path class="text-primary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="88, 100" stroke-linecap="round" stroke-width="3"></path>
-</svg>
-<div class="absolute inset-0 flex items-center justify-center">
-<span class="font-label-sm text-label-sm text-on-surface font-bold">88%</span>
-</div>
-</div>
-<div class="flex flex-col">
-<span class="font-body-md text-body-md text-on-surface font-semibold">Daily Portion Meter</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">On track for metabolic deficit</span>
-</div>
-</div>
-<div class="w-full h-px bg-surface-variant/50"></div>
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-full bg-optimal-green/10 flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-optimal-green">task_alt</span>
-</div>
-<div class="flex flex-col">
-<span class="font-body-md text-body-md text-on-surface font-semibold">3 of 4 Morning Habits</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">Locked in for optimal cortisol</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Suggested Actions -->
-<div class="flex flex-col gap-4 mt-2">
-<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider flex items-center gap-1 px-1">
-<span class="material-symbols-outlined text-[16px]">lightbulb</span> Suggested for your daily protocol
-    </span>
-<div class="flex flex-col gap-3">
-<button class="w-full bg-surface-container-lowest border border-surface-variant rounded-xl p-4 flex items-center gap-4 hover:bg-surface-variant transition-colors shadow-sm text-left group">
-<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
-<span class="material-symbols-outlined text-primary">restaurant_menu</span>
-</div>
-<div class="flex-1 min-w-0">
-<span class="font-body-md text-body-md text-on-surface font-medium block truncate">What 15m high-protein meal can I cook from my pantry?</span>
-</div>
-<span class="material-symbols-outlined text-outline shrink-0">arrow_forward</span>
-</button>
-<button class="w-full bg-surface-container-lowest border border-surface-variant rounded-xl p-4 flex items-center gap-4 hover:bg-surface-variant transition-colors shadow-sm text-left group">
-<div class="w-10 h-10 rounded-full bg-alert-amber/10 flex items-center justify-center shrink-0 group-hover:bg-alert-amber/20 transition-colors">
-<span class="material-symbols-outlined text-alert-amber">battery_charging_20</span>
-</div>
-<div class="flex-1 min-w-0">
-<span class="font-body-md text-body-md text-on-surface font-medium block truncate">Why do I feel tired at 2:00 PM &amp; how to fix it?</span>
-</div>
-<span class="material-symbols-outlined text-outline shrink-0">arrow_forward</span>
-</button>
-<button class="w-full bg-surface-container-lowest border border-surface-variant rounded-xl p-4 flex items-center gap-4 hover:bg-surface-variant transition-colors shadow-sm text-left group">
-<div class="w-10 h-10 rounded-full bg-tertiary/10 flex items-center justify-center shrink-0 group-hover:bg-tertiary/20 transition-colors">
-<span class="material-symbols-outlined text-tertiary">directions_walk</span>
-</div>
-<div class="flex-1 min-w-0">
-<span class="font-body-md text-body-md text-on-surface font-medium block truncate">When is the best time for my 12-min post-meal walk?</span>
-</div>
-<span class="material-symbols-outlined text-outline shrink-0">arrow_forward</span>
-</button>
-<button class="w-full bg-surface-container-lowest border border-surface-variant rounded-xl p-4 flex items-center gap-4 hover:bg-surface-variant transition-colors shadow-sm text-left group">
-<div class="w-10 h-10 rounded-full bg-on-surface/5 flex items-center justify-center shrink-0 group-hover:bg-on-surface/10 transition-colors">
-<span class="material-symbols-outlined text-on-surface">local_cafe</span>
-</div>
-<div class="flex-1 min-w-0">
-<span class="font-body-md text-body-md text-on-surface font-medium block truncate">Can I drink tea or coffee after 12:00 PM today?</span>
-</div>
-<span class="material-symbols-outlined text-outline shrink-0">arrow_forward</span>
-</button>
-</div>
-</div>
-<!-- Chat History Link -->
-<div class="flex justify-center mt-2 pb-6">
-<button class="flex items-center gap-2 px-4 py-2 rounded-full bg-surface-alt text-on-surface-variant hover:text-primary hover:bg-primary/5 transition-colors">
-<span class="material-symbols-outlined text-[18px]">calendar_month</span>
-<span class="font-label-sm text-label-sm uppercase tracking-wide">Browse daily consultations</span>
-</button>
-</div>
+      <!-- ############################################################## -->
+      <!-- TAB 3: CHAT (TOVELU INTELLIGENCE 24/7)                        -->
+      <!-- ############################################################## -->
+      <div id="pane-chat" class="tab-pane space-y-4 pb-20">
+        
+        <!-- Welcome Card -->
+        <div class="tdf-card p-5 space-y-3">
+          <div class="flex items-center gap-2 text-brand-primary">
+            <span class="material-symbols-outlined text-[22px]">smart_toy</span>
+            <h3 class="font-sans text-[16px] font-bold text-slate-textMain">Tovelu Intelligence</h3>
+          </div>
+          <p class="text-[13px] text-slate-textMuted leading-relaxed">
+            I am your dedicated longevity AI calibrated to your <strong>42 biomarkers</strong> and stocked kitchen pantry. Ask me about quick recipes, timing your post-meal walk, or ordering seed-oil-free dining.
+          </p>
 
-</div></div>
+          <!-- Prompt Quick Chips -->
+          <div class="flex flex-col gap-2 pt-1">
+            <button onclick="sendQuickPrompt('What 15m high-protein meal can I cook from my pantry?')" class="p-2.5 text-left rounded-xl bg-slate-subtle hover:bg-slate-200/70 text-[12.5px] font-medium text-slate-textMain transition-colors flex items-center justify-between tdf-tap">
+              <span>🍳 What 15m high-protein meal can I cook from my pantry?</span>
+              <span class="material-symbols-outlined text-[16px] text-slate-400">arrow_forward</span>
+            </button>
+            <button onclick="sendQuickPrompt('Why do I feel tired at 2:00 PM & how to fix it?')" class="p-2.5 text-left rounded-xl bg-slate-subtle hover:bg-slate-200/70 text-[12.5px] font-medium text-slate-textMain transition-colors flex items-center justify-between tdf-tap">
+              <span>⚡ Why do I feel tired at 2:00 PM & how to fix it?</span>
+              <span class="material-symbols-outlined text-[16px] text-slate-400">arrow_forward</span>
+            </button>
+            <button onclick="sendQuickPrompt('When is the best time for my 12-min post-meal walk?')" class="p-2.5 text-left rounded-xl bg-slate-subtle hover:bg-slate-200/70 text-[12.5px] font-medium text-slate-textMain transition-colors flex items-center justify-between tdf-tap">
+              <span>🚶 When is the best time for my 12-min post-meal walk?</span>
+              <span class="material-symbols-outlined text-[16px] text-slate-400">arrow_forward</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Chat Conversation Stream -->
+        <div id="chat-stream" class="space-y-3"></div>
+
       </div>
 
-      <!-- ==================== 4. TAB: YOU (MEMBER PROFILE) ==================== -->
-      <div id="pane-you" class="tab-view">
-        <div class="px-container-padding py-6"><div class="flex flex-col w-full gap-margin-md">
-<!-- Profile Hero Card -->
-<div class="relative w-full rounded-2xl bg-primary shadow-lg overflow-hidden flex flex-col p-container-padding">
-<!-- Decorative background element -->
-<div class="absolute -top-20 -right-20 w-64 h-64 bg-primary-fixed-dim rounded-full mix-blend-screen opacity-20 blur-3xl pointer-events-none"></div>
-<div class="absolute -bottom-10 -left-10 w-40 h-40 bg-secondary-fixed rounded-full mix-blend-screen opacity-20 blur-2xl pointer-events-none"></div>
-<div class="relative z-10 flex items-center gap-margin-sm mb-margin-sm">
-<div class="w-20 h-20 shrink-0 rounded-full bg-surface-container overflow-hidden shadow-inner ring-4 ring-on-primary/10">
-<img class="w-full h-full object-cover" data-alt="A professional yet relaxed portrait photo of a 25-year-old South Asian man named Ajay. He is smiling warmly, outdoors in soft morning light, wearing a high-quality athletic casual t-shirt. The color palette features clinical blue and natural greens." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMILtkEsibISkb7fJjE0THNlIhifZaG_aeVIkdZ-7ZtnhC3RYyfffKpY3se4Baj8HRx8pOlqp0DXgngVkpE3Bprom4zM563LziAHJtrdiFXWh5t8I6AXQZRIZOMitL-s1-q23UfVTEwF47sg7Wh5ecgcPFbq_-XcGeuy4LPa-O_Lu5CQahamxYojzJC2qF63JFGE4QuZ7k4lvHsB3MvdcIz3akYD-n6KZE357tEbjjrinAZiUb8Umn"/>
-</div>
-<div class="flex flex-col text-on-primary">
-<h1 class="font-headline-lg-mobile text-headline-lg-mobile tracking-tight flex items-center gap-2">
-          Ajay Sen
-          <span class="material-symbols-outlined text-[20px] text-tertiary-fixed">verified</span>
-</h1>
-<div class="flex items-center gap-2 mt-1">
-<span class="font-label-sm text-label-sm bg-on-primary/10 px-2 py-1 rounded-full uppercase tracking-wider backdrop-blur-sm">PRO CLINICAL</span>
-</div>
-<p class="font-label-sm text-[10px] opacity-80 mt-1 uppercase tracking-widest">ID: TOV-8829-PRO</p>
-</div>
-</div>
-</div>
-<!-- Quick Stats Bento -->
-<div class="grid grid-cols-2 gap-unit">
-<!-- Epigenetic Age -->
-<div class="bg-surface-container rounded-xl p-4 flex flex-col justify-between shadow-sm relative overflow-hidden">
-<div class="absolute top-0 right-0 w-16 h-16 bg-optimal-green/5 rounded-bl-full pointer-events-none"></div>
-<div class="flex items-center gap-1 text-on-surface-variant mb-2">
-<span class="material-symbols-outlined text-[16px]">psychology</span>
-<span class="font-label-sm text-label-sm uppercase">Epigenetic Age</span>
-</div>
-<div class="flex items-baseline gap-1 text-on-surface">
-<span class="font-data-metric text-data-metric">20.8</span>
-<span class="font-body-md text-body-md text-on-surface-variant">Yrs</span>
-</div>
-<div class="font-label-sm text-[10px] text-optimal-green mt-1 flex items-center">
-<span class="material-symbols-outlined text-[12px] mr-0.5">arrow_downward</span>
-        4.2 Yrs Younger
-      </div>
-</div>
-<!-- Aging Pace -->
-<div class="bg-surface-container rounded-xl p-4 flex flex-col justify-between shadow-sm">
-<div class="flex items-center gap-1 text-on-surface-variant mb-2">
-<span class="material-symbols-outlined text-[16px]">speed</span>
-<span class="font-label-sm text-label-sm uppercase">Aging Pace</span>
-</div>
-<div class="flex items-baseline gap-1 text-on-surface">
-<span class="font-data-metric text-data-metric">0.82x</span>
-</div>
-<div class="font-label-sm text-[10px] text-optimal-green mt-1">
-        Optimal Rate
-      </div>
-</div>
-<!-- Protocol Phase -->
-<div class="col-span-2 bg-gradient-to-r from-surface-container to-surface-container-high rounded-xl p-4 flex items-center justify-between shadow-sm">
-<div class="flex flex-col">
-<div class="flex items-center gap-1 text-on-surface-variant mb-1">
-<span class="material-symbols-outlined text-[16px]">calendar_month</span>
-<span class="font-label-sm text-label-sm uppercase">Protocol Phase</span>
-</div>
-<div class="font-headline-lg-mobile text-[20px] font-bold text-on-surface">
-          Day 18 <span class="font-body-md text-body-md font-normal text-on-surface-variant">/ Phase 2</span>
-</div>
-</div>
-<div class="w-12 h-12 rounded-full border-[3px] border-surface-variant flex items-center justify-center relative">
-<svg class="absolute inset-0 w-full h-full -rotate-90" viewbox="0 0 36 36">
-<path class="text-primary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="20, 100" stroke-width="3"></path>
-</svg>
-<span class="font-label-sm text-[10px] text-primary">20%</span>
-</div>
-</div>
-</div>
-<!-- Biological Passport Details -->
-<div class="flex flex-col gap-unit">
-<div class="flex items-center gap-2 px-1">
-<span class="material-symbols-outlined text-primary">badge</span>
-<h2 class="font-headline-lg-mobile text-[18px] text-on-surface">Biological Passport</h2>
-</div>
-<div class="bg-surface-container rounded-xl p-container-padding flex flex-col gap-4 shadow-sm">
-<div class="grid grid-cols-2 gap-y-4 gap-x-2">
-<div class="flex flex-col">
-<span class="font-label-sm text-[10px] text-on-surface-variant uppercase mb-1">Calibrated</span>
-<span class="font-body-md text-body-md text-on-surface font-medium">42 Markers</span>
-</div>
-<div class="flex flex-col">
-<span class="font-label-sm text-[10px] text-on-surface-variant uppercase mb-1">Chrono Age</span>
-<span class="font-body-md text-body-md text-on-surface font-medium">25 Yrs</span>
-</div>
-<div class="flex flex-col">
-<span class="font-label-sm text-[10px] text-on-surface-variant uppercase mb-1">Height / Weight</span>
-<span class="font-body-md text-body-md text-on-surface font-medium">175 cm / 70 kg</span>
-</div>
-<div class="flex flex-col">
-<span class="font-label-sm text-[10px] text-on-surface-variant uppercase mb-1">BMI</span>
-<span class="font-body-md text-body-md text-on-surface font-medium">22.9 <span class="text-optimal-green text-[12px]">(Optimal)</span></span>
-</div>
-<div class="flex flex-col col-span-2 bg-surface p-3 rounded-lg mt-1">
-<span class="font-label-sm text-[10px] text-on-surface-variant uppercase mb-1 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">local_fire_department</span> Basal Metabolic Burn (BMR)</span>
-<span class="font-data-metric text-[22px] text-primary">1,740 <span class="font-body-md text-[14px] text-on-surface-variant font-normal">kcal / day</span></span>
-</div>
-</div>
-<button class="mt-2 w-full flex items-center justify-center gap-2 py-3 rounded-lg bg-surface hover:bg-surface-variant transition-colors text-primary font-label-sm text-label-sm uppercase">
-<span class="material-symbols-outlined text-[18px]">edit_note</span>
-        Retake Intake Survey
-      </button>
-</div>
-</div>
-<!-- Active Protocol Targets -->
-<div class="flex flex-col gap-unit mt-4">
-<div class="flex items-center gap-2 px-1">
-<span class="material-symbols-outlined text-primary">tune</span>
-<h2 class="font-headline-lg-mobile text-[18px] text-on-surface">Active Protocol Targets</h2>
-</div>
-<div class="bg-surface-container rounded-xl flex flex-col shadow-sm overflow-hidden">
-<!-- Target Item -->
-<div class="flex items-center p-4 bg-surface/50">
-<div class="w-10 h-10 rounded-full bg-secondary-container/20 flex items-center justify-center text-secondary-container mr-4">
-<span class="material-symbols-outlined">restaurant</span>
-</div>
-<div class="flex-1">
-<div class="font-body-md text-body-md text-on-surface font-medium">Daily Calorie Budget</div>
-<div class="font-body-md text-[13px] text-on-surface-variant">15% Metabolic Deficit</div>
-</div>
-<div class="font-data-metric text-[20px] text-on-surface">1,500</div>
-</div>
-<div class="h-px bg-surface-variant mx-4"></div>
-<!-- Target Item -->
-<div class="flex items-center p-4 bg-surface/50">
-<div class="w-10 h-10 rounded-full bg-tertiary-container/20 flex items-center justify-center text-tertiary mr-4">
-<span class="material-symbols-outlined">fitness_center</span>
-</div>
-<div class="flex-1">
-<div class="font-body-md text-body-md text-on-surface font-medium">Daily Protein Floor</div>
-<div class="font-body-md text-[13px] text-on-surface-variant">Muscle retention</div>
-</div>
-<div class="font-data-metric text-[20px] text-on-surface">117g</div>
-</div>
-<div class="h-px bg-surface-variant mx-4"></div>
-<!-- Target Item -->
-<div class="flex items-center p-4 bg-surface/50">
-<div class="w-10 h-10 rounded-full bg-error-container/40 flex items-center justify-center text-on-error-container mr-4">
-<span class="material-symbols-outlined">coffee</span>
-</div>
-<div class="flex-1">
-<div class="font-body-md text-body-md text-on-surface font-medium">Caffeine Cutoff</div>
-<div class="font-body-md text-[13px] text-on-surface-variant">Adenosine clearance</div>
-</div>
-<div class="font-data-metric text-[20px] text-on-surface">12 PM</div>
-</div>
-</div>
-</div>
-<!-- Connected Devices -->
-<div class="flex flex-col gap-unit mt-4">
-<div class="flex items-center gap-2 px-1">
-<span class="material-symbols-outlined text-primary">devices</span>
-<h2 class="font-headline-lg-mobile text-[18px] text-on-surface">Connected Devices</h2>
-<span class="ml-auto font-label-sm text-[12px] bg-primary-container/20 text-primary px-2 py-0.5 rounded-full">3 Synced</span>
-</div>
-<div class="bg-surface-container rounded-xl flex flex-col shadow-sm overflow-hidden p-2 gap-1">
-<div class="flex items-center p-3 bg-surface rounded-lg">
-<span class="material-symbols-outlined text-on-surface-variant mr-3 text-[28px]">monitor_heart</span>
-<div class="flex-1">
-<div class="font-body-md text-[15px] text-on-surface font-medium">Continuous Glucose (CGM)</div>
-<div class="font-body-md text-[12px] text-on-surface-variant">FreeStyle Libre 3</div>
-</div>
-<div class="flex items-center gap-1.5 bg-optimal-green/10 px-2 py-1 rounded-full">
-<div class="w-2 h-2 rounded-full bg-optimal-green animate-pulse"></div>
-<span class="font-label-sm text-[10px] text-optimal-green uppercase tracking-wide">Live</span>
-</div>
-</div>
-<div class="flex items-center p-3 bg-surface rounded-lg">
-<span class="material-symbols-outlined text-on-surface-variant mr-3 text-[28px]">watch</span>
-<div class="flex-1">
-<div class="font-body-md text-[15px] text-on-surface font-medium">Sleep &amp; HRV</div>
-<div class="font-body-md text-[12px] text-on-surface-variant">Apple Watch</div>
-</div>
-<div class="flex items-center gap-1.5">
-<div class="w-2 h-2 rounded-full bg-optimal-green"></div>
-<span class="font-label-sm text-[10px] text-on-surface-variant uppercase tracking-wide">Synced</span>
-</div>
-</div>
-<div class="flex items-center p-3 bg-surface rounded-lg">
-<span class="material-symbols-outlined text-on-surface-variant mr-3 text-[28px]">scale</span>
-<div class="flex-1">
-<div class="font-body-md text-[15px] text-on-surface font-medium">Body Composition</div>
-<div class="font-body-md text-[12px] text-on-surface-variant">Withings Body Scan</div>
-</div>
-<div class="flex items-center gap-1.5">
-<div class="w-2 h-2 rounded-full bg-optimal-green"></div>
-<span class="font-label-sm text-[10px] text-on-surface-variant uppercase tracking-wide">Synced</span>
-</div>
-</div>
-</div>
-</div>
-<!-- Clinical Safety Actions -->
-<div class="flex flex-col gap-3 mt-6 mb-8">
-<button class="w-full bg-primary text-on-primary font-body-md text-body-md font-medium py-4 rounded-xl shadow-md flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors">
-<span class="material-symbols-outlined">terminal</span>
-      Launch THAIS Clinical AI
-    </button>
-<button class="w-full bg-surface-container border border-outline-variant/30 text-primary font-body-md text-body-md font-medium py-4 rounded-xl flex items-center justify-center gap-2 hover:bg-surface-variant transition-colors">
-<span class="material-symbols-outlined">download</span>
-      Doctor Clinical PDF Report
-    </button>
-</div>
-</div></div>
+      <!-- ############################################################## -->
+      <!-- TAB 4: YOU (MEMBER PROFILE & LONGEVITY OS)                    -->
+      <!-- ############################################################## -->
+      <div id="pane-you" class="tab-pane space-y-4">
+        
+        <!-- Profile Card -->
+        <div class="tdf-card p-5 space-y-4">
+          <div class="flex items-center gap-3.5">
+            <div class="w-14 h-14 rounded-full bg-brand-primary text-white flex items-center justify-center font-bold text-[20px] shadow-sm">
+              AK
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h3 class="text-[18px] font-bold text-slate-textMain">Ajay Kumar</h3>
+                <span class="text-[10px] font-bold uppercase tracking-wider text-brand-primary bg-brand-primary/10 px-2 py-0.5 rounded-md">Founder</span>
+              </div>
+              <p class="text-[12px] text-slate-textMuted mt-0.5">Protocol: 90-Day Metabolic & Epigenetic Reversal</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2 pt-2 border-t border-slate-100 text-[12.5px]">
+            <div class="p-2.5 bg-slate-subtle rounded-xl">
+              <span class="text-[10px] text-slate-textMuted uppercase font-bold block">Baseline Calibration</span>
+              <span class="font-bold text-slate-textMain">June 14, 2026</span>
+            </div>
+            <div class="p-2.5 bg-slate-subtle rounded-xl">
+              <span class="text-[10px] text-slate-textMuted uppercase font-bold block">Biomarker Panels</span>
+              <span class="font-bold text-slate-textMain">42 Markers (100%)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Export Action -->
+        <div class="tdf-card p-5 space-y-3 text-center">
+          <div class="w-12 h-12 rounded-full bg-brand-primary/10 text-brand-primary flex items-center justify-center mx-auto">
+            <span class="material-symbols-outlined text-[24px]">description</span>
+          </div>
+          <div>
+            <h4 class="text-[16px] font-bold text-slate-textMain">Download Clinical Physician Report</h4>
+            <p class="text-[12px] text-slate-textMuted mt-0.5">Generate certified PDF report with WHO ICD-11 biomarker documentation.</p>
+          </div>
+          <button onclick="downloadPhysicianPdf()" class="w-full py-3 bg-brand-primary hover:bg-brand-primary/90 text-white rounded-xl font-bold text-[13px] uppercase tracking-wider shadow-sm transition-all tdf-tap">
+            Download Clinical PDF
+          </button>
+        </div>
+
       </div>
 
     </main>
 
-    <!-- ─── FIXED BOTTOM NAVIGATION (Exact Stitch Bar) ─── -->
-    <nav class="fixed bottom-0 max-w-[440px] w-full z-50 pb-safe bg-surface/95 backdrop-blur-xl shadow-[0_-1px_8px_rgba(0,0,0,0.04)] border-t border-surface-container">
-      <div class="flex justify-around items-center h-16 px-2">
-        <button id="nav-flow" class="nav-btn active flex flex-col items-center justify-center gap-1 w-16 transition-colors text-primary font-bold" onclick="switchMainTab('flow')">
-          <span class="material-symbols-outlined text-[24px]">bubble_chart</span>
-          <span class="text-[10px] font-label-sm uppercase tracking-wider">FLOW</span>
+    <!-- ==================== FIXED CHAT COMPOSER (ONLY IN CHAT TAB) ==================== -->
+    <div id="tdf-fixed-composer" class="fixed bottom-16 inset-x-0 max-w-[430px] mx-auto z-40 px-4 py-2 bg-white/95 backdrop-blur-md border-t border-slate-200/60 shadow-tdf-float" style="display: none;">
+      <div class="bg-slate-subtle border border-slate-border rounded-full p-1 pl-4 flex items-center gap-2">
+        <span class="material-symbols-outlined text-slate-textSub text-[20px]">add_circle</span>
+        <input id="chat-input-field" type="text" placeholder="Ask Tovelu Intelligence..." class="flex-1 bg-transparent border-none outline-none text-[13.5px] text-slate-textMain placeholder:text-slate-textSub min-w-0" onkeydown="if(event.key==='Enter'){sendChatMessage(); event.preventDefault();}" />
+        <button onclick="sendChatMessage()" class="w-9 h-9 rounded-full bg-brand-primary text-white flex items-center justify-center shrink-0 hover:bg-brand-primary/90 transition-transform tdf-tap shadow-xs">
+          <span class="material-symbols-outlined text-[18px]">arrow_upward</span>
         </button>
-        <button id="nav-health" class="nav-btn flex flex-col items-center justify-center gap-1 w-16 text-on-surface-variant transition-colors" onclick="switchMainTab('health')">
-          <span class="material-symbols-outlined text-[24px]">monitoring</span>
-          <span class="text-[10px] font-label-sm uppercase tracking-wider">HEALTH</span>
+      </div>
+    </div>
+
+    <!-- ==================== FIXED BOTTOM NAVIGATION (60px) ==================== -->
+    <nav class="sticky bottom-0 z-50 bg-white/95 backdrop-blur-xl border-t border-slate-200/80 safe-bottom">
+      <div class="h-15 flex justify-around items-center px-2">
+        <button id="nav-flow" onclick="switchNav('flow')" class="nav-tab active flex flex-col items-center justify-center w-16 py-1 text-brand-primary transition-colors tdf-tap">
+          <span class="material-symbols-outlined text-[23px]">bubble_chart</span>
+          <span class="text-[10px] font-bold tracking-wider mt-0.5">FLOW</span>
         </button>
-        <button id="nav-chat" class="nav-btn flex flex-col items-center justify-center gap-1 w-16 text-on-surface-variant transition-colors" onclick="switchMainTab('chat')">
-          <span class="material-symbols-outlined text-[24px]">smart_toy</span>
-          <span class="text-[10px] font-label-sm uppercase tracking-wider">CHAT</span>
+        <button id="nav-health" onclick="switchNav('health')" class="nav-tab flex flex-col items-center justify-center w-16 py-1 text-slate-textMuted transition-colors tdf-tap">
+          <span class="material-symbols-outlined text-[23px]">monitoring</span>
+          <span class="text-[10px] font-bold tracking-wider mt-0.5">HEALTH</span>
         </button>
-        <button id="nav-you" class="nav-btn flex flex-col items-center justify-center gap-1 w-16 text-on-surface-variant transition-colors" onclick="switchMainTab('you')">
-          <span class="material-symbols-outlined text-[24px]">account_circle</span>
-          <span class="text-[10px] font-label-sm uppercase tracking-wider">YOU</span>
+        <button id="nav-chat" onclick="switchNav('chat')" class="nav-tab flex flex-col items-center justify-center w-16 py-1 text-slate-textMuted transition-colors tdf-tap">
+          <span class="material-symbols-outlined text-[23px]">smart_toy</span>
+          <span class="text-[10px] font-bold tracking-wider mt-0.5">CHAT</span>
+        </button>
+        <button id="nav-you" onclick="switchNav('you')" class="nav-tab flex flex-col items-center justify-center w-16 py-1 text-slate-textMuted transition-colors tdf-tap">
+          <span class="material-symbols-outlined text-[23px]">account_circle</span>
+          <span class="text-[10px] font-bold tracking-wider mt-0.5">YOU</span>
         </button>
       </div>
     </nav>
 
-  <!-- ==================== FIXED FLOATING CHAT COMPOSER (NEVER SCROLLS) ==================== -->
-  <div id="fixed-chat-composer" class="fixed bottom-16 max-w-[440px] w-full z-40 px-4 pt-3 pb-3.5 bg-surface/95 backdrop-blur-lg border-t border-surface-container/70 shadow-[0_-4px_16px_rgba(0,0,0,0.06)]" style="display: none;">
-    <div class="bg-surface-container-lowest border border-outline-variant/40 rounded-full p-2 pl-4 flex items-center shadow-sm gap-2.5">
-      <span class="material-symbols-outlined text-outline text-[22px] shrink-0">add_circle</span>
-      <input id="fixed-chat-input" class="flex-1 bg-transparent border-none outline-none font-body-md text-[14px] text-on-surface placeholder:text-outline w-full min-w-0 py-1" placeholder="Ask Tovelu Intelligence..." type="text" autocomplete="off" onkeydown="if(event.key==='Enter'){sendAppChatMessage(); event.preventDefault();}" />
-      <button onclick="sendAppChatMessage()" class="w-10 h-10 rounded-full bg-primary flex items-center justify-center shrink-0 hover:bg-primary/90 transition-colors shadow-sm cursor-pointer">
-        <span class="material-symbols-outlined text-on-primary text-[20px]">arrow_upward</span>
-      </button>
+    <!-- ==================== SIDE DRAWER: CHOOSE TIMELINE (HEALTH) ==================== -->
+    <div id="timeline-drawer-overlay" class="tdf-drawer-overlay flex justify-end" onclick="if(event.target===this) toggleTimelineDrawer(false)">
+      <div class="tdf-drawer w-full max-w-[320px] h-full bg-white shadow-2xl flex flex-col justify-between">
+        
+        <div>
+          <!-- Drawer Header -->
+          <div class="p-5 border-b border-slate-100 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-brand-primary text-[20px]">calendar_month</span>
+              <h3 class="font-bold text-[16px] text-slate-textMain">Choose Timeline</h3>
+            </div>
+            <button onclick="toggleTimelineDrawer(false)" class="w-8 h-8 rounded-full bg-slate-subtle flex items-center justify-center text-slate-textMuted hover:bg-slate-200">✕</button>
+          </div>
+
+          <!-- Month Picker -->
+          <div class="p-4 border-b border-slate-100 bg-slate-subtle/50">
+            <label class="text-[11px] font-bold uppercase tracking-wider text-slate-textMuted block mb-1">Select Month:</label>
+            <select id="drawer-month-picker" onchange="renderDrawerWeeks(this.value)" class="w-full p-2.5 bg-white border border-slate-200 rounded-xl text-[13px] font-semibold text-slate-textMain outline-none focus:border-brand-primary">
+              <option value="aug_2026" selected>August 2026 (Active)</option>
+              <option value="jul_2026">July 2026 (Archive)</option>
+              <option value="jun_2026">June 2026 (Baseline)</option>
+            </select>
+          </div>
+
+          <!-- Weeks List -->
+          <div id="drawer-weeks-container" class="p-4 space-y-2 max-h-[60vh] overflow-y-auto"></div>
+        </div>
+
+        <div class="p-4 border-t border-slate-100">
+          <button onclick="toggleTimelineDrawer(false)" class="w-full py-3 bg-brand-primary text-white rounded-xl font-bold text-[12px] uppercase tracking-wider shadow-sm">
+            Apply Selection
+          </button>
+        </div>
+
+      </div>
     </div>
-  </div>
 
-
-    <!-- ─── INTERACTIVE FOOD INTELLIGENCE BOTTOM SHEET MODAL ─── -->
-    <div id="food-modal" class="modal-overlay" onclick="if(event.target===this) closeFoodModal()">
-      <div class="modal-sheet">
-        <div class="flex justify-between items-center mb-4">
-          <h3 id="food-modal-title" class="font-headline-lg-mobile text-[18px] font-bold text-on-surface">
-            Food Intelligence Engine
-          </h3>
-          <button class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high" onclick="closeFoodModal()">✕</button>
+    <!-- ==================== FOOD INTELLIGENCE BOTTOM SHEET ==================== -->
+    <div id="food-sheet-overlay" class="tdf-drawer-overlay flex items-end justify-center" onclick="if(event.target===this) toggleFoodSheet(false)">
+      <div class="w-full max-w-[430px] bg-white rounded-t-3xl p-5 space-y-4 shadow-2xl animate-bounce-short">
+        <div class="flex items-center justify-between">
+          <h3 id="food-sheet-title" class="font-bold text-[17px] text-slate-textMain">Food Intelligence Engine</h3>
+          <button onclick="toggleFoodSheet(false)" class="w-8 h-8 rounded-full bg-slate-subtle flex items-center justify-center text-slate-textMuted hover:bg-slate-200">✕</button>
         </div>
 
-        <!-- 3 Detection Situation Selector -->
-        <div class="grid grid-cols-3 gap-1 bg-surface-container-low p-1 rounded-lg mb-4">
-          <button class="food-pill active py-2 text-[11px] font-semibold rounded-md bg-surface-container-lowest text-primary shadow-sm text-center" onclick="setFoodPill('cooked', this)">🍲 Cooked Dish</button>
-          <button class="food-pill py-2 text-[11px] font-semibold rounded-md text-on-surface-variant text-center" onclick="setFoodPill('ingredient', this)">🥦 Raw Groceries</button>
-          <button class="food-pill py-2 text-[11px] font-semibold rounded-md text-on-surface-variant text-center" onclick="setFoodPill('menu', this)">📜 Restaurant Menu</button>
+        <!-- 3 Category Chips -->
+        <div class="grid grid-cols-3 gap-1.5 p-1 bg-slate-subtle rounded-xl text-center text-[11px] font-semibold">
+          <button id="chip-cooked" onclick="setFoodCategory('cooked')" class="py-1.5 rounded-lg bg-white shadow-xs text-brand-primary">🍲 Cooked Dish</button>
+          <button id="chip-raw" onclick="setFoodCategory('raw')" class="py-1.5 rounded-lg text-slate-textMuted">🥦 Groceries</button>
+          <button id="chip-menu" onclick="setFoodCategory('menu')" class="py-1.5 rounded-lg text-slate-textMuted">📜 Restaurant</button>
         </div>
 
-        <!-- Dynamic Modal Body -->
-        <div id="food-modal-body" class="flex flex-col gap-4"></div>
+        <!-- Dynamic Body -->
+        <div id="food-sheet-content" class="space-y-3"></div>
       </div>
     </div>
 
   </div>
 
+  <!-- ==================== TDF JAVASCRIPT LOGIC ==================== -->
   <script>
-    // Tab Navigation Logic (FLOW | HEALTH | CHAT | YOU)
-    function switchMainTab(tabId) {
-      document.querySelectorAll('.tab-view').forEach(p => p.classList.remove('active'));
-      document.querySelectorAll('.nav-btn').forEach(b => {
-        b.classList.remove('active', 'text-primary', 'font-bold');
-        b.classList.add('text-on-surface-variant');
+    // 1. Navigation Switching (FLOW | HEALTH | CHAT | YOU)
+    function switchNav(tabId) {
+      document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nav-tab').forEach(t => {
+        t.classList.remove('active', 'text-brand-primary');
+        t.classList.add('text-slate-textMuted');
       });
 
-      const targetPane = document.getElementById('pane-' + tabId);
-      const targetNav = document.getElementById('nav-' + tabId);
-
-      if (targetPane) targetPane.classList.add('active');
-      const fixedComposer = document.getElementById('fixed-chat-composer');
-      if (fixedComposer) {
-        fixedComposer.style.display = (tabId === 'chat') ? 'block' : 'none';
+      const pane = document.getElementById('pane-' + tabId);
+      const nav = document.getElementById('nav-' + tabId);
+      if (pane) pane.classList.add('active');
+      if (nav) {
+        nav.classList.add('active', 'text-brand-primary');
+        nav.classList.remove('text-slate-textMuted');
       }
-      if (targetNav) {
-        targetNav.classList.add('active', 'text-primary', 'font-bold');
-        targetNav.classList.remove('text-on-surface-variant');
+
+      // Show/Hide Floating Chat Composer
+      const composer = document.getElementById('tdf-fixed-composer');
+      if (composer) {
+        composer.style.display = (tabId === 'chat') ? 'block' : 'none';
       }
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Sub View Switching (DAY | WEEK in FLOW)
-    function switchFlowSubView(subId) {
-      document.querySelectorAll('.sub-view').forEach(s => s.classList.remove('active'));
-      const dayBtn = document.getElementById('btn-sub-day');
-      const weekBtn = document.getElementById('btn-sub-week');
+    // 2. FLOW Subviews: Day vs Week
+    function switchFlowSub(sub) {
+      const dayPane = document.getElementById('flow-sub-day');
+      const weekPane = document.getElementById('flow-sub-week');
+      const dayBtn = document.getElementById('tab-sub-day');
+      const weekBtn = document.getElementById('tab-sub-week');
 
-      if (subId === 'day') {
-        document.getElementById('subview-day').classList.add('active');
-        dayBtn.className = 'flex-1 py-1.5 rounded-md bg-surface-container-lowest shadow-sm text-primary font-label-sm text-[12px] uppercase tracking-wider font-semibold transition-all';
-        weekBtn.className = 'flex-1 py-1.5 rounded-md text-on-surface-variant font-label-sm text-[12px] uppercase tracking-wider hover:bg-surface-container-lowest/50 transition-all';
+      if (sub === 'day') {
+        dayPane.style.display = 'block';
+        weekPane.style.display = 'none';
+        dayBtn.className = 'flex-1 py-1.5 rounded-lg bg-white shadow-sm text-brand-primary font-semibold text-[12px] uppercase tracking-wider transition-all';
+        weekBtn.className = 'flex-1 py-1.5 rounded-lg text-slate-textMuted font-semibold text-[12px] uppercase tracking-wider transition-all';
       } else {
-        document.getElementById('subview-week').classList.add('active');
-        weekBtn.className = 'flex-1 py-1.5 rounded-md bg-surface-container-lowest shadow-sm text-primary font-label-sm text-[12px] uppercase tracking-wider font-semibold transition-all';
-        dayBtn.className = 'flex-1 py-1.5 rounded-md text-on-surface-variant font-label-sm text-[12px] uppercase tracking-wider hover:bg-surface-container-lowest/50 transition-all';
+        dayPane.style.display = 'none';
+        weekPane.style.display = 'block';
+        weekBtn.className = 'flex-1 py-1.5 rounded-lg bg-white shadow-sm text-brand-primary font-semibold text-[12px] uppercase tracking-wider transition-all';
+        dayBtn.className = 'flex-1 py-1.5 rounded-lg text-slate-textMuted font-semibold text-[12px] uppercase tracking-wider transition-all';
       }
     }
 
-    // Dynamic Meal Selection & Theme Color Shifting
-    const mealThemes = {
-      'Breakfast': {
-        themeClass: 'meal-theme-breakfast',
-        activeWindow: 'Active Window • 08:30 AM',
-        windowColor: 'text-alert-amber',
-        title: 'Breakfast Target',
-        targetKcal: '420 kcal Target',
-        protein: '35g',
-        carbs: '15g',
-        fat: '12g'
+    // 3. Meal Selection & Color Dynamic Shift
+    const mealDatabase = {
+      breakfast: {
+        borderColor: 'border-l-brand-amber',
+        badgeText: '08:30 AM Target',
+        badgeClass: 'text-brand-amber bg-brand-amber/10',
+        title: 'Savory High-Protein Morning Target',
+        desc: 'Front-load 35g protein within 60 mins of waking to lock insulin sensitivity.'
       },
-      'Lunch': {
-        themeClass: 'meal-theme-lunch',
-        activeWindow: 'Active Window • 01:30 PM',
-        windowColor: 'text-optimal-green',
-        title: 'Lunch Target',
-        targetKcal: '680 kcal Target',
-        protein: '48g',
-        carbs: '35g',
-        fat: '14g'
+      lunch: {
+        borderColor: 'border-l-brand-emerald',
+        badgeText: '01:30 PM Target',
+        badgeClass: 'text-brand-emerald bg-brand-emerald/10',
+        title: 'Midday Metabolic Sustenance Target',
+        desc: '48g whole bioavailable protein with prebiotic greens to flatten afternoon glycemic curve.'
       },
-      'Dinner': {
-        themeClass: 'meal-theme-dinner',
-        activeWindow: 'Active Window • 07:30 PM',
-        windowColor: 'text-indigo-600',
-        title: 'Dinner Target',
-        targetKcal: '520 kcal Target',
-        protein: '40g',
-        carbs: '20g',
-        fat: '10g'
+      dinner: {
+        borderColor: 'border-l-brand-primary',
+        badgeText: '07:30 PM Target',
+        badgeClass: 'text-brand-primary bg-brand-primary/10',
+        title: 'Evening Cellular Recovery Target',
+        desc: 'Light 40g protein meal finished 3 hours prior to bedtime to maximize nocturnal autophagy.'
       }
     };
 
-    function selectMeal(mealName, tabBtn) {
-      const card = document.getElementById('meal-intelligence-card');
-      const data = mealThemes[mealName];
-      if (!card || !data) return;
+    function setMealMode(mode, btn) {
+      const data = mealDatabase[mode];
+      const card = document.getElementById('tdf-meal-card');
+      const badge = document.getElementById('meal-window-badge');
+      const title = document.getElementById('meal-title');
+      const desc = document.getElementById('meal-desc');
 
-      // 1. Update tab button visuals
-      const parent = tabBtn.parentElement;
-      if (parent) {
-        parent.querySelectorAll('button').forEach(b => {
-          b.className = 'flex-1 py-1.5 px-2 rounded flex items-center justify-center gap-1.5 text-on-surface-variant transition-all hover:bg-surface-container-lowest/50';
+      if (card && data) {
+        card.classList.remove('border-l-brand-amber', 'border-l-brand-emerald', 'border-l-brand-primary');
+        card.classList.add(data.borderColor);
+      }
+      if (badge && data) {
+        badge.innerText = data.badgeText;
+        badge.className = 'text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md ' + data.badgeClass;
+      }
+      if (title && data) title.innerText = data.title;
+      if (desc && data) desc.innerText = data.desc;
+
+      // Update button visuals
+      const p = btn.parentElement;
+      if (p) {
+        p.querySelectorAll('button').forEach(b => {
+          b.className = 'px-3 py-1 rounded-lg text-slate-textMuted font-medium hover:text-slate-textMain transition-all';
         });
-        tabBtn.className = 'flex-1 py-1.5 px-2 bg-surface-container-lowest rounded shadow-sm flex items-center justify-center gap-1.5 transition-all text-on-surface font-bold';
+        btn.className = 'px-3 py-1 rounded-lg bg-white shadow-xs font-bold text-brand-primary transition-all';
       }
-
-      // 2. Shift the card color & gradient theme!
-      card.classList.remove('meal-theme-breakfast', 'meal-theme-lunch', 'meal-theme-dinner');
-      card.classList.add(data.themeClass);
-
-      // 3. Update the inner content
-      const winEl = document.getElementById('meal-active-window');
-      const titleEl = document.getElementById('meal-target-title');
-      const kcalEl = document.getElementById('meal-target-kcal');
-      const protEl = document.getElementById('meal-macro-protein');
-      const carbsEl = document.getElementById('meal-macro-carbs');
-      const fatEl = document.getElementById('meal-macro-fat');
-
-      if (winEl) {
-        winEl.innerText = data.activeWindow;
-        winEl.className = 'font-label-sm text-label-sm uppercase tracking-wider block mb-1 font-semibold ' + data.windowColor;
-      }
-      if (titleEl) titleEl.innerText = data.title;
-      if (kcalEl) kcalEl.innerText = data.targetKcal;
-      if (protEl) protEl.innerText = data.protein;
-      if (carbsEl) carbsEl.innerText = data.carbs;
-      if (fatEl) fatEl.innerText = data.fat;
     }
 
-    // Connect All Interactive Elements Once Loaded
-    window.addEventListener('DOMContentLoaded', () => {
-      // Initialize Breakfast as default theme
-      const card = document.getElementById('meal-intelligence-card');
-      if (card) card.classList.add('meal-theme-breakfast');
+    // 4. Interactive Habit Slider Drag Engine
+    function initSliderPhysics() {
+      const card = document.getElementById('swipe-task-active');
+      const knob = document.getElementById('swipe-knob');
+      const fill = document.getElementById('swipe-progress-fill');
+      if (!card || !knob) return;
 
-      // 1. Hook Meal Tab Switcher (Breakfast, Lunch, Dinner)
-      const mealTabs = document.querySelectorAll('button');
-      mealTabs.forEach(btn => {
-        const text = (btn.innerText || '').trim();
-        if (text.includes('Breakfast')) {
-          btn.onclick = () => selectMeal('Breakfast', btn);
-        } else if (text.includes('Lunch')) {
-          btn.onclick = () => selectMeal('Lunch', btn);
-        } else if (text.includes('Dinner')) {
-          btn.onclick = () => selectMeal('Dinner', btn);
-        }
-      });
+      let isDragging = false;
+      let startX = 0;
+      let currentX = 0;
+      let maxDrag = 0;
 
-      // 2. Hook Food Action Buttons: Scan, Manually, Ask AI
-      const actionBtns = document.querySelectorAll('main button');
-      actionBtns.forEach(btn => {
-        const text = btn.innerText || '';
-        if (text.includes('Scan / Photo')) {
-          btn.onclick = () => openFoodModal('scan');
-        } else if (text.includes('Manually')) {
-          btn.onclick = () => openFoodModal('manual');
-        } else if (text.includes('Ask AI')) {
-          btn.onclick = () => openFoodModal('ask_ai');
-        }
-      });
+      function calcMaxDrag() {
+        maxDrag = card.clientWidth - knob.clientWidth - 16;
+      }
+      calcMaxDrag();
+      window.addEventListener('resize', calcMaxDrag);
 
-      // 3. Initialize Interactive Swipe-to-Check Tasks Engine
-      initSwipeTasksEngine();
+      function start(e) {
+        if (card.dataset.completed === 'true') return;
+        isDragging = true;
+        startX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+        knob.style.transition = 'none';
+        fill.style.transition = 'none';
+      }
 
-      // 4. Hook Prompt Suggestions in Chat
-      const promptButtons = document.querySelectorAll('#pane-chat button');
-      promptButtons.forEach(b => {
-        const txt = (b.innerText || '').trim();
-        if (txt.includes('What 15m') || txt.includes('Why do I feel') || txt.includes('When is the best') || txt.includes('Can I drink tea')) {
-          b.onclick = () => {
-            const input = document.getElementById('fixed-chat-input') || document.querySelector('#pane-chat input');
-            if (input) {
-              input.value = txt;
-              sendAppChatMessage();
+      function move(e) {
+        if (!isDragging) return;
+        const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+        const delta = clientX - startX;
+        currentX = Math.max(0, Math.min(delta, maxDrag));
+        knob.style.transform = `translateX(${currentX}px)`;
+        const pct = (currentX / maxDrag) * 100;
+        fill.style.width = `${pct}%`;
+      }
+
+      function end() {
+        if (!isDragging) return;
+        isDragging = false;
+        knob.style.transition = 'transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)';
+        fill.style.transition = 'width 0.2s cubic-bezier(0.16, 1, 0.3, 1)';
+
+        if (currentX > maxDrag * 0.7) {
+          knob.style.transform = `translateX(${maxDrag}px)`;
+          fill.style.width = '100%';
+          setTimeout(() => {
+            card.dataset.completed = 'true';
+            card.className = 'p-3 bg-slate-subtle/70 rounded-xl flex items-center justify-between border border-brand-emerald/20 transition-all';
+            card.innerHTML = `
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-lg bg-brand-emerald text-white flex items-center justify-center shrink-0 shadow-xs">
+                  <span class="material-symbols-outlined text-[18px]">devices_off</span>
+                </div>
+                <div>
+                  <span class="text-[10px] font-bold text-brand-emerald uppercase tracking-wider">10:00 PM • Bedtime</span>
+                  <h4 class="text-[13.5px] font-semibold text-slate-textMain leading-tight">Melatonin bright screen cutoff</h4>
+                </div>
+              </div>
+              <div class="w-6 h-6 rounded-full bg-brand-emerald flex items-center justify-center text-white shrink-0">
+                <span class="material-symbols-outlined text-[14px]">check</span>
+              </div>
+            `;
+            const badge = document.getElementById('habits-badge');
+            if (badge) {
+              badge.innerText = '4 / 4 Done';
+              badge.className = 'text-[11px] font-bold text-brand-emerald bg-brand-emerald/10 border border-brand-emerald/20 px-2 py-0.5 rounded-full';
             }
-          };
+          }, 150);
+        } else {
+          knob.style.transform = 'translateX(0px)';
+          fill.style.width = '0%';
         }
-      });
-
-      // 5. Hook Chat Send Action
-      const chatInput = document.querySelector('#pane-chat input');
-      const chatSendBtn = document.querySelector('#pane-chat button span.material-symbols-outlined')?.parentElement;
-      if (chatInput) {
-        chatInput.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter') {
-            e.preventDefault();
-            sendAppChatMessage();
-          }
-        });
       }
-      if (chatSendBtn) {
-        chatSendBtn.onclick = () => sendAppChatMessage();
-      }
-    });
 
-    // Interactive Swipe-to-Check Knob Logic
-    function initSwipeTasksEngine() {
-      const activeCards = document.querySelectorAll('.task-swipe-card[data-completed="false"]');
-      
-      activeCards.forEach(card => {
-        const knob = card.querySelector('.task-swipe-knob');
-        const fill = card.querySelector('.task-swipe-fill');
-        const endSlot = card.querySelector('.task-end-slot');
-        if (!knob) return;
+      knob.addEventListener('mousedown', start);
+      window.addEventListener('mousemove', move);
+      window.addEventListener('mouseup', end);
 
-        let isDragging = false;
-        let startX = 0;
-        let currentX = 0;
-        let maxDrag = 0;
-
-        function updateMaxDrag() {
-          const cardWidth = card.clientWidth;
-          const knobWidth = knob.clientWidth;
-          maxDrag = cardWidth - knobWidth - 16; // 8px padding each side
-        }
-        updateMaxDrag();
-        window.addEventListener('resize', updateMaxDrag);
-
-        function onStart(e) {
-          if (card.getAttribute('data-completed') === 'true') return;
-          isDragging = true;
-          startX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
-          knob.style.transition = 'none';
-          if (fill) fill.style.transition = 'none';
-        }
-
-        function onMove(e) {
-          if (!isDragging) return;
-          const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
-          const deltaX = clientX - startX;
-          currentX = Math.max(0, Math.min(deltaX, maxDrag));
-
-          knob.style.transform = `translateX(${currentX}px)`;
-          if (fill) {
-            const percent = (currentX / maxDrag) * 100;
-            fill.style.width = `${percent}%`;
-          }
-        }
-
-        function onEnd() {
-          if (!isDragging) return;
-          isDragging = false;
-          knob.style.transition = 'transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)';
-          if (fill) fill.style.transition = 'width 0.25s cubic-bezier(0.16, 1, 0.3, 1)';
-
-          // Threshold: if dragged > 70% of distance, mark completed
-          if (currentX > maxDrag * 0.7) {
-            // Complete the task!
-            knob.style.transform = `translateX(${maxDrag}px)`;
-            if (fill) fill.style.width = '100%';
-            
-            setTimeout(() => {
-              card.setAttribute('data-completed', 'true');
-              card.className = 'task-swipe-card completed relative flex items-center p-3.5 bg-surface-container-lowest rounded-xl border border-optimal-green/30 overflow-hidden select-none transition-all duration-300';
-              knob.className = 'task-swipe-knob absolute left-2 top-2 bottom-2 w-11 rounded-lg bg-optimal-green text-white flex items-center justify-center shadow-md z-10';
-              knob.style.transform = 'none';
-              
-              if (endSlot) {
-                endSlot.className = 'task-end-slot absolute right-3 w-7 h-7 rounded-full bg-optimal-green flex items-center justify-center text-white shadow-sm z-10';
-                endSlot.innerHTML = '<span class="material-symbols-outlined text-[16px]">check</span>';
-              }
-
-              // Update counter to 4 / 4 Done!
-              const badge = document.getElementById('tasks-done-badge');
-              if (badge) {
-                badge.innerText = '4 / 4 Done';
-                badge.className = 'font-label-sm text-label-sm text-optimal-green bg-optimal-green/10 px-2.5 py-0.5 rounded-full border border-optimal-green/30 font-bold';
-              }
-
-              alert('✓ Habit Completed! 4 / 4 habits locked in for today.');
-            }, 180);
-          } else {
-            // Snap back
-            knob.style.transform = 'translateX(0px)';
-            if (fill) fill.style.width = '0%';
-          }
-        }
-
-        // Pointer & Touch Events
-        knob.addEventListener('mousedown', onStart);
-        window.addEventListener('mousemove', onMove);
-        window.addEventListener('mouseup', onEnd);
-
-        knob.addEventListener('touchstart', onStart, { passive: true });
-        window.addEventListener('touchmove', onMove, { passive: true });
-        window.addEventListener('touchend', onEnd);
-      });
+      knob.addEventListener('touchstart', start, { passive: true });
+      window.addEventListener('touchmove', move, { passive: true });
+      window.addEventListener('touchend', end);
     }
 
-    let activeFoodMode = 'scan';
-    let activeFoodCategory = 'cooked';
+    // 5. Timeline Drawer Logic (Choose Month & Week)
+    const timelineData = {
+      aug_2026: [
+        { id: 'w1', title: 'Week 1 (01 Aug - 07 Aug)', sub: 'Baseline Induction', score: '94%' },
+        { id: 'w2', title: 'Week 2 (08 Aug - 14 Aug)', sub: 'Insulin Resensitization', score: '89%' },
+        { id: 'w3', title: 'Week 3 (15 Aug - 21 Aug)', sub: 'Active Calibration', score: '92%', active: true },
+        { id: 'w4', title: 'Week 4 (22 Aug - 28 Aug)', sub: 'Upcoming Cycle', score: 'Projected' }
+      ],
+      jul_2026: [
+        { id: 'j1', title: 'Week 1 (01 Jul - 07 Jul)', sub: 'Hepatic Detox', score: '96%' },
+        { id: 'j2', title: 'Week 2 (08 Jul - 14 Jul)', sub: 'Cellular Restoration', score: '90%' }
+      ],
+      jun_2026: [
+        { id: 'm1', title: 'Week 1 (Baseline Onboarding)', sub: 'DNAm Clock Intake', score: '100%' }
+      ]
+    };
 
-    function openFoodModal(mode) {
-      activeFoodMode = mode;
-      const modal = document.getElementById('food-modal');
-      const title = document.getElementById('food-modal-title');
-      const body = document.getElementById('food-modal-body');
+    let chosenMonth = 'aug_2026';
+    let chosenWeekId = 'w3';
 
-      if (mode === 'scan') {
-        title.innerText = '📷 Scan Meal & Detect Oils';
-        body.innerHTML = `
-          <div class="border-2 border-dashed border-outline-variant/40 rounded-xl p-6 text-center flex flex-col items-center gap-3">
-            <span class="material-symbols-outlined text-[36px] text-primary">add_a_photo</span>
-            <div class="font-body-md text-[14px] text-on-surface font-medium">Upload or snap photo of your ${activeFoodCategory === 'cooked' ? 'Cooked Plate' : activeFoodCategory === 'ingredient' ? 'Raw Groceries' : 'Restaurant Menu'}</div>
-            <input type="file" accept="image/*" class="hidden" id="camera-file-input" onchange="showScanResult()" />
-            <button class="bg-primary text-on-primary px-5 py-2.5 rounded-lg font-label-sm text-[12px] uppercase tracking-wider font-semibold shadow-sm hover:bg-primary/90" onclick="document.getElementById('camera-file-input').click()">
-              Open Camera / Choose Photo
-            </button>
-          </div>
-          <div id="scan-output-box"></div>
-        `;
-      } else if (mode === 'manual') {
-        title.innerText = '✍️ Log Meal Manually';
-        body.innerHTML = `
-          <div class="flex flex-col gap-3">
-            <label class="font-label-sm text-[11px] uppercase tracking-wider text-on-surface-variant">Describe Food or Ingredients:</label>
-            <textarea id="manual-dish-input" class="w-full p-3 rounded-lg border border-outline-variant/40 text-on-surface font-body-md text-[14px] outline-none focus:border-primary" rows="3" placeholder="e.g., 3 pasture-raised eggs scrambled in 1 tsp desi ghee with sautéed spinach..."></textarea>
-            <button class="w-full bg-primary text-on-primary py-3 rounded-lg font-label-sm text-[12px] uppercase tracking-wider font-semibold shadow-sm hover:bg-primary/90" onclick="showScanResult()">
-              Analyze & Calculate Glycemic Curve
-            </button>
-          </div>
-          <div id="scan-output-box"></div>
-        `;
-      } else if (mode === 'ask_ai') {
-        title.innerText = '🤖 Ask AI Kitchen Intelligence';
-        body.innerHTML = `
-          <div class="p-4 rounded-xl bg-surface-container-low border border-optimal-green/30 flex flex-col gap-2">
-            <span class="font-label-sm text-[10px] uppercase tracking-wider text-optimal-green font-bold">Recommended From Your Pantry</span>
-            <h4 class="font-headline-lg-mobile text-[16px] font-bold text-on-surface">Savory Organic Eggs & Grass-Fed Paneer Scramble</h4>
-            <p class="font-body-md text-[13px] text-on-surface-variant">Cooked in pure A2 desi ghee with 1/2 avocado. Delivers <strong>35g clean protein</strong> with zero seed oils and a flat glycemic response.</p>
-            <div class="flex gap-2 mt-2">
-              <span class="px-2 py-0.5 rounded bg-primary/10 text-primary text-[11px] font-semibold">35g Protein</span>
-              <span class="px-2 py-0.5 rounded bg-optimal-green/10 text-optimal-green text-[11px] font-semibold">0% Seed Oils</span>
-              <span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant text-[11px] font-semibold">12m Cook</span>
+    function toggleTimelineDrawer(show) {
+      const el = document.getElementById('timeline-drawer-overlay');
+      if (el) {
+        if (show) {
+          renderDrawerWeeks(chosenMonth);
+          el.classList.add('open');
+        } else {
+          el.classList.remove('open');
+        }
+      }
+    }
+
+    function renderDrawerWeeks(monthKey) {
+      chosenMonth = monthKey;
+      const container = document.getElementById('drawer-weeks-container');
+      if (!container) return;
+
+      const list = timelineData[monthKey] || [];
+      container.innerHTML = list.map(item => {
+        const isSel = (item.id === chosenWeekId);
+        return `
+          <div onclick="selectWeek('${monthKey}', '${item.id}', '${item.title}')" class="p-3 rounded-xl border transition-all cursor-pointer ${isSel ? 'bg-brand-primary/10 border-brand-primary text-brand-primary' : 'bg-slate-subtle border-slate-border text-slate-textMain hover:bg-slate-200'} flex items-center justify-between">
+            <div>
+              <h4 class="text-[13px] font-bold">${item.title}</h4>
+              <p class="text-[11px] text-slate-textMuted">${item.sub} • ${item.score}</p>
+            </div>
+            <div class="w-5 h-5 rounded-full border ${isSel ? 'border-brand-primary bg-brand-primary text-white' : 'border-slate-300'} flex items-center justify-center">
+              ${isSel ? '<span class="material-symbols-outlined text-[12px]">check</span>' : ''}
             </div>
           </div>
-          <button class="w-full bg-optimal-green text-white py-3 rounded-lg font-label-sm text-[12px] uppercase tracking-wider font-semibold shadow-sm hover:bg-optimal-green/90" onclick="alert('✓ Meal logged to Daily Calorie Meter!'); closeFoodModal();">
-            ✓ Log to Daily Portion Meter (+35g Protein)
+        `;
+      }).join('');
+    }
+
+    function selectWeek(monthKey, weekId, title) {
+      chosenWeekId = weekId;
+      renderDrawerWeeks(monthKey);
+      const label = document.getElementById('health-cycle-label');
+      if (label) {
+        const mNames = { aug_2026: 'August 2026', jul_2026: 'July 2026', jun_2026: 'June 2026' };
+        label.innerText = (mNames[monthKey] || 'August 2026') + ' • ' + title.split(' ')[0] + ' ' + title.split(' ')[1];
+      }
+    }
+
+    // 6. Food Sheet & Scanner
+    let activeFoodMode = 'scan';
+    function toggleFoodSheet(show) {
+      const el = document.getElementById('food-sheet-overlay');
+      if (el) el.classList.toggle('open', show);
+    }
+
+    function openFoodSheet(mode) {
+      activeFoodMode = mode;
+      const title = document.getElementById('food-sheet-title');
+      const body = document.getElementById('food-sheet-content');
+
+      if (mode === 'scan') {
+        title.innerText = '📷 Scan Meal & Detect Seed Oils';
+        body.innerHTML = `
+          <div class="border-2 border-dashed border-slate-200 rounded-2xl p-6 text-center space-y-3">
+            <span class="material-symbols-outlined text-[36px] text-brand-primary">add_a_photo</span>
+            <p class="text-[13px] text-slate-textMuted font-medium">Capture or upload photo of your plate</p>
+            <input type="file" accept="image/*" class="hidden" id="photo-input" onchange="showFoodResult()" />
+            <button onclick="document.getElementById('photo-input').click()" class="px-5 py-2.5 bg-brand-primary text-white rounded-xl font-bold text-[12px] uppercase tracking-wider shadow-sm tdf-tap">
+              Open Camera
+            </button>
+          </div>
+          <div id="food-result-target"></div>
+        `;
+      } else if (mode === 'manual') {
+        title.innerText = '✍️ Log Food Manually';
+        body.innerHTML = `
+          <div class="space-y-3">
+            <label class="text-[11px] font-bold text-slate-textMuted uppercase">Meal Ingredients or Dish:</label>
+            <textarea class="w-full p-3 rounded-xl border border-slate-200 text-[13.5px] outline-none focus:border-brand-primary" rows="3" placeholder="e.g. 3 pasture-raised eggs scrambled in 1 tsp desi ghee with spinach..."></textarea>
+            <button onclick="showFoodResult()" class="w-full py-3 bg-brand-primary text-white rounded-xl font-bold text-[12px] uppercase tracking-wider shadow-sm tdf-tap">
+              Calculate Glycemic Curve
+            </button>
+          </div>
+          <div id="food-result-target"></div>
+        `;
+      } else {
+        title.innerText = '🤖 Ask AI Kitchen Intelligence';
+        body.innerHTML = `
+          <div class="p-4 rounded-xl bg-brand-emerald/5 border border-brand-emerald/20 space-y-2">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-brand-emerald">Recommended from Pantry</span>
+            <h4 class="font-bold text-[15px] text-slate-textMain">Pasture Eggs & Grass-Fed Paneer Scramble</h4>
+            <p class="text-[12.5px] text-slate-textMuted">Cooked in pure A2 desi ghee with 1/2 avocado. Delivers <strong>35g clean protein</strong> with zero seed oils.</p>
+            <div class="flex gap-2 pt-1">
+              <span class="px-2 py-0.5 rounded bg-brand-primary/10 text-brand-primary text-[10px] font-bold">35g Protein</span>
+              <span class="px-2 py-0.5 rounded bg-brand-emerald/10 text-brand-emerald text-[10px] font-bold">0% Seed Oils</span>
+            </div>
+          </div>
+          <button onclick="alert('✓ 35g Protein added to Portion Meter!'); toggleFoodSheet(false);" class="w-full py-3 bg-brand-emerald text-white rounded-xl font-bold text-[12px] uppercase tracking-wider shadow-sm tdf-tap">
+            Log to Calorie Target
           </button>
         `;
       }
-
-      modal.style.display = 'flex';
+      toggleFoodSheet(true);
     }
 
-    function setFoodPill(cat, btn) {
-      activeFoodCategory = cat;
-      document.querySelectorAll('.food-pill').forEach(p => {
-        p.className = 'food-pill py-2 text-[11px] font-semibold rounded-md text-on-surface-variant text-center';
-      });
-      btn.className = 'food-pill active py-2 text-[11px] font-semibold rounded-md bg-surface-container-lowest text-primary shadow-sm text-center';
-      openFoodModal(activeFoodMode);
-    }
-
-    function showScanResult() {
-      const out = document.getElementById('scan-output-box');
-      if (!out) return;
-      out.innerHTML = `
-        <div class="p-4 rounded-xl bg-optimal-green/5 border border-optimal-green/30 flex flex-col gap-2 mt-2">
-          <div class="flex items-center gap-1.5 text-optimal-green font-label-sm text-[11px] uppercase tracking-wider font-bold">
+    function showFoodResult() {
+      const target = document.getElementById('food-result-target');
+      if (!target) return;
+      target.innerHTML = `
+        <div class="p-3.5 bg-brand-emerald/10 border border-brand-emerald/20 rounded-xl space-y-1.5 mt-2">
+          <div class="flex items-center gap-1.5 text-brand-emerald text-[12px] font-bold uppercase">
             <span class="material-symbols-outlined text-[16px]">verified</span>
-            Dish Analyzed: High-Protein Healthy Fats
+            Dish Analyzed: Clean Whole Food
           </div>
-          <div class="text-[13px] text-on-surface space-y-1">
-            <div>🟢 <strong>PROTEIN:</strong> 34g bioavailable whole protein.</div>
-            <div>🟢 <strong>SEED OILS:</strong> 0% industrial seed oils detected (Desi Ghee / Olive Oil).</div>
-            <div>🟢 <strong>GLYCEMIC INDEX:</strong> Flat insulin curve (Minimal glucose spike).</div>
-          </div>
-          <button class="w-full bg-primary text-on-primary py-2.5 rounded-lg font-label-sm text-[11px] uppercase tracking-wider font-bold mt-2 hover:bg-primary/90" onclick="alert('✓ 34g Protein & Calorie Target Logged!'); closeFoodModal();">
-            ✓ Confirm & Log to Calorie Meter
+          <p class="text-[12px] text-slate-textMain">🟢 <strong>PROTEIN:</strong> 34g bioavailable whole protein.</p>
+          <p class="text-[12px] text-slate-textMain">🟢 <strong>SEED OILS:</strong> 0% industrial seed oils detected.</p>
+          <button onclick="alert('✓ Meal Logged!'); toggleFoodSheet(false);" class="w-full py-2 bg-brand-primary text-white rounded-lg text-[11px] font-bold uppercase mt-2">
+            Confirm & Log Target
           </button>
         </div>
       `;
     }
 
-    function closeFoodModal() {
-      document.getElementById('food-modal').style.display = 'none';
-    }
-
-    // Live AI Chat Message Engine
-    function sendAppChatMessage() {
-      const input = document.querySelector('#pane-chat input');
+    // 7. Chat Engine Logic
+    function sendChatMessage() {
+      const input = document.getElementById('chat-input-field');
       if (!input || !input.value.trim()) return;
-
-      const userText = input.value.trim();
+      const text = input.value.trim();
       input.value = '';
+      appendChatBubble(text, true);
 
-      // Find the main greeting card in chat and insert conversation
-      const greetingCard = document.querySelector('#pane-chat .bg-surface-container-lowest');
-      if (greetingCard) {
-        const userMsgDiv = document.createElement('div');
-        userMsgDiv.className = 'p-3.5 bg-primary text-on-primary rounded-xl font-body-md text-[14px] self-end max-w-[85%] ml-auto mt-3 shadow-sm';
-        userMsgDiv.innerText = userText;
-
-        const aiMsgDiv = document.createElement('div');
-        aiMsgDiv.className = 'p-4 bg-surface-container-low border border-primary/20 rounded-xl font-body-md text-[14px] text-on-surface mt-2 shadow-sm flex flex-col gap-2';
-        aiMsgDiv.innerHTML = `
-          <div class="flex items-center gap-1 text-primary font-label-sm text-[11px] uppercase tracking-wider font-bold">
-            <span class="material-symbols-outlined text-[16px]">auto_awesome</span>
-            Tovelu Clinical Intelligence
-          </div>
-          <div>Based on your <strong>42-biomarker calibration</strong> (fasting glucose 84 mg/dL) and stocked pantry, here is your clinical answer: Ensure at least 30g whole protein with zero industrial seed oils to maintain flat glucose stability.</div>
-        `;
-
-        greetingCard.appendChild(userMsgDiv);
-        greetingCard.appendChild(aiMsgDiv);
-        userMsgDiv.scrollIntoView({ behavior: 'smooth' });
-      }
+      setTimeout(() => {
+        appendChatBubble('Based on your <strong>42-biomarker calibration</strong> (fasting glucose 84 mg/dL) and kitchen pantry, here is your clinical answer: Prioritize 35g whole protein with zero industrial seed oils to maintain flat postprandial glucose stability.', false);
+      }, 400);
     }
+
+    function sendQuickPrompt(txt) {
+      appendChatBubble(txt, true);
+      setTimeout(() => {
+        appendChatBubble('Here is the clinical protocol for that: Prioritize high-density protein and adhere strictly to your 12-min postprandial walk to blunt insulin spikes.', false);
+      }, 400);
+    }
+
+    function appendChatBubble(text, isUser) {
+      const stream = document.getElementById('chat-stream');
+      if (!stream) return;
+
+      const bubble = document.createElement('div');
+      if (isUser) {
+        bubble.className = 'p-3 bg-brand-primary text-white rounded-2xl rounded-tr-xs text-[13.5px] max-w-[85%] ml-auto shadow-xs';
+        bubble.innerText = text;
+      } else {
+        bubble.className = 'tdf-card p-4 rounded-2xl rounded-tl-xs text-[13px] text-slate-textMain max-w-[90%] space-y-1.5';
+        bubble.innerHTML = `
+          <div class="flex items-center gap-1.5 text-brand-primary text-[11px] font-bold uppercase tracking-wider">
+            <span class="material-symbols-outlined text-[16px]">smart_toy</span>
+            Tovelu Clinical AI
+          </div>
+          <div>${text}</div>
+        `;
+      }
+      stream.appendChild(bubble);
+      bubble.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // 8. PDF Download Trigger
+    function downloadPhysicianPdf() {
+      alert('✓ Complete Clinical Physician Report (WHO ICD-11 Certified) downloaded successfully!');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initSliderPhysics();
+    });
   </script>
-
-
-<!-- ==================== SIDE DRAWER: CHOOSE WEEK UNDER MONTH ==================== -->
-<div id="choose-week-drawer-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] transition-opacity duration-300 opacity-0 pointer-events-none flex justify-end" onclick="if(event.target===this) closeChooseWeekDrawer()">
-  <div id="choose-week-drawer" class="w-full max-w-[340px] h-full bg-surface shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300 ease-out border-l border-surface-container">
-    
-    <!-- Drawer Header -->
-    <div class="p-5 border-b border-surface-container flex items-center justify-between bg-surface-container-lowest">
-      <div class="flex items-center gap-2.5">
-        <div class="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-          <span class="material-symbols-outlined text-[20px]">date_range</span>
-        </div>
-        <div>
-          <h3 class="font-headline-lg-mobile text-[16px] font-bold text-on-surface">Choose Week</h3>
-          <p class="text-[11px] text-on-surface-variant">Select historical timeline</p>
-        </div>
-      </div>
-      <button onclick="closeChooseWeekDrawer()" class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors">✕</button>
-    </div>
-
-    <!-- Month Selector Dropdown -->
-    <div class="p-4 border-b border-surface-container bg-surface-container-low/50">
-      <label class="font-label-sm text-[10px] uppercase tracking-wider text-on-surface-variant font-bold block mb-1.5">Selected Month:</label>
-      <div class="relative">
-        <select id="drawer-month-select" class="w-full p-2.5 bg-surface-container-lowest border border-outline-variant/30 rounded-lg text-on-surface font-body-md text-[13px] font-semibold appearance-none outline-none focus:border-primary pr-8" onchange="renderDrawerWeeks(this.value)">
-          <option value="aug_2026" selected>August 2026 (Active)</option>
-          <option value="jul_2026">July 2026 (Archive)</option>
-          <option value="jun_2026">June 2026 (Baseline)</option>
-        </select>
-        <span class="material-symbols-outlined absolute right-2.5 top-2.5 text-on-surface-variant pointer-events-none text-[18px]">expand_more</span>
-      </div>
-    </div>
-
-    <!-- Weeks List (Under Selected Month) -->
-    <div class="flex-1 overflow-y-auto p-4 flex flex-col gap-2.5" id="drawer-weeks-list">
-      <!-- Dynamically Rendered Weeks -->
-    </div>
-
-    <!-- Drawer Footer -->
-    <div class="p-4 border-t border-surface-container bg-surface-container-lowest">
-      <button onclick="closeChooseWeekDrawer()" class="w-full py-3 bg-primary text-on-primary font-label-sm text-[12px] uppercase tracking-wider font-bold rounded-xl shadow-md hover:bg-primary/90 transition-colors">
-        Apply Selected Timeline
-      </button>
-    </div>
-
-  </div>
-</div>
 
 </body>
 </html>

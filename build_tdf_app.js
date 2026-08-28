@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+const fs = require("fs");
+
+const tdfHtml = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -1055,9 +1057,9 @@
         const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
         const delta = clientX - startX;
         currentX = Math.max(0, Math.min(delta, maxDrag));
-        knob.style.transform = `translateX(${currentX}px)`;
+        knob.style.transform = \`translateX(\${currentX}px)\`;
         const pct = (currentX / maxDrag) * 100;
-        fill.style.width = `${pct}%`;
+        fill.style.width = \`\${pct}%\`;
       }
 
       function end() {
@@ -1067,12 +1069,12 @@
         fill.style.transition = 'width 0.2s cubic-bezier(0.16, 1, 0.3, 1)';
 
         if (currentX > maxDrag * 0.7) {
-          knob.style.transform = `translateX(${maxDrag}px)`;
+          knob.style.transform = \`translateX(\${maxDrag}px)\`;
           fill.style.width = '100%';
           setTimeout(() => {
             card.dataset.completed = 'true';
             card.className = 'p-3 bg-slate-subtle/70 rounded-xl flex items-center justify-between border border-brand-emerald/20 transition-all';
-            card.innerHTML = `
+            card.innerHTML = \`
               <div class="flex items-center gap-3">
                 <div class="w-9 h-9 rounded-lg bg-brand-emerald text-white flex items-center justify-center shrink-0 shadow-xs">
                   <span class="material-symbols-outlined text-[18px]">devices_off</span>
@@ -1085,7 +1087,7 @@
               <div class="w-6 h-6 rounded-full bg-brand-emerald flex items-center justify-center text-white shrink-0">
                 <span class="material-symbols-outlined text-[14px]">check</span>
               </div>
-            `;
+            \`;
             const badge = document.getElementById('habits-badge');
             if (badge) {
               badge.innerText = '4 / 4 Done';
@@ -1147,17 +1149,17 @@
       const list = timelineData[monthKey] || [];
       container.innerHTML = list.map(item => {
         const isSel = (item.id === chosenWeekId);
-        return `
-          <div onclick="selectWeek('${monthKey}', '${item.id}', '${item.title}')" class="p-3 rounded-xl border transition-all cursor-pointer ${isSel ? 'bg-brand-primary/10 border-brand-primary text-brand-primary' : 'bg-slate-subtle border-slate-border text-slate-textMain hover:bg-slate-200'} flex items-center justify-between">
+        return \`
+          <div onclick="selectWeek('\${monthKey}', '\${item.id}', '\${item.title}')" class="p-3 rounded-xl border transition-all cursor-pointer \${isSel ? 'bg-brand-primary/10 border-brand-primary text-brand-primary' : 'bg-slate-subtle border-slate-border text-slate-textMain hover:bg-slate-200'} flex items-center justify-between">
             <div>
-              <h4 class="text-[13px] font-bold">${item.title}</h4>
-              <p class="text-[11px] text-slate-textMuted">${item.sub} • ${item.score}</p>
+              <h4 class="text-[13px] font-bold">\${item.title}</h4>
+              <p class="text-[11px] text-slate-textMuted">\${item.sub} • \${item.score}</p>
             </div>
-            <div class="w-5 h-5 rounded-full border ${isSel ? 'border-brand-primary bg-brand-primary text-white' : 'border-slate-300'} flex items-center justify-center">
-              ${isSel ? '<span class="material-symbols-outlined text-[12px]">check</span>' : ''}
+            <div class="w-5 h-5 rounded-full border \${isSel ? 'border-brand-primary bg-brand-primary text-white' : 'border-slate-300'} flex items-center justify-center">
+              \${isSel ? '<span class="material-symbols-outlined text-[12px]">check</span>' : ''}
             </div>
           </div>
-        `;
+        \`;
       }).join('');
     }
 
@@ -1185,7 +1187,7 @@
 
       if (mode === 'scan') {
         title.innerText = '📷 Scan Meal & Detect Seed Oils';
-        body.innerHTML = `
+        body.innerHTML = \`
           <div class="border-2 border-dashed border-slate-200 rounded-2xl p-6 text-center space-y-3">
             <span class="material-symbols-outlined text-[36px] text-brand-primary">add_a_photo</span>
             <p class="text-[13px] text-slate-textMuted font-medium">Capture or upload photo of your plate</p>
@@ -1195,10 +1197,10 @@
             </button>
           </div>
           <div id="food-result-target"></div>
-        `;
+        \`;
       } else if (mode === 'manual') {
         title.innerText = '✍️ Log Food Manually';
-        body.innerHTML = `
+        body.innerHTML = \`
           <div class="space-y-3">
             <label class="text-[11px] font-bold text-slate-textMuted uppercase">Meal Ingredients or Dish:</label>
             <textarea class="w-full p-3 rounded-xl border border-slate-200 text-[13.5px] outline-none focus:border-brand-primary" rows="3" placeholder="e.g. 3 pasture-raised eggs scrambled in 1 tsp desi ghee with spinach..."></textarea>
@@ -1207,10 +1209,10 @@
             </button>
           </div>
           <div id="food-result-target"></div>
-        `;
+        \`;
       } else {
         title.innerText = '🤖 Ask AI Kitchen Intelligence';
-        body.innerHTML = `
+        body.innerHTML = \`
           <div class="p-4 rounded-xl bg-brand-emerald/5 border border-brand-emerald/20 space-y-2">
             <span class="text-[10px] font-bold uppercase tracking-wider text-brand-emerald">Recommended from Pantry</span>
             <h4 class="font-bold text-[15px] text-slate-textMain">Pasture Eggs & Grass-Fed Paneer Scramble</h4>
@@ -1223,7 +1225,7 @@
           <button onclick="alert('✓ 35g Protein added to Portion Meter!'); toggleFoodSheet(false);" class="w-full py-3 bg-brand-emerald text-white rounded-xl font-bold text-[12px] uppercase tracking-wider shadow-sm tdf-tap">
             Log to Calorie Target
           </button>
-        `;
+        \`;
       }
       toggleFoodSheet(true);
     }
@@ -1231,7 +1233,7 @@
     function showFoodResult() {
       const target = document.getElementById('food-result-target');
       if (!target) return;
-      target.innerHTML = `
+      target.innerHTML = \`
         <div class="p-3.5 bg-brand-emerald/10 border border-brand-emerald/20 rounded-xl space-y-1.5 mt-2">
           <div class="flex items-center gap-1.5 text-brand-emerald text-[12px] font-bold uppercase">
             <span class="material-symbols-outlined text-[16px]">verified</span>
@@ -1243,7 +1245,7 @@
             Confirm & Log Target
           </button>
         </div>
-      `;
+      \`;
     }
 
     // 7. Chat Engine Logic
@@ -1276,13 +1278,13 @@
         bubble.innerText = text;
       } else {
         bubble.className = 'tdf-card p-4 rounded-2xl rounded-tl-xs text-[13px] text-slate-textMain max-w-[90%] space-y-1.5';
-        bubble.innerHTML = `
+        bubble.innerHTML = \`
           <div class="flex items-center gap-1.5 text-brand-primary text-[11px] font-bold uppercase tracking-wider">
             <span class="material-symbols-outlined text-[16px]">smart_toy</span>
             Tovelu Clinical AI
           </div>
-          <div>${text}</div>
-        `;
+          <div>\${text}</div>
+        \`;
       }
       stream.appendChild(bubble);
       bubble.scrollIntoView({ behavior: 'smooth' });
@@ -1299,4 +1301,11 @@
   </script>
 
 </body>
-</html>
+</html>`;
+
+fs.writeFileSync("/media/nikita/New Volume/Tovelufile/app.html", tdfHtml, "utf8");
+fs.writeFileSync("/media/nikita/New Volume/Tovelufile/index.html", tdfHtml, "utf8");
+fs.writeFileSync("/media/nikita/New Volume/Tovelufile/webapp/app.html", tdfHtml, "utf8");
+fs.writeFileSync("/media/nikita/New Volume/Tovelufile/webapp/index.html", tdfHtml, "utf8");
+
+console.log("Successfully generated clean, pure TDF-1.0 mobile app on all mirrors!");
