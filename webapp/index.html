@@ -348,7 +348,7 @@
       background: var(--gemini-surface);
       border: 1.5px solid var(--gemini-border);
       border-radius: 22px;
-      height: 72px;
+      height: 76px;
       display: flex;
       align-items: center;
       padding: 0 12px;
@@ -373,7 +373,7 @@
       left: 0;
       bottom: 0;
       width: 0%;
-      background: linear-gradient(90deg, rgba(0, 245, 160, 0.15), rgba(0, 208, 108, 0.35));
+      background: linear-gradient(90deg, rgba(0, 245, 160, 0.18), rgba(0, 208, 108, 0.38));
       pointer-events: none;
       transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -385,7 +385,7 @@
     /* Task text inside the card */
     .task-text-container {
       position: absolute;
-      left: 72px;
+      left: 74px;
       right: 56px;
       display: flex;
       flex-direction: column;
@@ -393,6 +393,25 @@
       pointer-events: none;
       z-index: 2;
       transition: opacity 0.2s;
+    }
+    .task-time-badge {
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--gemini-sparkle-blue);
+      background: var(--gemini-surface-container);
+      border: 1px solid var(--gemini-border-subtle);
+      padding: 1px 6px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      width: fit-content;
+      margin-bottom: 2px;
+      letter-spacing: 0.02em;
+    }
+    .app-task-card.completed .task-time-badge {
+      color: var(--gemini-vitality-emerald);
+      border-color: rgba(0, 208, 108, 0.2);
     }
     .app-task-card.completed .task-title-text {
       color: var(--gemini-text-muted);
@@ -402,8 +421,8 @@
     .task-end-target {
       position: absolute;
       right: 12px;
-      width: 48px;
-      height: 48px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
       border: 2px dashed var(--gemini-border);
       display: flex;
@@ -423,8 +442,8 @@
     .task-sliding-icon {
       position: absolute;
       left: 10px;
-      width: 50px;
-      height: 50px;
+      width: 52px;
+      height: 52px;
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -433,6 +452,7 @@
       z-index: 3;
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
       transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s;
+      will-change: transform;
     }
     .task-sliding-icon:active {
       cursor: grabbing;
@@ -702,7 +722,7 @@
 
           </div>
 
-          <!-- 4. TODAY'S TASKS (SLIDE ICON FROM START TO END) -->
+          <!-- 4. TODAY'S TASKS (DYNAMIC PROTOCOL ENGINE) -->
           <div style="display: flex; flex-direction: column; gap: 12px;">
             <div style="display: flex; justify-content: space-between; align-items: center;">
               <div style="font-size: 13px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase; letter-spacing: 0.05em;">
@@ -711,81 +731,8 @@
               <span style="font-size: 12px; font-weight: 800; color: var(--gemini-sparkle-blue); background: rgba(0, 98, 255, 0.08); padding: 4px 10px; border-radius: 9999px;" id="flow-task-counter">3 / 4 Done</span>
             </div>
 
-            <!-- Task 1: Sunlight -->
-            <div class="app-task-card completed" id="task-card-1">
-              <div class="task-drag-fill"></div>
-              <div class="task-sliding-icon" data-task-id="1" data-base-icon="light_mode" data-base-bg="linear-gradient(135deg, #F59E0B, #D97706)" style="background: var(--gemini-vitality-emerald);">
-                <span class="material-symbols-outlined knob-icon" style="font-size: 22px; color: #FFFFFF;">check</span>
-              </div>
-              <div class="task-text-container">
-                <div class="task-title-text" style="font-family: 'Google Sans', sans-serif; font-size: 14px; font-weight: 800; color: var(--gemini-text-main);">
-                  Sit under sunlight for 15 minutes
-                </div>
-                <div style="font-size: 11px; color: var(--gemini-text-muted);">
-                  Within 45m of waking for morning energy
-                </div>
-              </div>
-              <div class="task-end-target">
-                <span class="material-symbols-outlined" style="font-size: 18px; color: var(--gemini-text-muted);">arrow_forward</span>
-              </div>
-            </div>
-
-            <!-- Task 2: Hydration -->
-            <div class="app-task-card completed" id="task-card-2">
-              <div class="task-drag-fill"></div>
-              <div class="task-sliding-icon" data-task-id="2" data-base-icon="water_drop" data-base-bg="linear-gradient(135deg, #00C0FF, #0062FF)" style="background: var(--gemini-vitality-emerald);">
-                <span class="material-symbols-outlined knob-icon" style="font-size: 22px; color: #FFFFFF;">check</span>
-              </div>
-              <div class="task-text-container">
-                <div class="task-title-text" style="font-family: 'Google Sans', sans-serif; font-size: 14px; font-weight: 800; color: var(--gemini-text-main);">
-                  Drink a glass of mineral water
-                </div>
-                <div style="font-size: 11px; color: var(--gemini-text-muted);">
-                  Add a pinch of salt upon waking
-                </div>
-              </div>
-              <div class="task-end-target">
-                <span class="material-symbols-outlined" style="font-size: 18px; color: var(--gemini-text-muted);">arrow_forward</span>
-              </div>
-            </div>
-
-            <!-- Task 3: Walk -->
-            <div class="app-task-card completed" id="task-card-3">
-              <div class="task-drag-fill"></div>
-              <div class="task-sliding-icon" data-task-id="3" data-base-icon="directions_walk" data-base-bg="linear-gradient(135deg, #00F5A0, #00D06C)" style="background: var(--gemini-vitality-emerald);">
-                <span class="material-symbols-outlined knob-icon" style="font-size: 22px; color: #FFFFFF;">check</span>
-              </div>
-              <div class="task-text-container">
-                <div class="task-title-text" style="font-family: 'Google Sans', sans-serif; font-size: 14px; font-weight: 800; color: var(--gemini-text-main);">
-                  Take a 12-minute walk after lunch
-                </div>
-                <div style="font-size: 11px; color: var(--gemini-text-muted);">
-                  Smooths glucose & prevents crash
-                </div>
-              </div>
-              <div class="task-end-target">
-                <span class="material-symbols-outlined" style="font-size: 18px; color: var(--gemini-text-muted);">arrow_forward</span>
-              </div>
-            </div>
-
-            <!-- Task 4: Screen Wind-Down -->
-            <div class="app-task-card" id="task-card-4">
-              <div class="task-drag-fill"></div>
-              <div class="task-sliding-icon" data-task-id="4" data-base-icon="bedtime" data-base-bg="linear-gradient(135deg, #8B5CF6, #6366F1)" style="background: linear-gradient(135deg, #8B5CF6, #6366F1);">
-                <span class="material-symbols-outlined knob-icon" style="font-size: 22px; color: #FFFFFF;">bedtime</span>
-              </div>
-              <div class="task-text-container">
-                <div class="task-title-text" style="font-family: 'Google Sans', sans-serif; font-size: 14px; font-weight: 800; color: var(--gemini-text-main);">
-                  Turn off bright screens 1 hour before bed
-                </div>
-                <div style="font-size: 11px; color: var(--gemini-text-muted);">
-                  Slide icon to end to complete ➔
-                </div>
-              </div>
-              <div class="task-end-target">
-                <span class="material-symbols-outlined" style="font-size: 18px; color: var(--gemini-text-muted);">arrow_forward</span>
-              </div>
-            </div>
+            <!-- Dynamic Tasks Container (Supports 2, 4, 8, 20+ tasks based on user plan) -->
+            <div id="dynamic-tasks-list" style="display: flex; flex-direction: column; gap: 12px;"></div>
           </div>
 
           <!-- 5. TODAY'S CLINICAL NOTE (HEADER INSIDE CARD) -->
@@ -1412,7 +1359,76 @@
       document.getElementById('profile-modal-overlay').style.display = 'none';
     }
 
-    // Full Start-to-End Icon Drag Slider Controller (Thumb & Mouse Cursor)
+    // Dynamic Daily Protocol Tasks (Can hold 2, 4, 8, 20+ tasks based on user plan)
+    const dailyProtocolTasks = [
+      {
+        id: 1,
+        title: "Sit under sunlight for 15 minutes",
+        subtitle: "Synchronizes morning cortisol & brain alertness",
+        timeBadge: "⏰ 06:30 AM • Within 45m of waking",
+        icon: "light_mode",
+        bg: "linear-gradient(135deg, #F59E0B, #D97706)",
+        completed: true
+      },
+      {
+        id: 2,
+        title: "Drink a glass of mineral water",
+        subtitle: "Hydrates cellular osmolyte channels",
+        timeBadge: "⏰ 07:00 AM • Upon waking",
+        icon: "water_drop",
+        bg: "linear-gradient(135deg, #00C0FF, #0062FF)",
+        completed: true
+      },
+      {
+        id: 3,
+        title: "Take a 12-minute walk after lunch",
+        subtitle: "Blunts post-meal glucose rise by 34%",
+        timeBadge: "⏱️ 20 mins after lunch",
+        icon: "directions_walk",
+        bg: "linear-gradient(135deg, #00F5A0, #00D06C)",
+        completed: true
+      },
+      {
+        id: 4,
+        title: "Turn off bright screens 1 hour before bed",
+        subtitle: "Protects natural melatonin surge for deep sleep",
+        timeBadge: "⏰ 10:00 PM • 60m before bed",
+        icon: "bedtime",
+        bg: "linear-gradient(135deg, #8B5CF6, #6366F1)",
+        completed: false
+      }
+    ];
+
+    // Dynamic Task Rendering & Silk-Smooth Start-to-End Gesture Controller
+    function renderDynamicTasks() {
+      const container = document.getElementById('dynamic-tasks-list');
+      if (!container) return;
+
+      container.innerHTML = dailyProtocolTasks.map(t => `
+        <div class="app-task-card ${t.completed ? 'completed' : ''}" id="task-card-${t.id}" data-task-id="${t.id}">
+          <div class="task-drag-fill"></div>
+          <div class="task-sliding-icon" data-task-id="${t.id}" data-base-icon="${t.icon}" data-base-bg="${t.bg}" style="background: ${t.completed ? 'var(--gemini-vitality-emerald)' : t.bg};">
+            <span class="material-symbols-outlined knob-icon" style="font-size: 22px; color: #FFFFFF;">${t.completed ? 'check' : t.icon}</span>
+          </div>
+          <div class="task-text-container">
+            <span class="task-time-badge">${t.timeBadge}</span>
+            <div class="task-title-text" style="font-family: 'Google Sans', sans-serif; font-size: 14px; font-weight: 800; color: var(--gemini-text-main);">
+              ${t.title}
+            </div>
+            <div style="font-size: 11px; color: var(--gemini-text-muted);">
+              ${t.subtitle}
+            </div>
+          </div>
+          <div class="task-end-target">
+            <span class="material-symbols-outlined" style="font-size: 18px; color: var(--gemini-text-muted);">arrow_forward</span>
+          </div>
+        </div>
+      `).join('');
+
+      initTaskSwipeGestures();
+      updateTaskCounter();
+    }
+
     function initTaskSwipeGestures() {
       const cards = document.querySelectorAll('#subview-flow-day .app-task-card');
       
@@ -1420,6 +1436,8 @@
         const icon = card.querySelector('.task-sliding-icon');
         const fill = card.querySelector('.task-drag-fill');
         const iconSpan = icon ? icon.querySelector('.knob-icon') : null;
+        const taskId = parseInt(card.getAttribute('data-task-id'), 10);
+        const taskData = dailyProtocolTasks.find(t => t.id === taskId);
         const baseIcon = icon ? (icon.getAttribute('data-base-icon') || 'task') : 'task';
         const baseBg = icon ? (icon.getAttribute('data-base-bg') || 'linear-gradient(135deg, #00C0FF, #0062FF)') : '';
 
@@ -1431,8 +1449,8 @@
 
         function setPosition(isCompleted, animated = true) {
           const max = getMaxOffset();
-          const transition = animated ? 'transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s' : 'none';
-          const fillTransition = animated ? 'width 0.25s cubic-bezier(0.16, 1, 0.3, 1)' : 'none';
+          const transition = animated ? 'transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s' : 'none';
+          const fillTransition = animated ? 'width 0.28s cubic-bezier(0.16, 1, 0.3, 1)' : 'none';
           
           icon.style.transition = transition;
           fill.style.transition = fillTransition;
@@ -1443,24 +1461,26 @@
             fill.style.width = '100%';
             if (iconSpan) iconSpan.innerText = 'check';
             icon.style.background = 'var(--gemini-vitality-emerald)';
+            if (taskData) taskData.completed = true;
           } else {
             card.classList.remove('completed');
             icon.style.transform = 'translateX(0px)';
             fill.style.width = '0%';
             if (iconSpan) iconSpan.innerText = baseIcon;
             icon.style.background = baseBg;
+            if (taskData) taskData.completed = false;
           }
           updateTaskCounter();
         }
 
-        // Initialize position on load
+        // Initialize position on render
         setPosition(card.classList.contains('completed'), false);
 
         let startX = 0;
         let startTransform = 0;
         let isDragging = false;
 
-        // Touch Events (Thumb Drag from Start to End)
+        // Touch Drag (Thumb)
         icon.addEventListener('touchstart', (e) => {
           startX = e.touches[0].clientX;
           startTransform = card.classList.contains('completed') ? getMaxOffset() : 0;
@@ -1479,7 +1499,7 @@
           fill.style.width = `${Math.min(100, (newOffset + 30) / card.offsetWidth * 100)}%`;
         }, { passive: true });
 
-        icon.addEventListener('touchend', (e) => {
+        icon.addEventListener('touchend', () => {
           if (!isDragging) return;
           isDragging = false;
           const max = getMaxOffset();
@@ -1493,7 +1513,7 @@
           }
         });
 
-        // Mouse Events (Cursor Drag from Start to End)
+        // Mouse Drag (Cursor)
         icon.addEventListener('mousedown', (e) => {
           startX = e.clientX;
           startTransform = card.classList.contains('completed') ? getMaxOffset() : 0;
@@ -1595,7 +1615,7 @@
 
     window.addEventListener('load', () => {
       initTimeAwareMeal();
-      initTaskSwipeGestures();
+      renderDynamicTasks();
       const saved = localStorage.getItem('tovelu_survey_answers');
       if (saved) {
         try {
