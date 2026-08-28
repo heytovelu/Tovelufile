@@ -24,6 +24,40 @@ let chatInner = getInnerMain(chatRaw);
 // You Inner
 let youInner = getInnerMain(youRaw);
 
+// 1. Give Meal card an ID so we can dynamically adjust background/border color on tab click
+flowDayInner = flowDayInner.replace(
+  '<!-- Meals & Food Intelligence -->\n<div class="bg-surface-container-lowest rounded-xl p-5',
+  '<!-- Meals & Food Intelligence -->\n<div id="meal-intelligence-card" class="bg-surface-container-lowest rounded-xl p-5 transition-all duration-300'
+);
+
+// 2. Add IDs to active meal target fields
+flowDayInner = flowDayInner.replace(
+  '<span class="font-label-sm text-label-sm text-alert-amber uppercase tracking-wider block mb-1">Active Window • 08:30 AM</span>',
+  '<span id="meal-active-window" class="font-label-sm text-label-sm text-alert-amber uppercase tracking-wider block mb-1">Active Window • 08:30 AM</span>'
+);
+flowDayInner = flowDayInner.replace(
+  '<h3 class="font-headline-lg-mobile text-[20px] leading-[28px] font-semibold text-on-surface">Breakfast Target</h3>',
+  '<h3 id="meal-target-title" class="font-headline-lg-mobile text-[20px] leading-[28px] font-semibold text-on-surface">Breakfast Target</h3>'
+);
+flowDayInner = flowDayInner.replace(
+  '<span class="font-label-sm text-label-sm text-primary block">420 kcal Target</span>',
+  '<span id="meal-target-kcal" class="font-label-sm text-label-sm text-primary block font-semibold">420 kcal Target</span>'
+);
+
+// 3. Add IDs to macro amounts
+flowDayInner = flowDayInner.replace(
+  '<span class="font-data-metric text-[18px] text-on-surface">35g</span>',
+  '<span id="meal-macro-protein" class="font-data-metric text-[18px] text-on-surface">35g</span>'
+);
+flowDayInner = flowDayInner.replace(
+  '<span class="font-data-metric text-[18px] text-on-surface">15g</span>',
+  '<span id="meal-macro-carbs" class="font-data-metric text-[18px] text-on-surface">15g</span>'
+);
+flowDayInner = flowDayInner.replace(
+  '<span class="font-data-metric text-[18px] text-on-surface">12g</span>',
+  '<span id="meal-macro-fat" class="font-data-metric text-[18px] text-on-surface">12g</span>'
+);
+
 // Official Tovelu Mitosis Bio-Cell SVG Logo
 const toveluLogoSvg = `
 <svg width="28" height="28" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="shrink-0">
@@ -226,6 +260,23 @@ const unifiedHtml = `<!DOCTYPE html>
       font-variation-settings: 'FILL' 1;
     }
 
+    /* Meal Themes (Dynamic Color Shift on Click) */
+    .meal-theme-breakfast {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.05), rgba(255, 255, 255, 1)) !important;
+      border: 1.5px solid rgba(245, 158, 11, 0.35) !important;
+      box-shadow: 0 4px 20px rgba(245, 158, 11, 0.08) !important;
+    }
+    .meal-theme-lunch {
+      background: linear-gradient(135deg, rgba(0, 208, 108, 0.05), rgba(255, 255, 255, 1)) !important;
+      border: 1.5px solid rgba(0, 208, 108, 0.35) !important;
+      box-shadow: 0 4px 20px rgba(0, 208, 108, 0.08) !important;
+    }
+    .meal-theme-dinner {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(255, 255, 255, 1)) !important;
+      border: 1.5px solid rgba(99, 102, 241, 0.35) !important;
+      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.08) !important;
+    }
+
     /* Modal Sheet */
     .modal-overlay {
       position: fixed;
@@ -259,7 +310,7 @@ const unifiedHtml = `<!DOCTYPE html>
 
   <div class="app-viewport">
     
-    <!-- ─── TOP STICKY APP BAR (With Official Mitosis Bio-Cell Logo & Brand) ─── -->
+    <!-- ─── TOP STICKY APP BAR (With DAY 4 / WEEK 3 & Mitosis Bio-Cell Logo) ─── -->
     <header class="fixed top-0 max-w-[440px] w-full z-50 bg-surface/90 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(0,0,0,0.04)] border-b border-surface-container">
       <div class="h-14 px-gutter flex items-center justify-between">
         <div class="flex items-center gap-2 cursor-pointer" onclick="switchMainTab('flow')">
@@ -268,7 +319,7 @@ const unifiedHtml = `<!DOCTYPE html>
         </div>
         <div class="flex items-center gap-3">
           <div class="bg-primary/10 px-3 py-1 rounded-full border border-primary/20">
-            <span class="text-primary font-label-sm text-[11px] uppercase tracking-wider font-semibold">Day 18</span>
+            <span class="text-primary font-label-sm text-[11px] uppercase tracking-wider font-bold">DAY 4 / WEEK 3</span>
           </div>
           <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0 cursor-pointer shadow-sm shadow-primary/30" onclick="switchMainTab('you')">
             <span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
@@ -408,22 +459,93 @@ const unifiedHtml = `<!DOCTYPE html>
       }
     }
 
+    // Dynamic Meal Selection & Theme Color Shifting
+    const mealThemes = {
+      'Breakfast': {
+        themeClass: 'meal-theme-breakfast',
+        activeWindow: 'Active Window • 08:30 AM',
+        windowColor: 'text-alert-amber',
+        title: 'Breakfast Target',
+        targetKcal: '420 kcal Target',
+        protein: '35g',
+        carbs: '15g',
+        fat: '12g'
+      },
+      'Lunch': {
+        themeClass: 'meal-theme-lunch',
+        activeWindow: 'Active Window • 01:30 PM',
+        windowColor: 'text-optimal-green',
+        title: 'Lunch Target',
+        targetKcal: '680 kcal Target',
+        protein: '48g',
+        carbs: '35g',
+        fat: '14g'
+      },
+      'Dinner': {
+        themeClass: 'meal-theme-dinner',
+        activeWindow: 'Active Window • 07:30 PM',
+        windowColor: 'text-indigo-600',
+        title: 'Dinner Target',
+        targetKcal: '520 kcal Target',
+        protein: '40g',
+        carbs: '20g',
+        fat: '10g'
+      }
+    };
+
+    function selectMeal(mealName, tabBtn) {
+      const card = document.getElementById('meal-intelligence-card');
+      const data = mealThemes[mealName];
+      if (!card || !data) return;
+
+      // 1. Update tab button visuals
+      const parent = tabBtn.parentElement;
+      if (parent) {
+        parent.querySelectorAll('button').forEach(b => {
+          b.className = 'flex-1 py-1.5 px-2 rounded flex items-center justify-center gap-1.5 text-on-surface-variant transition-all hover:bg-surface-container-lowest/50';
+        });
+        tabBtn.className = 'flex-1 py-1.5 px-2 bg-surface-container-lowest rounded shadow-sm flex items-center justify-center gap-1.5 transition-all text-on-surface font-bold';
+      }
+
+      // 2. Shift the card color & gradient theme!
+      card.classList.remove('meal-theme-breakfast', 'meal-theme-lunch', 'meal-theme-dinner');
+      card.classList.add(data.themeClass);
+
+      // 3. Update the inner content
+      const winEl = document.getElementById('meal-active-window');
+      const titleEl = document.getElementById('meal-target-title');
+      const kcalEl = document.getElementById('meal-target-kcal');
+      const protEl = document.getElementById('meal-macro-protein');
+      const carbsEl = document.getElementById('meal-macro-carbs');
+      const fatEl = document.getElementById('meal-macro-fat');
+
+      if (winEl) {
+        winEl.innerText = data.activeWindow;
+        winEl.className = 'font-label-sm text-label-sm uppercase tracking-wider block mb-1 font-semibold ' + data.windowColor;
+      }
+      if (titleEl) titleEl.innerText = data.title;
+      if (kcalEl) kcalEl.innerText = data.targetKcal;
+      if (protEl) protEl.innerText = data.protein;
+      if (carbsEl) carbsEl.innerText = data.carbs;
+      if (fatEl) fatEl.innerText = data.fat;
+    }
+
     // Connect All Interactive Elements Once Loaded
     window.addEventListener('DOMContentLoaded', () => {
+      // Initialize Breakfast as default theme
+      const card = document.getElementById('meal-intelligence-card');
+      if (card) card.classList.add('meal-theme-breakfast');
+
       // 1. Hook Meal Tab Switcher (Breakfast, Lunch, Dinner)
       const mealTabs = document.querySelectorAll('button');
       mealTabs.forEach(btn => {
         const text = (btn.innerText || '').trim();
-        if (text.includes('Breakfast') || text.includes('Lunch') || text.includes('Dinner')) {
-          btn.addEventListener('click', function() {
-            const parent = this.parentElement;
-            if (parent) {
-              parent.querySelectorAll('button').forEach(b => {
-                b.className = 'flex-1 py-1.5 px-2 rounded flex items-center justify-center gap-1.5 text-on-surface-variant transition-all hover:bg-surface-container-lowest/50';
-              });
-              this.className = 'flex-1 py-1.5 px-2 bg-surface-container-lowest rounded shadow-sm flex items-center justify-center gap-1.5 transition-all text-on-surface font-semibold';
-            }
-          });
+        if (text.includes('Breakfast')) {
+          btn.onclick = () => selectMeal('Breakfast', btn);
+        } else if (text.includes('Lunch')) {
+          btn.onclick = () => selectMeal('Lunch', btn);
+        } else if (text.includes('Dinner')) {
+          btn.onclick = () => selectMeal('Dinner', btn);
         }
       });
 
@@ -616,4 +738,4 @@ const unifiedHtml = `<!DOCTYPE html>
 </html>`;
 
 fs.writeFileSync("/media/nikita/New Volume/Tovelufile/app.html", unifiedHtml, "utf8");
-console.log("Successfully rebuilt unified app.html with Tovelu Logo & Official Colors!");
+console.log("Successfully rebuilt unified app.html with DAY 4 / WEEK 3 & dynamic meal section colors!");
