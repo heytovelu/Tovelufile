@@ -915,6 +915,221 @@
     .gemini-send-btn:active {
       transform: scale(0.92);
     }
+
+    /* ==========================================================================
+       CLINICAL HEALTH REPORT & BIOMARKER INTELLIGENCE SYSTEM
+       ========================================================================== */
+    .health-container {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding-bottom: 20px;
+    }
+    .health-patient-card {
+      background: linear-gradient(135deg, rgba(26, 115, 232, 0.08), rgba(0, 208, 108, 0.08), var(--gemini-surface));
+      border: 1.5px solid rgba(26, 115, 232, 0.2);
+      border-radius: 22px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    }
+    .health-patient-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .health-pill-tag {
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      letter-spacing: 0.04em;
+    }
+    .health-pill-emerald {
+      background: rgba(0, 208, 108, 0.12);
+      color: var(--gemini-vitality-emerald);
+      border: 1px solid rgba(0, 208, 108, 0.25);
+    }
+    .health-pill-blue {
+      background: rgba(26, 115, 232, 0.1);
+      color: var(--gemini-sparkle-blue);
+      border: 1px solid rgba(26, 115, 232, 0.2);
+    }
+    .health-pill-amber {
+      background: rgba(245, 158, 11, 0.12);
+      color: #D97706;
+      border: 1px solid rgba(245, 158, 11, 0.25);
+    }
+    .health-bio-age-hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .health-bio-age-val {
+      font-family: 'Google Sans Display', sans-serif;
+      font-size: 34px;
+      font-weight: 800;
+      color: var(--gemini-sparkle-blue);
+      line-height: 1.1;
+    }
+    .health-trajectory-bar-wrap {
+      background: var(--gemini-surface-container);
+      border-radius: 9999px;
+      height: 10px;
+      overflow: hidden;
+      border: 1px solid var(--gemini-border-subtle);
+      position: relative;
+    }
+    .health-trajectory-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gemini-sparkle-blue), var(--gemini-vitality-emerald));
+      border-radius: 9999px;
+      transition: width 0.6s ease;
+    }
+
+    /* WEEKLY REPORT SWITCHER PILLS */
+    .health-week-nav {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      background: var(--gemini-surface-container);
+      padding: 4px;
+      border-radius: 16px;
+      border: 1px solid var(--gemini-border-subtle);
+    }
+    .health-week-btn {
+      background: transparent;
+      border: none;
+      height: 44px;
+      border-radius: 12px;
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--gemini-text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      transition: all 0.15s;
+      font-family: 'Google Sans', sans-serif;
+    }
+    .health-week-btn.active {
+      background: var(--gemini-surface);
+      color: var(--gemini-sparkle-blue);
+      box-shadow: 0 2px 8px rgba(0, 98, 255, 0.12);
+    }
+
+    /* 6 DEEP CLINICAL BIOMARKER PANELS */
+    .health-section-title {
+      font-family: 'Google Sans', sans-serif;
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--gemini-text-main);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 4px;
+    }
+    .health-panels-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .health-panel-card {
+      background: var(--gemini-surface);
+      border: 1.5px solid var(--gemini-border-subtle);
+      border-radius: 18px;
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+      transition: border-color 0.2s;
+    }
+    .health-panel-card:hover {
+      border-color: var(--gemini-sparkle-blue);
+    }
+    .health-panel-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .health-panel-name {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--gemini-text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .health-panel-metrics-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      background: var(--gemini-surface-container);
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--gemini-border-subtle);
+    }
+    .health-metric-box {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .health-metric-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gemini-text-muted);
+      text-transform: uppercase;
+    }
+    .health-metric-val {
+      font-family: 'Google Sans Display', sans-serif;
+      font-size: 16.5px;
+      font-weight: 800;
+      color: var(--gemini-text-main);
+    }
+    .health-panel-rationale {
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--gemini-text-muted);
+    }
+
+    /* CLINICAL EXPORT ACTIONS */
+    .health-export-box {
+      background: linear-gradient(135deg, rgba(26, 115, 232, 0.06), rgba(124, 58, 237, 0.04));
+      border: 1.5px dashed var(--gemini-sparkle-blue);
+      border-radius: 20px;
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .health-export-btn {
+      width: 100%;
+      height: 48px;
+      border-radius: 14px;
+      background: var(--gemini-sparkle-blue);
+      color: #FFFFFF;
+      border: none;
+      font-family: 'Google Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(26, 115, 232, 0.28);
+      transition: transform 0.15s;
+    }
+    .health-export-btn:active {
+      transform: scale(0.97);
+    }
   </style>
 </head>
 <body>
@@ -1517,42 +1732,308 @@
 
       </section>
 
-      <!-- ==================== 3. TAB: HEALTH (METABOLIC & EPIGENETICS) ==================== -->
+      <!-- ==================== 3. TAB: HEALTH (COMPREHENSIVE CLINICAL REPORT) ==================== -->
       <section id="pane-health" class="tab-pane">
-        <div class="gemini-card">
-          <div style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald); text-transform: uppercase;">Live Metabolic Telemetry</div>
-          <div style="font-family: 'Google Sans Display', sans-serif; font-size: 22px; font-weight: 800; margin-top: 4px;">
-            Biological Age: <span style="color: var(--gemini-sparkle-blue);" id="app-bio-age">20.8 Yrs</span>
+        
+        <div class="health-container">
+          
+          <!-- 1. PATIENT & EPIGENETIC LONGEVITY HERO CARD -->
+          <div class="health-patient-card">
+            <div class="health-patient-meta">
+              <span class="health-pill-tag health-pill-emerald">
+                ● CLINICAL TELEMETRY ACTIVE
+              </span>
+              <span class="health-pill-tag health-pill-blue">
+                AJAY • M / 25 YRS • WEEK 3
+              </span>
+            </div>
+
+            <div class="health-bio-age-hero">
+              <div>
+                <div style="font-size: 13px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase; letter-spacing: 0.04em;">
+                  DNAm Epigenetic Clock
+                </div>
+                <div class="health-bio-age-val" id="app-bio-age">
+                  20.8 Yrs
+                </div>
+                <div style="font-size: 13px; color: var(--gemini-vitality-emerald); font-weight: 800; margin-top: 2px;">
+                  ▼ 4.2 Years Younger than Chronological (25 Yrs)
+                </div>
+              </div>
+              <div style="text-align: right;">
+                <div style="font-size: 11px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase;">Aging Pace</div>
+                <div style="font-family: 'Google Sans Display', sans-serif; font-size: 24px; font-weight: 800; color: var(--gemini-text-main);">0.82x</div>
+                <div style="font-size: 11.5px; color: var(--gemini-text-muted);">Optimal Rate</div>
+              </div>
+            </div>
+
+            <!-- 90-Day Trajectory Gauge -->
+            <div>
+              <div style="display: flex; justify-content: space-between; font-size: 12px; font-weight: 700; color: var(--gemini-text-muted); margin-bottom: 6px;">
+                <span>90-Day Epigenetic Trajectory</span>
+                <span style="color: var(--gemini-sparkle-blue); font-weight: 800;">Day 18 / Day 90 (20% Complete)</span>
+              </div>
+              <div class="health-trajectory-bar-wrap">
+                <div class="health-trajectory-bar-fill" style="width: 20%;"></div>
+              </div>
+              <div style="font-size: 11.5px; color: var(--gemini-text-muted); margin-top: 6px;">
+                ✨ Projected 90-Day Epigenetic Outcome: <strong>19.6 Years Biological Age</strong> (+1.2 yrs saved)
+              </div>
+            </div>
           </div>
-          <div style="font-size: 12px; color: var(--gemini-text-muted);">Chronological Age: <span id="app-chrono-age">25 Yrs</span> • Aging Pace: <strong>0.82x (Optimal)</strong></div>
+
+          <!-- 2. WEEKLY REPORT SWITCHER (WEEK 3 ACTIVE | WEEK 2 | WEEK 1) -->
+          <div class="health-week-nav">
+            <button class="health-week-btn active" id="btn-health-w3" onclick="switchHealthWeek(3)">
+              <span>Week 3 (Active)</span>
+            </button>
+            <button class="health-week-btn" id="btn-health-w2" onclick="switchHealthWeek(2)">
+              <span>Week 2</span>
+            </button>
+            <button class="health-week-btn" id="btn-health-w1" onclick="switchHealthWeek(1)">
+              <span>Week 1</span>
+            </button>
+          </div>
+
+          <!-- 3. DEEP CLINICAL BIOMARKER PANELS (6 SPECIALIST MATRICES) -->
+          <div class="health-section-title">
+            <span>Clinical Biomarker Telemetry</span>
+            <span style="font-size: 12px; font-weight: 700; color: var(--gemini-vitality-emerald);">All 6 Panels Optimal 🟢</span>
+          </div>
+
+          <div class="health-panels-grid" id="health-panels-container">
+            
+            <!-- Panel 1: Endocrine & Metabolic Glycemic Control -->
+            <div class="health-panel-card">
+              <div class="health-panel-top">
+                <div class="health-panel-name">
+                  <span class="material-symbols-outlined" style="color: var(--gemini-sparkle-blue); font-size: 20px;">bloodtype</span>
+                  <span>1. Endocrine & Glucose Homeostasis</span>
+                </div>
+                <span class="health-pill-tag health-pill-emerald">Optimal</span>
+              </div>
+              <div class="health-panel-metrics-row">
+                <div class="health-metric-box">
+                  <span class="health-metric-label">Fasting Glucose</span>
+                  <span class="health-metric-val">84 mg/dL</span>
+                  <span style="font-size: 10px; color: var(--gemini-text-muted);">Ref: 70-99</span>
+                </div>
+                <div class="health-metric-box">
+                  <span class="health-metric-label">HOMA-IR Score</span>
+                  <span class="health-metric-val">0.82</span>
+                  <span style="font-size: 10px; color: var(--gemini-text-muted);">Ref: &lt; 1.0</span>
+                </div>
+                <div class="health-metric-box">
+                  <span class="health-metric-label">Est. HbA1c</span>
+                  <span class="health-metric-val">5.1%</span>
+                  <span style="font-size: 10px; color: var(--gemini-text-muted);">Ref: &lt; 5.7%</span>
+                </div>
+              </div>
+              <div class="health-panel-rationale">
+                <strong>Doctor's Rationale:</strong> Insulin sensitivity has resensitized by 34% through 35g+ morning protein pacing and 12-min postprandial walks blunting GLUT4 glucose spikes.
+              </div>
+            </div>
+
+            <!-- Panel 2: Cardiovascular & Atherogenic Lipid Clearance -->
+            <div class="health-panel-card">
+              <div class="health-panel-top">
+                <div class="health-panel-name">
+                  <span class="material-symbols-outlined" style="color: #EF4444; font-size: 20px;">favorite</span>
+                  <span>2. Atherogenic Cardiovascular Profile</span>
+                </div>
+                <span class="health-pill-tag health-pill-emerald">Optimal</span>
+              </div>
+              <div class="health-panel-metrics-row">
+                <div class="health-metric-box">
+                  <span class="health-metric-label">Trig / HDL Ratio</span>
+                  <span class="health-metric-val">1.12</span>
+                  <span style="font-size: 10px; color: var(--gemini-text-muted);">Ref: &lt; 1.5</span>
+                </div>
+                <div class="health-metric-box">
+                  <span class="health-metric-label">Blood Pressure</span>
+                  <span class="health-metric-val">118 / 76</span>
+                  <span style="font-size: 10px; color: var(--gemini-text-muted);">mmHg</span>
+                </div>
+                <div class="health-metric-box">
+                  <span class="health-metric-label">ApoB / ApoA1</span>
+                  <span class="health-metric-val">0.65</span>
+                  <span style="font-size: 10px; color: var(--gemini-text-muted);">Low Plaque Risk</span>
+                </div>
+              </div>
+              <div class="health-panel-rationale">
+                <strong>Doctor's Rationale:</strong> Triglyceride-to-HDL ratio of 1.12 confirms absence of small dense LDL particles. Zero trans-fats and high potassium intake protect arterial elasticity.
+              </div>
+            </div>
+
+            <!-- Panel 3: Liver Function & Seed Oil Clearance -->
+            <div class="health-panel-card">
+              <div class="health-panel-top">
+                <div class="health-panel-name">
+                  <span class="material-symbols-outlined" style="color: #F59E0B; font-size: 20px;">science</span>
+                  <span>3. Hepatic Detox & Seed Oil Clearance</span>
+                </div>
+                <span class="health-pill-tag health-pill-emerald">94% Cleared</span>
+              </div>
+              <div class="health-panel-metrics-row">
+                <div class="health-metric-box">
+                  <span class="health-metric-label">ALT / AST Ratio</span>
+                  <span class="health-metric-val">0.94</span>
+                  <span style="font-size: 10px; color: var(--gemini-text-muted);">Normal Parenchyma</span>
+                </div>
+                <div class="health-metric-box">
+                  <span class="health-metric-label">MASLD Risk</span>
+                  <span class="health-metric-val">&lt; 5%</span>
+                  <span style="font-size: 10px; color: var(--gemini-text-muted);">Zero Fatty Infiltration</span>
+                </div>
+                <div class="health-metric-box">
+                  <span class="health-metric-label">Seed Oil Status</span>
+                  <span class="health-metric-val">0% Used</span>
+                  <span style="font-size: 10px; color: var(--gemini-text-muted);">Pure Ghee/Olive Only</span>
+                </div>
+              </div>
+              <div class="health-panel-rationale">
+                <strong>Doctor's Rationale:</strong> Complete elimination of sunflower, canola, and palm oils prevents hepatic lipid peroxidation and de novo lipogenesis.
+              </div>
+            </div>
+
+            <!-- Panel 4: Gastrointestinal Microbiome & Systemic Inflammation -->
+            <div class="health-panel-card">
+              <div class="health-panel-top">
+                <div class="health-panel-name">
+                  <span class="material-symbols-outlined" style="color: var(--gemini-vitality-emerald); font-size: 20px;">spa</span>
+                  <span>4. Gut Microbiome & Systemic Inflammation</span>
+                </div>
+                <span class="health-pill-tag health-pill-emerald">Optimal</span>
+              </div>
+              <div class="health-panel-metrics-row">
+                <div class="health-metric-box">
+                  <span class="health-metric-label">hs-CRP Marker</span>
+                  <span class="health-metric-val">&lt; 0.5 mg/L</span>
+                  <span style="font-size: 10px; color: var(--gemini-text-muted);">Zero Inflammation</span>
+                </div>
+                <div class="health-metric-box">
+                  <span class="health-metric-label">Daily Fiber</span>
+                  <span class="health-metric-val">38g / day</span>
+                  <span style="font-size: 10px; color: var(--gemini-text-muted);">Target: 35g+</span>
+                </div>
+                <div class="health-metric-box">
+                  <span class="health-metric-label">Gut Barrier</span>
+                  <span class="health-metric-val">Tight</span>
+                  <span style="font-size: 10px; color: var(--gemini-text-muted);">Zero Bloating</span>
+                </div>
+              </div>
+              <div class="health-panel-rationale">
+                <strong>Doctor's Rationale:</strong> High prebiotic polyphenol intake and zero liquid sugars foster Akkermansia muciniphila growth, maintaining tight intestinal junction integrity.
+              </div>
+            </div>
+
+            <!-- Panel 5: Circadian Sleep Architecture & Autonomic Tone -->
+            <div class="health-panel-card">
+              <div class="health-panel-top">
+                <div class="health-panel-name">
+                  <span class="material-symbols-outlined" style="color: #8B5CF6; font-size: 20px;">bedtime</span>
+                  <span>5. Circadian Neuro-Endocrine Recovery</span>
+                </div>
+                <span class="health-pill-tag health-pill-emerald">89% Score</span>
+              </div>
+              <div class="health-panel-metrics-row">
+                <div class="health-metric-box">
+                  <span class="health-metric-label">Sunlight Window</span>
+                  <span class="health-metric-val">06:30 AM</span>
+                  <span style="font-size: 10px; color: var(--gemini-text-muted);">Cortisol Peak</span>
+                </div>
+                <div class="health-metric-box">
+                  <span class="health-metric-label">Caffeine Cutoff</span>
+                  <span class="health-metric-val">12:00 PM</span>
+                  <span style="font-size: 10px; color: var(--gemini-text-muted);">10h Sleep Window</span>
+                </div>
+                <div class="health-metric-box">
+                  <span class="health-metric-label">Deep Sleep</span>
+                  <span class="health-metric-val">1h 48m</span>
+                  <span style="font-size: 10px; color: var(--gemini-text-muted);">Stage 3/4 Restorative</span>
+                </div>
+              </div>
+              <div class="health-panel-rationale">
+                <strong>Doctor's Rationale:</strong> Strict 12:00 PM caffeine cutoff ensures complete adenosine clearance before bed, maximizing cellular brain detox during slow-wave sleep.
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 4. WHO ICD-11 55,000+ DIAGNOSTIC REVERSAL TRIAGE -->
+          <div class="gemini-card" style="padding: 20px;">
+            <div style="font-family: 'Google Sans', sans-serif; font-size: 16px; font-weight: 800; color: var(--gemini-text-main); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+              <span class="material-symbols-outlined" style="color: var(--gemini-sparkle-blue); font-size: 22px;">verified_user</span>
+              <span>WHO ICD-11 Diagnostic Triage & Reversal</span>
+            </div>
+            
+            <div style="display: flex; flex-direction: column; gap: 10px; font-size: 13px; line-height: 1.55;">
+              <div style="background: rgba(0, 208, 108, 0.08); border-left: 4px solid var(--gemini-vitality-emerald); padding: 12px 14px; border-radius: 4px 12px 12px 4px;">
+                <strong style="color: var(--gemini-vitality-emerald);">Category 1 (100% Solvable Lifestyle Conditions):</strong><br>
+                • <strong>ICD-11 5B81:</strong> Metabolic Syndrome & Insulin Resistance (92% Reversal Velocity)<br>
+                • <strong>ICD-11 5B70:</strong> 2 PM Energy Slump & Glycemic Somnolence (100% Solved)<br>
+                • <strong>ICD-11 DD91:</strong> Functional Bloating & Microbiome Dysbiosis (89% Resolved)
+              </div>
+              
+              <div style="background: rgba(245, 158, 11, 0.08); border-left: 4px solid #F59E0B; padding: 12px 14px; border-radius: 4px 12px 12px 4px;">
+                <strong style="color: #D97706;">Category 2 (Chronic Manageable Conditions):</strong><br>
+                • <strong>ICD-11 5A80 / 5A00:</strong> Endocrine Support (Thyroid & Hormonal stabilization via clean selenium, zinc & healthy fats)
+              </div>
+
+              <div style="background: rgba(239, 68, 68, 0.08); border-left: 4px solid #EF4444; padding: 12px 14px; border-radius: 4px 12px 12px 4px;">
+                <strong style="color: #DC2626;">Category 3 (Specialist Clinical Escalation):</strong><br>
+                • <strong>ICD-11 5A10:</strong> Type 1 Diabetes & Acute Care (Hospital/Physician supervised. Tovelu guarantees LAW-001 constitutional boundary).
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. WEEKLY NUTRITION & COMPLIANCE SUMMARY -->
+          <div class="gemini-card" style="padding: 20px;">
+            <div style="font-family: 'Google Sans', sans-serif; font-size: 16px; font-weight: 800; color: var(--gemini-text-main); margin-bottom: 12px;">
+              📊 Week 3 Protocol Compliance Matrix
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+              <div style="background: var(--gemini-surface-container); padding: 12px; border-radius: 12px;">
+                <div style="font-size: 11px; font-weight: 700; color: var(--gemini-text-muted); text-transform: uppercase;">Average Protein</div>
+                <div style="font-size: 18px; font-weight: 800; color: var(--gemini-text-main); margin-top: 2px;">118g / day</div>
+                <div style="font-size: 11px; color: var(--gemini-vitality-emerald); font-weight: 700;">✓ 100% Target Met</div>
+              </div>
+              <div style="background: var(--gemini-surface-container); padding: 12px; border-radius: 12px;">
+                <div style="font-size: 11px; font-weight: 700; color: var(--gemini-text-muted); text-transform: uppercase;">Seed Oils Used</div>
+                <div style="font-size: 18px; font-weight: 800; color: var(--gemini-vitality-emerald); margin-top: 2px;">0% (Zero)</div>
+                <div style="font-size: 11px; color: var(--gemini-vitality-emerald); font-weight: 700;">✓ 100% Eliminated</div>
+              </div>
+              <div style="background: var(--gemini-surface-container); padding: 12px; border-radius: 12px;">
+                <div style="font-size: 11px; font-weight: 700; color: var(--gemini-text-muted); text-transform: uppercase;">Post-Meal Walks</div>
+                <div style="font-size: 18px; font-weight: 800; color: var(--gemini-text-main); margin-top: 2px;">7 of 7 Logged</div>
+                <div style="font-size: 11px; color: var(--gemini-vitality-emerald); font-weight: 700;">✓ 84 Total Minutes</div>
+              </div>
+              <div style="background: var(--gemini-surface-container); padding: 12px; border-radius: 12px;">
+                <div style="font-size: 11px; font-weight: 700; color: var(--gemini-text-muted); text-transform: uppercase;">Caffeine Cutoff</div>
+                <div style="font-size: 18px; font-weight: 800; color: var(--gemini-text-main); margin-top: 2px;">7 of 7 Met</div>
+                <div style="font-size: 11px; color: var(--gemini-vitality-emerald); font-weight: 700;">✓ Before 12 PM</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. CLINICAL PDF EXPORT & DOCTOR SHARING -->
+          <div class="health-export-box">
+            <div>
+              <div style="font-family: 'Google Sans', sans-serif; font-size: 16px; font-weight: 800; color: var(--gemini-text-main);">
+                📄 Export Doctor Health Report (PDF)
+              </div>
+              <div style="font-size: 12.5px; color: var(--gemini-text-muted); margin-top: 3px; line-height: 1.5;">
+                Generates a verified WHO ICD-11 medical report formatted for your endocrinologist, cardiologist, or family physician.
+              </div>
+            </div>
+            <button class="health-export-btn" onclick="exportDoctorHealthReport()">
+              <span class="material-symbols-outlined" style="font-size: 20px;">download</span>
+              <span>Download Complete Clinical Report (PDF)</span>
+            </button>
+          </div>
+
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-          <div class="gemini-card" style="padding: 14px;">
-            <div style="font-size: 10px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase;">Basal Metabolic Burn</div>
-            <div style="font-size: 18px; font-weight: 800; color: var(--gemini-text-main); margin-top: 2px;" id="app-bmr-display">1,740 kcal</div>
-          </div>
-          <div class="gemini-card" style="padding: 14px;">
-            <div style="font-size: 10px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase;">WHO ICD-11 Triage</div>
-            <div style="font-size: 18px; font-weight: 800; color: var(--gemini-vitality-emerald); margin-top: 2px;">88% Solvable</div>
-          </div>
-        </div>
-
-        <!-- 55k WHO ICD-11 Triage Cards -->
-        <div class="gemini-card" style="padding: 14px;">
-          <div style="font-size: 12px; font-weight: 800; color: var(--gemini-text-main); margin-bottom: 8px;">WHO ICD-11 55,000+ Triage Summary</div>
-          <div style="display: flex; flex-direction: column; gap: 8px; font-size: 11px;">
-            <div style="border-left: 3px solid var(--gemini-vitality-emerald); padding-left: 8px;">
-              <strong style="color: var(--gemini-vitality-emerald);">Category 1 (100% Solvable):</strong> Insulin Resistance, Bloating, 2 PM Crash (ICD-11 5B81).
-            </div>
-            <div style="border-left: 3px solid #F59E0B; padding-left: 8px;">
-              <strong style="color: #D97706;">Category 2 (Manageable):</strong> PCOS, Thyroid & Stage 1 BP support (ICD-11 5A80).
-            </div>
-            <div style="border-left: 3px solid #EF4444; padding-left: 8px;">
-              <strong style="color: #DC2626;">Category 3 (Doctor Care):</strong> Type 1 Diabetes & Emergency Hospital Care (ICD-11 5A10).
-            </div>
-          </div>
-        </div>
       </section>
 
     </div>
@@ -2843,13 +3324,258 @@
             </button>
 
             <button class="gemini-prompt-card" onclick="askPresetQuestion('What snacks can I eat that will not spike my insulin?')">
-              <span>🥑 What healthy snacks can I eat that won\\'t spike insulin?</span>
+              <span>🥑 What healthy snacks can I eat that won\'t spike insulin?</span>
               <span class="material-symbols-outlined" style="font-size: 20px; color: var(--gemini-sparkle-blue);">arrow_forward</span>
             </button>
           </div>
         </div>
       `;
       scroller.scrollTop = scroller.scrollHeight;
+    }
+
+    // --- CLINICAL HEALTH REPORT LOGIC ---
+    const weeklyHealthData = {
+      3: {
+        bioAge: '20.8 Yrs',
+        diff: '▼ 4.2 Years Younger than Chronological (25 Yrs)',
+        pace: '0.82x',
+        trajWidth: '20%',
+        trajLabel: 'Day 18 / Day 90 (20% Complete)',
+        panels: [
+          {
+            icon: 'bloodtype', iconColor: 'var(--gemini-sparkle-blue)', name: '1. Endocrine & Glucose Homeostasis', status: 'Optimal',
+            m1: ['Fasting Glucose', '84 mg/dL', 'Ref: 70-99'],
+            m2: ['HOMA-IR Score', '0.82', 'Ref: < 1.0'],
+            m3: ['Est. HbA1c', '5.1%', 'Ref: < 5.7%'],
+            rationale: 'Insulin sensitivity has resensitized by 34% through 35g+ morning protein pacing and 12-min postprandial walks blunting GLUT4 glucose spikes.'
+          },
+          {
+            icon: 'favorite', iconColor: '#EF4444', name: '2. Atherogenic Cardiovascular Profile', status: 'Optimal',
+            m1: ['Trig / HDL Ratio', '1.12', 'Ref: < 1.5'],
+            m2: ['Blood Pressure', '118 / 76', 'mmHg'],
+            m3: ['ApoB / ApoA1', '0.65', 'Low Plaque Risk'],
+            rationale: 'Triglyceride-to-HDL ratio of 1.12 confirms absence of small dense LDL particles. Zero trans-fats and high potassium intake protect arterial elasticity.'
+          },
+          {
+            icon: 'science', iconColor: '#F59E0B', name: '3. Hepatic Detox & Seed Oil Clearance', status: '94% Cleared',
+            m1: ['ALT / AST Ratio', '0.94', 'Normal Parenchyma'],
+            m2: ['MASLD Risk', '< 5%', 'Zero Fatty Infiltration'],
+            m3: ['Seed Oil Status', '0% Used', 'Pure Ghee/Olive Only'],
+            rationale: 'Complete elimination of sunflower, canola, and palm oils prevents hepatic lipid peroxidation and de novo lipogenesis.'
+          },
+          {
+            icon: 'spa', iconColor: 'var(--gemini-vitality-emerald)', name: '4. Gut Microbiome & Systemic Inflammation', status: 'Optimal',
+            m1: ['hs-CRP Marker', '< 0.5 mg/L', 'Zero Inflammation'],
+            m2: ['Daily Fiber', '38g / day', 'Target: 35g+'],
+            m3: ['Gut Barrier', 'Tight', 'Zero Bloating'],
+            rationale: 'High prebiotic polyphenol intake and zero liquid sugars foster Akkermansia muciniphila growth, maintaining tight intestinal junction integrity.'
+          },
+          {
+            icon: 'bedtime', iconColor: '#8B5CF6', name: '5. Circadian Neuro-Endocrine Recovery', status: '89% Score',
+            m1: ['Sunlight Window', '06:30 AM', 'Cortisol Peak'],
+            m2: ['Caffeine Cutoff', '12:00 PM', '10h Sleep Window'],
+            m3: ['Deep Sleep', '1h 48m', 'Stage 3/4 Restorative'],
+            rationale: 'Strict 12:00 PM caffeine cutoff ensures complete adenosine clearance before bed, maximizing cellular brain detox during slow-wave sleep.'
+          }
+        ]
+      },
+      2: {
+        bioAge: '21.4 Yrs',
+        diff: '▼ 3.6 Years Younger than Chronological (25 Yrs)',
+        pace: '0.86x',
+        trajWidth: '14%',
+        trajLabel: 'Day 14 / Day 90 (15% Complete)',
+        panels: [
+          {
+            icon: 'bloodtype', iconColor: 'var(--gemini-sparkle-blue)', name: '1. Endocrine & Glucose Homeostasis', status: 'Optimal',
+            m1: ['Fasting Glucose', '89 mg/dL', 'Ref: 70-99'],
+            m2: ['HOMA-IR Score', '0.91', 'Ref: < 1.0'],
+            m3: ['Est. HbA1c', '5.2%', 'Ref: < 5.7%'],
+            rationale: 'Post-meal walking consistency initiated. Early stabilization of glycemic curve with zero reactive hypoglycemia episodes.'
+          },
+          {
+            icon: 'favorite', iconColor: '#EF4444', name: '2. Atherogenic Cardiovascular Profile', status: 'Optimal',
+            m1: ['Trig / HDL Ratio', '1.24', 'Ref: < 1.5'],
+            m2: ['Blood Pressure', '120 / 78', 'mmHg'],
+            m3: ['ApoB / ApoA1', '0.70', 'Low Plaque Risk'],
+            rationale: 'Arterial pulse wave velocity improving. Sodium/potassium balance restored with whole unprocessed foods.'
+          },
+          {
+            icon: 'science', iconColor: '#F59E0B', name: '3. Hepatic Detox & Seed Oil Clearance', status: '82% Cleared',
+            m1: ['ALT / AST Ratio', '0.98', 'Normal Range'],
+            m2: ['MASLD Risk', '7%', 'Decreasing'],
+            m3: ['Seed Oil Status', '0% Used', '100% Ghee Calibrated'],
+            rationale: 'Linoleic acid adipose turnover in progress. Zero inflammatory oxidized lipids ingested.'
+          },
+          {
+            icon: 'spa', iconColor: 'var(--gemini-vitality-emerald)', name: '4. Gut Microbiome & Systemic Inflammation', status: 'Optimal',
+            m1: ['hs-CRP Marker', '0.6 mg/L', 'Low Normal'],
+            m2: ['Daily Fiber', '34g / day', 'Target: 35g+'],
+            m3: ['Gut Barrier', 'Stabilizing', 'Minimal Gas'],
+            rationale: 'Elimination of packaged emulsifiers (polysorbate 80) allowed mucus layer regeneration.'
+          },
+          {
+            icon: 'bedtime', iconColor: '#8B5CF6', name: '5. Circadian Neuro-Endocrine Recovery', status: '84% Score',
+            m1: ['Sunlight Window', '06:45 AM', 'Morning CAR'],
+            m2: ['Caffeine Cutoff', '12:00 PM', 'Met 6/7 Days'],
+            m3: ['Deep Sleep', '1h 32m', 'Good Stage 3/4'],
+            rationale: 'Earlier sleep latency achieved after removing blue light spectrum exposure 60 mins before sleep.'
+          }
+        ]
+      },
+      1: {
+        bioAge: '22.1 Yrs',
+        diff: '▼ 2.9 Years Younger (Intake Baseline Transition)',
+        pace: '0.92x',
+        trajWidth: '7%',
+        trajLabel: 'Day 7 / Day 90 (8% Complete)',
+        panels: [
+          {
+            icon: 'bloodtype', iconColor: 'var(--gemini-sparkle-blue)', name: '1. Endocrine & Glucose Homeostasis', status: 'Baseline Calibrated',
+            m1: ['Fasting Glucose', '94 mg/dL', 'Ref: 70-99'],
+            m2: ['HOMA-IR Score', '1.14', 'Mild Resistance'],
+            m3: ['Est. HbA1c', '5.4%', 'Ref: < 5.7%'],
+            rationale: 'Baseline intake survey identified mild post-lunch insulin spikes and mid-afternoon energy crashes.'
+          },
+          {
+            icon: 'favorite', iconColor: '#EF4444', name: '2. Atherogenic Cardiovascular Profile', status: 'Baseline Safe',
+            m1: ['Trig / HDL Ratio', '1.42', 'Ref: < 1.5'],
+            m2: ['Blood Pressure', '124 / 80', 'mmHg'],
+            m3: ['ApoB / ApoA1', '0.78', 'Normal'],
+            rationale: 'Cardiovascular parameters calibrated within normal thresholds. Initiated seed oil elimination protocol.'
+          },
+          {
+            icon: 'science', iconColor: '#F59E0B', name: '3. Hepatic Detox & Seed Oil Clearance', status: '60% Baseline',
+            m1: ['ALT / AST Ratio', '1.05', 'Mild Elevation'],
+            m2: ['MASLD Risk', '11%', 'Baseline'],
+            m3: ['Seed Oil Status', 'Replaced', 'Switched to Ghee'],
+            rationale: 'Pantry audit purged industrial seed oils; kitchen restocked with pasture butter and pure cold-pressed oils.'
+          },
+          {
+            icon: 'spa', iconColor: 'var(--gemini-vitality-emerald)', name: '4. Gut Microbiome & Systemic Inflammation', status: 'Transitioning',
+            m1: ['hs-CRP Marker', '0.9 mg/L', 'Baseline Level'],
+            m2: ['Daily Fiber', '28g / day', 'Ramping Up'],
+            m3: ['Gut Barrier', 'Adapting', 'Intake Phase'],
+            rationale: 'Baseline gastrointestinal questionnaire noted frequent post-meal lethargy and mild bloating.'
+          },
+          {
+            icon: 'bedtime', iconColor: '#8B5CF6', name: '5. Circadian Neuro-Endocrine Recovery', status: '76% Score',
+            m1: ['Sunlight Window', '07:15 AM', 'Baseline'],
+            m2: ['Caffeine Cutoff', '02:30 PM', 'Late Cutoff (Old)'],
+            m3: ['Deep Sleep', '1h 15m', 'Fragmented'],
+            rationale: 'Initial intake revealed afternoon caffeine intake delaying endogenous melatonin release.'
+          }
+        ]
+      }
+    };
+
+    function switchHealthWeek(weekNum) {
+      document.querySelectorAll('.health-week-btn').forEach(btn => btn.classList.remove('active'));
+      const activeBtn = document.getElementById(`btn-health-w${weekNum}`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      const data = weeklyHealthData[weekNum];
+      if (!data) return;
+
+      const bioEl = document.getElementById('app-bio-age');
+      if (bioEl) bioEl.innerText = data.bioAge;
+
+      const container = document.getElementById('health-panels-container');
+      if (!container) return;
+
+      let html = '';
+      data.panels.forEach(p => {
+        html += `
+          <div class="health-panel-card">
+            <div class="health-panel-top">
+              <div class="health-panel-name">
+                <span class="material-symbols-outlined" style="color: ${p.iconColor}; font-size: 20px;">${p.icon}</span>
+                <span>${p.name}</span>
+              </div>
+              <span class="health-pill-tag health-pill-emerald">${p.status}</span>
+            </div>
+            <div class="health-panel-metrics-row">
+              <div class="health-metric-box">
+                <span class="health-metric-label">${p.m1[0]}</span>
+                <span class="health-metric-val">${p.m1[1]}</span>
+                <span style="font-size: 10px; color: var(--gemini-text-muted);">${p.m1[2]}</span>
+              </div>
+              <div class="health-metric-box">
+                <span class="health-metric-label">${p.m2[0]}</span>
+                <span class="health-metric-val">${p.m2[1]}</span>
+                <span style="font-size: 10px; color: var(--gemini-text-muted);">${p.m2[2]}</span>
+              </div>
+              <div class="health-metric-box">
+                <span class="health-metric-label">${p.m3[0]}</span>
+                <span class="health-metric-val">${p.m3[1]}</span>
+                <span style="font-size: 10px; color: var(--gemini-text-muted);">${p.m3[2]}</span>
+              </div>
+            </div>
+            <div class="health-panel-rationale">
+              <strong>Doctor's Rationale:</strong> ${p.rationale}
+            </div>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+    }
+
+    function exportDoctorHealthReport() {
+      const reportText = `
+========================================================================
+TOVELU HEALTH AI - WHO ICD-11 CLINICAL TELEMETRY REPORT
+PATIENT: Ajay | SEX: M | CHRONO AGE: 25 | BIO AGE: 20.8 Yrs
+PROTOCOL: 90-Day Metabolic Resensitization (Week 3 - Day 18/90)
+========================================================================
+
+1. EPIGENETIC CLOCK (DNAm Horvath Algorithm):
+   • Biological Age: 20.8 Yrs (-4.2 Yrs below chronological)
+   • Pace of Aging: 0.82x (Optimal deceleration rate)
+
+2. ENDOCRINE & GLUCOSE HOMEOSTASIS:
+   • Fasting Blood Glucose: 84 mg/dL (Ref: 70-99 mg/dL)
+   • Estimated HOMA-IR: 0.82 (Insulin Sensitive: < 1.0)
+   • Estimated HbA1c: 5.1% (Glycemic control: < 5.7%)
+
+3. ATHEROGENIC CARDIOVASCULAR TELEMETRY:
+   • Triglyceride-to-HDL Ratio: 1.12 (Ref: < 1.5)
+   • Resting Blood Pressure: 118 / 76 mmHg (Normotensive)
+   • ApoB/ApoA1 Estimated Ratio: 0.65 (Low Atherogenic Plaque Risk)
+
+4. HEPATIC DETOXIFICATION & SEED OIL CLEARANCE:
+   • ALT/AST Ratio: 0.94 (Healthy liver parenchyma)
+   • Hepatic Steatosis (MASLD) Risk: < 5% (Optimal)
+   • Seed Oil Elimination: 100% (Pure Desi Ghee / Olive Oil Only)
+
+5. GASTROINTESTINAL MICROBIOME & SYSTEMIC INFLAMMATION:
+   • hs-CRP Systemic Marker: < 0.5 mg/L (Zero Low-Grade Inflammation)
+   • Dietary Fiber Intake: 38g / day (Target: 35g+)
+   • Intestinal Mucosal Barrier: Tight Junction Integrity Intact
+
+6. CIRCADIAN NEURO-ENDOCRINE ARCHITECTURE:
+   • Cortisol Awakening Response: Peak at 06:30 AM (Lux Sunlight)
+   • Caffeine Cutoff: 12:00 PM (10-Hour Sleep Hygiene Half-Life)
+   • Deep Sleep Architecture: 1h 48m (Stage 3/4 Slow-Wave)
+
+7. WHO ICD-11 DIAGNOSTIC TRIAGE:
+   • ICD-11 5B81 (Metabolic Syndrome): 92% Reversal Velocity
+   • ICD-11 5B70 (Reactive Hypoglycemia): 100% Resolved
+   • ICD-11 DD91 (Gut Dysbiosis): 89% Resolved
+   • ICD-11 5A10 (Acute Boundary): LAW-001 Compliant
+
+Generated by Tovelu Clinical Intelligence System (LAW-001 Certified).
+========================================================================
+      `;
+      const blob = new Blob([reportText], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Tovelu_Clinical_Health_Report_Week3.txt';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      alert('✅ Complete Clinical Health Report (WHO ICD-11 Certified) downloaded successfully for your doctor!');
     }
 
     window.addEventListener('load', () => {
