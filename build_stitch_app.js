@@ -58,6 +58,96 @@ flowDayInner = flowDayInner.replace(
   '<span id="meal-macro-fat" class="font-data-metric text-[18px] text-on-surface">12g</span>'
 );
 
+// 4. Replace static Tasks with the interactive Swipe-to-Check Slider Tasks
+const swipeTasksHtml = `
+<!-- Today's Tasks (Swipe to Check System) -->
+<div class="bg-surface-container-lowest rounded-xl p-5 shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-surface-container flex flex-col gap-4">
+  <div class="flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-optimal-green">check_circle</span>
+      <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Today's Tasks</span>
+    </div>
+    <span id="tasks-done-badge" class="font-label-sm text-label-sm text-primary bg-primary/10 px-2.5 py-0.5 rounded-full border border-primary/20 font-bold">3 / 4 Done</span>
+  </div>
+
+  <div class="flex flex-col gap-3" id="swipe-tasks-container">
+    
+    <!-- Task 1 (Completed) -->
+    <div class="task-swipe-card completed relative flex items-center p-3.5 bg-surface-container-lowest rounded-xl border border-optimal-green/30 overflow-hidden select-none" data-completed="true" data-id="1">
+      <div class="task-swipe-fill absolute inset-0 bg-optimal-green/10 pointer-events-none" style="width: 100%;"></div>
+      <div class="task-swipe-knob absolute left-2 top-2 bottom-2 w-11 rounded-lg bg-optimal-green text-white flex items-center justify-center shadow-md z-10">
+        <span class="material-symbols-outlined text-[20px]">wb_sunny</span>
+      </div>
+      <div class="task-content ml-14 mr-10 flex flex-col min-w-0 z-10">
+        <span class="font-label-sm text-[10px] text-tertiary uppercase tracking-wider font-semibold">07:00 AM • Morning</span>
+        <span class="font-body-md text-[14px] leading-tight text-on-surface font-semibold line-clamp-1">Sit under sunlight for 15 minutes</span>
+        <span class="font-body-md text-[12px] text-on-surface-variant line-clamp-1 mt-0.5">Synchronizes morning cortisol & circadian rhythm</span>
+      </div>
+      <div class="task-end-slot absolute right-3 w-7 h-7 rounded-full bg-optimal-green flex items-center justify-center text-white shadow-sm z-10">
+        <span class="material-symbols-outlined text-[16px]">check</span>
+      </div>
+    </div>
+
+    <!-- Task 2 (Completed) -->
+    <div class="task-swipe-card completed relative flex items-center p-3.5 bg-surface-container-lowest rounded-xl border border-optimal-green/30 overflow-hidden select-none" data-completed="true" data-id="2">
+      <div class="task-swipe-fill absolute inset-0 bg-optimal-green/10 pointer-events-none" style="width: 100%;"></div>
+      <div class="task-swipe-knob absolute left-2 top-2 bottom-2 w-11 rounded-lg bg-optimal-green text-white flex items-center justify-center shadow-md z-10">
+        <span class="material-symbols-outlined text-[20px]">water_drop</span>
+      </div>
+      <div class="task-content ml-14 mr-10 flex flex-col min-w-0 z-10">
+        <span class="font-label-sm text-[10px] text-tertiary uppercase tracking-wider font-semibold">07:15 AM • Hydration</span>
+        <span class="font-body-md text-[14px] leading-tight text-on-surface font-semibold line-clamp-1">Drink a glass of mineral water</span>
+        <span class="font-body-md text-[12px] text-on-surface-variant line-clamp-1 mt-0.5">Hydrates cellular osmolyte channels</span>
+      </div>
+      <div class="task-end-slot absolute right-3 w-7 h-7 rounded-full bg-optimal-green flex items-center justify-center text-white shadow-sm z-10">
+        <span class="material-symbols-outlined text-[16px]">check</span>
+      </div>
+    </div>
+
+    <!-- Task 3 (Completed) -->
+    <div class="task-swipe-card completed relative flex items-center p-3.5 bg-surface-container-lowest rounded-xl border border-optimal-green/30 overflow-hidden select-none" data-completed="true" data-id="3">
+      <div class="task-swipe-fill absolute inset-0 bg-optimal-green/10 pointer-events-none" style="width: 100%;"></div>
+      <div class="task-swipe-knob absolute left-2 top-2 bottom-2 w-11 rounded-lg bg-optimal-green text-white flex items-center justify-center shadow-md z-10">
+        <span class="material-symbols-outlined text-[20px]">directions_walk</span>
+      </div>
+      <div class="task-content ml-14 mr-10 flex flex-col min-w-0 z-10">
+        <span class="font-label-sm text-[10px] text-tertiary uppercase tracking-wider font-semibold">12:30 PM • Postprandial</span>
+        <span class="font-body-md text-[14px] leading-tight text-on-surface font-semibold line-clamp-1">Take a 12-minute walk after lunch</span>
+        <span class="font-body-md text-[12px] text-on-surface-variant line-clamp-1 mt-0.5">Blunts post-meal glucose rise by 24%</span>
+      </div>
+      <div class="task-end-slot absolute right-3 w-7 h-7 rounded-full bg-optimal-green flex items-center justify-center text-white shadow-sm z-10">
+        <span class="material-symbols-outlined text-[16px]">check</span>
+      </div>
+    </div>
+
+    <!-- Task 4 (Active Swipeable Knob Track) -->
+    <div class="task-swipe-card relative flex items-center p-3.5 bg-surface-container-low rounded-xl border border-outline-variant/30 overflow-hidden select-none touch-pan-y" data-completed="false" data-id="4">
+      <div class="task-swipe-fill absolute inset-0 bg-optimal-green/15 pointer-events-none transition-all duration-100" style="width: 0%;"></div>
+      
+      <!-- Draggable Knob with Bedtime Screen Icon -->
+      <div class="task-swipe-knob absolute left-2 top-2 bottom-2 w-11 rounded-lg bg-primary text-white flex items-center justify-center shadow-md z-20 cursor-grab active:cursor-grabbing transition-transform duration-75">
+        <span class="material-symbols-outlined text-[20px]">devices_off</span>
+      </div>
+
+      <div class="task-content ml-14 mr-10 flex flex-col min-w-0 z-10 pointer-events-none">
+        <span class="font-label-sm text-[10px] text-primary uppercase tracking-wider font-semibold">10:00 PM • 60m before bed</span>
+        <span class="font-body-md text-[14px] leading-tight text-on-surface font-semibold line-clamp-1">Turn off bright screens 1 hour before bed</span>
+        <span class="font-body-md text-[12px] text-on-surface-variant line-clamp-1 mt-0.5">Protects natural melatonin surge for deep sleep</span>
+      </div>
+
+      <!-- End Target Destination Slot -->
+      <div class="task-end-slot absolute right-2 top-2 bottom-2 w-10 rounded-lg border-2 border-dashed border-outline-variant/60 flex items-center justify-center text-outline-variant z-10 pointer-events-none">
+        <span class="material-symbols-outlined text-[18px]">east</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+`;
+
+// Replace tasks section in flow
+flowDayInner = flowDayInner.replace(/<!-- Today's Tasks -->[\s\S]*?<!-- Clinical Note -->/, swipeTasksHtml + '\n<!-- Clinical Note -->');
+
 // Official Tovelu Mitosis Bio-Cell SVG Logo
 const toveluLogoSvg = `
 <svg width="28" height="28" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="shrink-0">
@@ -562,24 +652,8 @@ const unifiedHtml = `<!DOCTYPE html>
         }
       });
 
-      // 3. Hook Task Item Check Completion
-      const taskCards = document.querySelectorAll('#subview-day .flex.items-start.gap-3');
-      taskCards.forEach(card => {
-        const checkBtn = card.querySelector('button');
-        if (checkBtn) {
-          checkBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            this.innerHTML = '<span class="material-symbols-outlined text-[16px] text-optimal-green">check</span>';
-            card.classList.remove('bg-surface-container-low');
-            card.classList.add('bg-optimal-green/5', 'border-optimal-green/20');
-            const leftBar = card.querySelector('.absolute.left-0');
-            if (leftBar) {
-              leftBar.className = 'absolute left-0 top-0 bottom-0 w-1 bg-optimal-green rounded-l-lg';
-            }
-            alert('✓ Task completed! 4 of 4 habits locked in for today.');
-          });
-        }
-      });
+      // 3. Initialize Interactive Swipe-to-Check Tasks Engine
+      initSwipeTasksEngine();
 
       // 4. Hook Prompt Suggestions in Chat
       const promptButtons = document.querySelectorAll('#pane-chat button');
@@ -611,6 +685,100 @@ const unifiedHtml = `<!DOCTYPE html>
         chatSendBtn.onclick = () => sendAppChatMessage();
       }
     });
+
+    // Interactive Swipe-to-Check Knob Logic
+    function initSwipeTasksEngine() {
+      const activeCards = document.querySelectorAll('.task-swipe-card[data-completed="false"]');
+      
+      activeCards.forEach(card => {
+        const knob = card.querySelector('.task-swipe-knob');
+        const fill = card.querySelector('.task-swipe-fill');
+        const endSlot = card.querySelector('.task-end-slot');
+        if (!knob) return;
+
+        let isDragging = false;
+        let startX = 0;
+        let currentX = 0;
+        let maxDrag = 0;
+
+        function updateMaxDrag() {
+          const cardWidth = card.clientWidth;
+          const knobWidth = knob.clientWidth;
+          maxDrag = cardWidth - knobWidth - 16; // 8px padding each side
+        }
+        updateMaxDrag();
+        window.addEventListener('resize', updateMaxDrag);
+
+        function onStart(e) {
+          if (card.getAttribute('data-completed') === 'true') return;
+          isDragging = true;
+          startX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+          knob.style.transition = 'none';
+          if (fill) fill.style.transition = 'none';
+        }
+
+        function onMove(e) {
+          if (!isDragging) return;
+          const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+          const deltaX = clientX - startX;
+          currentX = Math.max(0, Math.min(deltaX, maxDrag));
+
+          knob.style.transform = \`translateX(\${currentX}px)\`;
+          if (fill) {
+            const percent = (currentX / maxDrag) * 100;
+            fill.style.width = \`\${percent}%\`;
+          }
+        }
+
+        function onEnd() {
+          if (!isDragging) return;
+          isDragging = false;
+          knob.style.transition = 'transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)';
+          if (fill) fill.style.transition = 'width 0.25s cubic-bezier(0.16, 1, 0.3, 1)';
+
+          // Threshold: if dragged > 70% of distance, mark completed
+          if (currentX > maxDrag * 0.7) {
+            // Complete the task!
+            knob.style.transform = \`translateX(\${maxDrag}px)\`;
+            if (fill) fill.style.width = '100%';
+            
+            setTimeout(() => {
+              card.setAttribute('data-completed', 'true');
+              card.className = 'task-swipe-card completed relative flex items-center p-3.5 bg-surface-container-lowest rounded-xl border border-optimal-green/30 overflow-hidden select-none transition-all duration-300';
+              knob.className = 'task-swipe-knob absolute left-2 top-2 bottom-2 w-11 rounded-lg bg-optimal-green text-white flex items-center justify-center shadow-md z-10';
+              knob.style.transform = 'none';
+              
+              if (endSlot) {
+                endSlot.className = 'task-end-slot absolute right-3 w-7 h-7 rounded-full bg-optimal-green flex items-center justify-center text-white shadow-sm z-10';
+                endSlot.innerHTML = '<span class="material-symbols-outlined text-[16px]">check</span>';
+              }
+
+              // Update counter to 4 / 4 Done!
+              const badge = document.getElementById('tasks-done-badge');
+              if (badge) {
+                badge.innerText = '4 / 4 Done';
+                badge.className = 'font-label-sm text-label-sm text-optimal-green bg-optimal-green/10 px-2.5 py-0.5 rounded-full border border-optimal-green/30 font-bold';
+              }
+
+              alert('✓ Habit Completed! 4 / 4 habits locked in for today.');
+            }, 180);
+          } else {
+            // Snap back
+            knob.style.transform = 'translateX(0px)';
+            if (fill) fill.style.width = '0%';
+          }
+        }
+
+        // Pointer & Touch Events
+        knob.addEventListener('mousedown', onStart);
+        window.addEventListener('mousemove', onMove);
+        window.addEventListener('mouseup', onEnd);
+
+        knob.addEventListener('touchstart', onStart, { passive: true });
+        window.addEventListener('touchmove', onMove, { passive: true });
+        window.addEventListener('touchend', onEnd);
+      });
+    }
 
     let activeFoodMode = 'scan';
     let activeFoodCategory = 'cooked';
@@ -738,4 +906,4 @@ const unifiedHtml = `<!DOCTYPE html>
 </html>`;
 
 fs.writeFileSync("/media/nikita/New Volume/Tovelufile/app.html", unifiedHtml, "utf8");
-console.log("Successfully rebuilt unified app.html with DAY 4 / WEEK 3 & dynamic meal section colors!");
+console.log("Successfully rebuilt unified app.html with Swipe-to-Check Tasks!");
