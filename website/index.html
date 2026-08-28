@@ -454,7 +454,7 @@
             </p>
           </div>
 
-          <!-- 2. PORTION LEVEL METER (THE TOVELU BIO-PLATE PROGRESS) -->
+          <!-- 2. PORTION LEVEL METER (PROTEIN, CARBS, FAT, VITAMINS) -->
           <div class="gemini-card">
             <div style="display: flex; justify-content: space-between; align-items: center;">
               <div style="font-size: 11px; font-weight: 800; color: var(--gemini-vitality-emerald); text-transform: uppercase;">
@@ -468,37 +468,37 @@
               <div style="width: 96px; height: 96px; position: relative; flex-shrink: 0;">
                 <svg width="96" height="96" viewBox="0 0 100 100">
                   <circle cx="50" cy="50" r="40" fill="none" stroke="var(--gemini-surface-container)" stroke-width="12"/>
-                  <!-- 50% Greens/Fiber (Emerald) -->
-                  <circle cx="50" cy="50" r="40" fill="none" stroke="#00F5A0" stroke-width="12" stroke-dasharray="125 251" stroke-dashoffset="0"/>
-                  <!-- 30% Clean Protein (Cyan/Blue) -->
-                  <circle cx="50" cy="50" r="40" fill="none" stroke="#0062FF" stroke-width="12" stroke-dasharray="75 251" stroke-dashoffset="-125"/>
-                  <!-- 15% Slow Carbs (Amber) -->
-                  <circle cx="50" cy="50" r="40" fill="none" stroke="#F59E0B" stroke-width="12" stroke-dasharray="38 251" stroke-dashoffset="-200"/>
-                  <!-- 5% Pure Fats (Purple) -->
-                  <circle cx="50" cy="50" r="40" fill="none" stroke="#A855F7" stroke-width="12" stroke-dasharray="13 251" stroke-dashoffset="-238"/>
+                  <!-- Protein (Cyan/Blue: 35%) -->
+                  <circle cx="50" cy="50" r="40" fill="none" stroke="#0062FF" stroke-width="12" stroke-dasharray="88 251" stroke-dashoffset="0"/>
+                  <!-- Carbs (Amber: 25%) -->
+                  <circle cx="50" cy="50" r="40" fill="none" stroke="#F59E0B" stroke-width="12" stroke-dasharray="63 251" stroke-dashoffset="-88"/>
+                  <!-- Fat (Purple: 15%) -->
+                  <circle cx="50" cy="50" r="40" fill="none" stroke="#A855F7" stroke-width="12" stroke-dasharray="38 251" stroke-dashoffset="-151"/>
+                  <!-- Vitamins & Minerals (Emerald: 25%) -->
+                  <circle cx="50" cy="50" r="40" fill="none" stroke="#00F5A0" stroke-width="12" stroke-dasharray="63 251" stroke-dashoffset="-189"/>
                 </svg>
                 <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: var(--gemini-text-main);">
                   PLATE
                 </div>
               </div>
 
-              <!-- Portion Slices Breakdown -->
-              <div style="flex: 1; display: flex; flex-direction: column; gap: 4px; font-size: 11px;">
+              <!-- 4 Core Nutrients Breakdown: Protein, Carbs, Fat, Vitamins -->
+              <div style="flex: 1; display: flex; flex-direction: column; gap: 5px; font-size: 11px;">
                 <div style="display: flex; justify-content: space-between;">
-                  <span style="color: #00D06C; font-weight: 700;">🥦 50% Greens & Fiber</span>
-                  <span style="font-weight: 700; color: var(--gemini-text-main);" id="pct-greens">65% Filled</span>
+                  <span style="color: #0062FF; font-weight: 700;">🥩 Protein:</span>
+                  <span style="font-weight: 700; color: var(--gemini-text-main);" id="pct-protein">110g / 145g (75%)</span>
                 </div>
                 <div style="display: flex; justify-content: space-between;">
-                  <span style="color: #0062FF; font-weight: 700;">🥩 30% Clean Protein</span>
-                  <span style="font-weight: 700; color: var(--gemini-text-main);" id="pct-protein">75% (110g/145g)</span>
+                  <span style="color: #D97706; font-weight: 700;">🍠 Carbs:</span>
+                  <span style="font-weight: 700; color: var(--gemini-text-main);">45g / 80g (56%)</span>
                 </div>
                 <div style="display: flex; justify-content: space-between;">
-                  <span style="color: #D97706; font-weight: 700;">🍠 15% Complex Carbs</span>
-                  <span style="font-weight: 700; color: var(--gemini-text-main);">40% (45g/80g)</span>
+                  <span style="color: #9333EA; font-weight: 700;">🧈 Fat:</span>
+                  <span style="font-weight: 700; color: var(--gemini-text-main);">28g / 45g (62%)</span>
                 </div>
                 <div style="display: flex; justify-content: space-between;">
-                  <span style="color: #9333EA; font-weight: 700;">🧈 5% Natural Fats</span>
-                  <span style="font-weight: 700; color: var(--gemini-text-main);">Desi Ghee / Olive</span>
+                  <span style="color: #00D06C; font-weight: 700;">🥦 Vitamins:</span>
+                  <span style="font-weight: 700; color: var(--gemini-text-main);" id="pct-vitamins">85% Optimal</span>
                 </div>
               </div>
             </div>
