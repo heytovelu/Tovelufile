@@ -769,14 +769,49 @@
             <div style="font-family: 'Google Sans Display', sans-serif; font-size: 20px; font-weight: 800; margin-top: 6px;">
               Insulin Resensitization & Fat Adaptation
             </div>
-            <div style="display: flex; gap: 6px; margin: 10px 0 6px 0;">
-              <div style="flex: 1; text-align: center; background: var(--gemini-vitality-emerald); color: white; padding: 6px 0; border-radius: 8px; font-size: 10px; font-weight: 800;">M ✓</div>
-              <div style="flex: 1; text-align: center; background: var(--gemini-vitality-emerald); color: white; padding: 6px 0; border-radius: 8px; font-size: 10px; font-weight: 800;">T ✓</div>
-              <div style="flex: 1; text-align: center; background: var(--gemini-vitality-emerald); color: white; padding: 6px 0; border-radius: 8px; font-size: 10px; font-weight: 800;">W ✓</div>
-              <div style="flex: 1; text-align: center; background: var(--gemini-sparkle-blue); color: white; padding: 6px 0; border-radius: 8px; font-size: 10px; font-weight: 800;">TH (Today)</div>
-              <div style="flex: 1; text-align: center; background: var(--gemini-surface-container); color: var(--gemini-text-muted); padding: 6px 0; border-radius: 8px; font-size: 10px; font-weight: 700;">F</div>
-              <div style="flex: 1; text-align: center; background: var(--gemini-surface-container); color: var(--gemini-text-muted); padding: 6px 0; border-radius: 8px; font-size: 10px; font-weight: 700;">SA</div>
-              <div style="flex: 1; text-align: center; background: var(--gemini-surface-container); color: var(--gemini-text-muted); padding: 6px 0; border-radius: 8px; font-size: 10px; font-weight: 700;">SU</div>
+            <!-- 7-Day Protocol Progress Cards (Enlarged, Clear & Spacious) -->
+            <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin: 14px 0 10px 0;">
+              <!-- Monday (Done) -->
+              <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--gemini-vitality-emerald); color: #FFFFFF; padding: 12px 2px; border-radius: 14px; gap: 4px; box-shadow: 0 2px 8px rgba(0, 208, 108, 0.2);">
+                <span style="font-size: 11px; font-weight: 800; opacity: 0.9;">MON</span>
+                <span style="font-family: 'Google Sans', sans-serif; font-size: 16px; font-weight: 800;">✓</span>
+              </div>
+
+              <!-- Tuesday (Done) -->
+              <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--gemini-vitality-emerald); color: #FFFFFF; padding: 12px 2px; border-radius: 14px; gap: 4px; box-shadow: 0 2px 8px rgba(0, 208, 108, 0.2);">
+                <span style="font-size: 11px; font-weight: 800; opacity: 0.9;">TUE</span>
+                <span style="font-family: 'Google Sans', sans-serif; font-size: 16px; font-weight: 800;">✓</span>
+              </div>
+
+              <!-- Wednesday (Done) -->
+              <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--gemini-vitality-emerald); color: #FFFFFF; padding: 12px 2px; border-radius: 14px; gap: 4px; box-shadow: 0 2px 8px rgba(0, 208, 108, 0.2);">
+                <span style="font-size: 11px; font-weight: 800; opacity: 0.9;">WED</span>
+                <span style="font-family: 'Google Sans', sans-serif; font-size: 16px; font-weight: 800;">✓</span>
+              </div>
+
+              <!-- Thursday (Today Active) -->
+              <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--gemini-sparkle-blue); color: #FFFFFF; padding: 12px 2px; border-radius: 14px; gap: 4px; box-shadow: 0 4px 14px rgba(0, 98, 255, 0.35); border: 2px solid #FFFFFF;">
+                <span style="font-size: 11px; font-weight: 800;">THU</span>
+                <span style="font-size: 10px; font-weight: 800; background: rgba(255, 255, 255, 0.25); padding: 1px 4px; border-radius: 4px; text-transform: uppercase;">TODAY</span>
+              </div>
+
+              <!-- Friday (Upcoming) -->
+              <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--gemini-surface); border: 1.5px solid var(--gemini-border); color: var(--gemini-text-muted); padding: 12px 2px; border-radius: 14px; gap: 4px;">
+                <span style="font-size: 11px; font-weight: 800;">FRI</span>
+                <span style="font-size: 13px; font-weight: 700; opacity: 0.4;">•</span>
+              </div>
+
+              <!-- Saturday (Upcoming) -->
+              <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--gemini-surface); border: 1.5px solid var(--gemini-border); color: var(--gemini-text-muted); padding: 12px 2px; border-radius: 14px; gap: 4px;">
+                <span style="font-size: 11px; font-weight: 800;">SAT</span>
+                <span style="font-size: 13px; font-weight: 700; opacity: 0.4;">•</span>
+              </div>
+
+              <!-- Sunday (Upcoming) -->
+              <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--gemini-surface); border: 1.5px solid var(--gemini-border); color: var(--gemini-text-muted); padding: 12px 2px; border-radius: 14px; gap: 4px;">
+                <span style="font-size: 11px; font-weight: 800;">SUN</span>
+                <span style="font-size: 13px; font-weight: 700; opacity: 0.4;">•</span>
+              </div>
             </div>
             <div style="font-size: 11px; color: var(--gemini-vitality-emerald); font-weight: 700;">
               ⚡ Projected Epigenetic Gain: -0.3 Biological Years Saved This Week.
