@@ -148,6 +148,144 @@ const swipeTasksHtml = `
 // Replace tasks section in flow
 flowDayInner = flowDayInner.replace(/<!-- Today's Tasks -->[\s\S]*?<!-- Clinical Note -->/, swipeTasksHtml + '\n<!-- Clinical Note -->');
 
+// 5. Add WHAT TO DO, WHAT TO AVOID, and CHALLENGES & SOLUTIONS to FLOW - WEEK
+const weekThreeSectionsHtml = `
+<!-- ==================== 1. WHAT TO DO (Clinical Directives) ==================== -->
+<div class="flex flex-col gap-3 bg-surface-container-lowest p-container-padding rounded-xl shadow-sm mt-3 border border-optimal-green/20 relative overflow-hidden">
+  <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-optimal-green"></div>
+  <div class="flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <div class="w-8 h-8 rounded-full bg-optimal-green/10 flex items-center justify-center text-optimal-green shrink-0">
+        <span class="material-symbols-outlined text-[20px]">check_circle</span>
+      </div>
+      <h3 class="text-on-surface font-headline-lg-mobile text-[17px] font-bold">WHAT TO DO</h3>
+    </div>
+    <span class="font-label-sm text-[10px] text-optimal-green bg-optimal-green/10 px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Week 3 Focus</span>
+  </div>
+
+  <div class="flex flex-col gap-2.5 mt-1">
+    <div class="flex items-start gap-3 p-3 bg-surface-alt rounded-lg">
+      <span class="text-optimal-green font-bold text-[14px] mt-0.5">01</span>
+      <div class="flex flex-col">
+        <span class="text-on-surface font-body-md text-[14px] font-semibold">Front-Load 35g+ Protein at Breakfast</span>
+        <span class="text-on-surface-variant font-body-md text-[12px]">Prioritize pasture-raised eggs, grass-fed paneer, or wild fish within 60 mins of waking to steady glucose.</span>
+      </div>
+    </div>
+
+    <div class="flex items-start gap-3 p-3 bg-surface-alt rounded-lg">
+      <span class="text-optimal-green font-bold text-[14px] mt-0.5">02</span>
+      <div class="flex flex-col">
+        <span class="text-on-surface font-body-md text-[14px] font-semibold">12-Minute Post-Meal Walk</span>
+        <span class="text-on-surface-variant font-body-md text-[12px]">Activate GLUT4 receptors without insulin to blunt postprandial glucose spike by up to 24%.</span>
+      </div>
+    </div>
+
+    <div class="flex items-start gap-3 p-3 bg-surface-alt rounded-lg">
+      <span class="text-optimal-green font-bold text-[14px] mt-0.5">03</span>
+      <div class="flex flex-col">
+        <span class="text-on-surface font-body-md text-[14px] font-semibold">90-Minute Morning Caffeine Delay</span>
+        <span class="text-on-surface-variant font-body-md text-[12px]">Allow natural adenosine clearance upon waking to eliminate the common 2:00 PM energy crash.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 2. WHAT TO AVOID (Metabolic Toxins) ==================== -->
+<div class="flex flex-col gap-3 bg-surface-container-lowest p-container-padding rounded-xl shadow-sm mt-3 border border-error/20 relative overflow-hidden">
+  <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-error"></div>
+  <div class="flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <div class="w-8 h-8 rounded-full bg-error/10 flex items-center justify-center text-error shrink-0">
+        <span class="material-symbols-outlined text-[20px]">block</span>
+      </div>
+      <h3 class="text-on-surface font-headline-lg-mobile text-[17px] font-bold">WHAT TO AVOID</h3>
+    </div>
+    <span class="font-label-sm text-[10px] text-error bg-error/10 px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Zero Tolerance</span>
+  </div>
+
+  <div class="flex flex-col gap-2.5 mt-1">
+    <div class="flex items-start gap-3 p-3 bg-surface-alt rounded-lg">
+      <span class="text-error font-bold text-[14px] mt-0.5">✕</span>
+      <div class="flex flex-col">
+        <span class="text-on-surface font-body-md text-[14px] font-semibold">0% Industrial Seed Oils</span>
+        <span class="text-on-surface-variant font-body-md text-[12px]">Zero canola, soybean, sunflower, or palm oils. Use pure A2 desi ghee, cold-pressed olive oil, or butter.</span>
+      </div>
+    </div>
+
+    <div class="flex items-start gap-3 p-3 bg-surface-alt rounded-lg">
+      <span class="text-error font-bold text-[14px] mt-0.5">✕</span>
+      <div class="flex flex-col">
+        <span class="text-on-surface font-body-md text-[14px] font-semibold">No Liquid Fructose & Refined Sugars</span>
+        <span class="text-on-surface-variant font-body-md text-[12px]">Avoid fruit juices, sodas, and sweet syrups that overburden hepatic mitochondria and trigger fatty liver.</span>
+      </div>
+    </div>
+
+    <div class="flex items-start gap-3 p-3 bg-surface-alt rounded-lg">
+      <span class="text-error font-bold text-[14px] mt-0.5">✕</span>
+      <div class="flex flex-col">
+        <span class="text-on-surface font-body-md text-[14px] font-semibold">Caffeine Past 2:00 PM</span>
+        <span class="text-on-surface-variant font-body-md text-[12px]">Caffeine has an 8-hour half-life. Afternoon consumption severely fragments deep REM sleep architecture.</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 3. CHALLENGES & SOLUTIONS (Behavioral Mastery) ==================== -->
+<div class="flex flex-col gap-3 bg-surface-container-lowest p-container-padding rounded-xl shadow-sm mt-3 border border-primary/20 relative overflow-hidden">
+  <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-primary"></div>
+  <div class="flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+        <span class="material-symbols-outlined text-[20px]">psychology</span>
+      </div>
+      <h3 class="text-on-surface font-headline-lg-mobile text-[17px] font-bold">CHALLENGES & SOLUTIONS</h3>
+    </div>
+    <span class="font-label-sm text-[10px] text-primary bg-primary/10 px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Protocol Hacks</span>
+  </div>
+
+  <div class="flex flex-col gap-3 mt-1">
+    <!-- Challenge 1 -->
+    <div class="p-3.5 bg-surface-alt rounded-lg border border-surface-container flex flex-col gap-2">
+      <div class="flex items-center gap-2">
+        <span class="text-[14px]">⚠️</span>
+        <span class="text-on-surface font-body-md text-[13.5px] font-bold">Challenge: Late Afternoon Sugar Cravings (4:00 PM)</span>
+      </div>
+      <div class="p-2.5 bg-optimal-green/5 border border-optimal-green/20 rounded-md text-[12px] text-on-surface">
+        <span class="font-bold text-optimal-green">💡 Clinical Solution:</span> Drink 1 glass of cold water with 1 tbsp raw apple cider vinegar + pinch of pink salt, or eat 10 soaked walnuts. Blunts dopamine dips instantly.
+      </div>
+    </div>
+
+    <!-- Challenge 2 -->
+    <div class="p-3.5 bg-surface-alt rounded-lg border border-surface-container flex flex-col gap-2">
+      <div class="flex items-center gap-2">
+        <span class="text-[14px]">⚠️</span>
+        <span class="text-on-surface font-body-md text-[13.5px] font-bold">Challenge: Dining Out & Social Meals With Seed Oils</span>
+      </div>
+      <div class="p-2.5 bg-optimal-green/5 border border-optimal-green/20 rounded-md text-[12px] text-on-surface">
+        <span class="font-bold text-optimal-green">💡 Clinical Solution:</span> Request tandoori, grilled, or steamed preparations asked to be basted in pure butter or ghee. Use Tovelu Scan on the restaurant menu!
+      </div>
+    </div>
+
+    <!-- Challenge 3 -->
+    <div class="p-3.5 bg-surface-alt rounded-lg border border-surface-container flex flex-col gap-2">
+      <div class="flex items-center gap-2">
+        <span class="text-[14px]">⚠️</span>
+        <span class="text-on-surface font-body-md text-[13.5px] font-bold">Challenge: Skipping Morning Sunlight on Busy Days</span>
+      </div>
+      <div class="p-2.5 bg-optimal-green/5 border border-optimal-green/20 rounded-md text-[12px] text-on-surface">
+        <span class="font-bold text-optimal-green">💡 Clinical Solution:</span> Combine your 15-min sunlight with your morning hydration walk. Step outside without sunglasses for direct photons on retinal ganglion cells.
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+// Insert the 3 sections right above the Download Clinical Report button in weekInner
+weekInner = weekInner.replace(
+  '<button class="mt-4 w-full flex items-center justify-center gap-2 bg-primary',
+  weekThreeSectionsHtml + '\n<button class="mt-4 w-full flex items-center justify-center gap-2 bg-primary'
+);
+
 // Official Tovelu Mitosis Bio-Cell SVG Logo
 const toveluLogoSvg = `
 <svg width="28" height="28" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="shrink-0">
@@ -441,7 +579,7 @@ const unifiedHtml = `<!DOCTYPE html>
           ${flowDayInner.replace(/<div class="flex justify-center mb-1">[\s\S]*?<\/div>\s*<\/div>/, "")}
         </div>
 
-        <!-- 1B. SUB-VIEW: WEEK (WEEKLY SCORECARD) -->
+        <!-- 1B. SUB-VIEW: WEEK (WEEKLY SCORECARD + WHAT TO DO / AVOID / CHALLENGES) -->
         <div id="subview-week" class="sub-view">
           ${weekInner}
         </div>
@@ -906,4 +1044,4 @@ const unifiedHtml = `<!DOCTYPE html>
 </html>`;
 
 fs.writeFileSync("/media/nikita/New Volume/Tovelufile/app.html", unifiedHtml, "utf8");
-console.log("Successfully rebuilt unified app.html with Swipe-to-Check Tasks!");
+console.log("Successfully rebuilt unified app.html with WHAT TO DO, WHAT TO AVOID, and CHALLENGES & SOLUTIONS in FLOW - WEEK!");
