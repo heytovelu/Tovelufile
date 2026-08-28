@@ -342,71 +342,66 @@
       border-color: var(--gemini-vitality-emerald);
     }
 
-    /* Swipe-to-Complete Task Cards */
+    /* Native Swipeable Task Cards (Thumb & Cursor Gestures) */
+    .task-swipe-item-wrapper {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      touch-action: pan-y;
+      user-select: none;
+      background: linear-gradient(90deg, #00D06C 0%, #00F5A0 100%);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    }
+    .task-swipe-bg-reveal {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding-left: 20px;
+      color: #FFFFFF;
+      font-weight: 800;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      gap: 6px;
+    }
     .app-task-card {
+      position: relative;
       background: var(--gemini-surface);
       border: 1px solid var(--gemini-border);
       border-radius: 20px;
-      padding: 18px 20px;
+      padding: 16px 18px;
       display: flex;
-      flex-direction: column;
-      gap: 12px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
-      transition: all 0.2s;
+      align-items: center;
+      gap: 16px;
+      cursor: grab;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s, border-color 0.2s;
+      z-index: 2;
     }
-    .app-task-card:hover {
-      border-color: var(--gemini-sparkle-blue);
+    .app-task-card:active {
+      cursor: grabbing;
+    }
+    .task-icon-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transition: all 0.2s;
     }
     .app-task-card.completed {
       background: var(--gemini-surface-container);
-      border-color: rgba(0, 208, 108, 0.3);
+      border-color: rgba(0, 208, 108, 0.35);
     }
-    .task-swipe-track {
-      position: relative;
-      width: 100%;
-      height: 44px;
-      background: var(--gemini-surface-container);
-      border: 1.5px solid var(--gemini-border);
-      border-radius: 9999px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 4px;
-      cursor: pointer;
-      overflow: hidden;
-      user-select: none;
-      transition: all 0.25s;
-    }
-    .task-swipe-label {
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.04em;
+    .app-task-card.completed .task-title-text {
       color: var(--gemini-text-muted);
-      text-transform: uppercase;
-      transition: all 0.2s;
     }
-    .task-swipe-knob {
-      position: absolute;
-      left: 4px;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .app-task-card.completed .task-swipe-track {
-      background: rgba(0, 245, 160, 0.15);
-      border-color: var(--gemini-vitality-emerald);
-    }
-    .app-task-card.completed .task-swipe-label {
-      color: #008744;
-    }
-    .app-task-card.completed .task-swipe-knob {
-      left: calc(100% - 40px);
+    .app-task-card.completed .task-icon-circle {
       background: var(--gemini-vitality-emerald) !important;
+      color: #FFFFFF !important;
     }
 
     /* Fixed Bottom App Navigation (3 Core Tabs: FLOW | CHAT | HEALTH) */
@@ -672,8 +667,8 @@
 
           </div>
 
-          <!-- 4. TODAY'S TASKS (SWIPE-TO-COMPLETE WITH TASK ICONS) -->
-          <div style="display: flex; flex-direction: column; gap: 14px;">
+          <!-- 4. TODAY'S TASKS (FULL CARD SWIPEABLE ITEMS) -->
+          <div style="display: flex; flex-direction: column; gap: 12px;">
             <div style="display: flex; justify-content: space-between; align-items: center;">
               <div style="font-size: 13px; font-weight: 800; color: var(--gemini-text-muted); text-transform: uppercase; letter-spacing: 0.05em;">
                 ✅ Today's Tasks
@@ -682,74 +677,90 @@
             </div>
 
             <!-- Task 1: Sunlight -->
-            <div class="app-task-card completed" id="task-card-1" onclick="toggleTaskSwipe('task-card-1')">
-              <div style="display: flex; flex-direction: column; gap: 3px;">
-                <div style="font-family: 'Google Sans', sans-serif; font-size: 15px; font-weight: 800; color: var(--gemini-text-main);">
-                  Sit under sunlight for 15 minutes
-                </div>
-                <div style="font-size: 12px; color: var(--gemini-text-muted);">
-                  Within 45 minutes of waking up for clean all-day energy
-                </div>
+            <div class="task-swipe-item-wrapper">
+              <div class="task-swipe-bg-reveal">
+                <span class="material-symbols-outlined" style="font-size: 20px;">check_circle</span>
+                <span>COMPLETED • +15 MINS LOGGED</span>
               </div>
-              <div class="task-swipe-track">
-                <span class="task-swipe-label">✓ Completed</span>
-                <div class="task-swipe-knob" style="background: linear-gradient(135deg, #F59E0B, #D97706);">
-                  <span class="material-symbols-outlined" style="font-size: 20px; color: #FFFFFF;">light_mode</span>
+              <div class="app-task-card completed" id="task-card-1" data-task-id="1">
+                <div class="task-icon-circle" style="background: linear-gradient(135deg, #F59E0B, #D97706);">
+                  <span class="material-symbols-outlined" style="font-size: 22px; color: #FFFFFF;">light_mode</span>
                 </div>
+                <div style="flex: 1; display: flex; flex-direction: column; gap: 3px;">
+                  <div class="task-title-text" style="font-family: 'Google Sans', sans-serif; font-size: 15px; font-weight: 800; color: var(--gemini-text-main);">
+                    Sit under sunlight for 15 minutes
+                  </div>
+                  <div style="font-size: 12px; color: var(--gemini-text-muted);">
+                    Within 45 minutes of waking up for clean all-day energy
+                  </div>
+                </div>
+                <span class="material-symbols-outlined task-check-glyph" style="font-size: 20px; color: var(--gemini-vitality-emerald);">check_circle</span>
               </div>
             </div>
 
             <!-- Task 2: Hydration -->
-            <div class="app-task-card completed" id="task-card-2" onclick="toggleTaskSwipe('task-card-2')">
-              <div style="display: flex; flex-direction: column; gap: 3px;">
-                <div style="font-family: 'Google Sans', sans-serif; font-size: 15px; font-weight: 800; color: var(--gemini-text-main);">
-                  Drink a glass of mineral water
-                </div>
-                <div style="font-size: 12px; color: var(--gemini-text-muted);">
-                  Add a pinch of salt upon waking to hydrate your cells
-                </div>
+            <div class="task-swipe-item-wrapper">
+              <div class="task-swipe-bg-reveal">
+                <span class="material-symbols-outlined" style="font-size: 20px;">check_circle</span>
+                <span>COMPLETED • 500ML LOGGED</span>
               </div>
-              <div class="task-swipe-track">
-                <span class="task-swipe-label">✓ Completed</span>
-                <div class="task-swipe-knob" style="background: linear-gradient(135deg, #00C0FF, #0062FF);">
-                  <span class="material-symbols-outlined" style="font-size: 20px; color: #FFFFFF;">water_drop</span>
+              <div class="app-task-card completed" id="task-card-2" data-task-id="2">
+                <div class="task-icon-circle" style="background: linear-gradient(135deg, #00C0FF, #0062FF);">
+                  <span class="material-symbols-outlined" style="font-size: 22px; color: #FFFFFF;">water_drop</span>
                 </div>
+                <div style="flex: 1; display: flex; flex-direction: column; gap: 3px;">
+                  <div class="task-title-text" style="font-family: 'Google Sans', sans-serif; font-size: 15px; font-weight: 800; color: var(--gemini-text-main);">
+                    Drink a glass of mineral water
+                  </div>
+                  <div style="font-size: 12px; color: var(--gemini-text-muted);">
+                    Add a pinch of salt upon waking to hydrate your cells
+                  </div>
+                </div>
+                <span class="material-symbols-outlined task-check-glyph" style="font-size: 20px; color: var(--gemini-vitality-emerald);">check_circle</span>
               </div>
             </div>
 
             <!-- Task 3: Walk -->
-            <div class="app-task-card completed" id="task-card-3" onclick="toggleTaskSwipe('task-card-3')">
-              <div style="display: flex; flex-direction: column; gap: 3px;">
-                <div style="font-family: 'Google Sans', sans-serif; font-size: 15px; font-weight: 800; color: var(--gemini-text-main);">
-                  Take a 12-minute walk after lunch
-                </div>
-                <div style="font-size: 12px; color: var(--gemini-text-muted);">
-                  Helps smooth your blood sugar and prevent afternoon sluggishness
-                </div>
+            <div class="task-swipe-item-wrapper">
+              <div class="task-swipe-bg-reveal">
+                <span class="material-symbols-outlined" style="font-size: 20px;">check_circle</span>
+                <span>COMPLETED • 12 MINS WALKED</span>
               </div>
-              <div class="task-swipe-track">
-                <span class="task-swipe-label">✓ Completed</span>
-                <div class="task-swipe-knob" style="background: linear-gradient(135deg, #00F5A0, #00D06C);">
-                  <span class="material-symbols-outlined" style="font-size: 20px; color: #FFFFFF;">directions_walk</span>
+              <div class="app-task-card completed" id="task-card-3" data-task-id="3">
+                <div class="task-icon-circle" style="background: linear-gradient(135deg, #00F5A0, #00D06C);">
+                  <span class="material-symbols-outlined" style="font-size: 22px; color: #FFFFFF;">directions_walk</span>
                 </div>
+                <div style="flex: 1; display: flex; flex-direction: column; gap: 3px;">
+                  <div class="task-title-text" style="font-family: 'Google Sans', sans-serif; font-size: 15px; font-weight: 800; color: var(--gemini-text-main);">
+                    Take a 12-minute walk after lunch
+                  </div>
+                  <div style="font-size: 12px; color: var(--gemini-text-muted);">
+                    Helps smooth your blood sugar and prevent afternoon sluggishness
+                  </div>
+                </div>
+                <span class="material-symbols-outlined task-check-glyph" style="font-size: 20px; color: var(--gemini-vitality-emerald);">check_circle</span>
               </div>
             </div>
 
             <!-- Task 4: Screen Wind-Down -->
-            <div class="app-task-card" id="task-card-4" onclick="toggleTaskSwipe('task-card-4')">
-              <div style="display: flex; flex-direction: column; gap: 3px;">
-                <div style="font-family: 'Google Sans', sans-serif; font-size: 15px; font-weight: 800; color: var(--gemini-text-main);">
-                  Turn off bright screens 1 hour before bed
-                </div>
-                <div style="font-size: 12px; color: var(--gemini-text-muted);">
-                  Helps your mind prepare for deep restful sleep
-                </div>
+            <div class="task-swipe-item-wrapper">
+              <div class="task-swipe-bg-reveal">
+                <span class="material-symbols-outlined" style="font-size: 20px;">check_circle</span>
+                <span>COMPLETED • SLEEP SYNCED</span>
               </div>
-              <div class="task-swipe-track">
-                <span class="task-swipe-label">Swipe to Complete ➔</span>
-                <div class="task-swipe-knob" style="background: linear-gradient(135deg, #8B5CF6, #6366F1);">
-                  <span class="material-symbols-outlined" style="font-size: 20px; color: #FFFFFF;">bedtime</span>
+              <div class="app-task-card" id="task-card-4" data-task-id="4">
+                <div class="task-icon-circle" style="background: linear-gradient(135deg, #8B5CF6, #6366F1);">
+                  <span class="material-symbols-outlined" style="font-size: 22px; color: #FFFFFF;">bedtime</span>
                 </div>
+                <div style="flex: 1; display: flex; flex-direction: column; gap: 3px;">
+                  <div class="task-title-text" style="font-family: 'Google Sans', sans-serif; font-size: 15px; font-weight: 800; color: var(--gemini-text-main);">
+                    Turn off bright screens 1 hour before bed
+                  </div>
+                  <div style="font-size: 12px; color: var(--gemini-text-muted);">
+                    Helps your mind prepare for deep restful sleep
+                  </div>
+                </div>
+                <span class="material-symbols-outlined task-check-glyph" style="font-size: 20px; color: var(--gemini-text-muted); opacity: 0.4;">swipe_right</span>
               </div>
             </div>
           </div>
@@ -1378,16 +1389,107 @@
       document.getElementById('profile-modal-overlay').style.display = 'none';
     }
 
-    function toggleTaskSwipe(cardId) {
-      const card = typeof cardId === 'string' ? document.getElementById(cardId) : cardId;
-      if (!card) return;
-      card.classList.toggle('completed');
-      const label = card.querySelector('.task-swipe-label');
-      if (label) {
-        label.innerText = card.classList.contains('completed') ? '✓ Completed' : 'Swipe to Complete ➔';
-      }
-      updateTaskCounter();
+    // Native Swipe Controller (Thumb & Mouse Cursor Gestures)
+    function initTaskSwipeGestures() {
+      document.querySelectorAll('.app-task-card').forEach(card => {
+        let startX = 0;
+        let currentX = 0;
+        let isDragging = false;
+        const threshold = 60;
+
+        // Touch Handlers (Thumb Swipe)
+        card.addEventListener('touchstart', (e) => {
+          startX = e.touches[0].clientX;
+          currentX = startX;
+          isDragging = true;
+          card.style.transition = 'none';
+        }, { passive: true });
+
+        card.addEventListener('touchmove', (e) => {
+          if (!isDragging) return;
+          currentX = e.touches[0].clientX;
+          const diff = currentX - startX;
+          if (diff > 0 && diff < 160) {
+            card.style.transform = `translateX(${diff}px)`;
+          }
+        }, { passive: true });
+
+        card.addEventListener('touchend', () => {
+          if (!isDragging) return;
+          isDragging = false;
+          card.style.transition = 'transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)';
+          const diff = currentX - startX;
+          if (diff > threshold) {
+            card.classList.toggle('completed');
+            updateTaskSwipeState(card);
+          }
+          card.style.transform = 'translateX(0px)';
+          updateTaskCounter();
+        });
+
+        // Mouse Handlers (Cursor Drag Swipe)
+        card.addEventListener('mousedown', (e) => {
+          startX = e.clientX;
+          currentX = startX;
+          isDragging = true;
+          card.style.transition = 'none';
+
+          const onMouseMove = (ev) => {
+            if (!isDragging) return;
+            currentX = ev.clientX;
+            const diff = currentX - startX;
+            if (diff > 0 && diff < 160) {
+              card.style.transform = `translateX(${diff}px)`;
+            }
+          };
+
+          const onMouseUp = () => {
+            if (!isDragging) return;
+            isDragging = false;
+            window.removeEventListener('mousemove', onMouseMove);
+            window.removeEventListener('mouseup', onMouseUp);
+            card.style.transition = 'transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)';
+            const diff = currentX - startX;
+            if (diff > threshold) {
+              card.classList.toggle('completed');
+              updateTaskSwipeState(card);
+            }
+            card.style.transform = 'translateX(0px)';
+            updateTaskCounter();
+          };
+
+          window.addEventListener('mousemove', onMouseMove);
+          window.addEventListener('mouseup', onMouseUp);
+        });
+
+        // Tap Click Fallback
+        card.addEventListener('click', (e) => {
+          const diff = Math.abs(currentX - startX);
+          if (diff < 8) {
+            card.classList.toggle('completed');
+            updateTaskSwipeState(card);
+            updateTaskCounter();
+          }
+        });
+      });
     }
+
+    function updateTaskSwipeState(card) {
+      const isDone = card.classList.contains('completed');
+      const glyph = card.querySelector('.task-check-glyph');
+      if (glyph) {
+        if (isDone) {
+          glyph.innerText = 'check_circle';
+          glyph.style.color = 'var(--gemini-vitality-emerald)';
+          glyph.style.opacity = '1';
+        } else {
+          glyph.innerText = 'swipe_right';
+          glyph.style.color = 'var(--gemini-text-muted)';
+          glyph.style.opacity = '0.4';
+        }
+      }
+    }
+
     function updateTaskCounter() {
       const all = document.querySelectorAll('#subview-flow-day .app-task-card');
       const done = document.querySelectorAll('#subview-flow-day .app-task-card.completed');
@@ -1431,6 +1533,7 @@
 
     window.addEventListener('load', () => {
       initTimeAwareMeal();
+      initTaskSwipeGestures();
       const saved = localStorage.getItem('tovelu_survey_answers');
       if (saved) {
         try {
