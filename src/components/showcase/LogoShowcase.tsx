@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { Sparkles, Eye, Compass } from 'lucide-react';
+import { Sparkles, Sun, Flame, Orbit, Moon } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../ui/Card';
 import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
 
-type ProprietaryMarkId = 'glyph_nexus' | 'vital_delta' | 'equi_sol';
+type SolVariationId = 'circadian_sol' | 'prismatic_spark' | 'vital_eclipse' | 'genesis_core';
 
 export const LogoShowcase: React.FC = () => {
-  const [selectedMark, setSelectedMark] = useState<ProprietaryMarkId>('glyph_nexus');
+  const [selectedSol, setSelectedSol] = useState<SolVariationId>('circadian_sol');
 
   return (
     <div className="space-y-8 animate-in fade-in duration-200">
@@ -15,104 +15,74 @@ export const LogoShowcase: React.FC = () => {
       <div className="rounded-xl border border-border-subtle bg-surface p-6 shadow-card space-y-3">
         <div className="flex items-center justify-between gap-2 flex-wrap">
           <div className="flex items-center gap-2 text-brand-primary">
-            <Sparkles className="w-5 h-5 text-brand-primary" />
+            <Sun className="w-5 h-5 text-brand-primary" />
             <span className="text-xs font-mono font-semibold uppercase tracking-wider">
-              The Sovereign Identity Standard (100% Original to Tovelu)
+              The Living Biological Sol Family • 4 Master Explorations
             </span>
           </div>
           <Badge variant="optimal" size="sm">
-            Standalone Global Trademark
+            Universal Solar Archetype
           </Badge>
         </div>
         <h2 className="text-xl font-bold text-text-primary tracking-tight">
-          A Symbol That Becomes a Global Phenomenon
+          The Living Biological Spark (Sol Archetype)
         </h2>
         <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
-          Not mimicking Apple&apos;s fruit or Nike&apos;s wing. Instead, owning an entirely new, iconic geometric silhouette that belongs solely to <strong>TOVELU</strong>. When 8 billion people see this shape with zero text, they instantly know: <em>That is Tovelu</em>.
+          The circular solar sphere is the most sacred, universal symbol of life across all 8 billion humans (circadian biology, the living cell, energy metabolism, and vital warmth). Here are 4 distinct, iconic ways to own this shape:
         </p>
       </div>
 
-      {/* 3 Breakthrough Proprietary Archetypes */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+      {/* 4 Sol Variations Selector */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
         <Button
-          variant={selectedMark === 'glyph_nexus' ? 'primary' : 'secondary'}
-          onClick={() => setSelectedMark('glyph_nexus')}
-          className="text-xs font-semibold py-3"
+          size="sm"
+          variant={selectedSol === 'circadian_sol' ? 'primary' : 'secondary'}
+          onClick={() => setSelectedSol('circadian_sol')}
+          className="text-xs font-semibold py-2.5"
         >
-          1. The Tovelu Nexus (Top Choice) ⭐
+          1. The Circadian Sol ⭐
         </Button>
         <Button
-          variant={selectedMark === 'vital_delta' ? 'primary' : 'secondary'}
-          onClick={() => setSelectedMark('vital_delta')}
-          className="text-xs font-semibold py-3"
+          size="sm"
+          variant={selectedSol === 'prismatic_spark' ? 'primary' : 'secondary'}
+          onClick={() => setSelectedSol('prismatic_spark')}
+          className="text-xs font-semibold py-2.5"
         >
-          2. The Vital Delta (The Elevation)
+          2. The Prismatic Spark
         </Button>
         <Button
-          variant={selectedMark === 'equi_sol' ? 'primary' : 'secondary'}
-          onClick={() => setSelectedMark('equi_sol')}
-          className="text-xs font-semibold py-3"
+          size="sm"
+          variant={selectedSol === 'vital_eclipse' ? 'primary' : 'secondary'}
+          onClick={() => setSelectedSol('vital_eclipse')}
+          className="text-xs font-semibold py-2.5"
         >
-          3. The Equilibrium Sol
+          3. The Vital Eclipse
+        </Button>
+        <Button
+          size="sm"
+          variant={selectedSol === 'genesis_core' ? 'primary' : 'secondary'}
+          onClick={() => setSelectedSol('genesis_core')}
+          className="text-xs font-semibold py-2.5"
+        >
+          4. The Genesis Core
         </Button>
       </div>
 
-      {/* Hero Canvas: Standalone Isolated Symbol Test */}
+      {/* Hero Showcase Display: Standalone Isolated Solar Mark */}
       <Card className="overflow-hidden">
         <div className="p-12 sm:p-20 bg-subtle/30 flex flex-col items-center justify-center border-b border-border-subtle transition-all min-h-[380px]">
           <div className="flex flex-col items-center gap-10 select-none">
             
-            {/* 1. THE TOVELU NEXUS (PROPRIETARY SYMBOL) */}
-            {selectedMark === 'glyph_nexus' && (
-              <div className="flex flex-col items-center gap-8 animate-in zoom-in-95 duration-200">
-                {/* Standalone Sovereign Icon */}
-                <div className="relative w-28 h-28 flex items-center justify-center transition-transform hover:scale-105">
-                  <svg width="112" height="112" viewBox="0 0 100 100" fill="none">
-                    {/* Upper Horizon Canopy: Gently curved, sheltering, broad */}
-                    <path
-                      d="M 14 30 C 26 22, 74 22, 86 30 C 82 38, 62 34, 50 34 C 38 34, 18 38, 14 30 Z"
-                      fill="currentColor"
-                      className="text-brand-primary"
-                    />
-                    {/* The Interlocking Vital Stem: Dynamic parabolic keel */}
-                    <path
-                      d="M 50 36 C 58 36, 62 46, 56 64 C 53 74, 47 74, 44 64 C 38 46, 42 36, 50 36 Z"
-                      fill="currentColor"
-                      className="text-text-primary"
-                    />
-                    {/* Sovereign Central Meridian Eye (Humanity Core) */}
-                    <circle
-                      cx="50"
-                      cy="48"
-                      r="4"
-                      fill="currentColor"
-                      className="text-brand-primary"
-                    />
-                  </svg>
-                </div>
-
-                {/* The Wordmark Lockup */}
-                <div className="text-center space-y-1.5">
-                  <span className="font-sans font-extrabold text-3xl sm:text-4xl tracking-[0.28em] text-text-primary block pl-2">
-                    TOVELU
-                  </span>
-                  <span className="text-[10px] font-mono tracking-[0.34em] text-text-secondary uppercase block">
-                    Towards Better Health
-                  </span>
-                </div>
-              </div>
-            )}
-
-            {/* 2. THE VITAL DELTA (THE TRIANGULAR ELEVATION OF LIFE) */}
-            {selectedMark === 'vital_delta' && (
+            {/* 1. THE CIRCADIAN SOL (DUAL-ARC BREATHING EQUILIBRIUM) */}
+            {selectedSol === 'circadian_sol' && (
               <div className="flex flex-col items-center gap-8 animate-in zoom-in-95 duration-200">
                 <div className="relative w-28 h-28 flex items-center justify-center transition-transform hover:scale-105">
                   <svg width="112" height="112" viewBox="0 0 100 100" fill="none">
-                    {/* Pure monolithic continuous triangular gateway of human elevation */}
+                    {/* Pure circular solar disc with an organic dual-crescent carve forming an optical living "T" */}
                     <path
                       fillRule="evenodd"
                       clipRule="evenodd"
-                      d="M 50 14 C 54 14, 57 16, 59 20 L 86 68 C 89 74, 85 82, 78 82 L 22 82 C 15 82, 11 74, 14 68 L 41 20 C 43 16, 46 14, 50 14 Z M 50 36 C 43 36, 38 42, 40 50 L 45 66 C 46 70, 54 70, 55 66 L 60 50 C 62 42, 57 36, 50 36 Z"
+                      d="M 50 10 C 72.09 10, 90 27.91, 90 50 C 90 72.09, 72.09 90, 50 90 C 27.91 90, 10 72.09, 10 50 C 10 27.91, 27.91 10, 50 10 Z M 32 34 C 44 34, 56 34, 68 34 C 68 42, 58 42, 54 46 L 54 70 C 54 74, 46 74, 46 70 L 46 46 C 42 42, 32 42, 32 34 Z M 50 22 C 53.31 22, 56 24.69, 56 28 C 56 31.31, 53.31 34, 50 34 C 46.69 34, 44 31.31, 44 28 C 44 24.69, 46.69 22, 50 22 Z"
                       fill="currentColor"
                       className="text-brand-primary"
                     />
@@ -130,16 +100,45 @@ export const LogoShowcase: React.FC = () => {
               </div>
             )}
 
-            {/* 3. THE EQUILIBRIUM SOL (THE LIVING BIOLOGICAL SPARK) */}
-            {selectedMark === 'equi_sol' && (
+            {/* 2. THE PRISMATIC SPARK (THE ASCENDING VITALITY APEX) */}
+            {selectedSol === 'prismatic_spark' && (
               <div className="flex flex-col items-center gap-8 animate-in zoom-in-95 duration-200">
                 <div className="relative w-28 h-28 flex items-center justify-center transition-transform hover:scale-105">
                   <svg width="112" height="112" viewBox="0 0 100 100" fill="none">
-                    {/* Pure, continuous geometric disc with an organic parabolic carve */}
+                    {/* A solar disc where a sweeping crescent scoops up to reveal a soaring vital ember */}
                     <path
                       fillRule="evenodd"
                       clipRule="evenodd"
-                      d="M 50 12 C 70.98 12, 88 29.02, 88 50 C 88 70.98, 70.98 88, 50 88 C 29.02 88, 12 70.98, 12 50 C 12 29.02, 29.02 12, 50 12 Z M 50 24 C 64.36 24, 76 35.64, 76 50 C 76 58, 72 65, 66 70 C 60 62, 56 46, 56 36 C 56 30, 53 24, 50 24 Z"
+                      d="M 50 12 C 70.98 12, 88 29.02, 88 50 C 88 70.98, 70.98 88, 50 88 C 29.02 88, 12 70.98, 12 50 C 12 29.02, 29.02 12, 50 12 Z M 50 26 C 62 26, 72 36, 72 48 C 72 64, 54 74, 38 68 C 50 64, 58 54, 58 44 C 58 34, 54 28, 50 26 Z"
+                      fill="currentColor"
+                      className="text-brand-primary"
+                    />
+                    {/* The Spark of Life (Ascending Nucleus) */}
+                    <circle cx="38" cy="36" r="6.5" fill="currentColor" className="text-brand-primary" />
+                  </svg>
+                </div>
+
+                <div className="text-center space-y-1.5">
+                  <span className="font-sans font-extrabold text-3xl sm:text-4xl tracking-[0.28em] text-text-primary block pl-2">
+                    TOVELU
+                  </span>
+                  <span className="text-[10px] font-mono tracking-[0.34em] text-text-secondary uppercase block">
+                    Towards Better Health
+                  </span>
+                </div>
+              </div>
+            )}
+
+            {/* 3. THE VITAL ECLIPSE (THE CALM PLANETARY HORIZON) */}
+            {selectedSol === 'vital_eclipse' && (
+              <div className="flex flex-col items-center gap-8 animate-in zoom-in-95 duration-200">
+                <div className="relative w-28 h-28 flex items-center justify-center transition-transform hover:scale-105">
+                  <svg width="112" height="112" viewBox="0 0 100 100" fill="none">
+                    {/* Pure solar disc with a calm negative-space horizontal arch cradling an inner living lens */}
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M 50 12 C 70.98 12, 88 29.02, 88 50 C 88 70.98, 70.98 88, 50 88 C 29.02 88, 12 70.98, 12 50 C 12 29.02, 29.02 12, 50 12 Z M 24 52 C 34 66, 66 66, 76 52 C 64 58, 36 58, 24 52 Z M 50 26 C 56.63 26, 62 31.37, 62 38 C 62 44.63, 56.63 50, 50 50 C 43.37 50, 38 44.63, 38 38 C 38 31.37, 43.37 26, 50 26 Z"
                       fill="currentColor"
                       className="text-brand-primary"
                     />
@@ -150,7 +149,35 @@ export const LogoShowcase: React.FC = () => {
                   <span className="font-sans font-extrabold text-3xl sm:text-4xl tracking-[0.28em] text-text-primary block pl-2">
                     TOVELU
                   </span>
-                  <span className="text-[11px] font-mono tracking-[0.34em] text-text-secondary uppercase block">
+                  <span className="text-[10px] font-mono tracking-[0.34em] text-text-secondary uppercase block">
+                    Towards Better Health
+                  </span>
+                </div>
+              </div>
+            )}
+
+            {/* 4. THE GENESIS CORE (THE CELLULAR EMBRYO / MÖBIUS SOL) */}
+            {selectedSol === 'genesis_core' && (
+              <div className="flex flex-col items-center gap-8 animate-in zoom-in-95 duration-200">
+                <div className="relative w-28 h-28 flex items-center justify-center transition-transform hover:scale-105">
+                  <svg width="112" height="112" viewBox="0 0 100 100" fill="none">
+                    {/* A solar sphere with an unbroken, continuous topological ribbon cradling the living ember */}
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M 50 12 C 70.98 12, 88 29.02, 88 50 C 88 70.98, 70.98 88, 50 88 C 29.02 88, 12 70.98, 12 50 C 12 29.02, 29.02 12, 50 12 Z M 50 22 C 65.46 22, 78 34.54, 78 50 C 78 65.46, 65.46 78, 50 78 C 34.54 78, 22 65.46, 22 50 C 22 34.54, 34.54 22, 50 22 Z M 50 32 C 40 32, 36 42, 42 54 L 50 66 L 58 54 C 64 42, 60 32, 50 32 Z"
+                      fill="currentColor"
+                      className="text-brand-primary"
+                    />
+                    <circle cx="50" cy="44" r="5" fill="currentColor" className="text-text-primary" />
+                  </svg>
+                </div>
+
+                <div className="text-center space-y-1.5">
+                  <span className="font-sans font-extrabold text-3xl sm:text-4xl tracking-[0.28em] text-text-primary block pl-2">
+                    TOVELU
+                  </span>
+                  <span className="text-[10px] font-mono tracking-[0.34em] text-text-secondary uppercase block">
                     Towards Better Health
                   </span>
                 </div>
@@ -160,63 +187,78 @@ export const LogoShowcase: React.FC = () => {
           </div>
         </div>
 
-        {/* Strategic Analysis */}
+        {/* Deep Analysis of Solar Archetype */}
         <CardContent className="pt-6 space-y-4">
-          {selectedMark === 'glyph_nexus' && (
+          {selectedSol === 'circadian_sol' && (
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <h4 className="text-base font-semibold text-text-primary flex items-center gap-2">
                   <Sparkles className="w-4 h-4 text-brand-primary" />
-                  The Tovelu Nexus: Why This Can Become a Global Icon
+                  Concept 1: The Circadian Sol (Top Recommendation) ⭐
                 </h4>
-                <Badge variant="optimal" size="sm">100% Unique to Tovelu</Badge>
+                <Badge variant="optimal" size="sm">Pure Global Perfection</Badge>
               </div>
               <p className="text-xs text-text-secondary leading-relaxed">
-                Notice the silhouette: It does not look like any existing company on Earth. It has an overarching protective horizon canopy (representing care, shelter, and public health infrastructure) interlocking seamlessly with a grounded central stem (representing the human spine, personal metrics, and scientific truth).
+                The perfect solid solar sphere bisected by a living dual-crescent interior. It forms an optical architectural modern &ldquo;T&rdquo; while evoking the 24-hour circadian biological rhythm of human life. The upper ember symbolizes human consciousness and metabolic vitality.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1 text-xs">
                 <div className="p-2.5 rounded bg-subtle border border-border-subtle">
-                  <span className="text-text-muted block text-[11px]">Ownership</span>
-                  <strong className="text-text-primary font-mono">100% Proprietary Shape</strong>
+                  <span className="text-text-muted block text-[11px]">Archetype</span>
+                  <strong className="text-text-primary font-mono">The Living Sol</strong>
                 </div>
                 <div className="p-2.5 rounded bg-subtle border border-border-subtle">
-                  <span className="text-text-muted block text-[11px]">Letter Harmony</span>
-                  <strong className="text-brand-primary font-mono">Subtle "T" + "V" Silhouette</strong>
+                  <span className="text-text-muted block text-[11px]">Biological Meaning</span>
+                  <strong className="text-brand-primary font-mono">Circadian Rhythm & Life</strong>
                 </div>
                 <div className="p-2.5 rounded bg-subtle border border-border-subtle">
-                  <span className="text-text-muted block text-[11px]">The Standalone Test</span>
-                  <strong className="text-status-optimal font-mono">Recognizable with No Text</strong>
+                  <span className="text-text-muted block text-[11px]">Negative Space</span>
+                  <strong className="text-status-optimal font-mono">Subtle Modern "T"</strong>
                 </div>
               </div>
             </div>
           )}
 
-          {selectedMark === 'vital_delta' && (
+          {selectedSol === 'prismatic_spark' && (
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <h4 className="text-base font-semibold text-text-primary flex items-center gap-2">
-                  <Compass className="w-4 h-4 text-brand-primary" />
-                  The Vital Delta: The Universal Symbol of Human Elevation
+                  <Flame className="w-4 h-4 text-brand-primary" />
+                  Concept 2: The Prismatic Spark
                 </h4>
-                <Badge variant="brand" size="sm">Mathematical & Vital</Badge>
+                <Badge variant="brand" size="sm">Energy & Renewal</Badge>
               </div>
               <p className="text-xs text-text-secondary leading-relaxed">
-                In mathematics and science, Delta ($\Delta$) is the universal symbol for change and transformation. The soft rounded portal in the center protects the human, while the monolithic triangular geometry points upward toward lifelong vitality.
+                A solid sphere where an organic crescent sweeps up like a flame or cellular membrane, releasing a floating vital nucleus. Symbolizes energy metabolism, mitochondrial vitality, and cellular renewal.
               </p>
             </div>
           )}
 
-          {selectedMark === 'equi_sol' && (
+          {selectedSol === 'vital_eclipse' && (
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <h4 className="text-base font-semibold text-text-primary flex items-center gap-2">
-                  <Eye className="w-4 h-4 text-brand-primary" />
-                  The Equilibrium Sol: The Living Biological Spark
+                  <Moon className="w-4 h-4 text-brand-primary" />
+                  Concept 3: The Vital Eclipse
                 </h4>
-                <Badge variant="evidence" size="sm">Organic Sphere</Badge>
+                <Badge variant="evidence" size="sm">Planetary Calm</Badge>
               </div>
               <p className="text-xs text-text-secondary leading-relaxed">
-                A single solid circle carved by an asymmetrical living arc. Represents the biological cycle of life, renewal, and continuous health intelligence.
+                A serene, horizontal planetary arch cradling an inner living lens. Brings supreme calm and peaceful equilibrium—the antidote to healthcare panic.
+              </p>
+            </div>
+          )}
+
+          {selectedSol === 'genesis_core' && (
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <h4 className="text-base font-semibold text-text-primary flex items-center gap-2">
+                  <Orbit className="w-4 h-4 text-brand-primary" />
+                  Concept 4: The Genesis Core
+                </h4>
+                <Badge variant="neutral" size="sm">Cellular Embryo</Badge>
+              </div>
+              <p className="text-xs text-text-secondary leading-relaxed">
+                A continuous topological ribbon cradling the living ember at the center of the cell. Represents unbroken genetic integrity and lifelong health protection.
               </p>
             </div>
           )}
@@ -228,7 +270,7 @@ export const LogoShowcase: React.FC = () => {
         <CardHeader>
           <CardTitle>The "Zero-Text Billboard Test" (The Nike/Apple Standard)</CardTitle>
           <CardDescription>
-            When Nike puts a swoosh on a billboard in Tokyo with zero words, you know it is Nike. When Apple puts an apple in Paris with zero words, you know it is Apple. This is how Tovelu looks completely isolated:
+            Notice how The Circadian Sol commands instant global recognition with zero words:
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -237,13 +279,11 @@ export const LogoShowcase: React.FC = () => {
             <div className="p-10 rounded-2xl bg-white border border-slate-200 text-black flex flex-col items-center justify-center gap-4 shadow-subtle min-h-[180px]">
               <div className="w-16 h-16 flex items-center justify-center">
                 <svg width="64" height="64" viewBox="0 0 100 100" fill="currentColor">
-                  <path d="M 14 30 C 26 22, 74 22, 86 30 C 82 38, 62 34, 50 34 C 38 34, 18 38, 14 30 Z" />
-                  <path d="M 50 36 C 58 36, 62 46, 56 64 C 53 74, 47 74, 44 64 C 38 46, 42 36, 50 36 Z" />
-                  <circle cx="50" cy="48" r="4" fill="white" />
+                  <path fillRule="evenodd" clipRule="evenodd" d="M 50 10 C 72.09 10, 90 27.91, 90 50 C 90 72.09, 72.09 90, 50 90 C 27.91 90, 10 72.09, 10 50 C 10 27.91, 27.91 10, 50 10 Z M 32 34 C 44 34, 56 34, 68 34 C 68 42, 58 42, 54 46 L 54 70 C 54 74, 46 74, 46 70 L 46 46 C 42 42, 32 42, 32 34 Z M 50 22 C 53.31 22, 56 24.69, 56 28 C 56 31.31, 53.31 34, 50 34 C 46.69 34, 44 31.31, 44 28 C 44 24.69, 46.69 22, 50 22 Z" />
                 </svg>
               </div>
               <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest">
-                No Name Needed • Instant Recognition
+                Solid Black • 1-Second Recognition
               </span>
             </div>
 
@@ -251,13 +291,11 @@ export const LogoShowcase: React.FC = () => {
             <div className="p-10 rounded-2xl bg-slate-950 border border-slate-800 text-white flex flex-col items-center justify-center gap-4 shadow-card min-h-[180px]">
               <div className="w-16 h-16 flex items-center justify-center">
                 <svg width="64" height="64" viewBox="0 0 100 100" fill="currentColor">
-                  <path d="M 14 30 C 26 22, 74 22, 86 30 C 82 38, 62 34, 50 34 C 38 34, 18 38, 14 30 Z" />
-                  <path d="M 50 36 C 58 36, 62 46, 56 64 C 53 74, 47 74, 44 64 C 38 46, 42 36, 50 36 Z" />
-                  <circle cx="50" cy="48" r="4" fill="#090D14" />
+                  <path fillRule="evenodd" clipRule="evenodd" d="M 50 10 C 72.09 10, 90 27.91, 90 50 C 90 72.09, 72.09 90, 50 90 C 27.91 90, 10 72.09, 10 50 C 10 27.91, 27.91 10, 50 10 Z M 32 34 C 44 34, 56 34, 68 34 C 68 42, 58 42, 54 46 L 54 70 C 54 74, 46 74, 46 70 L 46 46 C 42 42, 32 42, 32 34 Z M 50 22 C 53.31 22, 56 24.69, 56 28 C 56 31.31, 53.31 34, 50 34 C 46.69 34, 44 31.31, 44 28 C 44 24.69, 46.69 22, 50 22 Z" />
                 </svg>
               </div>
               <span className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">
-                Laser-Etched Titanium Complication
+                Solid White • Laser-Etched Hardware
               </span>
             </div>
           </div>
