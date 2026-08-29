@@ -7,7 +7,8 @@ import { SURVEY_QUESTIONS, SurveyQuestion } from '../../data/surveyQuestions';
 import { UserBiometricInput, DiagnosticAssessment, GeneratedDailyPlan } from '../../services/thais/types';
 import { ThaisDiagnosticEngine } from '../../services/thais/diagnosticEngine';
 import { ThaisPlanGenerator } from '../../services/thais/planGenerator';
-import { DopamineMilestone, MILESTONES, MilestoneData } from './DopamineMilestone';
+import { DopamineMilestone } from './DopamineMilestone';
+import { MILESTONES, MilestoneData } from '../../data/milestonesData';
 import { Button } from '../ui/Button';
 
 interface DopamineSurveyRunnerProps {
