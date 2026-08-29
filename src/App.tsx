@@ -81,8 +81,6 @@ export default function App() {
     <div className="min-h-screen bg-canvas text-text-primary transition-colors duration-200 pb-28">
       {/* Mobile-First Sticky App Header */}
       <AppHeader
-        title="Tovelu"
-        subtitle="Towards Better Health • Identity & Design System"
         statusBadge={
           <span className="text-[10px] font-mono uppercase bg-brand-subtle text-brand-dark px-1.5 py-0.5 rounded font-medium">
             Wordmark Lab Active
