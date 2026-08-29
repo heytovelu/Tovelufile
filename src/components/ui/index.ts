@@ -14,3 +14,5 @@ export * from './EmergencyBanner';
 export * from './BiomarkerCard';
 export * from './EvidenceCard';
 export * from './ExplanationCard';
+export * from './BiomarkerSparkline';
+export * from './TrendChart';

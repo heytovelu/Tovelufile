@@ -12,10 +12,11 @@ import {
   Home, 
   FileText, 
   UserCheck, 
-  Database,
-  Radio,
-  Dna,
-  HeartPulse
+  Database, 
+  Radio, 
+  Dna, 
+  HeartPulse,
+  LineChart
 } from 'lucide-react';
 import { 
   Button, 
@@ -37,7 +38,11 @@ import {
   EmergencyBanner,
   BiomarkerCard,
   EvidenceCard,
-  ExplanationCard
+  ExplanationCard,
+  BiomarkerSparkline,
+  TrendChart,
+  DataPoint,
+  SparklinePoint
 } from './components/ui';
 
 export default function App() {
@@ -56,6 +61,9 @@ export default function App() {
   const [showError, setShowError] = useState(false);
   const [isRetrying, setIsRetrying] = useState(false);
   const [showEmergency, setShowEmergency] = useState(false);
+
+  // Time Range for Trend Chart
+  const [timeRange, setTimeRange] = useState('30D');
 
   // Unit conversion state
   const [glucoseUnit, setGlucoseUnit] = useState<'mg/dL' | 'mmol/L'>('mg/dL');
@@ -96,6 +104,60 @@ export default function App() {
     }, 1500);
   };
 
+  // Sample 30-day Glucose Dataset with explicit Missing Days (Article 29)
+  const glucoseDataPoints: DataPoint[] = [
+    { date: '2026-08-01', displayDate: 'Aug 1', value: 96, provenance: 'Quest Lab' },
+    { date: '2026-08-02', displayDate: 'Aug 2', value: 94, provenance: 'Continuous Monitor' },
+    { date: '2026-08-03', displayDate: 'Aug 3', value: 92, provenance: 'Continuous Monitor' },
+    { date: '2026-08-04', displayDate: 'Aug 4', value: 95, provenance: 'Continuous Monitor' },
+    { date: '2026-08-05', displayDate: 'Aug 5', value: 98, provenance: 'Continuous Monitor' },
+    { date: '2026-08-06', displayDate: 'Aug 6', value: 91, provenance: 'Continuous Monitor' },
+    { date: '2026-08-07', displayDate: 'Aug 7', value: 89, provenance: 'Continuous Monitor' },
+    { date: '2026-08-08', displayDate: 'Aug 8', value: 93, provenance: 'Continuous Monitor' },
+    { date: '2026-08-09', displayDate: 'Aug 9', value: 95, provenance: 'Continuous Monitor' },
+    { date: '2026-08-10', displayDate: 'Aug 10', value: 97, provenance: 'Continuous Monitor' },
+    { date: '2026-08-11', displayDate: 'Aug 11', value: null, provenance: 'No Reading' }, // Missing day (Article 29)
+    { date: '2026-08-12', displayDate: 'Aug 12', value: null, provenance: 'No Reading' }, // Missing day
+    { date: '2026-08-13', displayDate: 'Aug 13', value: 94, provenance: 'Continuous Monitor' },
+    { date: '2026-08-14', displayDate: 'Aug 14', value: 90, provenance: 'Continuous Monitor' },
+    { date: '2026-08-15', displayDate: 'Aug 15', value: 88, provenance: 'Continuous Monitor' },
+    { date: '2026-08-16', displayDate: 'Aug 16', value: 91, provenance: 'Continuous Monitor' },
+    { date: '2026-08-17', displayDate: 'Aug 17', value: 93, provenance: 'Continuous Monitor' },
+    { date: '2026-08-18', displayDate: 'Aug 18', value: 96, provenance: 'Continuous Monitor' },
+    { date: '2026-08-19', displayDate: 'Aug 19', value: null, provenance: 'No Reading' }, // Missing day
+    { date: '2026-08-20', displayDate: 'Aug 20', value: 94, provenance: 'Continuous Monitor' },
+    { date: '2026-08-21', displayDate: 'Aug 21', value: 92, provenance: 'Continuous Monitor' },
+    { date: '2026-08-22', displayDate: 'Aug 22', value: 89, provenance: 'Continuous Monitor' },
+    { date: '2026-08-23', displayDate: 'Aug 23', value: 90, provenance: 'Continuous Monitor' },
+    { date: '2026-08-24', displayDate: 'Aug 24', value: 92, provenance: 'Continuous Monitor' },
+    { date: '2026-08-25', displayDate: 'Aug 25', value: 91, provenance: 'Continuous Monitor' },
+    { date: '2026-08-26', displayDate: 'Aug 26', value: 94, provenance: 'Continuous Monitor' },
+    { date: '2026-08-27', displayDate: 'Aug 27', value: 90, provenance: 'Continuous Monitor' },
+    { date: '2026-08-28', displayDate: 'Aug 28', value: 88, provenance: 'Continuous Monitor' },
+    { date: '2026-08-29', displayDate: 'Aug 29', value: 92, provenance: 'Today' },
+  ];
+
+  // Quick 7-Day Sparkline Dataset
+  const rhrSparkline: SparklinePoint[] = [
+    { date: 'Day 1', value: 65 },
+    { date: 'Day 2', value: 64 },
+    { date: 'Day 3', value: 63 },
+    { date: 'Day 4', value: null }, // sensor off
+    { date: 'Day 5', value: 62 },
+    { date: 'Day 6', value: 61 },
+    { date: 'Day 7', value: 62 },
+  ];
+
+  const glucoseSparkline: SparklinePoint[] = [
+    { date: 'Day 1', value: 96 },
+    { date: 'Day 2', value: 94 },
+    { date: 'Day 3', value: 91 },
+    { date: 'Day 4', value: 93 },
+    { date: 'Day 5', value: 90 },
+    { date: 'Day 6', value: 88 },
+    { date: 'Day 7', value: 92 },
+  ];
+
   const navItems: NavTabItem[] = [
     { id: 'overview', label: 'Overview', icon: <Home className="w-5 h-5" /> },
     { id: 'biomarkers', label: 'Biomarkers', icon: <Activity className="w-5 h-5" />, badge: 3 },
@@ -111,7 +173,7 @@ export default function App() {
         subtitle="Towards Better Health"
         statusBadge={
           <span className="text-[10px] font-mono uppercase bg-brand-subtle text-brand-dark px-1.5 py-0.5 rounded font-medium">
-            v0.5.0 • Health Components
+            v0.6.0 • Visualizations
           </span>
         }
         rightAction={
@@ -138,32 +200,82 @@ export default function App() {
 
       {/* Main Content Showcase */}
       <main className="max-w-4xl mx-auto px-4 py-6 space-y-10">
-        {/* Step 05 Milestone Banner */}
+        {/* Step 06 Milestone Banner */}
         <section className="bg-surface border border-border-subtle rounded-lg p-5 shadow-card space-y-3">
           <div className="flex items-center gap-2 text-brand-primary">
             <ShieldCheck className="w-5 h-5" />
-            <span className="text-xs font-mono font-semibold uppercase tracking-wider">Step 05: Core Health Components</span>
+            <span className="text-xs font-mono font-semibold uppercase tracking-wider">Step 06: Health Data Visualizations</span>
           </div>
-          <h2 className="text-xl font-bold text-text-primary">Clinical Biomarker Cards, Provenance & Evidence Registry</h2>
+          <h2 className="text-xl font-bold text-text-primary">Longitudinal Trend Intelligence & Gap-Preserving Charts</h2>
           <p className="text-sm text-text-secondary leading-relaxed">
-            Direct implementation of <strong className="text-text-primary">Article 28 (Data Provenance)</strong>, 
-            <strong className="text-text-primary"> Article 33 (The Explanation Standard)</strong>, and 
-            <strong className="text-text-primary"> Article 67 (The Evidence Graph)</strong>.
+            Implements <strong className="text-text-primary">Article 29 (Data Quality: Explicit Gap Preservation)</strong> and 
+            <strong className="text-text-primary"> Article 30 (Longitudinal Intelligence)</strong>. Shows target reference bands and never fabricates smooth lines over missing dates.
           </p>
         </section>
 
-        {/* 1. BIOMARKER & VITAL CARDS WITH DATA PROVENANCE (ARTICLE 28) */}
+        {/* 1. LONGITUDINAL TREND CHART (ARTICLE 29 & 30) */}
+        <section className="space-y-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <LineChart className="w-5 h-5 text-brand-primary" />
+              <h3 className="text-base font-semibold text-text-primary">1. Longitudinal Trend Chart (Touch-Scrubbable)</h3>
+            </div>
+            <span className="text-xs font-mono text-text-muted">Touch / Drag to Scrub</span>
+          </div>
+
+          <TrendChart
+            title="Fasting Blood Glucose Trend"
+            unit={glucoseUnit}
+            data={glucoseDataPoints}
+            optimalMin={70}
+            optimalMax={99}
+            selectedTimeRange={timeRange}
+            onTimeRangeChange={(r) => setTimeRange(r)}
+          />
+        </section>
+
+        {/* 2. INLINE SPARKLINE TRENDS */}
+        <section className="space-y-4">
+          <h3 className="text-base font-semibold text-text-primary">2. Inline Biomarker Sparklines</h3>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <Card>
+              <CardContent className="pt-5 space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-semibold text-text-primary">Resting Heart Rate (7-Day Trend)</span>
+                  <BiomarkerSparkline data={rhrSparkline} optimalMin={60} optimalMax={80} />
+                </div>
+                <p className="text-xs text-text-secondary">
+                  Includes explicit sensor detachment gap on Day 4 without misleading interpolation.
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardContent className="pt-5 space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-semibold text-text-primary">Fasting Glucose (7-Day Trend)</span>
+                  <BiomarkerSparkline data={glucoseSparkline} optimalMin={70} optimalMax={99} />
+                </div>
+                <p className="text-xs text-text-secondary">
+                  Consistent 4.2% downward stabilization toward central target window.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+
+        {/* 3. BIOMARKER & VITAL CARDS WITH DATA PROVENANCE (ARTICLE 28) */}
         <section className="space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <HeartPulse className="w-5 h-5 text-brand-primary" />
-              <h3 className="text-base font-semibold text-text-primary">1. Biomarker Cards with Data Provenance (Article 28)</h3>
+              <h3 className="text-base font-semibold text-text-primary">3. Biomarker Cards with Data Provenance</h3>
             </div>
-            <span className="text-xs font-mono text-text-muted">Interactive Tap to Inspect</span>
+            <span className="text-xs font-mono text-text-muted">Tap to Inspect</span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {/* Lab-Verified Card */}
             <BiomarkerCard
               name="Fasting Glucose"
               value={glucoseValue}
@@ -186,7 +298,6 @@ export default function App() {
               }}
             />
 
-            {/* Wearable-Sync Card */}
             <BiomarkerCard
               name="Resting Heart Rate"
               value="62"
@@ -209,7 +320,6 @@ export default function App() {
               }}
             />
 
-            {/* Self-Reported / Borderline Card */}
             <BiomarkerCard
               name="Blood Pressure"
               value="128/84"
@@ -234,11 +344,11 @@ export default function App() {
           </div>
         </section>
 
-        {/* 2. THE EVIDENCE REGISTRY CARD (ARTICLE 8, 24, 67) */}
+        {/* 4. THE EVIDENCE REGISTRY CARD (ARTICLE 8, 24, 67) */}
         <section className="space-y-4">
           <div className="flex items-center gap-2">
             <Dna className="w-5 h-5 text-status-evidence" />
-            <h3 className="text-base font-semibold text-text-primary">2. Scientific Evidence Card (Articles 8, 24 & 67)</h3>
+            <h3 className="text-base font-semibold text-text-primary">4. Scientific Evidence Card (Articles 8, 24 & 67)</h3>
           </div>
 
           <EvidenceCard
@@ -255,9 +365,9 @@ export default function App() {
           />
         </section>
 
-        {/* 3. THE EXPLANATION STANDARD CARD (ARTICLE 33 & 22) */}
+        {/* 5. THE EXPLANATION STANDARD CARD (ARTICLE 33 & 22) */}
         <section className="space-y-4">
-          <h3 className="text-base font-semibold text-text-primary">3. The Explanation Standard (Articles 33 & 22)</h3>
+          <h3 className="text-base font-semibold text-text-primary">5. The Explanation Standard (Articles 33 & 22)</h3>
           
           <ExplanationCard
             what="Gradually incorporate 30 minutes of low-intensity morning walking 4 days per week."
@@ -270,12 +380,12 @@ export default function App() {
           />
         </section>
 
-        {/* 4. EMERGENCY SAFETY TRIAGE BANNER (ARTICLE 34) */}
+        {/* 6. EMERGENCY SAFETY TRIAGE BANNER (ARTICLE 34) */}
         <section className="space-y-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <AlertOctagon className="w-5 h-5 text-status-alert" />
-              <h3 className="text-base font-semibold text-text-primary">4. Emergency Safety Escalation (Article 34)</h3>
+              <h3 className="text-base font-semibold text-text-primary">6. Emergency Safety Escalation (Article 34)</h3>
             </div>
             <button
               onClick={() => setShowEmergency(!showEmergency)}
@@ -294,11 +404,11 @@ export default function App() {
           )}
         </section>
 
-        {/* 5. STATE SWITCHBOARD */}
+        {/* 7. STATE SWITCHBOARD */}
         <section className="space-y-4">
           <div className="flex items-center gap-2">
             <Radio className="w-5 h-5 text-brand-primary" />
-            <h3 className="text-base font-semibold text-text-primary">5. State Simulation Switchboard</h3>
+            <h3 className="text-base font-semibold text-text-primary">7. State Simulation Switchboard</h3>
           </div>
 
           <Card>
@@ -376,10 +486,10 @@ export default function App() {
           </Card>
         </section>
 
-        {/* 6. FORM INPUTS & UNIT CONVERSION */}
+        {/* 8. FORM INPUTS & UNIT CONVERSION */}
         <section className="space-y-4">
           <div>
-            <h3 className="text-base font-semibold text-text-primary">6. Form Inputs & Deterministic Unit Toggle</h3>
+            <h3 className="text-base font-semibold text-text-primary">8. Form Inputs & Deterministic Unit Toggle</h3>
             <p className="text-xs text-text-secondary">Mobile-first inputs with 16px font and built-in medical unit conversion (Article 26).</p>
           </div>
 
@@ -440,11 +550,11 @@ export default function App() {
           </div>
         </section>
 
-        {/* 7. OVERLAY DEMOS */}
+        {/* 9. OVERLAY DEMOS */}
         <section className="space-y-4">
           <div className="flex items-center gap-2">
             <Layers className="w-5 h-5 text-brand-primary" />
-            <h3 className="text-base font-semibold text-text-primary">7. Reversible Action Confirmation Dialog</h3>
+            <h3 className="text-base font-semibold text-text-primary">9. Reversible Action Confirmation Dialog</h3>
           </div>
 
           <Card>
