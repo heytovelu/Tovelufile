@@ -8,12 +8,35 @@ import {
   AlertOctagon, 
   BookOpen, 
   HelpCircle,
-  Smartphone,
-  Sparkles
+  Activity,
+  Heart,
+  Plus,
+  ArrowRight,
+  Search,
+  Sliders
 } from 'lucide-react';
+import { 
+  Button, 
+  Badge, 
+  Card, 
+  CardHeader, 
+  CardTitle, 
+  CardDescription, 
+  CardContent, 
+  CardFooter,
+  Input,
+  UnitToggle 
+} from './components/ui';
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  
+  // Interactive state demo for unit conversion & input
+  const [glucoseUnit, setGlucoseUnit] = useState<'mg/dL' | 'mmol/L'>('mg/dL');
+  const [glucoseValue, setGlucoseValue] = useState<number>(95);
+  const [patientInput, setPatientInput] = useState('Resting Heart Rate');
+  const [inputError, setInputError] = useState('');
 
   useEffect(() => {
     if (darkMode) {
@@ -23,9 +46,22 @@ export default function App() {
     }
   }, [darkMode]);
 
+  // Deterministic Unit Conversion (Article 26)
+  const handleUnitChange = (newUnit: string) => {
+    if (newUnit === glucoseUnit) return;
+    if (newUnit === 'mmol/L') {
+      // 1 mg/dL = 0.0555 mmol/L (deterministic medical formula)
+      setGlucoseValue(Number((glucoseValue * 0.0555).toFixed(1)));
+    } else {
+      // 1 mmol/L = 18.0182 mg/dL
+      setGlucoseValue(Math.round(glucoseValue / 0.0555));
+    }
+    setGlucoseUnit(newUnit as 'mg/dL' | 'mmol/L');
+  };
+
   return (
     <div className="min-h-screen bg-canvas text-text-primary transition-colors duration-200 pb-safe">
-      {/* Mobile-First Header */}
+      {/* Mobile-First Sticky App Header */}
       <header className="sticky top-0 z-30 bg-surface/90 backdrop-blur-md border-b border-border-subtle pt-safe px-4 py-3">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2.5">
@@ -36,7 +72,7 @@ export default function App() {
               <div className="flex items-center gap-2">
                 <h1 className="font-semibold text-base tracking-tight text-text-primary">Tovelu Design System</h1>
                 <span className="text-[10px] font-mono uppercase bg-brand-subtle text-brand-dark px-1.5 py-0.5 rounded font-medium">
-                  v0.1.0 • Tokens
+                  v0.2.0 • Primitives
                 </span>
               </div>
               <p className="text-xs text-text-secondary">Towards Better Health</p>
@@ -53,222 +89,232 @@ export default function App() {
         </div>
       </header>
 
-      {/* Main Content Area */}
-      <main className="max-w-4xl mx-auto px-4 py-6 space-y-8">
-        {/* Intro Card */}
+      {/* Main Content Showcase */}
+      <main className="max-w-4xl mx-auto px-4 py-6 space-y-10">
+        {/* Step 02 Milestone Banner */}
         <section className="bg-surface border border-border-subtle rounded-lg p-5 shadow-card space-y-3">
           <div className="flex items-center gap-2 text-brand-primary">
             <ShieldCheck className="w-5 h-5" />
-            <span className="text-xs font-mono font-semibold uppercase tracking-wider">Constitution Level Verified</span>
+            <span className="text-xs font-mono font-semibold uppercase tracking-wider">Step 02: Base Interactive Primitives</span>
           </div>
-          <h2 className="text-xl font-bold text-text-primary">Step 01: Brand Tokens & Foundations</h2>
+          <h2 className="text-xl font-bold text-text-primary">Reusable UI Primitives (Touch-First & Accessible)</h2>
           <p className="text-sm text-text-secondary leading-relaxed">
-            The single source of truth for Tovelu’s visual language. Designed strictly according to 
-            <strong className="text-text-primary"> Articles 39, 40, 41, 42 & 63</strong>: calm, scientific, touch-first, accessible, and never fear-inducing.
+            All base components strictly adhere to <strong className="text-text-primary">Article 40 (≥ 48px touch targets)</strong>, 
+            <strong className="text-text-primary"> Article 42 (WCAG Accessibility)</strong>, and 
+            <strong className="text-text-primary"> Article 26 (Deterministic Calculations)</strong>.
           </p>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 text-xs">
-            <div className="bg-subtle p-2.5 rounded-md border border-border-subtle">
-              <span className="text-text-muted block">Min Touch Target</span>
-              <strong className="text-text-primary font-mono">48px (Touch-First)</strong>
-            </div>
-            <div className="bg-subtle p-2.5 rounded-md border border-border-subtle">
-              <span className="text-text-muted block">Grid System</span>
-              <strong className="text-text-primary font-mono">4px / 8px Baseline</strong>
-            </div>
-            <div className="bg-subtle p-2.5 rounded-md border border-border-subtle">
-              <span className="text-text-muted block">Contrast Target</span>
-              <strong className="text-text-primary font-mono">WCAG AAA / AA</strong>
-            </div>
-            <div className="bg-subtle p-2.5 rounded-md border border-border-subtle">
-              <span className="text-text-muted block">Aesthetic Tone</span>
-              <strong className="text-text-primary">Calm & Scientific</strong>
-            </div>
-          </div>
         </section>
 
-        {/* 1. Color Palette: Clinical Semantics */}
+        {/* 1. BUTTONS */}
         <section className="space-y-4">
-          <div>
-            <h3 className="text-base font-semibold text-text-primary flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-brand-primary" />
-              1. Clinical & Semantic Status Palette
-            </h3>
-            <p className="text-xs text-text-secondary">
-              Calm, clinical feedback states that convey truth without inciting fear or panic (Article 63).
-            </p>
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-base font-semibold text-text-primary">1. Touch-First Buttons</h3>
+              <p className="text-xs text-text-secondary">Minimum 48px touch target with active press haptic feedback.</p>
+            </div>
+            <button
+              onClick={() => setIsLoading(!isLoading)}
+              className="text-xs font-mono text-brand-primary hover:underline"
+            >
+              Toggle Loading State
+            </button>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-            {/* Optimal */}
-            <div className="bg-status-optimal-bg border border-status-optimal-border p-3.5 rounded-md space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-status-optimal flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4" /> Optimal / Verified
-                </span>
-                <code className="text-[11px] font-mono text-status-optimal">--color-status-optimal</code>
+          <Card>
+            <CardContent className="pt-5 space-y-4">
+              <div className="flex flex-wrap items-center gap-3">
+                <Button variant="primary" isLoading={isLoading} leftIcon={<Plus className="w-4 h-4" />}>
+                  Log Biomarker
+                </Button>
+                <Button variant="secondary" isLoading={isLoading} leftIcon={<Activity className="w-4 h-4" />}>
+                  View Trends
+                </Button>
+                <Button variant="outline" isLoading={isLoading}>
+                  Review Evidence
+                </Button>
+                <Button variant="ghost" isLoading={isLoading} rightIcon={<ArrowRight className="w-4 h-4" />}>
+                  Learn More
+                </Button>
+                <Button variant="destructive" isLoading={isLoading}>
+                  Emergency Triage
+                </Button>
               </div>
-              <p className="text-xs text-text-secondary">Used for in-range lab metrics, verified sources, and validated actions.</p>
-            </div>
 
-            {/* Attention */}
-            <div className="bg-status-attention-bg border border-status-attention-border p-3.5 rounded-md space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-status-attention flex items-center gap-1.5">
-                  <AlertTriangle className="w-4 h-4" /> Attention / Borderline
-                </span>
-                <code className="text-[11px] font-mono text-status-attention">--color-status-attention</code>
+              <div className="pt-2 border-t border-border-subtle flex flex-wrap items-center gap-3">
+                <Button size="sm" variant="secondary">Small Action (40px)</Button>
+                <Button size="default" variant="primary">Standard Touch (48px)</Button>
+                <Button size="lg" variant="primary" rightIcon={<Heart className="w-5 h-5 text-status-alert" />}>
+                  Large Primary Touch (56px)
+                </Button>
+                <Button disabled variant="primary">Disabled State</Button>
               </div>
-              <p className="text-xs text-text-secondary">Gentle amber advisory for metrics nearing threshold limits.</p>
-            </div>
-
-            {/* Critical Alert */}
-            <div className="bg-status-alert-bg border border-status-alert-border p-3.5 rounded-md space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-status-alert flex items-center gap-1.5">
-                  <AlertOctagon className="w-4 h-4" /> Clinical Triage Alert
-                </span>
-                <code className="text-[11px] font-mono text-status-alert">--color-status-alert</code>
-              </div>
-              <p className="text-xs text-text-secondary">Reserved strictly for emergency triage escalation (Article 34).</p>
-            </div>
-
-            {/* Evidence */}
-            <div className="bg-status-evidence-bg border border-status-evidence-border p-3.5 rounded-md space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-status-evidence flex items-center gap-1.5">
-                  <BookOpen className="w-4 h-4" /> Evidence & Citations
-                </span>
-                <code className="text-[11px] font-mono text-status-evidence">--color-status-evidence</code>
-              </div>
-              <p className="text-xs text-text-secondary">Denotes peer-reviewed studies and verifiable guideline references.</p>
-            </div>
-
-            {/* Unknown / Provenance */}
-            <div className="bg-status-unknown-bg border border-status-unknown-border p-3.5 rounded-md space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-status-unknown flex items-center gap-1.5">
-                  <HelpCircle className="w-4 h-4" /> Unverified / Unknown
-                </span>
-                <code className="text-[11px] font-mono text-status-unknown">--color-status-unknown</code>
-              </div>
-              <p className="text-xs text-text-secondary">Explicit state when data is missing or unverified (Article 28 & 29).</p>
-            </div>
-
-            {/* Brand Clinical Teal */}
-            <div className="bg-brand-subtle border border-brand-primary/20 p-3.5 rounded-md space-y-2">
-              <div className="flex items-center justify-between">
-                <span className="text-xs font-semibold text-brand-dark flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-brand-primary inline-block"></span> Brand Primary Teal
-                </span>
-                <code className="text-[11px] font-mono text-brand-dark">--color-brand-primary</code>
-              </div>
-              <p className="text-xs text-text-secondary">Primary scientific calm accent for interactive primary actions.</p>
-            </div>
-          </div>
+            </CardContent>
+          </Card>
         </section>
 
-        {/* 2. Typography Scale */}
+        {/* 2. BADGES & HEALTH STATUS PILLS */}
         <section className="space-y-4">
           <div>
-            <h3 className="text-base font-semibold text-text-primary">2. Typography Scales</h3>
-            <p className="text-xs text-text-secondary">
-              Clean, legible sans-serif for reading alongside precision tabular monospace for biomarker numbers.
-            </p>
+            <h3 className="text-base font-semibold text-text-primary">2. Badges & Provenance Indicators</h3>
+            <p className="text-xs text-text-secondary">Visual status indicators distinguishing data truth, evidence strength, and clinical alerts.</p>
           </div>
 
-          <div className="bg-surface border border-border-subtle rounded-lg p-4 divide-y divide-border-subtle space-y-4">
-            <div className="pt-2 flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
-              <div>
-                <span className="text-xs font-mono text-text-muted block">Display (32px / 40px)</span>
-                <h1 className="text-3xl font-bold tracking-tight text-text-primary">Health Intelligence</h1>
+          <Card>
+            <CardContent className="pt-5 space-y-4">
+              <div className="flex flex-wrap items-center gap-2.5">
+                <Badge variant="optimal" hasDot icon={<CheckCircle2 className="w-3.5 h-3.5" />}>
+                  Optimal Range
+                </Badge>
+                <Badge variant="attention" hasDot icon={<AlertTriangle className="w-3.5 h-3.5" />}>
+                  Borderline Advisory
+                </Badge>
+                <Badge variant="alert" hasDot pulseDot icon={<AlertOctagon className="w-3.5 h-3.5" />}>
+                  Urgent Escalation
+                </Badge>
+                <Badge variant="evidence" icon={<BookOpen className="w-3.5 h-3.5" />}>
+                  Evidence Grade A
+                </Badge>
+                <Badge variant="unknown" icon={<HelpCircle className="w-3.5 h-3.5" />}>
+                  Unverified (Self-Reported)
+                </Badge>
+                <Badge variant="brand">
+                  Tovelu Verified
+                </Badge>
+                <Badge variant="neutral">
+                  Lab Sync
+                </Badge>
               </div>
-              <span className="text-xs font-mono text-text-secondary">font-sans bold</span>
-            </div>
+            </CardContent>
+          </Card>
+        </section>
 
-            <div className="pt-4 flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
-              <div>
-                <span className="text-xs font-mono text-text-muted block">Heading 1 (24px)</span>
-                <h2 className="text-2xl font-semibold tracking-tight text-text-primary">Longitudinal Trend Analysis</h2>
-              </div>
-              <span className="text-xs font-mono text-text-secondary">font-sans semibold</span>
-            </div>
+        {/* 3. INPUTS & UNIT CONVERSION */}
+        <section className="space-y-4">
+          <div>
+            <h3 className="text-base font-semibold text-text-primary">3. Form Inputs & Deterministic Unit Toggle</h3>
+            <p className="text-xs text-text-secondary">Mobile-first inputs with 16px font (no auto-zoom) and built-in medical unit conversion (Article 26).</p>
+          </div>
 
-            <div className="pt-4 flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
-              <div>
-                <span className="text-xs font-mono text-text-muted block">Body (16px)</span>
-                <p className="text-base text-text-secondary max-w-xl">
-                  Tovelu continuously evaluates incoming health signals against peer-reviewed clinical guidelines to provide calm, verified recommendations.
-                </p>
-              </div>
-              <span className="text-xs font-mono text-text-secondary">16px base mobile</span>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Input with Search Icon */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Metric Search Input</CardTitle>
+                <CardDescription>Clean text input with icon prefix.</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <Input
+                  label="Search Health Metric"
+                  placeholder="e.g. Fasting Glucose, HbA1c..."
+                  value={patientInput}
+                  onChange={(e) => setPatientInput(e.target.value)}
+                  leftIcon={<Search className="w-4 h-4" />}
+                  helperText="Search over 120+ clinical biomarkers"
+                />
 
-            {/* Specialized Clinical Metrics */}
-            <div className="pt-4 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
-              <div>
-                <span className="text-xs font-mono text-text-muted block">Biomarker Metric Display (Tabular Mono)</span>
-                <div className="flex items-baseline gap-2 mt-1">
-                  <span className="font-numeric text-4xl font-bold text-text-primary">124/82</span>
-                  <span className="text-sm font-sans font-medium text-text-secondary">mmHg</span>
-                  <span className="text-xs font-mono bg-status-optimal-bg text-status-optimal px-2 py-0.5 rounded border border-status-optimal-border">
-                    Normal Range
-                  </span>
+                <Input
+                  label="Simulated Input with Error Validation"
+                  placeholder="Enter blood pressure..."
+                  value={inputError ? '999/999' : ''}
+                  onChange={(e) => {
+                    if (e.target.value) setInputError('Reading exceeds physiological range. Please verify input.');
+                    else setInputError('');
+                  }}
+                  error={inputError || undefined}
+                  helperText={!inputError ? "Type anything to trigger validation error" : undefined}
+                />
+              </CardContent>
+            </Card>
+
+            {/* Interactive Clinical Unit Conversion */}
+            <Card>
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <CardTitle>Deterministic Unit Conversion</CardTitle>
+                    <CardDescription>Fasting Blood Glucose</CardDescription>
+                  </div>
+                  <UnitToggle
+                    options={[
+                      { label: 'mg/dL', value: 'mg/dL' },
+                      { label: 'mmol/L', value: 'mmol/L' },
+                    ]}
+                    value={glucoseUnit}
+                    onChange={handleUnitChange}
+                  />
                 </div>
-              </div>
-              <span className="text-xs font-mono text-text-secondary">font-numeric / tabular-nums</span>
-            </div>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="p-4 rounded-lg bg-subtle border border-border-subtle flex items-center justify-between">
+                  <div>
+                    <span className="text-xs font-mono text-text-secondary block">Validated Metric Value</span>
+                    <div className="flex items-baseline gap-2 mt-1">
+                      <span className="font-numeric text-3xl font-bold text-text-primary">
+                        {glucoseValue}
+                      </span>
+                      <span className="text-sm font-sans font-medium text-text-secondary">
+                        {glucoseUnit}
+                      </span>
+                    </div>
+                  </div>
+                  <Badge variant="optimal" hasDot>
+                    Normal (Fasting)
+                  </Badge>
+                </div>
+
+                <p className="text-xs text-text-secondary leading-relaxed">
+                  Converted deterministically via <code className="font-mono bg-muted px-1 py-0.5 rounded text-[11px]">1 mg/dL = 0.0555 mmol/L</code> without generative hallucination risk.
+                </p>
+              </CardContent>
+            </Card>
           </div>
         </section>
 
-        {/* 3. Mobile Touch Targets & Safe Area Awareness */}
+        {/* 4. COMPOSABLE CARD SURFACES */}
         <section className="space-y-4">
-          <div className="flex items-center gap-2">
-            <Smartphone className="w-4 h-4 text-brand-primary" />
-            <h3 className="text-base font-semibold text-text-primary">3. Mobile-First Touch Standards (Article 40)</h3>
+          <div>
+            <h3 className="text-base font-semibold text-text-primary">4. Composable Surface Cards</h3>
+            <p className="text-xs text-text-secondary">Structured containers with calm elevation layers.</p>
           </div>
 
-          <div className="bg-surface border border-border-subtle rounded-lg p-4 space-y-4">
-            <p className="text-xs text-text-secondary">
-              Every interactive element must strictly satisfy the <strong>minimum 48px touch boundary</strong> so anyone on any phone can tap accurately without missed touches.
-            </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <Card variant="default">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle>Standard Health Card</CardTitle>
+                  <Sliders className="w-4 h-4 text-text-muted" />
+                </div>
+                <CardDescription>Base container for summary panels and profile data.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-text-secondary">
+                  Uses soft shadows and subtle borders to keep visual noise minimal on OLED mobile screens.
+                </p>
+              </CardContent>
+              <CardFooter className="justify-between border-t border-border-subtle pt-3 mt-2">
+                <span className="text-xs text-text-muted">Updated today</span>
+                <Button size="sm" variant="ghost">Details</Button>
+              </CardFooter>
+            </Card>
 
-            <div className="flex flex-wrap items-center gap-3">
-              {/* Standard 48px Touch Button */}
-              <button className="min-h-touch px-5 rounded-md bg-brand-primary hover:bg-brand-primary-hover active:scale-98 text-text-inverse font-medium text-sm flex items-center justify-center transition-all shadow-subtle">
-                Primary Action (48px)
-              </button>
-
-              <button className="min-h-touch px-5 rounded-md border border-border-default hover:bg-subtle active:scale-98 text-text-primary font-medium text-sm flex items-center justify-center transition-all">
-                Secondary Action (48px)
-              </button>
-
-              <div className="flex items-center gap-2 bg-subtle px-3 py-2 rounded-md border border-border-subtle text-xs text-text-secondary font-mono">
-                <span>Touch Boundary:</span>
-                <strong className="text-status-optimal font-bold">48px OK</strong>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* 4. Elevation, Radii & Shadows */}
-        <section className="space-y-4">
-          <h3 className="text-base font-semibold text-text-primary">4. Elevation & Surface Depth</h3>
-          
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <div className="bg-surface p-4 rounded-md shadow-subtle border border-border-subtle">
-              <span className="text-xs font-mono text-text-muted block mb-1">Subtle Depth</span>
-              <p className="text-xs text-text-secondary">Minimal border elevation for list items and data rows.</p>
-            </div>
-
-            <div className="bg-surface p-4 rounded-lg shadow-card border border-border-subtle">
-              <span className="text-xs font-mono text-text-muted block mb-1">Card Depth</span>
-              <p className="text-xs text-text-secondary">Standard elevation for health cards and biomarker panels.</p>
-            </div>
-
-            <div className="bg-surface p-4 rounded-xl shadow-modal border border-border-subtle">
-              <span className="text-xs font-mono text-text-muted block mb-1">Modal / Sheet Depth</span>
-              <p className="text-xs text-text-secondary">Elevated depth for bottom sheets and triage alerts.</p>
-            </div>
+            <Card variant="interactive">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle>Interactive Tap Card</CardTitle>
+                  <ArrowRight className="w-4 h-4 text-brand-primary" />
+                </div>
+                <CardDescription>Click or tap to test tactile feedback.</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-text-secondary">
+                  Provides subtle hover elevation and 0.99x micro-scale tap response on mobile screens.
+                </p>
+              </CardContent>
+              <CardFooter className="justify-between border-t border-border-subtle pt-3 mt-2">
+                <Badge variant="brand">Tap to Inspect</Badge>
+                <span className="text-xs font-mono text-brand-primary">Interactive</span>
+              </CardFooter>
+            </Card>
           </div>
         </section>
       </main>
