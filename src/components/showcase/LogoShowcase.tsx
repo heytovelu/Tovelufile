@@ -1,294 +1,467 @@
 import React, { useState } from 'react';
-import { Crown, Compass, Gem } from 'lucide-react';
+import { 
+  Smartphone, 
+  Globe, 
+  User, 
+  FileText, 
+  Watch, 
+  ShieldCheck
+} from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../ui/Card';
 import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
 
-type PremiumMarkId = 'vitruvian_column' | 'sovereign_dyad' | 'meridian_seal';
-
 export const LogoShowcase: React.FC = () => {
-  const [selectedMark, setSelectedMark] = useState<PremiumMarkId>('vitruvian_column');
+  const [activeTab, setActiveTab] = useState<'app' | 'web' | 'profile' | 'hardware' | 'document'>('app');
+
+  // Pure SVG Component of The Vitruvian Column
+  const VitruvianIcon = ({ size = 32, gold = true, className = "" }: { size?: number; gold?: boolean; className?: string }) => (
+    <svg width={size} height={size} viewBox="0 0 100 100" fill="none" className={className}>
+      <defs>
+        <linearGradient id="vitruvian-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#D4AF37" />
+          <stop offset="50%" stopColor="#F3E5AB" />
+          <stop offset="100%" stopColor="#AA771C" />
+        </linearGradient>
+      </defs>
+      {/* Curved Shoulders Horizon */}
+      <path
+        d="M 16 28 C 30 22, 70 22, 84 28 C 76 34, 60 32, 50 32 C 40 32, 24 34, 16 28 Z"
+        fill={gold ? "url(#vitruvian-gold)" : "currentColor"}
+      />
+      {/* Upright Spine Pillar */}
+      <path
+        d="M 46 34 L 54 34 L 52 82 C 52 84, 48 84, 48 82 Z"
+        fill={gold ? "url(#vitruvian-gold)" : "currentColor"}
+      />
+      {/* Meridian Crown Orb */}
+      <circle cx="50" cy="18" r="3.5" fill={gold ? "url(#vitruvian-gold)" : "currentColor"} />
+    </svg>
+  );
 
   return (
     <div className="space-y-8 animate-in fade-in duration-200">
-      {/* Header Banner: The Luxury & Timeless Standard */}
-      <div className="rounded-xl border border-border-subtle bg-surface p-6 shadow-card space-y-3">
+      {/* Master Milestone Header */}
+      <div className="rounded-xl border-2 border-brand-primary/30 bg-surface p-6 shadow-card space-y-3">
         <div className="flex items-center justify-between gap-2 flex-wrap">
           <div className="flex items-center gap-2 text-brand-primary">
-            <Crown className="w-5 h-5 text-brand-primary" />
+            <ShieldCheck className="w-5 h-5 text-brand-primary" />
             <span className="text-xs font-mono font-semibold uppercase tracking-wider">
-              Haute-Horlogerie & Museum Standard • Timeless Human Health
+              Selected Global Identity • The Vitruvian Column
             </span>
           </div>
           <Badge variant="optimal" size="sm">
-            Swiss Luxury & Institutional Dignity
+            Official Brand Mark Locked
           </Badge>
         </div>
         <h2 className="text-xl font-bold text-text-primary tracking-tight">
-          Quiet Luxury: The 100-Year Human Health Hallmarks
+          Comprehensive Usage Showcase: The Vitruvian Column
         </h2>
         <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
-          Stripped of all cheap startup graphics, cartoonish app shapes, and tech gimmicks. Inspired by classical human posture, golden-ratio sculpture (Brâncuși), and Swiss fine-watchmaking (Patek Philippe, Rolex, Hermès).
+          Testing our locked hallmark across all critical touchpoints: <strong>iOS/Android App Icon, Website Navigation, Sovereign Profile Passport, Wearable Hardware, and Clinical Lab Documents</strong>.
         </p>
-      </div>
 
-      {/* 3 Ultra-Premium Archetype Selectors */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-        <Button
-          variant={selectedMark === 'vitruvian_column' ? 'primary' : 'secondary'}
-          onClick={() => setSelectedMark('vitruvian_column')}
-          className="text-xs font-semibold py-3.5 flex items-center justify-center gap-2"
-        >
-          <Crown className="w-4 h-4" />
-          <span>1. The Vitruvian Column ⭐</span>
-        </Button>
-        <Button
-          variant={selectedMark === 'sovereign_dyad' ? 'primary' : 'secondary'}
-          onClick={() => setSelectedMark('sovereign_dyad')}
-          className="text-xs font-semibold py-3.5 flex items-center justify-center gap-2"
-        >
-          <Gem className="w-4 h-4" />
-          <span>2. The Sovereign Dyad</span>
-        </Button>
-        <Button
-          variant={selectedMark === 'meridian_seal' ? 'primary' : 'secondary'}
-          onClick={() => setSelectedMark('meridian_seal')}
-          className="text-xs font-semibold py-3.5 flex items-center justify-center gap-2"
-        >
-          <Compass className="w-4 h-4" />
-          <span>3. The Meridian Halo</span>
-        </Button>
-      </div>
+        {/* View Switcher Pills */}
+        <div className="pt-2 flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar select-none">
+          <Button
+            size="sm"
+            variant={activeTab === 'app' ? 'primary' : 'secondary'}
+            onClick={() => setActiveTab('app')}
+            className="text-xs flex items-center gap-1.5"
+          >
+            <Smartphone className="w-3.5 h-3.5" />
+            <span>1. App Icon & Mobile Screen</span>
+          </Button>
 
-      {/* Main Luxury Hallmark Display Surface */}
-      <Card className="overflow-hidden border-2 border-border-default shadow-elevated">
-        <div className="p-12 sm:p-20 bg-gradient-to-b from-subtle/50 via-surface to-subtle/30 flex flex-col items-center justify-center border-b border-border-subtle transition-all min-h-[420px]">
-          <div className="flex flex-col items-center gap-10 select-none">
-            
-            {/* 1. THE VITRUVIAN COLUMN (THE SPINE & HORIZON OF HEALTH) */}
-            {selectedMark === 'vitruvian_column' && (
-              <div className="flex flex-col items-center gap-8 animate-in zoom-in-95 duration-200">
-                <div className="relative w-32 h-32 flex items-center justify-center transition-transform hover:scale-105">
-                  <svg width="128" height="128" viewBox="0 0 100 100" fill="none">
-                    <defs>
-                      <linearGradient id="gold-pillar" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#D4AF37" />
-                        <stop offset="50%" stopColor="#F3E5AB" />
-                        <stop offset="100%" stopColor="#AA771C" />
-                      </linearGradient>
-                    </defs>
-                    {/* The Dignified Horizon: The curve of healthy, upright human shoulders */}
-                    <path
-                      d="M 16 28 C 30 22, 70 22, 84 28 C 76 34, 60 32, 50 32 C 40 32, 24 34, 16 28 Z"
-                      fill="url(#gold-pillar)"
-                    />
-                    {/* The Vitruvian Pillar: The human spine of vitality and alignment */}
-                    <path
-                      d="M 46 34 L 54 34 L 52 82 C 52 84, 48 84, 48 82 Z"
-                      fill="url(#gold-pillar)"
-                    />
-                    {/* Golden Ratio Meridian Crown */}
-                    <circle cx="50" cy="18" r="3.5" fill="url(#gold-pillar)" />
-                  </svg>
-                </div>
+          <Button
+            size="sm"
+            variant={activeTab === 'web' ? 'primary' : 'secondary'}
+            onClick={() => setActiveTab('web')}
+            className="text-xs flex items-center gap-1.5"
+          >
+            <Globe className="w-3.5 h-3.5" />
+            <span>2. Website & App Navigation</span>
+          </Button>
 
-                <div className="text-center space-y-2">
-                  <span className="font-serif tracking-[0.35em] text-3xl sm:text-4xl text-text-primary block font-light pl-3">
-                    TOVELU
-                  </span>
-                  <span className="text-[10px] font-mono tracking-[0.4em] text-text-secondary uppercase block">
-                    Geneva • Est. 2026 • Health Intelligence
-                  </span>
-                </div>
-              </div>
-            )}
+          <Button
+            size="sm"
+            variant={activeTab === 'profile' ? 'primary' : 'secondary'}
+            onClick={() => setActiveTab('profile')}
+            className="text-xs flex items-center gap-1.5"
+          >
+            <User className="w-3.5 h-3.5" />
+            <span>3. Member Passport & Profile</span>
+          </Button>
 
-            {/* 2. THE SOVEREIGN DYAD (SCULPTURAL LIFE & CARE) */}
-            {selectedMark === 'sovereign_dyad' && (
-              <div className="flex flex-col items-center gap-8 animate-in zoom-in-95 duration-200">
-                <div className="relative w-32 h-32 flex items-center justify-center transition-transform hover:scale-105">
-                  <svg width="128" height="128" viewBox="0 0 100 100" fill="none">
-                    <defs>
-                      <linearGradient id="platinum-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#E2E8F0" />
-                        <stop offset="50%" stopColor="#CBD5E1" />
-                        <stop offset="100%" stopColor="#94A3B8" />
-                      </linearGradient>
-                    </defs>
-                    {/* Left Contour: The Living Human Vessel */}
-                    <path
-                      d="M 32 78 C 22 66, 24 34, 46 18 C 42 34, 38 60, 48 74 C 44 78, 36 80, 32 78 Z"
-                      fill="url(#platinum-grad)"
-                    />
-                    {/* Right Counterpart: The Healing Sanctuary */}
-                    <path
-                      d="M 68 78 C 78 66, 76 34, 54 18 C 58 34, 62 60, 52 74 C 56 78, 64 80, 68 78 Z"
-                      fill="currentColor"
-                      className="text-brand-primary"
-                    />
-                  </svg>
-                </div>
+          <Button
+            size="sm"
+            variant={activeTab === 'hardware' ? 'primary' : 'secondary'}
+            onClick={() => setActiveTab('hardware')}
+            className="text-xs flex items-center gap-1.5"
+          >
+            <Watch className="w-3.5 h-3.5" />
+            <span>4. Hardware & Wearables</span>
+          </Button>
 
-                <div className="text-center space-y-2">
-                  <span className="font-serif tracking-[0.35em] text-3xl sm:text-4xl text-text-primary block font-light pl-3">
-                    TOVELU
-                  </span>
-                  <span className="text-[10px] font-mono tracking-[0.4em] text-text-secondary uppercase block">
-                    Towards Better Health
-                  </span>
-                </div>
-              </div>
-            )}
-
-            {/* 3. THE MERIDIAN HALO (THE PLATINUM & GOLD HORIZON) */}
-            {selectedMark === 'meridian_seal' && (
-              <div className="flex flex-col items-center gap-8 animate-in zoom-in-95 duration-200">
-                <div className="relative w-32 h-32 flex items-center justify-center transition-transform hover:scale-105">
-                  <svg width="128" height="128" viewBox="0 0 100 100" fill="none">
-                    <defs>
-                      <linearGradient id="ring-gold" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#D4AF37" />
-                        <stop offset="100%" stopColor="#AA771C" />
-                      </linearGradient>
-                      <linearGradient id="ring-plat" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#E2E8F0" />
-                        <stop offset="100%" stopColor="#94A3B8" />
-                      </linearGradient>
-                    </defs>
-                    {/* Left Hemisphere: Platinum Body */}
-                    <path
-                      d="M 50 14 A 36 36 0 0 0 50 86 L 50 74 A 24 24 0 0 1 50 26 Z"
-                      fill="url(#ring-plat)"
-                    />
-                    {/* Right Hemisphere: Gold Vitality */}
-                    <path
-                      d="M 50 14 A 36 36 0 0 1 50 86 L 50 74 A 24 24 0 0 0 50 26 Z"
-                      fill="url(#ring-gold)"
-                    />
-                    {/* Central Optical Meridian Gap */}
-                    <line x1="50" y1="10" x2="50" y2="90" stroke="var(--tds-color-bg-canvas)" strokeWidth="2.5" />
-                  </svg>
-                </div>
-
-                <div className="text-center space-y-2">
-                  <span className="font-serif tracking-[0.35em] text-3xl sm:text-4xl text-text-primary block font-light pl-3">
-                    TOVELU
-                  </span>
-                  <span className="text-[10px] font-mono tracking-[0.4em] text-text-secondary uppercase block">
-                    Towards Better Health
-                  </span>
-                </div>
-              </div>
-            )}
-
-          </div>
+          <Button
+            size="sm"
+            variant={activeTab === 'document' ? 'primary' : 'secondary'}
+            onClick={() => setActiveTab('document')}
+            className="text-xs flex items-center gap-1.5"
+          >
+            <FileText className="w-3.5 h-3.5" />
+            <span>5. Clinical Lab Report</span>
+          </Button>
         </div>
+      </div>
 
-        {/* Deep Philosophical Rationale */}
-        <CardContent className="pt-6 space-y-4">
-          {selectedMark === 'vitruvian_column' && (
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <h4 className="text-base font-semibold text-text-primary flex items-center gap-2">
-                  <Crown className="w-4 h-4 text-brand-accent" />
-                  The Vitruvian Column: Pure Upright Human Health ⭐
-                </h4>
-                <Badge variant="optimal" size="sm">Haute Horlogerie Level</Badge>
-              </div>
-              <p className="text-xs text-text-secondary leading-relaxed">
-                In classical human biology, health is <strong>upright vitality</strong>—the alignment of the human spine and the calm balance of the shoulders. This hallmark abstracts human posture into an unshakeable architectural lettermark <strong>&ldquo;T&rdquo;</strong> crowned by a golden meridian orb. It carries the weight of centuries.
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1 text-xs">
-                <div className="p-2.5 rounded bg-subtle border border-border-subtle">
-                  <span className="text-text-muted block text-[11px]">Aesthetic</span>
-                  <strong className="text-text-primary font-serif">Quiet Luxury</strong>
+      {/* 1. APP ICON ON MOBILE PHONE HOME SCREEN */}
+      {activeTab === 'app' && (
+        <Card className="overflow-hidden">
+          <CardHeader>
+            <CardTitle>1. iOS & Android App Icon Experience</CardTitle>
+            <CardDescription>
+              How Tovelu sits with quiet luxury on an iPhone home screen alongside everyday apps.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="flex flex-col md:flex-row items-center justify-center gap-8 p-8 bg-slate-950 rounded-2xl border border-slate-800 text-white">
+              
+              {/* iPhone Home Screen Mockup Frame */}
+              <div className="w-[280px] bg-slate-900/90 rounded-[40px] p-4 border-[4px] border-slate-700 shadow-2xl space-y-6 relative overflow-hidden backdrop-blur-md">
+                {/* Dynamic Island / Speaker Notch */}
+                <div className="w-24 h-4 bg-black rounded-full mx-auto" />
+
+                {/* App Grid Simulation */}
+                <div className="grid grid-cols-4 gap-3 pt-2">
+                  {/* Dummy App 1 */}
+                  <div className="flex flex-col items-center gap-1">
+                    <div className="w-12 h-12 rounded-xl bg-slate-800/80 flex items-center justify-center text-[10px] text-slate-400">Mail</div>
+                    <span className="text-[9px] text-slate-400">Mail</span>
+                  </div>
+                  {/* Dummy App 2 */}
+                  <div className="flex flex-col items-center gap-1">
+                    <div className="w-12 h-12 rounded-xl bg-slate-800/80 flex items-center justify-center text-[10px] text-slate-400">Photos</div>
+                    <span className="text-[9px] text-slate-400">Photos</span>
+                  </div>
+                  {/* Dummy App 3 */}
+                  <div className="flex flex-col items-center gap-1">
+                    <div className="w-12 h-12 rounded-xl bg-slate-800/80 flex items-center justify-center text-[10px] text-slate-400">Health</div>
+                    <span className="text-[9px] text-slate-400">Health</span>
+                  </div>
+
+                  {/* TOVELU MASTER APP ICON */}
+                  <div className="flex flex-col items-center gap-1 relative group cursor-pointer">
+                    <div className="w-12 h-12 rounded-2xl bg-gradient-to-b from-[#0F172A] to-[#020617] border border-[#334155] shadow-lg flex items-center justify-center relative transform group-hover:scale-105 transition-all">
+                      <VitruvianIcon size={32} />
+                      {/* Notification Badge */}
+                      <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-brand-primary text-[8px] font-bold text-white rounded-full flex items-center justify-center ring-2 ring-slate-900">
+                        1
+                      </span>
+                    </div>
+                    <span className="text-[10px] font-semibold text-white tracking-wide">Tovelu</span>
+                  </div>
                 </div>
-                <div className="p-2.5 rounded bg-subtle border border-border-subtle">
-                  <span className="text-text-muted block text-[11px]">Human Meaning</span>
-                  <strong className="text-brand-primary font-mono">Alignment & Spine</strong>
+
+                {/* Status Bar Text */}
+                <div className="pt-24 pb-4 text-center">
+                  <span className="text-[10px] font-mono text-slate-500 uppercase tracking-widest block">
+                    iOS 18 • 120Hz OLED
+                  </span>
                 </div>
-                <div className="p-2.5 rounded bg-subtle border border-border-subtle">
-                  <span className="text-text-muted block text-[11px]">100-Year Life</span>
-                  <strong className="text-status-optimal font-mono">Immortal Dignity</strong>
+              </div>
+
+              {/* Close-Up High-Res App Icon Detail */}
+              <div className="space-y-4 max-w-xs text-center md:text-left">
+                <div className="w-24 h-24 rounded-[22px] bg-gradient-to-b from-[#0F172A] to-[#020617] border border-[#334155] shadow-2xl flex items-center justify-center mx-auto md:mx-0">
+                  <VitruvianIcon size={64} />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-base text-white">The 512px App Store Icon</h4>
+                  <p className="text-xs text-slate-400 mt-1 leading-relaxed">
+                    Rendered with obsidian ceramic background, champagne gold brushed metal geometry, and micro-bevel highlights. Distinctive from 5 meters away.
+                  </p>
                 </div>
               </div>
             </div>
-          )}
+          </CardContent>
+        </Card>
+      )}
 
-          {selectedMark === 'sovereign_dyad' && (
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <h4 className="text-base font-semibold text-text-primary flex items-center gap-2">
-                  <Gem className="w-4 h-4 text-brand-primary" />
-                  The Sovereign Dyad: The Living Sculpture of Care
-                </h4>
-                <Badge variant="brand" size="sm">Organic Sculpture</Badge>
-              </div>
-              <p className="text-xs text-text-secondary leading-relaxed">
-                Inspired by modern museum sculpture (Constantin Brâncuși). Two tactile, fluid stone-smooth forms representing <strong>The Human Being</strong> and <strong>Scientific Care</strong> rising together in serene harmony.
-              </p>
-            </div>
-          )}
+      {/* 2. WEBSITE & DESKTOP NAVBAR LOCKUP */}
+      {activeTab === 'web' && (
+        <Card>
+          <CardHeader>
+            <CardTitle>2. Website & Global Navigation Lockup</CardTitle>
+            <CardDescription>
+              How Tovelu appears in the top header of tovelu.com across both Light and Dark themes.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            {/* Desktop Light Header Simulation */}
+            <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-subtle space-y-2">
+              <span className="text-[10px] font-mono uppercase text-slate-400 tracking-wider block">Light Theme Navbar</span>
+              <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                {/* Brand Lockup */}
+                <div className="flex items-center gap-3">
+                  <VitruvianIcon size={28} />
+                  <span className="font-serif text-xl tracking-[0.28em] text-slate-900 font-normal">
+                    TOVELU
+                  </span>
+                </div>
 
-          {selectedMark === 'meridian_seal' && (
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <h4 className="text-base font-semibold text-text-primary flex items-center gap-2">
-                  <Compass className="w-4 h-4 text-brand-primary" />
-                  The Meridian Halo: Wholeness & Longevity
-                </h4>
-                <Badge variant="evidence" size="sm">Platinum & Gold</Badge>
-              </div>
-              <p className="text-xs text-text-secondary leading-relaxed">
-                A solid circular halo divided by a vertical line of light. The union of platinum (biological reality) and gold (vitality). Pure, sovereign, and eternal.
-              </p>
-            </div>
-          )}
-        </CardContent>
-      </Card>
+                {/* Nav Links */}
+                <div className="hidden sm:flex items-center gap-6 text-xs text-slate-600 font-medium">
+                  <span className="text-slate-900 font-semibold cursor-pointer">Health Intelligence</span>
+                  <span className="hover:text-slate-900 cursor-pointer">Longitudinal Biomarkers</span>
+                  <span className="hover:text-slate-900 cursor-pointer">Science & Evidence</span>
+                  <span className="hover:text-slate-900 cursor-pointer">Privacy Guarantee</span>
+                </div>
 
-      {/* Physical Luxury Hallmark Test */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Physical Craftsmanship Benchmark</CardTitle>
-          <CardDescription>
-            Testing how this identity looks when stamped into fine physical artifacts (watch caseback, medical hardware, stationery).
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-center">
-            {/* Fine Heavyweight Cotton Card */}
-            <div className="p-8 rounded-2xl bg-[#FBF9F5] border border-[#EAE5DC] text-[#1E293B] flex flex-col items-center justify-center gap-3 shadow-subtle min-h-[180px]">
-              <span className="text-[10px] font-mono uppercase tracking-widest text-[#94A3B8]">
-                Debossed on Warm Cotton Paper
-              </span>
-              <div className="w-12 h-12 flex items-center justify-center text-[#B45309]">
-                <svg width="48" height="48" viewBox="0 0 100 100" fill="currentColor">
-                  <path d="M 16 28 C 30 22, 70 22, 84 28 C 76 34, 60 32, 50 32 C 40 32, 24 34, 16 28 Z" />
-                  <path d="M 46 34 L 54 34 L 52 82 C 52 84, 48 84, 48 82 Z" />
-                  <circle cx="50" cy="18" r="3.5" />
-                </svg>
+                {/* Action CTA */}
+                <div className="flex items-center gap-2">
+                  <Button size="sm" variant="primary" className="text-xs">
+                    Access Portal
+                  </Button>
+                </div>
               </div>
-              <span className="font-serif text-sm tracking-[0.3em] font-light">TOVELU</span>
             </div>
 
-            {/* Brushed Obsidian Titanium */}
-            <div className="p-8 rounded-2xl bg-[#0B0F17] border border-[#1E293B] text-[#F8FAFC] flex flex-col items-center justify-center gap-3 shadow-card min-h-[180px]">
-              <span className="text-[10px] font-mono uppercase tracking-widest text-[#64748B]">
-                Laser-Cut on Brushed Titanium
-              </span>
-              <div className="w-12 h-12 flex items-center justify-center text-[#E2E8F0]">
-                <svg width="48" height="48" viewBox="0 0 100 100" fill="currentColor">
-                  <path d="M 16 28 C 30 22, 70 22, 84 28 C 76 34, 60 32, 50 32 C 40 32, 24 34, 16 28 Z" />
-                  <path d="M 46 34 L 54 34 L 52 82 C 52 84, 48 84, 48 82 Z" />
-                  <circle cx="50" cy="18" r="3.5" />
-                </svg>
+            {/* Desktop Dark Theme Header Simulation */}
+            <div className="rounded-xl border border-slate-800 bg-[#090D14] p-4 shadow-card space-y-2">
+              <span className="text-[10px] font-mono uppercase text-slate-500 tracking-wider block">Dark Theme Navbar</span>
+              <div className="flex items-center justify-between border-b border-slate-800/80 pb-3">
+                {/* Brand Lockup */}
+                <div className="flex items-center gap-3">
+                  <VitruvianIcon size={28} />
+                  <span className="font-serif text-xl tracking-[0.28em] text-white font-normal">
+                    TOVELU
+                  </span>
+                </div>
+
+                {/* Nav Links */}
+                <div className="hidden sm:flex items-center gap-6 text-xs text-slate-400 font-medium">
+                  <span className="text-white font-semibold cursor-pointer">Health Intelligence</span>
+                  <span className="hover:text-white cursor-pointer">Longitudinal Biomarkers</span>
+                  <span className="hover:text-white cursor-pointer">Science & Evidence</span>
+                  <span className="hover:text-white cursor-pointer">Privacy Guarantee</span>
+                </div>
+
+                {/* Action CTA */}
+                <div className="flex items-center gap-2">
+                  <Button size="sm" variant="primary" className="text-xs">
+                    Access Portal
+                  </Button>
+                </div>
               </div>
-              <span className="font-serif text-sm tracking-[0.3em] font-light">TOVELU</span>
             </div>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* 3. MEMBER PASSPORT & DIGITAL WALLET PROFILE */}
+      {activeTab === 'profile' && (
+        <Card>
+          <CardHeader>
+            <CardTitle>3. Sovereign Health Passport & Member Card</CardTitle>
+            <CardDescription>
+              Article 16 in physical form: The user's private, encrypted health identity card (Apple Wallet / Physical Titanium).
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="flex flex-col items-center justify-center p-8 bg-subtle/50 rounded-2xl border border-border-subtle">
+              {/* Apple Wallet Style Titanium Card */}
+              <div className="w-full max-w-sm h-56 rounded-2xl bg-gradient-to-br from-[#0B0F17] via-[#1E293B] to-[#020617] border border-[#334155] shadow-2xl p-6 flex flex-col justify-between text-white relative overflow-hidden">
+                {/* Subtle Background Watermark */}
+                <div className="absolute -right-8 -bottom-8 opacity-10 pointer-events-none">
+                  <VitruvianIcon size={200} />
+                </div>
+
+                {/* Card Top: Brand Hallmark & Chip */}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2.5">
+                    <VitruvianIcon size={32} />
+                    <span className="font-serif text-lg tracking-[0.3em] font-light">TOVELU</span>
+                  </div>
+                  <span className="text-[9px] font-mono uppercase bg-brand-primary/20 text-brand-primary px-2 py-0.5 rounded border border-brand-primary/30">
+                    Sovereign Identity
+                  </span>
+                </div>
+
+                {/* Card Middle: User ID & Biometrics Encrypted */}
+                <div className="space-y-1">
+                  <span className="text-[10px] font-mono text-slate-400 block tracking-wider uppercase">Health Vault Key</span>
+                  <div className="font-mono text-sm tracking-widest text-slate-200">
+                    TOV • 8820 • 4910 • 7741
+                  </div>
+                </div>
+
+                {/* Card Bottom: Member Name & Encryption */}
+                <div className="flex items-end justify-between border-t border-slate-700/60 pt-3">
+                  <div>
+                    <span className="text-[9px] font-mono text-slate-400 uppercase">Cardholder</span>
+                    <div className="text-xs font-semibold tracking-wide">AJAY • FOUNDING MEMBER</div>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-[9px] font-mono text-slate-400 uppercase">Standard</span>
+                    <div className="text-[10px] font-mono text-brand-primary">E2E ENCRYPTED (EHR)</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Profile Avatar Variations */}
+              <div className="flex items-center gap-6 mt-8">
+                {/* Large Avatar (Twitter / LinkedIn) */}
+                <div className="flex flex-col items-center gap-1.5">
+                  <div className="w-16 h-16 rounded-full bg-slate-900 border-2 border-brand-primary/40 flex items-center justify-center shadow-subtle">
+                    <VitruvianIcon size={36} />
+                  </div>
+                  <span className="text-[10px] font-mono text-text-muted">64px Profile</span>
+                </div>
+
+                {/* Medium Avatar (In-App Navbar) */}
+                <div className="flex flex-col items-center gap-1.5">
+                  <div className="w-10 h-10 rounded-full bg-slate-900 border border-border-default flex items-center justify-center">
+                    <VitruvianIcon size={22} />
+                  </div>
+                  <span className="text-[10px] font-mono text-text-muted">40px Navbar</span>
+                </div>
+
+                {/* Micro Favicon (Browser Tab) */}
+                <div className="flex flex-col items-center gap-1.5">
+                  <div className="w-5 h-5 rounded bg-slate-900 flex items-center justify-center border border-slate-700">
+                    <VitruvianIcon size={12} />
+                  </div>
+                  <span className="text-[10px] font-mono text-text-muted">16px Favicon</span>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* 4. PHYSICAL HARDWARE & WEARABLE BIOSENSORS */}
+      {activeTab === 'hardware' && (
+        <Card>
+          <CardHeader>
+            <CardTitle>4. Physical Hardware & Wearable Biosensor Integration</CardTitle>
+            <CardDescription>
+              Laser-etched into medical sensors, continuous glucose monitor patches, and smart ring hardware.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {/* Smart Ring / Sensor Pod Case */}
+              <div className="p-8 rounded-2xl bg-[#090D14] border border-slate-800 text-white flex flex-col items-center justify-center gap-4 text-center">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-slate-500">
+                  Titanium Smart Ring / Biosensor Pod
+                </span>
+                {/* Circular Pod Mockup */}
+                <div className="w-28 h-28 rounded-full bg-gradient-to-b from-slate-800 to-slate-950 border-2 border-slate-700 flex items-center justify-center shadow-2xl">
+                  <div className="w-20 h-20 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center">
+                    <VitruvianIcon size={40} />
+                  </div>
+                </div>
+                <span className="text-xs text-slate-400 font-mono">Laser-Microetched • Grade 5 Titanium</span>
+              </div>
+
+              {/* Clinical Diagnostic Device Packaging */}
+              <div className="p-8 rounded-2xl bg-[#F8FAFC] border border-slate-200 text-slate-900 flex flex-col items-center justify-center gap-4 text-center">
+                <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400">
+                  Clinical Diagnostic Kit Packaging
+                </span>
+                {/* Packaging Box Simulation */}
+                <div className="w-36 h-28 rounded-xl bg-white border border-slate-200 shadow-card p-4 flex flex-col items-center justify-center gap-2">
+                  <VitruvianIcon size={32} />
+                  <span className="font-serif text-sm tracking-[0.25em] font-normal">TOVELU</span>
+                  <span className="text-[8px] font-mono text-slate-400 uppercase">Metabolic Panel Kit</span>
+                </div>
+                <span className="text-xs text-slate-500 font-mono">Foil-Stamped • Recycled Medical Paper</span>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* 5. CLINICAL LAB REPORT / PHYSICIAN SUMMARY */}
+      {activeTab === 'document' && (
+        <Card>
+          <CardHeader>
+            <CardTitle>5. Clinical Laboratory Report & Physician Summary</CardTitle>
+            <CardDescription>
+              The authoritative clinical print header seen by real-world doctors and medical laboratories.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            {/* Printed Paper Mockup Frame */}
+            <div className="p-8 bg-white border border-slate-300 rounded-xl shadow-card text-slate-900 space-y-6 max-w-2xl mx-auto">
+              {/* Document Header */}
+              <div className="flex items-start justify-between border-b-2 border-slate-900 pb-4">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2.5">
+                    <VitruvianIcon size={28} />
+                    <span className="font-serif text-xl tracking-[0.25em] font-medium text-slate-900">
+                      TOVELU
+                    </span>
+                  </div>
+                  <p className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">
+                    Health Intelligence & Longitudinal Biomarker Registry
+                  </p>
+                </div>
+
+                <div className="text-right text-[10px] font-mono text-slate-500 space-y-0.5">
+                  <div>CLINICAL LAB REPORT #TL-2026-904</div>
+                  <div>DATE: AUG 29, 2026 • 16:20 UTC</div>
+                  <div className="text-emerald-700 font-semibold">VALIDATED REFERENCE RANGE</div>
+                </div>
+              </div>
+
+              {/* Sample Lab Values Table */}
+              <div className="space-y-2 text-xs">
+                <h5 className="font-semibold text-slate-900 uppercase tracking-wider text-[11px] font-mono">
+                  Longitudinal Cardiometabolic Summary (Article 30)
+                </h5>
+                <table className="w-full text-left border-collapse font-sans">
+                  <thead>
+                    <tr className="border-b border-slate-200 text-slate-500 font-mono text-[10px]">
+                      <th className="py-1">BIOMARKER</th>
+                      <th className="py-1">RESULT</th>
+                      <th className="py-1">REFERENCE INTERVAL</th>
+                      <th className="py-1 text-right">STATUS</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100 font-mono text-xs">
+                    <tr>
+                      <td className="py-2 font-medium font-sans">Fasting Plasma Glucose</td>
+                      <td className="py-2 font-bold text-slate-900">92 mg/dL</td>
+                      <td className="py-2 text-slate-500">70 – 99 mg/dL</td>
+                      <td className="py-2 text-right text-emerald-700 font-semibold">Optimal</td>
+                    </tr>
+                    <tr>
+                      <td className="py-2 font-medium font-sans">Hemoglobin A1c (HbA1c)</td>
+                      <td className="py-2 font-bold text-slate-900">5.4 %</td>
+                      <td className="py-2 text-slate-500">&lt; 5.7 %</td>
+                      <td className="py-2 text-right text-emerald-700 font-semibold">Optimal</td>
+                    </tr>
+                    <tr>
+                      <td className="py-2 font-medium font-sans">High-Sensitivity CRP (hs-CRP)</td>
+                      <td className="py-2 font-bold text-slate-900">0.6 mg/L</td>
+                      <td className="py-2 text-slate-500">&lt; 1.0 mg/L</td>
+                      <td className="py-2 text-right text-emerald-700 font-semibold">Low Risk</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Physician Footer Stamp */}
+              <div className="border-t border-slate-200 pt-3 flex items-center justify-between text-[10px] font-mono text-slate-400">
+                <span>Provenance: Quest Diagnostics Sync (Article 28)</span>
+                <span>Cryptographically Signed • Tovelu Private Key</span>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )}
     </div>
   );
 };
