@@ -16,7 +16,7 @@ import { SwipeToComplete } from '../ui/SwipeToComplete';
 import { Button } from '../ui/Button';
 
 // Modals
-import { LiveSurveyRunner } from './LiveSurveyRunner';
+import { DopamineSurveyRunner } from '../survey/DopamineSurveyRunner';
 import { MealLogModal } from './MealLogModal';
 import { NightlyCheckInModal } from './NightlyCheckInModal';
 import { MedicalReportModal } from './MedicalReportModal';
@@ -874,11 +874,11 @@ export const ThaisStudio: React.FC = () => {
         </div>
       )}
 
-      {/* MODAL 1: FULL 52-QUESTION LIVE SURVEY */}
+      {/* MODAL 1: FULL 52-QUESTION LIVE DOPAMINE SURVEY */}
       {isSurveyOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md animate-in fade-in duration-200">
           <div className="w-full max-w-2xl max-h-[92vh] overflow-y-auto">
-            <LiveSurveyRunner
+            <DopamineSurveyRunner
               onComplete={(input, _newAssessment, _newPlan) => {
                 setCustomInput(input);
                 setIsSurveyOpen(false);

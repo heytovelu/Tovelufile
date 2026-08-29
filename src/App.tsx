@@ -23,8 +23,9 @@ import {
   NavTabItem 
 } from './components/ui';
 
-// THAIS AI Engine
+// THAIS AI Engine & Survey
 import { ThaisStudio } from './components/thais/ThaisStudio';
+import { DopamineSurveyRunner } from './components/survey/DopamineSurveyRunner';
 
 // Modular Showcase Views
 import { TokensShowcase } from './components/showcase/TokensShowcase';
@@ -38,7 +39,7 @@ import { ExtensionsShowcase } from './components/showcase/ExtensionsShowcase';
 import { LogoShowcase } from './components/showcase/LogoShowcase';
 import { WordmarkShowcase } from './components/showcase/WordmarkShowcase';
 
-type AppMode = 'thais' | 'design_system';
+type AppMode = 'thais' | 'survey' | 'design_system';
 type TDSGalleryTab = 'wordmark' | 'logo' | 'health' | 'extensions' | 'charts' | 'primitives' | 'navigation' | 'feedback' | 'tokens' | 'governance';
 
 export default function App() {
@@ -89,10 +90,10 @@ export default function App() {
       <AppHeader
         darkMode={darkMode}
         statusBadge={
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1.5 overflow-x-auto">
             <button
               onClick={() => setAppMode('thais')}
-              className={`px-2.5 py-1 rounded-full text-[11px] font-bold transition-all flex items-center gap-1 ${
+              className={`px-2.5 py-1 rounded-full text-[11px] font-bold transition-all flex items-center gap-1 shrink-0 ${
                 appMode === 'thais'
                   ? 'bg-emerald-500 text-white shadow-sm'
                   : 'bg-surface border border-border-default text-text-secondary hover:text-text-primary'
@@ -103,15 +104,27 @@ export default function App() {
             </button>
 
             <button
+              onClick={() => setAppMode('survey')}
+              className={`px-2.5 py-1 rounded-full text-[11px] font-bold transition-all flex items-center gap-1 shrink-0 ${
+                appMode === 'survey'
+                  ? 'bg-gradient-to-r from-emerald-500 to-brand-primary text-white shadow-sm ring-2 ring-emerald-500/30'
+                  : 'bg-surface border border-border-default text-emerald-600 dark:text-emerald-400 hover:text-emerald-500'
+              }`}
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              🔥 Live Dopamine Survey
+            </button>
+
+            <button
               onClick={() => setAppMode('design_system')}
-              className={`px-2.5 py-1 rounded-full text-[11px] font-bold transition-all flex items-center gap-1 ${
+              className={`px-2.5 py-1 rounded-full text-[11px] font-bold transition-all flex items-center gap-1 shrink-0 ${
                 appMode === 'design_system'
                   ? 'bg-brand-primary text-white shadow-sm'
                   : 'bg-surface border border-border-default text-text-secondary hover:text-text-primary'
               }`}
             >
               <Sparkles className="w-3.5 h-3.5" />
-              Brand & Design System
+              Brand & Design
             </button>
           </div>
         }
@@ -130,8 +143,17 @@ export default function App() {
 
       {/* Main Content Area */}
       <main className="max-w-6xl mx-auto px-4 py-4 space-y-6">
-        {/* Render THAIS Engine as Primary Mode */}
-        {appMode === 'thais' ? (
+        {/* Render Dopamine Survey Full Screen */}
+        {appMode === 'survey' ? (
+          <div className="py-2">
+            <DopamineSurveyRunner
+              onComplete={(_input, _assessment, _plan) => {
+                setAppMode('thais');
+              }}
+              onCancel={() => setAppMode('thais')}
+            />
+          </div>
+        ) : appMode === 'thais' ? (
           <ThaisStudio />
         ) : (
           <div className="space-y-8 max-w-4xl mx-auto">
