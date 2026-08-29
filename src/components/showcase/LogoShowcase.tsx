@@ -1,211 +1,223 @@
 import React, { useState } from 'react';
-import { Sparkles, Brain, Layers, Circle, Compass } from 'lucide-react';
+import { Sparkles, Activity, Layers, Orbit, Columns } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../ui/Card';
 import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
 
-type GooglePsychologyId = 'google_t_roundel' | 'vital_aperture' | 'material_pill_t' | 'deep_orbital';
+type FirstFourOptionId = 'homeostasis' | 'meridian' | 'orbit' | 'pillars';
 
 export const LogoShowcase: React.FC = () => {
-  const [selectedMark, setSelectedMark] = useState<GooglePsychologyId>('google_t_roundel');
+  const [selectedConcept, setSelectedConcept] = useState<FirstFourOptionId>('homeostasis');
 
   return (
     <div className="space-y-8 animate-in fade-in duration-200">
-      {/* Header Banner: The Google Design Psychology */}
+      {/* Header Banner: The Original 4 Architectural Foundations */}
       <div className="rounded-xl border-2 border-brand-primary/30 bg-surface p-6 shadow-card space-y-3">
         <div className="flex items-center justify-between gap-2 flex-wrap">
           <div className="flex items-center gap-2 text-brand-primary">
-            <Brain className="w-5 h-5 text-brand-primary" />
+            <Sparkles className="w-5 h-5 text-brand-primary" />
             <span className="text-xs font-mono font-semibold uppercase tracking-wider">
-              Google Design Psychology • The Democratic Universal Standard
+              The Original 4 Master Concepts • Pure Universal Foundations
             </span>
           </div>
           <Badge variant="optimal" size="sm">
-            Material Geometry • Zero Intimidation
+            Restored Original Selection
           </Badge>
         </div>
         <h2 className="text-xl font-bold text-text-primary tracking-tight">
-          How Google Designs for 8 Billion Humans
+          The Original 4 Master Marks for Tovelu
         </h2>
         <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
-          Google never designs elitist, aristocratic luxury crests. Google designs with <strong>Cognitive Psychology</strong>: pure geometric primitives, approachable curves, mathematically calibrated arcs, and instant 50-millisecond cognitive recognition for every human on Earth.
+          The foundational 4 concepts created strictly without healthcare clichés (no hearts, no pulses, no leaves, no medical crosses). Pure mathematical geometry representing <strong>Dynamic Homeostasis, Biological Vectors, Protective Orbits, and Institutional Pillars</strong>.
         </p>
 
-        {/* 4 Google-Psychology Archetype Selectors */}
+        {/* The Exact 4 Selectors */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2">
           <Button
             size="sm"
-            variant={selectedMark === 'google_t_roundel' ? 'primary' : 'secondary'}
-            onClick={() => setSelectedMark('google_t_roundel')}
-            className="text-xs font-semibold py-3"
+            variant={selectedConcept === 'homeostasis' ? 'primary' : 'secondary'}
+            onClick={() => setSelectedConcept('homeostasis')}
+            className="text-xs font-semibold py-3 flex items-center justify-center gap-1.5"
           >
-            1. The Tovelu "T" Roundel ⭐
+            <Activity className="w-3.5 h-3.5" />
+            <span>1. Homeostasis Ring ⭐</span>
           </Button>
 
           <Button
             size="sm"
-            variant={selectedMark === 'vital_aperture' ? 'primary' : 'secondary'}
-            onClick={() => setSelectedMark('vital_aperture')}
-            className="text-xs font-semibold py-3"
+            variant={selectedConcept === 'meridian' ? 'primary' : 'secondary'}
+            onClick={() => setSelectedConcept('meridian')}
+            className="text-xs font-semibold py-3 flex items-center justify-center gap-1.5"
           >
-            2. The Vital Aperture
+            <Layers className="w-3.5 h-3.5" />
+            <span>2. The Meridian T</span>
           </Button>
 
           <Button
             size="sm"
-            variant={selectedMark === 'material_pill_t' ? 'primary' : 'secondary'}
-            onClick={() => setSelectedMark('material_pill_t')}
-            className="text-xs font-semibold py-3"
+            variant={selectedConcept === 'orbit' ? 'primary' : 'secondary'}
+            onClick={() => setSelectedConcept('orbit')}
+            className="text-xs font-semibold py-3 flex items-center justify-center gap-1.5"
           >
-            3. The Material Pill T
+            <Orbit className="w-3.5 h-3.5" />
+            <span>3. The Vital Orbit</span>
           </Button>
 
           <Button
             size="sm"
-            variant={selectedMark === 'deep_orbital' ? 'primary' : 'secondary'}
-            onClick={() => setSelectedMark('deep_orbital')}
-            className="text-xs font-semibold py-3"
+            variant={selectedConcept === 'pillars' ? 'primary' : 'secondary'}
+            onClick={() => setSelectedConcept('pillars')}
+            className="text-xs font-semibold py-3 flex items-center justify-center gap-1.5"
           >
-            4. The Health Orbital
+            <Columns className="w-3.5 h-3.5" />
+            <span>4. Genesis Pillars</span>
           </Button>
         </div>
       </div>
 
-      {/* Hero Showcase Display: Standalone Isolated Google-Grade Mark */}
+      {/* Hero Showcase Display: Clean Isolated Vector Hallmark */}
       <Card className="overflow-hidden border-2 border-border-default shadow-elevated">
-        <div className="p-12 sm:p-20 bg-gradient-to-b from-subtle/40 via-surface to-subtle/20 flex flex-col items-center justify-center border-b border-border-subtle transition-all min-h-[420px]">
+        <div className="p-12 sm:p-20 bg-gradient-to-b from-subtle/50 via-surface to-subtle/30 flex flex-col items-center justify-center border-b border-border-subtle transition-all min-h-[400px]">
           <div className="flex flex-col items-center gap-10 select-none">
             
-            {/* 1. THE TOVELU "T" ROUNDEL (THE GOOGLE "G" PARADIGM FOR TOVELU) */}
-            {selectedMark === 'google_t_roundel' && (
+            {/* 1. CONCEPT 1: THE HOMEOSTASIS RING */}
+            {selectedConcept === 'homeostasis' && (
               <div className="flex flex-col items-center gap-8 animate-in zoom-in-95 duration-200">
                 <div className="relative w-32 h-32 flex items-center justify-center transition-transform hover:scale-105">
-                  <svg width="128" height="128" viewBox="0 0 100 100" fill="none">
-                    {/* Google Psychology: A perfect circle sliced into 4 harmonious health quadrants forming a clean 'T' */}
-                    {/* Top-Left Arc: Deep Teal (Science & Clinical Intelligence) */}
+                  <svg width="128" height="128" viewBox="0 0 84 84" fill="none">
+                    <defs>
+                      <linearGradient id="orig-teal-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="var(--tds-color-brand-primary)" />
+                        <stop offset="100%" stopColor="var(--tds-color-brand-accent)" />
+                      </linearGradient>
+                    </defs>
+                    {/* Outer Homeostatic Arc 1 (Human Reality) */}
                     <path
-                      d="M 50 10 A 40 40 0 0 0 10 50 L 32 50 A 18 18 0 0 1 50 32 Z"
-                      fill="#0D9488"
+                      d="M 42 10 A 32 32 0 0 1 74 42 A 32 32 0 0 1 54 71"
+                      stroke="url(#orig-teal-grad)"
+                      strokeWidth="7"
+                      strokeLinecap="round"
                     />
-                    {/* Top-Right Arc: Bright Emerald (Optimal Recovery & Longevity) */}
+                    {/* Outer Homeostatic Arc 2 (Objective Science) */}
                     <path
-                      d="M 50 10 A 40 40 0 0 1 90 50 L 68 50 A 18 18 0 0 0 50 32 Z"
-                      fill="#10B981"
+                      d="M 42 74 A 32 32 0 0 1 10 42 A 32 32 0 0 1 30 13"
+                      stroke="var(--tds-color-text-primary)"
+                      strokeWidth="7"
+                      strokeLinecap="round"
+                      opacity="0.85"
                     />
-                    {/* Bottom-Right Arc: Warm Coral (Metabolic Vitality & Life) */}
-                    <path
-                      d="M 90 50 A 40 40 0 0 1 50 90 L 50 68 A 18 18 0 0 0 68 50 Z"
-                      fill="#F59E0B"
-                    />
-                    {/* Bottom-Left Arc: Deep Cobalt (Privacy & E2E Trust) */}
-                    <path
-                      d="M 50 90 A 40 40 0 0 1 10 50 L 32 50 A 18 18 0 0 0 50 68 Z"
-                      fill="#3B82F6"
-                    />
-                    {/* Central Pure Horizontal Crossbar & Vertical Stem forming the crisp "T" */}
-                    <rect x="26" y="26" width="48" height="12" rx="6" fill="#0D9488" />
-                    <rect x="44" y="34" width="12" height="40" rx="6" fill="#0D9488" />
+                    {/* Central Living Geometric Core */}
+                    <circle cx="42" cy="42" r="5" fill="url(#orig-teal-grad)" />
                   </svg>
                 </div>
 
-                <div className="text-center space-y-1.5">
-                  <span className="font-sans font-bold tracking-[0.06em] text-3xl sm:text-4xl text-text-primary block">
-                    Tovelu
+                <div className="text-center space-y-2">
+                  <span className="font-sans font-bold tracking-[0.24em] text-3xl sm:text-4xl text-text-primary block pl-2">
+                    TOVELU
                   </span>
-                  <span className="text-xs font-medium text-text-secondary tracking-wide block">
+                  <span className="text-[10px] font-mono tracking-[0.32em] text-text-secondary uppercase block">
                     Towards Better Health
                   </span>
                 </div>
               </div>
             )}
 
-            {/* 2. THE VITAL APERTURE (THE CHROME / PHOTOS DYNAMIC HARMONY) */}
-            {selectedMark === 'vital_aperture' && (
+            {/* 2. CONCEPT 2: THE MERIDIAN T */}
+            {selectedConcept === 'meridian' && (
               <div className="flex flex-col items-center gap-8 animate-in zoom-in-95 duration-200">
                 <div className="relative w-32 h-32 flex items-center justify-center transition-transform hover:scale-105">
-                  <svg width="128" height="128" viewBox="0 0 100 100" fill="none">
-                    {/* Google Psychology: 3 overlapping circular rotational blades representing the human health cycle: Data -> Insight -> Action */}
-                    {/* Blade 1: Teal (Data & Wearables) */}
+                  <svg width="128" height="128" viewBox="0 0 84 84" fill="none">
+                    <defs>
+                      <linearGradient id="orig-merid-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+                        <stop offset="0%" stopColor="var(--tds-color-brand-primary)" />
+                        <stop offset="100%" stopColor="var(--tds-color-brand-accent)" />
+                      </linearGradient>
+                    </defs>
+                    {/* Horizontal Baseline */}
                     <path
-                      d="M 50 14 A 36 36 0 0 1 84 38 L 64 50 A 14 14 0 0 0 50 28 Z"
-                      fill="#0D9488"
+                      d="M 16 32 C 30 32, 54 32, 68 32"
+                      stroke="var(--tds-color-text-primary)"
+                      strokeWidth="7"
+                      strokeLinecap="round"
                     />
-                    {/* Blade 2: Emerald (Evidence & Insight) */}
+                    {/* Ascending Meridian Stem */}
                     <path
-                      d="M 84 38 A 36 36 0 0 1 50 86 L 50 64 A 14 14 0 0 0 64 50 Z"
-                      fill="#10B981"
+                      d="M 42 72 L 42 16"
+                      stroke="url(#orig-merid-grad)"
+                      strokeWidth="7"
+                      strokeLinecap="round"
                     />
-                    {/* Blade 3: Amber (Human Vitality & Action) */}
-                    <path
-                      d="M 50 86 A 36 36 0 0 1 16 38 L 36 50 A 14 14 0 0 0 50 64 Z"
-                      fill="#F59E0B"
-                    />
-                    {/* Inner Pure White Iris with Central T Dot */}
-                    <circle cx="50" cy="50" r="14" fill="var(--tds-color-bg-surface)" />
-                    <circle cx="50" cy="50" r="6" fill="#0D9488" />
+                    {/* Vector Uplift Arrow Tip Indicator */}
+                    <circle cx="42" cy="14" r="4.5" fill="var(--tds-color-brand-primary)" />
                   </svg>
                 </div>
 
-                <div className="text-center space-y-1.5">
-                  <span className="font-sans font-bold tracking-[0.06em] text-3xl sm:text-4xl text-text-primary block">
-                    Tovelu
+                <div className="text-center space-y-2">
+                  <span className="font-sans font-bold tracking-[0.24em] text-3xl sm:text-4xl text-text-primary block pl-2">
+                    TOVELU
                   </span>
-                  <span className="text-xs font-medium text-text-secondary tracking-wide block">
+                  <span className="text-[10px] font-mono tracking-[0.32em] text-text-secondary uppercase block">
                     Towards Better Health
                   </span>
                 </div>
               </div>
             )}
 
-            {/* 3. THE MATERIAL PILL T (THE FRIENDLY, TOUCHABLE GEOMETRY) */}
-            {selectedMark === 'material_pill_t' && (
+            {/* 3. CONCEPT 3: THE VITAL ORBIT */}
+            {selectedConcept === 'orbit' && (
               <div className="flex flex-col items-center gap-8 animate-in zoom-in-95 duration-200">
                 <div className="relative w-32 h-32 flex items-center justify-center transition-transform hover:scale-105">
-                  <svg width="128" height="128" viewBox="0 0 100 100" fill="none">
-                    {/* Outer Gentle Circular Protection Shield */}
-                    <circle cx="50" cy="50" r="42" fill="var(--tds-color-brand-subtle)" />
-                    {/* Horizontal Pill Bar (Teal: Scientific Care) */}
-                    <rect x="22" y="32" width="56" height="14" rx="7" fill="#0D9488" />
-                    {/* Vertical Pill Stem (Emerald: Living Health) */}
-                    <rect x="43" y="32" width="14" height="42" rx="7" fill="#10B981" />
-                    {/* The Intersecting Health Junction */}
-                    <rect x="43" y="32" width="14" height="14" rx="7" fill="#042F2E" opacity="0.15" />
+                  <svg width="128" height="128" viewBox="0 0 84 84" fill="none">
+                    <defs>
+                      <linearGradient id="orig-orb-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="var(--tds-color-brand-primary)" />
+                        <stop offset="100%" stopColor="var(--tds-color-status-evidence)" />
+                      </linearGradient>
+                    </defs>
+                    {/* Protective Orbital Shell */}
+                    <circle cx="42" cy="42" r="30" stroke="var(--tds-color-border-default)" strokeWidth="3" strokeDasharray="3 4" />
+                    {/* Concentric Living Curve */}
+                    <path
+                      d="M 42 16 A 26 26 0 1 1 20 54"
+                      stroke="url(#orig-orb-grad)"
+                      strokeWidth="6"
+                      strokeLinecap="round"
+                    />
+                    {/* Focused Center Point */}
+                    <circle cx="42" cy="42" r="7" fill="var(--tds-color-brand-primary)" />
                   </svg>
                 </div>
 
-                <div className="text-center space-y-1.5">
-                  <span className="font-sans font-bold tracking-[0.06em] text-3xl sm:text-4xl text-text-primary block">
-                    Tovelu
+                <div className="text-center space-y-2">
+                  <span className="font-sans font-bold tracking-[0.24em] text-3xl sm:text-4xl text-text-primary block pl-2">
+                    TOVELU
                   </span>
-                  <span className="text-xs font-medium text-text-secondary tracking-wide block">
+                  <span className="text-[10px] font-mono tracking-[0.32em] text-text-secondary uppercase block">
                     Towards Better Health
                   </span>
                 </div>
               </div>
             )}
 
-            {/* 4. THE HEALTH ORBITAL (DEEPMIND / GOOGLE HEALTH AI INTELLIGENCE) */}
-            {selectedMark === 'deep_orbital' && (
+            {/* 4. CONCEPT 4: THE GENESIS PILLARS */}
+            {selectedConcept === 'pillars' && (
               <div className="flex flex-col items-center gap-8 animate-in zoom-in-95 duration-200">
                 <div className="relative w-32 h-32 flex items-center justify-center transition-transform hover:scale-105">
-                  <svg width="128" height="128" viewBox="0 0 100 100" fill="none">
-                    {/* Outer Multi-Segment Orbit: Continuous Learning */}
-                    <circle cx="50" cy="50" r="38" stroke="#E2E8F0" strokeWidth="4" />
-                    {/* Top Quadrant: Teal */}
-                    <path d="M 50 12 A 38 38 0 0 1 88 50" stroke="#0D9488" strokeWidth="8" strokeLinecap="round" />
-                    {/* Bottom Quadrant: Emerald */}
-                    <path d="M 50 88 A 38 38 0 0 1 12 50" stroke="#10B981" strokeWidth="8" strokeLinecap="round" />
-                    {/* Inner Living Core: The Human Individual */}
-                    <circle cx="50" cy="50" r="14" fill="#0D9488" />
-                    <circle cx="50" cy="50" r="6" fill="white" />
+                  <svg width="128" height="128" viewBox="0 0 84 84" fill="none">
+                    {/* Left Pillar: Human Biology */}
+                    <rect x="24" y="24" width="10" height="42" rx="5" fill="var(--tds-color-text-primary)" opacity="0.85" />
+                    {/* Right Pillar: Science & Intelligence */}
+                    <rect x="50" y="24" width="10" height="42" rx="5" fill="var(--tds-color-brand-primary)" />
+                    {/* Connecting Horizon Bridge */}
+                    <rect x="24" y="16" width="36" height="8" rx="4" fill="var(--tds-color-brand-primary)" />
                   </svg>
                 </div>
 
-                <div className="text-center space-y-1.5">
-                  <span className="font-sans font-bold tracking-[0.06em] text-3xl sm:text-4xl text-text-primary block">
-                    Tovelu
+                <div className="text-center space-y-2">
+                  <span className="font-sans font-bold tracking-[0.24em] text-3xl sm:text-4xl text-text-primary block pl-2">
+                    TOVELU
                   </span>
-                  <span className="text-xs font-medium text-text-secondary tracking-wide block">
+                  <span className="text-[10px] font-mono tracking-[0.32em] text-text-secondary uppercase block">
                     Towards Better Health
                   </span>
                 </div>
@@ -215,156 +227,138 @@ export const LogoShowcase: React.FC = () => {
           </div>
         </div>
 
-        {/* Deep Psychological Analysis */}
+        {/* Detailed Concept Analysis & Constitutional Foundations */}
         <CardContent className="pt-6 space-y-4">
-          {selectedMark === 'google_t_roundel' && (
+          {selectedConcept === 'homeostasis' && (
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <h4 className="text-base font-semibold text-text-primary flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-brand-primary" />
-                  1. The Tovelu "T" Roundel (The Google "G" Equivalent) ⭐
+                  <Activity className="w-4 h-4 text-brand-primary" />
+                  Concept 1: The Homeostasis Ring (The Living Equilibrium) ⭐
                 </h4>
-                <Badge variant="optimal" size="sm">50ms Instant Recognition</Badge>
+                <Badge variant="optimal" size="sm">Top Original Choice</Badge>
               </div>
               <p className="text-xs text-text-secondary leading-relaxed">
-                Just like Google revolutionized brand identity by turning the letter <strong>"G"</strong> into a 4-color circular geometric primitive, this mark turns <strong>Tovelu&apos;s "T"</strong> into a pure, friendly circular medallion. It uses Google&apos;s psychological principles: zero intimidation, mathematically pure arcs, and four semantic healthcare color segments:
+                Represents biological homeostasis—the continuous, living dynamic equilibrium of human health. The two open interlocking arcs symbolize <strong>Human Biological Reality</strong> meeting <strong>Objective Science & Intelligence</strong>. The negative space creates an optical silhouette of the letter <strong>T</strong> without feeling forced.
               </p>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1 text-xs">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1 text-xs">
                 <div className="p-2.5 rounded bg-subtle border border-border-subtle">
-                  <span className="w-3 h-3 rounded-full bg-[#0D9488] inline-block mr-1.5 align-middle" />
-                  <strong className="text-text-primary font-mono text-[11px]">Deep Teal</strong>
-                  <span className="text-text-muted block text-[10px]">Science & Clinical</span>
+                  <span className="text-text-muted block text-[11px]">Core Concept</span>
+                  <strong className="text-text-primary font-mono">Dynamic Homeostasis</strong>
                 </div>
                 <div className="p-2.5 rounded bg-subtle border border-border-subtle">
-                  <span className="w-3 h-3 rounded-full bg-[#10B981] inline-block mr-1.5 align-middle" />
-                  <strong className="text-text-primary font-mono text-[11px]">Emerald</strong>
-                  <span className="text-text-muted block text-[10px]">Optimal Recovery</span>
+                  <span className="text-text-muted block text-[11px]">Global Trademark</span>
+                  <strong className="text-status-optimal font-mono">100% Conflict-Free</strong>
                 </div>
                 <div className="p-2.5 rounded bg-subtle border border-border-subtle">
-                  <span className="w-3 h-3 rounded-full bg-[#F59E0B] inline-block mr-1.5 align-middle" />
-                  <strong className="text-text-primary font-mono text-[11px]">Warm Amber</strong>
-                  <span className="text-text-muted block text-[10px]">Metabolic Life</span>
-                </div>
-                <div className="p-2.5 rounded bg-subtle border border-border-subtle">
-                  <span className="w-3 h-3 rounded-full bg-[#3B82F6] inline-block mr-1.5 align-middle" />
-                  <strong className="text-text-primary font-mono text-[11px]">Cobalt Blue</strong>
-                  <span className="text-text-muted block text-[10px]">E2E Privacy</span>
+                  <span className="text-text-muted block text-[11px]">Micro-Scale</span>
+                  <strong className="text-brand-primary font-mono">Ultra-Crisp Vector</strong>
                 </div>
               </div>
             </div>
           )}
 
-          {selectedMark === 'vital_aperture' && (
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <h4 className="text-base font-semibold text-text-primary flex items-center gap-2">
-                  <Compass className="w-4 h-4 text-brand-primary" />
-                  2. The Vital Aperture (The Chrome Dynamic Harmony)
-                </h4>
-                <Badge variant="brand" size="sm">Rotational Momentum</Badge>
-              </div>
-              <p className="text-xs text-text-secondary leading-relaxed">
-                Applies the psychology of the Google Chrome aperture. Three rotational blades representing the virtuous loop of health: <strong>Biosignal Data $\rightarrow$ Evidence Synthesis $\rightarrow$ Human Action</strong>.
-              </p>
-            </div>
-          )}
-
-          {selectedMark === 'material_pill_t' && (
+          {selectedConcept === 'meridian' && (
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <h4 className="text-base font-semibold text-text-primary flex items-center gap-2">
                   <Layers className="w-4 h-4 text-brand-primary" />
-                  3. The Material Pill T (Material You Friendly Geometry)
+                  Concept 2: The Meridian T (The Ascending Vector)
                 </h4>
-                <Badge variant="evidence" size="sm">Material You Tactile</Badge>
+                <Badge variant="brand" size="sm">Vector Precision</Badge>
               </div>
               <p className="text-xs text-text-secondary leading-relaxed">
-                Uses Google&apos;s &ldquo;Material You&rdquo; rounded-capsule pills. Approachable, warm, and inviting. It communicates that healthcare doesn&apos;t have to hurt or frighten you.
+                Directly codifies the tagline <em>&ldquo;Towards Better Health&rdquo;</em>. The calm horizontal base represents the patient&apos;s baseline health, while the ascending vertical vector represents continuous biological improvement over time.
               </p>
             </div>
           )}
 
-          {selectedMark === 'deep_orbital' && (
+          {selectedConcept === 'orbit' && (
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <h4 className="text-base font-semibold text-text-primary flex items-center gap-2">
-                  <Circle className="w-4 h-4 text-brand-primary" />
-                  4. The Health Orbital (DeepMind / AI Intelligence)
+                  <Orbit className="w-4 h-4 text-brand-primary" />
+                  Concept 3: The Vital Orbit (The Focused Human Center)
                 </h4>
-                <Badge variant="neutral" size="sm">AI Planetary Orbit</Badge>
+                <Badge variant="evidence" size="sm">Article 2 Aligned</Badge>
               </div>
               <p className="text-xs text-text-secondary leading-relaxed">
-                Concentric geometric orbits focusing on the individual human at the core. Clean, mathematical, and deeply intelligent.
+                Embodies Article 2: <em>&ldquo;1 Human → 1 Lifelong Health Intelligence System&rdquo;</em>. The protective outer orbit guards privacy and safety, focusing directly on the human being at the center.
+              </p>
+            </div>
+          )}
+
+          {selectedConcept === 'pillars' && (
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <h4 className="text-base font-semibold text-text-primary flex items-center gap-2">
+                  <Columns className="w-4 h-4 text-brand-primary" />
+                  Concept 4: The Genesis Pillars (Science & Humanity)
+                </h4>
+                <Badge variant="neutral" size="sm">Architectural</Badge>
+              </div>
+              <p className="text-xs text-text-secondary leading-relaxed">
+                Two unshakeable pillars representing Science and Humanity standing together, bridged by Tovelu&apos;s intelligence layer.
               </p>
             </div>
           )}
         </CardContent>
       </Card>
 
-      {/* The Google Multi-Platform Test (Favicon, App Icon, Watch Dial) */}
+      {/* Multi-Platform Scale Inspection */}
       <Card>
         <CardHeader>
-          <CardTitle>Google Psychology: The Universal Scale Test</CardTitle>
+          <CardTitle>Micro-Scalability Across Platforms</CardTitle>
           <CardDescription>
-            Google logos are legendary because they work identically on a 65-inch television, an Android notification bar, and a tiny 16px favicon.
+            Testing optical weight across mobile app icon, touch targets, and browser favicons.
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
-            {/* 64px Android Adaptive Icon */}
-            <div className="p-4 rounded-xl bg-subtle/50 border border-border-subtle flex flex-col items-center gap-2">
-              <div className="w-16 h-16 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-md">
-                <svg width="40" height="40" viewBox="0 0 100 100" fill="none">
-                  <path d="M 50 10 A 40 40 0 0 0 10 50 L 32 50 A 18 18 0 0 1 50 32 Z" fill="#0D9488" />
-                  <path d="M 50 10 A 40 40 0 0 1 90 50 L 68 50 A 18 18 0 0 0 50 32 Z" fill="#10B981" />
-                  <path d="M 90 50 A 40 40 0 0 1 50 90 L 50 68 A 18 18 0 0 0 68 50 Z" fill="#F59E0B" />
-                  <path d="M 50 90 A 40 40 0 0 1 10 50 L 32 50 A 18 18 0 0 0 50 68 Z" fill="#3B82F6" />
-                  <rect x="26" y="26" width="48" height="12" rx="6" fill="#0D9488" />
-                  <rect x="44" y="34" width="12" height="40" rx="6" fill="#0D9488" />
+          <div className="flex flex-wrap items-center gap-6 p-4 rounded-xl bg-subtle/50 border border-border-subtle">
+            {/* 64px App Icon */}
+            <div className="flex flex-col items-center gap-1.5">
+              <div className="w-16 h-16 rounded-2xl bg-surface border border-border-subtle shadow-card flex items-center justify-center">
+                <svg width="40" height="40" viewBox="0 0 84 84" fill="none">
+                  <path d="M 42 10 A 32 32 0 0 1 74 42 A 32 32 0 0 1 54 71" stroke="var(--tds-color-brand-primary)" strokeWidth="8" strokeLinecap="round" />
+                  <path d="M 42 74 A 32 32 0 0 1 10 42 A 32 32 0 0 1 30 13" stroke="var(--tds-color-text-primary)" strokeWidth="8" strokeLinecap="round" />
+                  <circle cx="42" cy="42" r="6" fill="var(--tds-color-brand-primary)" />
                 </svg>
               </div>
-              <span className="text-[10px] font-mono text-text-muted">Android 15 Icon</span>
+              <span className="text-[10px] font-mono text-text-muted">64px (iOS)</span>
             </div>
 
-            {/* Pixel Watch Round Complication */}
-            <div className="p-4 rounded-xl bg-subtle/50 border border-border-subtle flex flex-col items-center gap-2">
-              <div className="w-14 h-14 rounded-full bg-black border border-slate-800 flex items-center justify-center shadow-inner">
-                <svg width="32" height="32" viewBox="0 0 100 100" fill="none">
-                  <path d="M 50 10 A 40 40 0 0 0 10 50 L 32 50 A 18 18 0 0 1 50 32 Z" fill="#0D9488" />
-                  <path d="M 50 10 A 40 40 0 0 1 90 50 L 68 50 A 18 18 0 0 0 50 32 Z" fill="#10B981" />
-                  <path d="M 90 50 A 40 40 0 0 1 50 90 L 50 68 A 18 18 0 0 0 68 50 Z" fill="#F59E0B" />
-                  <path d="M 50 90 A 40 40 0 0 1 10 50 L 32 50 A 18 18 0 0 0 50 68 Z" fill="#3B82F6" />
-                  <rect x="26" y="26" width="48" height="12" rx="6" fill="#0D9488" />
-                  <rect x="44" y="34" width="12" height="40" rx="6" fill="#0D9488" />
+            {/* 48px Touch Icon */}
+            <div className="flex flex-col items-center gap-1.5">
+              <div className="w-12 h-12 rounded-xl bg-surface border border-border-subtle shadow-subtle flex items-center justify-center">
+                <svg width="30" height="30" viewBox="0 0 84 84" fill="none">
+                  <path d="M 42 10 A 32 32 0 0 1 74 42 A 32 32 0 0 1 54 71" stroke="var(--tds-color-brand-primary)" strokeWidth="8" strokeLinecap="round" />
+                  <path d="M 42 74 A 32 32 0 0 1 10 42 A 32 32 0 0 1 30 13" stroke="var(--tds-color-text-primary)" strokeWidth="8" strokeLinecap="round" />
+                  <circle cx="42" cy="42" r="6" fill="var(--tds-color-brand-primary)" />
                 </svg>
               </div>
-              <span className="text-[10px] font-mono text-text-muted">Pixel Watch Dial</span>
+              <span className="text-[10px] font-mono text-text-muted">48px (Touch)</span>
             </div>
 
-            {/* Google Search Result Micro Favicon */}
-            <div className="p-4 rounded-xl bg-subtle/50 border border-border-subtle flex flex-col items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-sm">
-                <svg width="18" height="18" viewBox="0 0 100 100" fill="none">
-                  <path d="M 50 10 A 40 40 0 0 0 10 50 L 32 50 A 18 18 0 0 1 50 32 Z" fill="#0D9488" />
-                  <path d="M 50 10 A 40 40 0 0 1 90 50 L 68 50 A 18 18 0 0 0 50 32 Z" fill="#10B981" />
-                  <path d="M 90 50 A 40 40 0 0 1 50 90 L 50 68 A 18 18 0 0 0 68 50 Z" fill="#F59E0B" />
-                  <path d="M 50 90 A 40 40 0 0 1 10 50 L 32 50 A 18 18 0 0 0 50 68 Z" fill="#3B82F6" />
-                  <rect x="26" y="26" width="48" height="12" rx="6" fill="#0D9488" />
-                  <rect x="44" y="34" width="12" height="40" rx="6" fill="#0D9488" />
+            {/* 32px Header Icon */}
+            <div className="flex flex-col items-center gap-1.5">
+              <div className="w-8 h-8 rounded-lg bg-surface border border-border-subtle flex items-center justify-center">
+                <svg width="20" height="20" viewBox="0 0 84 84" fill="none">
+                  <path d="M 42 10 A 32 32 0 0 1 74 42 A 32 32 0 0 1 54 71" stroke="var(--tds-color-brand-primary)" strokeWidth="8" strokeLinecap="round" />
+                  <path d="M 42 74 A 32 32 0 0 1 10 42 A 32 32 0 0 1 30 13" stroke="var(--tds-color-text-primary)" strokeWidth="8" strokeLinecap="round" />
+                  <circle cx="42" cy="42" r="6" fill="var(--tds-color-brand-primary)" />
                 </svg>
               </div>
-              <span className="text-[10px] font-mono text-text-muted">SERP Snippet</span>
+              <span className="text-[10px] font-mono text-text-muted">32px (Header)</span>
             </div>
 
-            {/* 16px Browser Favicon */}
-            <div className="p-4 rounded-xl bg-subtle/50 border border-border-subtle flex flex-col items-center gap-2">
-              <div className="w-6 h-6 rounded-full bg-white border border-slate-300 flex items-center justify-center">
-                <svg width="14" height="14" viewBox="0 0 100 100" fill="none">
-                  <circle cx="50" cy="50" r="40" stroke="#0D9488" strokeWidth="12" />
-                  <path d="M 30 36 L 70 36 M 50 36 L 50 74" stroke="#0D9488" strokeWidth="14" strokeLinecap="round" />
+            {/* 16px Favicon */}
+            <div className="flex flex-col items-center gap-1.5">
+              <div className="w-4 h-4 rounded bg-surface border border-border-subtle flex items-center justify-center">
+                <svg width="12" height="12" viewBox="0 0 84 84" fill="none">
+                  <circle cx="42" cy="42" r="30" stroke="var(--tds-color-brand-primary)" strokeWidth="16" />
                 </svg>
               </div>
-              <span className="text-[10px] font-mono text-text-muted">16px Favicon</span>
+              <span className="text-[10px] font-mono text-text-muted">16px (Favicon)</span>
             </div>
           </div>
         </CardContent>
