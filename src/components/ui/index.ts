@@ -21,3 +21,4 @@ export * from './HealthTimeline';
 export * from './PrivacyConsentCard';
 export * from './Toast';
 export * from './OfflineBanner';
+export * from './HomeostasisLogo';

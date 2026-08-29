@@ -5,45 +5,18 @@ import {
   CreditCard, 
   Package, 
   FileText, 
-  ShieldCheck 
+  ShieldCheck, 
+  Palette,
 } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../ui/Card';
 import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
+import { HomeostasisLogo } from '../ui/HomeostasisLogo';
 
-type UsageTab = 'app' | 'social' | 'cards' | 'packaging' | 'reports';
+type UsageTab = 'contrast_engine' | 'app' | 'social' | 'cards' | 'packaging' | 'reports';
 
 export const LogoShowcase: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<UsageTab>('app');
-  // Master SVG Component: The Homeostasis Ring
-  const HomeostasisRing = ({ size = 36, className = "" }: { size?: number; className?: string }) => (
-    <svg width={size} height={size} viewBox="0 0 84 84" fill="none" className={className}>
-      <defs>
-        <linearGradient id="hr-teal-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#0D9488" />
-          <stop offset="50%" stopColor="#14B8A6" />
-          <stop offset="100%" stopColor="#10B981" />
-        </linearGradient>
-      </defs>
-      {/* Outer Homeostatic Arc 1 (Human Reality) */}
-      <path
-        d="M 42 10 A 32 32 0 0 1 74 42 A 32 32 0 0 1 54 71"
-        stroke="url(#hr-teal-grad)"
-        strokeWidth="7.5"
-        strokeLinecap="round"
-      />
-      {/* Outer Homeostatic Arc 2 (Objective Science) */}
-      <path
-        d="M 42 74 A 32 32 0 0 1 10 42 A 32 32 0 0 1 30 13"
-        stroke="currentColor"
-        strokeWidth="7.5"
-        strokeLinecap="round"
-        className="text-text-primary opacity-85"
-      />
-      {/* Central Living Geometric Core */}
-      <circle cx="42" cy="42" r="5" fill="url(#hr-teal-grad)" />
-    </svg>
-  );
+  const [activeTab, setActiveTab] = useState<UsageTab>('contrast_engine');
 
   return (
     <div className="space-y-8 animate-in fade-in duration-200">
@@ -53,22 +26,32 @@ export const LogoShowcase: React.FC = () => {
           <div className="flex items-center gap-2 text-brand-primary">
             <ShieldCheck className="w-5 h-5 text-brand-primary" />
             <span className="text-xs font-mono font-semibold uppercase tracking-wider">
-              Permanent Brand Identity Locked • Concept 1: The Homeostasis Ring
+              Permanent Brand Mark • The Homeostasis Ring
             </span>
           </div>
           <Badge variant="optimal" size="sm">
-            Official Global Mark
+            Deterministic Contrast Engine Enforced
           </Badge>
         </div>
         <h2 className="text-xl font-bold text-text-primary tracking-tight">
-          Comprehensive Real-World Application Suite
+          The Homeostasis Ring • Color & Contrast Law
         </h2>
         <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
-          Exploring every physical and digital touchpoint for <strong>The Homeostasis Ring (The Living Equilibrium)</strong>: Mobile App, Social Media Campaigns, Titanium Member Cards, Diagnostic Packaging, and Official Lab Reports.
+          <strong>Founder Rule Enforced</strong>: Arc 2 never relies on fragile ambient theme inheritance. On any light/white surface, it is <strong>Pure Solid Obsidian Black (#090D14)</strong>. On any dark surface, it is <strong>Pure Solid Crisp White (#FFFFFF)</strong>.
         </p>
 
         {/* Category Navigation Pills */}
         <div className="pt-2 flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar select-none">
+          <Button
+            size="sm"
+            variant={activeTab === 'contrast_engine' ? 'primary' : 'secondary'}
+            onClick={() => setActiveTab('contrast_engine')}
+            className="text-xs flex items-center gap-1.5"
+          >
+            <Palette className="w-3.5 h-3.5" />
+            <span>★ Color & Contrast Engine</span>
+          </Button>
+
           <Button
             size="sm"
             variant={activeTab === 'app' ? 'primary' : 'secondary'}
@@ -96,7 +79,7 @@ export const LogoShowcase: React.FC = () => {
             className="text-xs flex items-center gap-1.5"
           >
             <CreditCard className="w-3.5 h-3.5" />
-            <span>3. Cards & Member Passport</span>
+            <span>3. Cards & Passport</span>
           </Button>
 
           <Button
@@ -116,10 +99,139 @@ export const LogoShowcase: React.FC = () => {
             className="text-xs flex items-center gap-1.5"
           >
             <FileText className="w-3.5 h-3.5" />
-            <span>5. Clinical Lab Reports</span>
+            <span>5. Lab Reports</span>
           </Button>
         </div>
       </div>
+
+      {/* ★ THE CONTRAST & COLOR ENGINE SHOWCASE */}
+      {activeTab === 'contrast_engine' && (
+        <Card className="overflow-hidden border-2 border-border-default">
+          <CardHeader>
+            <CardTitle>The Universal Contrast & Background Matrix (Founder Law)</CardTitle>
+            <CardDescription>
+              Testing how The Homeostasis Ring strictly adapts its second arc across light, dark, colored, and single-color surfaces.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              
+              {/* Box 1: Pure White Background */}
+              <div className="p-6 rounded-2xl bg-white border border-slate-200 flex flex-col items-center justify-between text-center gap-4 shadow-subtle min-h-[220px]">
+                <div className="flex items-center justify-between w-full text-[10px] font-mono text-slate-400">
+                  <span>LIGHT SURFACE</span>
+                  <span className="text-emerald-700 font-bold">ARC 2: SOLID BLACK</span>
+                </div>
+                <HomeostasisLogo size={56} mode="on-light" showWordmark showTagline />
+                <span className="text-[10px] font-mono text-slate-500">
+                  Background: #FFFFFF (Paper, Clean Web)
+                </span>
+              </div>
+
+              {/* Box 2: Pure Obsidian Black Background */}
+              <div className="p-6 rounded-2xl bg-[#090D14] border border-slate-800 flex flex-col items-center justify-between text-center gap-4 shadow-card min-h-[220px]">
+                <div className="flex items-center justify-between w-full text-[10px] font-mono text-slate-500">
+                  <span>DARK SURFACE</span>
+                  <span className="text-emerald-400 font-bold">ARC 2: SOLID WHITE</span>
+                </div>
+                <HomeostasisLogo size={56} mode="on-dark" showWordmark showTagline />
+                <span className="text-[10px] font-mono text-slate-400">
+                  Background: #090D14 (Obsidian Dark Mode)
+                </span>
+              </div>
+
+              {/* Box 3: Warm Luxury Cotton / Beige */}
+              <div className="p-6 rounded-2xl bg-[#FBF9F5] border border-[#E2E8F0] flex flex-col items-center justify-between text-center gap-4 shadow-subtle min-h-[220px]">
+                <div className="flex items-center justify-between w-full text-[10px] font-mono text-slate-400">
+                  <span>WARM COTTON</span>
+                  <span className="text-emerald-700 font-bold">ARC 2: SOLID BLACK</span>
+                </div>
+                <HomeostasisLogo size={56} mode="on-light" showWordmark showTagline />
+                <span className="text-[10px] font-mono text-slate-500">
+                  Background: #FBF9F5 (Luxury Stationery)
+                </span>
+              </div>
+
+              {/* Box 4: Titanium Slate Grey */}
+              <div className="p-6 rounded-2xl bg-[#1E293B] border border-slate-700 flex flex-col items-center justify-between text-center gap-4 shadow-card min-h-[220px]">
+                <div className="flex items-center justify-between w-full text-[10px] font-mono text-slate-400">
+                  <span>TITANIUM SLATE</span>
+                  <span className="text-emerald-400 font-bold">ARC 2: SOLID WHITE</span>
+                </div>
+                <HomeostasisLogo size={56} mode="on-dark" showWordmark showTagline />
+                <span className="text-[10px] font-mono text-slate-300">
+                  Background: #1E293B (Apple Wallet Card)
+                </span>
+              </div>
+
+              {/* Box 5: Deep Brand Teal Surface */}
+              <div className="p-6 rounded-2xl bg-[#0D9488] border border-teal-600 flex flex-col items-center justify-between text-center gap-4 shadow-card min-h-[220px] text-white">
+                <div className="flex items-center justify-between w-full text-[10px] font-mono text-teal-200">
+                  <span>BRAND TEAL</span>
+                  <span className="text-white font-bold">MONOCHROME WHITE</span>
+                </div>
+                <HomeostasisLogo size={56} mode="monochrome-white" showWordmark showTagline />
+                <span className="text-[10px] font-mono text-teal-100">
+                  Background: #0D9488 (Marketing Hero)
+                </span>
+              </div>
+
+              {/* Box 6: 1-Color Thermal / Fax / Print */}
+              <div className="p-6 rounded-2xl bg-white border-2 border-dashed border-slate-300 flex flex-col items-center justify-between text-center gap-4 min-h-[220px]">
+                <div className="flex items-center justify-between w-full text-[10px] font-mono text-slate-400">
+                  <span>MONOCHROME PRINT</span>
+                  <span className="text-black font-bold">100% SOLID BLACK</span>
+                </div>
+                <HomeostasisLogo size={56} mode="monochrome-black" showWordmark showTagline />
+                <span className="text-[10px] font-mono text-slate-500">
+                  1-Color Print / Prescription Receipt
+                </span>
+              </div>
+
+            </div>
+
+            {/* Strict Specification Table */}
+            <div className="border border-border-subtle rounded-xl overflow-hidden text-xs">
+              <table className="w-full text-left">
+                <thead className="bg-subtle text-text-secondary border-b border-border-subtle font-mono text-[10px] uppercase">
+                  <tr>
+                    <th className="p-3">Container Surface</th>
+                    <th className="p-3">Arc 1 (Living Science)</th>
+                    <th className="p-3">Arc 2 (Human Reality)</th>
+                    <th className="p-3">Compliance Standard</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-border-subtle font-mono text-xs">
+                  <tr>
+                    <td className="p-3 font-sans font-medium text-text-primary">Light Backgrounds (&gt; 50% Luminance)</td>
+                    <td className="p-3 text-brand-primary">Teal/Emerald Gradient</td>
+                    <td className="p-3 font-bold text-slate-900">#090D14 (Pure Solid Black)</td>
+                    <td className="p-3 text-status-optimal">WCAG AAA (18.4:1)</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 font-sans font-medium text-text-primary">Dark Backgrounds (&lt; 50% Luminance)</td>
+                    <td className="p-3 text-brand-primary">Teal/Emerald Gradient</td>
+                    <td className="p-3 font-bold text-white bg-slate-900 px-2 py-0.5 rounded inline-block">#FFFFFF (Pure Solid White)</td>
+                    <td className="p-3 text-status-optimal">WCAG AAA (19.2:1)</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 font-sans font-medium text-text-primary">Vibrant Brand Surfaces</td>
+                    <td className="p-3 text-slate-700">Pure Solid White</td>
+                    <td className="p-3 text-slate-700">Pure Solid White (85% Opacity)</td>
+                    <td className="p-3 text-status-optimal">High Contrast Inversion</td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 font-sans font-medium text-text-primary">Monochrome Single-Color Printing</td>
+                    <td className="p-3 text-black">100% Solid Black</td>
+                    <td className="p-3 text-black font-bold">100% Solid Black</td>
+                    <td className="p-3 text-status-optimal">100% Ink Density</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       {/* 1. MOBILE APP ICON & SPLASH SCREEN */}
       {activeTab === 'app' && (
@@ -127,7 +239,7 @@ export const LogoShowcase: React.FC = () => {
           <CardHeader>
             <CardTitle>1. Mobile App Icon & Launch Screen (iOS & Android)</CardTitle>
             <CardDescription>
-              How The Homeostasis Ring greets users on their phone screen and during initial app launch.
+              Notice how Arc 2 is crisp Solid White on the dark app icon and splash screen.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-8">
@@ -137,7 +249,6 @@ export const LogoShowcase: React.FC = () => {
               <div className="w-[280px] bg-slate-900/90 rounded-[40px] p-4 border-[4px] border-slate-700 shadow-2xl space-y-6 mx-auto backdrop-blur-md">
                 <div className="w-24 h-4 bg-black rounded-full mx-auto" />
 
-                {/* App Grid Simulation */}
                 <div className="grid grid-cols-4 gap-3 pt-2">
                   <div className="flex flex-col items-center gap-1">
                     <div className="w-12 h-12 rounded-xl bg-slate-800/80 flex items-center justify-center text-[10px] text-slate-400">Mail</div>
@@ -152,10 +263,10 @@ export const LogoShowcase: React.FC = () => {
                     <span className="text-[9px] text-slate-400">Fitness</span>
                   </div>
 
-                  {/* TOVELU HOMEOSTASIS APP ICON */}
+                  {/* TOVELU MASTER APP ICON */}
                   <div className="flex flex-col items-center gap-1 relative group cursor-pointer">
                     <div className="w-12 h-12 rounded-2xl bg-gradient-to-b from-[#0F172A] to-[#020617] border border-[#334155] shadow-lg flex items-center justify-center relative transform group-hover:scale-105 transition-all">
-                      <HomeostasisRing size={32} />
+                      <HomeostasisLogo size={32} mode="on-dark" />
                       <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-brand-primary text-[8px] font-bold text-white rounded-full flex items-center justify-center ring-2 ring-slate-900">
                         1
                       </span>
@@ -171,13 +282,13 @@ export const LogoShowcase: React.FC = () => {
                 </div>
               </div>
 
-              {/* Mobile App Splash / Loading Screen Mockup */}
+              {/* Mobile App Splash Screen */}
               <div className="w-[280px] h-[460px] bg-[#090D14] rounded-[40px] p-6 border-[4px] border-slate-700 shadow-2xl flex flex-col items-center justify-between mx-auto text-center">
                 <div className="w-20 h-3.5 bg-black rounded-full mx-auto" />
 
                 <div className="space-y-4 my-auto">
                   <div className="w-20 h-20 rounded-3xl bg-slate-900/90 border border-slate-800 flex items-center justify-center mx-auto shadow-2xl animate-pulse">
-                    <HomeostasisRing size={52} />
+                    <HomeostasisLogo size={52} mode="on-dark" />
                   </div>
                   <div>
                     <span className="font-sans font-bold tracking-[0.22em] text-xl text-white block pl-1">
@@ -199,13 +310,13 @@ export const LogoShowcase: React.FC = () => {
         </Card>
       )}
 
-      {/* 2. SOCIAL MEDIA AVATARS & PROMOTIONAL POST */}
+      {/* 2. SOCIAL MEDIA CAMPAIGN & PROMOTIONS */}
       {activeTab === 'social' && (
         <Card>
           <CardHeader>
-            <CardTitle>2. Social Media Avatars & Announcement Post (Instagram / LinkedIn / X)</CardTitle>
+            <CardTitle>2. Social Media Avatars & Announcement Post</CardTitle>
             <CardDescription>
-              How The Homeostasis Ring builds recognizable global brand awareness across all digital media feeds.
+              Notice how the avatar uses Solid White Arc 2 on dark circular backgrounds.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-8">
@@ -213,25 +324,14 @@ export const LogoShowcase: React.FC = () => {
               
               {/* Instagram / LinkedIn 1080x1080 Post Mockup */}
               <div className="w-full aspect-square max-w-md mx-auto rounded-2xl bg-gradient-to-br from-[#090D14] via-[#0F172A] to-[#042F2E] border border-slate-800 p-8 flex flex-col justify-between text-white shadow-2xl relative overflow-hidden">
-                {/* Subtle Background Watermark Ring */}
                 <div className="absolute -right-16 -bottom-16 opacity-10 pointer-events-none">
-                  <HomeostasisRing size={320} />
+                  <HomeostasisLogo size={320} mode="on-dark" />
                 </div>
 
-                {/* Post Top: Logo & Tagline Lockup */}
                 <div className="flex items-center gap-3">
-                  <HomeostasisRing size={40} />
-                  <div>
-                    <span className="font-sans font-bold tracking-[0.2em] text-base text-white block">
-                      TOVELU
-                    </span>
-                    <span className="text-[8px] font-mono tracking-widest text-brand-primary uppercase">
-                      Towards Better Health
-                    </span>
-                  </div>
+                  <HomeostasisLogo size={40} mode="on-dark" showWordmark showTagline />
                 </div>
 
-                {/* Post Center: Powerful Mission Statement */}
                 <div className="space-y-3 z-10">
                   <span className="text-xs font-mono font-semibold uppercase text-brand-primary tracking-widest block">
                     The Human Health Revolution
@@ -245,7 +345,6 @@ export const LogoShowcase: React.FC = () => {
                   </p>
                 </div>
 
-                {/* Post Bottom: Call to Action & Website */}
                 <div className="flex items-center justify-between border-t border-slate-800/80 pt-4 z-10">
                   <span className="text-xs font-mono text-slate-400">tovelu.com</span>
                   <span className="text-xs font-semibold text-brand-primary flex items-center gap-1">
@@ -254,46 +353,36 @@ export const LogoShowcase: React.FC = () => {
                 </div>
               </div>
 
-              {/* Social Media Profile Avatars & Banner */}
+              {/* Profile Avatars */}
               <div className="space-y-6">
                 <h4 className="text-sm font-semibold text-text-primary">
-                  Official Profile Avatars (Square & Circular Crops)
+                  Official Profile Avatars (Solid White Arc on Dark Surface)
                 </h4>
 
                 <div className="grid grid-cols-3 gap-4 text-center">
-                  {/* Twitter/X Round Avatar */}
                   <div className="p-4 rounded-xl bg-subtle border border-border-subtle flex flex-col items-center gap-2">
                     <div className="w-16 h-16 rounded-full bg-[#090D14] border-2 border-brand-primary/40 flex items-center justify-center shadow-subtle">
-                      <HomeostasisRing size={38} />
+                      <HomeostasisLogo size={38} mode="on-dark" />
                     </div>
                     <span className="text-[11px] font-medium text-text-primary">X / Twitter</span>
                     <span className="text-[9px] font-mono text-text-muted">400x400 Crop</span>
                   </div>
 
-                  {/* Instagram Avatar */}
                   <div className="p-4 rounded-xl bg-subtle border border-border-subtle flex flex-col items-center gap-2">
                     <div className="w-16 h-16 rounded-full bg-[#090D14] border-2 border-brand-primary/40 flex items-center justify-center shadow-subtle">
-                      <HomeostasisRing size={38} />
+                      <HomeostasisLogo size={38} mode="on-dark" />
                     </div>
                     <span className="text-[11px] font-medium text-text-primary">Instagram</span>
                     <span className="text-[9px] font-mono text-text-muted">Story Highlight</span>
                   </div>
 
-                  {/* LinkedIn Company Avatar */}
                   <div className="p-4 rounded-xl bg-subtle border border-border-subtle flex flex-col items-center gap-2">
                     <div className="w-16 h-16 rounded-2xl bg-[#090D14] border-2 border-brand-primary/40 flex items-center justify-center shadow-subtle">
-                      <HomeostasisRing size={38} />
+                      <HomeostasisLogo size={38} mode="on-dark" />
                     </div>
                     <span className="text-[11px] font-medium text-text-primary">LinkedIn</span>
                     <span className="text-[9px] font-mono text-text-muted">Company Logo</span>
                   </div>
-                </div>
-
-                <div className="p-4 rounded-xl bg-subtle border border-border-subtle space-y-2 text-xs text-text-secondary">
-                  <span className="font-semibold text-text-primary block">Instant Silhouette Memorability</span>
-                  <p>
-                    Because the two interlocking arcs create an unmistakable organic ring, users scrolling at high speeds on social feeds immediately associate this symbol with Tovelu.
-                  </p>
                 </div>
               </div>
 
@@ -302,36 +391,27 @@ export const LogoShowcase: React.FC = () => {
         </Card>
       )}
 
-      {/* 3. MEMBER PASSPORT & EXECUTIVE BUSINESS CARDS */}
+      {/* 3. MEMBER PASSPORT & EXECUTIVE CARDS */}
       {activeTab === 'cards' && (
         <Card>
           <CardHeader>
-            <CardTitle>3. Sovereign Health Passport & Executive Business Card</CardTitle>
+            <CardTitle>3. Sovereign Member Passport & Executive Card</CardTitle>
             <CardDescription>
-              Article 16 in physical form: The user's private, encrypted health identity card (Apple Wallet / Physical Titanium).
+              Notice the contrast difference: Titanium card uses Solid White Arc; Cotton business card uses Solid Black Arc.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center justify-center">
               
-              {/* Apple Wallet Style Titanium Black Card */}
+              {/* Apple Wallet Style Titanium Black Card (Dark Surface -> Arc 2 is White) */}
               <div className="w-full max-w-sm h-56 rounded-2xl bg-gradient-to-br from-[#090D14] via-[#0F172A] to-[#042F2E] border border-slate-700 shadow-2xl p-6 flex flex-col justify-between text-white mx-auto relative overflow-hidden">
-                <div className="absolute -right-8 -bottom-8 opacity-10 pointer-events-none">
-                  <HomeostasisRing size={200} />
-                </div>
-
-                {/* Card Top: Brand Lockup & Chip */}
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2.5">
-                    <HomeostasisRing size={32} />
-                    <span className="font-sans font-bold tracking-[0.2em] text-sm">TOVELU</span>
-                  </div>
+                  <HomeostasisLogo size={32} mode="on-dark" showWordmark />
                   <span className="text-[8px] font-mono uppercase bg-brand-primary/20 text-brand-primary px-2 py-0.5 rounded border border-brand-primary/30">
                     Sovereign Identity
                   </span>
                 </div>
 
-                {/* Card Middle: Health Vault Key */}
                 <div className="space-y-1">
                   <span className="text-[9px] font-mono text-slate-400 block tracking-wider uppercase">Health Vault Pass ID</span>
                   <div className="font-mono text-sm tracking-widest text-slate-200">
@@ -339,7 +419,6 @@ export const LogoShowcase: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Card Bottom: Member Name & Encryption */}
                 <div className="flex items-end justify-between border-t border-slate-700/60 pt-3">
                   <div>
                     <span className="text-[8px] font-mono text-slate-400 uppercase">Founder / Member</span>
@@ -352,12 +431,12 @@ export const LogoShowcase: React.FC = () => {
                 </div>
               </div>
 
-              {/* Minimalist Executive Business Card (Matte Cotton) */}
+              {/* Minimalist Executive Business Card (Light Cotton Surface -> Arc 2 is Solid Black) */}
               <div className="w-full max-w-sm h-56 rounded-2xl bg-[#FBF9F5] border border-[#E2E8F0] shadow-card p-6 flex flex-col justify-between text-[#0F172A] mx-auto">
                 <div className="flex items-center justify-between">
-                  <HomeostasisRing size={32} />
+                  <HomeostasisLogo size={32} mode="on-light" showWordmark />
                   <span className="text-[9px] font-mono text-slate-400 uppercase tracking-widest">
-                    Geneva • Global Headquarters
+                    Geneva • Global HQ
                   </span>
                 </div>
 
@@ -384,42 +463,32 @@ export const LogoShowcase: React.FC = () => {
           <CardHeader>
             <CardTitle>4. Clinical Diagnostic Test Kit & Wearable Biosensors</CardTitle>
             <CardDescription>
-              How The Homeostasis Ring commands clinical authority and precision engineering on physical products.
+              Hardware sensor pod uses Solid White Arc; Diagnostic box uses Solid Black Arc.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               
-              {/* Wearable Sensor Pod / Smart Patch */}
+              {/* Wearable Sensor Pod */}
               <div className="p-8 rounded-2xl bg-[#090D14] border border-slate-800 text-white flex flex-col items-center justify-center gap-4 text-center">
                 <span className="text-[10px] font-mono uppercase tracking-widest text-slate-500">
                   Wearable Continuous Biosensor Pod
                 </span>
-                {/* Circular Pod Mockup */}
                 <div className="w-28 h-28 rounded-full bg-gradient-to-b from-slate-800 to-slate-950 border-2 border-slate-700 flex items-center justify-center shadow-2xl">
                   <div className="w-20 h-20 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center">
-                    <HomeostasisRing size={44} />
+                    <HomeostasisLogo size={44} mode="on-dark" />
                   </div>
                 </div>
                 <span className="text-xs text-slate-400 font-mono">Laser-Microetched • Grade 5 Titanium</span>
               </div>
 
-              {/* Clinical Diagnostic Kit Box Packaging */}
+              {/* Diagnostic Box Packaging (Light Surface -> Arc 2 is Solid Black) */}
               <div className="p-8 rounded-2xl bg-[#F8FAFC] border border-slate-200 text-slate-900 flex flex-col items-center justify-center gap-4 text-center">
                 <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400">
                   Clinical Biomarker Test Kit Box
                 </span>
-                {/* Packaging Box Simulation */}
                 <div className="w-40 h-32 rounded-xl bg-white border border-slate-200 shadow-card p-4 flex flex-col items-center justify-center gap-2.5">
-                  <HomeostasisRing size={36} />
-                  <div className="text-center">
-                    <span className="font-sans font-bold text-sm tracking-[0.2em] block text-slate-900">
-                      TOVELU
-                    </span>
-                    <span className="text-[8px] font-mono text-slate-500 uppercase tracking-wider block mt-0.5">
-                      Cardiometabolic Kit
-                    </span>
-                  </div>
+                  <HomeostasisLogo size={36} mode="on-light" showWordmark showTagline />
                 </div>
                 <span className="text-xs text-slate-500 font-mono">Foil-Stamped • Clean Medical Grade</span>
               </div>
@@ -429,34 +498,20 @@ export const LogoShowcase: React.FC = () => {
         </Card>
       )}
 
-      {/* 5. CLINICAL LABORATORY REPORT & DOCTOR'S SUMMARY */}
+      {/* 5. CLINICAL LABORATORY REPORT */}
       {activeTab === 'reports' && (
         <Card>
           <CardHeader>
             <CardTitle>5. Official Clinical Laboratory Report Header</CardTitle>
             <CardDescription>
-              The authoritative clinical print header seen by primary care doctors and laboratory directors.
+              On white clinical paper, Arc 2 is strictly Pure Solid Obsidian Black for crystal-clear readability.
             </CardDescription>
           </CardHeader>
           <CardContent>
-            {/* Printed Report Paper Frame */}
             <div className="p-8 bg-white border border-slate-300 rounded-xl shadow-card text-slate-900 space-y-6 max-w-2xl mx-auto">
               
-              {/* Document Top Header */}
               <div className="flex items-start justify-between border-b-2 border-slate-900 pb-4">
-                <div className="space-y-1">
-                  <div className="flex items-center gap-3">
-                    <HomeostasisRing size={32} />
-                    <div>
-                      <span className="font-sans font-bold text-xl tracking-[0.2em] text-slate-900 block">
-                        TOVELU
-                      </span>
-                      <span className="text-[9px] font-mono text-slate-500 uppercase tracking-widest block">
-                        Health Intelligence & Longitudinal Registry
-                      </span>
-                    </div>
-                  </div>
-                </div>
+                <HomeostasisLogo size={36} mode="on-light" showWordmark showTagline />
 
                 <div className="text-right text-[10px] font-mono text-slate-500 space-y-0.5">
                   <div>CLINICAL LAB REPORT #TL-2026-904</div>
@@ -465,7 +520,6 @@ export const LogoShowcase: React.FC = () => {
                 </div>
               </div>
 
-              {/* Sample Lab Values Table */}
               <div className="space-y-2 text-xs">
                 <h5 className="font-semibold text-slate-900 uppercase tracking-wider text-[11px] font-mono">
                   Longitudinal Cardiometabolic Summary (Article 30)
@@ -502,7 +556,6 @@ export const LogoShowcase: React.FC = () => {
                 </table>
               </div>
 
-              {/* Report Footer Verification */}
               <div className="border-t border-slate-200 pt-3 flex items-center justify-between text-[10px] font-mono text-slate-400">
                 <span>Provenance: Quest Diagnostics Sync (Article 28)</span>
                 <span>Cryptographically Signed • Tovelu Private Key</span>
