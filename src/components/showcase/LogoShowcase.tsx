@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { Sparkles, Zap, Flame } from 'lucide-react';
+import { Sparkles, Eye, Compass } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../ui/Card';
 import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
 
-type IconicMarkId = 'vital_swoosh' | 'living_seed' | 'sovereign_crest' | 'mobius_t' | 'homeostasis';
+type ProprietaryMarkId = 'glyph_nexus' | 'vital_delta' | 'equi_sol';
 
 export const LogoShowcase: React.FC = () => {
-  const [selectedMark, setSelectedMark] = useState<IconicMarkId>('vital_swoosh');
+  const [selectedMark, setSelectedMark] = useState<ProprietaryMarkId>('glyph_nexus');
 
   return (
     <div className="space-y-8 animate-in fade-in duration-200">
@@ -15,175 +15,142 @@ export const LogoShowcase: React.FC = () => {
       <div className="rounded-xl border border-border-subtle bg-surface p-6 shadow-card space-y-3">
         <div className="flex items-center justify-between gap-2 flex-wrap">
           <div className="flex items-center gap-2 text-brand-primary">
-            <Flame className="w-5 h-5 text-brand-primary" />
+            <Sparkles className="w-5 h-5 text-brand-primary" />
             <span className="text-xs font-mono font-semibold uppercase tracking-wider">
-              The Apple & Nike Standard • Sovereign Single-Stroke Silhouettes
+              The Sovereign Identity Standard (100% Original to Tovelu)
             </span>
           </div>
           <Badge variant="optimal" size="sm">
-            Zero Clutter • 1-Second Recognition
+            Standalone Global Trademark
           </Badge>
         </div>
         <h2 className="text-xl font-bold text-text-primary tracking-tight">
-          Single-Silhouette Master Marks (Nike & Apple Tier)
+          A Symbol That Becomes a Global Phenomenon
         </h2>
         <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
-          The greatest marks in human history (Apple, Nike) are not diagrams—they are <strong>one single, unmistakable, iconic silhouette</strong> that a child can draw in the sand in one second. Bold, aerodynamic, living, and universally timeless.
+          Not mimicking Apple&apos;s fruit or Nike&apos;s wing. Instead, owning an entirely new, iconic geometric silhouette that belongs solely to <strong>TOVELU</strong>. When 8 billion people see this shape with zero text, they instantly know: <em>That is Tovelu</em>.
         </p>
       </div>
 
-      {/* Top Selector: 4 Master Single-Silhouette Marks */}
-      <div className="space-y-2">
-        <span className="text-xs font-mono text-text-muted uppercase tracking-wider block">
-          Choose a Single-Silhouette Archetype:
-        </span>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-          <Button
-            size="sm"
-            variant={selectedMark === 'vital_swoosh' ? 'primary' : 'secondary'}
-            onClick={() => setSelectedMark('vital_swoosh')}
-            className="text-xs font-semibold"
-          >
-            1. The Vital Swoosh ⭐ (Nike Tier)
-          </Button>
-          <Button
-            size="sm"
-            variant={selectedMark === 'living_seed' ? 'primary' : 'secondary'}
-            onClick={() => setSelectedMark('living_seed')}
-            className="text-xs font-semibold"
-          >
-            2. The Living Seed 🍎 (Apple Tier)
-          </Button>
-          <Button
-            size="sm"
-            variant={selectedMark === 'sovereign_crest' ? 'primary' : 'secondary'}
-            onClick={() => setSelectedMark('sovereign_crest')}
-            className="text-xs font-semibold"
-          >
-            3. The Sovereign Crest
-          </Button>
-          <Button
-            size="sm"
-            variant={selectedMark === 'mobius_t' ? 'primary' : 'secondary'}
-            onClick={() => setSelectedMark('mobius_t')}
-            className="text-xs font-semibold"
-          >
-            4. The Möbius T
-          </Button>
-        </div>
+      {/* 3 Breakthrough Proprietary Archetypes */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+        <Button
+          variant={selectedMark === 'glyph_nexus' ? 'primary' : 'secondary'}
+          onClick={() => setSelectedMark('glyph_nexus')}
+          className="text-xs font-semibold py-3"
+        >
+          1. The Tovelu Nexus (Top Choice) ⭐
+        </Button>
+        <Button
+          variant={selectedMark === 'vital_delta' ? 'primary' : 'secondary'}
+          onClick={() => setSelectedMark('vital_delta')}
+          className="text-xs font-semibold py-3"
+        >
+          2. The Vital Delta (The Elevation)
+        </Button>
+        <Button
+          variant={selectedMark === 'equi_sol' ? 'primary' : 'secondary'}
+          onClick={() => setSelectedMark('equi_sol')}
+          className="text-xs font-semibold py-3"
+        >
+          3. The Equilibrium Sol
+        </Button>
       </div>
 
-      {/* Hero Canvas Surface: Pure Solid Silhouette Testing */}
+      {/* Hero Canvas: Standalone Isolated Symbol Test */}
       <Card className="overflow-hidden">
-        <div className="p-10 sm:p-16 bg-subtle/30 flex flex-col items-center justify-center border-b border-border-subtle transition-all min-h-[340px]">
-          <div className="flex flex-col items-center gap-8 select-none">
+        <div className="p-12 sm:p-20 bg-subtle/30 flex flex-col items-center justify-center border-b border-border-subtle transition-all min-h-[380px]">
+          <div className="flex flex-col items-center gap-10 select-none">
             
-            {/* 1. THE VITAL SWOOSH (THE NIKE TIER - HEALTH MOMENTUM) */}
-            {selectedMark === 'vital_swoosh' && (
-              <div className="flex flex-col items-center gap-6 animate-in zoom-in-95 duration-200">
-                <svg width="104" height="104" viewBox="0 0 100 100" fill="none" className="transition-transform hover:scale-105">
-                  {/* Single continuous aerodynamic stroke: sweeps from grounded left, carves an organic cradle, and launches upward into an electric tapered apex */}
-                  <path
-                    d="M 12 56 C 24 68, 42 78, 62 66 C 76 56, 84 36, 88 16 C 82 32, 68 46, 50 48 C 34 50, 22 44, 12 56 Z"
-                    fill="currentColor"
-                    className="text-brand-primary"
-                  />
-                  {/* Complementary Upper Arc completing the dynamic "T" horizon */}
-                  <path
-                    d="M 28 24 C 44 20, 68 20, 84 26 C 72 26, 56 28, 44 34 C 36 38, 30 30, 28 24 Z"
-                    fill="currentColor"
-                    className="text-text-primary"
-                    opacity="0.85"
-                  />
-                </svg>
+            {/* 1. THE TOVELU NEXUS (PROPRIETARY SYMBOL) */}
+            {selectedMark === 'glyph_nexus' && (
+              <div className="flex flex-col items-center gap-8 animate-in zoom-in-95 duration-200">
+                {/* Standalone Sovereign Icon */}
+                <div className="relative w-28 h-28 flex items-center justify-center transition-transform hover:scale-105">
+                  <svg width="112" height="112" viewBox="0 0 100 100" fill="none">
+                    {/* Upper Horizon Canopy: Gently curved, sheltering, broad */}
+                    <path
+                      d="M 14 30 C 26 22, 74 22, 86 30 C 82 38, 62 34, 50 34 C 38 34, 18 38, 14 30 Z"
+                      fill="currentColor"
+                      className="text-brand-primary"
+                    />
+                    {/* The Interlocking Vital Stem: Dynamic parabolic keel */}
+                    <path
+                      d="M 50 36 C 58 36, 62 46, 56 64 C 53 74, 47 74, 44 64 C 38 46, 42 36, 50 36 Z"
+                      fill="currentColor"
+                      className="text-text-primary"
+                    />
+                    {/* Sovereign Central Meridian Eye (Humanity Core) */}
+                    <circle
+                      cx="50"
+                      cy="48"
+                      r="4"
+                      fill="currentColor"
+                      className="text-brand-primary"
+                    />
+                  </svg>
+                </div>
 
-                <div className="text-center space-y-1">
-                  <span className="font-sans font-extrabold text-3xl sm:text-4xl tracking-[0.26em] text-text-primary block pl-1.5">
+                {/* The Wordmark Lockup */}
+                <div className="text-center space-y-1.5">
+                  <span className="font-sans font-extrabold text-3xl sm:text-4xl tracking-[0.28em] text-text-primary block pl-2">
                     TOVELU
                   </span>
-                  <span className="text-[11px] font-mono tracking-[0.32em] text-text-secondary uppercase block">
+                  <span className="text-[10px] font-mono tracking-[0.34em] text-text-secondary uppercase block">
                     Towards Better Health
                   </span>
                 </div>
               </div>
             )}
 
-            {/* 2. THE LIVING SEED (THE APPLE TIER - ORGANIC LIFE WITH A NOTCH) */}
-            {selectedMark === 'living_seed' && (
-              <div className="flex flex-col items-center gap-6 animate-in zoom-in-95 duration-200">
-                <svg width="100" height="100" viewBox="0 0 100 100" fill="none" className="transition-transform hover:scale-105">
-                  {/* An iconic organic seed/drop silhouette with an optical circular notch carved into the top right, revealing a modern 'T' negative silhouette */}
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M 50 14 C 66 14, 82 28, 82 52 C 82 72, 68 86, 50 86 C 32 86, 18 72, 18 52 C 18 28, 34 14, 50 14 Z M 58 24 C 54 34, 62 44, 74 44 C 76 34, 68 24, 58 24 Z"
-                    fill="currentColor"
-                    className="text-brand-primary"
-                  />
-                </svg>
+            {/* 2. THE VITAL DELTA (THE TRIANGULAR ELEVATION OF LIFE) */}
+            {selectedMark === 'vital_delta' && (
+              <div className="flex flex-col items-center gap-8 animate-in zoom-in-95 duration-200">
+                <div className="relative w-28 h-28 flex items-center justify-center transition-transform hover:scale-105">
+                  <svg width="112" height="112" viewBox="0 0 100 100" fill="none">
+                    {/* Pure monolithic continuous triangular gateway of human elevation */}
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M 50 14 C 54 14, 57 16, 59 20 L 86 68 C 89 74, 85 82, 78 82 L 22 82 C 15 82, 11 74, 14 68 L 41 20 C 43 16, 46 14, 50 14 Z M 50 36 C 43 36, 38 42, 40 50 L 45 66 C 46 70, 54 70, 55 66 L 60 50 C 62 42, 57 36, 50 36 Z"
+                      fill="currentColor"
+                      className="text-brand-primary"
+                    />
+                  </svg>
+                </div>
 
-                <div className="text-center space-y-1">
-                  <span className="font-sans font-extrabold text-3xl sm:text-4xl tracking-[0.26em] text-text-primary block pl-1.5">
+                <div className="text-center space-y-1.5">
+                  <span className="font-sans font-extrabold text-3xl sm:text-4xl tracking-[0.28em] text-text-primary block pl-2">
                     TOVELU
                   </span>
-                  <span className="text-[11px] font-mono tracking-[0.32em] text-text-secondary uppercase block">
+                  <span className="text-[10px] font-mono tracking-[0.34em] text-text-secondary uppercase block">
                     Towards Better Health
                   </span>
                 </div>
               </div>
             )}
 
-            {/* 3. THE SOVEREIGN CREST (PURE PROTECTION & VITALITY) */}
-            {selectedMark === 'sovereign_crest' && (
-              <div className="flex flex-col items-center gap-6 animate-in zoom-in-95 duration-200">
-                <svg width="100" height="100" viewBox="0 0 100 100" fill="none" className="transition-transform hover:scale-105">
-                  {/* Single-piece aerodynamic shield with clean sweeping shoulders forming a majestic modern "T" */}
-                  <path
-                    d="M 16 26 C 34 26, 44 22, 50 16 C 56 22, 66 26, 84 26 C 84 54, 68 76, 50 86 C 32 76, 16 54, 16 26 Z"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="8"
-                    strokeLinejoin="round"
-                    className="text-brand-primary"
-                  />
-                  {/* Central Spine of Health */}
-                  <path
-                    d="M 50 32 L 50 68"
-                    stroke="currentColor"
-                    strokeWidth="8"
-                    strokeLinecap="round"
-                    className="text-text-primary"
-                  />
-                </svg>
-
-                <div className="text-center space-y-1">
-                  <span className="font-sans font-extrabold text-3xl sm:text-4xl tracking-[0.26em] text-text-primary block pl-1.5">
-                    TOVELU
-                  </span>
-                  <span className="text-[11px] font-mono tracking-[0.32em] text-text-secondary uppercase block">
-                    Towards Better Health
-                  </span>
+            {/* 3. THE EQUILIBRIUM SOL (THE LIVING BIOLOGICAL SPARK) */}
+            {selectedMark === 'equi_sol' && (
+              <div className="flex flex-col items-center gap-8 animate-in zoom-in-95 duration-200">
+                <div className="relative w-28 h-28 flex items-center justify-center transition-transform hover:scale-105">
+                  <svg width="112" height="112" viewBox="0 0 100 100" fill="none">
+                    {/* Pure, continuous geometric disc with an organic parabolic carve */}
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M 50 12 C 70.98 12, 88 29.02, 88 50 C 88 70.98, 70.98 88, 50 88 C 29.02 88, 12 70.98, 12 50 C 12 29.02, 29.02 12, 50 12 Z M 50 24 C 64.36 24, 76 35.64, 76 50 C 76 58, 72 65, 66 70 C 60 62, 56 46, 56 36 C 56 30, 53 24, 50 24 Z"
+                      fill="currentColor"
+                      className="text-brand-primary"
+                    />
+                  </svg>
                 </div>
-              </div>
-            )}
 
-            {/* 4. THE MÖBIUS T (INFINITE LIFELONG HEALTH) */}
-            {selectedMark === 'mobius_t' && (
-              <div className="flex flex-col items-center gap-6 animate-in zoom-in-95 duration-200">
-                <svg width="100" height="100" viewBox="0 0 100 100" fill="none" className="transition-transform hover:scale-105">
-                  {/* Bold sculptural monolithic T with continuous organic curve */}
-                  <path
-                    d="M 22 28 C 36 28, 64 28, 78 28 C 78 36, 60 36, 56 40 L 56 76 C 56 82, 44 82, 44 76 L 44 40 C 40 36, 22 36, 22 28 Z"
-                    fill="currentColor"
-                    className="text-brand-primary"
-                  />
-                </svg>
-
-                <div className="text-center space-y-1">
-                  <span className="font-sans font-extrabold text-3xl sm:text-4xl tracking-[0.26em] text-text-primary block pl-1.5">
+                <div className="text-center space-y-1.5">
+                  <span className="font-sans font-extrabold text-3xl sm:text-4xl tracking-[0.28em] text-text-primary block pl-2">
                     TOVELU
                   </span>
-                  <span className="text-[11px] font-mono tracking-[0.32em] text-text-secondary uppercase block">
+                  <span className="text-[11px] font-mono tracking-[0.34em] text-text-secondary uppercase block">
                     Towards Better Health
                   </span>
                 </div>
@@ -193,114 +160,105 @@ export const LogoShowcase: React.FC = () => {
           </div>
         </div>
 
-        {/* Deep Analysis of Nike/Apple Attributes */}
+        {/* Strategic Analysis */}
         <CardContent className="pt-6 space-y-4">
-          {selectedMark === 'vital_swoosh' && (
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <h4 className="text-base font-semibold text-text-primary flex items-center gap-2">
-                  <Zap className="w-4 h-4 text-brand-primary" />
-                  Concept 1: The Vital Swoosh (Nike Tier)
-                </h4>
-                <Badge variant="optimal" size="sm">Pure Momentum</Badge>
-              </div>
-              <p className="text-xs text-text-secondary leading-relaxed">
-                Just as the Nike Swoosh captures speed and athletic triumph, <strong>The Vital Swoosh</strong> captures <strong>Biological Momentum</strong>. It begins grounded in human reality, dips through a calm organic cradle, and accelerates upward into an electric tapered vector representing <em>&ldquo;Towards Better Health&rdquo;</em>.
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1 text-xs">
-                <div className="p-2.5 rounded bg-subtle border border-border-subtle">
-                  <span className="text-text-muted block text-[11px]">Simplicity</span>
-                  <strong className="text-text-primary font-mono">1-Second Recognition</strong>
-                </div>
-                <div className="p-2.5 rounded bg-subtle border border-border-subtle">
-                  <span className="text-text-muted block text-[11px]">Motion Feel</span>
-                  <strong className="text-brand-primary font-mono">Continuous Elevation</strong>
-                </div>
-                <div className="p-2.5 rounded bg-subtle border border-border-subtle">
-                  <span className="text-text-muted block text-[11px]">Hardware & Fabric</span>
-                  <strong className="text-status-optimal font-mono">Laser-Etch Clean</strong>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {selectedMark === 'living_seed' && (
+          {selectedMark === 'glyph_nexus' && (
             <div className="space-y-3">
               <div className="flex items-center justify-between">
                 <h4 className="text-base font-semibold text-text-primary flex items-center gap-2">
                   <Sparkles className="w-4 h-4 text-brand-primary" />
-                  Concept 2: The Living Seed (Apple Tier)
+                  The Tovelu Nexus: Why This Can Become a Global Icon
                 </h4>
-                <Badge variant="brand" size="sm">Organic Icon</Badge>
+                <Badge variant="optimal" size="sm">100% Unique to Tovelu</Badge>
               </div>
               <p className="text-xs text-text-secondary leading-relaxed">
-                Like the bitten Apple, this mark takes a universal organic form—<strong>The Seed of Life / The Vital Drop</strong>—and cuts a distinct circular notch into its shoulder. This notch provides immediate iconic scale and creates an unmistakable silhouette that cannot be confused with any generic drop or seed.
+                Notice the silhouette: It does not look like any existing company on Earth. It has an overarching protective horizon canopy (representing care, shelter, and public health infrastructure) interlocking seamlessly with a grounded central stem (representing the human spine, personal metrics, and scientific truth).
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1 text-xs">
+                <div className="p-2.5 rounded bg-subtle border border-border-subtle">
+                  <span className="text-text-muted block text-[11px]">Ownership</span>
+                  <strong className="text-text-primary font-mono">100% Proprietary Shape</strong>
+                </div>
+                <div className="p-2.5 rounded bg-subtle border border-border-subtle">
+                  <span className="text-text-muted block text-[11px]">Letter Harmony</span>
+                  <strong className="text-brand-primary font-mono">Subtle "T" + "V" Silhouette</strong>
+                </div>
+                <div className="p-2.5 rounded bg-subtle border border-border-subtle">
+                  <span className="text-text-muted block text-[11px]">The Standalone Test</span>
+                  <strong className="text-status-optimal font-mono">Recognizable with No Text</strong>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {selectedMark === 'vital_delta' && (
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <h4 className="text-base font-semibold text-text-primary flex items-center gap-2">
+                  <Compass className="w-4 h-4 text-brand-primary" />
+                  The Vital Delta: The Universal Symbol of Human Elevation
+                </h4>
+                <Badge variant="brand" size="sm">Mathematical & Vital</Badge>
+              </div>
+              <p className="text-xs text-text-secondary leading-relaxed">
+                In mathematics and science, Delta ($\Delta$) is the universal symbol for change and transformation. The soft rounded portal in the center protects the human, while the monolithic triangular geometry points upward toward lifelong vitality.
               </p>
             </div>
           )}
 
-          {selectedMark === 'sovereign_crest' && (
+          {selectedMark === 'equi_sol' && (
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <h4 className="text-base font-semibold text-text-primary">
-                  Concept 3: The Sovereign Crest
+                <h4 className="text-base font-semibold text-text-primary flex items-center gap-2">
+                  <Eye className="w-4 h-4 text-brand-primary" />
+                  The Equilibrium Sol: The Living Biological Spark
                 </h4>
-                <Badge variant="evidence" size="sm">Protection & Shield</Badge>
+                <Badge variant="evidence" size="sm">Organic Sphere</Badge>
               </div>
               <p className="text-xs text-text-secondary leading-relaxed">
-                A single aerodynamic crest silhouette representing health defense, privacy protection, and physical resilience. Clean sweeping shoulders form a majestic modern &ldquo;T&rdquo;.
-              </p>
-            </div>
-          )}
-
-          {selectedMark === 'mobius_t' && (
-            <div className="space-y-3">
-              <div className="flex items-center justify-between">
-                <h4 className="text-base font-semibold text-text-primary">
-                  Concept 4: The Möbius T
-                </h4>
-                <Badge variant="neutral" size="sm">Sculptural T</Badge>
-              </div>
-              <p className="text-xs text-text-secondary leading-relaxed">
-                A bold, monolithic sculptural lettermark. Broad, confident canopy tapering into an unshakeable vertical stem. Represents multi-decade stability.
+                A single solid circle carved by an asymmetrical living arc. Represents the biological cycle of life, renewal, and continuous health intelligence.
               </p>
             </div>
           )}
         </CardContent>
       </Card>
 
-      {/* The 1-Color Silhouette Test (The Apple/Nike Benchmark) */}
+      {/* The Standalone Billboard Test (Zero Text Test) */}
       <Card>
         <CardHeader>
-          <CardTitle>The "Laser-Etched Metal & T-Shirt" Test</CardTitle>
+          <CardTitle>The "Zero-Text Billboard Test" (The Nike/Apple Standard)</CardTitle>
           <CardDescription>
-            Apple and Nike look breathtaking even with zero colors—stamped into titanium or printed in pure black/white ink.
+            When Nike puts a swoosh on a billboard in Tokyo with zero words, you know it is Nike. When Apple puts an apple in Paris with zero words, you know it is Apple. This is how Tovelu looks completely isolated:
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-center">
-            {/* Pure Black on Pure White */}
-            <div className="p-6 rounded-xl bg-white border border-slate-200 text-black flex flex-col items-center justify-center gap-3 shadow-subtle">
-              <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400">Pure Solid Black (#000000)</span>
-              <div className="w-12 h-12 flex items-center justify-center">
-                <svg width="48" height="48" viewBox="0 0 100 100" fill="currentColor">
-                  <path d="M 12 56 C 24 68, 42 78, 62 66 C 76 56, 84 36, 88 16 C 82 32, 68 46, 50 48 C 34 50, 22 44, 12 56 Z" />
-                  <path d="M 28 24 C 44 20, 68 20, 84 26 C 72 26, 56 28, 44 34 C 36 38, 30 30, 28 24 Z" opacity="0.85" />
+            {/* Pure Black on White */}
+            <div className="p-10 rounded-2xl bg-white border border-slate-200 text-black flex flex-col items-center justify-center gap-4 shadow-subtle min-h-[180px]">
+              <div className="w-16 h-16 flex items-center justify-center">
+                <svg width="64" height="64" viewBox="0 0 100 100" fill="currentColor">
+                  <path d="M 14 30 C 26 22, 74 22, 86 30 C 82 38, 62 34, 50 34 C 38 34, 18 38, 14 30 Z" />
+                  <path d="M 50 36 C 58 36, 62 46, 56 64 C 53 74, 47 74, 44 64 C 38 46, 42 36, 50 36 Z" />
+                  <circle cx="50" cy="48" r="4" fill="white" />
                 </svg>
               </div>
-              <span className="text-xs font-bold tracking-[0.2em]">TOVELU</span>
+              <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest">
+                No Name Needed • Instant Recognition
+              </span>
             </div>
 
-            {/* Pure White on Pure Obsidian */}
-            <div className="p-6 rounded-xl bg-slate-950 border border-slate-800 text-white flex flex-col items-center justify-center gap-3 shadow-card">
-              <span className="text-[10px] font-mono uppercase tracking-widest text-slate-500">Pure Solid White (#FFFFFF)</span>
-              <div className="w-12 h-12 flex items-center justify-center">
-                <svg width="48" height="48" viewBox="0 0 100 100" fill="currentColor">
-                  <path d="M 12 56 C 24 68, 42 78, 62 66 C 76 56, 84 36, 88 16 C 82 32, 68 46, 50 48 C 34 50, 22 44, 12 56 Z" />
-                  <path d="M 28 24 C 44 20, 68 20, 84 26 C 72 26, 56 28, 44 34 C 36 38, 30 30, 28 24 Z" opacity="0.85" />
+            {/* Pure White on Deep Obsidian */}
+            <div className="p-10 rounded-2xl bg-slate-950 border border-slate-800 text-white flex flex-col items-center justify-center gap-4 shadow-card min-h-[180px]">
+              <div className="w-16 h-16 flex items-center justify-center">
+                <svg width="64" height="64" viewBox="0 0 100 100" fill="currentColor">
+                  <path d="M 14 30 C 26 22, 74 22, 86 30 C 82 38, 62 34, 50 34 C 38 34, 18 38, 14 30 Z" />
+                  <path d="M 50 36 C 58 36, 62 46, 56 64 C 53 74, 47 74, 44 64 C 38 46, 42 36, 50 36 Z" />
+                  <circle cx="50" cy="48" r="4" fill="#090D14" />
                 </svg>
               </div>
-              <span className="text-xs font-bold tracking-[0.2em]">TOVELU</span>
+              <span className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">
+                Laser-Etched Titanium Complication
+              </span>
             </div>
           </div>
         </CardContent>
