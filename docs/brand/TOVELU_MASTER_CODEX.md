@@ -261,3 +261,15 @@ Approved and sealed into the Master Codex by Founder Ajay on August 29, 2026:
 5. **Chronobiology & Circadian Nutrient Timing**: Synchronizes with local sunrise/sunset to dictate optimal carbohydrate vs. protein timing windows, maximizing morning insulin sensitivity and protecting nocturnal melatonin synthesis.
 6. **Conversational Zero-Hands Voice AI ("Talk to THAIS")**: Whisper-powered voice intelligence allowing users to log meals and tasks completely hands-free while driving, walking, or cooking.
 7. **Drug-Nutrient & Supplement De-Cluttering Engine**: Audits prescription medications for nutrient depletions (e.g. Metformin draining B12) and strips away redundant, expensive supplements.
+
+---
+
+## 16. The 100x Conversational Assistant & Triple-Lock Zero-Error Safety Protocol
+
+Approved and sealed into the Master Codex by Founder Ajay on August 29, 2026:
+
+1. **The Dynamic Personal Health Knowledge Graph (DPHKG)**: Connects all 52 survey points, every logged meal, every swiped task, every nightly reflection, and every uploaded doctor report into a lifelong longitudinal memory.
+2. **The Adaptive Language Chameleon**: Explains complex medical biology in simple human language or clinical depth, mirroring the user's comprehension level and native tongue.
+3. **Lock 1: Deterministic Clinical Contraindication Firewall**: Hard-coded software rules that physically prevent dangerous diet plans (e.g. strict protein caps for kidney disease, purine locks for gout, allergy exclusions).
+4. **Lock 2: Grounded Evidence Retrieval**: Zero ungrounded AI hallucinations. All advice must be tethered to the 500-Disease Index, USDA lab data, and clinical consensus.
+5. **Lock 3: Real-Time "Internal Doctor" Critic Agent**: Automated 50ms pre-flight audit that inspects and certifies every recommendation before it appears on screen.
