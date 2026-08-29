@@ -16,3 +16,8 @@ export * from './EvidenceCard';
 export * from './ExplanationCard';
 export * from './BiomarkerSparkline';
 export * from './TrendChart';
+export * from './AIGroundedCard';
+export * from './HealthTimeline';
+export * from './PrivacyConsentCard';
+export * from './Toast';
+export * from './OfflineBanner';

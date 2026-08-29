@@ -4,19 +4,20 @@ import {
   Moon, 
   ShieldCheck, 
   Activity, 
-  Layers,
-  Sparkles,
-  Component,
-  Bell,
-  LineChart
+  Layers, 
+  Sparkles, 
+  Component, 
+  Bell, 
+  LineChart,
+  Bot,
 } from 'lucide-react';
 import { 
   AppHeader, 
   BottomNav, 
   BottomSheet, 
-  Button,
-  Badge,
-  NavTabItem
+  Button, 
+  Badge, 
+  NavTabItem 
 } from './components/ui';
 
 // Modular Showcase Views
@@ -27,12 +28,13 @@ import { FeedbackShowcase } from './components/showcase/FeedbackShowcase';
 import { HealthShowcase } from './components/showcase/HealthShowcase';
 import { ChartsShowcase } from './components/showcase/ChartsShowcase';
 import { GovernanceShowcase } from './components/showcase/GovernanceShowcase';
+import { ExtensionsShowcase } from './components/showcase/ExtensionsShowcase';
 
-type TDSGalleryTab = 'tokens' | 'primitives' | 'navigation' | 'feedback' | 'health' | 'charts' | 'governance';
+type TDSGalleryTab = 'health' | 'extensions' | 'charts' | 'primitives' | 'navigation' | 'feedback' | 'tokens' | 'governance';
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(false);
-  const [activeGalleryTab, setActiveGalleryTab] = useState<TDSGalleryTab>('health');
+  const [activeGalleryTab, setActiveGalleryTab] = useState<TDSGalleryTab>('extensions');
   
   // Shared Biomarker Inspection Drawer
   const [isSheetOpen, setIsSheetOpen] = useState(false);
@@ -52,6 +54,7 @@ export default function App() {
   };
 
   const navCategories: { id: TDSGalleryTab; label: string; icon: React.ReactNode }[] = [
+    { id: 'extensions', label: 'AI, Timeline & Privacy (Step 08)', icon: <Bot className="w-4 h-4" /> },
     { id: 'health', label: 'Health & Evidence', icon: <Activity className="w-4 h-4" /> },
     { id: 'charts', label: 'Visualizations', icon: <LineChart className="w-4 h-4" /> },
     { id: 'primitives', label: 'UI Primitives', icon: <Component className="w-4 h-4" /> },
@@ -61,11 +64,10 @@ export default function App() {
     { id: 'governance', label: 'Constitution', icon: <ShieldCheck className="w-4 h-4" /> },
   ];
 
-  // Mobile bottom navigation bar items
   const bottomNavItems: NavTabItem[] = [
-    { id: 'health', label: 'Health', icon: <Activity className="w-5 h-5" />, badge: 3 },
+    { id: 'extensions', label: 'AI & Privacy', icon: <Bot className="w-5 h-5" />, badge: 'New' },
+    { id: 'health', label: 'Vitals', icon: <Activity className="w-5 h-5" />, badge: 3 },
     { id: 'charts', label: 'Trends', icon: <LineChart className="w-5 h-5" /> },
-    { id: 'primitives', label: 'Primitives', icon: <Component className="w-5 h-5" /> },
     { id: 'governance', label: 'Doctrine', icon: <ShieldCheck className="w-5 h-5" /> },
   ];
 
@@ -77,13 +79,13 @@ export default function App() {
         subtitle="Towards Better Health • Interactive Catalog"
         statusBadge={
           <span className="text-[10px] font-mono uppercase bg-brand-subtle text-brand-dark px-1.5 py-0.5 rounded font-medium">
-            v1.0.0 • Phase 1 Complete
+            v1.1.0 • Step 08 Live
           </span>
         }
         rightAction={
           <div className="flex items-center gap-2">
             <button
-              onClick={() => alert("Notification Center: All clinical components passed strict constitutional checks.")}
+              onClick={() => alert("Notification Center: All 8 TDS modules verified against Constitution.")}
               aria-label="Notifications"
               className="w-10 h-10 rounded-md border border-border-default flex items-center justify-center hover:bg-subtle active:scale-95 transition-all relative"
             >
@@ -104,30 +106,27 @@ export default function App() {
 
       {/* Main Content Area */}
       <main className="max-w-4xl mx-auto px-4 py-6 space-y-8">
-        {/* Phase 1 Completion Header Banner */}
+        {/* Step 08 Extension Milestone Banner */}
         <section className="bg-surface border border-border-subtle rounded-xl p-5 shadow-card space-y-3">
           <div className="flex items-center justify-between gap-2 flex-wrap">
             <div className="flex items-center gap-2 text-brand-primary">
               <ShieldCheck className="w-5 h-5" />
               <span className="text-xs font-mono font-semibold uppercase tracking-wider">
-                Phase 1 Complete • Tovelu Design System (TDS)
+                Step 08: Critical Health & Privacy Extensions
               </span>
             </div>
-            <span className="text-xs font-mono text-text-muted">7 Steps Implemented & Verified</span>
+            <span className="text-xs font-mono text-text-muted">8 Total TDS Steps Implemented</span>
           </div>
 
           <h2 className="text-xl font-bold text-text-primary tracking-tight">
-            Interactive Component & Token Catalog
+            Tovelu Design System Master Catalog
           </h2>
           <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
-            The permanent, reusable visual language for Tovelu. Fully compliant with 
-            <strong className="text-text-primary"> Article 39 (Calm & Scientific)</strong>, 
-            <strong className="text-text-primary"> Article 40 (Mobile-First Touch)</strong>, 
-            <strong className="text-text-primary"> Article 41 (Design System Before Feature Explosion)</strong>, and 
-            <strong className="text-text-primary"> Article 42 (Accessibility)</strong>.
+            Constitutional health UI system with strict 3-layer AI grounding (<strong className="text-text-primary">Article 70</strong>), 
+            longitudinal event timelines (<strong className="text-text-primary">Article 30</strong>), and user ownership privacy controls (<strong className="text-text-primary">Articles 15 & 16</strong>).
           </p>
 
-          {/* Category Navigation Pills (Horizontal scroll on mobile) */}
+          {/* Category Navigation Pills */}
           <div className="pt-2 flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar select-none">
             {navCategories.map((cat) => {
               const isSelected = cat.id === activeGalleryTab;
@@ -151,6 +150,10 @@ export default function App() {
 
         {/* Dynamic Gallery Content Display */}
         <section>
+          {activeGalleryTab === 'extensions' && (
+            <ExtensionsShowcase />
+          )}
+
           {activeGalleryTab === 'health' && (
             <HealthShowcase onInspectBiomarker={handleOpenInspect} />
           )}
