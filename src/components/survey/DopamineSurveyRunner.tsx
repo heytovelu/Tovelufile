@@ -25,7 +25,6 @@ export const DopamineSurveyRunner: React.FC<DopamineSurveyRunnerProps> = ({ onCo
   
   // Dopamine Interstitial State
   const [activeMilestone, setActiveMilestone] = useState<MilestoneData | null>(null);
-  const [recentlySelectedId, setRecentlySelectedId] = useState<string | null>(null);
   const [streakCount, setStreakCount] = useState<number>(1);
 
   // Health Report Reveal State
@@ -70,7 +69,7 @@ export const DopamineSurveyRunner: React.FC<DopamineSurveyRunnerProps> = ({ onCo
   const currentQuestion: SurveyQuestion = SURVEY_QUESTIONS[currentStepIndex];
   const progressPercent = Math.round(((currentStepIndex + 1) / SURVEY_QUESTIONS.length) * 100);
 
-  // Check if a milestone should trigger
+  // Advance to next step (called ONLY by clicking Next button)
   const checkMilestoneAndAdvance = (nextStep: number, updatedAnswers: Record<string, any>) => {
     setStreakCount(prev => prev + 1);
     if (MILESTONES[nextStep]) {
@@ -81,26 +80,20 @@ export const DopamineSurveyRunner: React.FC<DopamineSurveyRunnerProps> = ({ onCo
     }
   };
 
-  const handleSelectOptionWithAutoAdvance = (optionId: string) => {
-    setRecentlySelectedId(optionId);
+  // SINGLE CHOICE: Selects option without auto-advance (waits for Next button)
+  const handleSelectSingleOption = (optionId: string) => {
     const qId = currentQuestion.id;
     const newAnswers = { ...answers, [qId]: optionId };
     setAnswers(newAnswers);
-
-    // 320ms tactile spring feedback before gliding to next question
-    setTimeout(() => {
-      setRecentlySelectedId(null);
-      if (currentStepIndex >= SURVEY_QUESTIONS.length - 1) {
-        finishAndEvaluate(newAnswers);
-      } else {
-        checkMilestoneAndAdvance(currentStepIndex + 1, newAnswers);
-      }
-    }, 320);
+    saveProgress(newAnswers, currentStepIndex);
   };
 
+  // MULTI CHOICE: Toggles option in array (user can select multiple, waits for Next button)
   const handleToggleMultiOption = (optionId: string) => {
     const qId = currentQuestion.id;
-    const currentList: string[] = answers[qId] || [];
+    const currentVal = answers[qId];
+    const currentList: string[] = Array.isArray(currentVal) ? currentVal : (currentVal ? [currentVal] : []);
+    
     let updated: string[];
     if (optionId === 'none') {
       updated = ['none'];
@@ -117,7 +110,8 @@ export const DopamineSurveyRunner: React.FC<DopamineSurveyRunnerProps> = ({ onCo
     saveProgress(newAnswers, currentStepIndex);
   };
 
-  const handleNextManual = () => {
+  // FULL LENGTH NEXT BUTTON CLICK HANDLER
+  const handleNextClick = () => {
     if (customText.trim()) {
       answers[`${currentQuestion.id}_custom`] = customText.trim();
       setCustomText('');
@@ -143,35 +137,48 @@ export const DopamineSurveyRunner: React.FC<DopamineSurveyRunnerProps> = ({ onCo
     const currentYear = new Date().getFullYear();
     const calculatedAge = Math.max(18, currentYear - dobYear);
 
+    // Helpers to safely read single or multiple answers
+    const getPrimaryString = (qKey: string, fallback: string): string => {
+      const val = finalAnswers[qKey];
+      if (Array.isArray(val)) return val[0] || fallback;
+      return val || fallback;
+    };
+
+    const hasOption = (qKey: string, optVal: string): boolean => {
+      const val = finalAnswers[qKey];
+      if (Array.isArray(val)) return val.includes(optVal);
+      return val === optVal;
+    };
+
     const input: UserBiometricInput = {
-      sex: finalAnswers['q01_biological_sex'] === 'female' ? 'female' : 'male',
+      sex: getPrimaryString('q01_biological_sex', 'male') === 'female' ? 'female' : 'male',
       age: calculatedAge,
       dob: `${dobYear}-${dobMonth}-${dobDay}`,
       heightCm: heightCm,
       weightKg: weightKg,
       targetWeightKg: weightKg - 7,
-      primaryGoalId: finalAnswers['q04_primary_goal'] || 'weight_loss',
-      activityLevel: finalAnswers['q07_daily_activity_level'] || 'light',
-      dietaryPhilosophy: finalAnswers['q08_dietary_philosophy'] || 'non_vegetarian',
-      allergies: finalAnswers['q09_food_allergies'] || ['none'],
+      primaryGoalId: getPrimaryString('q04_primary_goal', 'weight_loss'),
+      activityLevel: (getPrimaryString('q07_daily_activity_level', 'light') as any) || 'light',
+      dietaryPhilosophy: (getPrimaryString('q08_dietary_philosophy', 'non_vegetarian') as any) || 'non_vegetarian',
+      allergies: Array.isArray(finalAnswers['q09_food_allergies']) ? finalAnswers['q09_food_allergies'] : ['none'],
       symptoms: {
-        bloatingTiming: finalAnswers['q13_bloating_timing'],
-        bristolStoolType: finalAnswers['q14_bristol_stool_type'],
-        floatingStool: finalAnswers['q15_floating_greasy_stool'] === 'yes_floating',
-        heartburn: finalAnswers['q16_heartburn_reflux'] === 'classic_gerd',
-        postCarbReaction: finalAnswers['q17_post_carb_reaction'],
-        middayCrash: finalAnswers['q18_midday_crash'] === 'daily_crash',
-        fastingHangry: finalAnswers['q19_fasting_irritability'] === 'hangry_shaky',
-        skinSigns: finalAnswers['q22_skin_markers'] || [],
-        sleepLatencyMinutes: finalAnswers['q25_sleep_latency'] === 'over_30_mins' ? 45 : 15,
-        nightWakingTime: finalAnswers['q26_night_waking_time'],
-        nocturiaFrequency: finalAnswers['q27_nocturia_frequency'] === 'two_plus' ? 2 : 0,
-        coldExtremities: finalAnswers['q30_cold_extremities'] === 'cold_hands_feet',
-        brainFogFrequency: finalAnswers['q38_brain_fog_frequency'],
-        acuteToePainGout: finalAnswers['q35_acute_toe_pain_gout'] === 'yes_gout'
+        bloatingTiming: getPrimaryString('q13_bloating_timing', '1_2_hours'),
+        bristolStoolType: getPrimaryString('q14_bristol_stool_type', 'type_3_4_normal'),
+        floatingStool: hasOption('q15_floating_greasy_stool', 'yes_floating'),
+        heartburn: hasOption('q16_heartburn_reflux', 'classic_gerd') || hasOption('q16_heartburn_reflux', 'silent_reflux'),
+        postCarbReaction: getPrimaryString('q17_post_carb_reaction', 'normal_energy'),
+        middayCrash: hasOption('q18_midday_crash', 'daily_crash') || hasOption('q18_midday_crash', 'sluggish'),
+        fastingHangry: hasOption('q19_fasting_irritability', 'hangry_shaky'),
+        skinSigns: Array.isArray(finalAnswers['q22_skin_markers']) ? finalAnswers['q22_skin_markers'] : [],
+        sleepLatencyMinutes: hasOption('q25_sleep_latency', 'over_30_mins') ? 45 : 15,
+        nightWakingTime: getPrimaryString('q26_night_waking_time', 'sleep_through'),
+        nocturiaFrequency: hasOption('q27_nocturia_frequency', 'two_plus') ? 2 : 0,
+        coldExtremities: hasOption('q30_cold_extremities', 'cold_hands_feet'),
+        brainFogFrequency: getPrimaryString('q38_brain_fog_frequency', 'rarely'),
+        acuteToePainGout: hasOption('q35_acute_toe_pain_gout', 'yes_gout')
       },
-      diagnosedConditions: finalAnswers['q46_diagnosed_conditions'] || [],
-      medications: finalAnswers['q47_daily_medications'] || []
+      diagnosedConditions: Array.isArray(finalAnswers['q46_diagnosed_conditions']) ? finalAnswers['q46_diagnosed_conditions'] : [],
+      medications: Array.isArray(finalAnswers['q47_daily_medications']) ? finalAnswers['q47_daily_medications'] : []
     };
 
     const assessmentResult = ThaisDiagnosticEngine.evaluate(input);
@@ -182,6 +189,12 @@ export const DopamineSurveyRunner: React.FC<DopamineSurveyRunnerProps> = ({ onCo
     setGeneratedPlan(planResult);
     setShowReveal(true);
   };
+
+  // Helper to count selected options on current question
+  const currentAnswer = answers[currentQuestion?.id];
+  const selectedCount = Array.isArray(currentAnswer) 
+    ? currentAnswer.length 
+    : currentAnswer ? 1 : 0;
 
   // Render Milestone Celebration Interstitial
   if (activeMilestone) {
@@ -275,7 +288,7 @@ export const DopamineSurveyRunner: React.FC<DopamineSurveyRunnerProps> = ({ onCo
           size="lg"
           variant="primary"
           fullWidth
-          className="rounded-2xl py-4 font-bold text-sm bg-gradient-to-r from-emerald-500 via-teal-500 to-brand-primary shadow-xl shadow-emerald-500/25 active:scale-98 transition-all"
+          className="rounded-2xl py-4 font-black text-sm bg-gradient-to-r from-emerald-500 via-teal-500 to-brand-primary shadow-xl shadow-emerald-500/25 active:scale-98 transition-all"
           onClick={() => onComplete(compiledInput, generatedAssessment, generatedPlan)}
         >
           <Zap className="w-4 h-4 mr-2" />
@@ -292,7 +305,7 @@ export const DopamineSurveyRunner: React.FC<DopamineSurveyRunnerProps> = ({ onCo
       <div className="flex items-center justify-between text-xs font-bold">
         <span className="flex items-center gap-1 text-amber-500 bg-amber-500/10 px-2.5 py-1 rounded-full border border-amber-500/20 animate-pulse">
           <Flame className="w-3.5 h-3.5 fill-amber-500" />
-          {streakCount}-Question Streak • Momentum High
+          {streakCount}-Question Streak • High Momentum
         </span>
         <span className="text-text-muted">
           Q{currentStepIndex + 1} of {SURVEY_QUESTIONS.length}
@@ -316,9 +329,16 @@ export const DopamineSurveyRunner: React.FC<DopamineSurveyRunnerProps> = ({ onCo
 
       {/* Question Header */}
       <div className="space-y-1.5 pt-1">
-        <span className="text-[11px] font-extrabold text-brand-primary uppercase tracking-wider">
-          {currentQuestion.section}
-        </span>
+        <div className="flex items-center justify-between">
+          <span className="text-[11px] font-extrabold text-brand-primary uppercase tracking-wider">
+            {currentQuestion.section}
+          </span>
+          {currentQuestion.inputType === 'multi-choice' && (
+            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-brand-primary/10 text-brand-primary border border-brand-primary/20">
+              Select one or multiple
+            </span>
+          )}
+        </div>
         <h2 className="text-xl md:text-2xl font-black text-text-primary leading-tight tracking-tight">
           {currentQuestion.title}
         </h2>
@@ -459,23 +479,20 @@ export const DopamineSurveyRunner: React.FC<DopamineSurveyRunnerProps> = ({ onCo
           </div>
         )}
 
-        {/* Single-Choice Cards with Tactile Pop & Auto-Advance */}
+        {/* Single-Choice Cards (Tap selects, stays on screen until Next clicked) */}
         {currentQuestion.inputType === 'single-choice' && currentQuestion.options && (
           <div className="grid grid-cols-1 gap-2.5">
             {currentQuestion.options.map((opt) => {
               const isSelected = answers[currentQuestion.id] === opt.id;
-              const isPopping = recentlySelectedId === opt.id;
               return (
                 <button
                   key={opt.id}
                   type="button"
-                  onClick={() => handleSelectOptionWithAutoAdvance(opt.id)}
+                  onClick={() => handleSelectSingleOption(opt.id)}
                   className={`p-4 rounded-2xl text-left border transition-all duration-150 flex items-center justify-between transform active:scale-[0.98] ${
-                    isPopping
-                      ? 'scale-[1.02] bg-emerald-500/25 border-emerald-500 shadow-md ring-2 ring-emerald-500/50'
-                      : isSelected
-                      ? 'bg-emerald-500/15 border-emerald-500 shadow-sm'
-                      : 'bg-surface-raised border-border-default hover:border-brand-primary hover:scale-[1.01]'
+                    isSelected
+                      ? 'scale-[1.01] bg-emerald-500/20 border-emerald-500 shadow-md ring-2 ring-emerald-500/40'
+                      : 'bg-surface-raised border-border-default hover:border-brand-primary hover:scale-[1.005]'
                   }`}
                 >
                   <div className="flex items-center gap-3.5">
@@ -486,9 +503,9 @@ export const DopamineSurveyRunner: React.FC<DopamineSurveyRunnerProps> = ({ onCo
                     </div>
                   </div>
                   <div className={`w-6 h-6 rounded-full border flex items-center justify-center shrink-0 transition-all ${
-                    isSelected || isPopping ? 'bg-emerald-500 border-emerald-500 text-white scale-110' : 'border-border-default'
+                    isSelected ? 'bg-emerald-500 border-emerald-500 text-white scale-110' : 'border-border-default'
                   }`}>
-                    {(isSelected || isPopping) && <Check className="w-3.5 h-3.5 stroke-[3]" />}
+                    {isSelected && <Check className="w-3.5 h-3.5 stroke-[3]" />}
                   </div>
                 </button>
               );
@@ -496,29 +513,33 @@ export const DopamineSurveyRunner: React.FC<DopamineSurveyRunnerProps> = ({ onCo
           </div>
         )}
 
-        {/* Multi-Choice Checkboxes */}
+        {/* Multi-Choice Cards (User can select multiple options freely) */}
         {currentQuestion.inputType === 'multi-choice' && currentQuestion.options && (
           <div className="grid grid-cols-1 gap-2.5">
             {currentQuestion.options.map((opt) => {
-              const selectedList: string[] = answers[currentQuestion.id] || [];
+              const currentVal = answers[currentQuestion.id];
+              const selectedList: string[] = Array.isArray(currentVal) ? currentVal : (currentVal ? [currentVal] : []);
               const isSelected = selectedList.includes(opt.id);
               return (
                 <button
                   key={opt.id}
                   type="button"
                   onClick={() => handleToggleMultiOption(opt.id)}
-                  className={`p-3.5 rounded-2xl text-left border transition-all flex items-center justify-between hover:scale-[1.01] active:scale-[0.99] ${
+                  className={`p-4 rounded-2xl text-left border transition-all duration-150 flex items-center justify-between transform active:scale-[0.98] ${
                     isSelected
-                      ? 'bg-emerald-500/15 border-emerald-500 shadow-sm'
-                      : 'bg-surface-raised border-border-default hover:border-brand-primary'
+                      ? 'scale-[1.01] bg-emerald-500/20 border-emerald-500 shadow-md ring-2 ring-emerald-500/40'
+                      : 'bg-surface-raised border-border-default hover:border-brand-primary hover:scale-[1.005]'
                   }`}
                 >
-                  <div>
-                    <div className="text-xs font-bold text-text-primary">{opt.label}</div>
-                    {opt.sublabel && <div className="text-[11px] text-text-muted mt-0.5">{opt.sublabel}</div>}
+                  <div className="flex items-center gap-3.5">
+                    {opt.icon && <span className="text-2xl shrink-0">{opt.icon}</span>}
+                    <div>
+                      <div className="text-xs md:text-sm font-bold text-text-primary">{opt.label}</div>
+                      {opt.sublabel && <div className="text-[11px] text-text-muted mt-0.5">{opt.sublabel}</div>}
+                    </div>
                   </div>
-                  <div className={`w-5 h-5 rounded-lg border flex items-center justify-center shrink-0 ${
-                    isSelected ? 'bg-emerald-500 border-emerald-500 text-white' : 'border-border-default'
+                  <div className={`w-6 h-6 rounded-xl border flex items-center justify-center shrink-0 transition-all ${
+                    isSelected ? 'bg-emerald-500 border-emerald-500 text-white scale-110 shadow-sm' : 'border-border-default'
                   }`}>
                     {isSelected && <Check className="w-3.5 h-3.5 stroke-[3]" />}
                   </div>
@@ -564,43 +585,54 @@ export const DopamineSurveyRunner: React.FC<DopamineSurveyRunnerProps> = ({ onCo
         </div>
       </div>
 
-      {/* Navigation Buttons */}
-      <div className="flex items-center justify-between pt-4 border-t border-border-default">
-        <button
-          type="button"
-          onClick={handlePrevious}
-          disabled={currentStepIndex === 0}
-          className={`flex items-center gap-1 text-xs font-semibold px-3 py-2 rounded-xl transition-all ${
-            currentStepIndex === 0 ? 'opacity-30 cursor-not-allowed text-text-muted' : 'text-text-secondary hover:text-text-primary'
-          }`}
-        >
-          <ChevronLeft className="w-4 h-4" /> Previous
-        </button>
+      {/* FULL LENGTH NEXT BUTTON & NAVIGATION FOOTER */}
+      {currentQuestion.inputType !== 'action-trigger' && (
+        <div className="space-y-3 pt-4 border-t border-border-default">
+          {/* HUGE FULL-LENGTH NEXT BUTTON */}
+          <Button
+            size="lg"
+            variant="primary"
+            fullWidth
+            onClick={handleNextClick}
+            className="rounded-2xl py-4 text-sm md:text-base font-black bg-gradient-to-r from-emerald-500 via-teal-500 to-brand-primary shadow-lg shadow-emerald-500/25 hover:shadow-emerald-500/40 active:scale-[0.99] transition-all flex items-center justify-center gap-2"
+          >
+            <span>
+              {selectedCount > 1 
+                ? `Next Question (${selectedCount} Selected)` 
+                : selectedCount === 1 
+                ? 'Next Question' 
+                : 'Next Question'}
+            </span>
+            <ChevronRight className="w-5 h-5 stroke-[2.5]" />
+          </Button>
 
-        <div className="flex items-center gap-2">
-          {onCancel && (
+          {/* Previous & Exit Controls */}
+          <div className="flex items-center justify-between text-xs font-semibold px-1">
             <button
               type="button"
-              onClick={onCancel}
-              className="text-xs text-text-muted hover:text-text-primary px-3 py-2"
+              onClick={handlePrevious}
+              disabled={currentStepIndex === 0}
+              className={`flex items-center gap-1 py-1.5 transition-all ${
+                currentStepIndex === 0 
+                  ? 'opacity-30 cursor-not-allowed text-text-muted' 
+                  : 'text-text-secondary hover:text-text-primary'
+              }`}
             >
-              Exit
+              <ChevronLeft className="w-4 h-4" /> Previous Question
             </button>
-          )}
 
-          {/* Show Next button for multi-choice, sliders, steppers, or date-picker */}
-          {currentQuestion.inputType !== 'single-choice' && currentQuestion.inputType !== 'action-trigger' && (
-            <Button
-              size="sm"
-              variant="primary"
-              onClick={handleNextManual}
-              className="rounded-xl px-5 font-bold text-xs"
-            >
-              Next <ChevronRight className="w-4 h-4 ml-1" />
-            </Button>
-          )}
+            {onCancel && (
+              <button
+                type="button"
+                onClick={onCancel}
+                className="text-text-muted hover:text-text-primary py-1.5"
+              >
+                Save & Exit
+              </button>
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

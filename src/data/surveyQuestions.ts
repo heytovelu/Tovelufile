@@ -78,7 +78,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'About You & Your Dream Goal',
     title: 'What is your dream goal with Tovelu?',
     whyWeAsk: 'Choose the primary change you want to see in your body and life. THAIS will build your daily plan around this.',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     options: [
       { id: 'weight_loss', label: 'Weight Loss & Belly Fat Reduction', sublabel: 'Burn fat, drop waist sizes', icon: '⚖️' },
       { id: 'muscle_building', label: 'Build Muscle & Physical Tone', sublabel: 'Sculpt lean body, get stronger', icon: '💪' },
@@ -110,7 +110,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'About You & Your Dream Goal',
     title: 'Where does your body store fat the most?',
     whyWeAsk: 'Where your body stores fat tells us your exact hormonal balance (Insulin vs Cortisol vs Estrogen).',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     options: [
       { id: 'belly_apple', label: 'Mostly around my belly / stomach', sublabel: 'Visceral fat & High Insulin', icon: '🍎' },
       { id: 'hips_pear', label: 'Mostly around my hips, thighs, and buttocks', sublabel: 'Subcutaneous fat & Estrogen balance', icon: '🍐' },
@@ -126,7 +126,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'About You & Your Dream Goal',
     title: 'How much do you move on an average normal day?',
     whyWeAsk: 'Adjusts your daily food intake so you never feel starved or overfed.',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     options: [
       { id: 'sedentary', label: 'Desk worker', sublabel: 'Sit most of the day, under 4,000 steps', icon: '🪑' },
       { id: 'light', label: 'On my feet moderately', sublabel: 'Cook, clean, walk 5,000 to 8,000 steps', icon: '🚶' },
@@ -144,7 +144,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'Food, Kitchen & Dietary Reality',
     title: 'What is your eating philosophy?',
     whyWeAsk: 'THAIS will NEVER recommend foods that go against your values, religion, or lifestyle.',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     options: [
       { id: 'non_vegetarian', label: 'Non-Vegetarian', sublabel: 'Eat all meats, fish, eggs, veg', icon: '🥩' },
       { id: 'vegetarian', label: 'Vegetarian', sublabel: 'No meat or fish, but eat dairy & plants', icon: '🥦' },
@@ -184,7 +184,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'Food, Kitchen & Dietary Reality',
     title: 'How many times a day do you actually prefer to eat?',
     whyWeAsk: 'Diets only work when they fit your natural schedule. We design your macro portions to match.',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     options: [
       { id: 'three_meals', label: '3 Fixed Meals (Breakfast, Lunch, Dinner)' },
       { id: 'three_plus_snacks', label: '3 Meals + 1 or 2 small snacks' },
@@ -200,7 +200,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'Food, Kitchen & Dietary Reality',
     title: 'What is your honest cooking reality at home?',
     whyWeAsk: 'No point giving a 45-minute recipe if you only have 10 minutes.',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     options: [
       { id: 'quick_prep', label: 'Quick & Simple (I only have 10–15 minutes to cook)', icon: '⏱️' },
       { id: 'home_cooking', label: 'Normal Home Cooking (I enjoy cooking 30–45 minutes)', icon: '🍳' },
@@ -216,7 +216,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'Food, Kitchen & Dietary Reality',
     title: 'How much water do you drink on a normal day?',
     whyWeAsk: 'Dehydration mimics hunger, causes false sugar cravings, and thickens your blood.',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     options: [
       { id: 'under_1l', label: 'Less than 3 glasses (under 1 Liter - I forget to drink)', icon: '💧' },
       { id: '1_5l', label: '4 to 6 glasses (about 1.5 Liters)', icon: '💧💧' },
@@ -233,7 +233,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'Digestion & Gut Health',
     title: 'When you get stomach bloating or a swollen belly, when does it happen?',
     whyWeAsk: 'The exact minute bloating begins tells THAIS whether the issue is in your stomach, your small intestine, or your colon.',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     options: [
       { id: '15_30_mins', label: 'Within 15 to 30 minutes after taking my first bite', sublabel: 'Hypochlorhydria / Low Stomach Acid' },
       { id: '1_2_hours', label: '1 to 2 hours after a meal (feels like a swollen balloon)', sublabel: 'SIBO bacterial overgrowth' },
@@ -249,7 +249,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'Digestion & Gut Health',
     title: 'What does your bowel movement (stool) look like most days?',
     whyWeAsk: 'The shape of your stool is the #1 direct clinical window into your liver, gallbladder, hydration, and gut speed.',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     options: [
       { id: 'type_1_2', label: 'Type 1–2: Hard separate lumps or dry pebble clusters', sublabel: 'Hard to push (Constipation & Low Bile)', icon: '🌰' },
       { id: 'type_3_4', label: 'Type 3–4: Smooth, soft, sausage or snake-shaped', sublabel: 'Easy to pass (Optimal Transit)', icon: '🍌' },
@@ -265,7 +265,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'Digestion & Gut Health',
     title: 'Does your stool ever float on top of water, look greasy, or stick to the bowl?',
     whyWeAsk: 'Floating or greasy stool proves your body is not absorbing fats properly because of sluggish gallbladder bile.',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     options: [
       { id: 'yes_floating', label: 'Yes, frequently floats or leaves oily residue', icon: '🧼' },
       { id: 'no_sinks', label: 'No, it sinks normally and flushes clean' },
@@ -279,7 +279,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'Digestion & Gut Health',
     title: 'Do you experience burning in your chest, acid rising into your throat, or frequent sour burps?',
     whyWeAsk: 'Detects acid reflux (GERD) so THAIS removes acidic triggers (like tomatoes, citrus, raw onions, coffee on an empty stomach).',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     options: [
       { id: 'classic_gerd', label: 'Yes, multiple times a week (especially when lying down)', icon: '🔥' },
       { id: 'silent_reflux', label: 'I don\'t feel burning, but I have a chronic morning cough or throat clearing', icon: '🗣️' },
@@ -296,7 +296,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'Blood Sugar, Energy & Metabolism',
     title: 'How do you feel 60 to 90 minutes after eating a meal rich in carbs (like rice, bread, or pasta)?',
     whyWeAsk: 'Detects if your cells are insulin-resistant and crashing your blood sugar.',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     options: [
       { id: 'sleepy_crash', label: 'Heavy exhaustion: I feel sleepy, foggy, and need a nap', icon: '😴' },
       { id: 'sweet_craving', label: 'Intense sweet craving: I feel an urgent need to eat sugar or dessert', icon: '🍬' },
@@ -311,7 +311,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'Blood Sugar, Energy & Metabolism',
     title: 'Do you experience a sudden energy drop or \'brain fog\' between 2:00 PM and 4:30 PM?',
     whyWeAsk: 'Mid-afternoon crashes prove your mitochondria are burning through glucose too fast without fat adaptation.',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     options: [
       { id: 'daily_crash', label: 'Yes, almost every single day (I must drink coffee, soda, or eat snacks)', icon: '📉' },
       { id: 'sleep_only', label: 'Only if I had a terrible night of sleep', icon: '🥱' },
@@ -326,7 +326,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'Blood Sugar, Energy & Metabolism',
     title: 'If a meal is delayed by 2 or 3 hours, what happens to your mood and body?',
     whyWeAsk: 'Healthy bodies burn stored fat smoothly. Unhealthy blood sugar triggers adrenaline and panic.',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     options: [
       { id: 'hangry_shaky', label: 'I get shaky, sweaty, angry, or lightheaded (\'Hangry\')', icon: '😠' },
       { id: 'calm_hunger', label: 'I feel normal hunger in my stomach, but my brain stays calm', icon: '😐' },
@@ -343,7 +343,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'Physical Visual Signs',
     title: 'Stick out your tongue in the mirror. What does the surface look like?',
     whyWeAsk: 'In clinical medicine, your tongue is a direct reflection of your stomach lining and gut microbiome balance.',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     options: [
       { id: 'clean_pink', label: 'Pink, clean, moist, smooth', sublabel: 'Optimal Digestive Balance', icon: '👅' },
       { id: 'white_coating', label: 'Covered with a thick white or yellowish coating', sublabel: 'Candida & Yeast Dysbiosis', icon: '⚪' },
@@ -393,7 +393,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'Physical Visual Signs',
     title: 'If you get adult acne, pimples, or cysts, where do they appear?',
     whyWeAsk: 'Face mapping tells THAIS whether acne is driven by dairy, gut bacteria, or reproductive hormones.',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     options: [
       { id: 'none', label: 'I rarely or never get acne', icon: '🚫' },
       { id: 'jawline_chin', label: 'Along my jawline, chin, and lower mouth', sublabel: 'Hormonal PCOS / Androgen Excess', icon: '🧔' },
@@ -409,7 +409,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'Physical Visual Signs',
     title: 'Do you have deep, dark purplish circles or puffiness under your eyes, even when you sleep well?',
     whyWeAsk: 'Known in medicine as \'Allergic Shiners\'—caused by food intolerances and congested lymphatic drainage.',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     options: [
       { id: 'allergic_shiners', label: 'Yes, chronic dark circles or puffy bags under my eyes', icon: '🐼' },
       { id: 'clean_eyes', label: 'No, under-eye area is clear and normal' },
@@ -425,7 +425,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'Sleep, Nighttime Timing & Circadian Rhythms',
     title: 'How long does it take you to fall asleep once your head hits the pillow?',
     whyWeAsk: 'Taking over 30 minutes proves your evening cortisol is too high and melatonin is blocked.',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     options: [
       { id: 'under_15', label: 'Under 15 minutes (Fall asleep smoothly - Optimal)', icon: '⚡' },
       { id: '15_30_mins', label: '15 to 30 minutes', icon: '⏳' },
@@ -440,7 +440,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'Sleep, Nighttime Timing & Circadian Rhythms',
     title: 'If you wake up in the middle of the night, what EXACT time does the clock show?',
     whyWeAsk: 'Waking between 2:00 AM and 3:30 AM is an exact clinical signature of liver glycogen depletion triggering an adrenaline surge.',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     options: [
       { id: '2am_330am', label: 'Between 2:00 AM and 3:30 AM (Wake up alert with racing thoughts)', icon: '⏰' },
       { id: '430am_530am', label: 'Between 4:30 AM and 5:30 AM (Wake up early and cannot get back to sleep)', icon: '⏰' },
@@ -455,7 +455,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'Sleep, Nighttime Timing & Circadian Rhythms',
     title: 'How many times do you get out of bed to urinate between falling asleep and morning?',
     whyWeAsk: 'Waking up twice or more to pee is not just about water—it is a leading warning sign of pre-diabetes and sleep apnea.',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     options: [
       { id: 'zero', label: '0 times (I never wake up to pee - Optimal)' },
       { id: 'one_time', label: '1 time occasionally' },
@@ -485,7 +485,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'Sleep, Nighttime Timing & Circadian Rhythms',
     title: 'Do your legs have an uncomfortable, restless, \'creepy-crawly\' urge to move when you lie down in bed?',
     whyWeAsk: 'Restless Legs Syndrome is 98% correlated with low brain iron stores (ferritin) and dopamine receptor fatigue.',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     options: [
       { id: 'yes_restless', label: 'Yes, deeply annoying urge to shake or kick my legs in bed', icon: '🦵' },
       { id: 'no_calm', label: 'No, my legs feel calm and relaxed' }
@@ -500,7 +500,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'Heart, Blood Pressure & Circulation',
     title: 'Are your hands or feet noticeably cold, even when the room is comfortable?',
     whyWeAsk: 'Cold extremities prove your microvascular capillaries are constricted from low nitric oxide, sluggish thyroid, or stress.',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     options: [
       { id: 'cold_hands_feet', label: 'Yes, my hands and feet are like ice almost all the time', icon: '🧊' },
       { id: 'warm_normal', label: 'No, my hands and feet stay warm normally' },
@@ -514,7 +514,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'Heart, Blood Pressure & Circulation',
     title: 'When you stand up quickly from a couch or bed, do you feel dizzy or see black spots for 3 seconds?',
     whyWeAsk: 'Detects orthostatic blood pressure drops and low electrolyte fluid volume in your veins.',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     options: [
       { id: 'dizzy_standing', label: 'Yes, I frequently have to hold onto a wall for a few seconds', icon: '💫' },
       { id: 'clear_head', label: 'No, my head stays completely clear when I stand up' }
@@ -527,7 +527,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'Heart, Blood Pressure & Circulation',
     title: 'Do you notice swelling, fluid retention, or sock marks dug deeply into your ankles at the end of the day?',
     whyWeAsk: 'Deep sock indentations prove your veins are holding onto excess fluid and sodium due to sluggish circulation or insulin.',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     options: [
       { id: 'sock_marks_edema', label: 'Yes, prominent ring marks around my ankles / puffy feet', icon: '🧦' },
       { id: 'no_edema', label: 'No, my ankles and feet look completely normal' }
@@ -540,7 +540,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'Heart, Blood Pressure & Circulation',
     title: 'Do you ever feel your heart suddenly pounding, fluttering, or skipping a beat when resting?',
     whyWeAsk: 'Benign heart palpitations while resting are usually a direct sign of cellular magnesium or potassium imbalance.',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     options: [
       { id: 'fluttering_thumping', label: 'Yes, occasional fluttering or heavy thumping in my chest', icon: '💓' },
       { id: 'calm_steady', label: 'No, my heartbeat feels calm, steady, and unnoticeable' },
@@ -556,7 +556,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'Joints, Muscles & Bones',
     title: 'When you wake up in the morning, do your joints feel stiff and creaky?',
     whyWeAsk: 'Joint stiffness lasting over 30 minutes indicates systemic inflammatory cytokines attacking cartilage tissue.',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     options: [
       { id: 'over_30_mins', label: 'Yes, takes more than 30 to 45 minutes of moving before joints loosen', sublabel: 'Inflammatory Arthritis #233 & #315', icon: '⏰' },
       { id: 'under_5_mins', label: 'Mild stiffness that disappears in 5 minutes after standing up', sublabel: 'Normal mechanical stiffness', icon: '🏃' },
@@ -571,7 +571,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'Joints, Muscles & Bones',
     title: 'Have you ever suffered a sudden, excruciating burning pain in your big toe or ankle, especially at night?',
     whyWeAsk: 'A throbbing, red-hot big toe joint is a 99.4% definitive pathognomonic sign of Gout (uric acid crystals).',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     options: [
       { id: 'yes_gout', label: 'Yes, severe sudden throbbing pain in my big toe joint / foot', icon: '🦶' },
       { id: 'never', label: 'Never experienced this' }
@@ -584,7 +584,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'Joints, Muscles & Bones',
     title: 'Do you suffer from sudden, painful muscle cramps in your calves or feet while sleeping?',
     whyWeAsk: 'Night calf charley horses are 98% correlated with calcium-magnesium pump depletion and dehydration.',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     options: [
       { id: 'yes_cramps', label: 'Yes, painful muscle spasms that wake me up in the middle of the night', icon: '⚡' },
       { id: 'no_cramps', label: 'No, never get night cramps' }
@@ -614,7 +614,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'Brain, Nervous System & Emotional State',
     title: 'How often do you experience \'Brain Fog\' (feeling like your brain is wrapped in cotton, slow thinking, struggling to find words)?',
     whyWeAsk: 'Brain fog is direct neuro-inflammation caused by gut leaks, blood sugar crashes, or lack of deep sleep.',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     options: [
       { id: 'multiple_days', label: 'Multiple days a week: It slows down my work and thinking', icon: '☁️' },
       { id: 'rare_poor_sleep', label: 'Only if I had terrible sleep or a massive junk-food meal', icon: '🌤️' },
@@ -628,7 +628,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'Brain, Nervous System & Emotional State',
     title: 'Do you suffer from frequent headaches? If yes, what do they feel like?',
     whyWeAsk: 'The type of headache dictates whether the cure is magnesium, posture alignment, or food trigger elimination.',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     options: [
       { id: 'tension_band', label: 'Tight band squeezing around my entire forehead / back of skull', sublabel: 'Tension Headache #473', icon: '🤕' },
       { id: 'migraine_throbbing', label: 'Intense throbbing on one side of my head with light/sound sensitivity', sublabel: 'Migraine #474', icon: '⚡' },
@@ -644,7 +644,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'Brain, Nervous System & Emotional State',
     title: 'How would you honestly describe your emotional nervous system over the past 30 days?',
     whyWeAsk: 'Calibrates THAIS to either soothe an overstimulated fight-or-flight state, or boost a depleted dopamine state.',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     options: [
       { id: 'high_alert_anxiety', label: 'High Alert: Constant inner anxiety, tight chest, racing thoughts', sublabel: 'Sympathetic Overdrive #469', icon: '🚨' },
       { id: 'numb_burnout', label: 'Heavy & Numb: Low motivation, feeling emotionally flat', sublabel: 'Dopamine Exhaustion #164 & #196', icon: '🪨' },
@@ -659,7 +659,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'Brain, Nervous System & Emotional State',
     title: 'Do you feel an uncontrollable craving for sugar, chocolate, or salty snacks when feeling stressed or bored?',
     whyWeAsk: 'Distinguishes between biological hunger vs. emotional dopamine-seeking craving loops.',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     options: [
       { id: 'hijacked_cravings', label: 'Yes, my brain feels like it is hijacked until I get a treat', icon: '🍩' },
       { id: 'calm_control', label: 'No, I can easily walk away from junk food without caring' }
@@ -674,7 +674,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'Hormonal & Reproductive Health',
     title: 'How would you describe your menstrual cycle over the last 6 months?',
     whyWeAsk: 'The menstrual cycle is the 5th vital sign of human biology. Cycle length reveals exact hormonal health.',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     conditionalOn: { field: 'q01_biological_sex', operator: 'equals', value: 'female' },
     options: [
       { id: 'regular', label: 'Predictable and regular (Happens every 26 to 32 days - Optimal)', icon: '📅' },
@@ -692,7 +692,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'Hormonal & Reproductive Health',
     title: 'In the 7 to 10 days before your period begins, do you experience severe emotional shifts?',
     whyWeAsk: 'Distinguishes between mild normal PMS vs. PMDD (severe neuro-chemical sensitivity to progesterone drop).',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     conditionalOn: { field: 'q01_biological_sex', operator: 'equals', value: 'female' },
     options: [
       { id: 'severe_pmdd', label: 'Severe: Intense crying spells, rage, severe anxiety, or feeling hopeless', sublabel: 'PMDD #388', icon: '🌪️' },
@@ -707,7 +707,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'Hormonal & Reproductive Health',
     title: 'Are you experiencing sudden waves of intense heat (hot flashes) or waking up drenched in night sweats?',
     whyWeAsk: 'Detects perimenopausal vasomotor instability so THAIS prescribes phyto-estrogenic and cooling nutritional protocols.',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     conditionalOn: { field: 'q01_biological_sex', operator: 'equals', value: 'female' },
     options: [
       { id: 'hot_flashes_sweats', label: 'Yes, sudden heat flushing over my face/chest or night sweats', icon: '🔥' },
@@ -721,7 +721,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'Hormonal & Reproductive Health',
     title: 'How has your physical drive, workout recovery, and morning vitality been recently?',
     whyWeAsk: 'Morning erections, workout bounce-back, and drive are 98% correlated with healthy bioavailable free testosterone.',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     conditionalOn: { field: 'q01_biological_sex', operator: 'equals', value: 'male' },
     options: [
       { id: 'drop_in_vitality', label: 'Noticeable drop: Slower workout recovery, lower drive, feeling softer around the middle', sublabel: 'Low Free Testosterone #395', icon: '📉' },
@@ -793,7 +793,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'Medical History & Physical Verification',
     title: 'How often do you take over-the-counter pain relievers (like Ibuprofen, Advil) or antacid pills (like Tums, Omeprazole)?',
     whyWeAsk: 'Frequent NSAIDs damage the gut lining (Leaky Gut); frequent antacids completely destroy stomach acid, causing severe dysbiosis.',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     options: [
       { id: 'rare', label: 'Rarely or never (Less than once a month)', icon: '💊' },
       { id: 'weekly', label: 'Multiple times a week (I rely on them to manage pain or heartburn)', icon: '💊' },
@@ -807,7 +807,7 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
     section: 'Medical History & Physical Verification',
     title: 'How many hours of outdoor natural daylight do your eyes receive before midday?',
     whyWeAsk: 'Morning outdoor light photons reset your suprachiasmatic nucleus (SCN), controlling your insulin, mood, and sleep clocks.',
-    inputType: 'single-choice',
+    inputType: 'multi-choice',
     options: [
       { id: '20_plus_mins', label: '20 to 30+ minutes outdoors in natural light every morning (Optimal Circadian Setting)', icon: '☀️' },
       { id: 'under_10_mins', label: 'Under 10 minutes: I wake up indoors and immediately work under artificial LED lights', icon: '🏢' }
