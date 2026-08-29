@@ -7,6 +7,7 @@ export interface AppHeaderProps {
   statusBadge?: React.ReactNode;
   leftAction?: React.ReactNode;
   rightAction?: React.ReactNode;
+  darkMode?: boolean;
   className?: string;
 }
 
@@ -14,6 +15,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
   statusBadge,
   leftAction,
   rightAction,
+  darkMode = false,
   className,
 }) => {
   return (
@@ -31,12 +33,12 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
           {leftAction ? (
             leftAction
           ) : (
-            <>
-              {/* Light Theme: Deep Clinical Teal + Obsidian Black Wordmark */}
-              <HomeostasisLogo size={32} mode="on-light" showWordmark className="shrink-0 dark:hidden" />
-              {/* Dark Theme: Luminous Electric Mint + Crisp White Wordmark */}
-              <HomeostasisLogo size={32} mode="on-dark" showWordmark className="shrink-0 hidden dark:inline-flex" />
-            </>
+            <HomeostasisLogo
+              size={32}
+              mode={darkMode ? 'on-dark' : 'on-light'}
+              showWordmark
+              className="shrink-0"
+            />
           )}
 
           {statusBadge && (
