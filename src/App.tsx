@@ -10,7 +10,8 @@ import {
   Bell, 
   LineChart,
   Bot,
-  Shapes
+  Shapes,
+  Type
 } from 'lucide-react';
 import { 
   AppHeader, 
@@ -31,12 +32,13 @@ import { ChartsShowcase } from './components/showcase/ChartsShowcase';
 import { GovernanceShowcase } from './components/showcase/GovernanceShowcase';
 import { ExtensionsShowcase } from './components/showcase/ExtensionsShowcase';
 import { LogoShowcase } from './components/showcase/LogoShowcase';
+import { WordmarkShowcase } from './components/showcase/WordmarkShowcase';
 
-type TDSGalleryTab = 'logo' | 'health' | 'extensions' | 'charts' | 'primitives' | 'navigation' | 'feedback' | 'tokens' | 'governance';
+type TDSGalleryTab = 'wordmark' | 'logo' | 'health' | 'extensions' | 'charts' | 'primitives' | 'navigation' | 'feedback' | 'tokens' | 'governance';
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(false);
-  const [activeGalleryTab, setActiveGalleryTab] = useState<TDSGalleryTab>('logo');
+  const [activeGalleryTab, setActiveGalleryTab] = useState<TDSGalleryTab>('wordmark');
   
   // Shared Biomarker Inspection Drawer
   const [isSheetOpen, setIsSheetOpen] = useState(false);
@@ -56,7 +58,8 @@ export default function App() {
   };
 
   const navCategories: { id: TDSGalleryTab; label: string; icon: React.ReactNode }[] = [
-    { id: 'logo', label: 'Logo & Wordmark Lab', icon: <Shapes className="w-4 h-4" /> },
+    { id: 'wordmark', label: 'Wordmark Typography Lab', icon: <Type className="w-4 h-4" /> },
+    { id: 'logo', label: 'The Homeostasis Ring', icon: <Shapes className="w-4 h-4" /> },
     { id: 'extensions', label: 'AI & Privacy', icon: <Bot className="w-4 h-4" /> },
     { id: 'health', label: 'Health & Evidence', icon: <Activity className="w-4 h-4" /> },
     { id: 'charts', label: 'Visualizations', icon: <LineChart className="w-4 h-4" /> },
@@ -68,10 +71,10 @@ export default function App() {
   ];
 
   const bottomNavItems: NavTabItem[] = [
-    { id: 'logo', label: 'Logo Lab', icon: <Shapes className="w-5 h-5" />, badge: 'New' },
+    { id: 'wordmark', label: 'Wordmark', icon: <Type className="w-5 h-5" />, badge: 'New' },
+    { id: 'logo', label: 'Logo Mark', icon: <Shapes className="w-5 h-5" /> },
     { id: 'health', label: 'Vitals', icon: <Activity className="w-5 h-5" /> },
     { id: 'charts', label: 'Trends', icon: <LineChart className="w-5 h-5" /> },
-    { id: 'governance', label: 'Doctrine', icon: <ShieldCheck className="w-5 h-5" /> },
   ];
 
   return (
@@ -82,13 +85,13 @@ export default function App() {
         subtitle="Towards Better Health • Identity & Design System"
         statusBadge={
           <span className="text-[10px] font-mono uppercase bg-brand-subtle text-brand-dark px-1.5 py-0.5 rounded font-medium">
-            Brand Lab Active
+            Wordmark Lab Active
           </span>
         }
         rightAction={
           <div className="flex items-center gap-2">
             <button
-              onClick={() => alert("Notification Center: All clinical components and brand tokens verified.")}
+              onClick={() => alert("Notification Center: Homeostasis Ring locked • Testing Wordmark typography.")}
               aria-label="Notifications"
               className="w-10 h-10 rounded-md border border-border-default flex items-center justify-center hover:bg-subtle active:scale-95 transition-all relative"
             >
@@ -132,6 +135,10 @@ export default function App() {
 
         {/* Dynamic Showcase View */}
         <section>
+          {activeGalleryTab === 'wordmark' && (
+            <WordmarkShowcase />
+          )}
+
           {activeGalleryTab === 'logo' && (
             <LogoShowcase />
           )}
