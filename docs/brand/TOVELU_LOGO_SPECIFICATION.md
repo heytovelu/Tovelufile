@@ -33,3 +33,32 @@ The Homeostasis Ring is composed of two asymmetric, breathing arcs in dynamic ba
 - **Clear Space**: Always maintain clear space around the mark equal to at least half the radius of the outer ring ($0.5R$).
 - **Minimum Digital Size**: $16 \times 16\text{px}$ (Micro Favicon / Status Complication).
 - **Minimum Print Size**: $8\text{mm} \times 8\text{mm}$ (Packaging / Prescription Stamp).
+
+---
+
+## 4. The Official Wordmark Specification (Architectural All-Caps)
+
+> **Approved by Founder Ajay on August 29, 2026.**
+
+- **Wordmark**: `TOVELU`
+- **Case**: All-Caps (Uppercase)
+- **Tracking / Letter-Spacing**: `+0.24em` (Wide, calm, unhurried optical kerning)
+- **Geometry**:
+  - **T**: Symmetrical balanced crossbar with identical optical stem thickness.
+  - **O**: Pure geometric circle mirroring the curvature of The Homeostasis Ring.
+  - **V**: Dynamic downward vertex with micro-softened internal apex.
+  - **E**: Even horizontal rhythm with balanced optical strokes.
+  - **L**: Grounded right-angle base providing architectural stability.
+  - **U**: Open, receptive upward curve cradling negative space.
+- **Tagline Lockup**: `TOWARDS BETTER HEALTH` in uppercase monospace (`tracking-[0.32em]`).
+
+---
+
+## 5. Lockup Configurations
+
+1. **Horizontal Lockup (Primary Digital)**:
+   - Homeostasis Ring on left + Wordmark on right.
+   - Ideal for: Mobile App Header, Website Navigation Bar, Printable Clinical Reports.
+2. **Stacked Centered Lockup (Hero / Physical)**:
+   - Homeostasis Ring centered above Wordmark + Tagline underneath.
+   - Ideal for: App Splash Screen, Diagnostic Test Kit Packaging, Member Cards, Global Billboards.

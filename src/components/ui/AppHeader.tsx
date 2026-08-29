@@ -1,6 +1,7 @@
 import React from 'react';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
+import { HomeostasisLogo } from './HomeostasisLogo';
 
 export interface AppHeaderProps {
   title?: string;
@@ -8,15 +9,17 @@ export interface AppHeaderProps {
   statusBadge?: React.ReactNode;
   leftAction?: React.ReactNode;
   rightAction?: React.ReactNode;
+  showOfficialLogo?: boolean;
   className?: string;
 }
 
 export const AppHeader: React.FC<AppHeaderProps> = ({
-  title = "Tovelu",
+  title = "TOVELU",
   subtitle = "Towards Better Health",
   statusBadge,
   leftAction,
   rightAction,
+  showOfficialLogo = true,
   className,
 }) => {
   return (
@@ -29,25 +32,26 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
       )}
     >
       <div className="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
-        {/* Left Section: Optional Custom Action or Brand Icon */}
+        {/* Left Section: Official Locked Brand Mark & Title */}
         <div className="flex items-center gap-3 min-w-0">
           {leftAction ? (
             leftAction
-          ) : (
-            <div className="w-9 h-9 rounded-md bg-brand-primary flex items-center justify-center text-text-inverse font-bold text-lg shadow-subtle shrink-0">
-              T
-            </div>
+          ) : showOfficialLogo ? (
+            <HomeostasisLogo size={32} mode="on-light" className="shrink-0 dark:hidden" />
+          ) : null}
+          {showOfficialLogo && (
+            <HomeostasisLogo size={32} mode="on-dark" className="shrink-0 hidden dark:inline-flex" />
           )}
 
           <div className="min-w-0">
             <div className="flex items-center gap-2 flex-wrap">
-              <h1 className="font-semibold text-base tracking-tight text-text-primary truncate">
+              <h1 className="font-sans font-bold text-base tracking-[0.2em] text-text-primary truncate">
                 {title}
               </h1>
               {statusBadge}
             </div>
             {subtitle && (
-              <p className="text-xs text-text-secondary truncate">
+              <p className="text-[11px] font-mono tracking-wider text-text-secondary truncate">
                 {subtitle}
               </p>
             )}
