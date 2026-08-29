@@ -22,3 +22,4 @@ export * from './PrivacyConsentCard';
 export * from './Toast';
 export * from './OfflineBanner';
 export * from './HomeostasisLogo';
+export * from './SwipeToComplete';
