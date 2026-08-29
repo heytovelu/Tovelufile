@@ -9,6 +9,7 @@ import {
   Palette,
   Sun,
   Moon,
+  CheckCircle2
 } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '../ui/Card';
 import { Badge } from '../ui/Badge';
@@ -28,21 +29,29 @@ export const LogoShowcase: React.FC = () => {
           <div className="flex items-center gap-2 text-brand-primary">
             <ShieldCheck className="w-5 h-5 text-brand-primary" />
             <span className="text-xs font-mono font-semibold uppercase tracking-wider">
-              Permanent Brand Identity • The Homeostasis Ring
+              Permanent Identity • The Homeostasis Ring
             </span>
           </div>
           <Badge variant="optimal" size="sm">
-            Universal Contrast Law Enforced
+            Founder Color Law Locked
           </Badge>
         </div>
         <h2 className="text-xl font-bold text-text-primary tracking-tight">
-          Full Logo: Icon + Wordmark (No Tagline)
+          Icon Color Rule • The Opposite Contrast Law
         </h2>
-        <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
-          <strong>Founder Mandates Enforced</strong>: <br />
-          1. <strong>No Tagline with Full Logo</strong>: The sovereign icon pairs cleanly with the architectural wordmark <code>TOVELU</code>.<br />
-          2. <strong>Universal Contrast Law</strong>: In dark theme, Arc 1 shifts to a <strong>Luminous Electric Mint Gradient</strong> so it never hides against black. In light theme, Arc 1 uses deep, rich <strong>Clinical Sea-Teal</strong>. Arc 2 is strictly solid white on dark, and solid black on light.
-        </p>
+        <div className="p-4 rounded-lg bg-subtle border border-border-subtle space-y-1.5 text-xs sm:text-sm text-text-primary">
+          <div className="font-mono font-bold text-brand-dark flex items-center gap-1.5">
+            <CheckCircle2 className="w-4 h-4 text-brand-primary" />
+            <span>FOUNDER DIRECTIVE LOCKED:</span>
+          </div>
+          <ul className="list-disc list-inside space-y-1 text-text-secondary pl-1">
+            <li><strong>Green part</strong> is ALWAYS visible at all conditions.</li>
+            <li>In <strong>black or dark BG</strong>, second part MUST be <strong>WHITE</strong>.</li>
+            <li>In <strong>white or light BG</strong>, second part MUST be <strong>BLACK</strong>.</li>
+            <li>Always add <strong>opposite color of BG</strong> of icon so <strong>BOTH colors STAND OUT every time</strong>.</li>
+            <li>Full Logo: <strong>Icon + Wordmark ONLY (No Tagline)</strong>.</li>
+          </ul>
+        </div>
 
         {/* Category Navigation Pills */}
         <div className="pt-2 flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar select-none">
@@ -53,7 +62,7 @@ export const LogoShowcase: React.FC = () => {
             className="text-xs flex items-center gap-1.5"
           >
             <Palette className="w-3.5 h-3.5" />
-            <span>★ Universal Contrast Law</span>
+            <span>★ Founder Color Law</span>
           </Button>
 
           <Button
@@ -108,13 +117,13 @@ export const LogoShowcase: React.FC = () => {
         </div>
       </div>
 
-      {/* ★ UNIVERSAL CONTRAST LAW SHOWCASE */}
+      {/* ★ FOUNDER COLOR LAW SHOWCASE */}
       {activeTab === 'contrast_law' && (
         <Card className="overflow-hidden border-2 border-border-default">
           <CardHeader>
-            <CardTitle>Universal Contrast Law: Visible Across Every Surface</CardTitle>
+            <CardTitle>Side-by-Side Standout Proof Across Every Surface</CardTitle>
             <CardDescription>
-              Demonstrating the 4 situations. Notice how the green in dark mode pops with high-luminance electric mint, while on light surfaces it is deep clinical sea-teal. Zero tagline clutter.
+              Notice how the second part is always the exact polar opposite of the background (White on Dark, Black on Light), ensuring BOTH colors stand out with zero compromise.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
@@ -123,67 +132,69 @@ export const LogoShowcase: React.FC = () => {
               {/* Situation 1: Pure Obsidian Dark Surface */}
               <div className="p-6 rounded-2xl bg-[#090D14] border border-slate-800 flex flex-col items-center justify-between text-center gap-5 shadow-card min-h-[230px]">
                 <div className="flex items-center justify-between w-full text-[10px] font-mono text-slate-400">
-                  <span className="flex items-center gap-1"><Moon className="w-3 h-3 text-teal-400" /> DARK SURFACE</span>
-                  <span className="text-teal-400 font-bold">ARC 1: LUMINOUS MINT</span>
+                  <span className="flex items-center gap-1"><Moon className="w-3 h-3 text-emerald-400" /> DARK BG</span>
+                  <span className="text-white font-bold bg-slate-800 px-2 py-0.5 rounded">2ND PART: WHITE</span>
                 </div>
                 {/* Full Logo: Icon + Wordmark ONLY */}
                 <HomeostasisLogo size={52} mode="on-dark" showWordmark />
                 <div className="text-[10px] font-mono text-slate-400 space-y-0.5">
-                  <span className="text-white block font-semibold">Arc 1: Electric Mint • Arc 2: Solid White</span>
-                  <span>Contrast Ratio: 18.2:1 (WCAG AAA)</span>
+                  <span className="text-emerald-400 font-bold block">Green Arc: Luminous Bio-Green</span>
+                  <span className="text-white font-bold block">Second Arc: 100% Solid White</span>
+                  <span className="text-slate-400 block text-[9px]">BOTH COLORS STAND OUT 100%</span>
                 </div>
               </div>
 
               {/* Situation 2: Pure White Light Surface */}
               <div className="p-6 rounded-2xl bg-white border border-slate-200 flex flex-col items-center justify-between text-center gap-5 shadow-subtle min-h-[230px]">
                 <div className="flex items-center justify-between w-full text-[10px] font-mono text-slate-400">
-                  <span className="flex items-center gap-1"><Sun className="w-3 h-3 text-amber-500" /> LIGHT SURFACE</span>
-                  <span className="text-teal-700 font-bold">ARC 1: SEA-TEAL</span>
+                  <span className="flex items-center gap-1"><Sun className="w-3 h-3 text-amber-500" /> LIGHT BG</span>
+                  <span className="text-black font-bold bg-slate-100 px-2 py-0.5 rounded border border-slate-300">2ND PART: BLACK</span>
                 </div>
                 {/* Full Logo: Icon + Wordmark ONLY */}
                 <HomeostasisLogo size={52} mode="on-light" showWordmark />
                 <div className="text-[10px] font-mono text-slate-500 space-y-0.5">
-                  <span className="text-slate-900 block font-semibold">Arc 1: Clinical Sea-Teal • Arc 2: Solid Black</span>
-                  <span>Contrast Ratio: 17.8:1 (WCAG AAA)</span>
+                  <span className="text-emerald-700 font-bold block">Green Arc: Deep Clinical Emerald</span>
+                  <span className="text-black font-bold block">Second Arc: 100% Solid Black</span>
+                  <span className="text-slate-500 block text-[9px]">BOTH COLORS STAND OUT 100%</span>
                 </div>
               </div>
 
               {/* Situation 3: Warm Luxury Cotton */}
               <div className="p-6 rounded-2xl bg-[#FBF9F5] border border-[#E2E8F0] flex flex-col items-center justify-between text-center gap-5 shadow-subtle min-h-[230px]">
                 <div className="flex items-center justify-between w-full text-[10px] font-mono text-slate-400">
-                  <span>WARM COTTON</span>
-                  <span className="text-teal-700 font-bold">ARC 2: SOLID BLACK</span>
+                  <span>WARM COTTON BG</span>
+                  <span className="text-black font-bold bg-white px-2 py-0.5 rounded border border-slate-200">2ND PART: BLACK</span>
                 </div>
                 <HomeostasisLogo size={52} mode="on-light" showWordmark />
                 <div className="text-[10px] font-mono text-slate-500 space-y-0.5">
-                  <span className="text-slate-900 block font-semibold">Luxury Paper / Business Card</span>
-                  <span>Contrast Ratio: 17.2:1 (WCAG AAA)</span>
+                  <span className="text-black font-bold block">Opposite Color Enforced</span>
+                  <span className="text-slate-600 block">Luxury Stationery & Executive Card</span>
                 </div>
               </div>
 
               {/* Situation 4: Titanium Slate Grey */}
               <div className="p-6 rounded-2xl bg-[#1E293B] border border-slate-700 flex flex-col items-center justify-between text-center gap-5 shadow-card min-h-[230px]">
                 <div className="flex items-center justify-between w-full text-[10px] font-mono text-slate-400">
-                  <span>TITANIUM SLATE</span>
-                  <span className="text-teal-400 font-bold">ARC 2: SOLID WHITE</span>
+                  <span>TITANIUM SLATE BG</span>
+                  <span className="text-white font-bold bg-slate-900 px-2 py-0.5 rounded">2ND PART: WHITE</span>
                 </div>
                 <HomeostasisLogo size={52} mode="on-dark" showWordmark />
                 <div className="text-[10px] font-mono text-slate-300 space-y-0.5">
-                  <span className="text-white block font-semibold">Apple Wallet Member Card</span>
-                  <span>Contrast Ratio: 16.5:1 (WCAG AAA)</span>
+                  <span className="text-white font-bold block">Opposite Color Enforced</span>
+                  <span className="text-slate-400 block">Apple Wallet Titanium Card</span>
                 </div>
               </div>
 
               {/* Situation 5: Vibrant Brand Teal Surface */}
               <div className="p-6 rounded-2xl bg-[#0D9488] border border-teal-600 flex flex-col items-center justify-between text-center gap-5 shadow-card min-h-[230px] text-white">
                 <div className="flex items-center justify-between w-full text-[10px] font-mono text-teal-200">
-                  <span>BRAND TEAL</span>
-                  <span className="text-white font-bold">MONOCHROME INVERSION</span>
+                  <span>BRAND TEAL BG</span>
+                  <span className="text-white font-bold">2ND PART: WHITE</span>
                 </div>
                 <HomeostasisLogo size={52} mode="on-colored" showWordmark />
                 <div className="text-[10px] font-mono text-teal-100 space-y-0.5">
-                  <span className="text-white block font-semibold">Pure Solid White Inversion</span>
-                  <span>Marketing Billboard / Conference</span>
+                  <span className="text-white font-bold block">Opposite Color Enforced</span>
+                  <span className="text-teal-200 block">Marketing Billboard / Hero</span>
                 </div>
               </div>
 
@@ -195,8 +206,8 @@ export const LogoShowcase: React.FC = () => {
                 </div>
                 <HomeostasisLogo size={52} mode="monochrome-black" showWordmark />
                 <div className="text-[10px] font-mono text-slate-500 space-y-0.5">
-                  <span className="text-black block font-semibold">100% Solid Ink Density</span>
-                  <span>Prescription Slips & Physical Stamps</span>
+                  <span className="text-black font-bold block">100% Solid Ink Density</span>
+                  <span className="text-slate-500 block">Prescription Receipts & Stamps</span>
                 </div>
               </div>
 
@@ -207,41 +218,41 @@ export const LogoShowcase: React.FC = () => {
               <table className="w-full text-left">
                 <thead className="bg-subtle text-text-secondary border-b border-border-subtle font-mono text-[10px] uppercase">
                   <tr>
-                    <th className="p-3">Environment Scenario</th>
-                    <th className="p-3">Arc 1 (Living Intelligence)</th>
-                    <th className="p-3">Arc 2 (Human Reality)</th>
+                    <th className="p-3">Background Condition</th>
+                    <th className="p-3">Part 1 (Green Part)</th>
+                    <th className="p-3">Part 2 (Opposite of BG)</th>
                     <th className="p-3">Full Logo Lockup</th>
-                    <th className="p-3">Visibility Standard</th>
+                    <th className="p-3">Visual Result</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border-subtle font-mono text-xs">
                   <tr>
-                    <td className="p-3 font-sans font-medium text-text-primary">Dark Surfaces (&lt; 25% Luminance)</td>
-                    <td className="p-3 text-teal-400 font-bold">Luminous Electric Mint</td>
-                    <td className="p-3 text-white bg-slate-900 px-2 py-0.5 rounded inline-block font-bold">#FFFFFF (Crisp White)</td>
+                    <td className="p-3 font-sans font-medium text-text-primary">Black / Dark Background</td>
+                    <td className="p-3 text-emerald-400 font-bold">Ultra-Luminous Bio-Green</td>
+                    <td className="p-3 text-white bg-slate-900 px-2 py-0.5 rounded inline-block font-bold">#FFFFFF (Pure White)</td>
                     <td className="p-3 text-white font-bold">Icon + TOVELU</td>
-                    <td className="p-3 text-status-optimal">100% High Glow</td>
+                    <td className="p-3 text-status-optimal font-bold">BOTH COLORS STAND OUT</td>
                   </tr>
                   <tr>
-                    <td className="p-3 font-sans font-medium text-text-primary">Light Surfaces (&gt; 75% Luminance)</td>
-                    <td className="p-3 text-teal-700 font-bold">Deep Clinical Sea-Teal</td>
-                    <td className="p-3 font-bold text-slate-900">#090D14 (Obsidian Black)</td>
-                    <td className="p-3 text-slate-900 font-bold">Icon + TOVELU</td>
-                    <td className="p-3 text-status-optimal">100% Deep Punch</td>
+                    <td className="p-3 font-sans font-medium text-text-primary">White / Light Background</td>
+                    <td className="p-3 text-emerald-700 font-bold">Deep Saturated Emerald</td>
+                    <td className="p-3 font-bold text-black bg-slate-100 px-2 py-0.5 rounded inline-block border border-slate-300">#000000 (Pure Black)</td>
+                    <td className="p-3 text-black font-bold">Icon + TOVELU</td>
+                    <td className="p-3 text-status-optimal font-bold">BOTH COLORS STAND OUT</td>
                   </tr>
                   <tr>
-                    <td className="p-3 font-sans font-medium text-text-primary">Colored / Brand Surfaces</td>
+                    <td className="p-3 font-sans font-medium text-text-primary">Colored Brand Background</td>
                     <td className="p-3 text-slate-700">Pure Solid White</td>
-                    <td className="p-3 text-slate-700">Solid White (80% Opacity)</td>
+                    <td className="p-3 text-slate-700 font-bold">Pure Solid White</td>
                     <td className="p-3 text-slate-700 font-bold">Icon + TOVELU</td>
-                    <td className="p-3 text-status-optimal">Crisp Inversion</td>
+                    <td className="p-3 text-status-optimal">High-Contrast Inversion</td>
                   </tr>
                   <tr>
                     <td className="p-3 font-sans font-medium text-text-primary">1-Color Monochrome Print</td>
-                    <td className="p-3 text-black">Pure Solid Black</td>
-                    <td className="p-3 text-black font-bold">Solid Black (75% Density)</td>
+                    <td className="p-3 text-black font-bold">Pure Solid Black</td>
+                    <td className="p-3 text-black font-bold">Pure Solid Black</td>
                     <td className="p-3 text-black font-bold">Icon + TOVELU</td>
-                    <td className="p-3 text-status-optimal">100% Ink Contrast</td>
+                    <td className="p-3 text-status-optimal">100% Ink Density</td>
                   </tr>
                 </tbody>
               </table>
@@ -256,7 +267,7 @@ export const LogoShowcase: React.FC = () => {
           <CardHeader>
             <CardTitle>1. Mobile App Icon & Launch Screen (iOS & Android)</CardTitle>
             <CardDescription>
-              Notice how the electric mint pops with razor-sharp luminescence against the obsidian background.
+              Notice how the green part glows and the second part is pure white on dark background.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-8">
@@ -284,7 +295,7 @@ export const LogoShowcase: React.FC = () => {
                   <div className="flex flex-col items-center gap-1 relative group cursor-pointer">
                     <div className="w-12 h-12 rounded-2xl bg-gradient-to-b from-[#0F172A] to-[#020617] border border-[#334155] shadow-lg flex items-center justify-center relative transform group-hover:scale-105 transition-all">
                       <HomeostasisLogo size={32} mode="on-dark" />
-                      <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-teal-400 text-[8px] font-bold text-slate-900 rounded-full flex items-center justify-center ring-2 ring-slate-900">
+                      <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-emerald-400 text-[8px] font-bold text-slate-900 rounded-full flex items-center justify-center ring-2 ring-slate-900">
                         1
                       </span>
                     </div>
@@ -349,7 +360,7 @@ export const LogoShowcase: React.FC = () => {
                 </div>
 
                 <div className="space-y-3 z-10">
-                  <span className="text-xs font-mono font-semibold uppercase text-teal-400 tracking-widest block">
+                  <span className="text-xs font-mono font-semibold uppercase text-emerald-400 tracking-widest block">
                     The Human Health Revolution
                   </span>
                   <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight leading-tight">
@@ -363,7 +374,7 @@ export const LogoShowcase: React.FC = () => {
 
                 <div className="flex items-center justify-between border-t border-slate-800/80 pt-4 z-10">
                   <span className="text-xs font-mono text-slate-400">tovelu.com</span>
-                  <span className="text-xs font-semibold text-teal-400 flex items-center gap-1">
+                  <span className="text-xs font-semibold text-emerald-400 flex items-center gap-1">
                     Explore Platform →
                   </span>
                 </div>
@@ -372,12 +383,12 @@ export const LogoShowcase: React.FC = () => {
               {/* Profile Avatars */}
               <div className="space-y-6">
                 <h4 className="text-sm font-semibold text-text-primary">
-                  Official Profile Avatars (Solid White Arc + Luminous Electric Mint Arc)
+                  Official Profile Avatars (Solid White Arc on Dark Surface)
                 </h4>
 
                 <div className="grid grid-cols-3 gap-4 text-center">
                   <div className="p-4 rounded-xl bg-subtle border border-border-subtle flex flex-col items-center gap-2">
-                    <div className="w-16 h-16 rounded-full bg-[#090D14] border-2 border-teal-400/40 flex items-center justify-center shadow-subtle">
+                    <div className="w-16 h-16 rounded-full bg-[#090D14] border-2 border-emerald-400/40 flex items-center justify-center shadow-subtle">
                       <HomeostasisLogo size={38} mode="on-dark" />
                     </div>
                     <span className="text-[11px] font-medium text-text-primary">X / Twitter</span>
@@ -385,7 +396,7 @@ export const LogoShowcase: React.FC = () => {
                   </div>
 
                   <div className="p-4 rounded-xl bg-subtle border border-border-subtle flex flex-col items-center gap-2">
-                    <div className="w-16 h-16 rounded-full bg-[#090D14] border-2 border-teal-400/40 flex items-center justify-center shadow-subtle">
+                    <div className="w-16 h-16 rounded-full bg-[#090D14] border-2 border-emerald-400/40 flex items-center justify-center shadow-subtle">
                       <HomeostasisLogo size={38} mode="on-dark" />
                     </div>
                     <span className="text-[11px] font-medium text-text-primary">Instagram</span>
@@ -393,7 +404,7 @@ export const LogoShowcase: React.FC = () => {
                   </div>
 
                   <div className="p-4 rounded-xl bg-subtle border border-border-subtle flex flex-col items-center gap-2">
-                    <div className="w-16 h-16 rounded-2xl bg-[#090D14] border-2 border-teal-400/40 flex items-center justify-center shadow-subtle">
+                    <div className="w-16 h-16 rounded-2xl bg-[#090D14] border-2 border-emerald-400/40 flex items-center justify-center shadow-subtle">
                       <HomeostasisLogo size={38} mode="on-dark" />
                     </div>
                     <span className="text-[11px] font-medium text-text-primary">LinkedIn</span>
@@ -407,13 +418,13 @@ export const LogoShowcase: React.FC = () => {
         </Card>
       )}
 
-      {/* 3. MEMBER PASSPORT & EXECUTIVE CARDS */}
+      {/* 3. CARDS */}
       {activeTab === 'cards' && (
         <Card>
           <CardHeader>
             <CardTitle>3. Sovereign Member Passport & Executive Card</CardTitle>
             <CardDescription>
-              Full Logo with Icon + Wordmark ONLY (No Tagline).
+              Notice how the titanium card has a White 2nd part, and the cotton card has a Black 2nd part.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-8">
@@ -423,7 +434,7 @@ export const LogoShowcase: React.FC = () => {
               <div className="w-full max-w-sm h-56 rounded-2xl bg-gradient-to-br from-[#090D14] via-[#0F172A] to-[#042F2E] border border-slate-700 shadow-2xl p-6 flex flex-col justify-between text-white mx-auto relative overflow-hidden">
                 <div className="flex items-center justify-between">
                   <HomeostasisLogo size={32} mode="on-dark" showWordmark />
-                  <span className="text-[8px] font-mono uppercase bg-teal-400/20 text-teal-300 px-2 py-0.5 rounded border border-teal-400/30">
+                  <span className="text-[8px] font-mono uppercase bg-emerald-400/20 text-emerald-300 px-2 py-0.5 rounded border border-emerald-400/30">
                     Sovereign Identity
                   </span>
                 </div>
@@ -442,7 +453,7 @@ export const LogoShowcase: React.FC = () => {
                   </div>
                   <div className="text-right">
                     <span className="text-[8px] font-mono text-slate-400 uppercase">Standard</span>
-                    <div className="text-[9px] font-mono text-teal-400">E2E ENCRYPTED (EHR)</div>
+                    <div className="text-[9px] font-mono text-emerald-400">E2E ENCRYPTED (EHR)</div>
                   </div>
                 </div>
               </div>
@@ -463,7 +474,7 @@ export const LogoShowcase: React.FC = () => {
                 </div>
 
                 <div className="flex items-center justify-between border-t border-slate-200 pt-3 text-[10px] font-mono text-slate-400">
-                  <span className="font-bold text-slate-900 tracking-wider">TOVELU</span>
+                  <span className="font-bold text-black tracking-wider">TOVELU</span>
                   <span>Health Intelligence</span>
                 </div>
               </div>
