@@ -1,0 +1,192 @@
+/**
+ * Tovelu Design System (TDS) - Design Tokens
+ * Supreme Operating Doctrine Alignment: Articles 39, 40, 41, 42, 63
+ * Principles: Calm, Minimal, Scientific, Premium, Human, Accessible
+ */
+
+:root {
+  /* =========================================================================
+     1. COLOR TOKENS: SURFACES & NEUTRALS (Light Mode Base)
+     ========================================================================= */
+  --tds-color-bg-canvas: #F8FAFC;         /* Calm background canvas */
+  --tds-color-bg-surface: #FFFFFF;        /* Elevated card / sheet surface */
+  --tds-color-bg-subtle: #F1F5F9;         /* Subtle secondary backgrounds */
+  --tds-color-bg-muted: #E2E8F0;          /* Inactive / disabled states */
+  
+  /* Text & Typography Colors */
+  --tds-color-text-primary: #0F172A;      /* Obsidian: primary reading */
+  --tds-color-text-secondary: #475569;    /* Slate: metadata, labels */
+  --tds-color-text-muted: #94A3B8;        /* Subtle hints, inactive */
+  --tds-color-text-inverse: #FFFFFF;      /* Text on dark surfaces */
+
+  /* Borders & Dividers */
+  --tds-color-border-subtle: #E2E8F0;     /* Ultra-subtle divider */
+  --tds-color-border-default: #CBD5E1;    /* Standard container border */
+  --tds-color-border-focused: #0D9488;    /* Calm active focus state */
+
+  /* =========================================================================
+     2. COLOR TOKENS: SCIENTIFIC BRAND & ACCENTS
+     ========================================================================= */
+  --tds-color-brand-primary: #0D9488;     /* Calm Clinical Teal (Deep) */
+  --tds-color-brand-primary-hover: #0F766E;
+  --tds-color-brand-accent: #0284C7;      /* Precise Oceanic Blue */
+  --tds-color-brand-subtle: #CCFBF1;      /* Light teal tint for badges */
+  --tds-color-brand-dark: #134E4A;
+
+  /* =========================================================================
+     3. COLOR TOKENS: CLINICAL SEMANTICS & HEALTH STATUS
+     (Article 63: Calm, informative, never fear- or panic-inducing)
+     ========================================================================= */
+  /* Optimal / Normal / Verified */
+  --tds-color-status-optimal: #059669;
+  --tds-color-status-optimal-bg: #ECFDF5;
+  --tds-color-status-optimal-border: #A7F3D0;
+
+  /* Attention / Borderline / Review Recommended */
+  --tds-color-status-attention: #D97706;
+  --tds-color-status-attention-bg: #FFFBEB;
+  --tds-color-status-attention-border: #FDE68A;
+
+  /* Alert / Emergency Escalation (Article 34: Triage & Safety) */
+  --tds-color-status-alert: #DC2626;
+  --tds-color-status-alert-bg: #FEF2F2;
+  --tds-color-status-alert-border: #FECACA;
+
+  /* Scientific Information / Evidence Indicator */
+  --tds-color-status-evidence: #4F46E5;
+  --tds-color-status-evidence-bg: #EEF2FF;
+  --tds-color-status-evidence-border: #C7D2FE;
+
+  /* Data Provenance / Unknown State (Article 28 & 29) */
+  --tds-color-status-unknown: #64748B;
+  --tds-color-status-unknown-bg: #F8FAFC;
+  --tds-color-status-unknown-border: #E2E8F0;
+
+  /* =========================================================================
+     4. TYPOGRAPHY SCALES
+     (Article 40 & 42: High legibility on mobile screens, WCAG AAA compliant)
+     ========================================================================= */
+  --tds-font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --tds-font-mono: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+
+  /* Display & Headings */
+  --tds-text-display: 2rem;               /* 32px (mobile) / 40px (tablet+) */
+  --tds-text-display-lh: 1.2;
+  --tds-text-h1: 1.5rem;                 /* 24px */
+  --tds-text-h1-lh: 1.3;
+  --tds-text-h2: 1.25rem;                /* 20px */
+  --tds-text-h2-lh: 1.4;
+  --tds-text-h3: 1.125rem;               /* 18px */
+  --tds-text-h3-lh: 1.4;
+
+  /* Body & Interactive */
+  --tds-text-body: 1rem;                  /* 16px (Standard mobile touch base) */
+  --tds-text-body-lh: 1.5;
+  --tds-text-body-sm: 0.875rem;          /* 14px */
+  --tds-text-body-sm-lh: 1.5;
+  --tds-text-caption: 0.75rem;           /* 12px */
+  --tds-text-caption-lh: 1.4;
+
+  /* Specialized Metric / Clinical Typography (JetBrains Mono) */
+  --tds-text-metric-xl: 2.5rem;          /* 40px: Primary Vital Display */
+  --tds-text-metric-lg: 2rem;            /* 32px */
+  --tds-text-metric-md: 1.5rem;          /* 24px */
+  --tds-text-metric-sm: 1.125rem;        /* 18px */
+
+  /* =========================================================================
+     5. SPACING & LAYOUT GRID (4px / 8px Baseline)
+     ========================================================================= */
+  --tds-space-1: 0.25rem;                /* 4px */
+  --tds-space-2: 0.5rem;                 /* 8px */
+  --tds-space-3: 0.75rem;                /* 12px */
+  --tds-space-4: 1rem;                   /* 16px (Mobile default margin) */
+  --tds-space-5: 1.25rem;                /* 20px */
+  --tds-space-6: 1.5rem;                 /* 24px (Tablet margin) */
+  --tds-space-8: 2rem;                   /* 32px (Desktop margin) */
+  --tds-space-10: 2.5rem;                /* 40px */
+  --tds-space-12: 3rem;                  /* 48px */
+  --tds-space-16: 4rem;                  /* 64px */
+
+  /* Touch-First Interactive Targets (Article 40 & 42: minimum 48px target) */
+  --tds-touch-target-min: 48px;
+  --tds-touch-target-compact: 40px;
+
+  /* Mobile Safe Area Insets (iOS Dynamic Island / Android bars) */
+  --tds-safe-top: env(safe-area-inset-top, 0px);
+  --tds-safe-bottom: env(safe-area-inset-bottom, 0px);
+  --tds-safe-left: env(safe-area-inset-left, 0px);
+  --tds-safe-right: env(safe-area-inset-right, 0px);
+
+  /* =========================================================================
+     6. RADII & CORNERS
+     ========================================================================= */
+  --tds-radius-sm: 6px;
+  --tds-radius-md: 10px;
+  --tds-radius-lg: 16px;
+  --tds-radius-xl: 24px;
+  --tds-radius-full: 9999px;
+
+  /* =========================================================================
+     7. ELEVATION & SHADOWS (Calm, diffuse, non-intrusive)
+     ========================================================================= */
+  --tds-shadow-subtle: 0 1px 2px 0 rgba(15, 23, 42, 0.04);
+  --tds-shadow-card: 0 2px 8px -2px rgba(15, 23, 42, 0.06), 0 1px 4px -1px rgba(15, 23, 42, 0.03);
+  --tds-shadow-modal: 0 12px 32px -4px rgba(15, 23, 42, 0.12), 0 4px 12px -2px rgba(15, 23, 42, 0.06);
+  --tds-shadow-sheet: 0 -8px 24px -4px rgba(15, 23, 42, 0.08);
+
+  /* =========================================================================
+     8. MOTION & TRANSITIONS
+     ========================================================================= */
+  --tds-transition-fast: 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  --tds-transition-base: 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  --tds-transition-smooth: 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* =========================================================================
+   DARK MODE TOKEN OVERRIDES (Calm Night / Low-light Clinical Mode)
+   ========================================================================= */
+.dark {
+  --tds-color-bg-canvas: #090D14;         /* Deep calm obsidian */
+  --tds-color-bg-surface: #111827;        /* Clean dark container */
+  --tds-color-bg-subtle: #1F2937;
+  --tds-color-bg-muted: #374151;
+
+  --tds-color-text-primary: #F9FAFB;
+  --tds-color-text-secondary: #9CA3AF;
+  --tds-color-text-muted: #6B7280;
+  --tds-color-text-inverse: #0F172A;
+
+  --tds-color-border-subtle: #1F2937;
+  --tds-color-border-default: #374151;
+  --tds-color-border-focused: #14B8A6;
+
+  --tds-color-brand-primary: #14B8A6;
+  --tds-color-brand-primary-hover: #2DD4BF;
+  --tds-color-brand-accent: #38BDF8;
+  --tds-color-brand-subtle: rgba(20, 184, 166, 0.15);
+
+  --tds-color-status-optimal: #34D399;
+  --tds-color-status-optimal-bg: rgba(16, 185, 129, 0.12);
+  --tds-color-status-optimal-border: rgba(16, 185, 129, 0.25);
+
+  --tds-color-status-attention: #FBBF24;
+  --tds-color-status-attention-bg: rgba(245, 158, 11, 0.12);
+  --tds-color-status-attention-border: rgba(245, 158, 11, 0.25);
+
+  --tds-color-status-alert: #F87171;
+  --tds-color-status-alert-bg: rgba(239, 68, 68, 0.12);
+  --tds-color-status-alert-border: rgba(239, 68, 68, 0.25);
+
+  --tds-color-status-evidence: #818CF8;
+  --tds-color-status-evidence-bg: rgba(99, 102, 241, 0.12);
+  --tds-color-status-evidence-border: rgba(99, 102, 241, 0.25);
+
+  --tds-color-status-unknown: #94A3B8;
+  --tds-color-status-unknown-bg: rgba(148, 163, 184, 0.08);
+  --tds-color-status-unknown-border: rgba(148, 163, 184, 0.2);
+
+  --tds-shadow-subtle: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --tds-shadow-card: 0 4px 16px -2px rgba(0, 0, 0, 0.4);
+  --tds-shadow-modal: 0 16px 40px -4px rgba(0, 0, 0, 0.6);
+  --tds-shadow-sheet: 0 -8px 30px -4px rgba(0, 0, 0, 0.5);
+}

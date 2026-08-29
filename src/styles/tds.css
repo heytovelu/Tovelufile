@@ -1,0 +1,45 @@
+@import './tokens.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: var(--tds-font-sans);
+    background-color: var(--tds-color-bg-canvas);
+    color: var(--tds-color-text-primary);
+    -webkit-tap-highlight-color: transparent;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  /* Safe area padding utilities for mobile-first native feel */
+  .pb-safe {
+    padding-bottom: max(1rem, var(--tds-safe-bottom));
+  }
+  .pt-safe {
+    padding-top: max(0.75rem, var(--tds-safe-top));
+  }
+
+  /* Accessible focus indicators (Article 42) */
+  :focus-visible {
+    outline: 2px solid var(--tds-color-brand-primary);
+    outline-offset: 2px;
+  }
+
+  /* Clean number typography for lab values */
+  .font-numeric {
+    font-family: var(--tds-font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+}
