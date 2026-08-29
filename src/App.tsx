@@ -11,7 +11,8 @@ import {
   LineChart,
   Bot,
   Shapes,
-  Type
+  Type,
+  Cpu
 } from 'lucide-react';
 import { 
   AppHeader, 
@@ -21,6 +22,9 @@ import {
   Badge, 
   NavTabItem 
 } from './components/ui';
+
+// THAIS AI Engine
+import { ThaisStudio } from './components/thais/ThaisStudio';
 
 // Modular Showcase Views
 import { TokensShowcase } from './components/showcase/TokensShowcase';
@@ -34,10 +38,12 @@ import { ExtensionsShowcase } from './components/showcase/ExtensionsShowcase';
 import { LogoShowcase } from './components/showcase/LogoShowcase';
 import { WordmarkShowcase } from './components/showcase/WordmarkShowcase';
 
+type AppMode = 'thais' | 'design_system';
 type TDSGalleryTab = 'wordmark' | 'logo' | 'health' | 'extensions' | 'charts' | 'primitives' | 'navigation' | 'feedback' | 'tokens' | 'governance';
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(false);
+  const [appMode, setAppMode] = useState<AppMode>('thais');
   const [activeGalleryTab, setActiveGalleryTab] = useState<TDSGalleryTab>('wordmark');
   
   // Shared Biomarker Inspection Drawer
@@ -71,10 +77,10 @@ export default function App() {
   ];
 
   const bottomNavItems: NavTabItem[] = [
-    { id: 'wordmark', label: 'Wordmark', icon: <Type className="w-5 h-5" />, badge: 'New' },
+    { id: 'thais_nav', label: 'THAIS AI', icon: <Cpu className="w-5 h-5" />, badge: 'Active' },
+    { id: 'wordmark', label: 'Wordmark', icon: <Type className="w-5 h-5" /> },
     { id: 'logo', label: 'Logo Mark', icon: <Shapes className="w-5 h-5" /> },
     { id: 'health', label: 'Vitals', icon: <Activity className="w-5 h-5" /> },
-    { id: 'charts', label: 'Trends', icon: <LineChart className="w-5 h-5" /> },
   ];
 
   return (
@@ -83,21 +89,34 @@ export default function App() {
       <AppHeader
         darkMode={darkMode}
         statusBadge={
-          <span className="text-[10px] font-mono uppercase bg-brand-subtle text-brand-dark px-1.5 py-0.5 rounded font-medium">
-            Wordmark Lab Active
-          </span>
+          <div className="flex items-center gap-1.5">
+            <button
+              onClick={() => setAppMode('thais')}
+              className={`px-2.5 py-1 rounded-full text-[11px] font-bold transition-all flex items-center gap-1 ${
+                appMode === 'thais'
+                  ? 'bg-emerald-500 text-white shadow-sm'
+                  : 'bg-surface border border-border-default text-text-secondary hover:text-text-primary'
+              }`}
+            >
+              <Cpu className="w-3.5 h-3.5" />
+              THAIS Engine
+            </button>
+
+            <button
+              onClick={() => setAppMode('design_system')}
+              className={`px-2.5 py-1 rounded-full text-[11px] font-bold transition-all flex items-center gap-1 ${
+                appMode === 'design_system'
+                  ? 'bg-brand-primary text-white shadow-sm'
+                  : 'bg-surface border border-border-default text-text-secondary hover:text-text-primary'
+              }`}
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              Brand & Design System
+            </button>
+          </div>
         }
         rightAction={
           <div className="flex items-center gap-2">
-            <button
-              onClick={() => alert("Notification Center: Homeostasis Ring locked • Testing Wordmark typography.")}
-              aria-label="Notifications"
-              className="w-10 h-10 rounded-md border border-border-default flex items-center justify-center hover:bg-subtle active:scale-95 transition-all relative"
-            >
-              <Bell className="w-4 h-4 text-text-secondary" />
-              <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-brand-primary" />
-            </button>
-
             <button
               onClick={() => setDarkMode(!darkMode)}
               aria-label="Toggle dark mode"
@@ -110,70 +129,77 @@ export default function App() {
       />
 
       {/* Main Content Area */}
-      <main className="max-w-4xl mx-auto px-4 py-6 space-y-8">
-        {/* Navigation Switcher Pills */}
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar select-none">
-          {navCategories.map((cat) => {
-            const isSelected = cat.id === activeGalleryTab;
-            return (
-              <button
-                key={cat.id}
-                onClick={() => setActiveGalleryTab(cat.id)}
-                className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium whitespace-nowrap transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary min-h-[40px] ${
-                  isSelected
-                    ? "bg-brand-primary text-text-inverse shadow-subtle font-semibold"
-                    : "bg-subtle text-text-secondary hover:text-text-primary hover:bg-muted border border-border-subtle"
-                }`}
-              >
-                {cat.icon}
-                <span>{cat.label}</span>
-              </button>
-            );
-          })}
-        </div>
+      <main className="max-w-6xl mx-auto px-4 py-4 space-y-6">
+        {/* Render THAIS Engine as Primary Mode */}
+        {appMode === 'thais' ? (
+          <ThaisStudio />
+        ) : (
+          <div className="space-y-8 max-w-4xl mx-auto">
+            {/* Navigation Switcher Pills */}
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar select-none">
+              {navCategories.map((cat) => {
+                const isSelected = cat.id === activeGalleryTab;
+                return (
+                  <button
+                    key={cat.id}
+                    onClick={() => setActiveGalleryTab(cat.id)}
+                    className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium whitespace-nowrap transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary min-h-[40px] ${
+                      isSelected
+                        ? "bg-brand-primary text-text-inverse shadow-subtle font-semibold"
+                        : "bg-subtle text-text-secondary hover:text-text-primary hover:bg-muted border border-border-subtle"
+                    }`}
+                  >
+                    {cat.icon}
+                    <span>{cat.label}</span>
+                  </button>
+                );
+              })}
+            </div>
 
-        {/* Dynamic Showcase View */}
-        <section>
-          {activeGalleryTab === 'wordmark' && (
-            <WordmarkShowcase />
-          )}
+            {/* Dynamic Showcase View */}
+            <section>
+              {activeGalleryTab === 'wordmark' && (
+                <WordmarkShowcase />
+              )}
 
-          {activeGalleryTab === 'logo' && (
-            <LogoShowcase />
-          )}
+              {activeGalleryTab === 'logo' && (
+                <LogoShowcase />
+              )}
 
-          {activeGalleryTab === 'extensions' && (
-            <ExtensionsShowcase />
-          )}
+              {activeGalleryTab === 'extensions' && (
+                <ExtensionsShowcase />
+              )}
 
-          {activeGalleryTab === 'health' && (
-            <HealthShowcase onInspectBiomarker={handleOpenInspect} />
-          )}
+              {activeGalleryTab === 'health' && (
+                <HealthShowcase onInspectBiomarker={handleOpenInspect} />
+              )}
 
-          {activeGalleryTab === 'charts' && (
-            <ChartsShowcase />
-          )}
+              {activeGalleryTab === 'charts' && (
+                <ChartsShowcase />
+              )}
 
-          {activeGalleryTab === 'primitives' && (
-            <PrimitivesShowcase />
-          )}
+              {activeGalleryTab === 'primitives' && (
+                <PrimitivesShowcase />
+              )}
 
-          {activeGalleryTab === 'navigation' && (
-            <NavigationShowcase />
-          )}
+              {activeGalleryTab === 'navigation' && (
+                <NavigationShowcase />
+              )}
 
-          {activeGalleryTab === 'feedback' && (
-            <FeedbackShowcase />
-          )}
+              {activeGalleryTab === 'feedback' && (
+                <FeedbackShowcase />
+              )}
 
-          {activeGalleryTab === 'tokens' && (
-            <TokensShowcase />
-          )}
+              {activeGalleryTab === 'tokens' && (
+                <TokensShowcase />
+              )}
 
-          {activeGalleryTab === 'governance' && (
-            <GovernanceShowcase />
-          )}
-        </section>
+              {activeGalleryTab === 'governance' && (
+                <GovernanceShowcase />
+              )}
+            </section>
+          </div>
+        )}
       </main>
 
       {/* Global Mobile Bottom Sheet for Biomarker Inspection */}
@@ -214,8 +240,15 @@ export default function App() {
       {/* Mobile-First Fixed Bottom Navigation Bar */}
       <BottomNav
         items={bottomNavItems}
-        activeId={activeGalleryTab}
-        onChange={(id) => setActiveGalleryTab(id as TDSGalleryTab)}
+        activeId={appMode === 'thais' ? 'thais_nav' : activeGalleryTab}
+        onChange={(id) => {
+          if (id === 'thais_nav') {
+            setAppMode('thais');
+          } else {
+            setAppMode('design_system');
+            setActiveGalleryTab(id as TDSGalleryTab);
+          }
+        }}
       />
     </div>
   );
