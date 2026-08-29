@@ -10,6 +10,7 @@ import {
   Bell, 
   LineChart,
   Bot,
+  Shapes
 } from 'lucide-react';
 import { 
   AppHeader, 
@@ -29,12 +30,13 @@ import { HealthShowcase } from './components/showcase/HealthShowcase';
 import { ChartsShowcase } from './components/showcase/ChartsShowcase';
 import { GovernanceShowcase } from './components/showcase/GovernanceShowcase';
 import { ExtensionsShowcase } from './components/showcase/ExtensionsShowcase';
+import { LogoShowcase } from './components/showcase/LogoShowcase';
 
-type TDSGalleryTab = 'health' | 'extensions' | 'charts' | 'primitives' | 'navigation' | 'feedback' | 'tokens' | 'governance';
+type TDSGalleryTab = 'logo' | 'health' | 'extensions' | 'charts' | 'primitives' | 'navigation' | 'feedback' | 'tokens' | 'governance';
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(false);
-  const [activeGalleryTab, setActiveGalleryTab] = useState<TDSGalleryTab>('extensions');
+  const [activeGalleryTab, setActiveGalleryTab] = useState<TDSGalleryTab>('logo');
   
   // Shared Biomarker Inspection Drawer
   const [isSheetOpen, setIsSheetOpen] = useState(false);
@@ -54,19 +56,20 @@ export default function App() {
   };
 
   const navCategories: { id: TDSGalleryTab; label: string; icon: React.ReactNode }[] = [
-    { id: 'extensions', label: 'AI, Timeline & Privacy (Step 08)', icon: <Bot className="w-4 h-4" /> },
+    { id: 'logo', label: 'Logo & Wordmark Lab', icon: <Shapes className="w-4 h-4" /> },
+    { id: 'extensions', label: 'AI & Privacy', icon: <Bot className="w-4 h-4" /> },
     { id: 'health', label: 'Health & Evidence', icon: <Activity className="w-4 h-4" /> },
     { id: 'charts', label: 'Visualizations', icon: <LineChart className="w-4 h-4" /> },
     { id: 'primitives', label: 'UI Primitives', icon: <Component className="w-4 h-4" /> },
     { id: 'navigation', label: 'Navigation & Overlays', icon: <Layers className="w-4 h-4" /> },
     { id: 'feedback', label: 'Feedback & States', icon: <Bell className="w-4 h-4" /> },
     { id: 'tokens', label: 'Brand Tokens', icon: <Sparkles className="w-4 h-4" /> },
-    { id: 'governance', label: 'Constitution', icon: <ShieldCheck className="w-4 h-4" /> },
+    { id: 'governance', label: 'Constitution & Voice', icon: <ShieldCheck className="w-4 h-4" /> },
   ];
 
   const bottomNavItems: NavTabItem[] = [
-    { id: 'extensions', label: 'AI & Privacy', icon: <Bot className="w-5 h-5" />, badge: 'New' },
-    { id: 'health', label: 'Vitals', icon: <Activity className="w-5 h-5" />, badge: 3 },
+    { id: 'logo', label: 'Logo Lab', icon: <Shapes className="w-5 h-5" />, badge: 'New' },
+    { id: 'health', label: 'Vitals', icon: <Activity className="w-5 h-5" /> },
     { id: 'charts', label: 'Trends', icon: <LineChart className="w-5 h-5" /> },
     { id: 'governance', label: 'Doctrine', icon: <ShieldCheck className="w-5 h-5" /> },
   ];
@@ -75,17 +78,17 @@ export default function App() {
     <div className="min-h-screen bg-canvas text-text-primary transition-colors duration-200 pb-28">
       {/* Mobile-First Sticky App Header */}
       <AppHeader
-        title="Tovelu Design System"
-        subtitle="Towards Better Health • Interactive Catalog"
+        title="Tovelu"
+        subtitle="Towards Better Health • Identity & Design System"
         statusBadge={
           <span className="text-[10px] font-mono uppercase bg-brand-subtle text-brand-dark px-1.5 py-0.5 rounded font-medium">
-            v1.1.0 • Step 08 Live
+            Brand Lab Active
           </span>
         }
         rightAction={
           <div className="flex items-center gap-2">
             <button
-              onClick={() => alert("Notification Center: All 8 TDS modules verified against Constitution.")}
+              onClick={() => alert("Notification Center: All clinical components and brand tokens verified.")}
               aria-label="Notifications"
               className="w-10 h-10 rounded-md border border-border-default flex items-center justify-center hover:bg-subtle active:scale-95 transition-all relative"
             >
@@ -106,50 +109,33 @@ export default function App() {
 
       {/* Main Content Area */}
       <main className="max-w-4xl mx-auto px-4 py-6 space-y-8">
-        {/* Step 08 Extension Milestone Banner */}
-        <section className="bg-surface border border-border-subtle rounded-xl p-5 shadow-card space-y-3">
-          <div className="flex items-center justify-between gap-2 flex-wrap">
-            <div className="flex items-center gap-2 text-brand-primary">
-              <ShieldCheck className="w-5 h-5" />
-              <span className="text-xs font-mono font-semibold uppercase tracking-wider">
-                Step 08: Critical Health & Privacy Extensions
-              </span>
-            </div>
-            <span className="text-xs font-mono text-text-muted">8 Total TDS Steps Implemented</span>
-          </div>
+        {/* Navigation Switcher Pills */}
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar select-none">
+          {navCategories.map((cat) => {
+            const isSelected = cat.id === activeGalleryTab;
+            return (
+              <button
+                key={cat.id}
+                onClick={() => setActiveGalleryTab(cat.id)}
+                className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium whitespace-nowrap transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary min-h-[40px] ${
+                  isSelected
+                    ? "bg-brand-primary text-text-inverse shadow-subtle font-semibold"
+                    : "bg-subtle text-text-secondary hover:text-text-primary hover:bg-muted border border-border-subtle"
+                }`}
+              >
+                {cat.icon}
+                <span>{cat.label}</span>
+              </button>
+            );
+          })}
+        </div>
 
-          <h2 className="text-xl font-bold text-text-primary tracking-tight">
-            Tovelu Design System Master Catalog
-          </h2>
-          <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
-            Constitutional health UI system with strict 3-layer AI grounding (<strong className="text-text-primary">Article 70</strong>), 
-            longitudinal event timelines (<strong className="text-text-primary">Article 30</strong>), and user ownership privacy controls (<strong className="text-text-primary">Articles 15 & 16</strong>).
-          </p>
-
-          {/* Category Navigation Pills */}
-          <div className="pt-2 flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar select-none">
-            {navCategories.map((cat) => {
-              const isSelected = cat.id === activeGalleryTab;
-              return (
-                <button
-                  key={cat.id}
-                  onClick={() => setActiveGalleryTab(cat.id)}
-                  className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium whitespace-nowrap transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary min-h-[40px] ${
-                    isSelected
-                      ? "bg-brand-primary text-text-inverse shadow-subtle font-semibold"
-                      : "bg-subtle text-text-secondary hover:text-text-primary hover:bg-muted border border-border-subtle"
-                  }`}
-                >
-                  {cat.icon}
-                  <span>{cat.label}</span>
-                </button>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* Dynamic Gallery Content Display */}
+        {/* Dynamic Showcase View */}
         <section>
+          {activeGalleryTab === 'logo' && (
+            <LogoShowcase />
+          )}
+
           {activeGalleryTab === 'extensions' && (
             <ExtensionsShowcase />
           )}
