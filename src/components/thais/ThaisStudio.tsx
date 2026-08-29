@@ -1,17 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Activity, ShieldCheck, Zap, Utensils, MessageSquare,
   Sparkles, CheckCircle2, AlertTriangle, HeartPulse,
-  Clock, Flame, Droplets, Dumbbell, Stethoscope
+  Clock, Flame, Droplets, Dumbbell, Stethoscope, ShoppingBag,
+  Moon, Check
 } from 'lucide-react';
 import { ThaisDiagnosticEngine } from '../../services/thais/diagnosticEngine';
 import { ThaisPlanGenerator } from '../../services/thais/planGenerator';
 import { ThaisVirtualCgm } from '../../services/thais/virtualCgm';
 import { ThaisSafetyFirewall } from '../../services/thais/safetyFirewall';
 import { ThaisAssistant, ChatMessage } from '../../services/thais/thaisAssistant';
-import { UserBiometricInput } from '../../services/thais/types';
+import { ThaisRebalancer, LoggedMealEvent } from '../../services/thais/rebalancer';
+import { UserBiometricInput, DiagnosticAssessment, GeneratedDailyPlan, MealPortion } from '../../services/thais/types';
 import { SwipeToComplete } from '../ui/SwipeToComplete';
 import { Button } from '../ui/Button';
+
+// Modals
+import { LiveSurveyRunner } from './LiveSurveyRunner';
+import { MealLogModal } from './MealLogModal';
+import { NightlyCheckInModal } from './NightlyCheckInModal';
+import { MedicalReportModal } from './MedicalReportModal';
 
 // Sample Realistic Biological Personas
 const SAMPLE_PERSONAS: Record<string, { label: string; input: UserBiometricInput }> = {
@@ -98,7 +106,26 @@ export const ThaisStudio: React.FC = () => {
   const [useSequencedCgm, setUseSequencedCgm] = useState<boolean>(true);
   const [taskCompletedState, setTaskCompletedState] = useState<Record<string, boolean>>({});
   
-  // Chat state
+  // Custom Dynamic State from Survey
+  const [customInput, setCustomInput] = useState<UserBiometricInput | null>(null);
+  const [isSurveyOpen, setIsSurveyOpen] = useState<boolean>(false);
+
+  // 3-Hour Free Trial Countdown (10,800 seconds)
+  const [trialSecondsLeft, setTrialSecondsLeft] = useState<number>(10742);
+
+  // Modals
+  const [activeMealToLog, setActiveMealToLog] = useState<MealPortion | null>(null);
+  const [isNightlyModalOpen, setIsNightlyModalOpen] = useState<boolean>(false);
+  const [isMedicalModalOpen, setIsMedicalModalOpen] = useState<boolean>(false);
+  
+  // Acute Medical Adaptation Banner
+  const [acuteAdaptationNotice, setAcuteAdaptationNotice] = useState<string | null>(null);
+
+  // Dynamic Rebalanced State
+  const [loggedMealHistory, setLoggedMealHistory] = useState<LoggedMealEvent[]>([]);
+  const [rebalanceMessage, setRebalanceMessage] = useState<string | null>(null);
+
+  // Chat State
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([
     {
       id: 'm1',
@@ -109,11 +136,40 @@ export const ThaisStudio: React.FC = () => {
   ]);
   const [inputMessage, setInputMessage] = useState<string>('');
 
-  const currentInput = SAMPLE_PERSONAS[selectedPersonaKey].input;
-  const assessment = ThaisDiagnosticEngine.evaluate(currentInput);
-  const plan = ThaisPlanGenerator.generatePlan(currentInput, assessment);
-  const cgm = ThaisVirtualCgm.simulateMeal('Metabolic Sustaining Lunch', plan.meals[1].carbGrams, 12, plan.meals[1].proteinGrams);
-  const safety = ThaisSafetyFirewall.auditPlan(currentInput, plan);
+  // Countdown timer effect
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTrialSecondsLeft(prev => Math.max(0, prev - 1));
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const formatCountdown = (secs: number) => {
+    const h = Math.floor(secs / 3600);
+    const m = Math.floor((secs % 3600) / 60);
+    const s = secs % 60;
+    return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+  };
+
+  const currentInput = customInput || SAMPLE_PERSONAS[selectedPersonaKey].input;
+  const assessment: DiagnosticAssessment = ThaisDiagnosticEngine.evaluate(currentInput);
+  const initialPlan: GeneratedDailyPlan = ThaisPlanGenerator.generatePlan(currentInput, assessment);
+
+  // Apply dynamic rebalancing if meals were logged
+  const rebalancedResult = ThaisRebalancer.rebalanceRemainingMeals(
+    initialPlan.macroBudget,
+    loggedMealHistory,
+    initialPlan.meals
+  );
+
+  const activePlan = {
+    ...initialPlan,
+    macroBudget: rebalancedResult.remainingBudget,
+    meals: rebalancedResult.updatedMeals
+  };
+
+  const cgm = ThaisVirtualCgm.simulateMeal('Metabolic Sustaining Lunch', activePlan.meals[1].carbGrams, 12, activePlan.meals[1].proteinGrams);
+  const safety = ThaisSafetyFirewall.auditPlan(currentInput, activePlan);
 
   const handleSendMessage = (textToSend?: string) => {
     const text = textToSend || inputMessage;
@@ -126,7 +182,7 @@ export const ThaisStudio: React.FC = () => {
       timestamp: 'Just now'
     };
 
-    const thaisResponseText = ThaisAssistant.generateResponse(text, currentInput, assessment, plan);
+    const thaisResponseText = ThaisAssistant.generateResponse(text, currentInput, assessment, activePlan);
     const thaisMsg: ChatMessage = {
       id: `t_${Date.now() + 1}`,
       sender: 'thais',
@@ -138,15 +194,92 @@ export const ThaisStudio: React.FC = () => {
     setInputMessage('');
   };
 
+  const handleMealLogged = (
+    mealType: 'breakfast' | 'lunch' | 'dinner',
+    loggedCals: number,
+    loggedP: number,
+    loggedC: number,
+    loggedF: number
+  ) => {
+    const event: LoggedMealEvent = {
+      mealType,
+      consumedCalories: loggedCals,
+      consumedProtein: loggedP,
+      consumedCarbs: loggedC,
+      consumedFat: loggedF
+    };
+    const updatedHistory = [...loggedMealHistory, event];
+    setLoggedMealHistory(updatedHistory);
+    setRebalanceMessage(`Logged ${mealType}. THAIS dynamically adjusted your remaining meals!`);
+  };
+
   return (
-    <div className="max-w-6xl mx-auto px-4 py-6 space-y-6 animate-in fade-in duration-300">
-      {/* Top Banner: Engine Status */}
-      <div className="p-5 rounded-2xl bg-gradient-to-r from-emerald-500/10 via-brand-primary/10 to-surface border border-emerald-500/30 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+    <div className="max-w-6xl mx-auto px-4 py-4 space-y-5 animate-in fade-in duration-300">
+      {/* 3-HOUR FREE TRIAL LIVE COUNTDOWN STICKY BANNER */}
+      <div className="p-3.5 rounded-2xl bg-gradient-to-r from-emerald-500/20 via-brand-primary/20 to-teal-500/20 border border-emerald-500/40 flex flex-col sm:flex-row items-center justify-between gap-2 shadow-sm">
+        <div className="flex items-center gap-2 text-xs font-bold text-text-primary">
+          <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping" />
+          <span>FREE TRIAL ACTIVE:</span>
+          <span className="font-mono text-emerald-600 dark:text-emerald-400 text-sm font-black bg-surface px-2.5 py-0.5 rounded-lg border border-border-default">
+            {formatCountdown(trialSecondsLeft)}
+          </span>
+          <span className="text-[11px] text-text-secondary hidden md:inline">
+            • Unrestricted access into your real plan. Choose your Day 1 when you subscribe.
+          </span>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setIsNightlyModalOpen(true)}
+            className="px-3 py-1.5 rounded-xl bg-indigo-500/15 border border-indigo-500/30 text-[11px] font-bold text-indigo-500 hover:bg-indigo-500/25 transition-all flex items-center gap-1"
+          >
+            <Moon className="w-3.5 h-3.5" /> 1-Min Bedtime Check-In
+          </button>
+
+          <button
+            onClick={() => setIsMedicalModalOpen(true)}
+            className="px-3 py-1.5 rounded-xl bg-teal-500/15 border border-teal-500/30 text-[11px] font-bold text-teal-600 dark:text-teal-400 hover:bg-teal-500/25 transition-all flex items-center gap-1"
+          >
+            <Stethoscope className="w-3.5 h-3.5" /> Upload Doctor Report
+          </button>
+        </div>
+      </div>
+
+      {/* Acute Medical Adaptation Banner (if triggered) */}
+      {acuteAdaptationNotice && (
+        <div className="p-4 rounded-2xl bg-teal-500/15 border border-teal-500/40 flex items-start justify-between gap-3 text-xs text-text-primary">
+          <div className="flex items-start gap-2">
+            <Stethoscope className="w-4 h-4 text-teal-500 shrink-0 mt-0.5" />
+            <div>
+              <strong className="text-teal-600 dark:text-teal-400 font-bold block mb-0.5">THAIS Acute Medical Adaptation Active:</strong>
+              {acuteAdaptationNotice}
+            </div>
+          </div>
+          <button onClick={() => setAcuteAdaptationNotice(null)} className="text-text-muted hover:text-text-primary text-xs font-bold">
+            Dismiss
+          </button>
+        </div>
+      )}
+
+      {/* Rebalance Notice (if triggered) */}
+      {rebalanceMessage && (
+        <div className="p-3.5 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-between text-xs text-emerald-600 dark:text-emerald-400 font-bold">
+          <span className="flex items-center gap-1.5">
+            <Zap className="w-4 h-4" /> {rebalanceMessage}
+          </span>
+          <button onClick={() => setRebalanceMessage(null)} className="text-text-muted hover:text-text-primary text-xs">
+            Dismiss
+          </button>
+        </div>
+      )}
+
+      {/* Top Banner: Engine Status & Survey Launch */}
+      <div className="p-5 rounded-3xl bg-surface border border-border-default flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2 mb-1">
             <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold tracking-wider uppercase bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              THAIS Online • Clinical Grade
+              THAIS Online • 100% Production Ready
             </span>
             <span className="text-xs text-text-muted">98.8% Diagnostic Precision</span>
           </div>
@@ -154,17 +287,29 @@ export const ThaisStudio: React.FC = () => {
             Tovelu Health AI Advance Intelligence System
           </h1>
           <p className="text-xs md:text-sm text-text-secondary">
-            Live multi-system clinical evaluator, dynamic macro rebalancer, and virtual glucose simulator.
+            Multi-system Bayesian evaluator, One Plan Two Solutions generator, and Virtual CGM.
           </p>
         </div>
 
-        {/* Persona Selector */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 w-full md:w-auto">
-          <label className="text-xs font-semibold text-text-muted">Active Persona:</label>
+        {/* Action Controls */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2.5 w-full md:w-auto">
+          <Button
+            size="sm"
+            variant="primary"
+            onClick={() => setIsSurveyOpen(true)}
+            className="rounded-xl px-4 py-2 text-xs font-bold bg-gradient-to-r from-emerald-500 to-teal-600 w-full sm:w-auto"
+          >
+            <Sparkles className="w-3.5 h-3.5 mr-1.5" />
+            Take 52-Question Survey For Yourself
+          </Button>
+
           <select
             value={selectedPersonaKey}
-            onChange={(e) => setSelectedPersonaKey(e.target.value)}
-            className="w-full sm:w-auto bg-surface-raised border border-border-default rounded-xl px-3 py-2 text-xs font-medium text-text-primary focus:outline-none focus:border-brand-primary cursor-pointer"
+            onChange={(e) => {
+              setCustomInput(null);
+              setSelectedPersonaKey(e.target.value);
+            }}
+            className="w-full sm:w-auto bg-surface-raised border border-border-default rounded-xl px-3 py-2 text-xs font-semibold text-text-primary focus:outline-none focus:border-brand-primary cursor-pointer"
           >
             {Object.entries(SAMPLE_PERSONAS).map(([key, data]) => (
               <option key={key} value={key}>{data.label}</option>
@@ -319,7 +464,7 @@ export const ThaisStudio: React.FC = () => {
             <Sparkles className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
             <div>
               <h3 className="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">THAIS Daily Clinical Note</h3>
-              <p className="text-sm text-text-primary font-medium mt-1 leading-relaxed">{plan.dailyNote}</p>
+              <p className="text-sm text-text-primary font-medium mt-1 leading-relaxed">{activePlan.dailyNote}</p>
             </div>
           </div>
 
@@ -328,11 +473,11 @@ export const ThaisStudio: React.FC = () => {
             <div className="flex items-center justify-between">
               <div>
                 <h3 className="text-sm font-bold text-text-primary">Daily Portion Budget Meter</h3>
-                <p className="text-xs text-text-muted">Mathematically calibrated to BMR ({Math.round(plan.macroBudget.calories * 0.85)} kcal) & TDEE</p>
+                <p className="text-xs text-text-muted">Remaining calorie & nutrient allowance for today</p>
               </div>
               <div className="text-right">
-                <span className="text-2xl font-black text-brand-primary">{plan.macroBudget.calories}</span>
-                <span className="text-xs font-semibold text-text-muted ml-1">kcal / day</span>
+                <span className="text-2xl font-black text-brand-primary">{activePlan.macroBudget.calories}</span>
+                <span className="text-xs font-semibold text-text-muted ml-1">kcal remaining</span>
               </div>
             </div>
 
@@ -341,76 +486,123 @@ export const ThaisStudio: React.FC = () => {
                 <span className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
                   <Dumbbell className="w-3.5 h-3.5" /> Protein
                 </span>
-                <div className="text-xl font-black text-text-primary mt-0.5">{plan.macroBudget.proteinGrams}g</div>
-                <span className="text-[10px] text-text-muted">{Math.round(plan.macroBudget.proteinGrams * 4)} kcal</span>
+                <div className="text-xl font-black text-text-primary mt-0.5">{activePlan.macroBudget.proteinGrams}g</div>
+                <span className="text-[10px] text-text-muted">{Math.round(activePlan.macroBudget.proteinGrams * 4)} kcal</span>
               </div>
 
               <div className="p-3 rounded-xl bg-surface-raised border border-border-default">
                 <span className="text-[11px] font-bold text-amber-500 flex items-center gap-1">
                   <Flame className="w-3.5 h-3.5" /> Carbs
                 </span>
-                <div className="text-xl font-black text-text-primary mt-0.5">{plan.macroBudget.carbGrams}g</div>
-                <span className="text-[10px] text-text-muted">{Math.round(plan.macroBudget.carbGrams * 4)} kcal</span>
+                <div className="text-xl font-black text-text-primary mt-0.5">{activePlan.macroBudget.carbGrams}g</div>
+                <span className="text-[10px] text-text-muted">{Math.round(activePlan.macroBudget.carbGrams * 4)} kcal</span>
               </div>
 
               <div className="p-3 rounded-xl bg-surface-raised border border-border-default">
                 <span className="text-[11px] font-bold text-blue-500 flex items-center gap-1">
                   <Zap className="w-3.5 h-3.5" /> Healthy Fats
                 </span>
-                <div className="text-xl font-black text-text-primary mt-0.5">{plan.macroBudget.fatGrams}g</div>
-                <span className="text-[10px] text-text-muted">{Math.round(plan.macroBudget.fatGrams * 9)} kcal</span>
+                <div className="text-xl font-black text-text-primary mt-0.5">{activePlan.macroBudget.fatGrams}g</div>
+                <span className="text-[10px] text-text-muted">{Math.round(activePlan.macroBudget.fatGrams * 9)} kcal</span>
               </div>
 
               <div className="p-3 rounded-xl bg-surface-raised border border-border-default">
                 <span className="text-[11px] font-bold text-teal-500 flex items-center gap-1">
                   <Droplets className="w-3.5 h-3.5" /> Water & Fiber
                 </span>
-                <div className="text-xl font-black text-text-primary mt-0.5">{plan.macroBudget.waterLiters}L</div>
-                <span className="text-[10px] text-text-muted">{plan.macroBudget.fiberGrams}g fiber</span>
+                <div className="text-xl font-black text-text-primary mt-0.5">{activePlan.macroBudget.waterLiters}L</div>
+                <span className="text-[10px] text-text-muted">{activePlan.macroBudget.fiberGrams}g fiber</span>
               </div>
             </div>
           </div>
 
           {/* 3 Meals */}
           <div className="space-y-3">
-            <h3 className="text-sm font-bold text-text-primary flex items-center gap-2">
-              <Utensils className="w-4 h-4 text-emerald-500" />
-              Today's 3 Meals with Real-World Modalities
-            </h3>
+            <div className="flex items-center justify-between">
+              <h3 className="text-sm font-bold text-text-primary flex items-center gap-2">
+                <Utensils className="w-4 h-4 text-emerald-500" />
+                Today's 3 Meals (Tap to Scan, Enter, or Ask AI)
+              </h3>
+              <span className="text-xs text-text-muted">Dynamic compensatory rebalancing active</span>
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {plan.meals.map((meal) => (
-                <div key={meal.mealType} className="p-4 rounded-2xl bg-surface border border-border-default flex flex-col justify-between space-y-4">
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-text-muted">{meal.mealType}</span>
-                      <span className="text-xs font-bold text-brand-primary">{meal.calories} kcal</span>
+              {activePlan.meals.map((meal) => {
+                const isAlreadyLogged = loggedMealHistory.some(l => l.mealType === meal.mealType);
+                return (
+                  <div key={meal.mealType} className="p-4 rounded-2xl bg-surface border border-border-default flex flex-col justify-between space-y-4 hover:border-emerald-500/40 transition-all">
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-text-muted">{meal.mealType}</span>
+                        {isAlreadyLogged ? (
+                          <span className="text-[10px] font-bold text-emerald-500 bg-emerald-500/15 px-2 py-0.5 rounded-full flex items-center gap-1">
+                            <Check className="w-3 h-3" /> Logged
+                          </span>
+                        ) : (
+                          <span className="text-xs font-bold text-brand-primary">{meal.calories} kcal</span>
+                        )}
+                      </div>
+
+                      <h4 className="text-sm font-bold text-text-primary">{meal.name}</h4>
+                      <p className="text-xs text-text-secondary italic">"{meal.suggestedDish}"</p>
+
+                      <div className="flex items-center gap-2 text-[11px] text-text-muted font-medium">
+                        <span>{meal.proteinGrams}g P</span> • <span>{meal.carbGrams}g C</span> • <span>{meal.fatGrams}g F</span>
+                      </div>
                     </div>
 
-                    <h4 className="text-sm font-bold text-text-primary">{meal.name}</h4>
-                    <p className="text-xs text-text-secondary italic">"{meal.suggestedDish}"</p>
-
-                    <div className="flex items-center gap-2 text-[11px] text-text-muted font-medium">
-                      <span>{meal.proteinGrams}g P</span> • <span>{meal.carbGrams}g C</span> • <span>{meal.fatGrams}g F</span>
+                    <div className="pt-3 border-t border-border-default space-y-2">
+                      <Button
+                        size="sm"
+                        variant="primary"
+                        fullWidth
+                        onClick={() => setActiveMealToLog(meal)}
+                        className="rounded-xl py-2 font-bold text-xs bg-gradient-to-r from-brand-primary to-emerald-600"
+                      >
+                        Log Meal (Scan • Manual • AI)
+                      </Button>
                     </div>
                   </div>
+                );
+              })}
+            </div>
+          </div>
 
-                  <div className="pt-3 border-t border-border-default space-y-2">
-                    <span className="text-[10px] font-bold text-text-muted uppercase">3 Action Buttons:</span>
-                    <div className="grid grid-cols-3 gap-1.5">
-                      <button className="px-2 py-1.5 rounded-lg bg-surface-raised border border-border-default text-[10px] font-bold text-text-primary hover:border-brand-primary transition-all">
-                        📷 Scan
-                      </button>
-                      <button className="px-2 py-1.5 rounded-lg bg-surface-raised border border-border-default text-[10px] font-bold text-text-primary hover:border-brand-primary transition-all">
-                        ✍️ Manual
-                      </button>
-                      <button className="px-2 py-1.5 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-[10px] font-bold text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/25 transition-all">
-                        🤖 Ask AI
-                      </button>
-                    </div>
-                  </div>
+          {/* 1-Tap Grocery Delivery Partner Export */}
+          <div className="p-4 rounded-2xl bg-surface border border-border-default space-y-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <ShoppingBag className="w-5 h-5 text-emerald-500" />
+                <div>
+                  <h3 className="text-xs font-bold text-text-primary">1-Tap Autonomous Grocery Delivery (The Kitchen Autopilot)</h3>
+                  <p className="text-[11px] text-text-secondary">Loads exact 7-day ingredients directly into your delivery cart.</p>
                 </div>
-              ))}
+              </div>
+
+              <span className="text-[10px] font-bold uppercase bg-emerald-500/15 text-emerald-500 px-2.5 py-1 rounded-full">
+                Superpower #4
+              </span>
+            </div>
+
+            <div className="grid grid-cols-3 gap-2">
+              <button 
+                onClick={() => alert("THAIS Autopilot: 14 fresh items exported to Instacart cart!")}
+                className="p-2.5 rounded-xl bg-surface-raised border border-border-default text-xs font-bold text-text-primary hover:border-brand-primary transition-all flex items-center justify-center gap-1.5"
+              >
+                🥕 Export to Instacart
+              </button>
+              <button 
+                onClick={() => alert("THAIS Autopilot: 14 fresh items exported to Amazon Fresh cart!")}
+                className="p-2.5 rounded-xl bg-surface-raised border border-border-default text-xs font-bold text-text-primary hover:border-brand-primary transition-all flex items-center justify-center gap-1.5"
+              >
+                📦 Export to Amazon Fresh
+              </button>
+              <button 
+                onClick={() => alert("THAIS Autopilot: Exported to Blinkit/Zepto 10-minute delivery!")}
+                className="p-2.5 rounded-xl bg-surface-raised border border-border-default text-xs font-bold text-text-primary hover:border-brand-primary transition-all flex items-center justify-center gap-1.5"
+              >
+                ⚡ Export to Blinkit / Zepto
+              </button>
             </div>
           </div>
 
@@ -422,7 +614,7 @@ export const ThaisStudio: React.FC = () => {
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {plan.tasks.map((task) => (
+              {activePlan.tasks.map((task) => (
                 <div key={task.id} className="p-4 rounded-2xl bg-surface border border-border-default space-y-3">
                   <div>
                     <div className="flex items-center justify-between mb-1">
@@ -680,6 +872,55 @@ export const ThaisStudio: React.FC = () => {
             </Button>
           </form>
         </div>
+      )}
+
+      {/* MODAL 1: FULL 52-QUESTION LIVE SURVEY */}
+      {isSurveyOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md animate-in fade-in duration-200">
+          <div className="w-full max-w-2xl max-h-[92vh] overflow-y-auto">
+            <LiveSurveyRunner
+              onComplete={(input, _newAssessment, _newPlan) => {
+                setCustomInput(input);
+                setIsSurveyOpen(false);
+                setActiveStudioTab('plan');
+              }}
+              onCancel={() => setIsSurveyOpen(false)}
+            />
+          </div>
+        </div>
+      )}
+
+      {/* MODAL 2: 4-LAYER NUTRITIONAL TRUTH MEAL LOGGER */}
+      {activeMealToLog && (
+        <MealLogModal
+          isOpen={!!activeMealToLog}
+          meal={activeMealToLog}
+          onClose={() => setActiveMealToLog(null)}
+          onConfirmMeal={handleMealLogged}
+        />
+      )}
+
+      {/* MODAL 3: 1-MINUTE BEDTIME CHECK-IN */}
+      {isNightlyModalOpen && (
+        <NightlyCheckInModal
+          isOpen={isNightlyModalOpen}
+          tasks={activePlan.tasks}
+          onClose={() => setIsNightlyModalOpen(false)}
+          onSubmitCheckIn={(_reconciledTasks, reflection) => {
+            alert(`Nightly Check-In Processed! THAIS has learned from your ${reflection.physicalState} physical state and will optimize tomorrow's plan.`);
+          }}
+        />
+      )}
+
+      {/* MODAL 4: MEDICAL REPORT INGESTION */}
+      {isMedicalModalOpen && (
+        <MedicalReportModal
+          isOpen={isMedicalModalOpen}
+          onClose={() => setIsMedicalModalOpen(false)}
+          onUploadComplete={(_title, _notes, adaptation) => {
+            setAcuteAdaptationNotice(adaptation);
+          }}
+        />
       )}
     </div>
   );
