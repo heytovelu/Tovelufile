@@ -7,20 +7,21 @@ import {
   AlertTriangle, 
   AlertOctagon, 
   BookOpen, 
-  HelpCircle,
-  Activity,
-  Heart,
-  Plus,
-  ArrowRight,
-  Search,
-  
-  Layers,
-  Trash2,
-  ExternalLink,
-  Bell,
-  Home,
-  FileText,
-  UserCheck
+  HelpCircle, 
+  Activity, 
+  Heart, 
+  Plus, 
+  ArrowRight, 
+  Search, 
+  Layers, 
+  Trash2, 
+  ExternalLink, 
+  Bell, 
+  Home, 
+  FileText, 
+  UserCheck, 
+  Database,
+  Radio
 } from 'lucide-react';
 import { 
   Button, 
@@ -30,14 +31,17 @@ import {
   CardTitle, 
   CardDescription, 
   CardContent, 
-  
-  Input,
-  UnitToggle,
-  AppHeader,
-  BottomNav,
-  BottomSheet,
-  Dialog,
-  NavTabItem
+  Input, 
+  UnitToggle, 
+  AppHeader, 
+  BottomNav, 
+  BottomSheet, 
+  Dialog, 
+  NavTabItem,
+  BiomarkerCardSkeleton,
+  EmptyState,
+  ErrorState,
+  EmergencyBanner
 } from './components/ui';
 
 export default function App() {
@@ -49,6 +53,13 @@ export default function App() {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [dialogLoading, setDialogLoading] = useState(false);
+
+  // Step 04: Feedback & State Handler controls
+  const [showSkeleton, setShowSkeleton] = useState(false);
+  const [showEmpty, setShowEmpty] = useState(false);
+  const [showError, setShowError] = useState(false);
+  const [isRetrying, setIsRetrying] = useState(false);
+  const [showEmergency, setShowEmergency] = useState(true);
 
   // Unit conversion state
   const [glucoseUnit, setGlucoseUnit] = useState<'mg/dL' | 'mmol/L'>('mg/dL');
@@ -82,6 +93,14 @@ export default function App() {
     }, 1200);
   };
 
+  const handleRetryError = () => {
+    setIsRetrying(true);
+    setTimeout(() => {
+      setIsRetrying(false);
+      setShowError(false);
+    }, 1500);
+  };
+
   const navItems: NavTabItem[] = [
     { id: 'overview', label: 'Overview', icon: <Home className="w-5 h-5" /> },
     { id: 'biomarkers', label: 'Vitals', icon: <Activity className="w-5 h-5" />, badge: 2 },
@@ -97,7 +116,7 @@ export default function App() {
         subtitle="Towards Better Health"
         statusBadge={
           <span className="text-[10px] font-mono uppercase bg-brand-subtle text-brand-dark px-1.5 py-0.5 rounded font-medium">
-            v0.3.0 • Step 03
+            v0.4.0 • Step 04
           </span>
         }
         rightAction={
@@ -124,23 +143,133 @@ export default function App() {
 
       {/* Main Content Showcase */}
       <main className="max-w-4xl mx-auto px-4 py-6 space-y-10">
-        {/* Step 03 Milestone Banner */}
+        {/* Step 04 Milestone Banner */}
         <section className="bg-surface border border-border-subtle rounded-lg p-5 shadow-card space-y-3">
           <div className="flex items-center gap-2 text-brand-primary">
             <ShieldCheck className="w-5 h-5" />
-            <span className="text-xs font-mono font-semibold uppercase tracking-wider">Step 03: Mobile Navigation & Overlays</span>
+            <span className="text-xs font-mono font-semibold uppercase tracking-wider">Step 04: Feedback & State Handlers</span>
           </div>
-          <h2 className="text-xl font-bold text-text-primary">Native Mobile Shell & Reversible Overlays</h2>
+          <h2 className="text-xl font-bold text-text-primary">Reliable Feedback, Shimmer Loaders & Emergency Safety</h2>
           <p className="text-sm text-text-secondary leading-relaxed">
-            Tovelu behaves like a native mobile app (<strong className="text-text-primary">Article 40</strong>) with bottom-up navigation sheets, safe-area awareness, and strict confirmation dialogs before irreversible changes (<strong className="text-text-primary">Article 20</strong>).
+            Eliminates silent failures (<strong className="text-text-primary">Article 87</strong>), guarantees zero blank loading screens, and enforces prompt clinical triage guidance (<strong className="text-text-primary">Article 34</strong>).
           </p>
         </section>
 
-        {/* 1. MOBILE OVERLAYS & SHEETS DEMO */}
+        {/* 1. EMERGENCY SAFETY TRIAGE BANNER (ARTICLE 34) */}
+        <section className="space-y-3">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <AlertOctagon className="w-5 h-5 text-status-alert" />
+              <h3 className="text-base font-semibold text-text-primary">1. Emergency Safety Escalation (Article 34)</h3>
+            </div>
+            <button
+              onClick={() => setShowEmergency(!showEmergency)}
+              className="text-xs font-mono text-brand-primary hover:underline"
+            >
+              {showEmergency ? "Hide Banner" : "Show Banner"}
+            </button>
+          </div>
+
+          {showEmergency && (
+            <EmergencyBanner
+              emergencyNumber="112 / 911"
+              jurisdiction="Global Emergency Safety Standard (Article 34)"
+              message="If you are experiencing acute chest pain, sudden numbness, severe difficulty breathing, or trauma, seek emergency medical care immediately. Tovelu does not provide clinical emergency diagnosis."
+            />
+          )}
+        </section>
+
+        {/* 2. FEEDBACK & STATE DEMO SWITCHBOARD */}
+        <section className="space-y-4">
+          <div className="flex items-center gap-2">
+            <Radio className="w-5 h-5 text-brand-primary" />
+            <h3 className="text-base font-semibold text-text-primary">2. State Simulation Switchboard</h3>
+          </div>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Simulate Component States</CardTitle>
+              <CardDescription>Click to preview how users experience loading, empty, and error states.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-wrap items-center gap-2.5 pb-4 border-b border-border-subtle">
+                <Button
+                  size="sm"
+                  variant={showSkeleton ? "primary" : "secondary"}
+                  onClick={() => {
+                    setShowSkeleton(!showSkeleton);
+                    setShowEmpty(false);
+                    setShowError(false);
+                  }}
+                >
+                  {showSkeleton ? "Disable Shimmer Skeleton" : "Simulate Loading Skeleton"}
+                </Button>
+
+                <Button
+                  size="sm"
+                  variant={showEmpty ? "primary" : "secondary"}
+                  onClick={() => {
+                    setShowEmpty(!showEmpty);
+                    setShowSkeleton(false);
+                    setShowError(false);
+                  }}
+                >
+                  {showEmpty ? "Hide Empty State" : "Simulate Empty State"}
+                </Button>
+
+                <Button
+                  size="sm"
+                  variant={showError ? "destructive" : "secondary"}
+                  onClick={() => {
+                    setShowError(!showError);
+                    setShowSkeleton(false);
+                    setShowEmpty(false);
+                  }}
+                >
+                  {showError ? "Dismiss Error State" : "Simulate Error State"}
+                </Button>
+              </div>
+
+              {/* Dynamic State Preview Container */}
+              <div className="pt-4">
+                {showSkeleton ? (
+                  <div className="space-y-3">
+                    <span className="text-xs font-mono text-text-muted block">Simulated Shimmer State:</span>
+                    <BiomarkerCardSkeleton />
+                  </div>
+                ) : showEmpty ? (
+                  <EmptyState
+                    icon={<Database className="w-6 h-6" />}
+                    title="No Biomarker Logs Recorded"
+                    description="You have not logged any blood pressure or glucose readings yet. Begin tracking to generate longitudinal intelligence."
+                    actionLabel="Log First Measurement"
+                    onAction={() => alert("Initiating first biometric intake form...")}
+                    secondaryActionLabel="Sync from Apple Health"
+                    onSecondaryAction={() => alert("Connecting to HealthKit...")}
+                  />
+                ) : showError ? (
+                  <ErrorState
+                    title="Health Data Sync Interrupted"
+                    message="Unable to reach the clinical database. Please check your internet connection or try again shortly."
+                    errorCode="ERR_CONN_TIMEOUT_503"
+                    isRetrying={isRetrying}
+                    onRetry={handleRetryError}
+                  />
+                ) : (
+                  <div className="p-4 rounded-lg bg-subtle border border-border-subtle text-xs text-text-secondary">
+                    All simulated states are currently idle. Click one of the buttons above to preview the shimmer loader, empty prompt, or error recovery handler.
+                  </div>
+                )}
+              </div>
+            </CardContent>
+          </Card>
+        </section>
+
+        {/* 3. MOBILE OVERLAYS & SHEETS DEMO */}
         <section className="space-y-4">
           <div className="flex items-center gap-2">
             <Layers className="w-5 h-5 text-brand-primary" />
-            <h3 className="text-base font-semibold text-text-primary">1. Mobile Bottom Sheets & Reversible Dialogs</h3>
+            <h3 className="text-base font-semibold text-text-primary">3. Mobile Bottom Sheets & Reversible Dialogs</h3>
           </div>
 
           <Card>
@@ -166,21 +295,15 @@ export default function App() {
                   Test Reversible Confirmation Dialog
                 </Button>
               </div>
-
-              <div className="p-3 bg-subtle rounded-md border border-border-subtle text-xs text-text-secondary space-y-1">
-                <p className="font-semibold text-text-primary">Constitutional Architecture Note:</p>
-                <p>• <strong>Bottom Sheets</strong> allow deep inspection of clinical markers on mobile without navigating away or losing context.</p>
-                <p>• <strong>Reversible Dialogs</strong> enforce Article 20 (&quot;Stop → Explain → Ask Ajay&quot;) before any destructive data change or migration.</p>
-              </div>
             </CardContent>
           </Card>
         </section>
 
-        {/* 2. BUTTONS SHOWCASE */}
+        {/* 4. TOUCH-FIRST BUTTONS SHOWCASE */}
         <section className="space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-base font-semibold text-text-primary">2. Touch-First Buttons (≥ 48px Target)</h3>
+              <h3 className="text-base font-semibold text-text-primary">4. Touch-First Buttons (≥ 48px Target)</h3>
               <p className="text-xs text-text-secondary">Minimum 48px touch target with active press haptic feedback.</p>
             </div>
             <button
@@ -223,10 +346,10 @@ export default function App() {
           </Card>
         </section>
 
-        {/* 3. STATUS BADGES */}
+        {/* 5. STATUS BADGES */}
         <section className="space-y-4">
           <div>
-            <h3 className="text-base font-semibold text-text-primary">3. Badges & Provenance Indicators</h3>
+            <h3 className="text-base font-semibold text-text-primary">5. Badges & Provenance Indicators</h3>
             <p className="text-xs text-text-secondary">Distinguishing data truth, evidence strength, and clinical alerts.</p>
           </div>
 
@@ -259,10 +382,10 @@ export default function App() {
           </Card>
         </section>
 
-        {/* 4. FORM INPUTS & UNIT CONVERSION */}
+        {/* 6. FORM INPUTS & UNIT CONVERSION */}
         <section className="space-y-4">
           <div>
-            <h3 className="text-base font-semibold text-text-primary">4. Form Inputs & Deterministic Unit Toggle</h3>
+            <h3 className="text-base font-semibold text-text-primary">6. Form Inputs & Deterministic Unit Toggle</h3>
             <p className="text-xs text-text-secondary">Mobile-first inputs with 16px font and built-in medical unit conversion (Article 26).</p>
           </div>
 
