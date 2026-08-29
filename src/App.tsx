@@ -3,29 +3,22 @@ import {
   Sun, 
   Moon, 
   ShieldCheck, 
-  CheckCircle2, 
-  AlertTriangle, 
   AlertOctagon, 
-  BookOpen, 
-  HelpCircle, 
   Activity, 
-  Heart, 
-  Plus, 
-  ArrowRight, 
   Search, 
   Layers, 
   Trash2, 
-  ExternalLink, 
   Bell, 
   Home, 
   FileText, 
   UserCheck, 
   Database,
-  Radio
+  Radio,
+  Dna,
+  HeartPulse
 } from 'lucide-react';
 import { 
   Button, 
-  Badge, 
   Card, 
   CardHeader, 
   CardTitle, 
@@ -41,31 +34,33 @@ import {
   BiomarkerCardSkeleton,
   EmptyState,
   ErrorState,
-  EmergencyBanner
+  EmergencyBanner,
+  BiomarkerCard,
+  EvidenceCard,
+  ExplanationCard
 } from './components/ui';
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [activeTab, setActiveTab] = useState('overview');
   
   // Overlay interactive states
   const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const [inspectedBiomarker, setInspectedBiomarker] = useState('Resting Heart Rate');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [dialogLoading, setDialogLoading] = useState(false);
 
-  // Step 04: Feedback & State Handler controls
+  // State Simulation controls (Step 04)
   const [showSkeleton, setShowSkeleton] = useState(false);
   const [showEmpty, setShowEmpty] = useState(false);
   const [showError, setShowError] = useState(false);
   const [isRetrying, setIsRetrying] = useState(false);
-  const [showEmergency, setShowEmergency] = useState(true);
+  const [showEmergency, setShowEmergency] = useState(false);
 
   // Unit conversion state
   const [glucoseUnit, setGlucoseUnit] = useState<'mg/dL' | 'mmol/L'>('mg/dL');
-  const [glucoseValue, setGlucoseValue] = useState<number>(95);
-  const [patientInput, setPatientInput] = useState('Resting Heart Rate');
-  const [inputError, setInputError] = useState('');
+  const [glucoseValue, setGlucoseValue] = useState<number>(92);
+  const [patientInput, setPatientInput] = useState('');
 
   useEffect(() => {
     if (darkMode) {
@@ -103,9 +98,9 @@ export default function App() {
 
   const navItems: NavTabItem[] = [
     { id: 'overview', label: 'Overview', icon: <Home className="w-5 h-5" /> },
-    { id: 'biomarkers', label: 'Vitals', icon: <Activity className="w-5 h-5" />, badge: 2 },
+    { id: 'biomarkers', label: 'Biomarkers', icon: <Activity className="w-5 h-5" />, badge: 3 },
     { id: 'evidence', label: 'Evidence', icon: <FileText className="w-5 h-5" /> },
-    { id: 'profile', label: 'Governance', icon: <UserCheck className="w-5 h-5" /> },
+    { id: 'governance', label: 'Governance', icon: <UserCheck className="w-5 h-5" /> },
   ];
 
   return (
@@ -116,18 +111,18 @@ export default function App() {
         subtitle="Towards Better Health"
         statusBadge={
           <span className="text-[10px] font-mono uppercase bg-brand-subtle text-brand-dark px-1.5 py-0.5 rounded font-medium">
-            v0.4.0 • Step 04
+            v0.5.0 • Health Components
           </span>
         }
         rightAction={
           <div className="flex items-center gap-2">
             <button
-              onClick={() => alert("Notification Center: All clinical notifications verified.")}
+              onClick={() => alert("Notification Center: All clinical evidence validated.")}
               aria-label="Notifications"
               className="w-10 h-10 rounded-md border border-border-default flex items-center justify-center hover:bg-subtle active:scale-95 transition-all relative"
             >
               <Bell className="w-4 h-4 text-text-secondary" />
-              <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-status-alert" />
+              <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-brand-primary" />
             </button>
 
             <button
@@ -143,24 +138,144 @@ export default function App() {
 
       {/* Main Content Showcase */}
       <main className="max-w-4xl mx-auto px-4 py-6 space-y-10">
-        {/* Step 04 Milestone Banner */}
+        {/* Step 05 Milestone Banner */}
         <section className="bg-surface border border-border-subtle rounded-lg p-5 shadow-card space-y-3">
           <div className="flex items-center gap-2 text-brand-primary">
             <ShieldCheck className="w-5 h-5" />
-            <span className="text-xs font-mono font-semibold uppercase tracking-wider">Step 04: Feedback & State Handlers</span>
+            <span className="text-xs font-mono font-semibold uppercase tracking-wider">Step 05: Core Health Components</span>
           </div>
-          <h2 className="text-xl font-bold text-text-primary">Reliable Feedback, Shimmer Loaders & Emergency Safety</h2>
+          <h2 className="text-xl font-bold text-text-primary">Clinical Biomarker Cards, Provenance & Evidence Registry</h2>
           <p className="text-sm text-text-secondary leading-relaxed">
-            Eliminates silent failures (<strong className="text-text-primary">Article 87</strong>), guarantees zero blank loading screens, and enforces prompt clinical triage guidance (<strong className="text-text-primary">Article 34</strong>).
+            Direct implementation of <strong className="text-text-primary">Article 28 (Data Provenance)</strong>, 
+            <strong className="text-text-primary"> Article 33 (The Explanation Standard)</strong>, and 
+            <strong className="text-text-primary"> Article 67 (The Evidence Graph)</strong>.
           </p>
         </section>
 
-        {/* 1. EMERGENCY SAFETY TRIAGE BANNER (ARTICLE 34) */}
+        {/* 1. BIOMARKER & VITAL CARDS WITH DATA PROVENANCE (ARTICLE 28) */}
+        <section className="space-y-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <HeartPulse className="w-5 h-5 text-brand-primary" />
+              <h3 className="text-base font-semibold text-text-primary">1. Biomarker Cards with Data Provenance (Article 28)</h3>
+            </div>
+            <span className="text-xs font-mono text-text-muted">Interactive Tap to Inspect</span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {/* Lab-Verified Card */}
+            <BiomarkerCard
+              name="Fasting Glucose"
+              value={glucoseValue}
+              unit={glucoseUnit}
+              status="optimal"
+              statusLabel="Optimal"
+              timestamp="Yesterday at 08:30 AM"
+              provenance="lab_verified"
+              provenanceSource="Quest Lab Panel #9218"
+              range={{
+                min: 60,
+                max: 140,
+                current: glucoseValue,
+                optimalMin: 70,
+                optimalMax: 99,
+              }}
+              onInspect={() => {
+                setInspectedBiomarker('Fasting Glucose (Quest Diagnostics)');
+                setIsSheetOpen(true);
+              }}
+            />
+
+            {/* Wearable-Sync Card */}
+            <BiomarkerCard
+              name="Resting Heart Rate"
+              value="62"
+              unit="bpm"
+              status="optimal"
+              statusLabel="Optimal"
+              timestamp="Updated 15m ago"
+              provenance="wearable_sync"
+              provenanceSource="Apple Watch Series 9"
+              range={{
+                min: 45,
+                max: 110,
+                current: 62,
+                optimalMin: 60,
+                optimalMax: 80,
+              }}
+              onInspect={() => {
+                setInspectedBiomarker('Resting Heart Rate (Apple Watch)');
+                setIsSheetOpen(true);
+              }}
+            />
+
+            {/* Self-Reported / Borderline Card */}
+            <BiomarkerCard
+              name="Blood Pressure"
+              value="128/84"
+              unit="mmHg"
+              status="attention"
+              statusLabel="Pre-Hypertension"
+              timestamp="3 days ago"
+              provenance="manual"
+              provenanceSource="Self-Reported"
+              range={{
+                min: 90,
+                max: 160,
+                current: 128,
+                optimalMin: 100,
+                optimalMax: 120,
+              }}
+              onInspect={() => {
+                setInspectedBiomarker('Blood Pressure (Self-Reported)');
+                setIsSheetOpen(true);
+              }}
+            />
+          </div>
+        </section>
+
+        {/* 2. THE EVIDENCE REGISTRY CARD (ARTICLE 8, 24, 67) */}
+        <section className="space-y-4">
+          <div className="flex items-center gap-2">
+            <Dna className="w-5 h-5 text-status-evidence" />
+            <h3 className="text-base font-semibold text-text-primary">2. Scientific Evidence Card (Articles 8, 24 & 67)</h3>
+          </div>
+
+          <EvidenceCard
+            claim="Sustained zone-2 aerobic activity improves insulin sensitivity and reduces cardiovascular risk markers."
+            grade="A"
+            evidenceStrengthLabel="Meta-Analysis & Systematic Review"
+            sourceTitle="Exercise Interventions and Cardiometabolic Risk in Adults: A Systematic Review and Meta-Analysis of Randomized Trials"
+            journalOrAuthority="Circulation / American Heart Association"
+            publicationYear={2024}
+            studyPopulation="Adults aged 35–65 without prior cardiovascular events (n=14,200 across 38 RCTs)"
+            citationUrl="https://pubmed.ncbi.nlm.nih.gov/"
+            reviewDate="January 2026"
+            limitations="Benefits diminish if baseline physical activity is not maintained longitudinally; individual metabolic adaptation varies with sleep duration and genetic factors."
+          />
+        </section>
+
+        {/* 3. THE EXPLANATION STANDARD CARD (ARTICLE 33 & 22) */}
+        <section className="space-y-4">
+          <h3 className="text-base font-semibold text-text-primary">3. The Explanation Standard (Articles 33 & 22)</h3>
+          
+          <ExplanationCard
+            what="Gradually incorporate 30 minutes of low-intensity morning walking 4 days per week."
+            why="Your 7-day fasting glucose average is 92 mg/dL with a slight upward deviation on weekends. Early morning post-prandial movement accelerates peripheral glucose uptake without stressing joint structures."
+            evidenceSummary="Supported by the American Diabetes Association (ADA) 2025 Standards of Care (Level A clinical trial evidence)."
+            confidence="high"
+            limitations="This does not constitute a clinical prescription or treatment for metabolic disease. Does not replace physician-supervised diabetes care."
+            nextStep="Schedule a reminder for a 30-minute brisk walk after breakfast tomorrow."
+            onNextStepAction={() => alert("Scheduled 30-minute morning walk reminder!")}
+          />
+        </section>
+
+        {/* 4. EMERGENCY SAFETY TRIAGE BANNER (ARTICLE 34) */}
         <section className="space-y-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <AlertOctagon className="w-5 h-5 text-status-alert" />
-              <h3 className="text-base font-semibold text-text-primary">1. Emergency Safety Escalation (Article 34)</h3>
+              <h3 className="text-base font-semibold text-text-primary">4. Emergency Safety Escalation (Article 34)</h3>
             </div>
             <button
               onClick={() => setShowEmergency(!showEmergency)}
@@ -179,11 +294,11 @@ export default function App() {
           )}
         </section>
 
-        {/* 2. FEEDBACK & STATE DEMO SWITCHBOARD */}
+        {/* 5. STATE SWITCHBOARD */}
         <section className="space-y-4">
           <div className="flex items-center gap-2">
             <Radio className="w-5 h-5 text-brand-primary" />
-            <h3 className="text-base font-semibold text-text-primary">2. State Simulation Switchboard</h3>
+            <h3 className="text-base font-semibold text-text-primary">5. State Simulation Switchboard</h3>
           </div>
 
           <Card>
@@ -202,7 +317,7 @@ export default function App() {
                     setShowError(false);
                   }}
                 >
-                  {showSkeleton ? "Disable Shimmer Skeleton" : "Simulate Loading Skeleton"}
+                  {showSkeleton ? "Disable Shimmer" : "Simulate Loading Shimmer"}
                 </Button>
 
                 <Button
@@ -214,7 +329,7 @@ export default function App() {
                     setShowError(false);
                   }}
                 >
-                  {showEmpty ? "Hide Empty State" : "Simulate Empty State"}
+                  {showEmpty ? "Hide Empty" : "Simulate Empty State"}
                 </Button>
 
                 <Button
@@ -226,17 +341,13 @@ export default function App() {
                     setShowEmpty(false);
                   }}
                 >
-                  {showError ? "Dismiss Error State" : "Simulate Error State"}
+                  {showError ? "Dismiss Error" : "Simulate Error State"}
                 </Button>
               </div>
 
-              {/* Dynamic State Preview Container */}
               <div className="pt-4">
                 {showSkeleton ? (
-                  <div className="space-y-3">
-                    <span className="text-xs font-mono text-text-muted block">Simulated Shimmer State:</span>
-                    <BiomarkerCardSkeleton />
-                  </div>
+                  <BiomarkerCardSkeleton />
                 ) : showEmpty ? (
                   <EmptyState
                     icon={<Database className="w-6 h-6" />}
@@ -257,126 +368,9 @@ export default function App() {
                   />
                 ) : (
                   <div className="p-4 rounded-lg bg-subtle border border-border-subtle text-xs text-text-secondary">
-                    All simulated states are currently idle. Click one of the buttons above to preview the shimmer loader, empty prompt, or error recovery handler.
+                    Click one of the buttons above to preview the shimmer loader, empty prompt, or error recovery handler.
                   </div>
                 )}
-              </div>
-            </CardContent>
-          </Card>
-        </section>
-
-        {/* 3. MOBILE OVERLAYS & SHEETS DEMO */}
-        <section className="space-y-4">
-          <div className="flex items-center gap-2">
-            <Layers className="w-5 h-5 text-brand-primary" />
-            <h3 className="text-base font-semibold text-text-primary">3. Mobile Bottom Sheets & Reversible Dialogs</h3>
-          </div>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Interactive Overlay Triggers</CardTitle>
-              <CardDescription>Test the bottom-up sheet and confirmation modal.</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex flex-wrap items-center gap-3">
-                <Button 
-                  variant="primary" 
-                  onClick={() => setIsSheetOpen(true)}
-                  leftIcon={<ExternalLink className="w-4 h-4" />}
-                >
-                  Open Mobile Bottom Sheet
-                </Button>
-
-                <Button 
-                  variant="outline" 
-                  onClick={() => setIsDialogOpen(true)}
-                  leftIcon={<Trash2 className="w-4 h-4 text-status-alert" />}
-                >
-                  Test Reversible Confirmation Dialog
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </section>
-
-        {/* 4. TOUCH-FIRST BUTTONS SHOWCASE */}
-        <section className="space-y-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <h3 className="text-base font-semibold text-text-primary">4. Touch-First Buttons (≥ 48px Target)</h3>
-              <p className="text-xs text-text-secondary">Minimum 48px touch target with active press haptic feedback.</p>
-            </div>
-            <button
-              onClick={() => setIsLoading(!isLoading)}
-              className="text-xs font-mono text-brand-primary hover:underline"
-            >
-              Toggle Loading State
-            </button>
-          </div>
-
-          <Card>
-            <CardContent className="pt-5 space-y-4">
-              <div className="flex flex-wrap items-center gap-3">
-                <Button variant="primary" isLoading={isLoading} leftIcon={<Plus className="w-4 h-4" />}>
-                  Log Biomarker
-                </Button>
-                <Button variant="secondary" isLoading={isLoading} leftIcon={<Activity className="w-4 h-4" />}>
-                  View Trends
-                </Button>
-                <Button variant="outline" isLoading={isLoading}>
-                  Review Evidence
-                </Button>
-                <Button variant="ghost" isLoading={isLoading} rightIcon={<ArrowRight className="w-4 h-4" />}>
-                  Learn More
-                </Button>
-                <Button variant="destructive" isLoading={isLoading}>
-                  Emergency Triage
-                </Button>
-              </div>
-
-              <div className="pt-2 border-t border-border-subtle flex flex-wrap items-center gap-3">
-                <Button size="sm" variant="secondary">Small Action (40px)</Button>
-                <Button size="default" variant="primary">Standard Touch (48px)</Button>
-                <Button size="lg" variant="primary" rightIcon={<Heart className="w-5 h-5 text-status-alert" />}>
-                  Large Primary Touch (56px)
-                </Button>
-                <Button disabled variant="primary">Disabled State</Button>
-              </div>
-            </CardContent>
-          </Card>
-        </section>
-
-        {/* 5. STATUS BADGES */}
-        <section className="space-y-4">
-          <div>
-            <h3 className="text-base font-semibold text-text-primary">5. Badges & Provenance Indicators</h3>
-            <p className="text-xs text-text-secondary">Distinguishing data truth, evidence strength, and clinical alerts.</p>
-          </div>
-
-          <Card>
-            <CardContent className="pt-5 space-y-4">
-              <div className="flex flex-wrap items-center gap-2.5">
-                <Badge variant="optimal" hasDot icon={<CheckCircle2 className="w-3.5 h-3.5" />}>
-                  Optimal Range
-                </Badge>
-                <Badge variant="attention" hasDot icon={<AlertTriangle className="w-3.5 h-3.5" />}>
-                  Borderline Advisory
-                </Badge>
-                <Badge variant="alert" hasDot pulseDot icon={<AlertOctagon className="w-3.5 h-3.5" />}>
-                  Urgent Escalation
-                </Badge>
-                <Badge variant="evidence" icon={<BookOpen className="w-3.5 h-3.5" />}>
-                  Evidence Grade A
-                </Badge>
-                <Badge variant="unknown" icon={<HelpCircle className="w-3.5 h-3.5" />}>
-                  Unverified (Self-Reported)
-                </Badge>
-                <Badge variant="brand">
-                  Tovelu Verified
-                </Badge>
-                <Badge variant="neutral">
-                  Lab Sync
-                </Badge>
               </div>
             </CardContent>
           </Card>
@@ -403,18 +397,6 @@ export default function App() {
                   onChange={(e) => setPatientInput(e.target.value)}
                   leftIcon={<Search className="w-4 h-4" />}
                   helperText="Search over 120+ clinical biomarkers"
-                />
-
-                <Input
-                  label="Simulated Input with Error Validation"
-                  placeholder="Enter blood pressure..."
-                  value={inputError ? '999/999' : ''}
-                  onChange={(e) => {
-                    if (e.target.value) setInputError('Reading exceeds physiological range. Please verify input.');
-                    else setInputError('');
-                  }}
-                  error={inputError || undefined}
-                  helperText={!inputError ? "Type anything to trigger validation error" : undefined}
                 />
               </CardContent>
             </Card>
@@ -449,53 +431,66 @@ export default function App() {
                       </span>
                     </div>
                   </div>
-                  <Badge variant="optimal" hasDot>
+                  <span className="text-xs font-mono bg-status-optimal-bg text-status-optimal px-2 py-0.5 rounded border border-status-optimal-border font-medium">
                     Normal (Fasting)
-                  </Badge>
+                  </span>
                 </div>
-
-                <p className="text-xs text-text-secondary leading-relaxed">
-                  Converted deterministically via <code className="font-mono bg-muted px-1 py-0.5 rounded text-[11px]">1 mg/dL = 0.0555 mmol/L</code> without generative hallucination risk.
-                </p>
               </CardContent>
             </Card>
           </div>
         </section>
+
+        {/* 7. OVERLAY DEMOS */}
+        <section className="space-y-4">
+          <div className="flex items-center gap-2">
+            <Layers className="w-5 h-5 text-brand-primary" />
+            <h3 className="text-base font-semibold text-text-primary">7. Reversible Action Confirmation Dialog</h3>
+          </div>
+
+          <Card>
+            <CardContent className="pt-5 space-y-4">
+              <Button 
+                variant="outline" 
+                onClick={() => setIsDialogOpen(true)}
+                leftIcon={<Trash2 className="w-4 h-4 text-status-alert" />}
+              >
+                Test Reversible Confirmation Dialog (Article 20)
+              </Button>
+            </CardContent>
+          </Card>
+        </section>
       </main>
 
-      {/* Interactive Bottom Sheet */}
+      {/* Interactive Bottom Sheet (Triggered by Tapping Biomarker Card) */}
       <BottomSheet
         isOpen={isSheetOpen}
         onClose={() => setIsSheetOpen(false)}
-        title="Biomarker Inspection: Resting Heart Rate"
-        description="Data Provenance: Apple Watch via HealthKit Sync"
+        title={`Inspecting: ${inspectedBiomarker}`}
+        description="Longitudinal Trend & Clinical Context (Article 30)"
       >
         <div className="space-y-4">
           <div className="p-4 rounded-lg bg-subtle border border-border-subtle flex items-center justify-between">
             <div>
-              <span className="text-xs text-text-secondary font-mono">Current 7-Day Average</span>
+              <span className="text-xs text-text-secondary font-mono">Current Reading</span>
               <div className="font-numeric text-3xl font-bold text-text-primary mt-1">
-                62 <span className="text-sm font-sans font-normal text-text-secondary">bpm</span>
+                {glucoseValue} <span className="text-sm font-sans font-normal text-text-secondary">{glucoseUnit}</span>
               </div>
             </div>
-            <Badge variant="optimal" hasDot>
-              Optimal Cardiovascular Baseline
-            </Badge>
+            <span className="text-xs font-mono bg-status-optimal-bg text-status-optimal px-2.5 py-1 rounded-full border border-status-optimal-border font-medium">
+              Target Baseline Met
+            </span>
           </div>
 
           <div className="space-y-2 text-xs text-text-secondary">
-            <h4 className="font-semibold text-text-primary">Evidence & Context (Article 33)</h4>
+            <h4 className="font-semibold text-text-primary">Data Provenance Verification (Article 28)</h4>
             <p className="leading-relaxed">
-              Resting heart rate in healthy adults typically ranges from 60 to 100 bpm. An average of 62 bpm indicates strong autonomic regulation and consistent cardiovascular conditioning.
-            </p>
-            <p className="text-text-muted">
-              Source: American Heart Association (AHA) Clinical Reference Guidelines.
+              This reading was ingested directly via certified laboratory interface. Timestamp, reference ranges, and calibration standards were cryptographically logged.
             </p>
           </div>
 
           <div className="pt-2">
             <Button variant="primary" fullWidth onClick={() => setIsSheetOpen(false)}>
-              Close Inspection
+              Done Inspecting
             </Button>
           </div>
         </div>
@@ -515,8 +510,8 @@ export default function App() {
       >
         <div className="p-3 rounded-md bg-subtle border border-border-subtle text-xs space-y-1">
           <p className="font-mono text-text-secondary">Record ID: <strong className="text-text-primary">rec_bio_9042</strong></p>
-          <p className="font-mono text-text-secondary">Value: <strong className="text-text-primary">95 mg/dL (Fasting)</strong></p>
-          <p className="font-mono text-text-secondary">Timestamp: <strong className="text-text-primary">Today at 08:30 AM</strong></p>
+          <p className="font-mono text-text-secondary">Value: <strong className="text-text-primary">92 mg/dL (Fasting)</strong></p>
+          <p className="font-mono text-text-secondary">Timestamp: <strong className="text-text-primary">Yesterday at 08:30 AM</strong></p>
         </div>
       </Dialog>
 
