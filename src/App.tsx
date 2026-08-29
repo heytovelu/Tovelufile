@@ -13,7 +13,14 @@ import {
   Plus,
   ArrowRight,
   Search,
-  Sliders
+  
+  Layers,
+  Trash2,
+  ExternalLink,
+  Bell,
+  Home,
+  FileText,
+  UserCheck
 } from 'lucide-react';
 import { 
   Button, 
@@ -23,16 +30,27 @@ import {
   CardTitle, 
   CardDescription, 
   CardContent, 
-  CardFooter,
+  
   Input,
-  UnitToggle 
+  UnitToggle,
+  AppHeader,
+  BottomNav,
+  BottomSheet,
+  Dialog,
+  NavTabItem
 } from './components/ui';
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [activeTab, setActiveTab] = useState('overview');
   
-  // Interactive state demo for unit conversion & input
+  // Overlay interactive states
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [dialogLoading, setDialogLoading] = useState(false);
+
+  // Unit conversion state
   const [glucoseUnit, setGlucoseUnit] = useState<'mg/dL' | 'mmol/L'>('mg/dL');
   const [glucoseValue, setGlucoseValue] = useState<number>(95);
   const [patientInput, setPatientInput] = useState('Resting Heart Rate');
@@ -46,70 +64,123 @@ export default function App() {
     }
   }, [darkMode]);
 
-  // Deterministic Unit Conversion (Article 26)
   const handleUnitChange = (newUnit: string) => {
     if (newUnit === glucoseUnit) return;
     if (newUnit === 'mmol/L') {
-      // 1 mg/dL = 0.0555 mmol/L (deterministic medical formula)
       setGlucoseValue(Number((glucoseValue * 0.0555).toFixed(1)));
     } else {
-      // 1 mmol/L = 18.0182 mg/dL
       setGlucoseValue(Math.round(glucoseValue / 0.0555));
     }
     setGlucoseUnit(newUnit as 'mg/dL' | 'mmol/L');
   };
 
-  return (
-    <div className="min-h-screen bg-canvas text-text-primary transition-colors duration-200 pb-safe">
-      {/* Mobile-First Sticky App Header */}
-      <header className="sticky top-0 z-30 bg-surface/90 backdrop-blur-md border-b border-border-subtle pt-safe px-4 py-3">
-        <div className="max-w-4xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-md bg-brand-primary flex items-center justify-center text-text-inverse font-bold text-lg shadow-subtle">
-              T
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h1 className="font-semibold text-base tracking-tight text-text-primary">Tovelu Design System</h1>
-                <span className="text-[10px] font-mono uppercase bg-brand-subtle text-brand-dark px-1.5 py-0.5 rounded font-medium">
-                  v0.2.0 • Primitives
-                </span>
-              </div>
-              <p className="text-xs text-text-secondary">Towards Better Health</p>
-            </div>
-          </div>
+  const handleConfirmAction = () => {
+    setDialogLoading(true);
+    setTimeout(() => {
+      setDialogLoading(false);
+      setIsDialogOpen(false);
+    }, 1200);
+  };
 
-          <button
-            onClick={() => setDarkMode(!darkMode)}
-            aria-label="Toggle dark mode"
-            className="w-10 h-10 rounded-md border border-border-default flex items-center justify-center hover:bg-subtle active:scale-95 transition-all"
-          >
-            {darkMode ? <Sun className="w-4 h-4 text-brand-accent" /> : <Moon className="w-4 h-4 text-text-secondary" />}
-          </button>
-        </div>
-      </header>
+  const navItems: NavTabItem[] = [
+    { id: 'overview', label: 'Overview', icon: <Home className="w-5 h-5" /> },
+    { id: 'biomarkers', label: 'Vitals', icon: <Activity className="w-5 h-5" />, badge: 2 },
+    { id: 'evidence', label: 'Evidence', icon: <FileText className="w-5 h-5" /> },
+    { id: 'profile', label: 'Governance', icon: <UserCheck className="w-5 h-5" /> },
+  ];
+
+  return (
+    <div className="min-h-screen bg-canvas text-text-primary transition-colors duration-200 pb-28">
+      {/* Mobile-First Sticky App Header */}
+      <AppHeader
+        title="Tovelu Design System"
+        subtitle="Towards Better Health"
+        statusBadge={
+          <span className="text-[10px] font-mono uppercase bg-brand-subtle text-brand-dark px-1.5 py-0.5 rounded font-medium">
+            v0.3.0 • Step 03
+          </span>
+        }
+        rightAction={
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => alert("Notification Center: All clinical notifications verified.")}
+              aria-label="Notifications"
+              className="w-10 h-10 rounded-md border border-border-default flex items-center justify-center hover:bg-subtle active:scale-95 transition-all relative"
+            >
+              <Bell className="w-4 h-4 text-text-secondary" />
+              <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-status-alert" />
+            </button>
+
+            <button
+              onClick={() => setDarkMode(!darkMode)}
+              aria-label="Toggle dark mode"
+              className="w-10 h-10 rounded-md border border-border-default flex items-center justify-center hover:bg-subtle active:scale-95 transition-all"
+            >
+              {darkMode ? <Sun className="w-4 h-4 text-brand-accent" /> : <Moon className="w-4 h-4 text-text-secondary" />}
+            </button>
+          </div>
+        }
+      />
 
       {/* Main Content Showcase */}
       <main className="max-w-4xl mx-auto px-4 py-6 space-y-10">
-        {/* Step 02 Milestone Banner */}
+        {/* Step 03 Milestone Banner */}
         <section className="bg-surface border border-border-subtle rounded-lg p-5 shadow-card space-y-3">
           <div className="flex items-center gap-2 text-brand-primary">
             <ShieldCheck className="w-5 h-5" />
-            <span className="text-xs font-mono font-semibold uppercase tracking-wider">Step 02: Base Interactive Primitives</span>
+            <span className="text-xs font-mono font-semibold uppercase tracking-wider">Step 03: Mobile Navigation & Overlays</span>
           </div>
-          <h2 className="text-xl font-bold text-text-primary">Reusable UI Primitives (Touch-First & Accessible)</h2>
+          <h2 className="text-xl font-bold text-text-primary">Native Mobile Shell & Reversible Overlays</h2>
           <p className="text-sm text-text-secondary leading-relaxed">
-            All base components strictly adhere to <strong className="text-text-primary">Article 40 (≥ 48px touch targets)</strong>, 
-            <strong className="text-text-primary"> Article 42 (WCAG Accessibility)</strong>, and 
-            <strong className="text-text-primary"> Article 26 (Deterministic Calculations)</strong>.
+            Tovelu behaves like a native mobile app (<strong className="text-text-primary">Article 40</strong>) with bottom-up navigation sheets, safe-area awareness, and strict confirmation dialogs before irreversible changes (<strong className="text-text-primary">Article 20</strong>).
           </p>
         </section>
 
-        {/* 1. BUTTONS */}
+        {/* 1. MOBILE OVERLAYS & SHEETS DEMO */}
+        <section className="space-y-4">
+          <div className="flex items-center gap-2">
+            <Layers className="w-5 h-5 text-brand-primary" />
+            <h3 className="text-base font-semibold text-text-primary">1. Mobile Bottom Sheets & Reversible Dialogs</h3>
+          </div>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Interactive Overlay Triggers</CardTitle>
+              <CardDescription>Test the bottom-up sheet and confirmation modal.</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex flex-wrap items-center gap-3">
+                <Button 
+                  variant="primary" 
+                  onClick={() => setIsSheetOpen(true)}
+                  leftIcon={<ExternalLink className="w-4 h-4" />}
+                >
+                  Open Mobile Bottom Sheet
+                </Button>
+
+                <Button 
+                  variant="outline" 
+                  onClick={() => setIsDialogOpen(true)}
+                  leftIcon={<Trash2 className="w-4 h-4 text-status-alert" />}
+                >
+                  Test Reversible Confirmation Dialog
+                </Button>
+              </div>
+
+              <div className="p-3 bg-subtle rounded-md border border-border-subtle text-xs text-text-secondary space-y-1">
+                <p className="font-semibold text-text-primary">Constitutional Architecture Note:</p>
+                <p>• <strong>Bottom Sheets</strong> allow deep inspection of clinical markers on mobile without navigating away or losing context.</p>
+                <p>• <strong>Reversible Dialogs</strong> enforce Article 20 (&quot;Stop → Explain → Ask Ajay&quot;) before any destructive data change or migration.</p>
+              </div>
+            </CardContent>
+          </Card>
+        </section>
+
+        {/* 2. BUTTONS SHOWCASE */}
         <section className="space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-base font-semibold text-text-primary">1. Touch-First Buttons</h3>
+              <h3 className="text-base font-semibold text-text-primary">2. Touch-First Buttons (≥ 48px Target)</h3>
               <p className="text-xs text-text-secondary">Minimum 48px touch target with active press haptic feedback.</p>
             </div>
             <button
@@ -152,11 +223,11 @@ export default function App() {
           </Card>
         </section>
 
-        {/* 2. BADGES & HEALTH STATUS PILLS */}
+        {/* 3. STATUS BADGES */}
         <section className="space-y-4">
           <div>
-            <h3 className="text-base font-semibold text-text-primary">2. Badges & Provenance Indicators</h3>
-            <p className="text-xs text-text-secondary">Visual status indicators distinguishing data truth, evidence strength, and clinical alerts.</p>
+            <h3 className="text-base font-semibold text-text-primary">3. Badges & Provenance Indicators</h3>
+            <p className="text-xs text-text-secondary">Distinguishing data truth, evidence strength, and clinical alerts.</p>
           </div>
 
           <Card>
@@ -188,15 +259,14 @@ export default function App() {
           </Card>
         </section>
 
-        {/* 3. INPUTS & UNIT CONVERSION */}
+        {/* 4. FORM INPUTS & UNIT CONVERSION */}
         <section className="space-y-4">
           <div>
-            <h3 className="text-base font-semibold text-text-primary">3. Form Inputs & Deterministic Unit Toggle</h3>
-            <p className="text-xs text-text-secondary">Mobile-first inputs with 16px font (no auto-zoom) and built-in medical unit conversion (Article 26).</p>
+            <h3 className="text-base font-semibold text-text-primary">4. Form Inputs & Deterministic Unit Toggle</h3>
+            <p className="text-xs text-text-secondary">Mobile-first inputs with 16px font and built-in medical unit conversion (Article 26).</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Input with Search Icon */}
             <Card>
               <CardHeader>
                 <CardTitle>Metric Search Input</CardTitle>
@@ -226,7 +296,6 @@ export default function App() {
               </CardContent>
             </Card>
 
-            {/* Interactive Clinical Unit Conversion */}
             <Card>
               <CardHeader>
                 <div className="flex items-center justify-between">
@@ -269,55 +338,71 @@ export default function App() {
             </Card>
           </div>
         </section>
-
-        {/* 4. COMPOSABLE CARD SURFACES */}
-        <section className="space-y-4">
-          <div>
-            <h3 className="text-base font-semibold text-text-primary">4. Composable Surface Cards</h3>
-            <p className="text-xs text-text-secondary">Structured containers with calm elevation layers.</p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <Card variant="default">
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <CardTitle>Standard Health Card</CardTitle>
-                  <Sliders className="w-4 h-4 text-text-muted" />
-                </div>
-                <CardDescription>Base container for summary panels and profile data.</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-text-secondary">
-                  Uses soft shadows and subtle borders to keep visual noise minimal on OLED mobile screens.
-                </p>
-              </CardContent>
-              <CardFooter className="justify-between border-t border-border-subtle pt-3 mt-2">
-                <span className="text-xs text-text-muted">Updated today</span>
-                <Button size="sm" variant="ghost">Details</Button>
-              </CardFooter>
-            </Card>
-
-            <Card variant="interactive">
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <CardTitle>Interactive Tap Card</CardTitle>
-                  <ArrowRight className="w-4 h-4 text-brand-primary" />
-                </div>
-                <CardDescription>Click or tap to test tactile feedback.</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-text-secondary">
-                  Provides subtle hover elevation and 0.99x micro-scale tap response on mobile screens.
-                </p>
-              </CardContent>
-              <CardFooter className="justify-between border-t border-border-subtle pt-3 mt-2">
-                <Badge variant="brand">Tap to Inspect</Badge>
-                <span className="text-xs font-mono text-brand-primary">Interactive</span>
-              </CardFooter>
-            </Card>
-          </div>
-        </section>
       </main>
+
+      {/* Interactive Bottom Sheet */}
+      <BottomSheet
+        isOpen={isSheetOpen}
+        onClose={() => setIsSheetOpen(false)}
+        title="Biomarker Inspection: Resting Heart Rate"
+        description="Data Provenance: Apple Watch via HealthKit Sync"
+      >
+        <div className="space-y-4">
+          <div className="p-4 rounded-lg bg-subtle border border-border-subtle flex items-center justify-between">
+            <div>
+              <span className="text-xs text-text-secondary font-mono">Current 7-Day Average</span>
+              <div className="font-numeric text-3xl font-bold text-text-primary mt-1">
+                62 <span className="text-sm font-sans font-normal text-text-secondary">bpm</span>
+              </div>
+            </div>
+            <Badge variant="optimal" hasDot>
+              Optimal Cardiovascular Baseline
+            </Badge>
+          </div>
+
+          <div className="space-y-2 text-xs text-text-secondary">
+            <h4 className="font-semibold text-text-primary">Evidence & Context (Article 33)</h4>
+            <p className="leading-relaxed">
+              Resting heart rate in healthy adults typically ranges from 60 to 100 bpm. An average of 62 bpm indicates strong autonomic regulation and consistent cardiovascular conditioning.
+            </p>
+            <p className="text-text-muted">
+              Source: American Heart Association (AHA) Clinical Reference Guidelines.
+            </p>
+          </div>
+
+          <div className="pt-2">
+            <Button variant="primary" fullWidth onClick={() => setIsSheetOpen(false)}>
+              Close Inspection
+            </Button>
+          </div>
+        </div>
+      </BottomSheet>
+
+      {/* Reversible Action Confirmation Dialog (Article 20) */}
+      <Dialog
+        isOpen={isDialogOpen}
+        onClose={() => setIsDialogOpen(false)}
+        onConfirm={handleConfirmAction}
+        isLoading={dialogLoading}
+        isDestructive={true}
+        title="Delete Health Datapoint?"
+        description="Article 20 Compliance: Are you sure you want to delete this glucose reading? This action cannot be undone once executed."
+        confirmLabel="Delete Permanently"
+        cancelLabel="Keep Record"
+      >
+        <div className="p-3 rounded-md bg-subtle border border-border-subtle text-xs space-y-1">
+          <p className="font-mono text-text-secondary">Record ID: <strong className="text-text-primary">rec_bio_9042</strong></p>
+          <p className="font-mono text-text-secondary">Value: <strong className="text-text-primary">95 mg/dL (Fasting)</strong></p>
+          <p className="font-mono text-text-secondary">Timestamp: <strong className="text-text-primary">Today at 08:30 AM</strong></p>
+        </div>
+      </Dialog>
+
+      {/* Mobile-First Fixed Bottom Navigation Bar */}
+      <BottomNav
+        items={navItems}
+        activeId={activeTab}
+        onChange={(id) => setActiveTab(id)}
+      />
     </div>
   );
 }
