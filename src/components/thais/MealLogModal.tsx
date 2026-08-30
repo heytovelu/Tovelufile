@@ -9,6 +9,7 @@ import { Button } from '../ui/Button';
 interface MealLogModalProps {
   isOpen: boolean;
   meal: MealPortion;
+  initialMode?: 'scan' | 'manual' | 'ask_ai';
   onClose: () => void;
   onConfirmMeal: (mealType: 'breakfast' | 'lunch' | 'dinner', loggedCalories: number, loggedP: number, loggedC: number, loggedF: number) => void;
 }
@@ -19,10 +20,17 @@ type FoodModality = 'dish' | 'ingredients' | 'menu';
 export const MealLogModal: React.FC<MealLogModalProps> = ({
   isOpen,
   meal,
+  initialMode = 'scan',
   onClose,
   onConfirmMeal
 }) => {
-  const [logMode, setLogMode] = useState<LogMode>('scan');
+  const [logMode, setLogMode] = useState<LogMode>(initialMode);
+
+  React.useEffect(() => {
+    if (initialMode) {
+      setLogMode(initialMode);
+    }
+  }, [initialMode, isOpen]);
   const [foodModality, setFoodModality] = useState<FoodModality>('dish');
   const [inputText, setInputText] = useState<string>('');
   const [isAnalyzing, setIsAnalyzing] = useState<boolean>(false);
