@@ -1,24 +1,37 @@
-# Tovelu Master Application Architecture: The 4-Section System
+# Tovelu Master Application Architecture: The 6-Section System
 
-> **Status**: **PERMANENTLY LOCKED BY FOUNDER AJAY (August 29, 2026)**.  
+> **Status**: **PERMANENTLY LOCKED BY FOUNDER AJAY (August 30, 2026)**.  
 > **Form Factor**: Web App = Mobile App (PWA with 100% Native Mobile Feel).  
 > **Engine**: THAIS (Tovelu Health AI Advance Intelligence System).
 
 ---
 
-## SECTION 1: FLOW (The Daily & Weekly Operational Engine)
+## NAVIGATION STRUCTURE
 
-Segmented Switcher at Top: `[ DAY | WEEK ]`
+```
+                            TOP HEADER ON EVERY SCREEN
+           [ TOVELU Wordmark + Ring ]           [ Profile Avatar -> Opens YOU ]
+                                       │
+   ┌───────────────────────────────────┼───────────────────────────────────┐
+   ▼                                   ▼                                   ▼
+5 BOTTOM TABS:
+1. [ TODAY ]   •   2. [ WEEK ]   •   3. [ CHAT ]   •   4. [ REPORT ]   •   5. [ HEALTH ]
+Day Execution      Strategy &        24/7 Clinical     4-Tier Medical    The Ultimate
+Portion Meter      Grocery Delivery  Mentor, Voice AI  Reports (Day/Wk/  Lifetime Health
+Swipe Tasks        Plan Your Week    & History Drawer  Month/Year) + Certs Report (Weekly)
+```
 
-### 1. TODAY (Flow - Day) • 100% Locked Blueprint
+---
+
+## 1. TODAY (Flow - Day) • 100% Locked Blueprint
 `TODAY` is the primary daily operational cockpit where the user spends 80% of their time inside Tovelu. It is engineered for zero cognitive friction, maximum dopamine, and effortless execution.
 
-#### Core Structure (Top to Bottom):
+### Core Structure (Top to Bottom):
 1. **Top Header**:
    - Architectural all-caps `TOVELU` wordmark + Sovereign Homeostasis Ring.
    - User Profile Avatar (tapping immediately opens the `YOU` section).
-2. **Day Status & Momentum Banner**:
-   - Displays current cycle position: e.g. `Day 14 of 90 • High Momentum 🔥` (or sticky 3-Hour Free Trial ticker for trial users).
+2. **Current Day & Full Calendar Date ⭐ (New Update)**:
+   - Prominently displays: e.g. **Sunday, August 30, 2026** • `Day 14 of 90 • High Momentum 🔥` (or sticky 3-Hour Free Trial ticker for trial users).
 3. **Living Homeostasis Progress Ring**:
    - Dynamically fills in real-time as daily milestones are reached (33% Breakfast & Morning Task → 66% Lunch & Midday Task → 100% Dinner & Bedtime Check-In).
    - Emits an energetic `#00FF9D` bio-glow celebration when 100% complete: *"Day Conquered • Cellular Repair Active Tonight"*.
@@ -47,10 +60,12 @@ Segmented Switcher at Top: `[ DAY | WEEK ]`
 10. **Nightly 1-Minute Bedtime Check-In**:
     - Prominently surfaces in the evening: Level 1 Task Reconciliation (`Done` vs `Skip`) + Level 2 3-Axis Reflection (*Physical, Mental, Emotional*) + **THAIS Precision Confirmation Inquiry**. Runs overnight machine learning loop.
 
-### 2. WEEK (Flow - Week) • 100% Locked Blueprint
+---
+
+## 2. WEEK (Flow - Week) • 100% Locked Blueprint
 `WEEK` is the strategic preparation, grocery autopilot, and momentum cockpit of Tovelu. It is engineered to ensure the user's plan bends around real life so their commitment never breaks.
 
-#### Core Structure (Top to Bottom):
+### Core Structure (Top to Bottom):
 1. **Top Header**:
    - Architectural all-caps `TOVELU` wordmark + Sovereign Homeostasis Ring.
    - User Profile Avatar (tapping opens `YOU`).
@@ -61,52 +76,36 @@ Segmented Switcher at Top: `[ DAY | WEEK ]`
      - Week 3: *"Gut Microbiome Species Repopulation & Mitochondrial Vigor"*
      - Week 4: *"Metabolic Flexibility & Hormonal Homeostasis"*
 3. **`[ 🗓️ Plan Your Week / Update Schedule ]` Master Calibrator**:
-   - **Accessible 24/7 at Any Moment**: Users can tap this on Sunday/Monday OR whenever real life changes unexpectedly mid-week (e.g. Wednesday afternoon late client dinner or emergency travel).
-   - **60-Second Routine Check**:
-     - *Standard Routine* (1 tap locks standard plan).
-     - *Custom Days*: User tags specific days:
-       - `[ ✈️ Early Travel / Commute ]`: THAIS shifts to portable fast protein blueprints and 5-min hotel/airport mobility.
-       - `[ 💼 Late Work Night / High Stress ]`: THAIS shifts to 10-min 1-pan dinners and removes heavy evening workouts to protect cortisol.
-       - `[ 🍷 Social Dinner / Party / Dining Out ]`: THAIS activates Restaurant Defense (protein first, sparkling water) and gently trims 20g carbs from adjacent meals.
-       - `[ 👨‍👩‍👧 Family Gathering / Guests ]`: Family-friendly meal portions.
-   - **The Tovelu Iron Guarantee**: The main plan and 7-day caloric/healing budget is **NEVER compromised or broken**.
-4. **7-Day Visual Momentum Arc (Loss Aversion Dopamine)**:
+   - Accessible 24/7 at any moment (user can recalibrate on Sunday OR mid-week when real life changes unexpectedly).
+   - 60-second routine check with auto-adaptation for travel, late work, and social dining.
+4. **`[ 📄 Add Doctor Visit / Medical Report ]` Ingestion Trigger ⭐ (New Update)**:
+   - Dedicated button right inside `WEEK`:
+   - User uploads any doctor prescription, lab report, or discharge slip, and manually writes what problem they had and what the doctor said.
+   - THAIS immediately auto-adjusts this week's meals and tasks (e.g. gut broths for antibiotics, workout softening for sprains) and archives it into the permanent medical vault.
+5. **7-Day Visual Momentum Arc (Loss Aversion Dopamine)**:
    - Horizontal strip of 7 Homeostasis Rings (`Mon 🟢`, `Tue 🟢`, `Wed 🟢`, `Thu 🟡 Today`, `Fri ⚪`, `Sat ⚪`, `Sun ⚪`).
    - Tapping any day opens its preview or historical review in 1 tap.
-   - Preserves psychological loss aversion (users refuse to break a 4-day winning streak).
-5. **7-Day Meal & Task Timeline**:
+6. **7-Day Meal & Task Timeline**:
    - Visual schedule displaying adapted meals, travel adaptations, and social dining strategies.
-6. **Zero-Waste Kitchen Autopilot (Grocery Delivery in 1 Tap)**:
+7. **Zero-Waste Kitchen Autopilot (Grocery Delivery in 1 Tap)**:
    - Categorized into *Proteins & Fish*, *Fibrous Greens & Veggies*, *Healthy Fats & Pantry*.
    - `[ Toggle "In My Kitchen" ]` vs `[ "Need to Buy" ]`.
    - **`[ 🛒 1-Tap Export to Instacart / Amazon Fresh / Blinkit / Zepto ]`**: Loads exact missing ingredients into delivery cart with zero food waste.
-7. **Sunday 20-Minute Batch Prep Blueprint**:
+8. **Sunday 20-Minute Batch Prep Blueprint**:
    - 2 quick batch-prep tasks (e.g. sheet-pan roast veggies, boil 6 eggs) that save 4 hours of weeknight cooking.
 
 ---
 
-## SECTION 2: HEALTH (The Longitudinal Intelligence & Clinical Event Vault)
+## 3. CHAT (THAIS Clinical Mentor) • 100% Locked Blueprint
+`CHAT` is the 24/7 empathetic clinical mentor, longevity specialist, and personal friend powered by THAIS.
 
-1. **Lifetime Health Report**:
-   - Biological age progress, cardiovascular/metabolic stability, and risk reduction score across the **500-Disease Index**.
-2. **Time Filter Selector (`Choose or Select`)**:
-   - Time range pills: `[ Day | Week | Month | Year | Lifetime ]`.
-   - Selecting any date or period dynamically pulls the exact health score and biomarker records for that specific timeframe.
-3. **The "Upload Medical / Doctor Event & Report" Feature ⭐ (New Mandate)**:
-   - Prominent Button: `[ 📄 Upload Health Report / Doctor Visit ]`.
-   - **Upload Capabilities**: PDF or photo upload of lab results, prescription slips, doctor notes, or hospital discharge summaries.
-   - **Human Context Input**: User types in plain language: *"What problem I had, and what the doctor said."*
-   - **THAIS Clinical Action**:
-     - **Immediate Acute Adaptation**: Automatically recalibrates the user's daily meal plan and task list for the duration of the medical event (e.g. swaps workouts for seated mobility, prescribes gut-soothing broths and electrolyte protocols during antibiotic courses).
-     - **Permanent Memory Ingestion**: Ingests the clinical event into the user's permanent longitudinal vault so THAIS remembers it months and years into the future.
-
-### 3. CHAT (THAIS Clinical Mentor) • 100% Locked Blueprint
-`CHAT` is the 24/7 empathetic clinical mentor, longevity specialist, and personal friend powered by THAIS. It operates with full longitudinal memory across the 52 survey answers, 500-disease index, daily logged meals, and uploaded doctor prescriptions.
-
-#### Core Structure (Top to Bottom):
+### Core Structure (Top to Bottom):
 1. **Top Header**:
    - Architectural all-caps `TOVELU` wordmark + Sovereign Homeostasis Ring.
    - Clinical Status: *"THAIS Clinical Mentor • DPHKG Longitudinal Memory Active"*.
+   - **`[ 📅 Chat History ]` Master Button ⭐ (New Update)**:
+     - User clicks this button $\rightarrow$ a sleek side popup drawer opens.
+     - User can choose **any specific day** to view that exact day's complete conversation transcript!
    - User Profile Avatar (opens `YOU`).
 2. **Context-Aware Smart Quick Prompts (Horizontal Scroll)**:
    - Dynamic 1-tap prompts updated based on the exact time of day and biological state:
@@ -116,109 +115,84 @@ Segmented Switcher at Top: `[ DAY | WEEK ]`
      - Gut Distress: *"My stomach feels bloated—what can I sip right now?"*
      - Restaurant: *"I'm looking at an Italian / Mexican menu—what should I order?"*
 3. **Conversational Thread with In-Message Interactive Action Buttons**:
-   - Speaks using the **Universal Voice Bible**: empathetic, simple language without medical jargon, zero judgment.
-   - When THAIS suggests plan adjustments, it renders an **in-message 1-tap action button**:
-     - *e.g. `[ ⚡ Yes, Apply This Dinner Update to Today's Plan ]`*
-     - Modifies `TODAY` instantly without leaving the chat!
-4. **Longitudinal Memory Vault & Archive Search**:
-   - Toggle between `Active Chat` and `Past Weekly Consultations & Medical Q&As`.
-   - Full keyword search to retrieve any past recipe, advice, or symptom insight.
-5. **Multimodal Input Suite**:
+   - Speaks using the **Universal Voice Bible**: empathetic, simple language, zero judgment.
+   - Renders 1-tap action buttons directly inside messages (e.g. `[ ⚡ Yes, Apply This Dinner Update to Today's Plan ]`).
+4. **Multimodal Input Suite**:
    - 🎙️ **Voice AI**: Tap to speak naturally or listen to THAIS respond in a warm, calming voice.
    - 📷 **Camera / Photo Scan**: Snap food or menu for instant clinical analysis.
    - ✍️ **Text Input**: Rapid typing with auto-complete prompts.
-6. **Triple-Lock Clinical Safety Firewall**:
-   - Deterministic rule layer prevents hallucinations. Automatically audits drug-nutrient conflicts against uploaded medications and triggers instant clinical red-flag protocols for acute medical emergencies.
-
-### 4. REPORT (Day | Week | Month | Year) • 100% Locked Blueprint
-`REPORT` is the multi-dimensional clinical proof engine of Tovelu. It answers the user's emotional and clinical question: *"Is my body truly healing?"* It replaces single dry weight scales with 4 distinct specialist-grade clinical reports that are easy for anyone to understand yet rigorous enough for any medical specialist.
-
-#### Core Features & Structure:
-1. **Master Period Picker Button ⭐**:
-   - Top button: `[ 📅 Choose Particular Day, Week, Month, or Year ]`.
-   - Allows picking any historical date in 1 tap to view that exact period's complete clinical transcript.
-2. **The 4 Distinct Specialist-Grade Report Tiers**:
-   - **DAY REPORT (24-Hour Acute Clinical Log)**:
-     - Metabolic substrate precision (Calories, P/C/F in grams, fiber, hydration, hidden culinary oils).
-     - Food sequencing compliance (-38% glucose spike attenuation).
-     - Estimated postprandial glycemic curve (time-in-optimal-range, 0 afternoon crashes).
-     - Prescribed task execution rate (SwipeToComplete 100%).
-     - Nightly 3-axis somatosensory audit (Physical, Mental, Emotional).
-     - Attending specialist clinical diagnosis.
-   - **WEEK REPORT (7-Day Systemic Adaptation & Habit Audit)**:
-     - 7-day cumulative calorie/macro balance and protein preservation index (ensures fat burned, not muscle).
-     - 7-day glycemic stability curve and spike prevention tally.
-     - Gastrointestinal motility report (Rome IV standards, bloating frequency, Bristol stool consistency).
-     - Sleep architecture (onset latency, nocturia frequency).
-     - Weekly clinical milestone clearance (e.g. liver glycogen depleted, visceral lipolysis confirmed).
-     - Specialist next-week tactical prescription.
-   - **MONTH REPORT (30-Day Hormonal & Inflammatory Phenotype Audit)**:
-     - Anthropometric remodeling (visceral fat reduction, waist-to-height ratio).
-     - Systemic Chronic Inflammation Score (SCI) drop (e.g. 68/100 → 36/100).
-     - Endocrine axis trajectory (insulin sensitivity +42%, cortisol curve, sex hormone recovery).
-     - Active 500-Disease Index Reversal Radar (confidence drop tracking across detected conditions).
-     - Specialist multi-disciplinary clinical impression.
-   - **YEAR REPORT (365-Day Cellular Longevity & Disease Reversal Transcript)**:
-     - Epigenetic Biological Age Reversal Transcript (e.g. -3.8 biological years younger, 35% cellular deceleration).
-     - 14-Physiological-System Clinical Homeostasis Scorecard (Grade A-F across all organ systems).
-     - Master 500-Disease Index Permanent Reversal Certificate.
-     - Actuarial lifespan & healthspan extension projection (+8.4 healthy years).
-     - Physician-certified medical export accepted by any hospital or specialist doctor.
-3. **1-Tap Privacy-Safe "Victory Card"**:
-   - Generates an Apple-style shareable visual card (*Zero private health data leaked*) for organic sharing with family and friends.
-
-### 5. HEALTH (The Ultimate Lifetime Health Report) • 100% Locked Blueprint
-`HEALTH` is the master medical mirror of the human being—Physical, Mental, and Emotional. It auto-updates weekly and is formatted to the highest clinical standards so that any world-class physician, specialist doctor, clinic, hospital (Mayo Clinic, Cleveland Clinic, NHS, AIIMS, Johns Hopkins), or government health authority anywhere on Earth can immediately read, verify, and understand the user's complete biological reality.
-
-#### Core Structure & Components:
-1. **Section A: Patient Identification & Sovereign Medical Verification**:
-   - Full Name, Biological Sex, Chronological vs Biological Age, Height, Weight, Blood Type.
-   - Unique Tovelu Sovereign Health ID (SHA-256 Encrypted).
-   - Clinical Reference Standards explicitly cited (*Rome IV for GI, Rotterdam for PCOS, Framingham & ACC/AHA for Cardiovascular, ADA for Diabetes, ATP III for Metabolic Syndrome*).
-   - Timestamp of latest weekly calibration.
-2. **Section B: The 3-Dimensional Mirror of Health**:
-   - **Physical Homeostasis**: Metabolic substrate oxidation, visceral adiposity, endothelial capillary refill, gut mucosal barrier.
-   - **Mental & Cognitive Acuity**: Neuro-inflammation index, brain fog frequency, sleep architecture (REM/Slow-wave recovery), circadian alertness curve.
-   - **Emotional & Autonomic Nervous Tone**: Vagal nerve balance, sympathetic vs parasympathetic tone, adrenal diurnal cortisol curve, allostatic stress resilience.
-3. **Section C: The 14-Physiological-System Clinical Audit Matrix**:
-   - Every organ system graded (Grade A to F) with clinical status and weekly trajectory:
-     1. *Metabolic & Glycemic System* (Insulin sensitivity, fasting glucose arc, HOMA-IR).
-     2. *Cardiovascular & Endothelial System* (Arterial compliance, blood pressure, microvascular stasis).
-     3. *Hepatic & Liver System* (MASLD fatty liver clearance, bile acid flow).
-     4. *Gastrointestinal & Microbiome System* (Rome IV motility, stomach acid, SIBO clearance).
-     5. *Endocrine & Hormonal System* (Thyroid conversion, androgen-estrogen ratio, adrenal axis).
-     6. *Neurological & Sleep Architecture* (Sleep latency <15m, 0 nocturnal awakenings).
-     7. *Immune & Chronic Inflammation System* (Systemic Chronic Inflammation Score SCI: 32/100).
-     8. *Renal & Fluid Electrolyte System* (eGFR support, sodium-potassium balance, 0 nocturia).
-     9. *Musculoskeletal & Joint System* (Sarcopenia lean mass index, joint mobility, uric acid defense).
-     10. *Respiratory & Oxygen Delivery System* (Resting respiration, sleep airway stability).
-     11. *Integumentary System (Skin, Hair, Nails)* (Capillary bed health, keratin synthesis).
-     12. *Hematological & Oxygen Transport System* (Cellular oxygenation, microvascular perfusion).
-     13. *Autonomic Vagal Tone* (Heart rate variability, parasympathetic recovery).
-     14. *Cellular Senescence & Longevity* (-3.8 biological years reversed, cellular decay deceleration).
-4. **Section D: Master 500-Disease Reversal & Prevention Registry**:
-   - Official clinical tracking of detected conditions with before vs current clinical confidence numbers (*e.g. Insulin Resistance: 94% → 28% [Reversal Achieved]; SIBO: 88% → 16% [In Remission]; MASLD: 82% → 22% [Hepatic Clearance]*).
-5. **Section E: Pharmacological Ledger & Drug-Nutrient Synergies**:
-   - Active doctor-prescribed medications, managed nutrient depletions, and 0 verified food-drug contraindications.
-6. **Section F: Longitudinal Medical Vault**:
-   - All uploaded blood tests, prescription slips, and hospital discharge notes with acute adaptations.
-7. **Section G: Hospital & Physician Export Suite**:
-   - **`[ 📄 Export Doctor-Ready PDF ]`**: Standardized international multi-page medical transcript formatted for hospital EMR systems.
-   - **`[ 🔗 24-Hour Cryptographic Doctor QR Code ]`**: Secure read-only doctor portal link for clinical consultations.
+5. **Triple-Lock Clinical Safety Firewall**:
+   - Grounded clinical knowledge graph preventing hallucinations, monitoring drug-nutrient depletions, and providing immediate emergency escalation.
 
 ---
-   - Prominent, beautifully structured User Operating Manual:
-     - **The 3 Golden Daily Commitments**: (Morning check, meal logging via Scan/Manual/AI, 1-minute nightly survey).
-     - **What to Log in the App**: Exactly what matters and what can be ignored.
-     - **How to Follow the Plan**: What to do when traveling, dining out, or having a bad day.
-     - **The Mindset of Tovelu**: Radical dignity, zero guilt, progress over perfection.
-2. **Personal Biological Baseline**:
-   - BMR, TDEE, target weight, dietary philosophy, allergies, and survey responses.
-3. **How to Use Tutorials**:
-   - 45-second visual micro-walkthroughs of the app features.
-4. **Subscription & Transparent Billing**:
-   - 1-tap pause button per Article 15 of the Constitution. Zero hidden traps.
-5. **Legal & Cryptographic Privacy Vault**:
-   - E2E encryption keys, complete data export in JSON/PDF, account deletion controls.
-6. **Support & Direct Contact**:
-   - Real-time founder & clinical support escalation.
+
+## 4. REPORT (Day | Week | Month | Year) • 100% Locked Blueprint
+`REPORT` is the multi-dimensional clinical proof engine of Tovelu. It answers the user's question: *"Is my body truly healing?"* with 4 distinct specialist-grade reports.
+
+### Core Structure (Top to Bottom):
+1. **Master Period Picker Button**:
+   - Top button: `[ 📅 Choose Particular Day, Week, Month, or Year ]`.
+   - Allows picking any historical date to inspect that period's clinical record.
+2. **The 4 Distinct Specialist-Grade Report Tiers**:
+   - **DAY REPORT**: Acute cellular intake, food sequencing, postprandial glucose stability, and task execution.
+   - **WEEK REPORT**: 7-day caloric balance, glycogen depletion, gut motility (Rome IV), sleep onset latency, milestone clearance.
+   - **MONTH REPORT**: Body composition remodeling, visceral fat loss, Systemic Chronic Inflammation drop, endocrine axis recovery, 500-disease reversal radar shift.
+   - **YEAR REPORT**: Epigenetic biological age reversal (-3.8 biological years), 14-system clinical scorecard, permanent disease reversal certificate, lifespan extension.
+3. **Official Milestone Achievement Certificates (Viral Growth Engine) ⭐ (New Update)**:
+   - A dedicated section inside `REPORT` where users can view, 1-tap download, or share high-resolution luxury certificates:
+     - 📜 **Certificate 1: Week 1 Consistency Champion** *(100% Habit Streak)*
+     - 📜 **Certificate 2: Metabolic Reset Milestone** *(-5 lbs / -2.3 kg Pure Fat Lost)*
+     - 📜 **Certificate 3: Master of Homeostasis** *(30 Consecutive Days Completed)*
+     - 📜 **Certificate 4: Zero-Slump Master** *(14 Consecutive Days of Glycemic Stability)*
+     - 📜 **Certificate 5: Biological Clock Reversed** *(-2.0+ Years Cellular Rejuvenation)*
+     - 📜 **Certificate 6: Gut Harmony Milestone** *(75% IBS/Bloating Resolution)*
+     - 📜 **Certificate 7: 90-Day Sovereign Transformation Laureate**
+   - **`[ 📲 1-Tap Download High-Res Certificate / Share to Instagram & WhatsApp ]`**:
+     - Beautifully styled with the Sovereign Homeostasis Ring, official gold/emerald seal, user's name, and milestone metrics.
+     - Fuels intense user pride and drives organic viral marketing!
+
+---
+
+## 5. HEALTH (The Ultimate Lifetime Health Report) • 100% Locked Blueprint
+`HEALTH` is the master medical mirror of the human being—Physical, Mental, and Emotional. It auto-updates weekly and is accepted by the world's best doctors, clinics (Mayo Clinic, Cleveland Clinic, NHS, AIIMS, Johns Hopkins), and health authorities anywhere on Earth.
+
+### Core Structure & Components:
+1. **Top Actions Bar ⭐ (New Update)**:
+   - **`[ 📥 Download as PDF ]`**: 1-tap downloads the standardized, multi-page clinical transcript.
+   - **`[ 📤 Send to Anyone (Doctor / Specialist / Family) ]`**: Send via Email, WhatsApp, or AirDrop.
+   - **`[ 🔗 24-Hour Cryptographic Doctor QR Code ]`**: Generates a secure QR code for doctor tablet scanning.
+2. **Section A: Patient Identification & Sovereign Medical Verification**:
+   - Biometrics, Blood Type, SHA-256 Encrypted Sovereign ID, explicit clinical citations (Rome IV, Rotterdam, Framingham, ADA, ATP III).
+3. **Section B: The 3-Dimensional Mirror of Health**:
+   - Physical Homeostasis • Mental & Cognitive Acuity • Emotional & Autonomic Nervous Balance.
+4. **Section C: The 14-Physiological-System Clinical Audit Matrix**:
+   - Graded A to F with clinical indicators and weekly trajectory across all 14 organ systems.
+5. **Section D: Master 500-Disease Reversal & Prevention Registry**:
+   - Clinical listing of detected conditions with before vs current clinical confidence numbers.
+6. **Section E: Pharmacological Ledger & Drug-Nutrient Synergies**:
+   - Active medications, managed nutrient depletions, 0 contraindications.
+7. **Section F: Longitudinal Medical Vault**:
+   - Permanent archive of uploaded lab tests, prescriptions, and doctor notes.
+
+---
+
+## 6. YOU (Profile, Sovereign Governance & Operating Rule Book) • 100% Locked Blueprint
+Accessed via the top-header User Profile Avatar on any screen. `YOU` is the user's sovereign command center.
+
+### The 8 Master Modules:
+1. **Module 1: The Official Tovelu Rule Book**:
+   - 5-chapter operating manual: Golden Commitments, What to Log, Following the Plan When Life Happens, Social Dining & Alcohol, The Tovelu Mindset.
+2. **Module 2: Biological Baseline & Biometric Calibration**:
+   - Weight, BMR, TDEE, Dietary Philosophy, Allergy & Intolerance Vault.
+3. **Module 3: Chronobiology & Daily Schedule Tuner**:
+   - Sleep/Wake hours, Meal/Fasting windows, Metric/Imperial toggle, Dark/Light mode (`#00FF9D`).
+4. **Module 4: Connected Wearable Sensors (Superpower #2)**:
+   - Passive sync with Apple Health, Google Health Connect, Oura, Whoop, Garmin, CGM.
+5. **Module 5: Commercial Dignity & Membership (Article 15)**:
+   - Transparent billing, `[ 🚀 Choose Your Day 1 ]`, and **`[ ⏸️ 1-Click Instant Membership Pause ]`** (zero retention tricks).
+6. **Module 6: The Absence & Re-Entry Compassion Protocol**:
+   - Zero-guilt re-entry ladder (1-3d Soft Landing, 1-2w Re-Alignment, 30d Reset, 6m+ Welcome Home).
+7. **Module 7: Cryptographic Privacy & Data Sovereignty Vault (Article 16)**:
+   - Zero data selling, E2E encryption, 1-click full JSON/PDF export, 1-click nuclear account deletion.
+8. **Module 8: Founder Concierge & App Video Guides**:
+   - Direct escalation line to Founder Ajay, 45-second interactive micro-tutorials, Master Codex Seal.
