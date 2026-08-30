@@ -28,8 +28,11 @@ export const DopamineSurveyRunner: React.FC<DopamineSurveyRunnerProps> = ({ onCo
   const [activeMilestone, setActiveMilestone] = useState<MilestoneData | null>(null);
   const [streakCount, setStreakCount] = useState<number>(1);
 
+  // Pre-Survey Note & Step View State
+  const [hasAcceptedClinicalNote, setHasAcceptedClinicalNote] = useState<boolean>(false);
+  const [surveyView, setSurveyView] = useState<'survey' | 'short_report' | 'decision'>('survey');
+
   // Health Report Reveal State
-  const [showReveal, setShowReveal] = useState<boolean>(false);
   const [generatedAssessment, setGeneratedAssessment] = useState<DiagnosticAssessment | null>(null);
   const [generatedPlan, setGeneratedPlan] = useState<GeneratedDailyPlan | null>(null);
   const [compiledInput, setCompiledInput] = useState<UserBiometricInput | null>(null);
@@ -48,10 +51,16 @@ export const DopamineSurveyRunner: React.FC<DopamineSurveyRunnerProps> = ({ onCo
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);
-        if (parsed.answers) setAnswers(parsed.answers);
+        if (parsed.answers) {
+          setAnswers(parsed.answers);
+          if (Object.keys(parsed.answers).length > 0) {
+            setHasAcceptedClinicalNote(true);
+          }
+        }
         if (parsed.stepIndex) {
           setCurrentStepIndex(parsed.stepIndex);
           setStreakCount(parsed.stepIndex + 1);
+          setHasAcceptedClinicalNote(true);
         }
       }
     } catch (e) {
@@ -188,7 +197,7 @@ export const DopamineSurveyRunner: React.FC<DopamineSurveyRunnerProps> = ({ onCo
     setCompiledInput(input);
     setGeneratedAssessment(assessmentResult);
     setGeneratedPlan(planResult);
-    setShowReveal(true);
+    setSurveyView('short_report');
   };
 
   // Helper to count selected options on current question
@@ -196,6 +205,75 @@ export const DopamineSurveyRunner: React.FC<DopamineSurveyRunnerProps> = ({ onCo
   const selectedCount = Array.isArray(currentAnswer) 
     ? currentAnswer.length 
     : currentAnswer ? 1 : 0;
+
+  // =========================================================================
+  // PAGE 1: PRE-SURVEY CLINICAL SERIOUSNESS NOTE (Before Q1)
+  // =========================================================================
+  if (!hasAcceptedClinicalNote && currentStepIndex === 0) {
+    return (
+      <div className="max-w-[448px] w-full mx-auto p-4 sm:p-6 bg-surface border border-emerald-500/30 rounded-3xl space-y-5 shadow-2xl animate-in zoom-in-95 duration-300">
+        <div className="text-center space-y-2">
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-400 text-white mx-auto flex items-center justify-center shadow-lg shadow-emerald-500/30">
+            <HeartPulse className="w-9 h-9" />
+          </div>
+          <span className="text-xs font-mono font-bold text-emerald-600 dark:text-[#00FF9D] uppercase tracking-widest">
+            CLINICAL INTEGRITY PROTOCOL
+          </span>
+          <h1 className="text-xl sm:text-2xl font-black text-text-primary tracking-tight">
+            Please Read Before Answering Question 1
+          </h1>
+        </div>
+
+        {/* Warning Notice Box */}
+        <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-xs text-amber-800 dark:text-amber-300 space-y-2 leading-relaxed">
+          <div className="flex items-center gap-2 font-black text-xs uppercase tracking-wider">
+            <span>⚠️</span>
+            <span>Your Every Single Answer Matters Deeply</span>
+          </div>
+          <p>
+            Unlike generic online quizzes, Tovelu does <strong>not</strong> use estimated guesses. Your answers directly program our clinical diagnostic engine across <strong>14 physiological organ systems</strong> and cross-examine <strong>500 metabolic root conditions</strong>.
+          </p>
+        </div>
+
+        {/* Three Rules */}
+        <div className="space-y-2.5 text-xs text-text-secondary">
+          <div className="p-3.5 rounded-2xl bg-surface-raised border border-border-default flex items-start gap-3">
+            <span className="text-lg shrink-0">⏳</span>
+            <div>
+              <strong className="text-text-primary block font-bold">1. Take Your Time — Do Not Rush</strong>
+              <span>Please read every single question and all answer options carefully before answering. A hurried or false answer corrupts your biological age calculation and produces an inaccurate food sequence.</span>
+            </div>
+          </div>
+
+          <div className="p-3.5 rounded-2xl bg-surface-raised border border-border-default flex items-start gap-3">
+            <span className="text-lg shrink-0">🎯</span>
+            <div>
+              <strong className="text-text-primary block font-bold">2. Answer with 100% Real Honesty</strong>
+              <span>Do not choose what sounds "healthy" or "ideal". Select what actually happens in your body (digestion, sleep, mid-day crashes, cravings, skin). Truthful answers allow our system to pinpoint and reverse your exact root bottlenecks.</span>
+            </div>
+          </div>
+
+          <div className="p-3.5 rounded-2xl bg-surface-raised border border-border-default flex items-start gap-3">
+            <span className="text-lg shrink-0">🔒</span>
+            <div>
+              <strong className="text-text-primary block font-bold">3. Zero Data Selling (Article 16)</strong>
+              <span>Your responses are cryptographically sealed. We never sell, rent, or disclose your biological data to insurance companies, pharmaceutical corporations, or advertisers.</span>
+            </div>
+          </div>
+        </div>
+
+        <Button
+          size="lg"
+          variant="primary"
+          fullWidth
+          className="rounded-2xl py-4 font-black text-sm bg-gradient-to-r from-emerald-500 via-teal-500 to-brand-primary shadow-xl shadow-emerald-500/25 active:scale-98 transition-all flex items-center justify-center gap-2"
+          onClick={() => setHasAcceptedClinicalNote(true)}
+        >
+          <span>I Promise to Answer Accurately — Begin Survey (Q1) →</span>
+        </Button>
+      </div>
+    );
+  }
 
   // Render Milestone Celebration Interstitial
   if (activeMilestone) {
@@ -212,8 +290,10 @@ export const DopamineSurveyRunner: React.FC<DopamineSurveyRunnerProps> = ({ onCo
     );
   }
 
-  // Render Health Report Reveal Screen
-  if (showReveal && generatedAssessment && generatedPlan && compiledInput) {
+  // =========================================================================
+  // PAGE 2: SHORT HEALTH REPORT (Motivates immediate action & buying)
+  // =========================================================================
+  if (surveyView === 'short_report' && generatedAssessment && generatedPlan && compiledInput) {
     return (
       <div className="max-w-[448px] w-full mx-auto p-4 sm:p-5 bg-surface border border-emerald-500/40 rounded-3xl space-y-5 shadow-2xl animate-in zoom-in-95 duration-300">
         <div className="text-center space-y-2">
@@ -232,11 +312,11 @@ export const DopamineSurveyRunner: React.FC<DopamineSurveyRunnerProps> = ({ onCo
         </div>
 
         {/* Biological Age Reveal Card */}
-        <div className="p-6 rounded-3xl bg-surface-raised border border-border-default flex items-center justify-between shadow-sm">
+        <div className="p-5 rounded-3xl bg-surface-raised border border-border-default flex items-center justify-between shadow-sm">
           <div>
             <span className="text-[11px] font-bold text-text-muted uppercase tracking-wider">Chronological vs Biological</span>
             <div className="text-3xl md:text-4xl font-black text-text-primary mt-0.5">
-              {generatedAssessment.biologicalAge} <span className="text-sm font-medium text-text-muted">biological years</span>
+              {generatedAssessment.biologicalAge} <span className="text-sm font-medium text-text-muted">bio years</span>
             </div>
             <span className={`text-xs font-extrabold ${generatedAssessment.ageDifferential > 0 ? 'text-amber-500' : 'text-emerald-500'}`}>
               {generatedAssessment.ageDifferential > 0 
@@ -265,7 +345,7 @@ export const DopamineSurveyRunner: React.FC<DopamineSurveyRunnerProps> = ({ onCo
 
           <div className="space-y-2">
             {generatedAssessment.detectedDiseases.slice(0, 3).map((d) => (
-              <div key={d.diseaseId} className="p-4 rounded-2xl bg-surface-raised border border-border-default flex items-center justify-between">
+              <div key={d.diseaseId} className="p-3.5 rounded-2xl bg-surface-raised border border-border-default flex items-center justify-between">
                 <div>
                   <span className="text-[10px] font-bold text-text-muted uppercase">{d.system} • #{d.diseaseId}</span>
                   <h4 className="text-xs md:text-sm font-bold text-text-primary">{d.name}</h4>
@@ -278,22 +358,88 @@ export const DopamineSurveyRunner: React.FC<DopamineSurveyRunnerProps> = ({ onCo
           </div>
         </div>
 
-        {/* One Plan, Two Solutions Potential */}
-        <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-xs text-text-secondary space-y-1">
-          <strong className="text-text-primary font-bold">The Tovelu Promise: One Plan, Two Solutions</strong>
+        {/* DEEP MOTIVATION & REVERSIBILITY MESSAGE */}
+        <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-xs text-text-secondary space-y-2 leading-relaxed">
+          <div className="flex items-center gap-2 font-bold text-text-primary text-xs">
+            <span className="text-base">🧬</span>
+            <span>Why This Biological Lag is 100% Reversible in 90 Days:</span>
+          </div>
           <p>
-            Your plan drives your goal of <strong>{compiledInput.primaryGoalId.replace(/_/g, ' ')}</strong> while systematically clearing your detected metabolic bottlenecks.
+            Your results show active metabolic friction, but human cellular biology is completely regenerative. When you eat in exact clinical sequence (<strong>Fiber first → Protein & Fats second → Starches last</strong>), you blunt peak glucose spikes by up to 38% and trigger deep autophagy without starving or giving up carbs.
+          </p>
+          <p className="font-semibold text-emerald-700 dark:text-[#00FF9D]">
+            ⚡ Delaying allows metabolic fatigue to compound. Starting today halts visceral fat storage and resets your biological age within 12 weeks.
           </p>
         </div>
 
-        {/* Dual Actions: Pay Now vs 3-Hour Free Trial */}
-        <div className="space-y-3 pt-1">
-          {/* PRIMARY: Pay Now */}
+        {/* Single Forward CTA: Advance to Decision Page */}
+        <Button
+          size="lg"
+          variant="primary"
+          fullWidth
+          className="rounded-2xl py-4 font-black text-sm bg-gradient-to-r from-emerald-500 via-teal-500 to-brand-primary shadow-xl shadow-emerald-500/25 active:scale-98 transition-all flex items-center justify-center gap-2"
+          onClick={() => setSurveyView('decision')}
+        >
+          <span>Review Reversal Protocol & Start Options →</span>
+        </Button>
+      </div>
+    );
+  }
+
+  // =========================================================================
+  // PAGE 3: DEDICATED DECISION PAGE (Pay Instant vs 3-Hour Free Trial)
+  // =========================================================================
+  if (surveyView === 'decision' && generatedAssessment && generatedPlan && compiledInput) {
+    return (
+      <div className="max-w-[448px] w-full mx-auto p-4 sm:p-5 bg-surface border border-emerald-500/40 rounded-3xl space-y-5 shadow-2xl animate-in zoom-in-95 duration-300">
+        <div className="text-center space-y-1">
+          <span className="text-xs font-mono font-bold text-emerald-600 dark:text-[#00FF9D] uppercase tracking-widest">
+            STEP 2 OF 2: CHOOSE YOUR START PATH
+          </span>
+          <h2 className="text-xl sm:text-2xl font-black text-text-primary tracking-tight">
+            Your Protocol is Formulated
+          </h2>
+          <p className="text-xs text-text-secondary">
+            Choose how you would like to begin your Tovelu metabolic transformation today:
+          </p>
+        </div>
+
+        {/* OPTION 1: INSTANT PAY & START DAY 1 (RECOMMENDED) */}
+        <div className="p-5 rounded-3xl bg-gradient-to-b from-emerald-500/15 to-surface-raised border-2 border-emerald-500/60 shadow-lg space-y-3 relative overflow-hidden">
+          <div className="flex items-center justify-between">
+            <span className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-500 text-slate-950">
+              ⭐ RECOMMENDED • FASTEST RESET
+            </span>
+            <span className="text-xs font-mono font-bold text-emerald-600 dark:text-[#00FF9D]">Full Access</span>
+          </div>
+
+          <div>
+            <h3 className="text-base font-black text-text-primary">Instant Protocol Activation</h3>
+            <p className="text-xs text-text-secondary mt-0.5">
+              Lock in your personalized 90-Day Metabolic Arc, select your official Day 1 Start Date, and begin immediately with full support.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 gap-2 text-[11px] font-semibold text-text-primary pt-1">
+            <div className="flex items-center gap-1.5">
+              <span className="text-emerald-500">✓</span> 100% Tax-Inclusive
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span className="text-emerald-500">✓</span> Pick Day 1 Start Date
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span className="text-emerald-500">✓</span> Subscriptions from $49/mo
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span className="text-emerald-500">✓</span> 30-Day Guarantee
+            </div>
+          </div>
+
           <Button
             size="lg"
             variant="primary"
             fullWidth
-            className="rounded-2xl py-4 font-black text-sm bg-gradient-to-r from-emerald-500 via-teal-500 to-brand-primary shadow-xl shadow-emerald-500/25 active:scale-98 transition-all flex items-center justify-center gap-2"
+            className="rounded-2xl py-4 font-black text-sm bg-gradient-to-r from-emerald-500 via-teal-500 to-brand-primary shadow-xl shadow-emerald-500/30 active:scale-98 transition-all flex items-center justify-center gap-2 mt-2"
             onClick={() => {
               if (onPayNow) {
                 onPayNow(compiledInput, generatedAssessment, generatedPlan);
@@ -303,16 +449,38 @@ export const DopamineSurveyRunner: React.FC<DopamineSurveyRunnerProps> = ({ onCo
             }}
           >
             <Zap className="w-4 h-4 fill-current" />
-            ⚡ Unlock Full Sovereign Protocol Now (Pay Now)
+            <span>⚡ Pay Now & Select Day 1 Launch Date →</span>
           </Button>
+        </div>
 
-          {/* SECONDARY: 3-Hour Free Trial */}
+        {/* DIVIDER */}
+        <div className="flex items-center gap-3">
+          <div className="flex-1 h-px bg-border-default" />
+          <span className="text-[10px] uppercase font-mono font-bold text-text-muted tracking-widest">
+            OR TEST-DRIVE FIRST
+          </span>
+          <div className="flex-1 h-px bg-border-default" />
+        </div>
+
+        {/* OPTION 2: 3-HOUR FREE TRIAL */}
+        <div className="p-4 rounded-3xl bg-surface-raised border border-border-default space-y-3">
+          <div className="flex items-center justify-between">
+            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-slate-200 dark:bg-slate-800 text-text-secondary">
+              ⏱️ 3-HOUR FREE ACCESS
+            </span>
+            <span className="text-[11px] font-bold text-text-muted">No Card Needed</span>
+          </div>
+
+          <p className="text-xs text-text-secondary leading-relaxed">
+            Want to inspect your sequenced meal engine, day 1 recipes, and organ mirrors first? Explore the entire Tovelu Web App free for the next 3 hours. Pay only when you are ready to continue.
+          </p>
+
           <button
             type="button"
-            className="w-full py-3.5 px-4 rounded-2xl border border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-700 dark:text-[#00FF9D] font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 active:scale-98"
+            className="w-full py-3.5 px-4 rounded-2xl border border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-700 dark:text-[#00FF9D] font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 active:scale-98 shadow-sm"
             onClick={() => onComplete(compiledInput, generatedAssessment, generatedPlan)}
           >
-            <span>⏱️ Or Explore Web App Free for 3 Hours →</span>
+            <span>⏱️ Explore Web App Free for 3 Hours →</span>
           </button>
         </div>
       </div>

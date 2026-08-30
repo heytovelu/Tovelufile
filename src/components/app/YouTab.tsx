@@ -8,14 +8,14 @@ interface YouTabProps {
   onOpenPaywall?: () => void;
 }
 
-type YouModule = 'rulebook' | 'biometrics' | 'schedule' | 'wearables' | 'membership' | 'privacy' | 'founder';
+type YouModule = 'guide' | 'rulebook' | 'biometrics' | 'schedule' | 'wearables' | 'membership' | 'privacy' | 'founder';
 
 export const YouTab: React.FC<YouTabProps> = ({
   darkMode = true,
   onToggleTheme,
   onOpenPaywall,
 }) => {
-  const [activeTab, setActiveTab] = useState<YouModule>('rulebook');
+  const [activeTab, setActiveTab] = useState<YouModule>('guide');
   const [activeChapter, setActiveChapter] = useState<number | null>(1);
   const [isPaused, setIsPaused] = useState(false);
   const [actionToast, setActionToast] = useState<string | null>(null);
@@ -40,6 +40,7 @@ export const YouTab: React.FC<YouTabProps> = ({
   };
 
   const navItems: { id: YouModule; label: string; icon: string }[] = [
+    { id: 'guide', label: 'How to Use App', icon: '📱' },
     { id: 'rulebook', label: 'Rule Book', icon: '📖' },
     { id: 'biometrics', label: 'Biometrics', icon: '🧬' },
     { id: 'schedule', label: 'Schedule', icon: '⏰' },
@@ -140,6 +141,166 @@ export const YouTab: React.FC<YouTabProps> = ({
       </div>
 
       {/* 4. MODULE CONTENT AREA */}
+
+      {/* MODULE 0: HOW TO USE THIS APP (SUPER SIMPLE GUIDE) */}
+      {activeTab === 'guide' && (
+        <div className="space-y-4 animate-fadeIn">
+          {/* Friendly Welcome Card */}
+          <div className={`p-4 sm:p-5 rounded-3xl border ${cardCls} space-y-3`}>
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-2xl bg-[#00FF9D]/20 text-emerald-600 dark:text-[#00FF9D] flex items-center justify-center text-2xl shrink-0">
+                👋
+              </div>
+              <div>
+                <h3 className={`text-base font-black ${textTitle}`}>How to Use Tovelu</h3>
+                <p className={`text-xs ${textSub}`}>Simple guide with zero complicated doctor words.</p>
+              </div>
+            </div>
+
+            <div className="p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-xs text-text-secondary leading-relaxed">
+              <strong className="text-text-primary block mb-1">💡 What is this app?</strong>
+              Think of Tovelu like a smart helper for your food and stomach. You <strong>never have to starve</strong>, and you <strong>don't have to stop eating your favorite foods</strong>. You only change the simple ORDER you put food into your mouth!
+            </div>
+          </div>
+
+          {/* THE GOLDEN 1-2-3 EATING RULE */}
+          <div className={`p-4 sm:p-5 rounded-3xl border ${cardCls} space-y-3`}>
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] uppercase font-mono font-bold text-emerald-600 dark:text-[#00FF9D] tracking-widest">
+                THE MAIN SECRET (DO THIS EVERY MEAL)
+              </span>
+              <span className="text-xs">🥗 🍗 🍚</span>
+            </div>
+            
+            <h4 className={`text-sm font-black ${textTitle}`}>The 1-2-3 Food Order Rule</h4>
+            <p className={`text-xs ${textSub}`}>Whenever you sit down for lunch or dinner, eat your plate in this exact order:</p>
+
+            <div className="space-y-2 text-xs">
+              {/* Step 1 */}
+              <div className={`p-3 rounded-2xl border ${subBoxCls} space-y-1`}>
+                <div className="flex items-center gap-2 font-black text-emerald-600 dark:text-[#00FF9D]">
+                  <span className="text-base">🥗</span>
+                  <span>STEP 1: Eat Your Veggies / Salad First</span>
+                </div>
+                <p className={`text-[11px] ${textSub} pl-6 leading-relaxed`}>
+                  Start with cucumber, carrots, salad, cabbage, or cooked vegetables. 
+                  <br />
+                  <strong className="text-text-primary">Why?</strong> The veggies coat the walls of your stomach like a gentle net so sugar and fat cannot rush into your blood all at once!
+                </p>
+              </div>
+
+              {/* Step 2 */}
+              <div className={`p-3 rounded-2xl border ${subBoxCls} space-y-1`}>
+                <div className="flex items-center gap-2 font-black text-amber-500">
+                  <span className="text-base">🍗</span>
+                  <span>STEP 2: Eat Your Protein & Fats Second</span>
+                </div>
+                <p className={`text-[11px] ${textSub} pl-6 leading-relaxed`}>
+                  Next eat your chicken, eggs, fish, paneer, tofu, nuts, or lentils.
+                  <br />
+                  <strong className="text-text-primary">Why?</strong> Protein tells your brain: "I am full and happy!" so you don't get hungry 1 hour later.
+                </p>
+              </div>
+
+              {/* Step 3 */}
+              <div className={`p-3 rounded-2xl border ${subBoxCls} space-y-1`}>
+                <div className="flex items-center gap-2 font-black text-sky-500">
+                  <span className="text-base">🍚</span>
+                  <span>STEP 3: Eat Your Rice, Roti, Bread, or Sweets Last!</span>
+                </div>
+                <p className={`text-[11px] ${textSub} pl-6 leading-relaxed`}>
+                  Finally, enjoy your rice, chapati/roti, pasta, potatoes, or sweet treats.
+                  <br />
+                  <strong className="text-text-primary">Why?</strong> Because the veggies and protein are already in your tummy, carbs digest slowly. You stay energetic and won't feel like falling asleep at your desk!
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* WHAT EACH TAB IN THE APP DOES */}
+          <div className={`p-4 sm:p-5 rounded-3xl border ${cardCls} space-y-3`}>
+            <span className="text-[10px] uppercase font-mono font-bold text-emerald-600 dark:text-[#00FF9D] tracking-widest">
+              HOW TO USE THE 5 TABS (AT BOTTOM OF SCREEN)
+            </span>
+
+            <div className="space-y-2.5 text-xs">
+              {/* TODAY */}
+              <div className={`p-3 rounded-2xl border ${subBoxCls} space-y-1`}>
+                <div className="font-bold flex items-center gap-2 text-text-primary">
+                  <span>🌅</span>
+                  <span>1. TODAY Tab (Your Daily Checklist)</span>
+                </div>
+                <p className={`text-[11px] ${textSub} leading-relaxed`}>
+                  Open this tab every morning. It tells you what to eat for Breakfast, Lunch, and Dinner in the right 1-2-3 order. When you finish eating, tap the checkmark!
+                </p>
+              </div>
+
+              {/* WEEK */}
+              <div className={`p-3 rounded-2xl border ${subBoxCls} space-y-1`}>
+                <div className="font-bold flex items-center gap-2 text-text-primary">
+                  <span>📅</span>
+                  <span>2. WEEK Tab (Your Weekly Plan & Groceries)</span>
+                </div>
+                <p className={`text-[11px] ${textSub} leading-relaxed`}>
+                  Shows what meals are planned for the whole week. It also gives you a simple grocery list so you know what groceries to buy from the market with zero food wasted.
+                </p>
+              </div>
+
+              {/* REPORT */}
+              <div className={`p-3 rounded-2xl border ${subBoxCls} space-y-1`}>
+                <div className="font-bold flex items-center gap-2 text-text-primary">
+                  <span>📊</span>
+                  <span>3. REPORT Tab (How Your Body is Getting Younger)</span>
+                </div>
+                <p className={`text-[11px] ${textSub} leading-relaxed`}>
+                  Look here to see your <strong>Biological Age</strong>. If your real age is 35 but your body is working like 40, this screen tracks your score as it drops back down week after week!
+                </p>
+              </div>
+
+              {/* HEALTH */}
+              <div className={`p-3 rounded-2xl border ${subBoxCls} space-y-1`}>
+                <div className="font-bold flex items-center gap-2 text-text-primary">
+                  <span>🫀</span>
+                  <span>4. HEALTH Tab (Your 14 Body Organs)</span>
+                </div>
+                <p className={`text-[11px] ${textSub} leading-relaxed`}>
+                  Shows 14 parts of your body (heart, liver, stomach, gut, skin). When an organ is green, it's healing! You can also tap "Doctor QR" to show this to your family doctor anytime.
+                </p>
+              </div>
+
+              {/* YOU */}
+              <div className={`p-3 rounded-2xl border ${subBoxCls} space-y-1`}>
+                <div className="font-bold flex items-center gap-2 text-text-primary">
+                  <span>👤</span>
+                  <span>5. YOU Tab (Your Personal Profile & Settings)</span>
+                </div>
+                <p className={`text-[11px] ${textSub} leading-relaxed`}>
+                  Where you are right now! Here you can check your sleep times, see your rules, connect smartwatches, or change your subscription plan.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* WHAT TO DO IF YOU CHEAT OR GO TO A PARTY */}
+          <div className="p-4 rounded-3xl bg-amber-500/10 border border-amber-500/30 text-xs space-y-2 text-amber-800 dark:text-amber-300">
+            <span className="font-bold block text-sm flex items-center gap-2">
+              <span>🍕</span>
+              <span>What if I eat pizza, ice cream, or cheat at a party?</span>
+            </span>
+            <p className="leading-relaxed text-[11px]">
+              <strong>Do not panic and DO NOT starve yourself the next day!</strong>
+              <br />
+              All you need to do:
+              <br />
+              1. Drink a big glass of room-temperature water.
+              <br />
+              2. Take a relaxed 10-minute walk after eating.
+              <br />
+              3. On your very next meal, simply eat your vegetables first again. That's it—your body resets quickly!
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* MODULE 1: THE OFFICIAL TOVELU RULE BOOK */}
       {activeTab === 'rulebook' && (
