@@ -66,6 +66,11 @@ export default function App() {
         try {
           localStorage.setItem('tovelu_user_session', JSON.stringify(session));
         } catch (_e) {}
+
+        if (searchParams.get('verified') === 'true') {
+          setToastMessage(`🎉 Email Confirmed! Welcome ${session.firstName}. Starting your 52-Question Clinical Audit...`);
+          setTimeout(() => setToastMessage(null), 4500);
+        }
       }
 
       // If accessing app.tovelu.store or /app or /survey
