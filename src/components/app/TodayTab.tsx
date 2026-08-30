@@ -81,65 +81,41 @@ export const TodayTab: React.FC<TodayTabProps> = ({
     },
   ]);
 
-  // Daily Habits & Vitals State
-  const [habits, setHabits] = useState({
-    walkSteps: 5420,
-    walkMinutes: 38,
-    walkUnit: 'steps' as 'steps' | 'minutes',
-    sleepHours: 7.2,
-    waterLiters: 2.1,
-    waterUnit: 'liters' as 'liters' | 'glasses',
-    exerciseMinutes: 20,
-    sunlightMinutes: 15,
-  });
-
-  // Habit Logging Modal State
-  const [activeHabitModal, setActiveHabitModal] = useState<HabitType | null>(null);
-
-  // Targeted Daily Health Tasks
-  const [tasks, setTasks] = useState<DailyHealthTask[]>([
-    {
-      id: 'task-1',
-      title: 'Morning Circadian Hydration with Mineral Salt',
-      category: 'hydration',
-      targetTiming: '5 min • Morning',
-      clinicalRationale: 'Re-establishes cellular osmolarity, activates adrenal medulla aldosterone balance, and triggers peristaltic gut clearance.',
-      targetsDisease: 'SIBO / Electrolyte Imbalance',
-      isCompleted: true,
-    },
-    {
-      id: 'task-2',
-      title: 'Post-Lunch 10-Minute Glucose Clearing Walk',
-      category: 'movement',
-      targetTiming: '10 min • Post-Lunch',
-      clinicalRationale: 'Soleus and quadricep muscle contractions activate GLUT4 glucose transporters independent of insulin, blunting peak glucose excursion by up to 38%.',
-      targetsDisease: 'Insulin Resistance',
-      isCompleted: true,
-    },
-    {
-      id: 'task-3',
-      title: 'Magnesium Glycinate & Blue Light Cutoff',
-      category: 'recovery',
-      targetTiming: '5 min • Night',
-      clinicalRationale: 'Reduces neuro-muscular hyper-excitability and prevents pineal melatonin suppression before deep slow-wave sleep.',
-      targetsDisease: 'Sleep Latency',
-      isCompleted: false,
-    },
-  ]);
+  // Combined Chronological Daily Routine & Healing Tasks State
+  const [sleepHours, setSleepHours] = useState(7.2);
+  const [isMorningHydrationDone, setIsMorningHydrationDone] = useState(true);
+  const [sunlightMins, setSunlightMins] = useState(15);
+  const [isPostLunchWalkDone, setIsPostLunchWalkDone] = useState(true);
+  const [waterLiters, setWaterLiters] = useState(2.1);
+  const [waterUnit, setWaterUnit] = useState<'liters' | 'glasses'>('liters');
+  const [exerciseMins, setExerciseMins] = useState(20);
+  const [walkSteps, setWalkSteps] = useState(5420);
+  const [walkUnit, setWalkUnit] = useState<'steps' | 'minutes'>('steps');
+  const [isMagnesiumDone, setIsMagnesiumDone] = useState(false);
 
   // Modals state
   const [activeLogMeal, setActiveLogMeal] = useState<MealPortion | null>(null);
   const [initialMealLogMode, setInitialMealLogMode] = useState<'scan' | 'manual' | 'ask_ai'>('scan');
+  const [activeHabitModal, setActiveHabitModal] = useState<HabitType | null>(null);
   const [isNightlyOpen, setIsNightlyOpen] = useState(false);
   const [isSosOpen, setIsSosOpen] = useState(false);
   const [activeExpandedMeal, setActiveExpandedMeal] = useState<'breakfast' | 'lunch' | 'dinner'>('dinner');
   const [oneTapToast, setOneTapToast] = useState<string | null>(null);
 
-  // Homeostasis Calculation
-  const totalItems = meals.length + tasks.length + 1;
+  // Homeostasis Calculation (Meals + Routine Tasks)
+  const totalTasksCount = 8;
+  const completedTasksCount =
+    (sleepHours >= 7.0 ? 1 : 0) +
+    (isMorningHydrationDone ? 1 : 0) +
+    (sunlightMins >= 15 ? 1 : 0) +
+    (isPostLunchWalkDone ? 1 : 0) +
+    (waterLiters >= 2.5 ? 1 : 0) +
+    (exerciseMins >= 30 ? 1 : 0) +
+    (walkSteps >= 8000 ? 1 : 0) +
+    (isMagnesiumDone ? 1 : 0);
+
   const completedMeals = meals.filter((m) => m.isLogged).length;
-  const completedTasks = tasks.filter((t) => t.isCompleted).length;
-  const progressPercent = Math.round(((completedMeals + completedTasks) / totalItems) * 100);
+  const progressPercent = Math.round(((completedMeals + completedTasksCount) / (meals.length + totalTasksCount)) * 100);
   const isAllComplete = progressPercent >= 100;
 
   // 1-Tap Log As Planned Handler
@@ -169,22 +145,17 @@ export const TodayTab: React.FC<TodayTabProps> = ({
   };
 
   const handleHabitSave = (type: HabitType, newVal: number) => {
-    setHabits((prev) => {
-      if (type === 'walk') return { ...prev, walkSteps: newVal };
-      if (type === 'sleep') return { ...prev, sleepHours: newVal };
-      if (type === 'water') return { ...prev, waterLiters: newVal };
-      if (type === 'exercise') return { ...prev, exerciseMinutes: newVal };
-      if (type === 'sunlight') return { ...prev, sunlightMinutes: newVal };
-      return prev;
-    });
+    if (type === 'walk') setWalkSteps(newVal);
+    if (type === 'sleep') setSleepHours(newVal);
+    if (type === 'water') {
+      setWaterLiters(newVal);
+      setBudget((prev) => ({ ...prev, consumedWaterL: newVal }));
+    }
+    if (type === 'exercise') setExerciseMins(newVal);
+    if (type === 'sunlight') setSunlightMins(newVal);
+
     setOneTapToast(`✅ Saved ${type.toUpperCase()} log!`);
     setTimeout(() => setOneTapToast(null), 2500);
-  };
-
-  const handleTaskComplete = (taskId: string) => {
-    setTasks((prev) =>
-      prev.map((t) => (t.id === taskId ? { ...t, isCompleted: true } : t))
-    );
   };
 
   const handleConfirmMeal = (
@@ -219,6 +190,14 @@ export const TodayTab: React.FC<TodayTabProps> = ({
   const btnSecCls = darkMode 
     ? 'bg-slate-800 hover:bg-slate-700 border-slate-700 text-slate-200' 
     : 'bg-slate-100 hover:bg-slate-200 border-slate-300 text-slate-800 font-bold';
+
+  // Quick helper for tasks for NightlyCheckInModal
+  const dummyTasks: DailyHealthTask[] = [
+    { id: '1', title: 'Sleep Window Audit', category: 'recovery', targetTiming: 'Morning', clinicalRationale: 'Cellular recovery', targetsDisease: 'Fatigue', isCompleted: sleepHours >= 7.0 },
+    { id: '2', title: 'Circadian Hydration & Salt', category: 'hydration', targetTiming: 'Morning', clinicalRationale: 'Aldosterone balance', targetsDisease: 'Electrolyte imbalance', isCompleted: isMorningHydrationDone },
+    { id: '3', title: 'Post-Lunch Glucose Walk', category: 'movement', targetTiming: 'Afternoon', clinicalRationale: 'GLUT4 activation', targetsDisease: 'Insulin resistance', isCompleted: isPostLunchWalkDone },
+    { id: '4', title: 'Magnesium & Blue Light', category: 'recovery', targetTiming: 'Night', clinicalRationale: 'Melatonin protection', targetsDisease: 'Sleep latency', isCompleted: isMagnesiumDone },
+  ];
 
   return (
     <div className="w-full space-y-4 px-4 pt-3 pb-8 animate-fadeIn">
@@ -293,7 +272,7 @@ export const TodayTab: React.FC<TodayTabProps> = ({
             {isAllComplete ? 'Day 14 Conquered! 🔥' : 'Day 14 in Progress'}
           </h3>
           <p className={`text-xs ${textSub} leading-snug font-medium`}>
-            {completedMeals}/3 Meals Logged • {completedTasks}/3 Tasks Done
+            {completedMeals}/3 Meals Logged • {completedTasksCount}/{totalTasksCount} Tasks Done
           </p>
 
           {/* Metabolic State Badge */}
@@ -420,13 +399,13 @@ export const TodayTab: React.FC<TodayTabProps> = ({
       </div>
 
       {/* ========================================================================= */}
-      {/* 5. SECTION 1: FOOD LOG (DIET SEQUENCING - BREAKFAST | LUNCH | DINNER) */}
+      {/* 5. FOOD LOG (DIET SEQUENCING - BREAKFAST | LUNCH | DINNER) */}
       {/* ========================================================================= */}
       <div className="space-y-2.5 pt-1">
         <div className="flex items-center justify-between px-1">
           <div>
             <span className="text-[10px] uppercase font-mono font-bold tracking-widest text-emerald-600 dark:text-[#00FF9D]">
-              LOG 1 OF 3
+              FOOD LOG
             </span>
             <h3 className={`text-xs font-black uppercase tracking-wider ${textTitle}`}>
               Diet Food Log (Sequenced)
@@ -571,301 +550,437 @@ export const TodayTab: React.FC<TodayTabProps> = ({
       </div>
 
       {/* ========================================================================= */}
-      {/* 6. SECTION 2: DAILY HABIT & VITALS LOG (METERS & MANUAL LOGGING) */}
+      {/* 6. COMBINED CHRONOLOGICAL SECTION: DAILY ROUTINE & HEALING TASKS */}
+      {/* (Morning to Night Sequence - Ajay's Mandate) */}
       {/* ========================================================================= */}
-      <div className={`p-4 rounded-2xl border ${cardCls} space-y-3.5`}>
-        <div className="flex items-center justify-between">
+      <div className={`p-4 rounded-2xl border ${cardCls} space-y-4`}>
+        <div className="flex items-center justify-between pb-1 border-b border-slate-200 dark:border-slate-800">
           <div>
             <span className="text-[10px] uppercase font-mono font-bold tracking-widest text-emerald-600 dark:text-[#00FF9D]">
-              LOG 2 OF 3
+              CHRONOLOGICAL TIMELINE
             </span>
             <h3 className={`text-xs font-black uppercase tracking-wider ${textTitle}`}>
-              Daily Habits & Vitals Log
+              Daily Routine & Healing Tasks
             </h3>
           </div>
-          <span className={`text-[10px] ${textSub} font-mono`}>Hit Daily Targets</span>
+          <span className="text-[10px] font-mono text-emerald-600 dark:text-[#00FF9D] font-bold">
+            {completedTasksCount} of {totalTasksCount} Done ({Math.round((completedTasksCount / totalTasksCount) * 100)}%)
+          </span>
         </div>
 
-        {/* 1. WALK METER */}
-        <div className={`p-3 rounded-xl border ${subBoxCls} space-y-2`}>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <span className="text-lg">🚶</span>
-              <div>
-                <div className={`text-xs font-bold ${textTitle}`}>Daily Walk</div>
-                <div className={`text-[10px] ${textSub}`}>
-                  Target: {habits.walkUnit === 'steps' ? '8,000 steps' : '45 minutes'}
+        {/* ========================================== */}
+        {/* PHASE 1: MORNING ROUTINE (Wake to 11 AM) */}
+        {/* ========================================== */}
+        <div className="space-y-2.5">
+          <div className="flex items-center gap-1.5 text-xs font-black tracking-wider uppercase text-amber-600 dark:text-amber-400">
+            <span>🌅</span>
+            <span>Morning Routine (Wake to 11 AM)</span>
+          </div>
+
+          {/* Task 1: Sleep Log */}
+          <div className={`p-3 rounded-xl border ${subBoxCls} space-y-2`}>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="text-xl">🌙</span>
+                <div>
+                  <div className={`text-xs font-bold ${textTitle}`}>1. Night Sleep Duration</div>
+                  <div className={`text-[10px] ${textSub}`}>Target: 8.0 hrs restorative sleep</div>
                 </div>
               </div>
-            </div>
-
-            <div className="flex items-center gap-2">
               <button
-                onClick={() =>
-                  setHabits((prev) => ({
-                    ...prev,
-                    walkUnit: prev.walkUnit === 'steps' ? 'minutes' : 'steps',
-                  }))
-                }
-                className={`py-1 px-2 rounded-lg text-[10px] font-mono border ${btnSecCls}`}
-              >
-                {habits.walkUnit === 'steps' ? 'Steps' : 'Mins'} ⇄
-              </button>
-              <button
-                onClick={() => setActiveHabitModal('walk')}
+                onClick={() => setActiveHabitModal('sleep')}
                 className="py-1 px-2.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-[#00FF9D] text-[11px] font-bold border border-emerald-500/40 active:scale-95 transition-all"
               >
-                ✍️ Log
+                ✍️ Log Sleep
               </button>
             </div>
-          </div>
 
-          <div className="space-y-1">
-            <div className="flex items-center justify-between text-[11px]">
-              <span className={`font-mono font-bold ${textTitle}`}>
-                {habits.walkUnit === 'steps' ? `${habits.walkSteps} / 8,000 steps` : `${habits.walkMinutes} / 45 mins`}
+            {/* Quick in-card stepper & pills */}
+            <div className="flex items-center justify-between pt-0.5">
+              <span className={`text-xs font-mono font-bold ${textTitle}`}>
+                Logged: <span className="text-emerald-600 dark:text-[#00FF9D] text-sm">{sleepHours} hrs</span>
               </span>
-              <span className="font-mono text-emerald-600 dark:text-emerald-400 font-bold">
-                {habits.walkUnit === 'steps'
-                  ? `${Math.round((habits.walkSteps / 8000) * 100)}%`
-                  : `${Math.round((habits.walkMinutes / 45) * 100)}%`}
-              </span>
-            </div>
-            <div className="h-2 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
-              <div
-                className="h-full bg-emerald-500 dark:bg-[#00FF9D] rounded-full transition-all"
-                style={{
-                  width: `${Math.min(
-                    100,
-                    habits.walkUnit === 'steps'
-                      ? (habits.walkSteps / 8000) * 100
-                      : (habits.walkMinutes / 45) * 100
-                  )}%`,
-                }}
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* 2. SLEEP METER */}
-        <div className={`p-3 rounded-xl border ${subBoxCls} space-y-2`}>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <span className="text-lg">🌙</span>
-              <div>
-                <div className={`text-xs font-bold ${textTitle}`}>Night Sleep Window</div>
-                <div className={`text-[10px] ${textSub}`}>Target: 8.0 hours restorative</div>
+              <div className="flex items-center gap-1">
+                {[6.5, 7.0, 7.5, 8.0, 8.5].map((h) => (
+                  <button
+                    key={h}
+                    onClick={() => {
+                      setSleepHours(h);
+                      setOneTapToast(`🌙 Logged ${h} hrs sleep!`);
+                      setTimeout(() => setOneTapToast(null), 2000);
+                    }}
+                    className={`py-0.5 px-2 rounded-lg text-[10px] font-bold border transition-all ${
+                      sleepHours === h
+                        ? 'bg-[#00FF9D] text-slate-950 border-[#00FF9D]'
+                        : darkMode
+                        ? 'bg-slate-800 text-slate-300 border-slate-700'
+                        : 'bg-slate-200 text-slate-700 border-slate-300'
+                    }`}
+                  >
+                    {h}h
+                  </button>
+                ))}
               </div>
             </div>
-
-            <button
-              onClick={() => setActiveHabitModal('sleep')}
-              className="py-1 px-2.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-[#00FF9D] text-[11px] font-bold border border-emerald-500/40 active:scale-95 transition-all"
-            >
-              ✍️ Log
-            </button>
-          </div>
-
-          <div className="space-y-1">
-            <div className="flex items-center justify-between text-[11px]">
-              <span className={`font-mono font-bold ${textTitle}`}>
-                {habits.sleepHours} / 8.0 hours
-              </span>
-              <span className="font-mono text-indigo-600 dark:text-indigo-400 font-bold">
-                {Math.round((habits.sleepHours / 8.0) * 100)}%
-              </span>
-            </div>
-            <div className="h-2 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+            <div className="h-1.5 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
               <div
                 className="h-full bg-indigo-500 dark:bg-indigo-400 rounded-full transition-all"
-                style={{ width: `${Math.min(100, (habits.sleepHours / 8.0) * 100)}%` }}
+                style={{ width: `${Math.min(100, (sleepHours / 8.0) * 100)}%` }}
               />
             </div>
           </div>
-        </div>
 
-        {/* 3. WATER HYDRATION METER */}
-        <div className={`p-3 rounded-xl border ${subBoxCls} space-y-2`}>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <span className="text-lg">💧</span>
-              <div>
-                <div className={`text-xs font-bold ${textTitle}`}>Water Hydration</div>
-                <div className={`text-[10px] ${textSub}`}>
-                  Target: {habits.waterUnit === 'liters' ? '3.0 Liters' : '12 Glasses'}
+          {/* Task 2: Morning Hydration with Mineral Salt */}
+          <div className={`p-3 rounded-xl border ${subBoxCls} space-y-2`}>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="text-xl">💧</span>
+                <div>
+                  <div className={`text-xs font-bold ${textTitle}`}>2. Mineral Hydration + Rock Salt</div>
+                  <div className={`text-[10px] ${textSub}`}>Target: 500ml warm water with pink salt</div>
                 </div>
               </div>
-            </div>
-
-            <div className="flex items-center gap-2">
               <button
-                onClick={() =>
-                  setHabits((prev) => ({
-                    ...prev,
-                    waterUnit: prev.waterUnit === 'liters' ? 'glasses' : 'liters',
-                  }))
-                }
-                className={`py-1 px-2 rounded-lg text-[10px] font-mono border ${btnSecCls}`}
+                onClick={() => {
+                  setIsMorningHydrationDone(!isMorningHydrationDone);
+                  setOneTapToast(!isMorningHydrationDone ? '💧 Morning mineral hydration logged!' : 'Reset hydration task');
+                  setTimeout(() => setOneTapToast(null), 2500);
+                }}
+                className={`py-1 px-3 rounded-lg text-[11px] font-bold border transition-all active:scale-95 ${
+                  isMorningHydrationDone
+                    ? 'bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border-emerald-500/40'
+                    : 'bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-700'
+                }`}
               >
-                {habits.waterUnit === 'liters' ? 'Liters' : 'Glasses'} ⇄
+                {isMorningHydrationDone ? 'Done ✓' : 'Log 500ml'}
               </button>
+            </div>
+            <p className={`text-[10px] ${textSub} leading-snug`}>
+              Re-establishes cellular osmolarity and triggers adrenal aldosterone balance upon waking.
+            </p>
+          </div>
+
+          {/* Task 3: Sunlight & Fresh Air */}
+          <div className={`p-3 rounded-xl border ${subBoxCls} space-y-2`}>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="text-xl">☀️</span>
+                <div>
+                  <div className={`text-xs font-bold ${textTitle}`}>3. Morning Sunlight & Circadian Reset</div>
+                  <div className={`text-[10px] ${textSub}`}>Target: 15 mins retinal photon exposure</div>
+                </div>
+              </div>
               <button
-                onClick={() => setActiveHabitModal('water')}
+                onClick={() => setActiveHabitModal('sunlight')}
                 className="py-1 px-2.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-[#00FF9D] text-[11px] font-bold border border-emerald-500/40 active:scale-95 transition-all"
               >
-                ✍️ Log
+                ✍️ Log Mins
               </button>
             </div>
-          </div>
 
-          <div className="space-y-1">
-            <div className="flex items-center justify-between text-[11px]">
-              <span className={`font-mono font-bold ${textTitle}`}>
-                {habits.waterUnit === 'liters'
-                  ? `${habits.waterLiters} / 3.0 Liters`
-                  : `${Math.round(habits.waterLiters * 4)} / 12 Glasses`}
+            <div className="flex items-center justify-between pt-0.5">
+              <span className={`text-xs font-mono font-bold ${textTitle}`}>
+                Exposure: <span className="text-emerald-600 dark:text-[#00FF9D] text-sm">{sunlightMins} mins</span>
               </span>
-              <span className="font-mono text-sky-600 dark:text-sky-400 font-bold">
-                {Math.round((habits.waterLiters / 3.0) * 100)}%
-              </span>
-            </div>
-            <div className="h-2 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
-              <div
-                className="h-full bg-sky-500 dark:bg-sky-400 rounded-full transition-all"
-                style={{ width: `${Math.min(100, (habits.waterLiters / 3.0) * 100)}%` }}
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* 4. EXERCISE & WORKOUT METER */}
-        <div className={`p-3 rounded-xl border ${subBoxCls} space-y-2`}>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <span className="text-lg">💪</span>
-              <div>
-                <div className={`text-xs font-bold ${textTitle}`}>Exercise & Training</div>
-                <div className={`text-[10px] ${textSub}`}>Target: 30 minutes</div>
+              <div className="flex items-center gap-1">
+                {[5, 10, 15, 20].map((m) => (
+                  <button
+                    key={m}
+                    onClick={() => {
+                      setSunlightMins(m);
+                      setOneTapToast(`☀️ Logged ${m} mins morning sunlight!`);
+                      setTimeout(() => setOneTapToast(null), 2000);
+                    }}
+                    className={`py-0.5 px-2 rounded-lg text-[10px] font-bold border transition-all ${
+                      sunlightMins === m
+                        ? 'bg-[#00FF9D] text-slate-950 border-[#00FF9D]'
+                        : darkMode
+                        ? 'bg-slate-800 text-slate-300 border-slate-700'
+                        : 'bg-slate-200 text-slate-700 border-slate-300'
+                    }`}
+                  >
+                    {m}m
+                  </button>
+                ))}
               </div>
             </div>
-
-            <button
-              onClick={() => setActiveHabitModal('exercise')}
-              className="py-1 px-2.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-[#00FF9D] text-[11px] font-bold border border-emerald-500/40 active:scale-95 transition-all"
-            >
-              ✍️ Log
-            </button>
-          </div>
-
-          <div className="space-y-1">
-            <div className="flex items-center justify-between text-[11px]">
-              <span className={`font-mono font-bold ${textTitle}`}>
-                {habits.exerciseMinutes} / 30 mins
-              </span>
-              <span className="font-mono text-amber-600 dark:text-amber-400 font-bold">
-                {Math.round((habits.exerciseMinutes / 30) * 100)}%
-              </span>
-            </div>
-            <div className="h-2 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
-              <div
-                className="h-full bg-amber-500 dark:bg-amber-400 rounded-full transition-all"
-                style={{ width: `${Math.min(100, (habits.exerciseMinutes / 30) * 100)}%` }}
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* 5. SUNLIGHT / OUTDOOR CIRCADIAN RESET */}
-        <div className={`p-3 rounded-xl border ${subBoxCls} space-y-2`}>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <span className="text-lg">☀️</span>
-              <div>
-                <div className={`text-xs font-bold ${textTitle}`}>Morning Sunlight & Air</div>
-                <div className={`text-[10px] ${textSub}`}>Target: 15 minutes retinal photon reset</div>
-              </div>
-            </div>
-
-            <button
-              onClick={() => setActiveHabitModal('sunlight')}
-              className="py-1 px-2.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-[#00FF9D] text-[11px] font-bold border border-emerald-500/40 active:scale-95 transition-all"
-            >
-              ✍️ Log
-            </button>
-          </div>
-
-          <div className="space-y-1">
-            <div className="flex items-center justify-between text-[11px]">
-              <span className={`font-mono font-bold ${textTitle}`}>
-                {habits.sunlightMinutes} / 15 mins
-              </span>
-              <span className="font-mono text-emerald-600 dark:text-[#00FF9D] font-bold">
-                {Math.round((habits.sunlightMinutes / 15) * 100)}% (Goal Hit! 🔥)
-              </span>
-            </div>
-            <div className="h-2 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+            <div className="h-1.5 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
               <div
                 className="h-full bg-emerald-500 dark:bg-[#00FF9D] rounded-full transition-all"
-                style={{ width: `${Math.min(100, (habits.sunlightMinutes / 15) * 100)}%` }}
+                style={{ width: `${Math.min(100, (sunlightMins / 15) * 100)}%` }}
               />
             </div>
           </div>
         </div>
-      </div>
 
-      {/* ========================================================================= */}
-      {/* 7. SECTION 3: TARGETED HEALING TASKS (SwipeToComplete) */}
-      {/* ========================================================================= */}
-      <div className="space-y-2.5 pt-1">
-        <div className="flex items-center justify-between px-1">
-          <div>
-            <span className="text-[10px] uppercase font-mono font-bold tracking-widest text-emerald-600 dark:text-[#00FF9D]">
-              LOG 3 OF 3
-            </span>
-            <h3 className={`text-xs font-black uppercase tracking-wider ${textTitle}`}>
-              Targeted Healing Tasks
-            </h3>
+        {/* ========================================== */}
+        {/* PHASE 2: AFTERNOON ROUTINE (12 PM to 4 PM) */}
+        {/* ========================================== */}
+        <div className="space-y-2.5 pt-2 border-t border-slate-200 dark:border-slate-800">
+          <div className="flex items-center gap-1.5 text-xs font-black tracking-wider uppercase text-sky-600 dark:text-sky-400">
+            <span>☀️</span>
+            <span>Afternoon Routine (12 PM to 4 PM)</span>
           </div>
-          <span className={`text-[10px] ${textSub} font-mono`}>Swipe to complete</span>
-        </div>
 
-        <div className="space-y-2">
-          {tasks.map((task) => (
-            <div
-              key={task.id}
-              className={`p-3.5 rounded-2xl border transition-all ${
-                task.isCompleted
-                  ? 'border-emerald-500/40 bg-emerald-500/5'
-                  : cardCls
-              }`}
-            >
-              <div className="flex items-center justify-between mb-1.5">
-                <div className={`text-xs font-bold flex items-center gap-1.5 ${textTitle}`}>
-                  <span>{task.isCompleted ? '✅' : '🎯'}</span>
-                  <span>{task.title}</span>
+          {/* Task 4: Post-Lunch Walk */}
+          <div className={`p-3 rounded-xl border ${subBoxCls} space-y-2`}>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="text-xl">🚶</span>
+                <div>
+                  <div className={`text-xs font-bold ${textTitle}`}>4. Post-Lunch 10-Min Walk</div>
+                  <div className={`text-[10px] ${textSub}`}>Soleus muscle contractions activate GLUT4</div>
                 </div>
-                <span className={`text-[10px] font-mono ${textSub}`}>
-                  {task.targetTiming}
-                </span>
+              </div>
+              <button
+                onClick={() => {
+                  setIsPostLunchWalkDone(!isPostLunchWalkDone);
+                  setOneTapToast(!isPostLunchWalkDone ? '🚶 Post-lunch walk logged! Glucose blunted.' : 'Reset walk task');
+                  setTimeout(() => setOneTapToast(null), 2500);
+                }}
+                className={`py-1 px-3 rounded-lg text-[11px] font-bold border transition-all active:scale-95 ${
+                  isPostLunchWalkDone
+                    ? 'bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border-emerald-500/40'
+                    : 'bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-700'
+                }`}
+              >
+                {isPostLunchWalkDone ? 'Done ✓' : 'Log 10m'}
+              </button>
+            </div>
+            <p className={`text-[10px] ${textSub} leading-snug`}>
+              Absorbs circulating postprandial glucose into muscle cells independent of insulin (-38% spike).
+            </p>
+          </div>
+
+          {/* Task 5: Daily Water Checkpoint */}
+          <div className={`p-3 rounded-xl border ${subBoxCls} space-y-2`}>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="text-xl">💧</span>
+                <div>
+                  <div className={`text-xs font-bold ${textTitle}`}>5. Water Hydration Target</div>
+                  <div className={`text-[10px] ${textSub}`}>
+                    Target: {waterUnit === 'liters' ? '3.0 Liters' : '12 Glasses'}
+                  </div>
+                </div>
               </div>
 
-              <p className={`text-[11px] ${textSub} leading-relaxed mb-3`}>
-                {task.clinicalRationale}
-              </p>
+              <div className="flex items-center gap-1.5">
+                <button
+                  onClick={() => setWaterUnit(waterUnit === 'liters' ? 'glasses' : 'liters')}
+                  className={`py-1 px-2 rounded-lg text-[10px] font-mono border ${btnSecCls}`}
+                >
+                  {waterUnit === 'liters' ? 'Liters' : 'Glasses'} ⇄
+                </button>
+                <button
+                  onClick={() => setActiveHabitModal('water')}
+                  className="py-1 px-2.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-[#00FF9D] text-[11px] font-bold border border-emerald-500/40 active:scale-95 transition-all"
+                >
+                  ✍️ Log
+                </button>
+              </div>
+            </div>
 
-              {/* Swipe Slider */}
-              <SwipeToComplete
-                label="Swipe to Complete Task"
-                completedLabel="Task Completed • Dopamine Locked"
-                isCompleted={task.isCompleted}
-                onComplete={() => handleTaskComplete(task.id)}
+            {/* Quick 1-Tap Adders */}
+            <div className="flex items-center justify-between pt-0.5">
+              <span className={`text-xs font-mono font-bold ${textTitle}`}>
+                {waterUnit === 'liters' ? `${waterLiters.toFixed(1)} / 3.0 L` : `${Math.round(waterLiters * 4)} / 12 Glasses`}
+              </span>
+              <div className="flex items-center gap-1">
+                {[0.25, 0.5, 0.75].map((amt) => (
+                  <button
+                    key={amt}
+                    onClick={() => {
+                      const newL = Number((waterLiters + amt).toFixed(2));
+                      setWaterLiters(newL);
+                      setBudget((prev) => ({ ...prev, consumedWaterL: newL }));
+                      setOneTapToast(`💧 +${amt * 1000}ml water added!`);
+                      setTimeout(() => setOneTapToast(null), 2000);
+                    }}
+                    className={`py-0.5 px-2 rounded-lg text-[10px] font-bold border transition-all ${
+                      darkMode
+                        ? 'bg-slate-800 text-sky-300 border-slate-700 hover:border-sky-400'
+                        : 'bg-sky-50 text-sky-800 border-sky-200 hover:border-sky-400'
+                    }`}
+                  >
+                    +{amt * 1000}ml
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="h-1.5 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-sky-500 dark:bg-sky-400 rounded-full transition-all"
+                style={{ width: `${Math.min(100, (waterLiters / 3.0) * 100)}%` }}
               />
             </div>
-          ))}
+          </div>
+
+          {/* Task 6: Daily Exercise & Movement */}
+          <div className={`p-3 rounded-xl border ${subBoxCls} space-y-2`}>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="text-xl">💪</span>
+                <div>
+                  <div className={`text-xs font-bold ${textTitle}`}>6. Exercise & Training Session</div>
+                  <div className={`text-[10px] ${textSub}`}>Target: 30 minutes training</div>
+                </div>
+              </div>
+              <button
+                onClick={() => setActiveHabitModal('exercise')}
+                className="py-1 px-2.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-[#00FF9D] text-[11px] font-bold border border-emerald-500/40 active:scale-95 transition-all"
+              >
+                ✍️ Log Mins
+              </button>
+            </div>
+
+            <div className="flex items-center justify-between pt-0.5">
+              <span className={`text-xs font-mono font-bold ${textTitle}`}>
+                Workout: <span className="text-amber-600 dark:text-amber-400 text-sm">{exerciseMins} / 30 mins</span>
+              </span>
+              <div className="flex items-center gap-1">
+                {[15, 30, 45, 60].map((m) => (
+                  <button
+                    key={m}
+                    onClick={() => {
+                      setExerciseMins(m);
+                      setOneTapToast(`💪 Logged ${m} mins exercise!`);
+                      setTimeout(() => setOneTapToast(null), 2000);
+                    }}
+                    className={`py-0.5 px-2 rounded-lg text-[10px] font-bold border transition-all ${
+                      exerciseMins === m
+                        ? 'bg-[#00FF9D] text-slate-950 border-[#00FF9D]'
+                        : darkMode
+                        ? 'bg-slate-800 text-slate-300 border-slate-700'
+                        : 'bg-slate-200 text-slate-700 border-slate-300'
+                    }`}
+                  >
+                    {m}m
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="h-1.5 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-amber-500 dark:bg-amber-400 rounded-full transition-all"
+                style={{ width: `${Math.min(100, (exerciseMins / 30) * 100)}%` }}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* ========================================== */}
+        {/* PHASE 3: EVENING ROUTINE (5 PM to 8 PM) */}
+        {/* ========================================== */}
+        <div className="space-y-2.5 pt-2 border-t border-slate-200 dark:border-slate-800">
+          <div className="flex items-center gap-1.5 text-xs font-black tracking-wider uppercase text-emerald-600 dark:text-emerald-400">
+            <span>🌇</span>
+            <span>Evening Routine (5 PM to 8 PM)</span>
+          </div>
+
+          {/* Task 7: Daily Steps Audit */}
+          <div className={`p-3 rounded-xl border ${subBoxCls} space-y-2`}>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="text-xl">🚶</span>
+                <div>
+                  <div className={`text-xs font-bold ${textTitle}`}>7. Daily Walk & Step Target</div>
+                  <div className={`text-[10px] ${textSub}`}>
+                    Target: {walkUnit === 'steps' ? '8,000 steps' : '45 minutes'}
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-1.5">
+                <button
+                  onClick={() => setWalkUnit(walkUnit === 'steps' ? 'minutes' : 'steps')}
+                  className={`py-1 px-2 rounded-lg text-[10px] font-mono border ${btnSecCls}`}
+                >
+                  {walkUnit === 'steps' ? 'Steps' : 'Mins'} ⇄
+                </button>
+                <button
+                  onClick={() => setActiveHabitModal('walk')}
+                  className="py-1 px-2.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-[#00FF9D] text-[11px] font-bold border border-emerald-500/40 active:scale-95 transition-all"
+                >
+                  ✍️ Log
+                </button>
+              </div>
+            </div>
+
+            {/* Quick Step Adders */}
+            <div className="flex items-center justify-between pt-0.5">
+              <span className={`text-xs font-mono font-bold ${textTitle}`}>
+                {walkUnit === 'steps' ? `${walkSteps.toLocaleString()} / 8,000 steps` : `${Math.round(walkSteps / 120)} / 45 mins`}
+              </span>
+              <div className="flex items-center gap-1">
+                {[1000, 2000, 3000].map((s) => (
+                  <button
+                    key={s}
+                    onClick={() => {
+                      setWalkSteps((prev) => prev + s);
+                      setOneTapToast(`🚶 +${s.toLocaleString()} steps added!`);
+                      setTimeout(() => setOneTapToast(null), 2000);
+                    }}
+                    className={`py-0.5 px-2 rounded-lg text-[10px] font-bold border transition-all ${
+                      darkMode
+                        ? 'bg-slate-800 text-emerald-300 border-slate-700 hover:border-emerald-500'
+                        : 'bg-emerald-50 text-emerald-800 border-emerald-200 hover:border-emerald-400'
+                    }`}
+                  >
+                    +{s}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="h-1.5 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-emerald-500 dark:bg-[#00FF9D] rounded-full transition-all"
+                style={{ width: `${Math.min(100, (walkSteps / 8000) * 100)}%` }}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* ========================================== */}
+        {/* PHASE 4: NIGHT ROUTINE (8:30 PM to Bedtime) */}
+        {/* ========================================== */}
+        <div className="space-y-2.5 pt-2 border-t border-slate-200 dark:border-slate-800">
+          <div className="flex items-center gap-1.5 text-xs font-black tracking-wider uppercase text-indigo-600 dark:text-indigo-400">
+            <span>🌙</span>
+            <span>Night Routine (8:30 PM to Bedtime)</span>
+          </div>
+
+          {/* Task 8: Magnesium & Blue Light Cutoff */}
+          <div className={`p-3 rounded-xl border ${subBoxCls} space-y-2.5`}>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="text-xl">💤</span>
+                <div>
+                  <div className={`text-xs font-bold ${textTitle}`}>8. Magnesium Glycinate & Blue Light Cutoff</div>
+                  <div className={`text-[10px] ${textSub}`}>Target: 5 min wind-down • Pineal protection</div>
+                </div>
+              </div>
+            </div>
+
+            <p className={`text-[11px] ${textSub} leading-relaxed`}>
+              Reduces neuro-muscular hyper-excitability and prevents pineal melatonin suppression before deep slow-wave sleep.
+            </p>
+
+            <SwipeToComplete
+              label="Swipe to Lock Evening Protocol"
+              completedLabel="Protocol Locked • Melatonin Protected"
+              isCompleted={isMagnesiumDone}
+              onComplete={() => {
+                setIsMagnesiumDone(true);
+                setOneTapToast('🌙 Evening protocol locked! Deep slow-wave sleep primed.');
+                setTimeout(() => setOneTapToast(null), 3000);
+              }}
+            />
+          </div>
         </div>
       </div>
 
-      {/* 8. EMERGENCY SOS RESCUE BUTTON */}
+      {/* 7. EMERGENCY SOS RESCUE BUTTON */}
       <div className="pt-1">
         <button
           onClick={() => setIsSosOpen(true)}
@@ -890,7 +1005,7 @@ export const TodayTab: React.FC<TodayTabProps> = ({
         </button>
       </div>
 
-      {/* 9. TODAY'S THAIS DAILY SUGGESTION & CLINICAL NOTE */}
+      {/* 8. TODAY'S THAIS DAILY SUGGESTION & CLINICAL NOTE */}
       <div className={`p-4 rounded-2xl border ${
         darkMode ? 'bg-gradient-to-br from-slate-900 to-[#0B1015] border-slate-800 text-slate-300' : 'bg-emerald-50/60 border-emerald-200 text-slate-800 shadow-sm'
       }`}>
@@ -905,7 +1020,7 @@ export const TodayTab: React.FC<TodayTabProps> = ({
         </p>
       </div>
 
-      {/* 10. 60-SECOND BEDTIME REFLECTION BUTTON */}
+      {/* 9. 60-SECOND BEDTIME REFLECTION BUTTON */}
       <div className="pt-1">
         <button
           onClick={() => setIsNightlyOpen(true)}
@@ -948,14 +1063,14 @@ export const TodayTab: React.FC<TodayTabProps> = ({
           habitType={activeHabitModal}
           currentValue={
             activeHabitModal === 'walk'
-              ? habits.walkSteps
+              ? walkSteps
               : activeHabitModal === 'sleep'
-              ? habits.sleepHours
+              ? sleepHours
               : activeHabitModal === 'water'
-              ? habits.waterLiters
+              ? waterLiters
               : activeHabitModal === 'exercise'
-              ? habits.exerciseMinutes
-              : habits.sunlightMinutes
+              ? exerciseMins
+              : sunlightMins
           }
           onSave={handleHabitSave}
           darkMode={darkMode}
@@ -964,7 +1079,7 @@ export const TodayTab: React.FC<TodayTabProps> = ({
 
       <NightlyCheckInModal
         isOpen={isNightlyOpen}
-        tasks={tasks}
+        tasks={dummyTasks}
         onClose={() => setIsNightlyOpen(false)}
         onSubmitCheckIn={(_reconciledTasks, _reflection) => {
           setOneTapToast('🌙 Nightly reflection recorded! Overnight biological adaptation active.');
