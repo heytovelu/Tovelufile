@@ -393,7 +393,7 @@ export const ReportTab: React.FC<ReportTabProps> = ({
         </div>
 
         <p className={`text-xs ${textSub} leading-relaxed font-medium`}>
-          Celebrate your clinical milestones with cryptographic certificates. Download high-resolution credentials to motivate yourself and share on Instagram, WhatsApp, or LinkedIn.
+          Celebrate your clinical milestones with cryptographic credentials. Export in Instagram Story (9:16) or Facebook Post (1:1) size with official registry accreditation (<span className="text-amber-500 font-mono font-bold">WWW.TOVELU.STORE</span>).
         </p>
 
         {/* Milestone Cards Carousel */}
