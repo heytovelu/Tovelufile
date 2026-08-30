@@ -63,7 +63,7 @@ export const AppBottomNav: React.FC<AppBottomNavProps> = ({
 
   return (
     <nav
-      className={`w-full px-2 py-2 border-t backdrop-blur-xl transition-all ${
+      className={`w-full px-2 pt-2 pb-[max(env(safe-area-inset-bottom),10px)] border-t backdrop-blur-xl transition-all ${
         darkMode
           ? 'bg-[#080A0E]/95 border-slate-800/80 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]'
           : 'bg-white/95 border-slate-200 shadow-[0_-4px_20px_rgba(0,0,0,0.06)]'

@@ -34,6 +34,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
 
   // Email Confirmation & Verification Code Fields
   const [verificationDigits, setVerificationDigits] = useState(['', '', '', '', '', '']);
+  const [expectedCode, setExpectedCode] = useState<string | null>(null);
   const [resendCooldown, setResendCooldown] = useState(0);
   const [authToast, setAuthToast] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -91,6 +92,10 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
       setAuthMode('verify');
       setResendCooldown(60);
 
+      if (result.code) {
+        setExpectedCode(result.code);
+      }
+
       if (!response.ok && result.configured === false) {
         setAuthToast('⚠️ Brevo API key pending in Vercel. Please provide your Brevo key.');
       } else if (response.ok) {
@@ -113,10 +118,17 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
     e.preventDefault();
     const enteredCode = verificationDigits.join('');
     
-    // Check if code was entered or if user confirmed via email link
+    // Check if code was entered
     if (enteredCode.length < 6) {
       setAuthToast('⚠️ Please enter the 6-digit verification code from your email, or click the link in your email.');
       setTimeout(() => setAuthToast(null), 3500);
+      return;
+    }
+
+    // Exact code validation
+    if (expectedCode && enteredCode !== expectedCode) {
+      setAuthToast('❌ Incorrect verification code. Please check the 6-digit code in your email.');
+      setTimeout(() => setAuthToast(null), 4000);
       return;
     }
 

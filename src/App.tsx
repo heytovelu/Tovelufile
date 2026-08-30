@@ -73,6 +73,24 @@ export default function App() {
         }
       }
 
+      // Capture Affiliate ID from URL (?ref=partner or ?aff=creator)
+      const refParam = searchParams.get('ref') || searchParams.get('aff');
+      if (refParam) {
+        try {
+          localStorage.setItem('tovelu_affiliate_id', refParam);
+        } catch (_e) {}
+      }
+
+      // Handle Dodo Payments return redirect (?payment=success)
+      if (searchParams.get('payment') === 'success' || searchParams.get('status') === 'completed') {
+        setIsPaidMember(true);
+        try {
+          localStorage.setItem('tovelu_membership_status', 'paid');
+        } catch (_e) {}
+        setToastMessage('🏆 Payment Confirmed! Full Sovereign Protocol Active.');
+        setTimeout(() => setToastMessage(null), 5000);
+      }
+
       // If accessing app.tovelu.store or /app or /survey
       if (hostname.startsWith('app.') || pathname.startsWith('/app') || pathname.startsWith('/survey')) {
         let isSurveyDone = false;

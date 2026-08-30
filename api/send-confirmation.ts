@@ -89,8 +89,9 @@ export default async function handler(req: any, res: any) {
             name: userName,
           },
         ],
-        subject: 'Confirm Your Tovelu Account',
+        subject: 'Confirm Your Tovelu Sovereign Health Account',
         htmlContent: emailHtml,
+        textContent: `Hello ${userName},\n\nWelcome to Tovelu Sovereign Health OS.\n\nPlease confirm your email address by opening this link in your browser:\n${confirmationLink}\n\nOr enter this 6-digit confirmation code on the verification screen:\n${confirmationCode}\n\n© ${new Date().getFullYear()} Tovelu Sovereign Health OS • Cellular Homeostasis & Metabolic Longevity`,
       }),
     });
 

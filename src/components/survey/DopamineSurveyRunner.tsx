@@ -241,7 +241,9 @@ export const DopamineSurveyRunner: React.FC<DopamineSurveyRunnerProps> = ({ onCo
             <span className={`text-xs font-extrabold ${generatedAssessment.ageDifferential > 0 ? 'text-amber-500' : 'text-emerald-500'}`}>
               {generatedAssessment.ageDifferential > 0 
                 ? `+${generatedAssessment.ageDifferential}y biological lag (Fully reversible)` 
-                : `${generatedAssessment.ageDifferential}y biologically younger!`}
+                : generatedAssessment.ageDifferential < 0
+                ? `${Math.abs(generatedAssessment.ageDifferential)}y biologically younger! ⚡`
+                : 'Optimal cellular baseline match ⚡'}
             </span>
           </div>
 

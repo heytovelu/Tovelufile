@@ -70,7 +70,15 @@ export const TodayTab: React.FC<TodayTabProps> = ({
 
     updateCountdown();
     const interval = setInterval(updateCountdown, 1000);
-    return () => clearInterval(interval);
+    const handleRefocus = () => updateCountdown();
+    window.addEventListener('focus', handleRefocus);
+    document.addEventListener('visibilitychange', handleRefocus);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('focus', handleRefocus);
+      document.removeEventListener('visibilitychange', handleRefocus);
+    };
   }, [isPaidMember]);
 
   // Macro & Caloric Budget
