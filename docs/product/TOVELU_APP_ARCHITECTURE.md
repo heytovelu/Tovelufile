@@ -130,9 +130,44 @@ Segmented Switcher at Top: `[ DAY | WEEK ]`
 6. **Triple-Lock Clinical Safety Firewall**:
    - Deterministic rule layer prevents hallucinations. Automatically audits drug-nutrient conflicts against uploaded medications and triggers instant clinical red-flag protocols for acute medical emergencies.
 
----
+### 4. REPORT (Day | Week | Month | Year) • 100% Locked Blueprint
+`REPORT` is the multi-dimensional clinical proof engine of Tovelu. It answers the user's emotional and clinical question: *"Is my body truly healing?"* It replaces single dry weight scales with 4 distinct specialist-grade clinical reports that are easy for anyone to understand yet rigorous enough for any medical specialist.
 
-## SECTION 4: YOU (Profile, Rules & Sovereign Control)
+#### Core Features & Structure:
+1. **Master Period Picker Button ⭐**:
+   - Top button: `[ 📅 Choose Particular Day, Week, Month, or Year ]`.
+   - Allows picking any historical date in 1 tap to view that exact period's complete clinical transcript.
+2. **The 4 Distinct Specialist-Grade Report Tiers**:
+   - **DAY REPORT (24-Hour Acute Clinical Log)**:
+     - Metabolic substrate precision (Calories, P/C/F in grams, fiber, hydration, hidden culinary oils).
+     - Food sequencing compliance (-38% glucose spike attenuation).
+     - Estimated postprandial glycemic curve (time-in-optimal-range, 0 afternoon crashes).
+     - Prescribed task execution rate (SwipeToComplete 100%).
+     - Nightly 3-axis somatosensory audit (Physical, Mental, Emotional).
+     - Attending specialist clinical diagnosis.
+   - **WEEK REPORT (7-Day Systemic Adaptation & Habit Audit)**:
+     - 7-day cumulative calorie/macro balance and protein preservation index (ensures fat burned, not muscle).
+     - 7-day glycemic stability curve and spike prevention tally.
+     - Gastrointestinal motility report (Rome IV standards, bloating frequency, Bristol stool consistency).
+     - Sleep architecture (onset latency, nocturia frequency).
+     - Weekly clinical milestone clearance (e.g. liver glycogen depleted, visceral lipolysis confirmed).
+     - Specialist next-week tactical prescription.
+   - **MONTH REPORT (30-Day Hormonal & Inflammatory Phenotype Audit)**:
+     - Anthropometric remodeling (visceral fat reduction, waist-to-height ratio).
+     - Systemic Chronic Inflammation Score (SCI) drop (e.g. 68/100 → 36/100).
+     - Endocrine axis trajectory (insulin sensitivity +42%, cortisol curve, sex hormone recovery).
+     - Active 500-Disease Index Reversal Radar (confidence drop tracking across detected conditions).
+     - Specialist multi-disciplinary clinical impression.
+   - **YEAR REPORT (365-Day Cellular Longevity & Disease Reversal Transcript)**:
+     - Epigenetic Biological Age Reversal Transcript (e.g. -3.8 biological years younger, 35% cellular deceleration).
+     - 14-Physiological-System Clinical Homeostasis Scorecard (Grade A-F across all organ systems).
+     - Master 500-Disease Index Permanent Reversal Certificate.
+     - Actuarial lifespan & healthspan extension projection (+8.4 healthy years).
+     - Physician-certified medical export accepted by any hospital or specialist doctor.
+3. **1-Tap Privacy-Safe "Victory Card"**:
+   - Generates an Apple-style shareable visual card (*Zero private health data leaked*) for organic sharing with family and friends.
+
+---
 
 1. **The Official Tovelu Rule Book ⭐ (New Mandate)**:
    - Prominent, beautifully structured User Operating Manual:
