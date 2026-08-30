@@ -24,10 +24,9 @@ import { MobileAppShell } from './components/app/MobileAppShell';
 import { AppBottomNav, AppTab } from './components/app/AppBottomNav';
 import { TodayTab } from './components/app/TodayTab';
 import { WeekTab } from './components/app/WeekTab';
-import { ChatTab } from './components/app/ChatTab';
 import { ReportTab } from './components/app/ReportTab';
 import { HealthTab } from './components/app/HealthTab';
-import { YouDrawer } from './components/app/YouDrawer';
+import { YouTab } from './components/app/YouTab';
 
 // THAIS AI Engine & Survey
 import { ThaisStudio } from './components/thais/ThaisStudio';
@@ -52,7 +51,6 @@ export default function App() {
   const [darkMode, setDarkMode] = useState(true);
   const [appMode, setAppMode] = useState<AppMode>('tovelu_app');
   const [appTab, setAppTab] = useState<AppTab>('today');
-  const [isYouOpen, setIsYouOpen] = useState(false);
 
   // Design system state
   const [activeGalleryTab, setActiveGalleryTab] = useState<TDSGalleryTab>('wordmark');
@@ -153,23 +151,19 @@ export default function App() {
       {appMode === 'tovelu_app' ? (
         <MobileAppShell
           darkMode={darkMode}
-          noPadding={appTab === 'chat'}
           bottomNav={<AppBottomNav activeTab={appTab} onTabChange={setAppTab} darkMode={darkMode} />}
         >
           {appTab === 'today' ? (
-            <TodayTab onOpenYou={() => setIsYouOpen(true)} darkMode={darkMode} />
+            <TodayTab onOpenYou={() => setAppTab('you')} darkMode={darkMode} />
           ) : appTab === 'week' ? (
-            <WeekTab onOpenYou={() => setIsYouOpen(true)} darkMode={darkMode} />
-          ) : appTab === 'chat' ? (
-            <ChatTab onOpenYou={() => setIsYouOpen(true)} darkMode={darkMode} />
+            <WeekTab onOpenYou={() => setAppTab('you')} darkMode={darkMode} />
           ) : appTab === 'report' ? (
-            <ReportTab onOpenYou={() => setIsYouOpen(true)} darkMode={darkMode} />
+            <ReportTab onOpenYou={() => setAppTab('you')} darkMode={darkMode} />
+          ) : appTab === 'health' ? (
+            <HealthTab onOpenYou={() => setAppTab('you')} darkMode={darkMode} />
           ) : (
-            <HealthTab onOpenYou={() => setIsYouOpen(true)} darkMode={darkMode} />
+            <YouTab darkMode={darkMode} />
           )}
-
-          {/* YOU DRAWER (Opened via Profile Avatar) */}
-          <YouDrawer isOpen={isYouOpen} onClose={() => setIsYouOpen(false)} darkMode={darkMode} />
         </MobileAppShell>
       ) : appMode === 'survey' ? (
         <div className="max-w-4xl mx-auto py-4 px-3">
