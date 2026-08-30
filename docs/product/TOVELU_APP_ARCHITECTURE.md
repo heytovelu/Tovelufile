@@ -47,17 +47,41 @@ Segmented Switcher at Top: `[ DAY | WEEK ]`
 10. **Nightly 1-Minute Bedtime Check-In**:
     - Prominently surfaces in the evening: Level 1 Task Reconciliation (`Done` vs `Skip`) + Level 2 3-Axis Reflection (*Physical, Mental, Emotional*) + **THAIS Precision Confirmation Inquiry**. Runs overnight machine learning loop.
 
-### B. The `WEEK` View
-1. **7 Days Performance Chart**:
-   - Visual trend of portion accuracy and swiped task completion from Monday to Sunday.
-2. **"Create Your Grocery" Button**:
-   - **In My Kitchen**: Inventory of available ingredients with quantities.
-   - **Need to Buy**: Missing ingredients THAIS automatically calculates for the upcoming 7-day plan, organized by supermarket aisle.
-3. **Challenges You May Face This Week & Their Solutions**:
-   - Proactive behavioral coaching (*e.g. "Challenge: Late Friday dinner out. Solution: Order grilled salmon, ask for sauce on side"*).
-4. **Rules & Guide for the Week**:
-   - **What to Do** *(3 high-impact positive habits)*.
-   - **What NOT to Do** *(3 specific dietary/routine pitfalls to avoid)*.
+### 2. WEEK (Flow - Week) • 100% Locked Blueprint
+`WEEK` is the strategic preparation, grocery autopilot, and momentum cockpit of Tovelu. It is engineered to ensure the user's plan bends around real life so their commitment never breaks.
+
+#### Core Structure (Top to Bottom):
+1. **Top Header**:
+   - Architectural all-caps `TOVELU` wordmark + Sovereign Homeostasis Ring.
+   - User Profile Avatar (tapping opens `YOU`).
+2. **Weekly Biological Milestone Banner**:
+   - Defines the physiological achievement for the 7-day cycle:
+     - Week 1: *"Rapid Fluid & Systemic Inflammation Flush (-2 to -4 lbs, lower blood pressure)"*
+     - Week 2: *"Visceral Fat Access & Hepatic Glycogen Depletion"*
+     - Week 3: *"Gut Microbiome Species Repopulation & Mitochondrial Vigor"*
+     - Week 4: *"Metabolic Flexibility & Hormonal Homeostasis"*
+3. **`[ 🗓️ Plan Your Week / Update Schedule ]` Master Calibrator**:
+   - **Accessible 24/7 at Any Moment**: Users can tap this on Sunday/Monday OR whenever real life changes unexpectedly mid-week (e.g. Wednesday afternoon late client dinner or emergency travel).
+   - **60-Second Routine Check**:
+     - *Standard Routine* (1 tap locks standard plan).
+     - *Custom Days*: User tags specific days:
+       - `[ ✈️ Early Travel / Commute ]`: THAIS shifts to portable fast protein blueprints and 5-min hotel/airport mobility.
+       - `[ 💼 Late Work Night / High Stress ]`: THAIS shifts to 10-min 1-pan dinners and removes heavy evening workouts to protect cortisol.
+       - `[ 🍷 Social Dinner / Party / Dining Out ]`: THAIS activates Restaurant Defense (protein first, sparkling water) and gently trims 20g carbs from adjacent meals.
+       - `[ 👨‍👩‍👧 Family Gathering / Guests ]`: Family-friendly meal portions.
+   - **The Tovelu Iron Guarantee**: The main plan and 7-day caloric/healing budget is **NEVER compromised or broken**.
+4. **7-Day Visual Momentum Arc (Loss Aversion Dopamine)**:
+   - Horizontal strip of 7 Homeostasis Rings (`Mon 🟢`, `Tue 🟢`, `Wed 🟢`, `Thu 🟡 Today`, `Fri ⚪`, `Sat ⚪`, `Sun ⚪`).
+   - Tapping any day opens its preview or historical review in 1 tap.
+   - Preserves psychological loss aversion (users refuse to break a 4-day winning streak).
+5. **7-Day Meal & Task Timeline**:
+   - Visual schedule displaying adapted meals, travel adaptations, and social dining strategies.
+6. **Zero-Waste Kitchen Autopilot (Grocery Delivery in 1 Tap)**:
+   - Categorized into *Proteins & Fish*, *Fibrous Greens & Veggies*, *Healthy Fats & Pantry*.
+   - `[ Toggle "In My Kitchen" ]` vs `[ "Need to Buy" ]`.
+   - **`[ 🛒 1-Tap Export to Instacart / Amazon Fresh / Blinkit / Zepto ]`**: Loads exact missing ingredients into delivery cart with zero food waste.
+7. **Sunday 20-Minute Batch Prep Blueprint**:
+   - 2 quick batch-prep tasks (e.g. sheet-pan roast veggies, boil 6 eggs) that save 4 hours of weeknight cooking.
 
 ---
 
