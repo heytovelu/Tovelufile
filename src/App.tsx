@@ -33,16 +33,61 @@ export default function App() {
     if (typeof window !== 'undefined') {
       const hostname = window.location.hostname;
       const pathname = window.location.pathname;
+      const searchParams = new URLSearchParams(window.location.search);
 
-      // If accessing app.tovelu.store or /app or /survey -> enter authenticated app flow
+      const emailParam = searchParams.get('email');
+      const nameParam = searchParams.get('name');
+
+      if (emailParam && nameParam) {
+        const session = { name: nameParam, email: emailParam };
+        setUserSession(session);
+        try {
+          localStorage.setItem('tovelu_user_session', JSON.stringify(session));
+        } catch (_e) {}
+      } else {
+        try {
+          const stored = localStorage.getItem('tovelu_user_session');
+          if (stored) {
+            setUserSession(JSON.parse(stored));
+          }
+        } catch (_e) {}
+      }
+
+      // If accessing app.tovelu.store or /app or /survey -> enter clinical survey / app flow
       if (hostname.startsWith('app.') || pathname.startsWith('/app') || pathname.startsWith('/survey')) {
         setFlowState('survey');
       } else {
-        // Public domain tovelu.store -> show the real brand website
+        // Public domain tovelu.store -> strictly website or auth
         setFlowState('website');
       }
     }
   }, []);
+
+  const handleAuthSuccess = (user: { name: string; email: string }) => {
+    setUserSession(user);
+    try {
+      localStorage.setItem('tovelu_user_session', JSON.stringify(user));
+    } catch (_e) {}
+
+    // If user is on tovelu.store, REDIRECT IMMEDIATELY TO app.tovelu.store
+    if (typeof window !== 'undefined') {
+      const hostname = window.location.hostname;
+      if (hostname.includes('tovelu.store') && !hostname.startsWith('app.')) {
+        setToastMessage(`🎉 Account Verified! Redirecting to app.tovelu.store...`);
+        setTimeout(() => {
+          window.location.href = `https://app.tovelu.store/?email=${encodeURIComponent(user.email)}&name=${encodeURIComponent(user.name)}`;
+        }, 600);
+        return;
+      }
+    }
+
+    // If on app.tovelu.store or local environment:
+    setToastMessage(`🎉 Welcome ${user.name}! Starting your 52-Question Clinical Audit...`);
+    setTimeout(() => {
+      setToastMessage(null);
+      setFlowState('survey');
+    }, 1000);
+  };
 
   useEffect(() => {
     if (darkMode) {
@@ -64,7 +109,7 @@ export default function App() {
       )}
 
       {/* ========================================================================= */}
-      {/* 1. REAL PUBLIC BRAND WEBSITE (At tovelu.store) */}
+      {/* 1. REAL PUBLIC BRAND WEBSITE (Strictly at tovelu.store) */}
       {/* ========================================================================= */}
       {flowState === 'website' && (
         <BrandWebsite
@@ -76,21 +121,14 @@ export default function App() {
       )}
 
       {/* ========================================================================= */}
-      {/* 2. REAL AUTHENTICATION SCREEN: Create Free Account, Brevo Verify, Login */}
+      {/* 2. REAL AUTHENTICATION SCREEN: Sign Up / Login (Redirects to app.tovelu.store) */}
       {/* ========================================================================= */}
       {flowState === 'auth' && (
         <div className="min-h-screen flex items-center justify-center p-3">
           <div className="w-full max-w-[448px]">
             <AuthScreen
               darkMode={darkMode}
-              onAuthSuccess={(user) => {
-                setUserSession(user);
-                setToastMessage(`🎉 Welcome ${user.name}! Starting your 52-Question Clinical Audit...`);
-                setTimeout(() => {
-                  setToastMessage(null);
-                  setFlowState('survey');
-                }, 1200);
-              }}
+              onAuthSuccess={handleAuthSuccess}
             />
           </div>
         </div>
@@ -111,7 +149,13 @@ export default function App() {
                 setTimeout(() => setToastMessage(null), 3500);
                 setFlowState('app');
               }}
-              onCancel={() => setFlowState('website')}
+              onCancel={() => {
+                if (typeof window !== 'undefined') {
+                  window.location.href = 'https://tovelu.store';
+                } else {
+                  setFlowState('website');
+                }
+              }}
             />
           </div>
         </div>
