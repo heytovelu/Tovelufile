@@ -10,25 +10,42 @@
 
 Segmented Switcher at Top: `[ DAY | WEEK ]`
 
-### A. The `DAY` View
-1. **Portion Meter with Details**:
-   - Circular/bar gauge displaying remaining vs. consumed:
-     - **Calories (kcal)**
-     - **Protein (g)**
-     - **Carbohydrates (g)**
-     - **Healthy Fats (g)**
-2. **The 3 Meals (Breakfast | Lunch | Dinner)**:
-   - Each meal card displays its calculated calorie & macro portion.
-   - 3 Action Buttons on each meal:
-     - `[ 📷 SCAN OR UPLOAD ]`: Photo of pre-cooked dish, fridge ingredients, or restaurant menu.
-     - `[ ✍️ MANUAL ]`: Type text description of dish, ingredients, or menu.
-     - `[ 🤖 ASK AI ]`: 1-tap smart meal idea based on survey baseline, remaining macros, and kitchen pantry.
-   - **Dynamic Compensatory Rebalancer**: If one meal goes over or under, subsequent meal portions automatically adjust so the user hits 100% of their daily target.
-3. **Your Today's Task List**:
-   - Interactive tasks completed via **Tactile Swipe Slider** (`SwipeToComplete` component).
-   - Prevents accidental logging and triggers a dopamine accomplishment release.
-4. **Today's Note / Suggestion**:
-   - 2-sentence empathetic clinical insight from THAIS (*e.g. "We noticed your short sleep last night. We added 15g healthy fats to your lunch to keep your brain dopamine steady"*).
+### 1. TODAY (Flow - Day) • 100% Locked Blueprint
+`TODAY` is the primary daily operational cockpit where the user spends 80% of their time inside Tovelu. It is engineered for zero cognitive friction, maximum dopamine, and effortless execution.
+
+#### Core Structure (Top to Bottom):
+1. **Top Header**:
+   - Architectural all-caps `TOVELU` wordmark + Sovereign Homeostasis Ring.
+   - User Profile Avatar (tapping immediately opens the `YOU` section).
+2. **Day Status & Momentum Banner**:
+   - Displays current cycle position: e.g. `Day 14 of 90 • High Momentum 🔥` (or sticky 3-Hour Free Trial ticker for trial users).
+3. **Living Homeostasis Progress Ring**:
+   - Dynamically fills in real-time as daily milestones are reached (33% Breakfast & Morning Task → 66% Lunch & Midday Task → 100% Dinner & Bedtime Check-In).
+   - Emits an energetic `#00FF9D` bio-glow celebration when 100% complete: *"Day Conquered • Cellular Repair Active Tonight"*.
+4. **Real-Time Metabolic State Badge**:
+   - Tells the user what their physiology is actively doing:
+     - Morning Fasting: *"🔥 Fasting Lipolysis: Burning Visceral Fat Stores"*
+     - Post-Meal Window: *"🟢 Stable Glucose Arc: 0 Energy Crashes"*
+     - Evening: *"🌙 Melatonin Rising: Glycogen Replenished"*
+5. **Daily Portion Budget Meter**:
+   - Shows remaining caloric target and exact macro breakdown in grams: **Protein, Carbs, Healthy Fats, Fiber, and Water**.
+6. **Chronobiological Smart Active Meal Card**:
+   - Auto-expands the meal relevant to the current local time:
+     - Morning (6 AM - 11 AM): Breakfast + morning hydration.
+     - Midday (12 PM - 3 PM): Lunch + post-lunch 10-min walk.
+     - Evening (6 PM - 9 PM): Dinner + wind-down routine.
+   - **`[ ⚡ 1-Tap Log: Ate As Planned ]`**: Instant 1-second logging if the prescribed meal was eaten.
+   - **`[ 📷 Scan / ✍️ Manual / 🤖 Ask AI ]`**: 4-Layer Nutritional Truth logging with the 1-second confirmation lock (`[ ✅ 100% Correct ]`) and dynamic compensatory rebalancing if ingredients varied.
+7. **Today's Targeted Healing Tasks**:
+   - 2 to 4 micro-tasks specifically addressing the root causes of detected diseases from the 500-index.
+   - Completed using tactile **SwipeToComplete** dopamine sliders.
+8. **Emergency SOS Rescue Button**:
+   - `[ 🆘 SOS: Bloated / Overate / Craving? Tap for Instant Fix ]`
+   - Zero-guilt 2-minute actionable clinical protocol (e.g. 7-min GLUT4 walk, digestive tea, automatic next-meal rebalancing).
+9. **Today's THAIS Daily Suggestion & Clinical Note**:
+   - Personalized daily insight box written by THAIS based on the user's primary goal, detected conditions, and day of the week.
+10. **Nightly 1-Minute Bedtime Check-In**:
+    - Prominently surfaces in the evening: Level 1 Task Reconciliation (`Done` vs `Skip`) + Level 2 3-Axis Reflection (*Physical, Mental, Emotional*) + **THAIS Precision Confirmation Inquiry**. Runs overnight machine learning loop.
 
 ### B. The `WEEK` View
 1. **7 Days Performance Chart**:
