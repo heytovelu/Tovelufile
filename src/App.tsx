@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   LineChart, Sparkles, Shapes, 
   Activity, Bell, Type, Layers, Component, ShieldCheck,
-  Bot, Moon, Sun, Cpu, Smartphone, Lock, CreditCard
+  Bot, Moon, Sun, Cpu, Smartphone, Lock, CreditCard, Globe
 } from 'lucide-react';
 import { DopamineSurveyRunner } from './components/survey/DopamineSurveyRunner';
 import { ThaisStudio } from './components/thais/ThaisStudio';
@@ -14,6 +14,7 @@ import { ReportTab } from './components/app/ReportTab';
 import { HealthTab } from './components/app/HealthTab';
 import { YouTab } from './components/app/YouTab';
 import { AuthScreen } from './components/auth/AuthScreen';
+import { MarketingLandingPage } from './components/marketing/MarketingLandingPage';
 import { PaywallModal } from './components/paywall/PaywallModal';
 import { StartDatePickerModal } from './components/onboarding/StartDatePickerModal';
 
@@ -29,7 +30,7 @@ import { ExtensionsShowcase } from './components/showcase/ExtensionsShowcase';
 import { LogoShowcase } from './components/showcase/LogoShowcase';
 import { WordmarkShowcase } from './components/showcase/WordmarkShowcase';
 
-type AppMode = 'auth' | 'survey' | 'tovelu_app' | 'thais' | 'design_system';
+type AppMode = 'marketing' | 'auth' | 'survey' | 'tovelu_app' | 'thais' | 'design_system';
 type TDSGalleryTab = 'wordmark' | 'logo' | 'health' | 'extensions' | 'charts' | 'primitives' | 'navigation' | 'feedback' | 'tokens' | 'governance';
 
 export default function App() {
@@ -49,6 +50,18 @@ export default function App() {
 
   // Design system state
   const [activeGalleryTab, setActiveGalleryTab] = useState<TDSGalleryTab>('wordmark');
+
+  // Intelligent Subdomain Detection for Vercel (tovelu.store vs app.tovelu.store)
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const hostname = window.location.hostname;
+      if (hostname === 'tovelu.store' || hostname === 'www.tovelu.store') {
+        setAppMode('marketing');
+      } else if (hostname.startsWith('app.') || hostname.includes('app.tovelu.store')) {
+        setAppMode('tovelu_app');
+      }
+    }
+  }, []);
 
   useEffect(() => {
     if (darkMode) {
@@ -73,40 +86,26 @@ export default function App() {
 
   return (
     <div className={`min-h-screen ${darkMode ? 'bg-[#050709] text-slate-100' : 'bg-slate-100 text-slate-900'} transition-colors duration-200`}>
-      {/* Top Universal Mode Switcher Bar (User Journey Stages) */}
+      {/* Top Universal Switcher Bar (Vercel Domain Routing) */}
       <header className="sticky top-0 z-50 w-full bg-slate-950/90 backdrop-blur-md border-b border-slate-800/80 px-3 py-2">
         <div className="max-w-6xl mx-auto flex items-center justify-between gap-2 overflow-x-auto no-scrollbar">
-          {/* Journey Navigation Pills */}
+          {/* Domain Routing Switcher */}
           <div className="flex items-center gap-1.5 shrink-0">
-            {/* Step 1: Create Account / Login */}
+            {/* Domain 1: tovelu.store */}
             <button
-              onClick={() => setAppMode('auth')}
-              className={`px-2.5 py-1 rounded-full text-xs font-bold transition-all flex items-center gap-1 shrink-0 ${
-                appMode === 'auth'
+              onClick={() => setAppMode('marketing')}
+              className={`px-3 py-1 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 shrink-0 ${
+                appMode === 'marketing'
                   ? 'bg-gradient-to-r from-emerald-500 to-[#00FF9D] text-slate-950 font-black shadow-sm'
                   : 'bg-slate-900 border border-slate-800 text-slate-300 hover:text-white'
               }`}
-              title="Step 1: Create Free Account, Brevo Verification & Supabase Auth"
+              title="Public Domain: tovelu.store (Sales Page, Free Signup, Login)"
             >
-              <Lock className="w-3 h-3" />
-              1. Account & Verify
+              <Globe className="w-3.5 h-3.5" />
+              <span>🌐 tovelu.store (Sales & Auth)</span>
             </button>
 
-            {/* Step 2: 52-Q Survey */}
-            <button
-              onClick={() => setAppMode('survey')}
-              className={`px-2.5 py-1 rounded-full text-xs font-bold transition-all flex items-center gap-1 shrink-0 ${
-                appMode === 'survey'
-                  ? 'bg-gradient-to-r from-emerald-500 to-[#00FF9D] text-slate-950 font-black shadow-sm'
-                  : 'bg-slate-900 border border-slate-800 text-emerald-400 hover:text-emerald-300'
-              }`}
-              title="Step 2: 52-Q Survey & Short Health Report Reveal"
-            >
-              <Sparkles className="w-3 h-3" />
-              2. 52-Q Survey
-            </button>
-
-            {/* Step 3: Web App */}
+            {/* Domain 2: app.tovelu.store */}
             <button
               onClick={() => setAppMode('tovelu_app')}
               className={`px-3 py-1 rounded-full text-xs font-black transition-all flex items-center gap-1.5 shrink-0 ${
@@ -114,17 +113,40 @@ export default function App() {
                   ? 'bg-[#00FF9D] text-slate-950 shadow-[0_0_15px_rgba(0,255,157,0.4)]'
                   : 'bg-slate-900 border border-slate-800 text-slate-400 hover:text-white'
               }`}
-              title="Step 3: Web App with 3-Hour Free Access Window"
+              title="App Domain: app.tovelu.store (Web App, Today/Week, 3-Hr Trial, Paywall)"
             >
               <Smartphone className="w-3.5 h-3.5" />
-              3. Web App ({isPaidMember ? 'Member' : '3-Hr Trial'})
+              <span>📱 app.tovelu.store (App)</span>
             </button>
 
-            {/* Step 4: Paywall Trigger */}
+            {/* Sub-Funnel Jump Links for Testing */}
+            <button
+              onClick={() => setAppMode('auth')}
+              className={`px-2.5 py-1 rounded-full text-xs font-bold transition-all flex items-center gap-1 shrink-0 ${
+                appMode === 'auth'
+                  ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
+                  : 'bg-slate-900 border border-slate-800 text-slate-400 hover:text-white'
+              }`}
+            >
+              <Lock className="w-3 h-3" />
+              Sign Up/Verify
+            </button>
+
+            <button
+              onClick={() => setAppMode('survey')}
+              className={`px-2.5 py-1 rounded-full text-xs font-bold transition-all flex items-center gap-1 shrink-0 ${
+                appMode === 'survey'
+                  ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
+                  : 'bg-slate-900 border border-slate-800 text-slate-400 hover:text-white'
+              }`}
+            >
+              <Sparkles className="w-3 h-3" />
+              52-Q Survey
+            </button>
+
             <button
               onClick={() => setIsPaywallOpen(true)}
               className="px-2.5 py-1 rounded-full text-xs font-bold transition-all flex items-center gap-1 shrink-0 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40"
-              title="Test Dodo Payments 4-Tier Paywall"
             >
               <CreditCard className="w-3 h-3" />
               💳 Dodo Paywall
@@ -139,7 +161,7 @@ export default function App() {
               }`}
             >
               <Cpu className="w-3.5 h-3.5" />
-              THAIS Engine
+              THAIS
             </button>
 
             <button
@@ -175,14 +197,26 @@ export default function App() {
         </div>
       )}
 
-      {/* RENDER ACTIVE MODE */}
-      {appMode === 'auth' ? (
+      {/* ========================================================================= */}
+      {/* 1. PUBLIC DOMAIN VIEW: tovelu.store (Marketing Landing & Sales Page) */}
+      {/* ========================================================================= */}
+      {appMode === 'marketing' ? (
+        <MarketingLandingPage
+          darkMode={darkMode}
+          onStartSignUp={() => setAppMode('auth')}
+          onGoToLogin={() => setAppMode('auth')}
+          onEnterApp={() => setAppMode('tovelu_app')}
+        />
+      ) : appMode === 'auth' ? (
+        /* ========================================================================= */
+        /* 2. AUTH SCREEN: Create Free Account, Brevo Verification, Supabase Login */
+        /* ========================================================================= */
         <div className="w-full max-w-[448px] mx-auto py-3 px-2">
           <AuthScreen
             darkMode={darkMode}
             onAuthSuccess={(user) => {
               setUserSession(user);
-              setJourneyToast(`🎉 Welcome ${user.name}! Directing to 52-Question Clinical Survey...`);
+              setJourneyToast(`🎉 Welcome ${user.name}! Redirecting to app.tovelu.store 52-Q Survey...`);
               setTimeout(() => {
                 setJourneyToast(null);
                 setAppMode('survey');
@@ -191,6 +225,9 @@ export default function App() {
           />
         </div>
       ) : appMode === 'survey' ? (
+        /* ========================================================================= */
+        /* 3. 52-QUESTION SURVEY & SHORT HEALTH REPORT (Inside app.tovelu.store) */
+        /* ========================================================================= */
         <div className="w-full max-w-[448px] mx-auto py-2 px-2">
           <DopamineSurveyRunner
             onPayNow={(_input, _assessment, _plan) => {
@@ -205,6 +242,9 @@ export default function App() {
           />
         </div>
       ) : appMode === 'tovelu_app' ? (
+        /* ========================================================================= */
+        /* 4. AUTHENTICATED SOVEREIGN WEB APP (app.tovelu.store - 5 Core Sections) */
+        /* ========================================================================= */
         <MobileAppShell
           darkMode={darkMode}
           bottomNav={<AppBottomNav activeTab={appTab} onTabChange={setAppTab} darkMode={darkMode} />}
