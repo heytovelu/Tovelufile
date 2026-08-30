@@ -16,28 +16,7 @@ interface AuthScreenProps {
   darkMode?: boolean;
 }
 
-const COUNTRIES = [
-  { code: 'US', name: 'United States', flag: '🇺🇸' },
-  { code: 'IN', name: 'India', flag: '🇮🇳' },
-  { code: 'GB', name: 'United Kingdom', flag: '🇬🇧' },
-  { code: 'CA', name: 'Canada', flag: '🇨🇦' },
-  { code: 'AU', name: 'Australia', flag: '🇦🇺' },
-  { code: 'DE', name: 'Germany', flag: '🇩🇪' },
-  { code: 'FR', name: 'France', flag: '🇫🇷' },
-  { code: 'AE', name: 'United Arab Emirates', flag: '🇦🇪' },
-  { code: 'SG', name: 'Singapore', flag: '🇸🇬' },
-  { code: 'NZ', name: 'New Zealand', flag: '🇳🇿' },
-  { code: 'IE', name: 'Ireland', flag: '🇮🇪' },
-  { code: 'CH', name: 'Switzerland', flag: '🇨🇭' },
-  { code: 'NL', name: 'Netherlands', flag: '🇳🇱' },
-  { code: 'SE', name: 'Sweden', flag: '🇸🇪' },
-  { code: 'NO', name: 'Norway', flag: '🇳🇴' },
-  { code: 'ES', name: 'Spain', flag: '🇪🇸' },
-  { code: 'IT', name: 'Italy', flag: '🇮🇹' },
-  { code: 'BR', name: 'Brazil', flag: '🇧🇷' },
-  { code: 'MX', name: 'Mexico', flag: '🇲🇽' },
-  { code: 'ZA', name: 'South Africa', flag: '🇿🇦' },
-];
+import { ALL_COUNTRIES } from '../../data/countries';
 
 export const AuthScreen: React.FC<AuthScreenProps> = ({
   onAuthSuccess,
@@ -286,7 +265,7 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
                   onChange={(e) => setCountry(e.target.value)}
                   className={`w-full px-3.5 py-2.5 rounded-xl border text-xs focus:outline-none transition-all ${inputCls}`}
                 >
-                  {COUNTRIES.map(c => (
+                  {ALL_COUNTRIES.map(c => (
                     <option key={c.code} value={c.name}>
                       {c.flag} {c.name}
                     </option>
