@@ -4,41 +4,43 @@ import { HomeostasisLogo } from '../ui/HomeostasisLogo';
 interface DoctorShareModalProps {
   isOpen: boolean;
   onClose: () => void;
+  initialMode?: 'pdf' | 'qr';
+  userName?: string;
+  reportSummary: {
+    reportTitle: string;
+    biologicalAge: number;
+    calendarAge: number;
+    homaIrStatus: string;
+    siboStatus: string;
+    complianceScore: string;
+  };
   darkMode?: boolean;
 }
 
 export const DoctorShareModal: React.FC<DoctorShareModalProps> = ({
   isOpen,
   onClose,
+  initialMode = 'pdf',
+  userName = 'Ajay',
+  reportSummary,
   darkMode = true,
 }) => {
-  const [recipient, setRecipient] = useState('');
-  const [shareMethod, setShareMethod] = useState<'whatsapp' | 'email' | 'airdrop' | 'qr'>('qr');
-  const [copiedLink, setCopiedLink] = useState(false);
+  const [shareMethod, setShareMethod] = useState<'pdf' | 'qr' | 'whatsapp' | 'email' | 'airdrop'>(initialMode);
   const [sentToast, setSentToast] = useState<string | null>(null);
 
   if (!isOpen) return null;
 
-  const secureDoctorUrl = 'https://tovelu.com/clinical/transcript/TVL-SOV-8941?auth=sha256_verified';
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(secureDoctorUrl);
-    setCopiedLink(true);
-    setTimeout(() => setCopiedLink(false), 2500);
-  };
-
-  const handleSend = () => {
-    setSentToast(`📤 Sent Doctor-Ready Health Transcript to ${recipient || 'recipient'}!`);
+  const handleSimulateShare = (methodName: string) => {
+    setSentToast(`✅ Clinical Report prepared and sent via ${methodName}!`);
     setTimeout(() => {
       setSentToast(null);
       onClose();
     }, 2000);
   };
 
-  const handleDownloadPdf = () => {
-    setSentToast('📥 Downloading Official Multi-Page Medical Transcript (PDF)...');
-    setTimeout(() => setSentToast(null), 3000);
-  };
+  const textTitle = darkMode ? 'text-white' : 'text-slate-900';
+  const textSub = darkMode ? 'text-slate-400' : 'text-slate-600';
+  const subBoxCls = darkMode ? 'bg-slate-900 border-slate-800 text-slate-300' : 'bg-slate-50 border-slate-200 text-slate-800';
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
@@ -48,28 +50,30 @@ export const DoctorShareModal: React.FC<DoctorShareModalProps> = ({
         }`}
       >
         {/* Header */}
-        <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+        <div className={`flex items-center justify-between pb-3 border-b ${darkMode ? 'border-slate-800' : 'border-slate-200'}`}>
           <div className="flex items-center gap-2">
             <span className="text-xl">🩺</span>
             <div>
-              <h3 className="text-sm font-bold tracking-tight">Export & Send Health Report</h3>
-              <p className="text-[11px] text-slate-400">Accepted by any doctor, clinic, or hospital globally</p>
+              <h3 className={`text-sm font-bold tracking-tight ${textTitle}`}>
+                Export & Send Health Report • {userName}
+              </h3>
+              <p className={`text-[11px] ${textSub}`}>{reportSummary.reportTitle}</p>
             </div>
           </div>
-          <button onClick={onClose} className="p-1 text-slate-400 hover:text-white rounded-lg">
+          <button onClick={onClose} className={`p-1 rounded-lg ${darkMode ? 'text-slate-400 hover:text-white' : 'text-slate-500 hover:text-slate-900'}`}>
             ✕
           </button>
         </div>
 
         {/* TOAST */}
         {sentToast && (
-          <div className="my-2 p-2 rounded-xl bg-[#00FF9D]/20 border border-[#00FF9D] text-center text-xs font-bold text-[#00FF9D] animate-bounce">
+          <div className="my-2 p-2 rounded-xl bg-emerald-500/20 border border-emerald-500 text-center text-xs font-bold text-emerald-700 dark:text-[#00FF9D] animate-bounce">
             {sentToast}
           </div>
         )}
 
         {/* Share Mode Tabs */}
-        <div className="grid grid-cols-4 gap-1.5 py-3 border-b border-slate-800">
+        <div className={`grid grid-cols-4 gap-1.5 py-3 border-b ${darkMode ? 'border-slate-800' : 'border-slate-200'}`}>
           {[
             { id: 'qr', label: 'Doctor QR' },
             { id: 'whatsapp', label: 'WhatsApp' },
@@ -82,7 +86,9 @@ export const DoctorShareModal: React.FC<DoctorShareModalProps> = ({
               className={`py-1.5 text-xs font-bold rounded-xl transition-all ${
                 shareMethod === m.id
                   ? 'bg-[#00FF9D] text-slate-950 shadow-sm'
-                  : 'bg-slate-900 text-slate-400 hover:text-white border border-slate-800'
+                  : darkMode
+                  ? 'bg-slate-900 text-slate-400 hover:text-white border border-slate-800'
+                  : 'bg-slate-100 text-slate-600 hover:text-slate-900 border border-slate-300'
               }`}
             >
               {m.label}
@@ -94,7 +100,7 @@ export const DoctorShareModal: React.FC<DoctorShareModalProps> = ({
         <div className="py-4 space-y-3">
           {shareMethod === 'qr' && (
             <div className="text-center space-y-3">
-              <div className="w-36 h-36 mx-auto p-2.5 rounded-2xl bg-white flex items-center justify-center shadow-lg border border-slate-700">
+              <div className="w-36 h-36 mx-auto p-2.5 rounded-2xl bg-white flex items-center justify-center shadow-lg border border-slate-300">
                 {/* Simulated High-Res QR Code */}
                 <div className="w-full h-full bg-slate-950 p-2 rounded-xl flex flex-col items-center justify-center text-center">
                   <HomeostasisLogo size={28} mode="on-dark" showWordmark={false} />
@@ -103,54 +109,86 @@ export const DoctorShareModal: React.FC<DoctorShareModalProps> = ({
                 </div>
               </div>
 
-              <div className="text-xs text-slate-300">
+              <div className={`text-xs ${textSub}`}>
                 Ask your doctor or specialist to scan this with their phone or hospital tablet for an instant, secure read-only view.
               </div>
 
-              <div className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between text-xs font-mono">
-                <span className="truncate text-slate-400 text-[11px]">{secureDoctorUrl}</span>
-                <button
-                  onClick={handleCopy}
-                  className="text-xs font-bold text-[#00FF9D] hover:underline shrink-0 pl-2"
-                >
-                  {copiedLink ? 'Copied! ✓' : 'Copy Link'}
-                </button>
+              <div className={`p-2.5 rounded-xl border flex items-center justify-between text-xs font-mono ${subBoxCls}`}>
+                <span>Link Expires: 24 Hours</span>
+                <span className="text-emerald-600 dark:text-[#00FF9D] font-bold">Encrypted E2E</span>
               </div>
             </div>
           )}
 
-          {(shareMethod === 'whatsapp' || shareMethod === 'email' || shareMethod === 'airdrop') && (
-            <div className="space-y-3">
-              <div className="text-xs text-slate-300">
-                Enter your doctor's name, email, or WhatsApp number to send the official transcript:
-              </div>
-
+          {shareMethod === 'whatsapp' && (
+            <div className="space-y-3 text-xs">
+              <p className={textSub}>
+                Send an encrypted PDF download link directly to your doctor, nutritionist, or family member via WhatsApp:
+              </p>
               <input
-                type="text"
-                value={recipient}
-                onChange={(e) => setRecipient(e.target.value)}
-                placeholder={shareMethod === 'email' ? 'doctor@mayoclinic.org' : '+1 (555) 019-2834'}
-                className="w-full py-2.5 px-3 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#00FF9D]"
+                type="tel"
+                placeholder="Doctor WhatsApp number (e.g. +1 555 0192)"
+                className={`w-full p-2.5 rounded-xl border text-xs focus:outline-none focus:border-emerald-500 ${
+                  darkMode ? 'bg-slate-900 border-slate-800 text-white placeholder-slate-500' : 'bg-slate-50 border-slate-300 text-slate-900 placeholder-slate-400'
+                }`}
               />
-
               <button
-                onClick={handleSend}
-                className="w-full py-2.5 rounded-xl font-bold text-xs uppercase tracking-wider bg-[#00FF9D] text-slate-950 hover:bg-[#00FF9D]/90 active:scale-98 transition-all shadow-[0_0_15px_rgba(0,255,157,0.3)]"
+                onClick={() => handleSimulateShare('WhatsApp')}
+                className="w-full py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs uppercase tracking-wider transition-all shadow-md"
               >
-                Send Health Report via {shareMethod.toUpperCase()}
+                Send via WhatsApp
               </button>
             </div>
           )}
 
-          {/* Download PDF Button */}
-          <div className="pt-2 border-t border-slate-800">
-            <button
-              onClick={handleDownloadPdf}
-              className="w-full py-2.5 px-4 rounded-xl font-bold text-xs text-slate-200 bg-slate-800 hover:bg-slate-700 border border-slate-700 active:scale-98 transition-all flex items-center justify-center gap-2"
-            >
-              <span>📥 Download Official Multi-Page PDF</span>
-            </button>
-          </div>
+          {shareMethod === 'email' && (
+            <div className="space-y-3 text-xs">
+              <p className={textSub}>
+                Email official clinical PDF packet with raw data attachments (HL7 / FHIR format):
+              </p>
+              <input
+                type="email"
+                placeholder="doctor@clinic.org"
+                className={`w-full p-2.5 rounded-xl border text-xs focus:outline-none focus:border-emerald-500 ${
+                  darkMode ? 'bg-slate-900 border-slate-800 text-white placeholder-slate-500' : 'bg-slate-50 border-slate-300 text-slate-900 placeholder-slate-400'
+                }`}
+              />
+              <button
+                onClick={() => handleSimulateShare('Doctor Email')}
+                className="w-full py-2.5 rounded-xl bg-[#00FF9D] text-slate-950 font-bold text-xs uppercase tracking-wider transition-all shadow-md"
+              >
+                Send Official Clinical PDF
+              </button>
+            </div>
+          )}
+
+          {shareMethod === 'airdrop' && (
+            <div className="text-center space-y-3 text-xs">
+              <div className="p-4 rounded-2xl bg-sky-500/10 border border-sky-500/30 text-sky-700 dark:text-sky-300">
+                <span className="text-2xl block mb-1">📡</span>
+                <span className="font-bold">AirDrop or Bluetooth File Transfer</span>
+                <p className={`text-[11px] mt-1 ${textSub}`}>
+                  Transfer instantly to an adjacent iPad, iPhone, or Mac workstation.
+                </p>
+              </div>
+              <button
+                onClick={() => handleSimulateShare('AirDrop')}
+                className="w-full py-2.5 rounded-xl bg-[#00FF9D] text-slate-950 font-bold text-xs uppercase tracking-wider transition-all shadow-md"
+              >
+                Broadcast to Nearby Device
+              </button>
+            </div>
+          )}
+        </div>
+
+        {/* Universal 1-Tap PDF Direct Download */}
+        <div className={`pt-3 border-t flex gap-2 ${darkMode ? 'border-slate-800' : 'border-slate-200'}`}>
+          <button
+            onClick={() => handleSimulateShare('Direct PDF Download')}
+            className="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-emerald-500 to-[#00FF9D] text-slate-950 font-bold text-xs uppercase tracking-wider hover:opacity-90 active:scale-98 transition-all flex items-center justify-center gap-1.5 shadow-sm"
+          >
+            <span>📥 Download Clinical PDF Directly to Device</span>
+          </button>
         </div>
       </div>
     </div>

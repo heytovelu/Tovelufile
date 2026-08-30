@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 export type HabitType = 'walk' | 'sleep' | 'water' | 'exercise' | 'sunlight';
 
@@ -7,7 +7,7 @@ interface HabitLogModalProps {
   onClose: () => void;
   habitType: HabitType;
   currentValue: number;
-  onSave: (habitType: HabitType, newValue: number) => void;
+  onSave: (type: HabitType, value: number) => void;
   darkMode?: boolean;
 }
 
@@ -19,11 +19,7 @@ export const HabitLogModal: React.FC<HabitLogModalProps> = ({
   onSave,
   darkMode = true,
 }) => {
-  const [val, setVal] = useState<number>(currentValue);
-
-  useEffect(() => {
-    setVal(currentValue);
-  }, [currentValue, habitType, isOpen]);
+  const [val, setVal] = useState(currentValue);
 
   if (!isOpen) return null;
 
@@ -93,6 +89,15 @@ export const HabitLogModal: React.FC<HabitLogModalProps> = ({
     onClose();
   };
 
+  const textTitle = darkMode ? 'text-white' : 'text-slate-900';
+  const textSub = darkMode ? 'text-slate-400' : 'text-slate-600';
+  const btnSecCls = darkMode
+    ? 'bg-slate-800 hover:bg-slate-700 border-slate-700 text-slate-200'
+    : 'bg-slate-100 hover:bg-slate-200 border-slate-300 text-slate-800 font-bold';
+  const boxCls = darkMode
+    ? 'bg-slate-900 border-slate-800 text-slate-300'
+    : 'bg-slate-50 border-slate-200 text-slate-800';
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
       <div
@@ -101,15 +106,15 @@ export const HabitLogModal: React.FC<HabitLogModalProps> = ({
         }`}
       >
         {/* Header */}
-        <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+        <div className={`flex items-center justify-between pb-3 border-b ${darkMode ? 'border-slate-800' : 'border-slate-200'}`}>
           <div className="flex items-center gap-2">
             <span className="text-2xl">{currentConfig.icon}</span>
             <div>
-              <h3 className="text-sm font-bold tracking-tight">Log {currentConfig.title}</h3>
-              <p className="text-[11px] text-slate-400">Target: {currentConfig.target} {currentConfig.unit}</p>
+              <h3 className={`text-sm font-bold tracking-tight ${textTitle}`}>Log {currentConfig.title}</h3>
+              <p className={`text-[11px] ${textSub}`}>Target: {currentConfig.target} {currentConfig.unit}</p>
             </div>
           </div>
-          <button onClick={onClose} className="p-1 text-slate-400 hover:text-white rounded-lg">
+          <button onClick={onClose} className={`p-1 rounded-lg ${darkMode ? 'text-slate-400 hover:text-white' : 'text-slate-500 hover:text-slate-900'}`}>
             ✕
           </button>
         </div>
@@ -119,17 +124,17 @@ export const HabitLogModal: React.FC<HabitLogModalProps> = ({
           <div className="flex items-center justify-center gap-4">
             <button
               onClick={() => setVal((prev) => Math.max(0, Number((prev - currentConfig.step).toFixed(1))))}
-              className="w-11 h-11 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-lg font-black text-slate-200 active:scale-95 transition-all"
+              className={`w-11 h-11 rounded-xl border text-lg font-black active:scale-95 transition-all flex items-center justify-center ${btnSecCls}`}
             >
               -
             </button>
             <div className="min-w-[120px]">
-              <span className="text-3xl font-black text-white">{val}</span>
-              <span className="text-xs text-slate-400 block font-mono uppercase">{currentConfig.unit}</span>
+              <span className={`text-3xl font-black ${textTitle}`}>{val}</span>
+              <span className={`text-xs block font-mono uppercase ${textSub}`}>{currentConfig.unit}</span>
             </div>
             <button
               onClick={() => setVal((prev) => Number((prev + currentConfig.step).toFixed(1)))}
-              className="w-11 h-11 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-lg font-black text-slate-200 active:scale-95 transition-all"
+              className={`w-11 h-11 rounded-xl border text-lg font-black active:scale-95 transition-all flex items-center justify-center ${btnSecCls}`}
             >
               +
             </button>
@@ -137,7 +142,7 @@ export const HabitLogModal: React.FC<HabitLogModalProps> = ({
 
           {/* Quick Add Pills */}
           <div className="space-y-1.5 pt-1">
-            <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">
+            <span className={`text-[10px] uppercase font-bold tracking-wider block ${textSub}`}>
               Quick Add:
             </span>
             <div className="flex items-center justify-center gap-2 flex-wrap">
@@ -145,7 +150,11 @@ export const HabitLogModal: React.FC<HabitLogModalProps> = ({
                 <button
                   key={amt}
                   onClick={() => setVal((prev) => Number((prev + amt).toFixed(1)))}
-                  className="py-1 px-3 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-bold text-[#00FF9D] active:scale-95 transition-all"
+                  className={`py-1 px-3 rounded-lg border text-xs font-bold active:scale-95 transition-all ${
+                    darkMode
+                      ? 'bg-slate-800 hover:bg-slate-700 border-slate-700 text-[#00FF9D]'
+                      : 'bg-emerald-50 hover:bg-emerald-100 border-emerald-300 text-emerald-800'
+                  }`}
                 >
                   +{amt} {currentConfig.unit === 'steps' ? '' : currentConfig.unit}
                 </button>
@@ -154,7 +163,7 @@ export const HabitLogModal: React.FC<HabitLogModalProps> = ({
           </div>
 
           {/* Clinical Rationale */}
-          <div className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-[11px] text-slate-300 leading-relaxed text-left">
+          <div className={`p-2.5 rounded-xl border text-[11px] leading-relaxed text-left ${boxCls}`}>
             💡 {currentConfig.rationale}
           </div>
         </div>

@@ -40,7 +40,7 @@ export const MobileAppShell: React.FC<MobileAppShellProps> = ({
 
         {/* Bottom Navigation */}
         {bottomNav && (
-          <div className="w-full shrink-0 z-50 bg-[#080A0E]">
+          <div className={`w-full shrink-0 z-50 ${darkMode ? 'bg-[#080A0E]' : 'bg-white'}`}>
             {bottomNav}
           </div>
         )}

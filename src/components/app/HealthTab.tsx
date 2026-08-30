@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { HomeostasisLogo } from '../ui/HomeostasisLogo';
 import { DoctorShareModal } from './DoctorShareModal';
+import { HomeostasisLogo } from '../ui/HomeostasisLogo';
 
 interface HealthTabProps {
   onOpenYou: () => void;
@@ -12,30 +12,50 @@ export const HealthTab: React.FC<HealthTabProps> = ({
   darkMode = true,
 }) => {
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
-  const [downloadToast, setDownloadToast] = useState<string | null>(null);
+  const [shareMode, setShareMode] = useState<'pdf' | 'qr'>('pdf');
+  const [activeOrganCategory, setActiveOrganCategory] = useState<string | null>(null);
 
-  // 14 Organ Systems Data
+  const handleOpenShare = (mode: 'pdf' | 'qr') => {
+    setShareMode(mode);
+    setIsShareModalOpen(true);
+  };
+
+  // 14 Organ Systems Matrix
   const organSystems = [
-    { name: '1. Metabolic & Glycemic', grade: 'Grade A', status: 'Optimal / Sensitive', metrics: 'Fasting glucose 88 mg/dL • HOMA-IR 1.1' },
-    { name: '2. Cardiovascular & Artery', grade: 'Grade A', status: 'Optimal Flow', metrics: 'Resting BP 118/76 mmHg • Compliance normal' },
-    { name: '3. Hepatic & Liver (MASLD)', grade: 'Grade A', status: 'Clearing / Reversing', metrics: 'Steatosis resolving • ALT/AST optimal mid-range' },
-    { name: '4. Gastrointestinal & Gut', grade: 'Grade A', status: 'Optimal Transit', metrics: 'Rome IV score optimal • SIBO gas cleared' },
-    { name: '5. Endocrine & Hormonal Axis', grade: 'Grade A-', status: 'Balancing', metrics: 'Thyroid T3 normal • Cortisol rhythm restored' },
-    { name: '6. Neurological & Sleep Architecture', grade: 'Grade A', status: 'Deep Restorative', metrics: 'Sleep latency 14m • 0 nocturnal awakenings' },
-    { name: '7. Immune & Chronic Inflammation', grade: 'Grade A', status: 'Low / Protective', metrics: 'SCI Score 34/100 (Optimal Low) • 0 cytokine flare' },
-    { name: '8. Renal & Fluid Electrolytes', grade: 'Grade A', status: 'Optimal Filtration', metrics: 'eGFR support optimal • 0 nocturia episodes' },
-    { name: '9. Musculoskeletal & Joints', grade: 'Grade A', status: 'Strong / Resilient', metrics: 'Sarcopenia index optimal • 0 uric acid flares' },
-    { name: '10. Respiratory & Oxygen Vitals', grade: 'Grade A', status: 'Optimal Oxygenation', metrics: 'Resting respiration 12/min • 0 nocturnal hypoxia' },
-    { name: '11. Integumentary (Skin, Hair)', grade: 'Grade A', status: 'Vibrant / Clear', metrics: 'Keratin synthesis normal • Capillary beds clear' },
-    { name: '12. Hematological & Oxygen Flow', grade: 'Grade A', status: 'Optimal Perfusion', metrics: 'O2 Saturation 99% • Iron turnover optimal' },
-    { name: '13. Autonomic Vagal Tone', grade: 'Grade A', status: 'High Parasympathetic', metrics: 'Vagal nerve tone high • Resting heart-rate 58 bpm' },
-    { name: '14. Cellular Senescence & Longevity', grade: 'Grade A', status: 'Decelerated Aging', metrics: '-3.6 Biological Years • 38% aging deceleration' },
+    { id: 'endo', name: 'Endocrine & Insulin Sensitivity', grade: 'A', status: 'HOMA-IR: 1.1 (Optimal)', icon: '🩸' },
+    { id: 'cardio', name: 'Cardiovascular & Endothelial', grade: 'A', status: 'ApoB/A1: 0.58 • BP: 116/74', icon: '🫀' },
+    { id: 'gi', name: 'Gastrointestinal & Microbiome', grade: 'A', status: 'Rome IV: 1/10 • SIBO Remission', icon: '🌱' },
+    { id: 'hepatic', name: 'Hepatic & Bile Acid Flow', grade: 'A', status: 'ALT: 19 U/L • Fatty Liver: Reversing', icon: '🧪' },
+    { id: 'neuro', name: 'Neurological & Circadian Tone', grade: 'A', status: 'Deep Sleep: 24% • Cortisol: Balanced', icon: '🧠' },
+    { id: 'renal', name: 'Renal & Electrolyte Osmolarity', grade: 'A', status: 'eGFR: >90 • Creatinine: 0.9', icon: '💧' },
+    { id: 'immune', name: 'Immunological & Autoimmune', grade: 'A', status: 'hs-CRP: 0.4 mg/L (Low SCI)', icon: '🛡️' },
+    { id: 'pulmo', name: 'Pulmonary & Oxygen Kinetics', grade: 'A', status: 'SpO2: 99% • VO2 Max Corridor: Optimal', icon: '🫁' },
+    { id: 'musculo', name: 'Musculoskeletal & Bone Density', grade: 'A', status: 'Lean Mass Retained: 98%', icon: '🦴' },
+    { id: 'derm', name: 'Dermatological & Microvascular', grade: 'A', status: 'Capillary Refill: <2 sec', icon: '✨' },
+    { id: 'mitochondria', name: 'Mitochondrial Bioenergetics', grade: 'A', status: 'Beta-Oxidation Rate: High', icon: '⚡' },
+    { id: 'lymphatic', name: 'Lymphatic & Glymphatic Clearance', grade: 'A', status: 'Nightly Delta Flush: Normal', icon: '🌊' },
+    { id: 'ocular', name: 'Ocular & Retinal Microcirculation', grade: 'A', status: 'Circadian Light Responsive', icon: '👁️' },
+    { id: 'gonadal', name: 'Reproductive & Hormonal Axis', grade: 'A', status: 'Free Testosterone/Estrogen: Stable', icon: '🧬' },
   ];
 
-  const handleQuickDownload = () => {
-    setDownloadToast('📥 Generating Doctor-Ready Health Transcript (PDF)...');
-    setTimeout(() => setDownloadToast(null), 3000);
-  };
+  // 500-Disease Prevention Registry
+  const monitoredDiseases = [
+    { name: 'Pre-Diabetes / Type 2 Diabetes', initialRisk: 94, currentRisk: 28, status: 'Reversed to Normal Corridors', icon: '📉' },
+    { name: 'SIBO / Dysbiosis (Small Intestine Bloating)', initialRisk: 88, currentRisk: 16, status: 'Full Motility Restored', icon: '🌱' },
+    { name: 'Non-Alcoholic Fatty Liver (MASLD)', initialRisk: 81, currentRisk: 22, status: 'Hepatic Fat Clearance Active', icon: '🧪' },
+    { name: 'Atherosclerosis / Vascular Plaque', initialRisk: 62, currentRisk: 18, status: 'Vascular Endothelium Calm', icon: '🫀' },
+    { name: 'Metabolic Syndrome (ATP III Criteria)', initialRisk: 89, currentRisk: 12, status: 'Criteria Cleared (5/5 Cleared)', icon: '✅' },
+    { name: 'Systemic Chronic Inflammation (SCI)', initialRisk: 79, currentRisk: 24, status: 'Inflammatory Cascades Quenched', icon: '🛡️' },
+  ];
+
+  // Theme helper classes for 100% crisp light/dark visibility
+  const cardCls = darkMode ? 'bg-[#0E1318] border-slate-800 text-slate-100' : 'bg-white border-slate-200 text-slate-900 shadow-sm';
+  const subBoxCls = darkMode ? 'bg-slate-900/80 border-slate-800 text-slate-200' : 'bg-slate-50 border-slate-200 text-slate-800';
+  const textTitle = darkMode ? 'text-slate-100' : 'text-slate-900';
+  const textSub = darkMode ? 'text-slate-400' : 'text-slate-600';
+  const btnSecCls = darkMode 
+    ? 'bg-slate-800 hover:bg-slate-700 border-slate-700 text-slate-200' 
+    : 'bg-slate-100 hover:bg-slate-200 border-slate-300 text-slate-800 font-bold';
 
   return (
     <div className="w-full space-y-4 px-4 pt-3 pb-8 animate-fadeIn">
@@ -64,258 +84,268 @@ export const HealthTab: React.FC<HealthTabProps> = ({
         </button>
       </div>
 
-      {/* 2. TOP ACTIONS BAR (Ajay's Mandate: Download as PDF & Send to Anyone) */}
-      <div className="grid grid-cols-2 gap-2">
-        <button
-          onClick={handleQuickDownload}
-          className="p-3 rounded-2xl border border-emerald-500/40 bg-emerald-500/10 hover:border-emerald-500 transition-all flex items-center gap-2.5 text-left active:scale-98"
-        >
-          <span className="text-xl">📥</span>
+      {/* 2. DOCTOR ACTION BAR: DOWNLOAD AS PDF & SEND TO ANYONE (Ajay's Mandate) */}
+      <div className={`p-4 rounded-2xl border ${cardCls} space-y-3 shadow-sm`}>
+        <div className="flex items-center justify-between">
           <div>
-            <span className="text-xs font-bold text-emerald-300 block">Download as PDF</span>
-            <span className="text-[10px] text-slate-400">Official multi-page transcript</span>
+            <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-600 dark:text-[#00FF9D]">
+              Clinical Interoperability Hub
+            </span>
+            <h2 className={`text-sm font-black tracking-tight ${textTitle}`}>
+              Lifetime Health Report
+            </h2>
           </div>
-        </button>
+          <span className="text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
+            Updates Weekly
+          </span>
+        </div>
 
-        <button
-          onClick={() => setIsShareModalOpen(true)}
-          className="p-3 rounded-2xl border border-sky-500/40 bg-sky-500/10 hover:border-sky-500 transition-all flex items-center gap-2.5 text-left active:scale-98"
-        >
-          <span className="text-xl">📤</span>
-          <div>
-            <span className="text-xs font-bold text-sky-300 block">Send to Doctor / QR</span>
-            <span className="text-[10px] text-slate-400">WhatsApp, Email, or Clinic Link</span>
-          </div>
-        </button>
+        <p className={`text-xs ${textSub} leading-relaxed font-medium`}>
+          A single living document tracking your entire lifetime biological health, physical-mental-emotional homeostasis, 14 organ systems, and 500-disease reversal registry.
+        </p>
+
+        {/* 2 Action Buttons */}
+        <div className="grid grid-cols-2 gap-2 pt-1">
+          {/* Download as PDF */}
+          <button
+            onClick={() => handleOpenShare('pdf')}
+            className="py-2.5 px-3 rounded-xl bg-gradient-to-r from-emerald-500 to-[#00FF9D] text-slate-950 font-bold text-xs uppercase tracking-wider hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-1.5 shadow-[0_0_12px_rgba(0,255,157,0.25)]"
+          >
+            <span>📥</span>
+            <span>Download as PDF</span>
+          </button>
+
+          {/* Send to Doctor / QR */}
+          <button
+            onClick={() => handleOpenShare('qr')}
+            className={`py-2.5 px-3 rounded-xl border font-bold text-xs uppercase tracking-wider active:scale-95 transition-all flex items-center justify-center gap-1.5 ${btnSecCls}`}
+          >
+            <span>📤</span>
+            <span>Send to Anyone</span>
+          </button>
+        </div>
       </div>
 
-      {/* TOAST */}
-      {downloadToast && (
-        <div className="p-2.5 rounded-xl bg-[#00FF9D]/20 border border-[#00FF9D] text-center text-xs font-bold text-[#00FF9D] animate-bounce">
-          {downloadToast}
-        </div>
-      )}
-
-      {/* SECTION A: PATIENT IDENTIFICATION & CLINICAL STANDARDS */}
-      <div className={`p-4 rounded-2xl border ${darkMode ? 'bg-[#0E1318] border-slate-800' : 'bg-white border-slate-200'} space-y-3`}>
-        <div className="flex items-center justify-between pb-2 border-b border-slate-800">
-          <div>
-            <span className="text-[10px] uppercase font-mono text-[#00FF9D] font-bold tracking-wider">
-              LIFETIME CLINICAL TRANSCRIPT • WEEKLY RE-CALIBRATION
-            </span>
-            <h2 className="text-base font-black text-slate-100 mt-0.5">
-              Ajay • Sovereign Health Record
-            </h2>
-            <div className="text-[11px] font-mono text-slate-400">
-              ID: #TVL-SOV-8941 • Blood Group: O+ • Height: 178 cm • Weight: 76.4 kg
+      {/* ========================================================================= */}
+      {/* SECTION A: CLINICAL PATIENT IDENTIFIER & EPIGENETIC AGE */}
+      {/* ========================================================================= */}
+      <div className={`p-4 rounded-2xl border ${cardCls} space-y-3`}>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-2xl bg-emerald-500/15 border border-emerald-500/40 flex items-center justify-center font-black text-sm text-emerald-700 dark:text-[#00FF9D]">
+              AJ
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className={`text-sm font-black ${textTitle}`}>Ajay</span>
+                <span className="text-[10px] font-mono px-1.5 py-0.2 rounded bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+                  #TVL-SOV-8941
+                </span>
+              </div>
+              <span className={`text-[10px] ${textSub}`}>
+                Standardized Clinical Record • Blood Group: O+ • Male
+              </span>
             </div>
           </div>
+
           <div className="text-right">
-            <span className="text-[10px] font-mono text-slate-400 block">Updated:</span>
-            <span className="text-xs font-mono font-bold text-emerald-400">Aug 30, 2026</span>
+            <span className={`text-[9px] uppercase font-mono ${textSub} block`}>Registry Status</span>
+            <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">Verified Grade A</span>
           </div>
         </div>
 
         {/* Biological vs Chronological Age */}
-        <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
-          <div>
-            <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">
-              Epigenetic Biological Age
-            </span>
-            <div className="text-xl font-black text-white">
-              29.4 Years <span className="text-xs font-bold text-[#00FF9D]">(-3.6 Years Reversal)</span>
-            </div>
+        <div className="grid grid-cols-2 gap-2 text-center pt-1">
+          <div className={`p-2.5 rounded-xl border ${darkMode ? 'bg-emerald-950/20 border-emerald-500/40 text-emerald-300' : 'bg-emerald-50 border-emerald-200 text-emerald-900'}`}>
+            <span className="text-[10px] font-bold block">Biological Epigenetic Age</span>
+            <span className="text-lg font-black text-emerald-600 dark:text-[#00FF9D]">29.4 Years</span>
+            <span className="text-[9px] block text-emerald-700 dark:text-emerald-400 font-bold mt-0.5">-3.6 Yrs Reversal</span>
           </div>
-          <div className="text-right text-xs">
-            <span className="text-slate-400 block text-[10px]">Calendar Age</span>
-            <span className="font-bold text-slate-200">33.0 Years</span>
+
+          <div className={`p-2.5 rounded-xl border ${subBoxCls}`}>
+            <span className={`text-[10px] block ${textSub}`}>Calendar Age</span>
+            <span className={`font-bold text-lg ${textTitle}`}>33.0 Years</span>
+            <span className={`text-[9px] block ${textSub} mt-0.5`}>Chronological Reference</span>
           </div>
         </div>
 
-        {/* Clinical Reference Standards Cited */}
-        <div className="text-[10px] text-slate-500 font-mono leading-relaxed border-t border-slate-800/80 pt-2">
+        {/* Clinical Reference Standards */}
+        <div className={`text-[10px] ${textSub} font-mono leading-relaxed border-t ${darkMode ? 'border-slate-800/80' : 'border-slate-200'} pt-2`}>
           Clinical Guidance Framework: Rome IV (GI) • Rotterdam 2018 (PCOS) • Framingham & ACC/AHA (Cardiovascular) • ADA Standards of Care (Metabolic) • ATP III (Metabolic Syndrome).
         </div>
       </div>
 
-      {/* SECTION B: THE 3-DIMENSIONAL MIRROR OF HEALTH (Physical • Mental • Emotional) */}
-      <div className={`p-4 rounded-2xl border ${darkMode ? 'bg-[#0E1318] border-slate-800' : 'bg-white border-slate-200'} space-y-3`}>
+      {/* ========================================================================= */}
+      {/* SECTION B: THE 3-DIMENSIONAL MIRROR OF HEALTH */}
+      {/* ========================================================================= */}
+      <div className={`p-4 rounded-2xl border ${cardCls} space-y-3`}>
         <div className="flex items-center justify-between">
           <div>
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#00FF9D]">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-600 dark:text-[#00FF9D]">
               The 3-Dimensional Mirror of Health
             </span>
-            <h3 className="text-sm font-black text-slate-100">
+            <h3 className={`text-sm font-black ${textTitle}`}>
               Whole-Person Homeostasis
             </h3>
           </div>
-          <span className="text-[10px] font-bold text-emerald-400 bg-emerald-400/10 px-2 py-0.5 rounded border border-emerald-400/30">
+          <span className="text-[10px] font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/30">
             96% Optimal Balance
           </span>
         </div>
 
         <div className="space-y-2 text-xs">
           {/* Physical */}
-          <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
+          <div className={`p-3 rounded-xl border ${subBoxCls} space-y-1`}>
             <div className="flex items-center justify-between">
-              <span className="font-bold text-slate-200">🫀 1. Physical Homeostasis</span>
-              <span className="text-emerald-400 font-bold">Grade A</span>
+              <span className={`font-bold ${textTitle}`}>🫀 1. Physical Homeostasis</span>
+              <span className="text-emerald-600 dark:text-emerald-400 font-bold">Grade A</span>
             </div>
-            <p className="text-[11px] text-slate-400 leading-relaxed">
+            <p className={`text-[11px] ${textSub} leading-relaxed`}>
               Metabolic substrate oxidation efficiency: 96% optimal. Visceral waist-to-height ratio 0.50 (low organ fat pressure). Microvascular capillary refill in hands and feet restored.
             </p>
           </div>
 
           {/* Mental */}
-          <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
+          <div className={`p-3 rounded-xl border ${subBoxCls} space-y-1`}>
             <div className="flex items-center justify-between">
-              <span className="font-bold text-slate-200">🧠 2. Mental & Cognitive Acuity</span>
-              <span className="text-emerald-400 font-bold">Grade A</span>
+              <span className={`font-bold ${textTitle}`}>🧠 2. Mental & Cognitive Acuity</span>
+              <span className="text-emerald-600 dark:text-emerald-400 font-bold">Grade A</span>
             </div>
-            <p className="text-[11px] text-slate-400 leading-relaxed">
+            <p className={`text-[11px] ${textSub} leading-relaxed`}>
               Neuro-inflammation index: low. Brain fog episodes: 0 reported over past 14 days. Slow-wave Delta deep sleep: 24% (optimal restorative). Sleep onset latency: 14 mins.
             </p>
           </div>
 
           {/* Emotional */}
-          <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
+          <div className={`p-3 rounded-xl border ${subBoxCls} space-y-1`}>
             <div className="flex items-center justify-between">
-              <span className="font-bold text-slate-200">🧘 3. Emotional & Autonomic Nervous Tone</span>
-              <span className="text-emerald-400 font-bold">Grade A</span>
+              <span className={`font-bold ${textTitle}`}>🧘 3. Emotional & Autonomic Nervous Tone</span>
+              <span className="text-emerald-600 dark:text-emerald-400 font-bold">Grade A</span>
             </div>
-            <p className="text-[11px] text-slate-400 leading-relaxed">
+            <p className={`text-[11px] ${textSub} leading-relaxed`}>
               Autonomic vagal tone: high parasympathetic dominance (Rest & Digest). Diurnal cortisol awakening response restored; evening melatonin surge verified. Allostatic burnout resilience: high.
             </p>
           </div>
         </div>
       </div>
 
+      {/* ========================================================================= */}
       {/* SECTION C: THE 14-ORGAN SYSTEMS CLINICAL MATRIX */}
-      <div className={`p-4 rounded-2xl border ${darkMode ? 'bg-[#0E1318] border-slate-800' : 'bg-white border-slate-200'} space-y-3`}>
+      {/* ========================================================================= */}
+      <div className={`p-4 rounded-2xl border ${cardCls} space-y-3`}>
         <div className="flex items-center justify-between">
           <div>
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#00FF9D]">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-600 dark:text-[#00FF9D]">
               Clinical Matrix
             </span>
-            <h3 className="text-sm font-black text-slate-100">
+            <h3 className={`text-sm font-black ${textTitle}`}>
               14 Physiological Organ Systems
             </h3>
           </div>
-          <span className="text-[10px] font-mono text-slate-400">All Systems Graded</span>
+          <span className="text-[10px] font-mono text-emerald-600 dark:text-[#00FF9D] font-bold">14/14 Grade A</span>
         </div>
 
-        <div className="space-y-2">
-          {organSystems.map((sys) => (
-            <div
-              key={sys.name}
-              className="p-2.5 rounded-xl bg-slate-900/70 border border-slate-800 flex items-center justify-between gap-2"
-            >
-              <div className="min-w-0 flex-1">
-                <div className="flex items-center gap-2">
-                  <span className="text-xs font-bold text-slate-200">{sys.name}</span>
-                  <span className="text-[10px] font-bold text-[#00FF9D]">{sys.grade}</span>
+        <div className="space-y-1.5">
+          {organSystems.map((organ) => {
+            const isExpanded = activeOrganCategory === organ.id;
+            return (
+              <div
+                key={organ.id}
+                onClick={() => setActiveOrganCategory(isExpanded ? null : organ.id)}
+                className={`p-2.5 rounded-xl border transition-all cursor-pointer ${subBoxCls} hover:border-emerald-500/50`}
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 min-w-0 pr-2">
+                    <span className="text-base">{organ.icon}</span>
+                    <span className={`text-xs font-bold truncate ${textTitle}`}>{organ.name}</span>
+                  </div>
+                  <div className="flex items-center gap-2 shrink-0">
+                    <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-bold">
+                      Grade {organ.grade}
+                    </span>
+                    <span className={`text-xs font-mono ${textSub}`}>{isExpanded ? '▲' : '▼'}</span>
+                  </div>
                 </div>
-                <div className="text-[10px] text-slate-400 truncate mt-0.5">
-                  {sys.metrics}
-                </div>
+
+                {isExpanded && (
+                  <div className={`mt-2 pt-2 border-t text-[11px] ${darkMode ? 'border-slate-800 text-slate-300' : 'border-slate-200 text-slate-700'}`}>
+                    <span className="font-bold text-emerald-600 dark:text-[#00FF9D]">Biomarker Readings: </span>
+                    {organ.status}
+                  </div>
+                )}
               </div>
-              <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 shrink-0">
-                {sys.status}
-              </span>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
-      {/* SECTION D: MASTER 500-DISEASE REVERSAL & PREVENTION REGISTRY */}
-      <div className={`p-4 rounded-2xl border ${darkMode ? 'bg-[#0E1318] border-slate-800' : 'bg-white border-slate-200'} space-y-3`}>
+      {/* ========================================================================= */}
+      {/* SECTION D: 500-DISEASE PREVENTION & REVERSAL REGISTRY */}
+      {/* ========================================================================= */}
+      <div className={`p-4 rounded-2xl border ${cardCls} space-y-3`}>
         <div className="flex items-center justify-between">
           <div>
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#00FF9D]">
-              500-Disease Index Ledger
+            <span className="text-[10px] font-bold uppercase tracking-widest text-emerald-600 dark:text-[#00FF9D]">
+              Clinical Surveillance
             </span>
-            <h3 className="text-sm font-black text-slate-100">
-              Chronic Disease Reversal Registry
+            <h3 className={`text-sm font-black ${textTitle}`}>
+              500-Disease Prevention Registry
             </h3>
           </div>
-          <span className="text-[10px] font-mono text-slate-400">Bayesian Audit</span>
+          <span className={`text-[10px] ${textSub} font-mono`}>500 Monitored</span>
         </div>
 
         <div className="space-y-2 text-xs">
-          {/* Condition 5 */}
-          <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
-            <div className="flex items-center justify-between">
-              <span className="font-bold text-slate-200">Condition #5: Insulin Resistance / Pre-Diabetes</span>
-              <span className="text-xs font-bold text-[#00FF9D] bg-[#00FF9D]/10 px-2 py-0.5 rounded border border-[#00FF9D]/30">
-                Reversal Achieved
-              </span>
-            </div>
-            <div className="text-[11px] text-slate-300">
-              Baseline Risk: <span className="text-amber-400 font-bold">94%</span> → Current Risk: <span className="text-[#00FF9D] font-bold">28%</span>
-            </div>
-            <p className="text-[10px] text-slate-400">
-              Food sequencing and post-meal muscle GLUT4 activation have normalized cellular insulin sensitivity.
-            </p>
-          </div>
+          {monitoredDiseases.map((d) => (
+            <div
+              key={d.name}
+              className={`p-3 rounded-xl border ${subBoxCls} space-y-1.5`}
+            >
+              <div className="flex items-center justify-between">
+                <span className={`font-bold ${textTitle}`}>{d.name}</span>
+                <span className="text-[10px] font-mono text-emerald-600 dark:text-[#00FF9D] font-bold">
+                  {d.status}
+                </span>
+              </div>
 
-          {/* Condition 109 */}
-          <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
-            <div className="flex items-center justify-between">
-              <span className="font-bold text-slate-200">Condition #109: SIBO / Small Bowel Dysbiosis</span>
-              <span className="text-xs font-bold text-[#00FF9D] bg-[#00FF9D]/10 px-2 py-0.5 rounded border border-[#00FF9D]/30">
-                Clinical Remission
-              </span>
+              {/* Visual Risk Drop Track */}
+              <div className="space-y-1 pt-0.5">
+                <div className="flex items-center justify-between text-[10px] font-mono">
+                  <span className={textSub}>Initial Risk: {d.initialRisk}%</span>
+                  <span className="text-emerald-600 dark:text-emerald-400 font-bold">Current: {d.currentRisk}%</span>
+                </div>
+                <div className="h-1.5 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-gradient-to-r from-amber-500 to-emerald-400 rounded-full transition-all duration-700"
+                    style={{ width: `${100 - d.currentRisk}%` }}
+                  />
+                </div>
+              </div>
             </div>
-            <div className="text-[11px] text-slate-300">
-              Baseline Risk: <span className="text-amber-400 font-bold">88%</span> → Current Risk: <span className="text-[#00FF9D] font-bold">16%</span>
-            </div>
-            <p className="text-[10px] text-slate-400">
-              Bacterial fermentation in the duodenum resolved. Rome IV bloating score dropped by 75%.
-            </p>
-          </div>
+          ))}
+        </div>
 
-          {/* Condition 302 */}
-          <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
-            <div className="flex items-center justify-between">
-              <span className="font-bold text-slate-200">Condition #302: Non-Alcoholic Fatty Liver (MASLD)</span>
-              <span className="text-xs font-bold text-[#00FF9D] bg-[#00FF9D]/10 px-2 py-0.5 rounded border border-[#00FF9D]/30">
-                Hepatic Clearance
-              </span>
-            </div>
-            <div className="text-[11px] text-slate-300">
-              Baseline Risk: <span className="text-amber-400 font-bold">81%</span> → Current Risk: <span className="text-[#00FF9D] font-bold">22%</span>
-            </div>
-            <p className="text-[10px] text-slate-400">
-              Hepatic steatosis clearing via 72-hour sustained glycogen depletion and choline/omega-3 optimization.
-            </p>
-          </div>
-
-          <div className="p-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-[11px] text-emerald-300 text-center font-bold">
-            ✓ 497 Other Chronic Conditions Monitored & Verified Negative / Protected
-          </div>
+        {/* 494 Remaining Diseases Banner */}
+        <div className={`p-2.5 rounded-xl border text-center text-xs ${darkMode ? 'bg-slate-900 border-slate-800 text-slate-400' : 'bg-slate-100 border-slate-200 text-slate-700'}`}>
+          <span className="font-bold text-emerald-600 dark:text-[#00FF9D]">🛡️ 494 Other Chronic Diseases: </span>
+          Zero Risk Corridors Detected. Protected via daily anti-inflammatory habit matrix.
         </div>
       </div>
 
-      {/* SECTION E: PHARMACOLOGICAL & SUPPLEMENT LEDGER */}
-      <div className={`p-4 rounded-2xl border ${darkMode ? 'bg-[#0E1318] border-slate-800' : 'bg-white border-slate-200'} space-y-2 text-xs`}>
-        <div className="flex items-center justify-between mb-1">
-          <span className="text-[10px] font-bold uppercase tracking-widest text-[#00FF9D]">
-            Pharmacological Ledger
-          </span>
-          <span className="text-[10px] text-slate-400">0 Contraindications</span>
-        </div>
-        <div className="p-2.5 rounded-xl bg-slate-900 border border-slate-800 space-y-1">
-          <div className="font-bold text-slate-200">Active Prescriptions & Nutrient Synergies:</div>
-          <p className="text-[11px] text-slate-400">
-            Currently on 0 prescription drugs. Proactive nutritional support active for magnesium, zinc, and polyphenol antioxidant defense.
-          </p>
-        </div>
-      </div>
-
-      {/* DOCTOR SHARE / PDF EXPORT MODAL */}
+      {/* DOCTOR SHARE MODAL */}
       <DoctorShareModal
         isOpen={isShareModalOpen}
         onClose={() => setIsShareModalOpen(false)}
+        initialMode={shareMode}
+        userName="Ajay"
+        reportSummary={{
+          reportTitle: 'Tovelu Lifetime Health Report • Comprehensive Homeostasis',
+          biologicalAge: 29.4,
+          calendarAge: 33.0,
+          homaIrStatus: 'Optimal (1.1)',
+          siboStatus: 'Remission (Rome IV: 1/10)',
+          complianceScore: 'Grade A+ (96%)',
+        }}
         darkMode={darkMode}
       />
     </div>

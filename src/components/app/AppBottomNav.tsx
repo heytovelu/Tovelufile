@@ -93,7 +93,9 @@ export const AppBottomNav: React.FC<AppBottomNavProps> = ({
                 {tab.label}
               </span>
               {isActive && (
-                <div className="w-1.5 h-1.5 rounded-full bg-[#00FF9D] mt-0.5 shadow-[0_0_8px_#00FF9D]" />
+                <div className={`w-1.5 h-1.5 rounded-full mt-0.5 ${
+                  darkMode ? 'bg-[#00FF9D] shadow-[0_0_8px_#00FF9D]' : 'bg-emerald-600'
+                }`} />
               )}
             </button>
           );

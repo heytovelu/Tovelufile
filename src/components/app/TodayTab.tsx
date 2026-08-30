@@ -136,7 +136,7 @@ export const TodayTab: React.FC<TodayTabProps> = ({
   const [oneTapToast, setOneTapToast] = useState<string | null>(null);
 
   // Homeostasis Calculation
-  const totalItems = meals.length + tasks.length + 1; // +1 for nightly check-in
+  const totalItems = meals.length + tasks.length + 1;
   const completedMeals = meals.filter((m) => m.isLogged).length;
   const completedTasks = tasks.filter((t) => t.isCompleted).length;
   const progressPercent = Math.round(((completedMeals + completedTasks) / totalItems) * 100);
@@ -163,13 +163,11 @@ export const TodayTab: React.FC<TodayTabProps> = ({
     setTimeout(() => setOneTapToast(null), 3000);
   };
 
-  // Open specific logging mode (Scan | Manual | Ask AI)
   const handleOpenMealModal = (meal: MealPortion, mode: 'scan' | 'manual' | 'ask_ai') => {
     setActiveLogMeal(meal);
     setInitialMealLogMode(mode);
   };
 
-  // Habit quick add handlers
   const handleHabitSave = (type: HabitType, newVal: number) => {
     setHabits((prev) => {
       if (type === 'walk') return { ...prev, walkSteps: newVal };
@@ -183,14 +181,12 @@ export const TodayTab: React.FC<TodayTabProps> = ({
     setTimeout(() => setOneTapToast(null), 2500);
   };
 
-  // Task Swipe Complete Handler
   const handleTaskComplete = (taskId: string) => {
     setTasks((prev) =>
       prev.map((t) => (t.id === taskId ? { ...t, isCompleted: true } : t))
     );
   };
 
-  // Meal Modal Confirm Handler
   const handleConfirmMeal = (
     mealType: 'breakfast' | 'lunch' | 'dinner',
     loggedCalories: number,
@@ -215,6 +211,15 @@ export const TodayTab: React.FC<TodayTabProps> = ({
 
   const caloriesRemaining = Math.max(0, budget.targetCalories - budget.consumedCalories);
 
+  // Theme helper classes for 100% crisp light/dark visibility
+  const cardCls = darkMode ? 'bg-[#0E1318] border-slate-800 text-slate-100' : 'bg-white border-slate-200 text-slate-900 shadow-sm';
+  const subBoxCls = darkMode ? 'bg-slate-900/80 border-slate-800 text-slate-200' : 'bg-slate-50 border-slate-200 text-slate-800';
+  const textTitle = darkMode ? 'text-slate-100' : 'text-slate-900';
+  const textSub = darkMode ? 'text-slate-400' : 'text-slate-600';
+  const btnSecCls = darkMode 
+    ? 'bg-slate-800 hover:bg-slate-700 border-slate-700 text-slate-200' 
+    : 'bg-slate-100 hover:bg-slate-200 border-slate-300 text-slate-800 font-bold';
+
   return (
     <div className="w-full space-y-4 px-4 pt-3 pb-8 animate-fadeIn">
       {/* 1. TOP HEADER */}
@@ -223,7 +228,7 @@ export const TodayTab: React.FC<TodayTabProps> = ({
           <HomeostasisLogo size={28} mode={darkMode ? 'on-dark' : 'on-light'} showWordmark={true} />
         </div>
 
-        {/* Profile Avatar -> Opens YOU Drawer */}
+        {/* Profile Avatar -> Opens YOU */}
         <button
           onClick={onOpenYou}
           className={`flex items-center gap-2 p-1.5 rounded-full border transition-all active:scale-95 ${
@@ -243,26 +248,24 @@ export const TodayTab: React.FC<TodayTabProps> = ({
       </div>
 
       {/* 2. CURRENT DAY, FULL DATE & TRIAL COUNTDOWN BANNER */}
-      <div className={`p-3.5 rounded-2xl border ${
-        darkMode ? 'bg-[#0E1318] border-slate-800' : 'bg-slate-50 border-slate-200'
-      } flex items-center justify-between`}>
+      <div className={`p-3.5 rounded-2xl border ${cardCls} flex items-center justify-between`}>
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-xs font-black uppercase tracking-wider text-slate-100">
+            <h2 className={`text-xs font-black uppercase tracking-wider ${textTitle}`}>
               {fullCalendarDate}
             </h2>
-            <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-[#00FF9D] border border-emerald-500/30 font-bold">
+            <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-[#00FF9D] border border-emerald-500/30 font-bold">
               Active
             </span>
           </div>
-          <p className="text-[11px] text-slate-400 mt-0.5">{momentumLabel}</p>
+          <p className={`text-[11px] ${textSub} mt-0.5 font-medium`}>{momentumLabel}</p>
         </div>
 
         <div className="text-right">
-          <span className="text-[9px] uppercase font-bold text-amber-400 block tracking-widest">
+          <span className="text-[9px] uppercase font-bold text-amber-500 dark:text-amber-400 block tracking-widest">
             Trial Clock
           </span>
-          <span className="text-xs font-mono font-black text-amber-300">
+          <span className="text-xs font-mono font-black text-amber-600 dark:text-amber-300">
             {trialCountdown}
           </span>
         </div>
@@ -270,7 +273,7 @@ export const TodayTab: React.FC<TodayTabProps> = ({
 
       {/* TOAST NOTIFICATION */}
       {oneTapToast && (
-        <div className="p-2.5 rounded-xl bg-[#00FF9D]/20 border border-[#00FF9D] text-center text-xs font-bold text-[#00FF9D] animate-bounce">
+        <div className="p-2.5 rounded-xl bg-emerald-500/20 border border-emerald-500 text-center text-xs font-bold text-emerald-700 dark:text-[#00FF9D] animate-bounce">
           {oneTapToast}
         </div>
       )}
@@ -279,26 +282,24 @@ export const TodayTab: React.FC<TodayTabProps> = ({
       <div className={`p-4 rounded-3xl border transition-all ${
         isAllComplete
           ? 'border-[#00FF9D] bg-emerald-950/20 shadow-[0_0_30px_rgba(0,255,157,0.15)]'
-          : darkMode
-          ? 'border-slate-800 bg-[#0E1318]'
-          : 'border-slate-200 bg-white'
+          : cardCls
       } flex items-center justify-between`}>
         {/* Ring Left */}
         <div className="space-y-1 max-w-[62%]">
-          <span className="text-[10px] uppercase font-mono tracking-widest text-[#00FF9D] font-bold">
+          <span className="text-[10px] uppercase font-mono tracking-widest text-emerald-600 dark:text-[#00FF9D] font-bold">
             Homeostasis Engine
           </span>
-          <h3 className="text-base font-black tracking-tight text-white">
+          <h3 className={`text-base font-black tracking-tight ${textTitle}`}>
             {isAllComplete ? 'Day 14 Conquered! 🔥' : 'Day 14 in Progress'}
           </h3>
-          <p className="text-xs text-slate-400 leading-snug">
+          <p className={`text-xs ${textSub} leading-snug font-medium`}>
             {completedMeals}/3 Meals Logged • {completedTasks}/3 Tasks Done
           </p>
 
           {/* Metabolic State Badge */}
           <div className="pt-1.5">
-            <span className="inline-flex items-center gap-1.5 py-1 px-2.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-[10px] font-bold text-emerald-300">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#00FF9D] animate-ping" />
+            <span className="inline-flex items-center gap-1.5 py-1 px-2.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-[10px] font-bold text-emerald-700 dark:text-emerald-300">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-[#00FF9D] animate-ping" />
               Stable Glucose Arc • 0 Crashes
             </span>
           </div>
@@ -311,7 +312,7 @@ export const TodayTab: React.FC<TodayTabProps> = ({
               cx="50"
               cy="50"
               r="40"
-              className="stroke-slate-800"
+              className={darkMode ? 'stroke-slate-800' : 'stroke-slate-200'}
               strokeWidth="8"
               fill="transparent"
             />
@@ -328,8 +329,8 @@ export const TodayTab: React.FC<TodayTabProps> = ({
             />
           </svg>
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-            <span className="text-xl font-black text-white">{progressPercent}%</span>
-            <span className="text-[8px] uppercase tracking-widest text-slate-400 font-mono">
+            <span className={`text-xl font-black ${textTitle}`}>{progressPercent}%</span>
+            <span className={`text-[8px] uppercase tracking-widest ${textSub} font-mono font-bold`}>
               Homeostasis
             </span>
           </div>
@@ -337,20 +338,18 @@ export const TodayTab: React.FC<TodayTabProps> = ({
       </div>
 
       {/* 4. DAILY PORTION BUDGET METER */}
-      <div className={`p-4 rounded-2xl border ${
-        darkMode ? 'bg-[#0E1318] border-slate-800' : 'bg-white border-slate-200'
-      } space-y-3`}>
+      <div className={`p-4 rounded-2xl border ${cardCls} space-y-3`}>
         <div className="flex items-center justify-between">
           <div>
-            <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+            <span className={`text-[10px] font-bold uppercase tracking-widest ${textSub}`}>
               Daily Portion Budget
             </span>
-            <div className="text-xs font-bold text-slate-100">
+            <div className={`text-xs font-bold ${textTitle}`}>
               {budget.consumedCalories} / {budget.targetCalories} kcal
             </div>
           </div>
           <div className="text-right">
-            <span className="text-[10px] font-bold text-[#00FF9D] font-mono">
+            <span className="text-[10px] font-bold text-emerald-600 dark:text-[#00FF9D] font-mono">
               {caloriesRemaining} kcal remaining
             </span>
           </div>
@@ -360,62 +359,62 @@ export const TodayTab: React.FC<TodayTabProps> = ({
         <div className="grid grid-cols-5 gap-1.5 text-center pt-1">
           {/* Protein */}
           <div className="space-y-1">
-            <div className="text-[10px] font-bold text-emerald-400 uppercase">Protein</div>
-            <div className="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden">
+            <div className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase">Protein</div>
+            <div className="h-1.5 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
               <div
-                className="h-full bg-emerald-400 rounded-full transition-all"
+                className="h-full bg-emerald-500 dark:bg-emerald-400 rounded-full transition-all"
                 style={{ width: `${Math.min(100, (budget.consumedProtein / budget.targetProtein) * 100)}%` }}
               />
             </div>
-            <div className="text-[10px] font-mono text-slate-300">{budget.consumedProtein}g</div>
+            <div className={`text-[10px] font-mono font-bold ${textTitle}`}>{budget.consumedProtein}g</div>
           </div>
 
           {/* Carbs */}
           <div className="space-y-1">
-            <div className="text-[10px] font-bold text-amber-400 uppercase">Carbs</div>
-            <div className="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden">
+            <div className="text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase">Carbs</div>
+            <div className="h-1.5 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
               <div
-                className="h-full bg-amber-400 rounded-full transition-all"
+                className="h-full bg-amber-500 dark:bg-amber-400 rounded-full transition-all"
                 style={{ width: `${Math.min(100, (budget.consumedCarbs / budget.targetCarbs) * 100)}%` }}
               />
             </div>
-            <div className="text-[10px] font-mono text-slate-300">{budget.consumedCarbs}g</div>
+            <div className={`text-[10px] font-mono font-bold ${textTitle}`}>{budget.consumedCarbs}g</div>
           </div>
 
           {/* Fats */}
           <div className="space-y-1">
-            <div className="text-[10px] font-bold text-sky-400 uppercase">Fats</div>
-            <div className="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden">
+            <div className="text-[10px] font-bold text-sky-600 dark:text-sky-400 uppercase">Fats</div>
+            <div className="h-1.5 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
               <div
-                className="h-full bg-sky-400 rounded-full transition-all"
+                className="h-full bg-sky-500 dark:bg-sky-400 rounded-full transition-all"
                 style={{ width: `${Math.min(100, (budget.consumedFats / budget.targetFats) * 100)}%` }}
               />
             </div>
-            <div className="text-[10px] font-mono text-slate-300">{budget.consumedFats}g</div>
+            <div className={`text-[10px] font-mono font-bold ${textTitle}`}>{budget.consumedFats}g</div>
           </div>
 
           {/* Fiber */}
           <div className="space-y-1">
-            <div className="text-[10px] font-bold text-teal-400 uppercase">Fiber</div>
-            <div className="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden">
+            <div className="text-[10px] font-bold text-teal-600 dark:text-teal-400 uppercase">Fiber</div>
+            <div className="h-1.5 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
               <div
-                className="h-full bg-teal-400 rounded-full transition-all"
+                className="h-full bg-teal-500 dark:bg-teal-400 rounded-full transition-all"
                 style={{ width: `${Math.min(100, (budget.consumedFiber / budget.targetFiber) * 100)}%` }}
               />
             </div>
-            <div className="text-[10px] font-mono text-slate-300">{budget.consumedFiber}g</div>
+            <div className={`text-[10px] font-mono font-bold ${textTitle}`}>{budget.consumedFiber}g</div>
           </div>
 
           {/* Water */}
           <div className="space-y-1">
-            <div className="text-[10px] font-bold text-blue-400 uppercase">Water</div>
-            <div className="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden">
+            <div className="text-[10px] font-bold text-blue-600 dark:text-blue-400 uppercase">Water</div>
+            <div className="h-1.5 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
               <div
-                className="h-full bg-blue-400 rounded-full transition-all"
+                className="h-full bg-blue-500 dark:bg-blue-400 rounded-full transition-all"
                 style={{ width: `${Math.min(100, (budget.consumedWaterL / budget.targetWaterL) * 100)}%` }}
               />
             </div>
-            <div className="text-[10px] font-mono text-slate-300">{budget.consumedWaterL}L</div>
+            <div className={`text-[10px] font-mono font-bold ${textTitle}`}>{budget.consumedWaterL}L</div>
           </div>
         </div>
       </div>
@@ -426,14 +425,14 @@ export const TodayTab: React.FC<TodayTabProps> = ({
       <div className="space-y-2.5 pt-1">
         <div className="flex items-center justify-between px-1">
           <div>
-            <span className="text-[10px] uppercase font-mono font-bold tracking-widest text-[#00FF9D]">
+            <span className="text-[10px] uppercase font-mono font-bold tracking-widest text-emerald-600 dark:text-[#00FF9D]">
               LOG 1 OF 3
             </span>
-            <h3 className="text-xs font-black text-slate-100 uppercase tracking-wider">
+            <h3 className={`text-xs font-black uppercase tracking-wider ${textTitle}`}>
               Diet Food Log (Sequenced)
             </h3>
           </div>
-          <span className="text-[10px] text-emerald-400 font-bold">Food Sequencing = -38% Spikes</span>
+          <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold">Food Sequencing = -38% Spikes</span>
         </div>
 
         {meals.map((meal) => {
@@ -443,39 +442,39 @@ export const TodayTab: React.FC<TodayTabProps> = ({
               key={meal.mealType}
               className={`rounded-2xl border transition-all ${
                 meal.isLogged
-                  ? 'border-slate-800/80 bg-slate-900/40 opacity-90'
+                  ? darkMode ? 'border-slate-800/80 bg-slate-900/40 opacity-90' : 'border-slate-200 bg-slate-50/70'
                   : isExpanded
-                  ? 'border-[#00FF9D]/60 bg-[#0E1318] shadow-[0_0_20px_rgba(0,255,157,0.08)]'
-                  : 'border-slate-800 bg-[#0E1318]'
+                  ? darkMode ? 'border-[#00FF9D]/60 bg-[#0E1318] shadow-[0_0_20px_rgba(0,255,157,0.08)]' : 'border-emerald-500 bg-white shadow-md'
+                  : cardCls
               }`}
             >
               {/* Card Header */}
-              <div className="p-3.5 flex items-center justify-between border-b border-slate-800/60">
+              <div className={`p-3.5 flex items-center justify-between border-b ${darkMode ? 'border-slate-800/60' : 'border-slate-200'}`}>
                 <div className="flex items-center gap-2.5 min-w-0">
                   <div
                     className={`w-8 h-8 rounded-xl flex items-center justify-center font-black text-sm ${
                       meal.isLogged
-                        ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
-                        : 'bg-slate-800 text-slate-200'
+                        ? 'bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/40'
+                        : darkMode ? 'bg-slate-800 text-slate-200' : 'bg-slate-200 text-slate-800'
                     }`}
                   >
                     {meal.isLogged ? '✓' : meal.mealType === 'breakfast' ? '🌅' : meal.mealType === 'lunch' ? '☀️' : '🌙'}
                   </div>
                   <div className="min-w-0">
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-black uppercase tracking-wider text-slate-200">
+                      <span className={`text-xs font-black uppercase tracking-wider ${textTitle}`}>
                         {meal.mealType}
                       </span>
-                      <span className="text-[11px] font-mono text-[#00FF9D]">
+                      <span className="text-[11px] font-mono font-bold text-emerald-600 dark:text-[#00FF9D]">
                         {meal.calories} kcal
                       </span>
                       {meal.isLogged && (
-                        <span className="text-[9px] uppercase font-bold px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                        <span className="text-[9px] uppercase font-bold px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
                           Logged ✓
                         </span>
                       )}
                     </div>
-                    <div className="text-xs font-bold text-slate-100 truncate mt-0.5">
+                    <div className={`text-xs font-bold truncate mt-0.5 ${textTitle}`}>
                       {meal.suggestedDish}
                     </div>
                   </div>
@@ -483,7 +482,7 @@ export const TodayTab: React.FC<TodayTabProps> = ({
 
                 <button
                   onClick={() => setActiveExpandedMeal(isExpanded ? (null as any) : meal.mealType)}
-                  className="text-xs text-slate-400 font-mono p-1"
+                  className={`text-xs font-mono p-1 font-bold ${textSub}`}
                 >
                   {isExpanded ? 'Hide Details ▲' : 'Details ▼'}
                 </button>
@@ -491,21 +490,21 @@ export const TodayTab: React.FC<TodayTabProps> = ({
 
               {/* Expanded details (Ingredients & Sequencing) */}
               {isExpanded && (
-                <div className="px-3.5 py-2.5 bg-slate-900/40 border-b border-slate-800/60 space-y-2 text-xs">
-                  <div className="p-2 rounded-xl bg-slate-900 border border-slate-800 text-[11px] text-slate-300">
-                    <span className="font-bold text-[#00FF9D] uppercase block mb-0.5">
+                <div className={`px-3.5 py-2.5 border-b ${darkMode ? 'bg-slate-900/40 border-slate-800/60' : 'bg-slate-50 border-slate-200'} space-y-2 text-xs`}>
+                  <div className={`p-2 rounded-xl border ${subBoxCls} text-[11px]`}>
+                    <span className="font-bold text-emerald-600 dark:text-[#00FF9D] uppercase block mb-0.5">
                       🥗 Sequencing Order:
                     </span>
                     {meal.guidance}
                   </div>
-                  <div className="text-[11px] text-slate-400">
-                    <span className="font-bold text-slate-300">Ingredients: </span>
+                  <div className={`text-[11px] ${textSub}`}>
+                    <span className={`font-bold ${textTitle}`}>Ingredients: </span>
                     {meal.ingredients.join(' • ')}
                   </div>
                 </div>
               )}
 
-              {/* ACTION BUTTONS: SCAN | MANUAL | ASK AI (Slightly bigger, easy to tap!) */}
+              {/* ACTION BUTTONS: SCAN | MANUAL | ASK AI */}
               <div className="p-3 space-y-2">
                 {!meal.isLogged ? (
                   <>
@@ -513,10 +512,10 @@ export const TodayTab: React.FC<TodayTabProps> = ({
                       {/* SCAN BUTTON */}
                       <button
                         onClick={() => handleOpenMealModal(meal, 'scan')}
-                        className="py-3 px-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 active:scale-95 transition-all flex flex-col items-center justify-center gap-1 shadow-sm"
+                        className={`py-3 px-2 rounded-xl border active:scale-95 transition-all flex flex-col items-center justify-center gap-1 shadow-sm ${btnSecCls}`}
                       >
                         <span className="text-base">📷</span>
-                        <span className="text-[11px] font-black uppercase tracking-wider text-slate-200">
+                        <span className="text-[11px] font-black uppercase tracking-wider">
                           Scan
                         </span>
                       </button>
@@ -524,10 +523,10 @@ export const TodayTab: React.FC<TodayTabProps> = ({
                       {/* MANUAL BUTTON */}
                       <button
                         onClick={() => handleOpenMealModal(meal, 'manual')}
-                        className="py-3 px-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 active:scale-95 transition-all flex flex-col items-center justify-center gap-1 shadow-sm"
+                        className={`py-3 px-2 rounded-xl border active:scale-95 transition-all flex flex-col items-center justify-center gap-1 shadow-sm ${btnSecCls}`}
                       >
                         <span className="text-base">✍️</span>
-                        <span className="text-[11px] font-black uppercase tracking-wider text-slate-200">
+                        <span className="text-[11px] font-black uppercase tracking-wider">
                           Manual
                         </span>
                       </button>
@@ -535,10 +534,12 @@ export const TodayTab: React.FC<TodayTabProps> = ({
                       {/* ASK AI BUTTON */}
                       <button
                         onClick={() => handleOpenMealModal(meal, 'ask_ai')}
-                        className="py-3 px-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 active:scale-95 transition-all flex flex-col items-center justify-center gap-1 shadow-sm"
+                        className={`py-3 px-2 rounded-xl border active:scale-95 transition-all flex flex-col items-center justify-center gap-1 shadow-sm ${
+                          darkMode ? 'bg-slate-800 hover:bg-slate-700 border-slate-700 text-[#00FF9D]' : 'bg-emerald-50 hover:bg-emerald-100 border-emerald-300 text-emerald-700'
+                        }`}
                       >
                         <span className="text-base">🤖</span>
-                        <span className="text-[11px] font-black uppercase tracking-wider text-[#00FF9D]">
+                        <span className="text-[11px] font-black uppercase tracking-wider">
                           Ask AI
                         </span>
                       </button>
@@ -554,10 +555,10 @@ export const TodayTab: React.FC<TodayTabProps> = ({
                   </>
                 ) : (
                   <div className="flex items-center justify-between p-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-xs">
-                    <span className="text-emerald-300 font-bold">✅ Logged with 100% Precision</span>
+                    <span className="text-emerald-700 dark:text-emerald-300 font-bold">✅ Logged with 100% Precision</span>
                     <button
                       onClick={() => handleOpenMealModal(meal, 'scan')}
-                      className="text-[11px] font-bold text-slate-400 hover:text-white underline"
+                      className={`text-[11px] font-bold ${textSub} hover:underline`}
                     >
                       Re-log
                     </button>
@@ -572,27 +573,27 @@ export const TodayTab: React.FC<TodayTabProps> = ({
       {/* ========================================================================= */}
       {/* 6. SECTION 2: DAILY HABIT & VITALS LOG (METERS & MANUAL LOGGING) */}
       {/* ========================================================================= */}
-      <div className={`p-4 rounded-2xl border ${darkMode ? 'bg-[#0E1318] border-slate-800' : 'bg-white border-slate-200'} space-y-3.5`}>
+      <div className={`p-4 rounded-2xl border ${cardCls} space-y-3.5`}>
         <div className="flex items-center justify-between">
           <div>
-            <span className="text-[10px] uppercase font-mono font-bold tracking-widest text-[#00FF9D]">
+            <span className="text-[10px] uppercase font-mono font-bold tracking-widest text-emerald-600 dark:text-[#00FF9D]">
               LOG 2 OF 3
             </span>
-            <h3 className="text-xs font-black text-slate-100 uppercase tracking-wider">
+            <h3 className={`text-xs font-black uppercase tracking-wider ${textTitle}`}>
               Daily Habits & Vitals Log
             </h3>
           </div>
-          <span className="text-[10px] text-slate-400 font-mono">Hit Daily Targets</span>
+          <span className={`text-[10px] ${textSub} font-mono`}>Hit Daily Targets</span>
         </div>
 
-        {/* 1. WALK METER (Steps or Minutes) */}
-        <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 space-y-2">
+        {/* 1. WALK METER */}
+        <div className={`p-3 rounded-xl border ${subBoxCls} space-y-2`}>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="text-lg">🚶</span>
               <div>
-                <div className="text-xs font-bold text-slate-200">Daily Walk</div>
-                <div className="text-[10px] text-slate-400">
+                <div className={`text-xs font-bold ${textTitle}`}>Daily Walk</div>
+                <div className={`text-[10px] ${textSub}`}>
                   Target: {habits.walkUnit === 'steps' ? '8,000 steps' : '45 minutes'}
                 </div>
               </div>
@@ -606,34 +607,33 @@ export const TodayTab: React.FC<TodayTabProps> = ({
                     walkUnit: prev.walkUnit === 'steps' ? 'minutes' : 'steps',
                   }))
                 }
-                className="py-1 px-2 rounded-lg bg-slate-800 text-[10px] font-mono text-slate-300 border border-slate-700 hover:text-white"
+                className={`py-1 px-2 rounded-lg text-[10px] font-mono border ${btnSecCls}`}
               >
                 {habits.walkUnit === 'steps' ? 'Steps' : 'Mins'} ⇄
               </button>
               <button
                 onClick={() => setActiveHabitModal('walk')}
-                className="py-1 px-2.5 rounded-lg bg-[#00FF9D]/10 hover:bg-[#00FF9D]/20 text-[#00FF9D] text-[11px] font-bold border border-[#00FF9D]/40 active:scale-95 transition-all"
+                className="py-1 px-2.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-[#00FF9D] text-[11px] font-bold border border-emerald-500/40 active:scale-95 transition-all"
               >
                 ✍️ Log
               </button>
             </div>
           </div>
 
-          {/* Meter Bar */}
           <div className="space-y-1">
             <div className="flex items-center justify-between text-[11px]">
-              <span className="font-mono text-slate-300 font-bold">
+              <span className={`font-mono font-bold ${textTitle}`}>
                 {habits.walkUnit === 'steps' ? `${habits.walkSteps} / 8,000 steps` : `${habits.walkMinutes} / 45 mins`}
               </span>
-              <span className="font-mono text-emerald-400 font-bold">
+              <span className="font-mono text-emerald-600 dark:text-emerald-400 font-bold">
                 {habits.walkUnit === 'steps'
                   ? `${Math.round((habits.walkSteps / 8000) * 100)}%`
                   : `${Math.round((habits.walkMinutes / 45) * 100)}%`}
               </span>
             </div>
-            <div className="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
+            <div className="h-2 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
               <div
-                className="h-full bg-[#00FF9D] rounded-full transition-all"
+                className="h-full bg-emerald-500 dark:bg-[#00FF9D] rounded-full transition-all"
                 style={{
                   width: `${Math.min(
                     100,
@@ -647,20 +647,20 @@ export const TodayTab: React.FC<TodayTabProps> = ({
           </div>
         </div>
 
-        {/* 2. SLEEP METER (Hours) */}
-        <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 space-y-2">
+        {/* 2. SLEEP METER */}
+        <div className={`p-3 rounded-xl border ${subBoxCls} space-y-2`}>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="text-lg">🌙</span>
               <div>
-                <div className="text-xs font-bold text-slate-200">Night Sleep Window</div>
-                <div className="text-[10px] text-slate-400">Target: 8.0 hours restorative</div>
+                <div className={`text-xs font-bold ${textTitle}`}>Night Sleep Window</div>
+                <div className={`text-[10px] ${textSub}`}>Target: 8.0 hours restorative</div>
               </div>
             </div>
 
             <button
               onClick={() => setActiveHabitModal('sleep')}
-              className="py-1 px-2.5 rounded-lg bg-[#00FF9D]/10 hover:bg-[#00FF9D]/20 text-[#00FF9D] text-[11px] font-bold border border-[#00FF9D]/40 active:scale-95 transition-all"
+              className="py-1 px-2.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-[#00FF9D] text-[11px] font-bold border border-emerald-500/40 active:scale-95 transition-all"
             >
               ✍️ Log
             </button>
@@ -668,30 +668,30 @@ export const TodayTab: React.FC<TodayTabProps> = ({
 
           <div className="space-y-1">
             <div className="flex items-center justify-between text-[11px]">
-              <span className="font-mono text-slate-300 font-bold">
+              <span className={`font-mono font-bold ${textTitle}`}>
                 {habits.sleepHours} / 8.0 hours
               </span>
-              <span className="font-mono text-indigo-400 font-bold">
+              <span className="font-mono text-indigo-600 dark:text-indigo-400 font-bold">
                 {Math.round((habits.sleepHours / 8.0) * 100)}%
               </span>
             </div>
-            <div className="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
+            <div className="h-2 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
               <div
-                className="h-full bg-indigo-400 rounded-full transition-all"
+                className="h-full bg-indigo-500 dark:bg-indigo-400 rounded-full transition-all"
                 style={{ width: `${Math.min(100, (habits.sleepHours / 8.0) * 100)}%` }}
               />
             </div>
           </div>
         </div>
 
-        {/* 3. WATER HYDRATION METER (Liters or Glasses) */}
-        <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 space-y-2">
+        {/* 3. WATER HYDRATION METER */}
+        <div className={`p-3 rounded-xl border ${subBoxCls} space-y-2`}>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="text-lg">💧</span>
               <div>
-                <div className="text-xs font-bold text-slate-200">Water Hydration</div>
-                <div className="text-[10px] text-slate-400">
+                <div className={`text-xs font-bold ${textTitle}`}>Water Hydration</div>
+                <div className={`text-[10px] ${textSub}`}>
                   Target: {habits.waterUnit === 'liters' ? '3.0 Liters' : '12 Glasses'}
                 </div>
               </div>
@@ -705,13 +705,13 @@ export const TodayTab: React.FC<TodayTabProps> = ({
                     waterUnit: prev.waterUnit === 'liters' ? 'glasses' : 'liters',
                   }))
                 }
-                className="py-1 px-2 rounded-lg bg-slate-800 text-[10px] font-mono text-slate-300 border border-slate-700 hover:text-white"
+                className={`py-1 px-2 rounded-lg text-[10px] font-mono border ${btnSecCls}`}
               >
                 {habits.waterUnit === 'liters' ? 'Liters' : 'Glasses'} ⇄
               </button>
               <button
                 onClick={() => setActiveHabitModal('water')}
-                className="py-1 px-2.5 rounded-lg bg-[#00FF9D]/10 hover:bg-[#00FF9D]/20 text-[#00FF9D] text-[11px] font-bold border border-[#00FF9D]/40 active:scale-95 transition-all"
+                className="py-1 px-2.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-[#00FF9D] text-[11px] font-bold border border-emerald-500/40 active:scale-95 transition-all"
               >
                 ✍️ Log
               </button>
@@ -720,38 +720,38 @@ export const TodayTab: React.FC<TodayTabProps> = ({
 
           <div className="space-y-1">
             <div className="flex items-center justify-between text-[11px]">
-              <span className="font-mono text-slate-300 font-bold">
+              <span className={`font-mono font-bold ${textTitle}`}>
                 {habits.waterUnit === 'liters'
                   ? `${habits.waterLiters} / 3.0 Liters`
                   : `${Math.round(habits.waterLiters * 4)} / 12 Glasses`}
               </span>
-              <span className="font-mono text-sky-400 font-bold">
+              <span className="font-mono text-sky-600 dark:text-sky-400 font-bold">
                 {Math.round((habits.waterLiters / 3.0) * 100)}%
               </span>
             </div>
-            <div className="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
+            <div className="h-2 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
               <div
-                className="h-full bg-sky-400 rounded-full transition-all"
+                className="h-full bg-sky-500 dark:bg-sky-400 rounded-full transition-all"
                 style={{ width: `${Math.min(100, (habits.waterLiters / 3.0) * 100)}%` }}
               />
             </div>
           </div>
         </div>
 
-        {/* 4. EXERCISE & WORKOUT METER (Minutes) */}
-        <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 space-y-2">
+        {/* 4. EXERCISE & WORKOUT METER */}
+        <div className={`p-3 rounded-xl border ${subBoxCls} space-y-2`}>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="text-lg">💪</span>
               <div>
-                <div className="text-xs font-bold text-slate-200">Exercise & Training</div>
-                <div className="text-[10px] text-slate-400">Target: 30 minutes</div>
+                <div className={`text-xs font-bold ${textTitle}`}>Exercise & Training</div>
+                <div className={`text-[10px] ${textSub}`}>Target: 30 minutes</div>
               </div>
             </div>
 
             <button
               onClick={() => setActiveHabitModal('exercise')}
-              className="py-1 px-2.5 rounded-lg bg-[#00FF9D]/10 hover:bg-[#00FF9D]/20 text-[#00FF9D] text-[11px] font-bold border border-[#00FF9D]/40 active:scale-95 transition-all"
+              className="py-1 px-2.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-[#00FF9D] text-[11px] font-bold border border-emerald-500/40 active:scale-95 transition-all"
             >
               ✍️ Log
             </button>
@@ -759,36 +759,36 @@ export const TodayTab: React.FC<TodayTabProps> = ({
 
           <div className="space-y-1">
             <div className="flex items-center justify-between text-[11px]">
-              <span className="font-mono text-slate-300 font-bold">
+              <span className={`font-mono font-bold ${textTitle}`}>
                 {habits.exerciseMinutes} / 30 mins
               </span>
-              <span className="font-mono text-amber-400 font-bold">
+              <span className="font-mono text-amber-600 dark:text-amber-400 font-bold">
                 {Math.round((habits.exerciseMinutes / 30) * 100)}%
               </span>
             </div>
-            <div className="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
+            <div className="h-2 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
               <div
-                className="h-full bg-amber-400 rounded-full transition-all"
+                className="h-full bg-amber-500 dark:bg-amber-400 rounded-full transition-all"
                 style={{ width: `${Math.min(100, (habits.exerciseMinutes / 30) * 100)}%` }}
               />
             </div>
           </div>
         </div>
 
-        {/* 5. SUNLIGHT / OUTDOOR CIRCADIAN RESET (Minutes) */}
-        <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 space-y-2">
+        {/* 5. SUNLIGHT / OUTDOOR CIRCADIAN RESET */}
+        <div className={`p-3 rounded-xl border ${subBoxCls} space-y-2`}>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="text-lg">☀️</span>
               <div>
-                <div className="text-xs font-bold text-slate-200">Morning Sunlight & Air</div>
-                <div className="text-[10px] text-slate-400">Target: 15 minutes retinal photon reset</div>
+                <div className={`text-xs font-bold ${textTitle}`}>Morning Sunlight & Air</div>
+                <div className={`text-[10px] ${textSub}`}>Target: 15 minutes retinal photon reset</div>
               </div>
             </div>
 
             <button
               onClick={() => setActiveHabitModal('sunlight')}
-              className="py-1 px-2.5 rounded-lg bg-[#00FF9D]/10 hover:bg-[#00FF9D]/20 text-[#00FF9D] text-[11px] font-bold border border-[#00FF9D]/40 active:scale-95 transition-all"
+              className="py-1 px-2.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-600 dark:text-[#00FF9D] text-[11px] font-bold border border-emerald-500/40 active:scale-95 transition-all"
             >
               ✍️ Log
             </button>
@@ -796,16 +796,16 @@ export const TodayTab: React.FC<TodayTabProps> = ({
 
           <div className="space-y-1">
             <div className="flex items-center justify-between text-[11px]">
-              <span className="font-mono text-slate-300 font-bold">
+              <span className={`font-mono font-bold ${textTitle}`}>
                 {habits.sunlightMinutes} / 15 mins
               </span>
-              <span className="font-mono text-[#00FF9D] font-bold">
+              <span className="font-mono text-emerald-600 dark:text-[#00FF9D] font-bold">
                 {Math.round((habits.sunlightMinutes / 15) * 100)}% (Goal Hit! 🔥)
               </span>
             </div>
-            <div className="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
+            <div className="h-2 w-full bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
               <div
-                className="h-full bg-[#00FF9D] rounded-full transition-all"
+                className="h-full bg-emerald-500 dark:bg-[#00FF9D] rounded-full transition-all"
                 style={{ width: `${Math.min(100, (habits.sunlightMinutes / 15) * 100)}%` }}
               />
             </div>
@@ -819,14 +819,14 @@ export const TodayTab: React.FC<TodayTabProps> = ({
       <div className="space-y-2.5 pt-1">
         <div className="flex items-center justify-between px-1">
           <div>
-            <span className="text-[10px] uppercase font-mono font-bold tracking-widest text-[#00FF9D]">
+            <span className="text-[10px] uppercase font-mono font-bold tracking-widest text-emerald-600 dark:text-[#00FF9D]">
               LOG 3 OF 3
             </span>
-            <h3 className="text-xs font-black text-slate-100 uppercase tracking-wider">
+            <h3 className={`text-xs font-black uppercase tracking-wider ${textTitle}`}>
               Targeted Healing Tasks
             </h3>
           </div>
-          <span className="text-[10px] text-slate-500 font-mono">Swipe to complete</span>
+          <span className={`text-[10px] ${textSub} font-mono`}>Swipe to complete</span>
         </div>
 
         <div className="space-y-2">
@@ -835,21 +835,21 @@ export const TodayTab: React.FC<TodayTabProps> = ({
               key={task.id}
               className={`p-3.5 rounded-2xl border transition-all ${
                 task.isCompleted
-                  ? 'border-emerald-500/30 bg-emerald-500/5'
-                  : 'border-slate-800 bg-[#0E1318]'
+                  ? 'border-emerald-500/40 bg-emerald-500/5'
+                  : cardCls
               }`}
             >
               <div className="flex items-center justify-between mb-1.5">
-                <div className="text-xs font-bold text-slate-100 flex items-center gap-1.5">
+                <div className={`text-xs font-bold flex items-center gap-1.5 ${textTitle}`}>
                   <span>{task.isCompleted ? '✅' : '🎯'}</span>
                   <span>{task.title}</span>
                 </div>
-                <span className="text-[10px] font-mono text-slate-400">
+                <span className={`text-[10px] font-mono ${textSub}`}>
                   {task.targetTiming}
                 </span>
               </div>
 
-              <p className="text-[11px] text-slate-400 leading-relaxed mb-3">
+              <p className={`text-[11px] ${textSub} leading-relaxed mb-3`}>
                 {task.clinicalRationale}
               </p>
 
@@ -869,34 +869,38 @@ export const TodayTab: React.FC<TodayTabProps> = ({
       <div className="pt-1">
         <button
           onClick={() => setIsSosOpen(true)}
-          className="w-full p-3 rounded-2xl border border-amber-500/40 bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-transparent hover:border-amber-500/70 transition-all flex items-center justify-between text-left active:scale-98"
+          className={`w-full p-3 rounded-2xl border transition-all flex items-center justify-between text-left active:scale-98 ${
+            darkMode
+              ? 'border-amber-500/40 bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-transparent hover:border-amber-500/70'
+              : 'border-amber-400 bg-amber-50/80 hover:bg-amber-100/80 shadow-sm'
+          }`}
         >
           <div className="flex items-center gap-3">
             <span className="text-2xl">🆘</span>
             <div>
-              <div className="text-xs font-bold text-amber-300">
+              <div className="text-xs font-bold text-amber-700 dark:text-amber-300">
                 Bloated / Overate / Craving Something?
               </div>
-              <div className="text-[11px] text-slate-400">
+              <div className={`text-[11px] ${textSub}`}>
                 Tap for instant 2-minute zero-guilt clinical fix
               </div>
             </div>
           </div>
-          <span className="text-xs font-bold text-amber-400 font-mono">Rescue →</span>
+          <span className="text-xs font-bold text-amber-600 dark:text-amber-400 font-mono">Rescue →</span>
         </button>
       </div>
 
       {/* 9. TODAY'S THAIS DAILY SUGGESTION & CLINICAL NOTE */}
       <div className={`p-4 rounded-2xl border ${
-        darkMode ? 'bg-gradient-to-br from-slate-900 to-[#0B1015] border-slate-800' : 'bg-slate-50 border-slate-200'
+        darkMode ? 'bg-gradient-to-br from-slate-900 to-[#0B1015] border-slate-800 text-slate-300' : 'bg-emerald-50/60 border-emerald-200 text-slate-800 shadow-sm'
       }`}>
         <div className="flex items-center gap-2 mb-1.5">
           <span className="text-base">💡</span>
-          <span className="text-xs font-bold uppercase tracking-wider text-[#00FF9D]">
+          <span className="text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-[#00FF9D]">
             Today's THAIS Clinical Note (Day 14)
           </span>
         </div>
-        <p className="text-xs text-slate-300 leading-relaxed">
+        <p className="text-xs leading-relaxed font-medium">
           Your liver glycogen stores have depleted over the past 72 hours, meaning your cells are now directly accessing visceral fat for fuel. If you experience a mild salt craving around 4 PM, have a pinch of rock salt in warm water—it immediately balances your adrenal cortisol without breaking fat oxidation.
         </p>
       </div>
@@ -905,20 +909,24 @@ export const TodayTab: React.FC<TodayTabProps> = ({
       <div className="pt-1">
         <button
           onClick={() => setIsNightlyOpen(true)}
-          className="w-full py-3.5 px-4 rounded-2xl border border-indigo-500/40 bg-gradient-to-r from-indigo-500/15 via-indigo-500/10 to-transparent hover:border-indigo-500/70 transition-all flex items-center justify-between text-left active:scale-98 shadow-sm"
+          className={`w-full py-3.5 px-4 rounded-2xl border transition-all flex items-center justify-between text-left active:scale-98 shadow-sm ${
+            darkMode
+              ? 'border-indigo-500/40 bg-gradient-to-r from-indigo-500/15 via-indigo-500/10 to-transparent hover:border-indigo-500/70 text-indigo-200'
+              : 'border-indigo-300 bg-indigo-50/80 hover:bg-indigo-100/80 text-indigo-950'
+          }`}
         >
           <div className="flex items-center gap-3">
             <span className="text-xl">🌙</span>
             <div>
-              <div className="text-xs font-bold text-indigo-200">
+              <div className="text-xs font-bold">
                 60-Second Bedtime Reflection
               </div>
-              <div className="text-[10px] text-slate-400">
+              <div className={`text-[10px] ${textSub}`}>
                 Reconcile today & calibrate tomorrow's biological plan
               </div>
             </div>
           </div>
-          <span className="text-xs font-bold text-indigo-300 font-mono">Start →</span>
+          <span className="text-xs font-bold text-indigo-600 dark:text-indigo-300 font-mono">Start →</span>
         </button>
       </div>
 

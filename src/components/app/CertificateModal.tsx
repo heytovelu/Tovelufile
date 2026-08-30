@@ -6,15 +6,16 @@ export interface MilestoneCertificate {
   title: string;
   category: string;
   dateEarned: string;
-  metric: string;
-  clinicalSignificance: string;
-  sealColor: string;
+  badgeIcon: string;
+  metricSummary: string;
+  impactNote: string;
 }
 
 interface CertificateModalProps {
   isOpen: boolean;
   onClose: () => void;
-  certificate: MilestoneCertificate | null;
+  certificate: MilestoneCertificate;
+  userName?: string;
   darkMode?: boolean;
 }
 
@@ -22,51 +23,56 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
   isOpen,
   onClose,
   certificate,
+  userName = 'Ajay',
   darkMode = true,
 }) => {
   const [downloadToast, setDownloadToast] = useState<string | null>(null);
 
-  if (!isOpen || !certificate) return null;
+  if (!isOpen) return null;
 
   const handleDownload = () => {
-    setDownloadToast('📥 Certificate saved as high-resolution image!');
+    setDownloadToast('🏆 High-Resolution Certificate generated & downloaded to device!');
     setTimeout(() => setDownloadToast(null), 3000);
   };
 
-  const handleShare = (platform: 'Instagram' | 'WhatsApp' | 'Twitter') => {
-    setDownloadToast(`📲 Shared ${certificate.title} to ${platform}!`);
+  const handleShare = (platform: string) => {
+    setDownloadToast(`📲 Shared credential directly to ${platform}!`);
     setTimeout(() => setDownloadToast(null), 3000);
   };
+
+  const btnSecCls = darkMode
+    ? 'bg-slate-900 hover:bg-slate-800 border-slate-800 text-slate-200'
+    : 'bg-slate-100 hover:bg-slate-200 border-slate-300 text-slate-800';
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fadeIn">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
       <div
         className={`w-full max-w-md rounded-2xl p-5 border shadow-2xl transition-all ${
-          darkMode ? 'bg-[#0A0D11] text-slate-100 border-slate-700' : 'bg-white text-slate-900 border-slate-200'
+          darkMode ? 'bg-[#0E1318] text-slate-100 border-slate-700' : 'bg-white text-slate-900 border-slate-200'
         }`}
       >
-        {/* Modal Close Header */}
-        <div className="flex items-center justify-between pb-3 border-b border-slate-800">
+        {/* Header */}
+        <div className={`flex items-center justify-between pb-2 border-b ${darkMode ? 'border-slate-800' : 'border-slate-200'}`}>
           <div className="flex items-center gap-2">
             <span className="text-xl">📜</span>
-            <span className="text-xs font-bold uppercase tracking-wider text-[#00FF9D]">
+            <span className="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-[#00FF9D]">
               Official Tovelu Laureate
             </span>
           </div>
-          <button onClick={onClose} className="p-1 text-slate-400 hover:text-white rounded-lg">
+          <button onClick={onClose} className={`p-1 rounded-lg ${darkMode ? 'text-slate-400 hover:text-white' : 'text-slate-500 hover:text-slate-900'}`}>
             ✕
           </button>
         </div>
 
         {/* TOAST */}
         {downloadToast && (
-          <div className="my-2 p-2 rounded-xl bg-[#00FF9D]/20 border border-[#00FF9D] text-center text-xs font-bold text-[#00FF9D] animate-bounce">
+          <div className="my-2 p-2 rounded-xl bg-emerald-500/20 border border-emerald-500 text-center text-xs font-bold text-emerald-700 dark:text-[#00FF9D] animate-bounce">
             {downloadToast}
           </div>
         )}
 
         {/* LUXURY CERTIFICATE FRAME (Gold/Emerald Border) */}
-        <div className="my-4 p-5 rounded-2xl border-2 border-amber-400/50 bg-gradient-to-b from-[#10161C] via-[#0A0E13] to-[#080B0F] shadow-[0_0_30px_rgba(251,191,36,0.15)] text-center relative overflow-hidden">
+        <div className="my-4 p-5 rounded-2xl border-2 border-amber-400/50 bg-gradient-to-b from-[#10161C] via-[#0A0E13] to-[#080B0F] shadow-[0_0_30px_rgba(251,191,36,0.15)] text-center relative overflow-hidden text-slate-100">
           {/* Subtle Background Homeostasis Watermark */}
           <div className="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">
             <HomeostasisLogo size={220} mode="on-dark" showWordmark={false} />
@@ -90,19 +96,19 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
             <div className="py-1">
               <div className="text-[11px] text-slate-400">Awarded to</div>
               <div className="text-base font-black text-[#00FF9D] tracking-wide">
-                AJAY
+                {userName.toUpperCase()}
               </div>
-              <div className="text-[10px] font-mono text-slate-500">ID: #TVL-SOV-8941</div>
+              <div className="text-[10px] font-mono text-slate-400">ID: #TVL-SOV-8941</div>
             </div>
 
             {/* Key Metric Badge */}
             <div className="inline-block py-1.5 px-4 rounded-xl bg-amber-400/10 border border-amber-400/30 text-amber-300 font-black text-sm tracking-tight shadow-inner">
-              {certificate.metric}
+              {certificate.metricSummary}
             </div>
 
             {/* Clinical Significance */}
             <p className="text-xs text-slate-300 leading-relaxed max-w-xs mx-auto pt-1">
-              {certificate.clinicalSignificance}
+              {certificate.impactNote}
             </p>
 
             {/* Verified Footer */}
@@ -125,19 +131,19 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
           <div className="grid grid-cols-3 gap-2">
             <button
               onClick={() => handleShare('Instagram')}
-              className="py-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-[11px] font-bold text-slate-200 flex items-center justify-center gap-1 active:scale-95 transition-all"
+              className={`py-2 rounded-xl border text-[11px] font-bold flex items-center justify-center gap-1 active:scale-95 transition-all ${btnSecCls}`}
             >
               📸 Instagram
             </button>
             <button
               onClick={() => handleShare('WhatsApp')}
-              className="py-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-[11px] font-bold text-slate-200 flex items-center justify-center gap-1 active:scale-95 transition-all"
+              className={`py-2 rounded-xl border text-[11px] font-bold flex items-center justify-center gap-1 active:scale-95 transition-all ${btnSecCls}`}
             >
               💬 WhatsApp
             </button>
             <button
               onClick={() => handleShare('Twitter')}
-              className="py-2 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-800 text-[11px] font-bold text-slate-200 flex items-center justify-center gap-1 active:scale-95 transition-all"
+              className={`py-2 rounded-xl border text-[11px] font-bold flex items-center justify-center gap-1 active:scale-95 transition-all ${btnSecCls}`}
             >
               🐦 Twitter/X
             </button>
