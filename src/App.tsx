@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   LineChart, Sparkles, Shapes, 
   Activity, Bell, Type, Layers, Component, ShieldCheck,
-  Bot, Moon, Sun, Cpu, Smartphone, Lock, CreditCard, Globe
+  Bot, Moon, Sun, Cpu, Smartphone, Lock, CreditCard, Globe, Zap
 } from 'lucide-react';
 import { DopamineSurveyRunner } from './components/survey/DopamineSurveyRunner';
 import { ThaisStudio } from './components/thais/ThaisStudio';
@@ -15,6 +15,7 @@ import { HealthTab } from './components/app/HealthTab';
 import { YouTab } from './components/app/YouTab';
 import { AuthScreen } from './components/auth/AuthScreen';
 import { MarketingLandingPage } from './components/marketing/MarketingLandingPage';
+import { TestSalesPage } from './components/marketing/TestSalesPage';
 import { PaywallModal } from './components/paywall/PaywallModal';
 import { StartDatePickerModal } from './components/onboarding/StartDatePickerModal';
 
@@ -30,12 +31,12 @@ import { ExtensionsShowcase } from './components/showcase/ExtensionsShowcase';
 import { LogoShowcase } from './components/showcase/LogoShowcase';
 import { WordmarkShowcase } from './components/showcase/WordmarkShowcase';
 
-type AppMode = 'marketing' | 'auth' | 'survey' | 'tovelu_app' | 'thais' | 'design_system';
+type AppMode = 'sales_test' | 'marketing' | 'auth' | 'survey' | 'tovelu_app' | 'thais' | 'design_system';
 type TDSGalleryTab = 'wordmark' | 'logo' | 'health' | 'extensions' | 'charts' | 'primitives' | 'navigation' | 'feedback' | 'tokens' | 'governance';
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(false);
-  const [appMode, setAppMode] = useState<AppMode>('tovelu_app');
+  const [appMode, setAppMode] = useState<AppMode>('sales_test');
   const [appTab, setAppTab] = useState<AppTab>('today');
 
   // User Journey States
@@ -56,7 +57,7 @@ export default function App() {
     if (typeof window !== 'undefined') {
       const hostname = window.location.hostname;
       if (hostname === 'tovelu.store' || hostname === 'www.tovelu.store') {
-        setAppMode('marketing');
+        setAppMode('sales_test');
       } else if (hostname.startsWith('app.') || hostname.includes('app.tovelu.store')) {
         setAppMode('tovelu_app');
       }
@@ -91,18 +92,32 @@ export default function App() {
         <div className="max-w-6xl mx-auto flex items-center justify-between gap-2 overflow-x-auto no-scrollbar">
           {/* Domain Routing Switcher */}
           <div className="flex items-center gap-1.5 shrink-0">
+            {/* Sales Page with CTA Try It For Free */}
+            <button
+              onClick={() => setAppMode('sales_test')}
+              className={`px-3 py-1 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 shrink-0 ${
+                appMode === 'sales_test'
+                  ? 'bg-gradient-to-r from-emerald-500 to-[#00FF9D] text-slate-950 font-black shadow-[0_0_15px_rgba(0,255,157,0.4)]'
+                  : 'bg-emerald-950/40 border border-emerald-500/40 text-emerald-300 hover:text-white'
+              }`}
+              title="Test Sales Page with CTA: 'Try It For Free'"
+            >
+              <Zap className="w-3.5 h-3.5 fill-current" />
+              <span>⚡ Sales Page (Try It For Free)</span>
+            </button>
+
             {/* Domain 1: tovelu.store */}
             <button
               onClick={() => setAppMode('marketing')}
               className={`px-3 py-1 rounded-full text-xs font-bold transition-all flex items-center gap-1.5 shrink-0 ${
                 appMode === 'marketing'
-                  ? 'bg-gradient-to-r from-emerald-500 to-[#00FF9D] text-slate-950 font-black shadow-sm'
+                  ? 'bg-[#00FF9D] text-slate-950 font-black shadow-sm'
                   : 'bg-slate-900 border border-slate-800 text-slate-300 hover:text-white'
               }`}
-              title="Public Domain: tovelu.store (Sales Page, Free Signup, Login)"
+              title="Public Domain: tovelu.store (Marketing Portal)"
             >
               <Globe className="w-3.5 h-3.5" />
-              <span>🌐 tovelu.store (Sales & Auth)</span>
+              <span>🌐 tovelu.store</span>
             </button>
 
             {/* Domain 2: app.tovelu.store */}
@@ -119,7 +134,7 @@ export default function App() {
               <span>📱 app.tovelu.store (App)</span>
             </button>
 
-            {/* Sub-Funnel Jump Links for Testing */}
+            {/* Funnel Jump Links */}
             <button
               onClick={() => setAppMode('auth')}
               className={`px-2.5 py-1 rounded-full text-xs font-bold transition-all flex items-center gap-1 shrink-0 ${
@@ -129,7 +144,7 @@ export default function App() {
               }`}
             >
               <Lock className="w-3 h-3" />
-              Sign Up/Verify
+              Sign Up
             </button>
 
             <button
@@ -198,9 +213,22 @@ export default function App() {
       )}
 
       {/* ========================================================================= */}
-      {/* 1. PUBLIC DOMAIN VIEW: tovelu.store (Marketing Landing & Sales Page) */}
+      {/* 0. TEST SALES PAGE WITH PRIMARY CTA "TRY IT FOR FREE" */}
       {/* ========================================================================= */}
-      {appMode === 'marketing' ? (
+      {appMode === 'sales_test' ? (
+        <TestSalesPage
+          darkMode={darkMode}
+          onTryForFree={() => {
+            setJourneyToast('🎉 3-Hour Free Access Protocol Initialized! Starting 52-Q Survey...');
+            setTimeout(() => setJourneyToast(null), 3500);
+            setAppMode('survey');
+          }}
+          onGoToLogin={() => setAppMode('auth')}
+        />
+      ) : appMode === 'marketing' ? (
+        /* ========================================================================= */
+        /* 1. PUBLIC DOMAIN VIEW: tovelu.store (Marketing Landing & Sales Page) */
+        /* ========================================================================= */
         <MarketingLandingPage
           darkMode={darkMode}
           onStartSignUp={() => setAppMode('auth')}
