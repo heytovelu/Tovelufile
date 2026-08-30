@@ -215,7 +215,7 @@ export const DopamineSurveyRunner: React.FC<DopamineSurveyRunnerProps> = ({ onCo
   // Render Health Report Reveal Screen
   if (showReveal && generatedAssessment && generatedPlan && compiledInput) {
     return (
-      <div className="max-w-2xl mx-auto p-6 md:p-8 bg-surface border border-emerald-500/40 rounded-3xl space-y-6 shadow-2xl animate-in zoom-in-95 duration-300">
+      <div className="max-w-[448px] w-full mx-auto p-4 sm:p-5 bg-surface border border-emerald-500/40 rounded-3xl space-y-5 shadow-2xl animate-in zoom-in-95 duration-300">
         <div className="text-center space-y-2">
           <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-400 text-white mx-auto flex items-center justify-center shadow-lg shadow-emerald-500/30 animate-pulse">
             <HeartPulse className="w-8 h-8" />
@@ -319,7 +319,7 @@ export const DopamineSurveyRunner: React.FC<DopamineSurveyRunnerProps> = ({ onCo
 
   // Standard Question Screen
   return (
-    <div className="max-w-xl mx-auto p-6 md:p-8 bg-surface border border-border-default rounded-3xl space-y-6 shadow-xl animate-in fade-in duration-200">
+    <div className="max-w-[448px] w-full mx-auto p-4 sm:p-5 bg-surface border border-border-default rounded-3xl space-y-4 shadow-xl animate-in fade-in duration-200">
       {/* Top Momentum & Streak Banner */}
       <div className="flex items-center justify-between text-xs font-bold">
         <span className="flex items-center gap-1 text-amber-500 bg-amber-500/10 px-2.5 py-1 rounded-full border border-amber-500/20 animate-pulse">

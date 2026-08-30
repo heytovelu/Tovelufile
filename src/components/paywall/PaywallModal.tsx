@@ -30,13 +30,13 @@ export const PaywallModal: React.FC<PaywallModalProps> = ({
   const tiers = [
     {
       id: 'starter_30' as PricingTierId,
-      name: '30-Day Starter Arc',
-      duration: '30 Days Access',
+      name: '30-Day Starter',
+      duration: '30 Days',
       priceUSD: '$49',
       priceINR: '₹1,499',
-      guarantee: '7-Day Money-Back Guarantee',
+      guarantee: '7-Day Guarantee',
       badge: null,
-      description: 'Acute 30-day reset to reverse gut bloating and stabilize glucose crashes.',
+      description: 'Acute reset to reverse gut bloating and stabilize postprandial glucose.',
     },
     {
       id: 'master_90' as PricingTierId,
@@ -44,30 +44,30 @@ export const PaywallModal: React.FC<PaywallModalProps> = ({
       duration: '90 Days Full Arc',
       priceUSD: '$119',
       priceINR: '₹3,499',
-      guarantee: '14-Day Money-Back Guarantee',
-      badge: '⭐ MOST POPULAR • MASTER PROTOCOL',
-      description: 'Complete biological transformation. Deep visceral fat reversal and cellular homeostasis.',
+      guarantee: '14-Day Guarantee',
+      badge: '⭐ MOST POPULAR • MASTER ARCS',
+      description: 'Complete biological transformation. Deep visceral fat and cellular homeostasis.',
       isHero: true,
     },
     {
       id: 'annual_365' as PricingTierId,
-      name: '365-Day Serious Arc',
-      duration: 'Full 1-Year Access',
+      name: '365-Day Serious',
+      duration: 'Full 1-Year',
       priceUSD: '$299',
       priceINR: '₹7,999',
-      guarantee: '30-Day Money-Back Guarantee',
+      guarantee: '30-Day Guarantee',
       badge: '👑 FOR THE SERIOUS • SAVE 60%',
-      description: 'Permanent metabolic lifestyle mastery. Includes 4 quarterly clinical lab audit adaptations.',
+      description: 'Permanent metabolic mastery. Includes quarterly lab audit adaptations.',
     },
     {
       id: 'lifetime_vip' as PricingTierId,
-      name: 'Lifetime Sovereign VIP',
-      duration: 'Forever Unrestricted',
+      name: 'Lifetime VIP',
+      duration: 'Forever Access',
       priceUSD: '$799',
       priceINR: '₹19,999',
-      guarantee: '30-Day Money-Back Guarantee',
-      badge: '💎 PRESTIGE • 1-TIME PAYMENT',
-      description: 'Lifetime access to all current and future clinical protocols, 3D body mirrors, and algorithms.',
+      guarantee: '30-Day Guarantee',
+      badge: '💎 PRESTIGE LIFETIME',
+      description: 'Unrestricted lifetime access to all future protocols, organ mirrors, and AI.',
     },
   ];
 
@@ -91,38 +91,43 @@ export const PaywallModal: React.FC<PaywallModalProps> = ({
   const textTitle = darkMode ? 'text-slate-100' : 'text-slate-900';
   const textSub = darkMode ? 'text-slate-400' : 'text-slate-600';
 
+  const currentPrice = currency === 'USD' 
+    ? tiers.find(t => t.id === selectedTier)?.priceUSD 
+    : tiers.find(t => t.id === selectedTier)?.priceINR;
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
-      <div className={`w-full max-w-xl max-h-[92vh] overflow-y-auto rounded-3xl p-5 sm:p-7 border transition-all ${cardCls} space-y-5`}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 bg-black/80 backdrop-blur-md animate-fadeIn">
+      {/* Mobile-Native Width Container (max-w-[420px]) */}
+      <div className={`w-full max-w-[420px] max-h-[90dvh] overflow-y-auto rounded-3xl p-4 sm:p-5 border transition-all ${cardCls} space-y-4 no-scrollbar`}>
         {/* Header */}
-        <div className={`flex items-center justify-between pb-3 border-b ${darkMode ? 'border-slate-800' : 'border-slate-200'}`}>
-          <div className="flex items-center gap-2.5">
-            <HomeostasisLogo size={32} mode={darkMode ? 'on-dark' : 'on-light'} showWordmark={true} />
+        <div className={`flex items-center justify-between pb-2 border-b ${darkMode ? 'border-slate-800' : 'border-slate-200'}`}>
+          <div className="flex items-center gap-2">
+            <HomeostasisLogo size={28} mode={darkMode ? 'on-dark' : 'on-light'} showWordmark={true} />
           </div>
           <button
             onClick={onClose}
-            className={`p-1.5 rounded-lg ${darkMode ? 'text-slate-400 hover:text-white' : 'text-slate-500 hover:text-slate-900'}`}
+            className={`p-1.5 rounded-lg text-xs font-bold ${darkMode ? 'text-slate-400 hover:text-white' : 'text-slate-500 hover:text-slate-900'}`}
           >
             ✕
           </button>
         </div>
 
         {/* Title */}
-        <div className="text-center space-y-1.5">
-          <span className="text-[10px] uppercase font-mono tracking-widest text-emerald-600 dark:text-[#00FF9D] font-bold">
-            DODO PAYMENTS • 100% TAX INCLUDED
+        <div className="text-center space-y-1">
+          <span className="text-[9px] uppercase font-mono tracking-widest text-emerald-600 dark:text-[#00FF9D] font-bold">
+            DODO PAYMENTS • TAX INCLUDED
           </span>
-          <h2 className={`text-xl sm:text-2xl font-black tracking-tight ${textTitle}`}>
-            Unlock Your Sovereign Health Protocol
+          <h2 className={`text-lg font-black tracking-tight ${textTitle}`}>
+            Unlock Sovereign Health Protocol
           </h2>
-          <p className={`text-xs ${textSub} max-w-md mx-auto leading-relaxed`}>
-            Every tier grants <strong>100% full access to all features</strong>: food sequencing, all 14 organ systems, 500-disease registry, and verified certificates.
+          <p className={`text-[11px] ${textSub} leading-snug`}>
+            Every tier includes <strong>100% full access to all features</strong>, food sequencing, 14 organs, and verified certificates.
           </p>
         </div>
 
         {/* Toast */}
         {payToast && (
-          <div className="p-3 rounded-2xl bg-emerald-500/20 border border-emerald-500 text-center text-xs font-bold text-emerald-700 dark:text-[#00FF9D] animate-bounce">
+          <div className="p-2.5 rounded-2xl bg-emerald-500/20 border border-emerald-500 text-center text-xs font-bold text-emerald-700 dark:text-[#00FF9D] animate-bounce">
             {payToast}
           </div>
         )}
@@ -130,12 +135,12 @@ export const PaywallModal: React.FC<PaywallModalProps> = ({
         {/* Currency Switcher */}
         <div className="flex items-center justify-between px-1">
           <span className={`text-[11px] font-bold ${textSub}`}>
-            Select Your Currency:
+            Currency:
           </span>
-          <div className={`flex items-center p-1 rounded-xl border ${darkMode ? 'bg-slate-900 border-slate-800' : 'bg-slate-100 border-slate-300'}`}>
+          <div className={`flex items-center p-0.5 rounded-xl border ${darkMode ? 'bg-slate-900 border-slate-800' : 'bg-slate-100 border-slate-300'}`}>
             <button
               onClick={() => setCurrency('USD')}
-              className={`py-1 px-3 rounded-lg text-xs font-bold transition-all ${
+              className={`py-1 px-2.5 rounded-lg text-[11px] font-bold transition-all ${
                 currency === 'USD'
                   ? 'bg-[#00FF9D] text-slate-950 shadow-sm'
                   : textSub
@@ -145,7 +150,7 @@ export const PaywallModal: React.FC<PaywallModalProps> = ({
             </button>
             <button
               onClick={() => setCurrency('INR')}
-              className={`py-1 px-3 rounded-lg text-xs font-bold transition-all ${
+              className={`py-1 px-2.5 rounded-lg text-[11px] font-bold transition-all ${
                 currency === 'INR'
                   ? 'bg-[#00FF9D] text-slate-950 shadow-sm'
                   : textSub
@@ -157,7 +162,7 @@ export const PaywallModal: React.FC<PaywallModalProps> = ({
         </div>
 
         {/* 4 Official Tiers */}
-        <div className="space-y-2.5">
+        <div className="space-y-2">
           {tiers.map((t) => {
             const isSelected = selectedTier === t.id;
             const price = currency === 'USD' ? t.priceUSD : t.priceINR;
@@ -166,11 +171,11 @@ export const PaywallModal: React.FC<PaywallModalProps> = ({
               <div
                 key={t.id}
                 onClick={() => setSelectedTier(t.id)}
-                className={`p-4 rounded-2xl border-2 cursor-pointer transition-all relative ${
+                className={`p-3 rounded-2xl border-2 cursor-pointer transition-all relative ${
                   isSelected
                     ? darkMode
-                      ? 'border-[#00FF9D] bg-emerald-950/20 shadow-[0_0_25px_rgba(0,255,157,0.15)]'
-                      : 'border-emerald-500 bg-emerald-50/50 shadow-md'
+                      ? 'border-[#00FF9D] bg-emerald-950/20 shadow-[0_0_15px_rgba(0,255,157,0.15)]'
+                      : 'border-emerald-500 bg-emerald-50/60 shadow-sm'
                     : darkMode
                     ? 'border-slate-800 bg-slate-900/60 hover:border-slate-700'
                     : 'border-slate-200 bg-white hover:border-slate-300'
@@ -178,37 +183,37 @@ export const PaywallModal: React.FC<PaywallModalProps> = ({
               >
                 {/* Optional Badge */}
                 {t.badge && (
-                  <div className="absolute -top-2.5 right-4 px-2.5 py-0.5 rounded-full text-[9px] font-black uppercase tracking-wider bg-[#00FF9D] text-slate-950 shadow-sm">
+                  <div className="absolute -top-2.5 right-3 px-2 py-0.5 rounded-full text-[8px] font-black uppercase tracking-wider bg-[#00FF9D] text-slate-950 shadow-sm">
                     {t.badge}
                   </div>
                 )}
 
-                <div className="flex items-start justify-between gap-3">
-                  <div className="space-y-1 min-w-0 pr-2">
-                    <div className="flex items-center gap-2">
-                      <h3 className={`text-sm font-black tracking-tight ${textTitle}`}>
+                <div className="flex items-center justify-between gap-2">
+                  <div className="space-y-0.5 min-w-0 pr-1">
+                    <div className="flex items-center gap-1.5">
+                      <h3 className={`text-xs font-black tracking-tight ${textTitle}`}>
                         {t.name}
                       </h3>
-                      <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                      <span className={`text-[9px] font-bold px-1.5 py-0.2 rounded-full ${
                         darkMode ? 'bg-slate-800 text-slate-300' : 'bg-slate-200 text-slate-700'
                       }`}>
                         {t.duration}
                       </span>
                     </div>
-                    <p className={`text-[11px] ${textSub} leading-snug`}>
+                    <p className={`text-[10px] ${textSub} leading-tight line-clamp-1`}>
                       {t.description}
                     </p>
-                    <div className="text-[10px] font-bold text-emerald-600 dark:text-[#00FF9D] pt-0.5">
-                      ✓ {t.guarantee} • 100% Tax Included
+                    <div className="text-[9px] font-bold text-emerald-600 dark:text-[#00FF9D]">
+                      ✓ {t.guarantee}
                     </div>
                   </div>
 
                   {/* Price */}
                   <div className="text-right shrink-0">
-                    <div className={`text-lg sm:text-xl font-black ${textTitle}`}>
+                    <div className={`text-base font-black ${textTitle}`}>
                       {price}
                     </div>
-                    <span className={`text-[9px] uppercase font-mono font-bold block ${textSub}`}>
+                    <span className={`text-[8px] uppercase font-mono font-bold block ${textSub}`}>
                       Tax Included
                     </span>
                   </div>
@@ -218,31 +223,30 @@ export const PaywallModal: React.FC<PaywallModalProps> = ({
           })}
         </div>
 
-        {/* Affiliate & Tax Guarantee Banner */}
-        <div className={`p-3 rounded-2xl border text-xs flex items-center justify-between ${
+        {/* Affiliate & Account Banner */}
+        <div className={`p-2.5 rounded-2xl border text-[11px] flex items-center justify-between ${
           darkMode ? 'bg-slate-900/80 border-slate-800 text-slate-300' : 'bg-slate-50 border-slate-200 text-slate-700'
         }`}>
-          <div className="flex items-center gap-2">
-            <span className="text-base">🤝</span>
-            <span>Account: <strong className="font-mono text-emerald-600 dark:text-[#00FF9D]">{userEmail}</strong> • Partner: @{affiliateCode} (40% locked)</span>
+          <div className="truncate pr-1">
+            <span>Account: <strong className="font-mono text-emerald-600 dark:text-[#00FF9D]">{userEmail}</strong> • Partner: @{affiliateCode}</span>
           </div>
-          <span className="font-mono text-[10px] font-bold text-emerald-600 dark:text-[#00FF9D]">✓ 0% Extra Tax</span>
+          <span className="font-mono text-[9px] font-bold text-emerald-600 dark:text-[#00FF9D] shrink-0">✓ 0% Extra Tax</span>
         </div>
 
         {/* 1-Tap Checkout Button */}
-        <div className="pt-2 space-y-2">
+        <div className="pt-1 space-y-1.5">
           <button
             onClick={handleCheckout}
             disabled={isProcessing}
-            className="w-full py-4 px-4 rounded-2xl bg-[#00FF9D] hover:bg-[#00FF9D]/90 active:scale-98 text-slate-950 font-black text-sm uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(0,255,157,0.35)] flex items-center justify-center gap-2"
+            className="w-full py-3.5 px-3 rounded-2xl bg-[#00FF9D] hover:bg-[#00FF9D]/90 active:scale-98 text-slate-950 font-black text-xs uppercase tracking-wider transition-all shadow-[0_0_15px_rgba(0,255,157,0.3)] flex items-center justify-center gap-1.5"
           >
-            <span>{isProcessing ? 'Securing via Dodo Payments...' : `Pay ${currency === 'USD' ? tiers.find(t => t.id === selectedTier)?.priceUSD : tiers.find(t => t.id === selectedTier)?.priceINR} (Tax Included) & Unlock Full Protocol →`}</span>
+            <span>{isProcessing ? 'Connecting...' : `Pay ${currentPrice} (Tax Included) & Unlock →`}</span>
           </button>
 
-          <div className="text-center text-[10px] text-slate-400 font-mono flex items-center justify-center gap-3 pt-1">
-            <span>🔒 256-Bit SSL Encryption</span>
+          <div className="text-center text-[9px] text-slate-400 font-mono flex items-center justify-center gap-2">
+            <span>🔒 256-Bit SSL</span>
             <span>•</span>
-            <span>Merchant of Record: Dodo Payments</span>
+            <span>MoR: Dodo Payments</span>
             <span>•</span>
             <span>Apple Pay / UPI / Cards</span>
           </div>

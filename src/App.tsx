@@ -177,7 +177,7 @@ export default function App() {
 
       {/* RENDER ACTIVE MODE */}
       {appMode === 'auth' ? (
-        <div className="max-w-4xl mx-auto py-6 px-3">
+        <div className="w-full max-w-[448px] mx-auto py-3 px-2">
           <AuthScreen
             darkMode={darkMode}
             onAuthSuccess={(user) => {
@@ -191,7 +191,7 @@ export default function App() {
           />
         </div>
       ) : appMode === 'survey' ? (
-        <div className="max-w-4xl mx-auto py-4 px-3">
+        <div className="w-full max-w-[448px] mx-auto py-2 px-2">
           <DopamineSurveyRunner
             onPayNow={(_input, _assessment, _plan) => {
               setIsPaywallOpen(true);
