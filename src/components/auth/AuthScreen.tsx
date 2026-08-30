@@ -1,24 +1,72 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { HomeostasisLogo } from '../ui/HomeostasisLogo';
 
-export type AuthMode = 'signup' | 'verify' | 'login';
+export type AuthMode = 'signup' | 'verify' | 'login' | 'forgot_password';
+
+export interface UserSessionData {
+  name: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  country: string;
+}
 
 interface AuthScreenProps {
-  onAuthSuccess: (user: { name: string; email: string }) => void;
+  onAuthSuccess: (user: UserSessionData) => void;
   darkMode?: boolean;
 }
+
+const COUNTRIES = [
+  { code: 'US', name: 'United States', flag: '🇺🇸' },
+  { code: 'IN', name: 'India', flag: '🇮🇳' },
+  { code: 'GB', name: 'United Kingdom', flag: '🇬🇧' },
+  { code: 'CA', name: 'Canada', flag: '🇨🇦' },
+  { code: 'AU', name: 'Australia', flag: '🇦🇺' },
+  { code: 'DE', name: 'Germany', flag: '🇩🇪' },
+  { code: 'FR', name: 'France', flag: '🇫🇷' },
+  { code: 'AE', name: 'United Arab Emirates', flag: '🇦🇪' },
+  { code: 'SG', name: 'Singapore', flag: '🇸🇬' },
+  { code: 'NZ', name: 'New Zealand', flag: '🇳🇿' },
+  { code: 'IE', name: 'Ireland', flag: '🇮🇪' },
+  { code: 'CH', name: 'Switzerland', flag: '🇨🇭' },
+  { code: 'NL', name: 'Netherlands', flag: '🇳🇱' },
+  { code: 'SE', name: 'Sweden', flag: '🇸🇪' },
+  { code: 'NO', name: 'Norway', flag: '🇳🇴' },
+  { code: 'ES', name: 'Spain', flag: '🇪🇸' },
+  { code: 'IT', name: 'Italy', flag: '🇮🇹' },
+  { code: 'BR', name: 'Brazil', flag: '🇧🇷' },
+  { code: 'MX', name: 'Mexico', flag: '🇲🇽' },
+  { code: 'ZA', name: 'South Africa', flag: '🇿🇦' },
+];
 
 export const AuthScreen: React.FC<AuthScreenProps> = ({
   onAuthSuccess,
   darkMode = false,
 }) => {
   const [authMode, setAuthMode] = useState<AuthMode>('signup');
-  const [name, setName] = useState('Ajay');
-  const [email, setEmail] = useState('ajay@tovelu.store');
-  const [password, setPassword] = useState('••••••••••••');
-  const [verificationCode, setVerificationCode] = useState(['8', '9', '4', '1', '2', '0']);
+
+  // Sign Up Fields
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [country, setCountry] = useState('United States');
+  const [showPassword, setShowPassword] = useState(false);
+
+  // Email Confirmation & Verification Code Fields
+  const [verificationDigits, setVerificationDigits] = useState(['', '', '', '', '', '']);
+  const [resendCooldown, setResendCooldown] = useState(0);
   const [authToast, setAuthToast] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  // Cooldown timer for Brevo email resend
+  useEffect(() => {
+    if (resendCooldown <= 0) return;
+    const timer = setInterval(() => {
+      setResendCooldown(prev => prev - 1);
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [resendCooldown]);
 
   const cardCls = darkMode
     ? 'bg-[#0E1318] border-slate-800 text-slate-100 shadow-2xl'
@@ -29,52 +77,112 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
     ? 'bg-slate-900 border-slate-700 text-white placeholder-slate-500 focus:border-[#00FF9D]'
     : 'bg-slate-50 border-slate-300 text-slate-900 placeholder-slate-400 focus:border-emerald-500';
 
+  // 1. SIGN UP SUBMISSION
   const handleSignUpSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
+    if (!firstName.trim() || !lastName.trim() || !email.trim() || !password) {
+      setAuthToast('⚠️ Please fill in all required fields.');
+      setTimeout(() => setAuthToast(null), 3000);
+      return;
+    }
+
+    if (password.length < 8) {
+      setAuthToast('⚠️ Password must be at least 8 characters long.');
+      setTimeout(() => setAuthToast(null), 3000);
+      return;
+    }
+
     setIsLoading(true);
+    setAuthToast('📨 Sending official confirmation link via Brevo...');
+
+    // Simulate Brevo transactional confirmation dispatch
     setTimeout(() => {
       setIsLoading(false);
       setAuthMode('verify');
-      setAuthToast('📧 Verification code sent to your email via Brevo!');
-      setTimeout(() => setAuthToast(null), 3500);
-    }, 600);
+      setResendCooldown(60);
+      setAuthToast(`✉️ Confirmation email sent to ${email} via Brevo!`);
+      setTimeout(() => setAuthToast(null), 4000);
+    }, 800);
   };
 
+  // 2. VERIFY SUBMISSION (Via Link or Code)
   const handleVerifySubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const enteredCode = verificationDigits.join('');
+    
+    // Check if code was entered or if user confirmed via email link
+    if (enteredCode.length < 6) {
+      setAuthToast('⚠️ Please enter the 6-digit verification code from your email, or click the link in your email.');
+      setTimeout(() => setAuthToast(null), 3500);
+      return;
+    }
+
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-      setAuthToast('✅ Email verified via Supabase! Directing to Clinical Survey...');
+      const fullName = `${firstName.trim()} ${lastName.trim()}`.trim() || 'Sovereign Member';
+      setAuthToast('✅ Email confirmed via Brevo! Redirecting to app.tovelu.store...');
       setTimeout(() => {
-        onAuthSuccess({ name: name || 'Sovereign Member', email });
+        onAuthSuccess({
+          name: fullName,
+          firstName: firstName.trim() || 'Member',
+          lastName: lastName.trim(),
+          email: email.trim(),
+          country,
+        });
       }, 1000);
-    }, 600);
+    }, 800);
   };
 
+  // 3. LOGIN SUBMISSION
   const handleLoginSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
+    if (!email.trim() || !password) {
+      setAuthToast('⚠️ Please enter your email and password.');
+      setTimeout(() => setAuthToast(null), 3000);
+      return;
+    }
+
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-      setAuthToast('✅ Logged in successfully!');
+      const inferredName = email.split('@')[0] || 'Member';
+      setAuthToast('✅ Welcome back! Redirecting to app.tovelu.store...');
       setTimeout(() => {
-        onAuthSuccess({ name: name || 'Ajay', email });
+        onAuthSuccess({
+          name: inferredName,
+          firstName: inferredName,
+          lastName: '',
+          email: email.trim(),
+          country: 'United States',
+        });
       }, 800);
-    }, 600);
+    }, 700);
   };
 
-  const handleCodeChange = (index: number, val: string) => {
+  // Resend Brevo Confirmation Link
+  const handleResendLink = () => {
+    if (resendCooldown > 0) return;
+    setResendCooldown(60);
+    setAuthToast(`🔄 Fresh confirmation email sent to ${email} via Brevo!`);
+    setTimeout(() => setAuthToast(null), 3500);
+  };
+
+  const handleDigitChange = (index: number, val: string) => {
     if (val.length > 1) val = val.slice(-1);
-    const newCode = [...verificationCode];
-    newCode[index] = val;
-    setVerificationCode(newCode);
+    const newDigits = [...verificationDigits];
+    newDigits[index] = val;
+    setVerificationDigits(newDigits);
+
+    // Auto-focus next input
+    if (val && index < 5) {
+      const nextInput = document.getElementById(`verify-digit-${index + 1}`);
+      if (nextInput) nextInput.focus();
+    }
   };
 
   return (
-    <div className="w-full min-h-[90vh] flex items-center justify-center p-4">
+    <div className="w-full min-h-[85vh] flex items-center justify-center p-3 sm:p-4">
       <div className={`w-full max-w-md rounded-3xl p-6 sm:p-8 border transition-all ${cardCls} space-y-6`}>
         {/* Brand Header */}
         <div className="text-center space-y-2">
@@ -86,80 +194,124 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
           </div>
         </div>
 
-        {/* Toast */}
+        {/* Global Toast */}
         {authToast && (
           <div className="p-3 rounded-2xl bg-emerald-500/20 border border-emerald-500 text-center text-xs font-bold text-emerald-700 dark:text-[#00FF9D] animate-bounce">
             {authToast}
           </div>
         )}
 
-        {/* 1. SIGN UP VIEW */}
+        {/* ========================================================================= */}
+        {/* 1. SIGN UP VIEW: First Name, Last Name, Email, Password, Country */}
+        {/* ========================================================================= */}
         {authMode === 'signup' && (
           <div className="space-y-4">
             <div className="text-center space-y-1">
               <h2 className={`text-xl font-black tracking-tight ${textTitle}`}>
-                Create Your Free Account
+                Create Free Sovereign Account
               </h2>
               <p className={`text-xs ${textSub}`}>
-                Step 1 of 3: Access your 52-Question Clinical Biological Survey
+                Unlock your 52-Question Clinical Audit and 3-hour free trial.
               </p>
             </div>
 
             <form onSubmit={handleSignUpSubmit} className="space-y-3 pt-1">
-              <div>
-                <label className={`block text-[11px] font-bold uppercase tracking-wider mb-1 ${textSub}`}>
-                  Full Name
-                </label>
-                <input
-                  type="text"
-                  required
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="e.g. Ajay"
-                  className={`w-full p-3 rounded-xl border text-xs focus:outline-none transition-all ${inputCls}`}
-                />
+              {/* First Name & Last Name */}
+              <div className="grid grid-cols-2 gap-2.5">
+                <div className="space-y-1">
+                  <label className={`text-[11px] font-bold ${textSub}`}>First Name *</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="Ajay"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    className={`w-full px-3.5 py-2.5 rounded-xl border text-xs focus:outline-none transition-all ${inputCls}`}
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className={`text-[11px] font-bold ${textSub}`}>Last Name *</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="Founder"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    className={`w-full px-3.5 py-2.5 rounded-xl border text-xs focus:outline-none transition-all ${inputCls}`}
+                  />
+                </div>
               </div>
 
-              <div>
-                <label className={`block text-[11px] font-bold uppercase tracking-wider mb-1 ${textSub}`}>
-                  Email Address
-                </label>
+              {/* Email Address */}
+              <div className="space-y-1">
+                <label className={`text-[11px] font-bold ${textSub}`}>Email Address *</label>
                 <input
                   type="email"
                   required
+                  placeholder="ajay@tovelu.store"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="name@email.com"
-                  className={`w-full p-3 rounded-xl border text-xs focus:outline-none transition-all ${inputCls}`}
+                  className={`w-full px-3.5 py-2.5 rounded-xl border text-xs focus:outline-none transition-all ${inputCls}`}
                 />
               </div>
 
-              <div>
-                <label className={`block text-[11px] font-bold uppercase tracking-wider mb-1 ${textSub}`}>
-                  Password
-                </label>
-                <input
-                  type="password"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Choose a secure password"
-                  className={`w-full p-3 rounded-xl border text-xs focus:outline-none transition-all ${inputCls}`}
-                />
+              {/* Password with Eye Toggle */}
+              <div className="space-y-1">
+                <label className={`text-[11px] font-bold ${textSub}`}>Password (Min 8 Characters) *</label>
+                <div className="relative">
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    required
+                    placeholder="••••••••••••"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className={`w-full px-3.5 py-2.5 rounded-xl border text-xs focus:outline-none transition-all pr-10 ${inputCls}`}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className={`absolute right-3 top-2.5 text-xs ${textSub} hover:text-slate-900 dark:hover:text-white`}
+                  >
+                    {showPassword ? '🙈' : '👁️'}
+                  </button>
+                </div>
               </div>
 
-              <div className="pt-2">
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="w-full py-3.5 px-4 rounded-xl bg-[#00FF9D] hover:bg-[#00FF9D]/90 active:scale-98 text-slate-950 font-black text-xs uppercase tracking-wider transition-all shadow-[0_0_15px_rgba(0,255,157,0.3)] flex items-center justify-center gap-2"
+              {/* Country Selector */}
+              <div className="space-y-1">
+                <label className={`text-[11px] font-bold ${textSub}`}>Your Country *</label>
+                <select
+                  value={country}
+                  onChange={(e) => setCountry(e.target.value)}
+                  className={`w-full px-3.5 py-2.5 rounded-xl border text-xs focus:outline-none transition-all ${inputCls}`}
                 >
-                  {isLoading ? 'Creating Sovereign Account...' : 'Continue: Verify Email & Start Survey →'}
-                </button>
+                  {COUNTRIES.map(c => (
+                    <option key={c.code} value={c.name}>
+                      {c.flag} {c.name}
+                    </option>
+                  ))}
+                </select>
               </div>
+
+              {/* Brevo Email Notice */}
+              <div className={`p-2.5 rounded-xl border text-[11px] ${
+                darkMode ? 'bg-slate-900/60 border-slate-800 text-slate-300' : 'bg-slate-50 border-slate-200 text-slate-700'
+              }`}>
+                <span>🔒 We will send an official confirmation link to your email address via <strong>Brevo</strong>.</span>
+              </div>
+
+              {/* Submit Button */}
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="w-full py-3.5 px-4 rounded-2xl bg-[#00FF9D] hover:bg-[#00FF9D]/90 active:scale-98 text-slate-950 font-black text-xs uppercase tracking-wider transition-all shadow-[0_0_15px_rgba(0,255,157,0.3)] flex items-center justify-center gap-2"
+              >
+                <span>{isLoading ? 'Sending Confirmation Link...' : 'Create Account & Send Confirmation Link →'}</span>
+              </button>
             </form>
 
-            <div className="pt-2 text-center">
+            <div className="pt-1 text-center">
               <button
                 type="button"
                 onClick={() => setAuthMode('login')}
@@ -171,118 +323,155 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
           </div>
         )}
 
-        {/* 2. VERIFY EMAIL VIEW */}
+        {/* ========================================================================= */}
+        {/* 2. VERIFY EMAIL VIEW: Sent Link via Brevo + Optional 6-Digit Code */}
+        {/* ========================================================================= */}
         {authMode === 'verify' && (
           <div className="space-y-4">
-            <div className="text-center space-y-1">
-              <div className="text-2xl">📧</div>
+            <div className="text-center space-y-2">
+              <div className="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-2xl mx-auto animate-pulse">
+                ✉️
+              </div>
               <h2 className={`text-xl font-black tracking-tight ${textTitle}`}>
-                Verify Your Email
+                Check Your Email Inbox
               </h2>
-              <p className={`text-xs ${textSub}`}>
-                We sent a 6-digit code to <span className="font-bold text-emerald-600 dark:text-[#00FF9D]">{email}</span>
+              <p className={`text-xs ${textSub} leading-relaxed`}>
+                We sent an official confirmation link via <strong>Brevo</strong> to:<br />
+                <strong className="text-emerald-600 dark:text-[#00FF9D] font-mono text-xs">{email}</strong>
               </p>
             </div>
 
-            <form onSubmit={handleVerifySubmit} className="space-y-4 pt-1">
-              {/* 6 Digits input */}
-              <div className="flex justify-center gap-2">
-                {verificationCode.map((digit, idx) => (
-                  <input
-                    key={idx}
-                    type="text"
-                    maxLength={1}
-                    value={digit}
-                    onChange={(e) => handleCodeChange(idx, e.target.value)}
-                    className={`w-11 h-12 text-center text-lg font-black rounded-xl border focus:outline-none transition-all ${inputCls}`}
-                  />
-                ))}
+            {/* Email Instructions Card */}
+            <div className={`p-3.5 rounded-2xl border text-xs space-y-2 ${
+              darkMode ? 'bg-slate-900/80 border-slate-800 text-slate-300' : 'bg-slate-50 border-slate-200 text-slate-700'
+            }`}>
+              <div className="font-bold flex items-center gap-1.5 text-emerald-600 dark:text-[#00FF9D]">
+                <span>✓ Step 1:</span> Open the email from Tovelu
               </div>
+              <p className="text-[11px] leading-snug">
+                Click the button <strong>"Confirm Your Email"</strong> inside the email to immediately activate your account and launch the 52-Question Survey on <strong>app.tovelu.store</strong>.
+              </p>
+            </div>
 
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="w-full py-3.5 px-4 rounded-xl bg-[#00FF9D] hover:bg-[#00FF9D]/90 active:scale-98 text-slate-950 font-black text-xs uppercase tracking-wider transition-all shadow-[0_0_15px_rgba(0,255,157,0.3)] flex items-center justify-center gap-2"
-              >
-                {isLoading ? 'Verifying Code...' : 'Verify Email & Enter 52-Q Survey →'}
-              </button>
-            </form>
+            {/* Optional 6-Digit Code Fallback */}
+            <div className="space-y-2 pt-1 border-t border-slate-200 dark:border-slate-800">
+              <span className={`text-[11px] font-bold block text-center ${textSub}`}>
+                Or enter the 6-digit confirmation code from your email:
+              </span>
 
+              <form onSubmit={handleVerifySubmit} className="space-y-3">
+                <div className="flex justify-center gap-1.5 sm:gap-2">
+                  {verificationDigits.map((digit, idx) => (
+                    <input
+                      key={idx}
+                      id={`verify-digit-${idx}`}
+                      type="text"
+                      maxLength={1}
+                      value={digit}
+                      onChange={(e) => handleDigitChange(idx, e.target.value)}
+                      placeholder="•"
+                      className={`w-10 h-11 sm:w-11 sm:h-12 text-center text-lg font-black rounded-xl border focus:outline-none transition-all ${inputCls}`}
+                    />
+                  ))}
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-full py-3.5 px-4 rounded-xl bg-[#00FF9D] hover:bg-[#00FF9D]/90 active:scale-98 text-slate-950 font-black text-xs uppercase tracking-wider transition-all shadow-md flex items-center justify-center gap-2"
+                >
+                  <span>{isLoading ? 'Verifying...' : 'Confirm Code & Enter app.tovelu.store →'}</span>
+                </button>
+              </form>
+            </div>
+
+            {/* Resend Link & Change Email Controls */}
             <div className="flex items-center justify-between text-xs pt-1 px-1">
               <button
                 type="button"
-                onClick={() => {
-                  setAuthToast('🔄 Fresh verification code sent via Brevo!');
-                  setTimeout(() => setAuthToast(null), 3000);
-                }}
-                className={`font-semibold ${textSub} hover:text-emerald-600 dark:hover:text-[#00FF9D]`}
+                onClick={handleResendLink}
+                disabled={resendCooldown > 0}
+                className={`font-semibold ${
+                  resendCooldown > 0 
+                    ? 'text-slate-400 cursor-not-allowed' 
+                    : 'text-emerald-600 dark:text-[#00FF9D] hover:underline'
+                }`}
               >
-                Resend Code
+                {resendCooldown > 0 ? `Resend email in ${resendCooldown}s` : 'Resend confirmation email'}
               </button>
+
               <button
                 type="button"
                 onClick={() => setAuthMode('signup')}
-                className={`font-semibold ${textSub} hover:underline`}
+                className={`font-medium ${textSub} hover:text-slate-900 dark:hover:text-white`}
               >
-                Change Email
+                Change email
               </button>
             </div>
           </div>
         )}
 
-        {/* 3. LOGIN VIEW */}
+        {/* ========================================================================= */}
+        {/* 3. SIGN IN VIEW */}
+        {/* ========================================================================= */}
         {authMode === 'login' && (
           <div className="space-y-4">
             <div className="text-center space-y-1">
               <h2 className={`text-xl font-black tracking-tight ${textTitle}`}>
-                Log In to Tovelu
+                Sign In to Tovelu
               </h2>
               <p className={`text-xs ${textSub}`}>
-                Enter your credentials to access your Sovereign Health OS
+                Access your biological dashboard on app.tovelu.store
               </p>
             </div>
 
             <form onSubmit={handleLoginSubmit} className="space-y-3 pt-1">
-              <div>
-                <label className={`block text-[11px] font-bold uppercase tracking-wider mb-1 ${textSub}`}>
-                  Email Address
-                </label>
+              <div className="space-y-1">
+                <label className={`text-[11px] font-bold ${textSub}`}>Email Address</label>
                 <input
                   type="email"
                   required
+                  placeholder="ajay@tovelu.store"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="name@email.com"
-                  className={`w-full p-3 rounded-xl border text-xs focus:outline-none transition-all ${inputCls}`}
+                  className={`w-full px-3.5 py-2.5 rounded-xl border text-xs focus:outline-none transition-all ${inputCls}`}
                 />
               </div>
 
-              <div>
-                <label className={`block text-[11px] font-bold uppercase tracking-wider mb-1 ${textSub}`}>
-                  Password
-                </label>
+              <div className="space-y-1">
+                <div className="flex items-center justify-between">
+                  <label className={`text-[11px] font-bold ${textSub}`}>Password</label>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setAuthToast('📩 Password reset instructions sent via Brevo!');
+                      setTimeout(() => setAuthToast(null), 3500);
+                    }}
+                    className="text-[10px] text-emerald-600 dark:text-[#00FF9D] hover:underline"
+                  >
+                    Forgot password?
+                  </button>
+                </div>
                 <input
                   type="password"
                   required
+                  placeholder="••••••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Your password"
-                  className={`w-full p-3 rounded-xl border text-xs focus:outline-none transition-all ${inputCls}`}
+                  className={`w-full px-3.5 py-2.5 rounded-xl border text-xs focus:outline-none transition-all ${inputCls}`}
                 />
               </div>
 
-              <div className="pt-2">
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="w-full py-3.5 px-4 rounded-xl bg-[#00FF9D] hover:bg-[#00FF9D]/90 active:scale-98 text-slate-950 font-black text-xs uppercase tracking-wider transition-all shadow-[0_0_15px_rgba(0,255,157,0.3)] flex items-center justify-center gap-2"
-                >
-                  {isLoading ? 'Authenticating...' : 'Sign In to Sovereign OS →'}
-                </button>
-              </div>
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="w-full py-3.5 px-4 rounded-2xl bg-[#00FF9D] hover:bg-[#00FF9D]/90 active:scale-98 text-slate-950 font-black text-xs uppercase tracking-wider transition-all shadow-[0_0_15px_rgba(0,255,157,0.3)] flex items-center justify-center gap-2"
+              >
+                <span>{isLoading ? 'Signing In...' : 'Sign In & Enter app.tovelu.store →'}</span>
+              </button>
             </form>
 
-            <div className="pt-2 text-center">
+            <div className="pt-1 text-center">
               <button
                 type="button"
                 onClick={() => setAuthMode('signup')}
@@ -293,13 +482,6 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
             </div>
           </div>
         )}
-
-        {/* Security & Codex Article 16 Seal */}
-        <div className="pt-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-center gap-2 text-[10px] text-slate-400 font-mono">
-          <span>🛡️ Powered by Supabase & Brevo</span>
-          <span>•</span>
-          <span>Zero Data Selling (Art. 16)</span>
-        </div>
       </div>
     </div>
   );

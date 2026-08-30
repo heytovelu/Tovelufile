@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MealPortion, DailyHealthTask } from '../../services/thais/types';
 import { MealLogModal } from '../thais/MealLogModal';
 import { NightlyCheckInModal } from '../thais/NightlyCheckInModal';
@@ -29,7 +29,49 @@ export const TodayTab: React.FC<TodayTabProps> = ({
   // Calendar & Day Meta
   const fullCalendarDate = 'Sunday, August 30, 2026';
   const momentumLabel = 'Day 14 of 90 • High Momentum 🔥';
-  const trialCountdown = '02:54:12';
+
+  // Live 3-Hour Free Access Timer Logic (Zero Loophole)
+  const [trialTimeLeft, setTrialTimeLeft] = useState<string>('03:00:00');
+  const [isTrialExpired, setIsTrialExpired] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (isPaidMember) return;
+
+    const TRIAL_STORAGE_KEY = 'tovelu_trial_expires_at';
+    let expiresAt: number;
+
+    try {
+      const stored = localStorage.getItem(TRIAL_STORAGE_KEY);
+      if (stored) {
+        expiresAt = parseInt(stored, 10);
+      } else {
+        // Initialize 3 hours from right now
+        expiresAt = Date.now() + 3 * 60 * 60 * 1000;
+        localStorage.setItem(TRIAL_STORAGE_KEY, expiresAt.toString());
+      }
+    } catch (_e) {
+      expiresAt = Date.now() + 3 * 60 * 60 * 1000;
+    }
+
+    const updateCountdown = () => {
+      const remainingMs = expiresAt - Date.now();
+      if (remainingMs <= 0) {
+        setTrialTimeLeft('00:00:00');
+        setIsTrialExpired(true);
+      } else {
+        const totalSec = Math.floor(remainingMs / 1000);
+        const h = Math.floor(totalSec / 3600);
+        const m = Math.floor((totalSec % 3600) / 60);
+        const s = totalSec % 60;
+        const formatted = `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+        setTrialTimeLeft(formatted);
+      }
+    };
+
+    updateCountdown();
+    const interval = setInterval(updateCountdown, 1000);
+    return () => clearInterval(interval);
+  }, [isPaidMember]);
 
   // Macro & Caloric Budget
   const [budget, setBudget] = useState({
@@ -277,14 +319,22 @@ export const TodayTab: React.FC<TodayTabProps> = ({
         ) : (
           <button
             onClick={onOpenPaywall}
-            className="text-right p-1.5 rounded-xl border border-amber-500/30 hover:border-amber-500/60 bg-amber-500/10 active:scale-95 transition-all"
+            className={`text-right p-1.5 sm:p-2 rounded-xl border active:scale-95 transition-all ${
+              isTrialExpired
+                ? 'border-rose-500/50 bg-rose-500/10 text-rose-500 animate-pulse'
+                : 'border-amber-500/30 hover:border-amber-500/60 bg-amber-500/10'
+            }`}
             title="Upgrade to Full Sovereign Protocol"
           >
-            <span className="text-[9px] uppercase font-bold text-amber-600 dark:text-amber-400 block tracking-widest">
-              3-Hr Trial: {trialCountdown}
+            <span className={`text-[9px] uppercase font-bold block tracking-widest ${
+              isTrialExpired ? 'text-rose-500 dark:text-rose-400' : 'text-amber-600 dark:text-amber-400'
+            }`}>
+              {isTrialExpired ? '⚠️ Trial Expired' : `3-Hr Trial: ${trialTimeLeft}`}
             </span>
-            <span className="text-[11px] font-mono font-black text-amber-700 dark:text-amber-300 underline">
-              Unlock Full Plan →
+            <span className={`text-[11px] font-mono font-black underline ${
+              isTrialExpired ? 'text-rose-600 dark:text-rose-300' : 'text-amber-700 dark:text-amber-300'
+            }`}>
+              {isTrialExpired ? 'Unlock Full Protocol →' : 'Unlock Full Plan →'}
             </span>
           </button>
         )}

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { BrandWebsite } from './components/brand/BrandWebsite';
-import { AuthScreen } from './components/auth/AuthScreen';
+import { AuthScreen, UserSessionData } from './components/auth/AuthScreen';
 import { DopamineSurveyRunner } from './components/survey/DopamineSurveyRunner';
 import { MobileAppShell } from './components/app/MobileAppShell';
 import { AppBottomNav, AppTab } from './components/app/AppBottomNav';
@@ -21,9 +21,24 @@ export default function App() {
   // Real-world domain detection (tovelu.store vs app.tovelu.store)
   const [flowState, setFlowState] = useState<AppFlowState>('website');
 
-  // User Authentication & Membership State
-  const [userSession, setUserSession] = useState<{ name: string; email: string } | null>(null);
-  const [isPaidMember, setIsPaidMember] = useState(false);
+  // User Authentication & Membership State with LocalStorage Persistence
+  const [userSession, setUserSession] = useState<UserSessionData | null>(() => {
+    try {
+      const stored = localStorage.getItem('tovelu_user_session');
+      return stored ? JSON.parse(stored) : null;
+    } catch (_e) {
+      return null;
+    }
+  });
+
+  const [isPaidMember, setIsPaidMember] = useState<boolean>(() => {
+    try {
+      return localStorage.getItem('tovelu_membership_status') === 'paid';
+    } catch (_e) {
+      return false;
+    }
+  });
+
   const [isPaywallOpen, setIsPaywallOpen] = useState(false);
   const [isStartDatePickerOpen, setIsStartDatePickerOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
@@ -37,25 +52,34 @@ export default function App() {
 
       const emailParam = searchParams.get('email');
       const nameParam = searchParams.get('name');
+      const countryParam = searchParams.get('country') || 'United States';
 
       if (emailParam && nameParam) {
-        const session = { name: nameParam, email: emailParam };
+        const session: UserSessionData = {
+          name: nameParam,
+          firstName: nameParam.split(' ')[0] || 'Member',
+          lastName: nameParam.split(' ')[1] || '',
+          email: emailParam,
+          country: countryParam,
+        };
         setUserSession(session);
         try {
           localStorage.setItem('tovelu_user_session', JSON.stringify(session));
         } catch (_e) {}
-      } else {
-        try {
-          const stored = localStorage.getItem('tovelu_user_session');
-          if (stored) {
-            setUserSession(JSON.parse(stored));
-          }
-        } catch (_e) {}
       }
 
-      // If accessing app.tovelu.store or /app or /survey -> enter clinical survey / app flow
+      // If accessing app.tovelu.store or /app or /survey
       if (hostname.startsWith('app.') || pathname.startsWith('/app') || pathname.startsWith('/survey')) {
-        setFlowState('survey');
+        let isSurveyDone = false;
+        try {
+          isSurveyDone = localStorage.getItem('tovelu_survey_completed') === 'true';
+        } catch (_e) {}
+
+        if (isSurveyDone) {
+          setFlowState('app');
+        } else {
+          setFlowState('survey');
+        }
       } else {
         // Public domain tovelu.store -> strictly website or auth
         setFlowState('website');
@@ -63,7 +87,7 @@ export default function App() {
     }
   }, []);
 
-  const handleAuthSuccess = (user: { name: string; email: string }) => {
+  const handleAuthSuccess = (user: UserSessionData) => {
     setUserSession(user);
     try {
       localStorage.setItem('tovelu_user_session', JSON.stringify(user));
@@ -75,14 +99,14 @@ export default function App() {
       if (hostname.includes('tovelu.store') && !hostname.startsWith('app.')) {
         setToastMessage(`🎉 Account Verified! Redirecting to app.tovelu.store...`);
         setTimeout(() => {
-          window.location.href = `https://app.tovelu.store/?email=${encodeURIComponent(user.email)}&name=${encodeURIComponent(user.name)}`;
+          window.location.href = `https://app.tovelu.store/?email=${encodeURIComponent(user.email)}&name=${encodeURIComponent(user.name)}&country=${encodeURIComponent(user.country)}`;
         }, 600);
         return;
       }
     }
 
     // If on app.tovelu.store or local environment:
-    setToastMessage(`🎉 Welcome ${user.name}! Starting your 52-Question Clinical Audit...`);
+    setToastMessage(`🎉 Welcome ${user.firstName}! Starting your 52-Question Clinical Audit...`);
     setTimeout(() => {
       setToastMessage(null);
       setFlowState('survey');
@@ -142,9 +166,19 @@ export default function App() {
           <div className="w-full max-w-[448px]">
             <DopamineSurveyRunner
               onPayNow={(_input, _assessment, _plan) => {
+                try {
+                  localStorage.setItem('tovelu_survey_completed', 'true');
+                } catch (_e) {}
                 setIsPaywallOpen(true);
               }}
               onComplete={(_input, _assessment, _plan) => {
+                try {
+                  localStorage.setItem('tovelu_survey_completed', 'true');
+                  // Initialize 3-hour trial if not already running
+                  if (!localStorage.getItem('tovelu_trial_expires_at')) {
+                    localStorage.setItem('tovelu_trial_expires_at', (Date.now() + 3 * 60 * 60 * 1000).toString());
+                  }
+                } catch (_e) {}
                 setToastMessage('⏱️ 3-Hour Free Access Activated! Explore your full protocol in the app.');
                 setTimeout(() => setToastMessage(null), 3500);
                 setFlowState('app');
@@ -212,6 +246,10 @@ export default function App() {
         onConfirmStartDate={(choice) => {
           setIsStartDatePickerOpen(false);
           setIsPaidMember(true);
+          try {
+            localStorage.setItem('tovelu_membership_status', 'paid');
+            localStorage.setItem('tovelu_start_date_choice', choice);
+          } catch (_e) {}
           setToastMessage(`🏆 Day 1 Start Date Locked for "${choice}"! Full Protocol Active.`);
           setTimeout(() => setToastMessage(null), 4000);
           setFlowState('app');
