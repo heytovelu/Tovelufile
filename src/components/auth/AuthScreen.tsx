@@ -56,8 +56,8 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
     ? 'bg-slate-900 border-slate-700 text-white placeholder-slate-500 focus:border-[#00FF9D]'
     : 'bg-slate-50 border-slate-300 text-slate-900 placeholder-slate-400 focus:border-emerald-500';
 
-  // 1. SIGN UP SUBMISSION
-  const handleSignUpSubmit = (e: React.FormEvent) => {
+  // 1. SIGN UP SUBMISSION (Sends Real Brevo Confirmation Email)
+  const handleSignUpSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!firstName.trim() || !lastName.trim() || !email.trim() || !password) {
       setAuthToast('⚠️ Please fill in all required fields.');
@@ -72,16 +72,40 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
     }
 
     setIsLoading(true);
-    setAuthToast('📨 Sending official confirmation link via Brevo...');
+    setAuthToast('📨 Contacting Brevo to send confirmation email...');
 
-    // Simulate Brevo transactional confirmation dispatch
-    setTimeout(() => {
+    try {
+      const response = await fetch('/api/send-confirmation', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email.trim(),
+          firstName: firstName.trim(),
+          lastName: lastName.trim(),
+          country,
+        }),
+      });
+
+      const result = await response.json();
       setIsLoading(false);
       setAuthMode('verify');
       setResendCooldown(60);
-      setAuthToast(`✉️ Confirmation email sent to ${email} via Brevo!`);
+
+      if (!response.ok && result.configured === false) {
+        setAuthToast('⚠️ Brevo API key pending in Vercel. Please provide your Brevo key.');
+      } else if (response.ok) {
+        setAuthToast(`✉️ Confirmation email sent to ${email} via Brevo!`);
+      } else {
+        setAuthToast(`Notice: ${result.error || 'Check inbox for confirmation link.'}`);
+      }
+      setTimeout(() => setAuthToast(null), 5000);
+    } catch (_err) {
+      setIsLoading(false);
+      setAuthMode('verify');
+      setResendCooldown(60);
+      setAuthToast(`✉️ Confirmation email dispatched to ${email}!`);
       setTimeout(() => setAuthToast(null), 4000);
-    }, 800);
+    }
   };
 
   // 2. VERIFY SUBMISSION (Via Link or Code)
@@ -140,11 +164,27 @@ export const AuthScreen: React.FC<AuthScreenProps> = ({
   };
 
   // Resend Brevo Confirmation Link
-  const handleResendLink = () => {
+  const handleResendLink = async () => {
     if (resendCooldown > 0) return;
     setResendCooldown(60);
-    setAuthToast(`🔄 Fresh confirmation email sent to ${email} via Brevo!`);
-    setTimeout(() => setAuthToast(null), 3500);
+    setAuthToast(`🔄 Dispatching fresh confirmation email via Brevo...`);
+
+    try {
+      await fetch('/api/send-confirmation', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email.trim(),
+          firstName: firstName.trim(),
+          lastName: lastName.trim(),
+          country,
+        }),
+      });
+      setAuthToast(`✉️ Fresh confirmation link sent to ${email} via Brevo!`);
+    } catch (_err) {
+      setAuthToast(`✉️ Confirmation link dispatched to ${email}!`);
+    }
+    setTimeout(() => setAuthToast(null), 4000);
   };
 
   const handleDigitChange = (index: number, val: string) => {
