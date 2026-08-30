@@ -100,21 +100,35 @@ Segmented Switcher at Top: `[ DAY | WEEK ]`
      - **Immediate Acute Adaptation**: Automatically recalibrates the user's daily meal plan and task list for the duration of the medical event (e.g. swaps workouts for seated mobility, prescribes gut-soothing broths and electrolyte protocols during antibiotic courses).
      - **Permanent Memory Ingestion**: Ingests the clinical event into the user's permanent longitudinal vault so THAIS remembers it months and years into the future.
 
----
+### 3. CHAT (THAIS Clinical Mentor) • 100% Locked Blueprint
+`CHAT` is the 24/7 empathetic clinical mentor, longevity specialist, and personal friend powered by THAIS. It operates with full longitudinal memory across the 52 survey answers, 500-disease index, daily logged meals, and uploaded doctor prescriptions.
 
-## SECTION 3: CHAT (The AI Friend + Clinical Mentor)
-
-1. **Conversational Experience**:
-   - Talks like a trusted best friend and clinical mentor (governed by the Universal Voice Bible: calm authority, zero judgment).
-2. **Suggested Quick-Question Prompts**:
-   - Tappable prompt chips:
-     - *"What is my next task right now?"*
-     - *"Can I have dessert tonight?"*
-     - *"Why do I feel bloated right now?"*
-     - *"How did my lunch affect my energy?"*
-3. **Weekly Chat History Engine**:
-   - Dedicated `[ 📅 History ]` Button.
-   - User chooses any historical week $\rightarrow$ Expands to view all 7 days of chat logs from that week, preserving complete longitudinal memory.
+#### Core Structure (Top to Bottom):
+1. **Top Header**:
+   - Architectural all-caps `TOVELU` wordmark + Sovereign Homeostasis Ring.
+   - Clinical Status: *"THAIS Clinical Mentor • DPHKG Longitudinal Memory Active"*.
+   - User Profile Avatar (opens `YOU`).
+2. **Context-Aware Smart Quick Prompts (Horizontal Scroll)**:
+   - Dynamic 1-tap prompts updated based on the exact time of day and biological state:
+     - Morning: *"What is my #1 priority task this morning?"*
+     - Afternoon Slump: *"Why am I feeling sluggish right now? Give me a 3-minute fix."*
+     - Evening: *"Can I have dark chocolate or dessert tonight?"*
+     - Gut Distress: *"My stomach feels bloated—what can I sip right now?"*
+     - Restaurant: *"I'm looking at an Italian / Mexican menu—what should I order?"*
+3. **Conversational Thread with In-Message Interactive Action Buttons**:
+   - Speaks using the **Universal Voice Bible**: empathetic, simple language without medical jargon, zero judgment.
+   - When THAIS suggests plan adjustments, it renders an **in-message 1-tap action button**:
+     - *e.g. `[ ⚡ Yes, Apply This Dinner Update to Today's Plan ]`*
+     - Modifies `TODAY` instantly without leaving the chat!
+4. **Longitudinal Memory Vault & Archive Search**:
+   - Toggle between `Active Chat` and `Past Weekly Consultations & Medical Q&As`.
+   - Full keyword search to retrieve any past recipe, advice, or symptom insight.
+5. **Multimodal Input Suite**:
+   - 🎙️ **Voice AI**: Tap to speak naturally or listen to THAIS respond in a warm, calming voice.
+   - 📷 **Camera / Photo Scan**: Snap food or menu for instant clinical analysis.
+   - ✍️ **Text Input**: Rapid typing with auto-complete prompts.
+6. **Triple-Lock Clinical Safety Firewall**:
+   - Deterministic rule layer prevents hallucinations. Automatically audits drug-nutrient conflicts against uploaded medications and triggers instant clinical red-flag protocols for acute medical emergencies.
 
 ---
 
