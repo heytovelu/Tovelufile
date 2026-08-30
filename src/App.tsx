@@ -241,7 +241,7 @@ export default function App() {
           ) : appTab === 'health' ? (
             <HealthTab onOpenYou={() => setAppTab('you')} darkMode={darkMode} onToggleTheme={() => setDarkMode(!darkMode)} />
           ) : (
-            <YouTab darkMode={darkMode} onToggleTheme={() => setDarkMode(!darkMode)} />
+            <YouTab darkMode={darkMode} onToggleTheme={() => setDarkMode(!darkMode)} onOpenPaywall={() => setIsPaywallOpen(true)} />
           )}
         </MobileAppShell>
       )}

@@ -5,6 +5,7 @@ import { HomeostasisLogo } from '../ui/HomeostasisLogo';
 interface YouTabProps {
   darkMode?: boolean;
   onToggleTheme?: () => void;
+  onOpenPaywall?: () => void;
 }
 
 type YouModule = 'rulebook' | 'biometrics' | 'schedule' | 'wearables' | 'membership' | 'privacy' | 'founder';
@@ -12,6 +13,7 @@ type YouModule = 'rulebook' | 'biometrics' | 'schedule' | 'wearables' | 'members
 export const YouTab: React.FC<YouTabProps> = ({
   darkMode = true,
   onToggleTheme,
+  onOpenPaywall,
 }) => {
   const [activeTab, setActiveTab] = useState<YouModule>('rulebook');
   const [activeChapter, setActiveChapter] = useState<number | null>(1);
@@ -360,6 +362,25 @@ export const YouTab: React.FC<YouTabProps> = ({
               <div className={`text-xs font-bold ${textTitle}`}>Current Status: Active Member</div>
               <div className={`text-[11px] ${textSub}`}>Billing Cycle: Monthly ($0 hidden fees)</div>
               <div className="text-[10px] text-emerald-600 dark:text-emerald-400 font-mono">Next Renewal: November 24, 2026</div>
+            </div>
+
+            {/* Upgrade or Switch Subscription Tier */}
+            <div className="p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-emerald-700 dark:text-[#00FF9D] text-xs">
+                  ⚡ Upgrade or Switch Plan
+                </span>
+                <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400">Prorated Instantly</span>
+              </div>
+              <p className={`text-[11px] ${textSub} leading-relaxed`}>
+                Upgrade from Monthly ($49/mo) to 90-Day Mastery ($119/3-mo), 365-Day Serious ($299/yr), or Lifetime VIP ($799 once). Switch plans anytime with zero cancellation penalty.
+              </p>
+              <button
+                onClick={onOpenPaywall || (() => handleToast('Opening subscription plans...'))}
+                className="w-full py-2.5 rounded-xl font-black text-xs uppercase tracking-wider bg-[#00FF9D] hover:bg-[#00FF9D]/90 text-slate-950 shadow-md shadow-[#00FF9D]/20 transition-all flex items-center justify-center gap-2"
+              >
+                <span>⚡ Upgrade Subscription Tier</span>
+              </button>
             </div>
 
             {/* 1-Click Instant Membership Pause */}

@@ -18,41 +18,26 @@ export default async function handler(req: any, res: any) {
 
   const { tierId, email, name, affiliateId } = req.body || {};
 
-  const apiKey = process.env.DODO_PAYMENTS_API_KEY;
-  const isTest = process.env.DODO_PAYMENTS_MODE === 'test' || (apiKey && apiKey.startsWith('test_'));
-  const baseUrl = isTest ? 'https://test.dodopayments.com' : 'https://live.dodopayments.com';
+  const apiKey = process.env.DODO_PAYMENTS_API_KEY || 'on4-roYByC5v9Pu4.vfKAYJgsr9u2srk6uXpgzL0q8TxAZRsNT5Rvw-qYWl8o5Rr5';
+  const baseUrl = 'https://live.dodopayments.com';
 
-  // Map tier to Product ID from environment variables
+  // Map tier to Product ID created in Ajay's live account
   let productId = '';
-  if (tierId === '30_day_reset') {
-    productId = process.env.DODO_PRODUCT_30_DAYS || '';
-  } else if (tierId === '90_day_mastery') {
-    productId = process.env.DODO_PRODUCT_90_DAYS || '';
+  if (tierId === '30_day_reset' || tierId === 'starter_30') {
+    productId = process.env.DODO_PRODUCT_30_DAYS || 'pdt_0NmWMkTJggMZTgXcQJT7e';
+  } else if (tierId === '90_day_mastery' || tierId === 'master_90') {
+    productId = process.env.DODO_PRODUCT_90_DAYS || 'pdt_0NmWMlvqqjSnEM3tFlGex';
   } else if (tierId === 'annual_365') {
-    productId = process.env.DODO_PRODUCT_365_DAYS || '';
+    productId = process.env.DODO_PRODUCT_365_DAYS || 'pdt_0NmWMn5VlVPr7KZl20bCb';
   } else if (tierId === 'lifetime_vip') {
-    productId = process.env.DODO_PRODUCT_LIFETIME || '';
-  }
-
-  // If specific payment link exists in env, return that directly
-  const customPaymentLink = process.env[`DODO_LINK_${tierId.toUpperCase()}`];
-  if (customPaymentLink) {
-    const separator = customPaymentLink.includes('?') ? '&' : '?';
-    const redirectUrl = `${customPaymentLink}${separator}email=${encodeURIComponent(email || '')}&aff=${encodeURIComponent(affiliateId || '')}`;
-    return res.status(200).json({ checkoutUrl: redirectUrl });
-  }
-
-  // If API Key is missing and no static product links exist:
-  if (!apiKey || !productId) {
-    return res.status(500).json({
-      error: 'Dodo Payments products or API key not yet configured in environment variables.',
-      configured: false,
-      tierId,
-    });
+    productId = process.env.DODO_PRODUCT_LIFETIME || 'pdt_0NmWL3eM2SZ1zmiyrWCTT';
+  } else {
+    // Default to flagship quarterly protocol
+    productId = process.env.DODO_PRODUCT_90_DAYS || 'pdt_0NmWMlvqqjSnEM3tFlGex';
   }
 
   try {
-    const returnUrl = `https://app.tovelu.store/?payment=success&tier=${encodeURIComponent(tierId)}`;
+    const returnUrl = `https://app.tovelu.store/?payment=success&tier=${encodeURIComponent(tierId || '90_day_mastery')}`;
     const dodoRes = await fetch(`${baseUrl}/checkouts`, {
       method: 'POST',
       headers: {
@@ -60,15 +45,20 @@ export default async function handler(req: any, res: any) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        product_id: productId,
-        billing: {
+        product_cart: [
+          {
+            product_id: productId,
+            quantity: 1,
+          },
+        ],
+        customer: {
           email: email || 'customer@tovelu.store',
           name: name || 'Sovereign Member',
         },
         return_url: returnUrl,
         metadata: {
           affiliate_id: affiliateId || 'direct',
-          tier_id: tierId,
+          tier_id: tierId || '90_day_mastery',
         },
       }),
     });
@@ -85,7 +75,7 @@ export default async function handler(req: any, res: any) {
 
     return res.status(200).json({
       checkoutUrl: data.checkout_url || data.url,
-      checkoutId: data.checkout_id || data.id,
+      sessionId: data.session_id || data.id,
     });
   } catch (err: any) {
     console.error('Dodo Checkout Exception:', err);
