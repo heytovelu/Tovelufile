@@ -48,7 +48,7 @@ type AppMode = 'tovelu_app' | 'thais' | 'survey' | 'design_system';
 type TDSGalleryTab = 'wordmark' | 'logo' | 'health' | 'extensions' | 'charts' | 'primitives' | 'navigation' | 'feedback' | 'tokens' | 'governance';
 
 export default function App() {
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
   const [appMode, setAppMode] = useState<AppMode>('tovelu_app');
   const [appTab, setAppTab] = useState<AppTab>('today');
 
@@ -154,15 +154,15 @@ export default function App() {
           bottomNav={<AppBottomNav activeTab={appTab} onTabChange={setAppTab} darkMode={darkMode} />}
         >
           {appTab === 'today' ? (
-            <TodayTab onOpenYou={() => setAppTab('you')} darkMode={darkMode} />
+            <TodayTab onOpenYou={() => setAppTab('you')} darkMode={darkMode} onToggleTheme={() => setDarkMode(!darkMode)} />
           ) : appTab === 'week' ? (
-            <WeekTab onOpenYou={() => setAppTab('you')} darkMode={darkMode} />
+            <WeekTab onOpenYou={() => setAppTab('you')} darkMode={darkMode} onToggleTheme={() => setDarkMode(!darkMode)} />
           ) : appTab === 'report' ? (
-            <ReportTab onOpenYou={() => setAppTab('you')} darkMode={darkMode} />
+            <ReportTab onOpenYou={() => setAppTab('you')} darkMode={darkMode} onToggleTheme={() => setDarkMode(!darkMode)} />
           ) : appTab === 'health' ? (
-            <HealthTab onOpenYou={() => setAppTab('you')} darkMode={darkMode} />
+            <HealthTab onOpenYou={() => setAppTab('you')} darkMode={darkMode} onToggleTheme={() => setDarkMode(!darkMode)} />
           ) : (
-            <YouTab darkMode={darkMode} />
+            <YouTab darkMode={darkMode} onToggleTheme={() => setDarkMode(!darkMode)} />
           )}
         </MobileAppShell>
       ) : appMode === 'survey' ? (

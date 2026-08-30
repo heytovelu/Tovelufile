@@ -6,6 +6,7 @@ import { HomeostasisLogo } from '../ui/HomeostasisLogo';
 interface ReportTabProps {
   onOpenYou: () => void;
   darkMode?: boolean;
+  onToggleTheme?: () => void;
 }
 
 type ReportTier = 'day' | 'week' | 'month' | 'year';
@@ -13,6 +14,7 @@ type ReportTier = 'day' | 'week' | 'month' | 'year';
 export const ReportTab: React.FC<ReportTabProps> = ({
   onOpenYou,
   darkMode = true,
+  onToggleTheme,
 }) => {
   const [activeTier, setActiveTier] = useState<ReportTier>('week');
   const [isPeriodPickerOpen, setIsPeriodPickerOpen] = useState(false);
@@ -88,23 +90,42 @@ export const ReportTab: React.FC<ReportTabProps> = ({
           <HomeostasisLogo size={28} mode={darkMode ? 'on-dark' : 'on-light'} showWordmark={true} />
         </div>
 
-        {/* Profile Avatar -> Opens YOU */}
-        <button
-          onClick={onOpenYou}
-          className={`flex items-center gap-2 p-1.5 rounded-full border transition-all active:scale-95 ${
-            darkMode
-              ? 'bg-slate-900 border-slate-700 hover:border-[#00FF9D] text-slate-200'
-              : 'bg-slate-100 border-slate-200 hover:border-emerald-500 text-slate-800'
-          }`}
-          title="Open YOU"
-        >
-          <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-emerald-600 to-[#00FF9D] flex items-center justify-center text-slate-950 font-black text-xs">
-            AJ
-          </div>
-          <span className="text-[11px] font-bold pr-1.5 uppercase tracking-wider text-slate-400">
-            YOU
-          </span>
-        </button>
+        {/* Right side controls: Theme Toggle + Profile Avatar */}
+        <div className="flex items-center gap-2">
+          {/* Theme Toggle Button (Sun ☀️ / Moon 🌙) */}
+          {onToggleTheme && (
+            <button
+              onClick={onToggleTheme}
+              aria-label="Toggle Theme"
+              className={`w-8 h-8 rounded-full border flex items-center justify-center transition-all active:scale-90 shadow-sm ${
+                darkMode
+                  ? 'bg-slate-900 border-slate-700 text-amber-400 hover:bg-slate-800'
+                  : 'bg-slate-100 border-slate-300 text-slate-700 hover:bg-slate-200'
+              }`}
+              title={darkMode ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
+            >
+              <span className="text-sm">{darkMode ? '☀️' : '🌙'}</span>
+            </button>
+          )}
+
+          {/* Profile Avatar -> Opens YOU */}
+          <button
+            onClick={onOpenYou}
+            className={`flex items-center gap-2 p-1.5 rounded-full border transition-all active:scale-95 ${
+              darkMode
+                ? 'bg-slate-900 border-slate-700 hover:border-[#00FF9D] text-slate-200'
+                : 'bg-slate-100 border-slate-200 hover:border-emerald-500 text-slate-800'
+            }`}
+            title="Open YOU"
+          >
+            <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-emerald-600 to-[#00FF9D] flex items-center justify-center text-slate-950 font-black text-xs">
+              AJ
+            </div>
+            <span className="text-[11px] font-bold pr-1.5 uppercase tracking-wider text-slate-400">
+              YOU
+            </span>
+          </button>
+        </div>
       </div>
 
       {/* 2. CHOOSE PARTICULAR DAY/WEEK/MONTH/YEAR (Ajay's Mandate) */}

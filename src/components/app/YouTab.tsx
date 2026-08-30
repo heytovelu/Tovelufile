@@ -4,12 +4,14 @@ import { HomeostasisLogo } from '../ui/HomeostasisLogo';
 
 interface YouTabProps {
   darkMode?: boolean;
+  onToggleTheme?: () => void;
 }
 
 type YouModule = 'rulebook' | 'biometrics' | 'schedule' | 'wearables' | 'membership' | 'privacy' | 'founder';
 
 export const YouTab: React.FC<YouTabProps> = ({
   darkMode = true,
+  onToggleTheme,
 }) => {
   const [activeTab, setActiveTab] = useState<YouModule>('rulebook');
   const [activeChapter, setActiveChapter] = useState<number | null>(1);
@@ -62,9 +64,27 @@ export const YouTab: React.FC<YouTabProps> = ({
           <HomeostasisLogo size={28} mode={darkMode ? 'on-dark' : 'on-light'} showWordmark={true} />
         </div>
 
-        <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-[#00FF9D] border border-emerald-500/30 font-mono">
-          SOVEREIGN HEALTH OS
-        </span>
+        <div className="flex items-center gap-2">
+          {/* Theme Toggle Button (Sun ☀️ / Moon 🌙) */}
+          {onToggleTheme && (
+            <button
+              onClick={onToggleTheme}
+              aria-label="Toggle Theme"
+              className={`w-8 h-8 rounded-full border flex items-center justify-center transition-all active:scale-90 shadow-sm ${
+                darkMode
+                  ? 'bg-slate-900 border-slate-700 text-amber-400 hover:bg-slate-800'
+                  : 'bg-slate-100 border-slate-300 text-slate-700 hover:bg-slate-200'
+              }`}
+              title={darkMode ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
+            >
+              <span className="text-sm">{darkMode ? '☀️' : '🌙'}</span>
+            </button>
+          )}
+
+          <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-[#00FF9D] border border-emerald-500/30 font-mono">
+            SOVEREIGN HEALTH OS
+          </span>
+        </div>
       </div>
 
       {/* 2. USER PROFILE BANNER */}
