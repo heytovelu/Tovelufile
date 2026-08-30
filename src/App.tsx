@@ -25,6 +25,7 @@ import { AppBottomNav, AppTab } from './components/app/AppBottomNav';
 import { TodayTab } from './components/app/TodayTab';
 import { WeekTab } from './components/app/WeekTab';
 import { ChatTab } from './components/app/ChatTab';
+import { ReportTab } from './components/app/ReportTab';
 import { YouDrawer } from './components/app/YouDrawer';
 
 // THAIS AI Engine & Survey
@@ -159,17 +160,18 @@ export default function App() {
             <WeekTab onOpenYou={() => setIsYouOpen(true)} darkMode={darkMode} />
           ) : appTab === 'chat' ? (
             <ChatTab onOpenYou={() => setIsYouOpen(true)} darkMode={darkMode} />
+          ) : appTab === 'report' ? (
+            <ReportTab onOpenYou={() => setIsYouOpen(true)} darkMode={darkMode} />
           ) : (
             <div className="p-6 text-center space-y-4 pt-20">
               <div className="w-14 h-14 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center mx-auto text-2xl">
-                {appTab === 'report' ? '📊' : '🩺'}
+                🩺
               </div>
               <h3 className="text-base font-black text-slate-100 uppercase tracking-wider">
-                {appTab} Section
+                HEALTH Section
               </h3>
               <p className="text-xs text-slate-400 max-w-xs mx-auto leading-relaxed">
-                {appTab === 'report' && 'REPORT view with 4-tier medical reports & Milestone Certificates is queued next!'}
-                {appTab === 'health' && 'HEALTH view with the Doctor-Ready Lifetime Health Report is queued next!'}
+                The Doctor-Ready Lifetime Health Report (Weekly Auto-Updating Medical Mirror) is queued next!
               </p>
               <button
                 onClick={() => setAppTab('today')}
