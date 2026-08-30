@@ -11,6 +11,8 @@ interface TodayTabProps {
   onOpenYou: () => void;
   darkMode?: boolean;
   onToggleTheme?: () => void;
+  onOpenPaywall?: () => void;
+  isPaidMember?: boolean;
 }
 
 export interface TodayMealItem extends MealPortion {
@@ -21,6 +23,8 @@ export const TodayTab: React.FC<TodayTabProps> = ({
   onOpenYou,
   darkMode = true,
   onToggleTheme,
+  onOpenPaywall,
+  isPaidMember = false,
 }) => {
   // Calendar & Day Meta
   const fullCalendarDate = 'Sunday, August 30, 2026';
@@ -255,20 +259,35 @@ export const TodayTab: React.FC<TodayTabProps> = ({
               {fullCalendarDate}
             </h2>
             <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-[#00FF9D] border border-emerald-500/30 font-bold">
-              Active
+              {isPaidMember ? 'Sovereign Active' : 'Trial Active'}
             </span>
           </div>
           <p className={`text-[11px] ${textSub} mt-0.5 font-medium`}>{momentumLabel}</p>
         </div>
 
-        <div className="text-right">
-          <span className="text-[9px] uppercase font-bold text-amber-500 dark:text-amber-400 block tracking-widest">
-            Trial Clock
-          </span>
-          <span className="text-xs font-mono font-black text-amber-600 dark:text-amber-300">
-            {trialCountdown}
-          </span>
-        </div>
+        {isPaidMember ? (
+          <div className="text-right">
+            <span className="text-[9px] uppercase font-bold text-emerald-600 dark:text-[#00FF9D] block tracking-widest">
+              Membership
+            </span>
+            <span className="text-xs font-mono font-black text-emerald-600 dark:text-emerald-300">
+              Active ✓
+            </span>
+          </div>
+        ) : (
+          <button
+            onClick={onOpenPaywall}
+            className="text-right p-1.5 rounded-xl border border-amber-500/30 hover:border-amber-500/60 bg-amber-500/10 active:scale-95 transition-all"
+            title="Upgrade to Full Sovereign Protocol"
+          >
+            <span className="text-[9px] uppercase font-bold text-amber-600 dark:text-amber-400 block tracking-widest">
+              3-Hr Trial: {trialCountdown}
+            </span>
+            <span className="text-[11px] font-mono font-black text-amber-700 dark:text-amber-300 underline">
+              Unlock Full Plan →
+            </span>
+          </button>
+        )}
       </div>
 
       {/* TOAST NOTIFICATION */}

@@ -1,25 +1,11 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
-  Sun, 
-  Moon, 
-  ShieldCheck, 
-  Activity, 
-  Layers, 
-  Sparkles, 
-  Component, 
-  Bell, 
-  LineChart,
-  Bot,
-  Shapes,
-  Type,
-  Cpu,
-  Smartphone
+  LineChart, Sparkles, Shapes, 
+  Activity, Bell, Type, Layers, Component, ShieldCheck,
+  Bot, Moon, Sun, Cpu, Smartphone, Lock, CreditCard
 } from 'lucide-react';
-import { 
-  BottomSheet, 
-} from './components/ui';
-
-// Tovelu 5-Tab Application Shell
+import { DopamineSurveyRunner } from './components/survey/DopamineSurveyRunner';
+import { ThaisStudio } from './components/thais/ThaisStudio';
 import { MobileAppShell } from './components/app/MobileAppShell';
 import { AppBottomNav, AppTab } from './components/app/AppBottomNav';
 import { TodayTab } from './components/app/TodayTab';
@@ -27,12 +13,11 @@ import { WeekTab } from './components/app/WeekTab';
 import { ReportTab } from './components/app/ReportTab';
 import { HealthTab } from './components/app/HealthTab';
 import { YouTab } from './components/app/YouTab';
+import { AuthScreen } from './components/auth/AuthScreen';
+import { PaywallModal } from './components/paywall/PaywallModal';
+import { StartDatePickerModal } from './components/onboarding/StartDatePickerModal';
 
-// THAIS AI Engine & Survey
-import { ThaisStudio } from './components/thais/ThaisStudio';
-import { DopamineSurveyRunner } from './components/survey/DopamineSurveyRunner';
-
-// Showcase Views
+// Showcase components for Design System
 import { TokensShowcase } from './components/showcase/TokensShowcase';
 import { PrimitivesShowcase } from './components/showcase/PrimitivesShowcase';
 import { NavigationShowcase } from './components/showcase/NavigationShowcase';
@@ -44,7 +29,7 @@ import { ExtensionsShowcase } from './components/showcase/ExtensionsShowcase';
 import { LogoShowcase } from './components/showcase/LogoShowcase';
 import { WordmarkShowcase } from './components/showcase/WordmarkShowcase';
 
-type AppMode = 'tovelu_app' | 'thais' | 'survey' | 'design_system';
+type AppMode = 'auth' | 'survey' | 'tovelu_app' | 'thais' | 'design_system';
 type TDSGalleryTab = 'wordmark' | 'logo' | 'health' | 'extensions' | 'charts' | 'primitives' | 'navigation' | 'feedback' | 'tokens' | 'governance';
 
 export default function App() {
@@ -52,10 +37,18 @@ export default function App() {
   const [appMode, setAppMode] = useState<AppMode>('tovelu_app');
   const [appTab, setAppTab] = useState<AppTab>('today');
 
+  // User Journey States
+  const [userSession, setUserSession] = useState<{ name: string; email: string } | null>({
+    name: 'Ajay',
+    email: 'ajay@tovelu.store',
+  });
+  const [isPaidMember, setIsPaidMember] = useState(false);
+  const [isPaywallOpen, setIsPaywallOpen] = useState(false);
+  const [isStartDatePickerOpen, setIsStartDatePickerOpen] = useState(false);
+  const [journeyToast, setJourneyToast] = useState<string | null>(null);
+
   // Design system state
   const [activeGalleryTab, setActiveGalleryTab] = useState<TDSGalleryTab>('wordmark');
-  const [isSheetOpen, setIsSheetOpen] = useState(false);
-  const [_inspectedBiomarker, setInspectedBiomarker] = useState('Fasting Glucose');
 
   useEffect(() => {
     if (darkMode) {
@@ -80,11 +73,40 @@ export default function App() {
 
   return (
     <div className={`min-h-screen ${darkMode ? 'bg-[#050709] text-slate-100' : 'bg-slate-100 text-slate-900'} transition-colors duration-200`}>
-      {/* Top Universal Mode Switcher Bar */}
+      {/* Top Universal Mode Switcher Bar (User Journey Stages) */}
       <header className="sticky top-0 z-50 w-full bg-slate-950/90 backdrop-blur-md border-b border-slate-800/80 px-3 py-2">
         <div className="max-w-6xl mx-auto flex items-center justify-between gap-2 overflow-x-auto no-scrollbar">
-          {/* App Mode Pills */}
+          {/* Journey Navigation Pills */}
           <div className="flex items-center gap-1.5 shrink-0">
+            {/* Step 1: Create Account / Login */}
+            <button
+              onClick={() => setAppMode('auth')}
+              className={`px-2.5 py-1 rounded-full text-xs font-bold transition-all flex items-center gap-1 shrink-0 ${
+                appMode === 'auth'
+                  ? 'bg-gradient-to-r from-emerald-500 to-[#00FF9D] text-slate-950 font-black shadow-sm'
+                  : 'bg-slate-900 border border-slate-800 text-slate-300 hover:text-white'
+              }`}
+              title="Step 1: Create Free Account, Brevo Verification & Supabase Auth"
+            >
+              <Lock className="w-3 h-3" />
+              1. Account & Verify
+            </button>
+
+            {/* Step 2: 52-Q Survey */}
+            <button
+              onClick={() => setAppMode('survey')}
+              className={`px-2.5 py-1 rounded-full text-xs font-bold transition-all flex items-center gap-1 shrink-0 ${
+                appMode === 'survey'
+                  ? 'bg-gradient-to-r from-emerald-500 to-[#00FF9D] text-slate-950 font-black shadow-sm'
+                  : 'bg-slate-900 border border-slate-800 text-emerald-400 hover:text-emerald-300'
+              }`}
+              title="Step 2: 52-Q Survey & Short Health Report Reveal"
+            >
+              <Sparkles className="w-3 h-3" />
+              2. 52-Q Survey
+            </button>
+
+            {/* Step 3: Web App */}
             <button
               onClick={() => setAppMode('tovelu_app')}
               className={`px-3 py-1 rounded-full text-xs font-black transition-all flex items-center gap-1.5 shrink-0 ${
@@ -92,21 +114,20 @@ export default function App() {
                   ? 'bg-[#00FF9D] text-slate-950 shadow-[0_0_15px_rgba(0,255,157,0.4)]'
                   : 'bg-slate-900 border border-slate-800 text-slate-400 hover:text-white'
               }`}
+              title="Step 3: Web App with 3-Hour Free Access Window"
             >
               <Smartphone className="w-3.5 h-3.5" />
-              📱 Tovelu App
+              3. Web App ({isPaidMember ? 'Member' : '3-Hr Trial'})
             </button>
 
+            {/* Step 4: Paywall Trigger */}
             <button
-              onClick={() => setAppMode('survey')}
-              className={`px-2.5 py-1 rounded-full text-xs font-bold transition-all flex items-center gap-1 shrink-0 ${
-                appMode === 'survey'
-                  ? 'bg-gradient-to-r from-emerald-500 to-[#00FF9D] text-slate-950 font-black shadow-sm ring-2 ring-emerald-500/30'
-                  : 'bg-slate-900 border border-slate-800 text-emerald-400 hover:text-emerald-300'
-              }`}
+              onClick={() => setIsPaywallOpen(true)}
+              className="px-2.5 py-1 rounded-full text-xs font-bold transition-all flex items-center gap-1 shrink-0 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40"
+              title="Test Dodo Payments 4-Tier Paywall"
             >
-              <Sparkles className="w-3.5 h-3.5" />
-              🔥 52-Q Survey
+              <CreditCard className="w-3 h-3" />
+              💳 Dodo Paywall
             </button>
 
             <button
@@ -147,14 +168,55 @@ export default function App() {
         </div>
       </header>
 
+      {/* Global Toast */}
+      {journeyToast && (
+        <div className="max-w-md mx-auto my-2 p-2.5 rounded-xl bg-emerald-500/20 border border-emerald-500 text-center text-xs font-bold text-emerald-700 dark:text-[#00FF9D] animate-bounce">
+          {journeyToast}
+        </div>
+      )}
+
       {/* RENDER ACTIVE MODE */}
-      {appMode === 'tovelu_app' ? (
+      {appMode === 'auth' ? (
+        <div className="max-w-4xl mx-auto py-6 px-3">
+          <AuthScreen
+            darkMode={darkMode}
+            onAuthSuccess={(user) => {
+              setUserSession(user);
+              setJourneyToast(`🎉 Welcome ${user.name}! Directing to 52-Question Clinical Survey...`);
+              setTimeout(() => {
+                setJourneyToast(null);
+                setAppMode('survey');
+              }, 1200);
+            }}
+          />
+        </div>
+      ) : appMode === 'survey' ? (
+        <div className="max-w-4xl mx-auto py-4 px-3">
+          <DopamineSurveyRunner
+            onPayNow={(_input, _assessment, _plan) => {
+              setIsPaywallOpen(true);
+            }}
+            onComplete={(_input, _assessment, _plan) => {
+              setJourneyToast('⏱️ 3-Hour Free Access Activated! Explore your full protocol in the app.');
+              setTimeout(() => setJourneyToast(null), 4000);
+              setAppMode('tovelu_app');
+            }}
+            onCancel={() => setAppMode('tovelu_app')}
+          />
+        </div>
+      ) : appMode === 'tovelu_app' ? (
         <MobileAppShell
           darkMode={darkMode}
           bottomNav={<AppBottomNav activeTab={appTab} onTabChange={setAppTab} darkMode={darkMode} />}
         >
           {appTab === 'today' ? (
-            <TodayTab onOpenYou={() => setAppTab('you')} darkMode={darkMode} onToggleTheme={() => setDarkMode(!darkMode)} />
+            <TodayTab
+              onOpenYou={() => setAppTab('you')}
+              darkMode={darkMode}
+              onToggleTheme={() => setDarkMode(!darkMode)}
+              onOpenPaywall={() => setIsPaywallOpen(true)}
+              isPaidMember={isPaidMember}
+            />
           ) : appTab === 'week' ? (
             <WeekTab onOpenYou={() => setAppTab('you')} darkMode={darkMode} onToggleTheme={() => setDarkMode(!darkMode)} />
           ) : appTab === 'report' ? (
@@ -165,15 +227,6 @@ export default function App() {
             <YouTab darkMode={darkMode} onToggleTheme={() => setDarkMode(!darkMode)} />
           )}
         </MobileAppShell>
-      ) : appMode === 'survey' ? (
-        <div className="max-w-4xl mx-auto py-4 px-3">
-          <DopamineSurveyRunner
-            onComplete={(_input, _assessment, _plan) => {
-              setAppMode('tovelu_app');
-            }}
-            onCancel={() => setAppMode('tovelu_app')}
-          />
-        </div>
       ) : appMode === 'thais' ? (
         <div className="max-w-6xl mx-auto py-4 px-3">
           <ThaisStudio />
@@ -204,7 +257,7 @@ export default function App() {
             {activeGalleryTab === 'wordmark' && <WordmarkShowcase />}
             {activeGalleryTab === 'logo' && <LogoShowcase />}
             {activeGalleryTab === 'extensions' && <ExtensionsShowcase />}
-            {activeGalleryTab === 'health' && <HealthShowcase onInspectBiomarker={(name) => { setInspectedBiomarker(name); setIsSheetOpen(true); }} />}
+            {activeGalleryTab === 'health' && <HealthShowcase onInspectBiomarker={() => {}} />}
             {activeGalleryTab === 'charts' && <ChartsShowcase />}
             {activeGalleryTab === 'primitives' && <PrimitivesShowcase />}
             {activeGalleryTab === 'navigation' && <NavigationShowcase />}
@@ -215,24 +268,31 @@ export default function App() {
         </div>
       )}
 
-      {/* Shared Inspection Drawer */}
-      <BottomSheet
-        isOpen={isSheetOpen}
-        onClose={() => setIsSheetOpen(false)}
-        title="Biomarker Telemetry & Root Cause"
-        description="THAIS Bayesian clinical evaluation"
-      >
-        <div className="space-y-4 text-slate-200">
-          <div className="p-4 bg-slate-900 rounded-xl border border-slate-800">
-            <span className="text-xs font-bold text-[#00FF9D] uppercase tracking-wider block mb-1">
-              Clinical Assessment
-            </span>
-            <p className="text-xs text-slate-300 leading-relaxed">
-              Biomarker trajectory is currently within the optimal homeostasis corridor. No systemic acute alarm detected.
-            </p>
-          </div>
-        </div>
-      </BottomSheet>
+      {/* DODO PAYMENTS 4-TIER PAYWALL MODAL */}
+      <PaywallModal
+        isOpen={isPaywallOpen}
+        onClose={() => setIsPaywallOpen(false)}
+        userEmail={userSession?.email}
+        darkMode={darkMode}
+        onPaymentSuccess={(_tier) => {
+          setIsPaywallOpen(false);
+          setIsStartDatePickerOpen(true);
+        }}
+      />
+
+      {/* POST-PAYMENT: CHOOSE START DATE FOR DAY 1 */}
+      <StartDatePickerModal
+        isOpen={isStartDatePickerOpen}
+        darkMode={darkMode}
+        onConfirmStartDate={(choice) => {
+          setIsStartDatePickerOpen(false);
+          setIsPaidMember(true);
+          setJourneyToast(`🏆 Day 1 Start Date Locked for "${choice}"! Full Protocol Active.`);
+          setTimeout(() => setJourneyToast(null), 4000);
+          setAppMode('tovelu_app');
+          setAppTab('today');
+        }}
+      />
     </div>
   );
 }

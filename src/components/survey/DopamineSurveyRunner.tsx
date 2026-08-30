@@ -13,12 +13,13 @@ import { Button } from '../ui/Button';
 
 interface DopamineSurveyRunnerProps {
   onComplete: (input: UserBiometricInput, assessment: DiagnosticAssessment, plan: GeneratedDailyPlan) => void;
+  onPayNow?: (input: UserBiometricInput, assessment: DiagnosticAssessment, plan: GeneratedDailyPlan) => void;
   onCancel?: () => void;
 }
 
 const STORAGE_KEY = 'tovelu_dopamine_survey_v1';
 
-export const DopamineSurveyRunner: React.FC<DopamineSurveyRunnerProps> = ({ onComplete, onCancel }) => {
+export const DopamineSurveyRunner: React.FC<DopamineSurveyRunnerProps> = ({ onComplete, onPayNow, onCancel }) => {
   const [currentStepIndex, setCurrentStepIndex] = useState<number>(0);
   const [answers, setAnswers] = useState<Record<string, any>>({});
   const [customText, setCustomText] = useState<string>('');
@@ -283,17 +284,35 @@ export const DopamineSurveyRunner: React.FC<DopamineSurveyRunnerProps> = ({ onCo
           </p>
         </div>
 
-        {/* 3-Hour Free Trial Launch Button */}
-        <Button
-          size="lg"
-          variant="primary"
-          fullWidth
-          className="rounded-2xl py-4 font-black text-sm bg-gradient-to-r from-emerald-500 via-teal-500 to-brand-primary shadow-xl shadow-emerald-500/25 active:scale-98 transition-all"
-          onClick={() => onComplete(compiledInput, generatedAssessment, generatedPlan)}
-        >
-          <Zap className="w-4 h-4 mr-2" />
-          Explore Your Full Plan Free for 3 Hours
-        </Button>
+        {/* Dual Actions: Pay Now vs 3-Hour Free Trial */}
+        <div className="space-y-3 pt-1">
+          {/* PRIMARY: Pay Now */}
+          <Button
+            size="lg"
+            variant="primary"
+            fullWidth
+            className="rounded-2xl py-4 font-black text-sm bg-gradient-to-r from-emerald-500 via-teal-500 to-brand-primary shadow-xl shadow-emerald-500/25 active:scale-98 transition-all flex items-center justify-center gap-2"
+            onClick={() => {
+              if (onPayNow) {
+                onPayNow(compiledInput, generatedAssessment, generatedPlan);
+              } else {
+                onComplete(compiledInput, generatedAssessment, generatedPlan);
+              }
+            }}
+          >
+            <Zap className="w-4 h-4 fill-current" />
+            ⚡ Unlock Full Sovereign Protocol Now (Pay Now)
+          </Button>
+
+          {/* SECONDARY: 3-Hour Free Trial */}
+          <button
+            type="button"
+            className="w-full py-3.5 px-4 rounded-2xl border border-emerald-500/40 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-700 dark:text-[#00FF9D] font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 active:scale-98"
+            onClick={() => onComplete(compiledInput, generatedAssessment, generatedPlan)}
+          >
+            <span>⏱️ Or Explore Web App Free for 3 Hours →</span>
+          </button>
+        </div>
       </div>
     );
   }
