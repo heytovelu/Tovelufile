@@ -26,6 +26,7 @@ import { TodayTab } from './components/app/TodayTab';
 import { WeekTab } from './components/app/WeekTab';
 import { ChatTab } from './components/app/ChatTab';
 import { ReportTab } from './components/app/ReportTab';
+import { HealthTab } from './components/app/HealthTab';
 import { YouDrawer } from './components/app/YouDrawer';
 
 // THAIS AI Engine & Survey
@@ -163,23 +164,7 @@ export default function App() {
           ) : appTab === 'report' ? (
             <ReportTab onOpenYou={() => setIsYouOpen(true)} darkMode={darkMode} />
           ) : (
-            <div className="p-6 text-center space-y-4 pt-20">
-              <div className="w-14 h-14 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center mx-auto text-2xl">
-                🩺
-              </div>
-              <h3 className="text-base font-black text-slate-100 uppercase tracking-wider">
-                HEALTH Section
-              </h3>
-              <p className="text-xs text-slate-400 max-w-xs mx-auto leading-relaxed">
-                The Doctor-Ready Lifetime Health Report (Weekly Auto-Updating Medical Mirror) is queued next!
-              </p>
-              <button
-                onClick={() => setAppTab('today')}
-                className="py-2 px-4 rounded-xl text-xs font-bold bg-[#00FF9D] text-slate-950 hover:bg-[#00FF9D]/90"
-              >
-                ← Back to TODAY
-              </button>
-            </div>
+            <HealthTab onOpenYou={() => setIsYouOpen(true)} darkMode={darkMode} />
           )}
 
           {/* YOU DRAWER (Opened via Profile Avatar) */}
