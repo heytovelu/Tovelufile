@@ -5,6 +5,7 @@ interface MobileAppShellProps {
   header?: React.ReactNode;
   bottomNav?: React.ReactNode;
   darkMode?: boolean;
+  noPadding?: boolean;
 }
 
 /**
@@ -17,11 +18,12 @@ export const MobileAppShell: React.FC<MobileAppShellProps> = ({
   header,
   bottomNav,
   darkMode = true,
+  noPadding = false,
 }) => {
   return (
     <div className={`min-h-screen w-full flex justify-center items-start ${darkMode ? 'bg-[#050709]' : 'bg-slate-100'} transition-colors font-sans selection:bg-[#00FF9D]/30 selection:text-[#00FF9D]`}>
       {/* Centered Mobile Device Frame on Desktop */}
-      <div className={`w-full max-w-[448px] min-h-screen relative flex flex-col ${
+      <div className={`w-full max-w-[448px] ${noPadding ? 'h-screen' : 'min-h-screen'} relative flex flex-col ${
         darkMode ? 'bg-[#080A0E] text-slate-100 border-x border-slate-800/60 shadow-[0_0_60px_rgba(0,0,0,0.8)]' : 'bg-white text-slate-900 border-x border-slate-200 shadow-2xl'
       }`}>
         {/* Sticky Header */}
@@ -31,8 +33,8 @@ export const MobileAppShell: React.FC<MobileAppShellProps> = ({
           </div>
         )}
 
-        {/* Scrollable Main Content Area */}
-        <main className="flex-1 w-full overflow-y-auto overflow-x-hidden pb-28">
+        {/* Main Content Area */}
+        <main className={`flex-1 w-full flex flex-col ${noPadding ? 'h-[calc(100vh-68px)] overflow-hidden pb-0' : 'overflow-y-auto overflow-x-hidden pb-28'}`}>
           {children}
         </main>
 

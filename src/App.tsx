@@ -153,6 +153,7 @@ export default function App() {
       {appMode === 'tovelu_app' ? (
         <MobileAppShell
           darkMode={darkMode}
+          noPadding={appTab === 'chat'}
           bottomNav={<AppBottomNav activeTab={appTab} onTabChange={setAppTab} darkMode={darkMode} />}
         >
           {appTab === 'today' ? (

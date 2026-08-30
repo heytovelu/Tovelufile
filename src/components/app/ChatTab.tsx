@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { HomeostasisLogo } from '../ui/HomeostasisLogo';
 import { ChatHistoryDrawer, DailyChatLog } from './ChatHistoryDrawer';
 
 interface Message {
@@ -26,7 +25,7 @@ export const ChatTab: React.FC<ChatTabProps> = ({
     {
       id: 'm1',
       sender: 'thais',
-      text: "Good afternoon, Ajay. Your liver glycogen stores have been steadily clearing over the past 72 hours, meaning your cells are now tapping visceral fat for baseline energy.\n\nHow is your energy and digestion feeling right now?",
+      text: "Good afternoon, Ajay. Your liver glycogen stores have been steadily clearing over the past 72 hours, meaning your cells are now tapping visceral fat for fuel.\n\nHow is your energy and digestion feeling right now?",
       time: '1:45 PM',
     },
     {
@@ -59,12 +58,12 @@ export const ChatTab: React.FC<ChatTabProps> = ({
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  // Context-Aware Quick Prompts
-  const quickPrompts = [
-    'Why am I feeling sluggish? 3-min fix',
-    'Can I have dark chocolate or dessert tonight?',
-    'Stomach is bloated—what can I sip right now?',
-    "I'm eating Italian / Mexican—what to order?",
+  // Predecided Questions (Rendered UNDER chat, directly above typing bar)
+  const predecidedQuestions = [
+    'Why am I tired? 3-min fix',
+    'Can I have dark chocolate tonight?',
+    'Stomach is bloated—what to drink?',
+    'Eating Italian / Mexican—how to order?',
     'Adjust my dinner for fewer carbs',
     'How did my lunch affect my blood sugar?',
   ];
@@ -162,22 +161,41 @@ export const ChatTab: React.FC<ChatTabProps> = ({
   };
 
   return (
-    <div className="w-full flex flex-col h-[calc(100vh-145px)] animate-fadeIn">
-      {/* 1. TOP HEADER */}
-      <div className="px-4 py-2 flex items-center justify-between border-b border-slate-800/80 shrink-0 bg-[#080A0E]/95 backdrop-blur-md">
-        <div className="flex items-center gap-2">
-          <HomeostasisLogo size={24} mode={darkMode ? 'on-dark' : 'on-light'} showWordmark={true} />
-          <span className="hidden sm:inline text-[9px] uppercase font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
-            DPHKG Active
-          </span>
+    <div className="w-full h-full flex flex-col bg-[#0B141A] text-slate-100 overflow-hidden relative select-none">
+      {/* 1. FIXED TOP BAR (WhatsApp Style) */}
+      <div className="w-full px-3.5 py-2.5 bg-[#1F2C34] border-b border-slate-700/60 flex items-center justify-between shrink-0 z-30 shadow-sm">
+        <div className="flex items-center gap-2.5 min-w-0">
+          {/* Avatar with live online green indicator */}
+          <div className="relative shrink-0">
+            <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-emerald-600 to-[#00FF9D] flex items-center justify-center text-slate-950 font-black text-xs shadow-md">
+              TH
+            </div>
+            <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-[#00FF9D] border-2 border-[#1F2C34]" />
+          </div>
+
+          {/* Title & Online Status */}
+          <div className="min-w-0">
+            <div className="flex items-center gap-1.5">
+              <h2 className="text-xs font-bold text-slate-100 truncate">
+                THAIS Clinical Mentor
+              </h2>
+              <span className="text-[9px] font-mono text-[#00FF9D] bg-[#00FF9D]/10 px-1.5 py-0.2 rounded border border-[#00FF9D]/30 hidden sm:inline">
+                DPHKG
+              </span>
+            </div>
+            <p className="text-[10px] text-[#00FF9D] font-medium leading-tight">
+              online • 24/7 metabolic memory
+            </p>
+          </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        {/* Action Controls */}
+        <div className="flex items-center gap-2 shrink-0">
           {/* History Button (Ajay's Mandate) */}
           <button
             onClick={() => setIsHistoryOpen(true)}
-            className="py-1 px-2.5 rounded-xl border border-slate-700 bg-slate-900 hover:border-[#00FF9D] text-slate-200 text-xs font-bold flex items-center gap-1.5 active:scale-95 transition-all"
-            title="View Past Day Chat Transcripts"
+            className="py-1 px-2.5 rounded-xl border border-slate-600 bg-slate-800 hover:border-[#00FF9D] text-slate-200 text-xs font-bold flex items-center gap-1 active:scale-95 transition-all"
+            title="Choose any day to see chat"
           >
             <span>📅</span>
             <span>History</span>
@@ -186,7 +204,7 @@ export const ChatTab: React.FC<ChatTabProps> = ({
           {/* Profile Avatar -> Opens YOU */}
           <button
             onClick={onOpenYou}
-            className="w-7 h-7 rounded-full bg-gradient-to-tr from-emerald-600 to-[#00FF9D] flex items-center justify-center text-slate-950 font-black text-xs shadow-sm"
+            className="w-7 h-7 rounded-full bg-slate-800 hover:bg-slate-700 border border-slate-600 flex items-center justify-center text-xs font-bold text-slate-200"
             title="Open YOU"
           >
             AJ
@@ -196,72 +214,76 @@ export const ChatTab: React.FC<ChatTabProps> = ({
 
       {/* HISTORICAL BANNER (If viewing a past day) */}
       {activeHistoryDay && (
-        <div className="px-4 py-2 bg-amber-500/15 border-b border-amber-500/30 flex items-center justify-between text-xs text-amber-300 shrink-0">
-          <span>📜 Viewing Day {activeHistoryDay} Consultation Transcript</span>
+        <div className="px-4 py-1.5 bg-amber-500/20 border-b border-amber-500/40 flex items-center justify-between text-xs text-amber-300 shrink-0 z-20">
+          <span className="text-[11px]">📜 Viewing Day {activeHistoryDay} Consultation Transcript</span>
           <button
             onClick={handleReturnToLive}
-            className="font-bold underline hover:text-white"
+            className="font-bold underline text-xs hover:text-white"
           >
-            Return to Live Chat →
+            Return to Live →
           </button>
         </div>
       )}
 
       {/* ACTION TOAST */}
       {actionToast && (
-        <div className="mx-4 mt-2 p-2 rounded-xl bg-[#00FF9D]/20 border border-[#00FF9D] text-center text-xs font-bold text-[#00FF9D] animate-bounce shrink-0">
+        <div className="absolute top-14 left-4 right-4 z-40 p-2 rounded-xl bg-[#00FF9D]/20 border border-[#00FF9D] text-center text-xs font-bold text-[#00FF9D] animate-bounce shadow-lg">
           {actionToast}
         </div>
       )}
 
-      {/* 2. CONTEXT-AWARE SMART QUICK PROMPTS */}
-      <div className="px-3 py-2 flex items-center gap-1.5 overflow-x-auto no-scrollbar shrink-0 border-b border-slate-800/60 bg-slate-900/30">
-        {quickPrompts.map((prompt, i) => (
-          <button
-            key={i}
-            onClick={() => handleSend(prompt)}
-            className="py-1 px-2.5 rounded-full border border-slate-800 bg-slate-900 hover:border-[#00FF9D]/60 text-slate-300 hover:text-white text-[11px] font-medium whitespace-nowrap active:scale-95 transition-all shrink-0"
-          >
-            {prompt}
-          </button>
-        ))}
-      </div>
+      {/* 2. SCROLLABLE MESSAGES CONTAINER (WhatsApp Style) */}
+      <div className="flex-1 overflow-y-auto px-3.5 py-3 space-y-2.5 overscroll-contain">
+        {/* Date Stamp Separator */}
+        <div className="flex justify-center my-1">
+          <span className="py-0.5 px-3 rounded-md bg-[#182229] text-[10px] font-mono text-slate-400 border border-slate-800 shadow-sm">
+            TODAY • AUGUST 30, 2026
+          </span>
+        </div>
 
-      {/* 3. CONVERSATION MESSAGES */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-3">
         {messages.map((msg) => {
           const isUser = msg.sender === 'user';
           return (
             <div
               key={msg.id}
-              className={`flex flex-col ${isUser ? 'items-end' : 'items-start'} space-y-1`}
+              className={`flex flex-col ${isUser ? 'items-end' : 'items-start'}`}
             >
-              <div className="flex items-center gap-1 text-[10px] text-slate-500 px-1">
-                <span>{isUser ? 'You' : 'THAIS Clinical Mentor'}</span>
-                <span>•</span>
-                <span>{msg.time}</span>
-              </div>
-
               <div
-                className={`max-w-[85%] rounded-2xl p-3.5 text-xs leading-relaxed ${
+                className={`relative max-w-[85%] rounded-2xl px-3.5 py-2.5 text-xs leading-relaxed shadow-md ${
                   isUser
-                    ? 'bg-[#00FF9D] text-slate-950 font-medium rounded-br-none shadow-sm'
-                    : 'bg-[#0E1318] text-slate-200 border border-slate-800 rounded-bl-none shadow-sm'
+                    ? 'bg-[#005C4B] text-[#E9EDEF] rounded-tr-none'
+                    : 'bg-[#202C33] text-[#D1D7DB] rounded-tl-none border border-slate-700/40'
                 }`}
               >
-                <div className="whitespace-pre-line">{msg.text}</div>
+                {/* Sender Name in Group/Mentor Chat */}
+                {!isUser && (
+                  <div className="text-[10px] font-bold text-[#00FF9D] mb-1">
+                    THAIS Clinical Mentor
+                  </div>
+                )}
+
+                {/* Message Body */}
+                <div className="whitespace-pre-line text-xs font-normal">
+                  {msg.text}
+                </div>
 
                 {/* In-Message Interactive Action Button */}
                 {msg.actionButton && (
-                  <div className="mt-3 pt-2.5 border-t border-slate-800/80">
+                  <div className="mt-2.5 pt-2 border-t border-slate-700/80">
                     <button
                       onClick={() => handleApplyAction(msg.actionButton!)}
-                      className="w-full py-2 px-3 rounded-xl bg-gradient-to-r from-emerald-500/20 to-[#00FF9D]/20 border border-[#00FF9D]/60 hover:border-[#00FF9D] text-[#00FF9D] font-bold text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 active:scale-95 transition-all shadow-[0_0_10px_rgba(0,255,157,0.15)]"
+                      className="w-full py-2 px-3 rounded-xl bg-gradient-to-r from-emerald-500/25 to-[#00FF9D]/25 border border-[#00FF9D]/60 hover:border-[#00FF9D] text-[#00FF9D] font-bold text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 active:scale-95 transition-all shadow-sm"
                     >
                       {msg.actionButton.label}
                     </button>
                   </div>
                 )}
+
+                {/* Timestamp + WhatsApp Double Checkmark */}
+                <div className="flex items-center justify-end gap-1 text-[9px] text-slate-400 mt-1 font-mono">
+                  <span>{msg.time}</span>
+                  {isUser && <span className="text-[#53BDEB] font-bold">✓✓</span>}
+                </div>
               </div>
             </div>
           );
@@ -271,12 +293,11 @@ export const ChatTab: React.FC<ChatTabProps> = ({
 
       {/* VOICE AI ANIMATION (When active) */}
       {isVoiceActive && (
-        <div className="p-3 mx-4 mb-2 rounded-2xl bg-slate-900 border border-[#00FF9D]/60 flex items-center justify-between text-xs text-slate-200 animate-pulse">
+        <div className="p-2.5 mx-3 mb-1 rounded-xl bg-[#1F2C34] border border-[#00FF9D]/60 flex items-center justify-between text-xs text-slate-200 shrink-0 animate-pulse">
           <div className="flex items-center gap-2">
             <span className="w-2.5 h-2.5 rounded-full bg-[#00FF9D] animate-ping" />
             <span className="font-bold text-[#00FF9D]">Listening in Natural Voice...</span>
           </div>
-          <span className="font-mono text-xs text-slate-400">Speak naturally</span>
           <button
             onClick={() => setIsVoiceActive(false)}
             className="text-xs font-bold text-slate-400 hover:text-white"
@@ -286,8 +307,21 @@ export const ChatTab: React.FC<ChatTabProps> = ({
         </div>
       )}
 
-      {/* 4. MULTIMODAL INPUT SUITE */}
-      <div className="p-3 border-t border-slate-800/80 bg-[#080A0E] shrink-0">
+      {/* 3. PREDECIDED QUESTIONS (SHOW UNDER CHAT, NOT ON TOP - Ajay's Mandate) */}
+      <div className="px-3 py-1.5 flex items-center gap-1.5 overflow-x-auto no-scrollbar shrink-0 bg-[#121B22]/90 border-t border-slate-800/60">
+        {predecidedQuestions.map((q, i) => (
+          <button
+            key={i}
+            onClick={() => handleSend(q)}
+            className="py-1 px-3 rounded-full border border-slate-700/80 bg-[#1F2C34] hover:border-[#00FF9D]/60 text-[#D1D7DB] hover:text-white text-[11px] font-medium whitespace-nowrap active:scale-95 transition-all shrink-0 shadow-sm"
+          >
+            {q}
+          </button>
+        ))}
+      </div>
+
+      {/* 4. FIXED TYPING BAR (EXACT WHATSAPP SIZE & LAYOUT - Ajay's Mandate) */}
+      <div className="p-2.5 bg-[#1F2C34] border-t border-slate-800/80 shrink-0 z-30">
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -295,53 +329,63 @@ export const ChatTab: React.FC<ChatTabProps> = ({
           }}
           className="flex items-center gap-2"
         >
-          {/* Voice AI Button */}
-          <button
-            type="button"
-            onClick={() => setIsVoiceActive(!isVoiceActive)}
-            className={`w-9 h-9 rounded-xl border flex items-center justify-center transition-all ${
-              isVoiceActive
-                ? 'border-[#00FF9D] bg-[#00FF9D]/20 text-[#00FF9D]'
-                : 'border-slate-800 bg-slate-900 text-slate-400 hover:text-white'
-            }`}
-            title="Voice AI Listen & Speak"
-          >
-            🎙️
-          </button>
+          {/* Main WhatsApp Rounded Pill Input */}
+          <div className="flex-1 flex items-center gap-2 bg-[#2A3942] rounded-3xl px-3 py-1.5 border border-slate-700/60 shadow-inner">
+            {/* Emoji / Mode Button */}
+            <button
+              type="button"
+              onClick={() => handleSend("Give me a quick 60-second summary of today's progress.")}
+              className="text-slate-400 hover:text-slate-200 text-base shrink-0"
+              title="Quick Summary"
+            >
+              😊
+            </button>
 
-          {/* Photo Scan Attachment Button */}
-          <button
-            type="button"
-            onClick={() => {
-              handleSend("I uploaded a photo of my meal. Can you analyze the portion and sequencing?");
-            }}
-            className="w-9 h-9 rounded-xl border border-slate-800 bg-slate-900 text-slate-400 hover:text-white flex items-center justify-center transition-all"
-            title="Snap Meal or Menu Photo"
-          >
-            📷
-          </button>
+            {/* WhatsApp Text Input */}
+            <input
+              type="text"
+              value={inputQuery}
+              onChange={(e) => setInputQuery(e.target.value)}
+              placeholder="Message THAIS..."
+              className="flex-1 bg-transparent text-xs text-white placeholder-slate-400 focus:outline-none min-w-0"
+            />
 
-          {/* Text Input */}
-          <input
-            type="text"
-            value={inputQuery}
-            onChange={(e) => setInputQuery(e.target.value)}
-            placeholder="Ask THAIS anything (diet, fatigue, cravings)..."
-            className="flex-1 py-2 px-3 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-[#00FF9D]"
-          />
+            {/* Photo / Camera Scan */}
+            <button
+              type="button"
+              onClick={() => handleSend("I uploaded a photo of my meal. Can you verify the food sequencing?")}
+              className="text-slate-400 hover:text-slate-200 text-base shrink-0"
+              title="Scan Meal / Menu"
+            >
+              📷
+            </button>
+          </div>
 
-          {/* Send Button */}
-          <button
-            type="submit"
-            disabled={!inputQuery.trim()}
-            className={`w-9 h-9 rounded-xl font-bold flex items-center justify-center transition-all ${
-              inputQuery.trim()
-                ? 'bg-[#00FF9D] text-slate-950 shadow-[0_0_10px_rgba(0,255,157,0.4)] active:scale-95'
-                : 'bg-slate-800 text-slate-600 cursor-not-allowed'
-            }`}
-          >
-            →
-          </button>
+          {/* WhatsApp Circular Send Button (or Mic Button) */}
+          {inputQuery.trim() ? (
+            <button
+              type="submit"
+              className="w-10 h-10 rounded-full bg-[#00A884] hover:bg-[#00A884]/90 text-white flex items-center justify-center shrink-0 shadow-md active:scale-95 transition-all"
+              title="Send Message"
+            >
+              <svg className="w-5 h-5 translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setIsVoiceActive(!isVoiceActive)}
+              className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 shadow-md active:scale-95 transition-all ${
+                isVoiceActive
+                  ? 'bg-[#00FF9D] text-slate-950 animate-pulse'
+                  : 'bg-[#00A884] text-white hover:bg-[#00A884]/90'
+              }`}
+              title="Voice AI"
+            >
+              <span className="text-base">🎙️</span>
+            </button>
+          )}
         </form>
       </div>
 
