@@ -15,7 +15,7 @@ interface PaywallModalProps {
 export const PaywallModal: React.FC<PaywallModalProps> = ({
   isOpen,
   onClose,
-  onPaymentSuccess,
+  onPaymentSuccess: _onPaymentSuccess,
   userEmail = 'ajay@tovelu.store',
   affiliateCode = 'partner_creator',
   darkMode = false,
@@ -71,18 +71,42 @@ export const PaywallModal: React.FC<PaywallModalProps> = ({
     },
   ];
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     setIsProcessing(true);
     setPayToast('🔒 Connecting to Dodo Payments Secure Checkout...');
 
-    // Simulate Dodo Payments checkout completion
-    setTimeout(() => {
+    try {
+      let affiliateId = '';
+      try {
+        affiliateId = localStorage.getItem('tovelu_affiliate_id') || '';
+      } catch (_e) {}
+
+      const response = await fetch('/api/create-dodo-checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          tierId: selectedTier,
+          email: userEmail,
+          affiliateId,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.checkoutUrl) {
+        setPayToast('✅ Redirecting to Dodo Payments Checkout...');
+        window.location.href = result.checkoutUrl;
+        return;
+      } else {
+        setIsProcessing(false);
+        setPayToast(result.error || '⚠️ Dodo Payments product setup required.');
+        setTimeout(() => setPayToast(null), 4500);
+      }
+    } catch (_err) {
       setIsProcessing(false);
-      setPayToast('✅ Payment authorized via Dodo Payments! Tax included. Proceeding to Day 1 Setup...');
-      setTimeout(() => {
-        onPaymentSuccess(selectedTier);
-      }, 1200);
-    }, 1000);
+      setPayToast('❌ Connection error to Dodo Payments. Please try again.');
+      setTimeout(() => setPayToast(null), 3500);
+    }
   };
 
   const cardCls = darkMode
