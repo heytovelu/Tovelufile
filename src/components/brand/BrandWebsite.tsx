@@ -36,7 +36,6 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
       name: 'Sarah M.',
       role: 'Working Mom & Accountant',
       location: 'Chicago',
-      avatar: '👩‍💼',
       quote:
         '“I was terrified I’d have to stop eating dinner with my kids or cook separate boiled meals. On Tovelu, I eat our regular pasta and rice—just after my salad and protein. Down 14 lbs in 8 weeks, and my 2 PM brain fog is completely gone without touching a diet pill.”',
       metric: '⚡ -14 lbs Visceral Fat • Glucose Spikes Reduced 34%',
@@ -46,7 +45,6 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
       name: 'Marcus T.',
       role: 'Software Executive',
       location: 'Austin',
-      avatar: '👨‍💻',
       quote:
         '“My doctor warned me my HbA1c was creeping into danger territory. Calorie counting apps made me feel like an obsessive lunatic weighing rice on a scale. Tovelu’s 1-2-3 sequence is so effortless it feels like cheating. My fasting blood sugar dropped from 114 to 91.”',
       metric: '🩸 HbA1c Dropped 0.7% • Fasting 91 mg/dL',
@@ -56,7 +54,6 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
       name: 'Priya R.',
       role: 'Teacher & PCOS Fighter',
       location: 'London',
-      avatar: '👩‍🏫',
       quote:
         '“With PCOS, every diet told me carbs were poison. But Indian home cooking has roti and rice every single day. Tovelu showed me how to eat my dal and sabzi first, roti last. My painful stomach bloating vanished in literally 4 days, and my cycle is regular for the first time in 3 years.”',
       metric: '✨ Gut De-Bloat in 4 Days • Hormonal Balance',
@@ -66,7 +63,6 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
       name: 'David L.',
       role: 'Retired Engineer',
       location: 'Toronto',
-      avatar: '👴',
       quote:
         '“I tried Ozempic last year and the constant sulfur burps and nausea were unbearable. Tovelu gave me my dignity back. No synthetic shots, no scales. I sleep through the night without waking at 3 AM, and my biological age dropped by 3.2 years on my report.”',
       metric: '⏳ -3.2 Years Biological Age • Zero Nausea',
@@ -76,7 +72,6 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
       name: 'Elena K.',
       role: 'Marketing Manager',
       location: 'Sydney',
-      avatar: '👩‍🎨',
       quote:
         '“I used to need 3 cups of coffee and a sugary snack just to survive past 2 PM. Changing the eating order smoothed out my energy so much that I don’t even think about sugar anymore. My skin has completely cleared up because my insulin isn’t spiking after lunch.”',
       metric: '⚡ Zero Afternoon Slumps • Clean Skin Homeostasis',
@@ -93,10 +88,18 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
 
   const activeReview = reviews[currentReviewIdx];
 
+  const handlePrevReview = () => {
+    setCurrentReviewIdx((prev) => (prev === 0 ? reviews.length - 1 : prev - 1));
+  };
+
+  const handleNextReview = () => {
+    setCurrentReviewIdx((prev) => (prev + 1) % reviews.length);
+  };
+
   return (
     <div className={`min-h-screen ${darkMode ? 'bg-[#050709] text-slate-100' : 'bg-white text-slate-900'} transition-colors duration-200 font-sans`}>
       
-      {/* CSS Animation for Seamless Infinite Auto-Scroll Ticker (Slow, Crisp, Zero Blur) */}
+      {/* CSS Animation for Seamless Infinite Auto-Scroll Ticker */}
       <style>{`
         @keyframes toveluTicker {
           0% { transform: translate3d(0, 0, 0); }
@@ -117,12 +120,12 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
       `}</style>
 
       {/* ========================================================================= */}
-      {/* 1. TOP MINIMAL TDS NAVIGATION BAR */}
+      {/* 1. TOP MINIMAL NAVIGATION BAR */}
       {/* ========================================================================= */}
       <header className={`sticky top-0 z-50 w-full backdrop-blur-xl transition-all ${
         darkMode ? 'bg-[#050709]/90 border-b border-slate-800/80' : 'bg-white/90 border-b border-slate-200/80'
       }`}>
-        <div className="max-w-6xl mx-auto px-4 sm:px-8 h-18 sm:h-20 flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-4 sm:px-8 h-16 sm:h-20 flex items-center justify-between">
           
           {/* Brand Wordmark & Logo */}
           <div className="flex items-center gap-3 cursor-pointer" onClick={() => setActiveNav('home')}>
@@ -152,8 +155,8 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
             ))}
           </nav>
 
-          {/* Right Action Utilities (Theme + Sign In) */}
-          <div className="flex items-center gap-3">
+          {/* Right Action Utilities (Theme + Sign In on Desktop, Theme + Menu on Mobile) */}
+          <div className="flex items-center gap-2.5 sm:gap-3">
             {onToggleTheme && (
               <button
                 onClick={onToggleTheme}
@@ -166,9 +169,10 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
               </button>
             )}
 
+            {/* Desktop Only Sign In Button */}
             <button
               onClick={onGoToLogin}
-              className={`py-2 px-5 rounded-xl text-xs sm:text-sm font-bold transition-all border ${
+              className={`hidden md:inline-flex py-2 px-5 rounded-xl text-xs sm:text-sm font-bold transition-all border ${
                 darkMode
                   ? 'bg-slate-900 border-slate-800 text-slate-200 hover:text-white'
                   : 'bg-white border-slate-300 text-slate-700 hover:text-slate-900'
@@ -177,46 +181,103 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
               Sign In
             </button>
 
-            {/* Mobile Menu Icon */}
+            {/* Mobile 3-Dots / Menu Icon (Generous Tap Target) */}
             <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden w-9 h-9 rounded-xl border border-slate-300 dark:border-slate-800 flex items-center justify-center text-sm font-bold"
+              onClick={() => setMobileMenuOpen(true)}
+              className="md:hidden w-10 h-10 rounded-xl border border-slate-300 dark:border-slate-800 flex items-center justify-center text-base font-bold text-slate-700 dark:text-slate-200 active:scale-95 transition-all"
               aria-label="Open mobile menu"
             >
-              {mobileMenuOpen ? '✕' : '☰'}
+              •••
             </button>
           </div>
         </div>
+      </header>
 
-        {/* Mobile Dropdown */}
-        {mobileMenuOpen && (
-          <div className={`md:hidden px-6 py-6 space-y-3 border-b ${
-            darkMode ? 'bg-[#0A0E13] border-slate-800' : 'bg-white border-slate-200'
+      {/* ========================================================================= */}
+      {/* MOBILE SIDE SLIDE-OUT DRAWER (OPENS FROM RIGHT ON 3 DOTS CLICK) */}
+      {/* ========================================================================= */}
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 z-50 md:hidden flex justify-end">
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
+            onClick={() => setMobileMenuOpen(false)}
+          />
+
+          {/* Drawer Panel */}
+          <div className={`relative w-4/5 max-w-sm h-full p-6 shadow-2xl flex flex-col justify-between z-10 transition-transform duration-300 ease-in-out ${
+            darkMode ? 'bg-[#0B0F14] text-slate-100 border-l border-slate-800' : 'bg-white text-slate-900 border-l border-slate-200'
           }`}>
-            {[
-              { id: 'home', label: 'HOME' },
-              { id: 'goals', label: 'GOALS' },
-              { id: 'diet', label: 'DIET' },
-              { id: 'journey', label: 'JOURNEY' },
-              { id: 'thais', label: 'THAIS' },
-              { id: 'blog', label: 'BLOG' },
-            ].map((item) => (
+            <div className="space-y-6">
+              {/* Drawer Header */}
+              <div className="flex items-center justify-between border-b pb-4 border-slate-200 dark:border-slate-800">
+                <HomeostasisLogo size={28} mode={darkMode ? 'on-dark' : 'on-light'} showWordmark={true} />
+                <button
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-9 h-9 rounded-xl border border-slate-300 dark:border-slate-800 flex items-center justify-center text-sm font-bold active:scale-95"
+                  aria-label="Close menu"
+                >
+                  ✕
+                </button>
+              </div>
+
+              {/* Navigation Links in Drawer */}
+              <nav className="space-y-2">
+                {[
+                  { id: 'home', label: 'HOME' },
+                  { id: 'goals', label: 'GOALS' },
+                  { id: 'diet', label: 'DIET' },
+                  { id: 'journey', label: 'JOURNEY' },
+                  { id: 'thais', label: 'THAIS' },
+                  { id: 'blog', label: 'BLOG' },
+                ].map((item) => (
+                  <button
+                    key={item.id}
+                    onClick={() => {
+                      setActiveNav(item.id as any);
+                      setMobileMenuOpen(false);
+                    }}
+                    className={`w-full text-left py-3 px-4 rounded-xl text-sm font-black tracking-wider transition-all block ${
+                      activeNav === item.id
+                        ? 'text-emerald-700 dark:text-[#00FF9D] bg-emerald-500/10'
+                        : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60'
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </nav>
+            </div>
+
+            {/* Bottom Actions in Drawer: Sign In & CTA */}
+            <div className="space-y-3 pt-6 border-t border-slate-200 dark:border-slate-800">
               <button
-                key={item.id}
                 onClick={() => {
-                  setActiveNav(item.id as any);
                   setMobileMenuOpen(false);
+                  onGoToLogin();
                 }}
-                className={`block w-full text-left text-sm font-semibold py-1.5 ${
-                  activeNav === item.id ? 'text-emerald-500 font-bold' : 'text-slate-600 dark:text-slate-300'
+                className={`w-full py-3.5 px-5 rounded-xl text-sm font-bold transition-all border text-center block ${
+                  darkMode
+                    ? 'bg-slate-900 border-slate-800 text-slate-200 hover:text-white'
+                    : 'bg-slate-100 border-slate-300 text-slate-800 hover:bg-slate-200'
                 }`}
               >
-                {item.label}
+                Sign In
               </button>
-            ))}
+
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onTryForFree();
+                }}
+                className="w-full py-3.5 px-5 rounded-xl text-sm font-black uppercase tracking-wider bg-[#00FF9D] text-slate-950 shadow-md shadow-[#00FF9D]/20 text-center block active:scale-95"
+              >
+                CHOOSE YOUR #1 GOAL →
+              </button>
+            </div>
           </div>
-        )}
-      </header>
+        </div>
+      )}
 
       {/* ========================================================================= */}
       {/* 2. SECTION 1: MINIMAL HERO */}
@@ -247,7 +308,7 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
           </p>
         </div>
 
-        {/* The High-Conversion CTA Button: CHOOSE YOUR #1 GOAL */}
+        {/* The High-Conversion CTA Button */}
         <div className="pt-6 space-y-3 max-w-md mx-auto">
           <button
             onClick={onTryForFree}
@@ -256,7 +317,7 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
             <span>CHOOSE YOUR #1 GOAL →</span>
           </button>
 
-          {/* Clean Trust Line: TRY FOR FREE • NO CARD NEEDED */}
+          {/* Clean Trust Line */}
           <div className="text-xs sm:text-sm font-bold font-mono tracking-wider text-slate-500 dark:text-slate-400">
             TRY FOR FREE • NO CARD NEEDED
           </div>
@@ -264,11 +325,10 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
       </section>
 
       {/* ========================================================================= */}
-      {/* MINI SECTION: INFINITE AUTO-SCROLLING TICKER (RIGHT TO LEFT NON-STOP) */}
+      {/* MINI SECTION: INFINITE AUTO-SCROLLING TICKER */}
       {/* ========================================================================= */}
       <div className="w-full overflow-hidden py-4 bg-emerald-600 dark:bg-emerald-600 border-y border-emerald-700/60 shadow-inner">
         <div className="animate-tovelu-ticker flex items-center gap-10 text-sm sm:text-base font-mono font-extrabold tracking-wider text-white">
-          {/* Double mapped array for seamless continuous infinite loop */}
           {[...usps, ...usps, ...usps, ...usps].map((usp, i) => (
             <div key={i} className="flex items-center gap-10 shrink-0">
               <span className="text-white flex items-center gap-2 drop-shadow-sm">
@@ -281,7 +341,7 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
       </div>
 
       {/* ========================================================================= */}
-      {/* 3. SECTION 2: 1-REVIEW AUTO-SLIDER (EVERY 5 SECONDS) */}
+      {/* 3. SECTION 2: 1-REVIEW AUTO-SLIDER WITH MANUAL ARROWS */}
       {/* ========================================================================= */}
       <section className="transition-colors">
         <div className="max-w-4xl mx-auto px-4 sm:px-8 py-20 sm:py-24 space-y-10 text-center">
@@ -295,7 +355,7 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
             </h2>
           </div>
 
-          {/* Active Review Display (Minimal, Breathable, Smooth Transition) */}
+          {/* Active Review Display */}
           <div className="min-h-[220px] flex flex-col items-center justify-center space-y-6 transition-all duration-500">
             {/* Stars */}
             <div className="flex items-center justify-center gap-1 text-amber-400 text-lg">
@@ -321,20 +381,35 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
             </div>
           </div>
 
-          {/* Slider Indicators (5 Dots) */}
-          <div className="flex items-center justify-center gap-2 pt-4">
-            {reviews.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => setCurrentReviewIdx(idx)}
-                aria-label={`Go to review ${idx + 1}`}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  currentReviewIdx === idx
-                    ? 'w-8 bg-emerald-500 dark:bg-[#00FF9D]'
-                    : 'w-2 bg-slate-300 dark:bg-slate-700 hover:bg-slate-400'
-                }`}
-              />
-            ))}
+          {/* MANUAL ARROW BUTTONS FOR ALL DEVICES (REPLACES DOTS) */}
+          <div className="flex items-center justify-center gap-5 pt-4">
+            <button
+              onClick={handlePrevReview}
+              aria-label="Previous review"
+              className={`w-12 h-12 rounded-full border flex items-center justify-center text-lg font-bold transition-all shadow-sm active:scale-90 ${
+                darkMode
+                  ? 'border-slate-800 bg-slate-900/60 text-slate-300 hover:border-emerald-500 hover:text-[#00FF9D]'
+                  : 'border-slate-300 bg-white text-slate-700 hover:border-emerald-600 hover:text-emerald-600'
+              }`}
+            >
+              ←
+            </button>
+
+            <span className="text-xs font-mono font-bold text-slate-400">
+              {currentReviewIdx + 1} / {reviews.length}
+            </span>
+
+            <button
+              onClick={handleNextReview}
+              aria-label="Next review"
+              className={`w-12 h-12 rounded-full border flex items-center justify-center text-lg font-bold transition-all shadow-sm active:scale-90 ${
+                darkMode
+                  ? 'border-slate-800 bg-slate-900/60 text-slate-300 hover:border-emerald-500 hover:text-[#00FF9D]'
+                  : 'border-slate-300 bg-white text-slate-700 hover:border-emerald-600 hover:text-emerald-600'
+              }`}
+            >
+              →
+            </button>
           </div>
 
           {/* Bottom Direct CTA */}
