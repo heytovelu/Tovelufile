@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { HomeostasisLogo } from '../ui/HomeostasisLogo';
+import { GoalsPillar } from './GoalsPillar';
+import { DietPillar } from './DietPillar';
 
 interface BrandWebsiteProps {
   onTryForFree: () => void;
@@ -101,6 +103,11 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
     setCurrentReviewIdx((prev) => (prev + 1) % reviews.length);
   };
 
+  const handleNavClick = (target: 'home' | 'goals' | 'diet' | 'journey' | 'thais' | 'blog') => {
+    setActiveNav(target);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <div className={`min-h-screen ${darkMode ? 'bg-[#050709] text-slate-100' : 'bg-white text-slate-900'} transition-colors duration-200 font-sans`}>
       
@@ -133,7 +140,7 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
         <div className="max-w-6xl mx-auto px-4 sm:px-8 h-16 sm:h-20 flex items-center justify-between">
           
           {/* Brand Wordmark & Logo */}
-          <div className="flex items-center gap-3 cursor-pointer" onClick={() => setActiveNav('home')}>
+          <div className="flex items-center gap-3 cursor-pointer" onClick={() => handleNavClick('home')}>
             <HomeostasisLogo size={36} mode={darkMode ? 'on-dark' : 'on-light'} showWordmark={true} />
           </div>
 
@@ -148,7 +155,7 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
             ].map((item) => (
               <button
                 key={item.id}
-                onClick={() => setActiveNav(item.id as any)}
+                onClick={() => handleNavClick(item.id as any)}
                 className={`transition-colors hover:text-emerald-500 ${
                   activeNav === item.id
                     ? 'text-emerald-600 dark:text-[#00FF9D] font-black'
@@ -199,7 +206,7 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
       </header>
 
       {/* ========================================================================= */}
-      {/* MOBILE SIDE SLIDE-OUT DRAWER (OPENS FROM RIGHT ON 3 DOTS CLICK) */}
+      {/* MOBILE SIDE SLIDE-OUT DRAWER */}
       {/* ========================================================================= */}
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-50 md:hidden flex justify-end">
@@ -239,8 +246,8 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
                   <button
                     key={item.id}
                     onClick={() => {
-                      setActiveNav(item.id as any);
                       setMobileMenuOpen(false);
+                      handleNavClick(item.id as any);
                     }}
                     className={`w-full text-left py-3 px-4 rounded-xl text-sm font-black tracking-wider transition-all block ${
                       activeNav === item.id
@@ -285,153 +292,164 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
       )}
 
       {/* ========================================================================= */}
-      {/* 2. SECTION 1: MINIMAL HERO */}
+      {/* CONDITIONAL PILLAR VIEW ROUTER */}
       {/* ========================================================================= */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-8 pt-16 sm:pt-28 pb-16 sm:pb-24 text-center space-y-8">
-        
-        {/* Subtle Authority Pill */}
-        <div className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full text-[11px] sm:text-xs font-mono font-bold tracking-wider text-emerald-700 dark:text-[#00FF9D] bg-emerald-500/10 border border-emerald-500/20">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-[#00FF9D] animate-ping" />
-          WORLD HEALTH ORGANIZATION DATA • CELLULAR HOMEOSTASIS OS
-        </div>
+      {activeNav === 'goals' ? (
+        <GoalsPillar onTryForFree={onTryForFree} darkMode={darkMode} />
+      ) : activeNav === 'diet' ? (
+        <DietPillar onTryForFree={onTryForFree} darkMode={darkMode} />
+      ) : (
+        <>
+          {/* ========================================================================= */}
+          {/* 2. SECTION 1: MINIMAL HERO */}
+          {/* ========================================================================= */}
+          <section className="max-w-4xl mx-auto px-4 sm:px-8 pt-16 sm:pt-28 pb-16 sm:pb-24 text-center space-y-8">
+            
+            {/* Subtle Authority Pill */}
+            <div className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full text-[11px] sm:text-xs font-mono font-bold tracking-wider text-emerald-700 dark:text-[#00FF9D] bg-emerald-500/10 border border-emerald-500/20">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-[#00FF9D] animate-ping" />
+              WORLD HEALTH ORGANIZATION DATA • CELLULAR HOMEOSTASIS OS
+            </div>
 
-        {/* The Clean, Bold Headline */}
-        <h1 className={`text-4xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.08] ${textTitle}`}>
-          Eat what you love. <br />
-          <span className="text-emerald-600 dark:text-[#00FF9D]">
-            Just change the order.
-          </span>
-        </h1>
-
-        {/* The Minimal, Human Subheadline */}
-        <div className={`text-base sm:text-xl lg:text-2xl ${textSub} leading-relaxed max-w-2xl mx-auto space-y-3 font-normal`}>
-          <p className="font-semibold text-slate-800 dark:text-slate-200">
-            You never have to sit at family dinner picking at plain boiled food while everyone else eats delicious meals.
-          </p>
-          <p className="text-sm sm:text-base lg:text-lg">
-            Eating your normal home food in Tovelu’s <strong>1-2-3 sequence</strong> blunts post-meal glucose spikes by up to <strong>38%</strong> without starving or cutting carbs. Your body shuts off fat storage and shields your 14 organs from 500 hidden diseases—while hitting your #1 body goal on the same plate.
-          </p>
-        </div>
-
-        {/* The High-Conversion CTA Button */}
-        <div className="pt-6 space-y-3 max-w-md mx-auto">
-          <button
-            onClick={onTryForFree}
-            className="w-full py-4 sm:py-5 px-8 rounded-2xl bg-[#00FF9D] hover:bg-[#00FF9D]/90 active:scale-[0.98] text-slate-950 font-black text-sm sm:text-base uppercase tracking-wider transition-all shadow-[0_4px_25px_rgba(0,255,157,0.4)] flex items-center justify-center gap-2"
-          >
-            <span>CHOOSE YOUR #1 GOAL →</span>
-          </button>
-
-          {/* Clean Trust Line */}
-          <div className="text-xs sm:text-sm font-bold font-mono tracking-wider text-slate-500 dark:text-slate-400">
-            TRY FOR FREE • NO CARD NEEDED
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* MINI SECTION: INFINITE AUTO-SCROLLING TICKER */}
-      {/* ========================================================================= */}
-      <div className="w-full overflow-hidden py-4 bg-emerald-600 dark:bg-emerald-600 border-y border-emerald-700/60 shadow-inner">
-        <div className="animate-tovelu-ticker flex items-center gap-10 text-sm sm:text-base font-mono font-extrabold tracking-wider text-white">
-          {[...usps, ...usps, ...usps, ...usps].map((usp, i) => (
-            <div key={i} className="flex items-center gap-10 shrink-0">
-              <span className="text-white flex items-center gap-2 drop-shadow-sm">
-                {usp}
+            {/* The Clean, Bold Headline */}
+            <h1 className={`text-4xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.08] ${textTitle}`}>
+              Eat what you love. <br />
+              <span className="text-emerald-600 dark:text-[#00FF9D]">
+                Just change the order.
               </span>
-              <span className="text-emerald-200 text-sm">✦</span>
-            </div>
-          ))}
-        </div>
-      </div>
+            </h1>
 
-      {/* ========================================================================= */}
-      {/* 3. SECTION 2: 1-REVIEW AUTO-SLIDER WITH MANUAL ARROWS */}
-      {/* ========================================================================= */}
-      <section className="transition-colors">
-        <div className="max-w-4xl mx-auto px-4 sm:px-8 py-20 sm:py-24 space-y-10 text-center">
-          
-          <div className="space-y-2">
-            <span className="text-xs uppercase font-mono tracking-widest text-emerald-600 dark:text-[#00FF9D] font-bold block">
-              REAL DAILY LIFE EXPERIENCES
-            </span>
-            <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight ${textTitle}`}>
-              Eat real food. Feel the difference.
-            </h2>
-          </div>
-
-          {/* Active Review Display */}
-          <div className="min-h-[220px] flex flex-col items-center justify-center space-y-6 transition-all duration-500">
-            {/* Stars */}
-            <div className="flex items-center justify-center gap-1 text-amber-400 text-lg">
-              ★★★★★
+            {/* The Minimal, Human Subheadline */}
+            <div className={`text-base sm:text-xl lg:text-2xl ${textSub} leading-relaxed max-w-2xl mx-auto space-y-3 font-normal`}>
+              <p className="font-semibold text-slate-800 dark:text-slate-200">
+                You never have to sit at family dinner picking at plain boiled food while everyone else eats delicious meals.
+              </p>
+              <p className="text-sm sm:text-base lg:text-lg">
+                Eating your normal home food in Tovelu’s <strong>1-2-3 sequence</strong> blunts post-meal glucose spikes by up to <strong>38%</strong> without starving or cutting carbs. Your body shuts off fat storage and shields your 14 organs from 500 hidden diseases—while hitting your #1 body goal on the same plate.
+              </p>
             </div>
 
-            {/* Quote */}
-            <blockquote className={`text-lg sm:text-2xl font-normal leading-relaxed italic max-w-3xl ${textTitle}`}>
-              {activeReview.quote}
-            </blockquote>
+            {/* The High-Conversion CTA Button */}
+            <div className="pt-6 space-y-3 max-w-md mx-auto">
+              <button
+                onClick={onTryForFree}
+                className="w-full py-4 sm:py-5 px-8 rounded-2xl bg-[#00FF9D] hover:bg-[#00FF9D]/90 active:scale-[0.98] text-slate-950 font-black text-sm sm:text-base uppercase tracking-wider transition-all shadow-[0_4px_25px_rgba(0,255,157,0.4)] flex items-center justify-center gap-2"
+              >
+                <span>CHOOSE YOUR #1 GOAL →</span>
+              </button>
 
-            {/* Clinical Metric Pill */}
-            <div>
-              <span className="inline-block text-xs font-mono font-bold text-emerald-700 dark:text-[#00FF9D] bg-emerald-500/10 border border-emerald-500/20 px-3.5 py-1.5 rounded-full">
-                {activeReview.metric}
-              </span>
+              {/* Clean Trust Line */}
+              <div className="text-xs sm:text-sm font-bold font-mono tracking-wider text-slate-500 dark:text-slate-400">
+                TRY FOR FREE • NO CARD NEEDED
+              </div>
             </div>
+          </section>
 
-            {/* Reviewer Details (Text Only) */}
-            <div className="pt-2 text-center space-y-0.5">
-              <h3 className={`text-sm sm:text-base font-bold ${textTitle}`}>{activeReview.name}</h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400">{activeReview.role} • {activeReview.location}</p>
+          {/* ========================================================================= */}
+          {/* MINI SECTION: INFINITE AUTO-SCROLLING TICKER */}
+          {/* ========================================================================= */}
+          <div className="w-full overflow-hidden py-4 bg-emerald-600 dark:bg-emerald-600 border-y border-emerald-700/60 shadow-inner">
+            <div className="animate-tovelu-ticker flex items-center gap-10 text-sm sm:text-base font-mono font-extrabold tracking-wider text-white">
+              {[...usps, ...usps, ...usps, ...usps].map((usp, i) => (
+                <div key={i} className="flex items-center gap-10 shrink-0">
+                  <span className="text-white flex items-center gap-2 drop-shadow-sm">
+                    {usp}
+                  </span>
+                  <span className="text-emerald-200 text-sm">✦</span>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* MANUAL ARROW BUTTONS FOR ALL DEVICES (REPLACES DOTS) */}
-          <div className="flex items-center justify-center gap-5 pt-4">
-            <button
-              onClick={handlePrevReview}
-              aria-label="Previous review"
-              className={`w-12 h-12 rounded-full border flex items-center justify-center text-lg font-bold transition-all shadow-sm active:scale-90 ${
-                darkMode
-                  ? 'border-slate-800 bg-slate-900/60 text-slate-300 hover:border-emerald-500 hover:text-[#00FF9D]'
-                  : 'border-slate-300 bg-white text-slate-700 hover:border-emerald-600 hover:text-emerald-600'
-              }`}
-            >
-              ←
-            </button>
+          {/* ========================================================================= */}
+          {/* 3. SECTION 2: 1-REVIEW AUTO-SLIDER WITH MANUAL ARROWS */}
+          {/* ========================================================================= */}
+          <section className="transition-colors">
+            <div className="max-w-4xl mx-auto px-4 sm:px-8 py-20 sm:py-24 space-y-10 text-center">
+              
+              <div className="space-y-2">
+                <span className="text-xs uppercase font-mono tracking-widest text-emerald-600 dark:text-[#00FF9D] font-bold block">
+                  REAL DAILY LIFE EXPERIENCES
+                </span>
+                <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight ${textTitle}`}>
+                  Eat real food. Feel the difference.
+                </h2>
+              </div>
 
-            <span className="text-xs font-mono font-bold text-slate-400">
-              {currentReviewIdx + 1} / {reviews.length}
-            </span>
+              {/* Active Review Display */}
+              <div className="min-h-[220px] flex flex-col items-center justify-center space-y-6 transition-all duration-500">
+                {/* Stars */}
+                <div className="flex items-center justify-center gap-1 text-amber-400 text-lg">
+                  ★★★★★
+                </div>
 
-            <button
-              onClick={handleNextReview}
-              aria-label="Next review"
-              className={`w-12 h-12 rounded-full border flex items-center justify-center text-lg font-bold transition-all shadow-sm active:scale-90 ${
-                darkMode
-                  ? 'border-slate-800 bg-slate-900/60 text-slate-300 hover:border-emerald-500 hover:text-[#00FF9D]'
-                  : 'border-slate-300 bg-white text-slate-700 hover:border-emerald-600 hover:text-emerald-600'
-              }`}
-            >
-              →
-            </button>
-          </div>
+                {/* Quote */}
+                <blockquote className={`text-lg sm:text-2xl font-normal leading-relaxed italic max-w-3xl ${textTitle}`}>
+                  {activeReview.quote}
+                </blockquote>
 
-          {/* Bottom Direct CTA */}
-          <div className="pt-6 space-y-3">
-            <button
-              onClick={onTryForFree}
-              className="py-3.5 px-8 rounded-xl bg-[#00FF9D] hover:bg-[#00FF9D]/90 active:scale-95 text-slate-950 font-black text-xs sm:text-sm uppercase tracking-wider shadow-md shadow-[#00FF9D]/20 transition-all inline-block"
-            >
-              CHOOSE YOUR #1 GOAL →
-            </button>
-            <div className="text-xs font-bold font-mono tracking-wider text-slate-500 dark:text-slate-400 block">
-              TRY FOR FREE • NO CARD NEEDED
+                {/* Clinical Metric Pill */}
+                <div>
+                  <span className="inline-block text-xs font-mono font-bold text-emerald-700 dark:text-[#00FF9D] bg-emerald-500/10 border border-emerald-500/20 px-3.5 py-1.5 rounded-full">
+                    {activeReview.metric}
+                  </span>
+                </div>
+
+                {/* Reviewer Details (Text Only) */}
+                <div className="pt-2 text-center space-y-0.5">
+                  <h3 className={`text-sm sm:text-base font-bold ${textTitle}`}>{activeReview.name}</h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">{activeReview.role} • {activeReview.location}</p>
+                </div>
+              </div>
+
+              {/* MANUAL ARROW BUTTONS FOR ALL DEVICES */}
+              <div className="flex items-center justify-center gap-5 pt-4">
+                <button
+                  onClick={handlePrevReview}
+                  aria-label="Previous review"
+                  className={`w-12 h-12 rounded-full border flex items-center justify-center text-lg font-bold transition-all shadow-sm active:scale-90 ${
+                    darkMode
+                      ? 'border-slate-800 bg-slate-900/60 text-slate-300 hover:border-emerald-500 hover:text-[#00FF9D]'
+                      : 'border-slate-300 bg-white text-slate-700 hover:border-emerald-600 hover:text-emerald-600'
+                  }`}
+                >
+                  ←
+                </button>
+
+                <span className="text-xs font-mono font-bold text-slate-400">
+                  {currentReviewIdx + 1} / {reviews.length}
+                </span>
+
+                <button
+                  onClick={handleNextReview}
+                  aria-label="Next review"
+                  className={`w-12 h-12 rounded-full border flex items-center justify-center text-lg font-bold transition-all shadow-sm active:scale-90 ${
+                    darkMode
+                      ? 'border-slate-800 bg-slate-900/60 text-slate-300 hover:border-emerald-500 hover:text-[#00FF9D]'
+                      : 'border-slate-300 bg-white text-slate-700 hover:border-emerald-600 hover:text-emerald-600'
+                  }`}
+                >
+                  →
+                </button>
+              </div>
+
+              {/* Bottom Direct CTA */}
+              <div className="pt-6 space-y-3">
+                <button
+                  onClick={onTryForFree}
+                  className="py-3.5 px-8 rounded-xl bg-[#00FF9D] hover:bg-[#00FF9D]/90 active:scale-95 text-slate-950 font-black text-xs sm:text-sm uppercase tracking-wider shadow-md shadow-[#00FF9D]/20 transition-all inline-block"
+                >
+                  CHOOSE YOUR #1 GOAL →
+                </button>
+                <div className="text-xs font-bold font-mono tracking-wider text-slate-500 dark:text-slate-400 block">
+                  TRY FOR FREE • NO CARD NEEDED
+                </div>
+              </div>
+
             </div>
-          </div>
-
-        </div>
-      </section>
+          </section>
+        </>
+      )}
 
       {/* Clean Minimal Footer */}
       <footer className={`py-12 text-center text-xs font-mono border-t ${
