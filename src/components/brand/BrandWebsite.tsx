@@ -78,21 +78,26 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
     },
   ];
 
-  // Auto slide reviews every 5 seconds
+  const [isAutoSlideActive, setIsAutoSlideActive] = useState(true);
+
+  // Auto slide reviews every 5 seconds (until visitor manually slides)
   useEffect(() => {
+    if (!isAutoSlideActive) return;
     const timer = setInterval(() => {
       setCurrentReviewIdx((prev) => (prev + 1) % reviews.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, [reviews.length]);
+  }, [isAutoSlideActive, reviews.length]);
 
   const activeReview = reviews[currentReviewIdx];
 
   const handlePrevReview = () => {
+    setIsAutoSlideActive(false); // Stop auto-slide once user manually controls
     setCurrentReviewIdx((prev) => (prev === 0 ? reviews.length - 1 : prev - 1));
   };
 
   const handleNextReview = () => {
+    setIsAutoSlideActive(false); // Stop auto-slide once user manually controls
     setCurrentReviewIdx((prev) => (prev + 1) % reviews.length);
   };
 
