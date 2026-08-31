@@ -113,23 +113,22 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
       <section className="max-w-4xl mx-auto px-4 sm:px-6 pt-12 sm:pt-20 pb-16 text-center space-y-6">
         <div className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-[#00FF9D] text-xs font-mono font-bold tracking-wider">
           <span className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-[#00FF9D] animate-ping" />
-          A DIRECT MESSAGE FOR YOUR BODY & METABOLISM
+          WORLD HEALTH ORGANIZATION DATA • CELLULAR HOMEOSTASIS OS
         </div>
 
         <h1 className={`text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.15] sm:leading-[1.15] ${textTitle}`}>
-          Your Body Can Face <span className="text-rose-500">55,000+ Diseases</span>. <br />
-          Just <span className="text-amber-500">500</span> Are Responsible For 75% to 80% of All Deaths & Chronic Illnesses. <br />
+          You Weren’t Failing Your Diets—<span className="text-rose-500">Your Diets Were Failing Your Biology:</span> <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 via-teal-400 to-[#00FF9D]">
-            And You Can Prevent & Reverse Almost Every Single One By Fixing Your Diet Order & Daily Routine.
+            Just 500 Metabolic Pathways Cause 75% of Global Illnesses, and They Are Secretly Blocking Your Goals.
           </span>
         </h1>
 
         <div className={`text-base sm:text-lg ${textSub} max-w-2xl mx-auto leading-relaxed space-y-3`}>
           <p>
-            <strong>Let’s be completely honest with you:</strong> You don’t have to live with a bloated stomach, exhausting afternoon fatigue, or stubborn belly fat. You don’t need dangerous crash diets, bitter powders, or synthetic pills.
+            We know you just want to lose stubborn belly fat, stop the 2 PM energy crash, and feel light again. But clinical data from the WHO shows over 500 metabolic root conditions silently trigger post-meal insulin resistance, locking your body into fat storage regardless of calories.
           </p>
           <p className="font-semibold text-emerald-700 dark:text-[#00FF9D]">
-            Our system solves these 500 root disease pathways automatically—while helping you achieve your #1 personal body goal at the same time.
+            Tovelu’s 1-2-3 food sequencing blunts glucose spikes by up to 38% without starving—reversing those 500 hidden disease pathways while hitting your #1 body goal on the exact same daily plate.
           </p>
         </div>
 
