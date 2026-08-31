@@ -14,11 +14,25 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
   darkMode = false,
   onToggleTheme,
 }) => {
+  // Calculator state
+  const [age, setAge] = useState(32);
+  const [symptoms, setSymptoms] = useState<string[]>(['bloat', 'crash']);
+  
+  // Interactive Example User Task Logging state
+  const [interactiveTasks, setInteractiveTasks] = useState({
+    breakfast: true,
+    lunch: true,
+    dinner: false,
+    walk: false,
+  });
+  const [loggedToast, setLoggedToast] = useState<string | null>(null);
+
+  // Section states
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [selectedGoal, setSelectedGoal] = useState<number | null>(1);
   const [showStickyCta, setShowStickyCta] = useState(false);
 
-  // Scroll listener to show sticky mobile CTA after user scrolls past hero
+  // Scroll listener for floating mobile CTA
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 280) {
@@ -30,6 +44,30 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const toggleSymptom = (id: string) => {
+    setSymptoms(prev => 
+      prev.includes(id) ? prev.filter(s => s !== id) : [...prev, id]
+    );
+  };
+
+  const calculatedLag = (symptoms.includes('bloat') ? 1.8 : 0) + 
+                        (symptoms.includes('crash') ? 1.4 : 0) + 
+                        (symptoms.includes('sleep') ? 1.2 : 0) +
+                        (symptoms.includes('cravings') ? 1.1 : 0);
+  const estimatedBioAge = (age + calculatedLag).toFixed(1);
+
+  const toggleTask = (task: 'breakfast' | 'lunch' | 'dinner' | 'walk') => {
+    const nextVal = !interactiveTasks[task];
+    setInteractiveTasks(prev => ({ ...prev, [task]: nextVal }));
+    if (nextVal) {
+      setLoggedToast(`⚡ 1-Tap Logged! Day 14 sequence verified.`);
+      setTimeout(() => setLoggedToast(null), 2500);
+    }
+  };
+
+  const completedCount = Object.values(interactiveTasks).filter(Boolean).length;
+  const progressPercent = Math.round((completedCount / 4) * 100);
 
   const cardCls = darkMode
     ? 'bg-[#0E1318] border-slate-800 text-slate-100 shadow-xl'
@@ -282,14 +320,13 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
         </div>
       </header>
 
-      {/* RESPONSIVE CONTAINER: NATIVE MOBILE ON PHONES, FULL-WIDTH LUXURY ON DESKTOP */}
+      {/* RESPONSIVE CONTAINER */}
       <main className="max-w-6xl mx-auto px-3.5 sm:px-6 lg:px-8 pt-6 sm:pt-10 space-y-8 sm:space-y-12">
 
         {/* ========================================================================= */}
         {/* SECTION 1: THE MASTER HEADLINE & SUBHEADLINE (THE WHO PROOF HOOK) */}
         {/* ========================================================================= */}
         <section className={`p-6 sm:p-10 lg:p-12 rounded-3xl border ${cardCls} space-y-6 text-left relative overflow-hidden`}>
-          {/* Subtle Ambient Glow */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
 
           <div className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-[#00FF9D] text-xs font-mono font-bold tracking-wider">
@@ -333,6 +370,104 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
         </section>
 
         {/* ========================================================================= */}
+        {/* INTERACTIVE BIOLOGICAL AGE CALCULATOR (SHOWS REVERSIBLE AGE) */}
+        {/* ========================================================================= */}
+        <section className={`p-6 sm:p-10 rounded-3xl border-2 shadow-xl ${
+          calculatedLag > 2
+            ? 'border-amber-500/40 bg-gradient-to-br from-amber-500/5 via-transparent to-emerald-500/5'
+            : cardCls
+        } space-y-6`}>
+          <div className="text-center space-y-2 max-w-2xl mx-auto">
+            <span className="text-xs uppercase font-mono font-bold text-amber-500 tracking-widest block">
+              INTERACTIVE PREVIEW CALCULATOR
+            </span>
+            <h2 className={`text-2xl sm:text-3xl font-black tracking-tight ${textTitle}`}>
+              Calculate Your Cellular Age vs Calendar Age
+            </h2>
+            <p className={`text-xs sm:text-sm ${textSub}`}>
+              Slide your age and tap your daily symptoms to see your estimated biological lag—and how fast food sequencing can reverse it:
+            </p>
+          </div>
+
+          <div className="max-w-2xl mx-auto space-y-5">
+            {/* Age Slider */}
+            <div className="space-y-2">
+              <div className="flex items-center justify-between text-xs sm:text-sm font-bold">
+                <span className={textSub}>Your Calendar Age:</span>
+                <span className={`text-base sm:text-lg font-black font-mono ${textTitle}`}>{age} Years Old</span>
+              </div>
+              <input
+                type="range"
+                min={18}
+                max={75}
+                value={age}
+                onChange={(e) => setAge(Number(e.target.value))}
+                className="w-full accent-[#00FF9D] cursor-pointer h-2 bg-slate-200 dark:bg-slate-800 rounded-lg"
+              />
+            </div>
+
+            {/* Symptom Chips */}
+            <div className="space-y-2">
+              <span className={`text-xs font-bold block ${textSub}`}>Select Daily Symptoms:</span>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                {[
+                  { id: 'bloat', label: 'Post-Meal Bloat', icon: '🎈' },
+                  { id: 'crash', label: '2 PM Energy Crash', icon: '🥱' },
+                  { id: 'sleep', label: 'Restless Sleep (3 AM)', icon: '🌙' },
+                  { id: 'cravings', label: 'Evening Sugar Cravings', icon: '🍩' },
+                ].map(s => {
+                  const isActive = symptoms.includes(s.id);
+                  return (
+                    <button
+                      key={s.id}
+                      onClick={() => toggleSymptom(s.id)}
+                      className={`p-3 rounded-2xl border text-xs font-bold transition-all text-center flex flex-col items-center gap-1 ${
+                        isActive
+                          ? 'bg-amber-500/20 text-amber-700 dark:text-amber-300 border-amber-500/50 shadow-sm'
+                          : subBoxCls
+                      }`}
+                    >
+                      <span className="text-lg">{s.icon}</span>
+                      <span>{s.label}</span>
+                      <span className="text-[10px] opacity-75 font-mono">{isActive ? '✓ Selected' : '+ Tap to add'}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Live Result Callout */}
+            <div className="p-4 sm:p-5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+              <div>
+                <span className="text-xs uppercase font-mono font-bold text-slate-500 dark:text-slate-400 block">
+                  Estimated Cellular Biological Age:
+                </span>
+                <div className="flex items-baseline justify-center sm:justify-start gap-2 pt-0.5">
+                  <span className="text-2xl sm:text-3xl font-black text-emerald-600 dark:text-[#00FF9D] font-mono">
+                    {estimatedBioAge} Years
+                  </span>
+                  {calculatedLag > 0 && (
+                    <span className="text-xs font-bold text-amber-600 dark:text-amber-400 font-mono">
+                      (+{calculatedLag.toFixed(1)}y Metabolic Lag)
+                    </span>
+                  )}
+                </div>
+                <span className="text-[11px] text-slate-600 dark:text-slate-300 block pt-1">
+                  ⚡ <strong>100% Reversible:</strong> Food sequencing blunts glucose spikes to drop biological age within 90 days.
+                </span>
+              </div>
+
+              <button
+                onClick={onTryForFree}
+                className="py-3 px-6 rounded-xl bg-[#00FF9D] hover:bg-[#00FF9D]/90 active:scale-95 text-slate-950 font-black text-xs uppercase tracking-wider transition-all shadow-[0_0_15px_rgba(0,255,157,0.35)] shrink-0"
+              >
+                Reverse My Bio-Age →
+              </button>
+            </div>
+          </div>
+        </section>
+
+        {/* ========================================================================= */}
         {/* SECTION 2: CHOOSE YOUR #1 GOAL (11 GOALS WITH CLINICAL DATA) */}
         {/* ========================================================================= */}
         <section className={`p-6 sm:p-10 rounded-3xl border ${cardCls} space-y-6`}>
@@ -348,7 +483,6 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
             </p>
           </div>
 
-          {/* Responsive Multi-Column on Desktop (3 Cols), 1 Col on Mobile */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 pt-2">
             {goals.map((g) => {
               const isSelected = selectedGoal === g.id;
@@ -446,7 +580,7 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
               </ul>
             </div>
 
-            {/* STEP 3: EXACTLY AS LOCKED */}
+            {/* STEP 3 */}
             <div className={`p-5 sm:p-6 rounded-2xl border ${subBoxCls} space-y-4`}>
               <div className="flex items-center gap-3">
                 <span className="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-600 dark:text-[#00FF9D] flex items-center justify-center text-sm font-black font-mono">
@@ -524,57 +658,73 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
         </section>
 
         {/* ========================================================================= */}
-        {/* SECTION 4: USER DAILY JOURNEY WITH APP PREVIEW */}
+        {/* SECTION 4: USER DAILY JOURNEY WITH INTERACTIVE 1-TAP EXAMPLE LOGGING */}
         {/* ========================================================================= */}
         <section className={`p-6 sm:p-10 rounded-3xl border ${cardCls} space-y-6`}>
           <div className="space-y-2">
             <span className="text-xs uppercase font-mono font-bold text-emerald-600 dark:text-[#00FF9D] tracking-widest block">
-              INSIDE THE TOVELU APP
+              EXPERIENCE THE APP IN REAL TIME
             </span>
             <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight ${textTitle}`}>
               What Your Daily Life Looks Like With Tovelu
             </h2>
             <p className={`text-xs sm:text-sm ${textSub} max-w-3xl`}>
-              Here is the simple, stress-free routine you follow inside the Tovelu app:
+              <strong>Try it yourself below!</strong> Tap the meals and tasks to experience how an example user logs their full day in under 30 seconds with 1-tap checkmarks:
             </p>
           </div>
 
-          {/* Desktop 2-Column Grid (Steps on Left, Mockup on Right) */}
+          {/* Toast for Interactive logging demo */}
+          {loggedToast && (
+            <div className="p-3 rounded-xl bg-emerald-500/20 border border-emerald-500 text-center text-xs font-bold text-emerald-700 dark:text-[#00FF9D] animate-bounce">
+              {loggedToast}
+            </div>
+          )}
+
+          {/* Desktop 2-Column Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center pt-2">
-            {/* 3 Touchpoints */}
+            {/* Left: 3 Daily Steps with Example User Journey */}
             <div className="space-y-3.5">
               <div className={`p-4 sm:p-5 rounded-2xl border ${subBoxCls} space-y-1.5`}>
-                <div className="flex items-center gap-2.5 font-bold text-sm sm:text-base text-emerald-600 dark:text-[#00FF9D]">
-                  <span className="text-xl">🌅</span>
-                  <span>1. Morning Wake-Up (TODAY Tab)</span>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2.5 font-bold text-sm sm:text-base text-emerald-600 dark:text-[#00FF9D]">
+                    <span className="text-xl">🌅</span>
+                    <span>1. Morning Wake-Up (Breakfast In Sequence)</span>
+                  </div>
+                  <span className="text-[10px] font-mono bg-emerald-500/10 px-2 py-0.5 rounded text-emerald-600 dark:text-[#00FF9D]">Takes 5 sec</span>
                 </div>
                 <p className={`text-xs sm:text-sm ${textSub} pl-7 leading-relaxed`}>
-                  Open the app. See your personalized breakfast sequence. Check it off when you finish. Enjoy clear, sharp focus with zero mid-morning cravings.
+                  You wake up and glance at your TODAY tab. It says: <em>Eggs & Avocado first, Toast second</em>. You eat, tap the checkmark, and enjoy crystal-clear focus all morning.
                 </p>
               </div>
 
               <div className={`p-4 sm:p-5 rounded-2xl border ${subBoxCls} space-y-1.5`}>
-                <div className="flex items-center gap-2.5 font-bold text-sm sm:text-base text-amber-500">
-                  <span className="text-xl">☀️</span>
-                  <span>2. Lunch & Dinner Sequence (TODAY Tab)</span>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2.5 font-bold text-sm sm:text-base text-amber-500">
+                    <span className="text-xl">☀️</span>
+                    <span>2. Lunch & Dinner Sequence (No Afternoon Slump)</span>
+                  </div>
+                  <span className="text-[10px] font-mono bg-amber-500/10 px-2 py-0.5 rounded text-amber-500">1-Tap Log</span>
                 </div>
                 <p className={`text-xs sm:text-sm ${textSub} pl-7 leading-relaxed`}>
-                  Eat your normal home-cooked meals or restaurant food in the 1-2-3 sequence. The dreaded 2:00 PM afternoon food coma completely disappears.
+                  At 1:15 PM, you eat your normal home food or office lunch in sequence: <em>Salad first, Chicken/Dal second, Rice last</em>. Tap checkmark. The 2:00 PM food coma is 100% eliminated!
                 </p>
               </div>
 
               <div className={`p-4 sm:p-5 rounded-2xl border ${subBoxCls} space-y-1.5`}>
-                <div className="flex items-center gap-2.5 font-bold text-sm sm:text-base text-sky-500">
-                  <span className="text-xl">📊</span>
-                  <span>3. Weekly Healing & Doctor Reports (REPORT & HEALTH Tabs)</span>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2.5 font-bold text-sm sm:text-base text-sky-500">
+                    <span className="text-xl">📊</span>
+                    <span>3. Weekly Healing & Doctor Reports (REPORT Tab)</span>
+                  </div>
+                  <span className="text-[10px] font-mono bg-sky-500/10 px-2 py-0.5 rounded text-sky-500">1-Tap Export</span>
                 </div>
                 <p className={`text-xs sm:text-sm ${textSub} pl-7 leading-relaxed`}>
-                  Watch your internal Biological Age drop week after week. See all 14 organ systems stay in healthy green homeostasis. Export a 1-tap QR report for your doctor anytime.
+                  Watch your internal Biological Age drop week after week. See all 14 organ systems stay in healthy green homeostasis. Export a 1-tap encrypted QR report for your doctor anytime.
                 </p>
               </div>
             </div>
 
-            {/* Luxury Native Mobile Card Preview */}
+            {/* Right: INTERACTIVE 1-TAP EXAMPLE USER CARD MOCKUP */}
             <div className="flex justify-center">
               <div className={`w-full max-w-[360px] rounded-3xl p-5 border-2 ${
                 darkMode ? 'bg-[#080A0E] border-slate-700 shadow-2xl' : 'bg-white border-slate-300 shadow-xl'
@@ -582,15 +732,17 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
                 <div className="flex items-center justify-between border-b pb-2.5 border-slate-200 dark:border-slate-800">
                   <div className="flex items-center gap-2">
                     <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="font-bold text-xs tracking-tight">TODAY MEAL ENGINE</span>
+                    <span className="font-bold text-xs tracking-tight">EXAMPLE USER • AJAY (DAY 14)</span>
                   </div>
-                  <span className="font-mono text-xs text-emerald-600 dark:text-[#00FF9D] font-bold">DAY 14 OF 90</span>
+                  <span className="font-mono text-[10px] text-emerald-600 dark:text-[#00FF9D] font-bold">
+                    {progressPercent}% Complete
+                  </span>
                 </div>
 
                 {/* Bio Age Card */}
-                <div className="p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-between">
+                <div className="p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-between">
                   <div>
-                    <span className="text-[10px] uppercase font-bold text-slate-500 block">Biological Age</span>
+                    <span className="text-[9px] uppercase font-bold text-slate-500 block">Biological Age</span>
                     <span className="text-xl font-black text-emerald-600 dark:text-[#00FF9D]">31.2 Years</span>
                   </div>
                   <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/20 px-2.5 py-1 rounded-full">
@@ -598,37 +750,96 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
                   </span>
                 </div>
 
-                {/* Sequence Checklist */}
+                {/* Interactive Meals & Tasks: VISITOR CAN TAP TO LOG! */}
                 <div className="space-y-2 pt-1">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Today’s Sequence</span>
+                  <div className="flex items-center justify-between text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                    <span>Tap to Test 1-Tap Logging:</span>
+                    <span className="text-emerald-500">Tap Any Item 👇</span>
+                  </div>
 
-                  <div className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                  {/* Breakfast */}
+                  <div
+                    onClick={() => toggleTask('breakfast')}
+                    className={`p-2.5 rounded-xl border transition-all cursor-pointer flex items-center justify-between active:scale-95 ${
+                      interactiveTasks.breakfast
+                        ? 'bg-emerald-500/10 border-emerald-500/40 text-emerald-950 dark:text-emerald-200'
+                        : 'bg-slate-100 dark:bg-slate-900 border-slate-200 dark:border-slate-800'
+                    }`}
+                  >
                     <div>
                       <span className="font-bold block text-xs">Breakfast • 8:30 AM</span>
-                      <span className="text-[11px] text-slate-500">Eggs & Avocado first → Toast last</span>
+                      <span className="text-[11px] opacity-75">Eggs & Avocado first → Toast last</span>
                     </div>
-                    <span className="text-emerald-500 font-bold text-sm">✓</span>
+                    <span className={`w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs ${
+                      interactiveTasks.breakfast ? 'bg-emerald-500 text-slate-950' : 'border border-slate-400'
+                    }`}>
+                      {interactiveTasks.breakfast ? '✓' : ''}
+                    </span>
                   </div>
 
-                  <div className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                  {/* Lunch */}
+                  <div
+                    onClick={() => toggleTask('lunch')}
+                    className={`p-2.5 rounded-xl border transition-all cursor-pointer flex items-center justify-between active:scale-95 ${
+                      interactiveTasks.lunch
+                        ? 'bg-emerald-500/10 border-emerald-500/40 text-emerald-950 dark:text-emerald-200'
+                        : 'bg-slate-100 dark:bg-slate-900 border-slate-200 dark:border-slate-800'
+                    }`}
+                  >
                     <div>
                       <span className="font-bold block text-xs">Lunch • 1:15 PM</span>
-                      <span className="text-[11px] text-slate-500">Cucumber salad → Chicken/Dal → Rice</span>
+                      <span className="text-[11px] opacity-75">Cucumber salad → Chicken/Dal → Rice</span>
                     </div>
-                    <span className="text-emerald-500 font-bold text-sm">✓</span>
+                    <span className={`w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs ${
+                      interactiveTasks.lunch ? 'bg-emerald-500 text-slate-950' : 'border border-slate-400'
+                    }`}>
+                      {interactiveTasks.lunch ? '✓' : ''}
+                    </span>
                   </div>
 
-                  <div className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                  {/* Dinner */}
+                  <div
+                    onClick={() => toggleTask('dinner')}
+                    className={`p-2.5 rounded-xl border transition-all cursor-pointer flex items-center justify-between active:scale-95 ${
+                      interactiveTasks.dinner
+                        ? 'bg-emerald-500/10 border-emerald-500/40 text-emerald-950 dark:text-emerald-200'
+                        : 'bg-slate-100 dark:bg-slate-900 border-slate-200 dark:border-slate-800'
+                    }`}
+                  >
                     <div>
                       <span className="font-bold block text-xs">Dinner • 7:45 PM</span>
-                      <span className="text-[11px] text-slate-500">Steamed Greens → Salmon/Paneer → Sweet</span>
+                      <span className="text-[11px] opacity-75">Steamed Greens → Salmon/Paneer → Sweet</span>
                     </div>
-                    <span className="text-slate-400 text-xs">Upcoming</span>
+                    <span className={`w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs ${
+                      interactiveTasks.dinner ? 'bg-emerald-500 text-slate-950' : 'border border-slate-400'
+                    }`}>
+                      {interactiveTasks.dinner ? '✓' : ''}
+                    </span>
+                  </div>
+
+                  {/* 10-Min Walk */}
+                  <div
+                    onClick={() => toggleTask('walk')}
+                    className={`p-2.5 rounded-xl border transition-all cursor-pointer flex items-center justify-between active:scale-95 ${
+                      interactiveTasks.walk
+                        ? 'bg-emerald-500/10 border-emerald-500/40 text-emerald-950 dark:text-emerald-200'
+                        : 'bg-slate-100 dark:bg-slate-900 border-slate-200 dark:border-slate-800'
+                    }`}
+                  >
+                    <div>
+                      <span className="font-bold block text-xs">Post-Meal Habit • 10-Min Walk</span>
+                      <span className="text-[11px] opacity-75">Smooth muscle glucose absorption</span>
+                    </div>
+                    <span className={`w-6 h-6 rounded-full flex items-center justify-center font-bold text-xs ${
+                      interactiveTasks.walk ? 'bg-emerald-500 text-slate-950' : 'border border-slate-400'
+                    }`}>
+                      {interactiveTasks.walk ? '✓' : ''}
+                    </span>
                   </div>
                 </div>
 
                 {/* Bottom mini nav */}
-                <div className="pt-2.5 border-t border-slate-200 dark:border-slate-800 flex items-center justify-around text-[10px] font-bold text-slate-400">
+                <div className="pt-2 border-t border-slate-200 dark:border-slate-800 flex items-center justify-around text-[10px] font-bold text-slate-400">
                   <span className="text-emerald-500">TODAY</span>
                   <span>WEEK</span>
                   <span>REPORT</span>
@@ -641,7 +852,7 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
         </section>
 
         {/* ========================================================================= */}
-        {/* SECTION 5: WHY CHOOSE TOVELU (MARKET REAL STRUGGLES VS. US) */}
+        {/* SECTION 5: WHY CHOOSE TOVELU (SAVED SECTION 5 FULL COMPARISON TABLE) */}
         {/* ========================================================================= */}
         <section className={`p-6 sm:p-10 rounded-3xl border ${cardCls} space-y-6`}>
           <div className="space-y-2">
@@ -656,18 +867,45 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
             </p>
           </div>
 
-          {/* Responsive Comparison: Vertical Stack on Mobile, 2-Column Grid on Desktop */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+          {/* FULL COMPARISON TABLE ON DESKTOP */}
+          <div className="hidden md:block overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800">
+            <table className="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr className={darkMode ? 'bg-slate-900/90 text-slate-300' : 'bg-slate-100 text-slate-800'}>
+                  <th className="p-4 font-bold border-b border-slate-200 dark:border-slate-800 w-1/4">Real Daily Life Struggle</th>
+                  <th className="p-4 font-bold border-b border-slate-200 dark:border-slate-800 text-rose-500">❌ Starvation / Keto Diets</th>
+                  <th className="p-4 font-bold border-b border-slate-200 dark:border-slate-800 text-amber-500">❌ Calorie Counting Apps</th>
+                  <th className="p-4 font-bold border-b border-slate-200 dark:border-slate-800 text-rose-500">❌ Injections (Ozempic / Wegovy)</th>
+                  <th className="p-4 font-black border-b border-slate-200 dark:border-slate-800 text-emerald-600 dark:text-[#00FF9D] bg-emerald-500/10">
+                    👑 Tovelu (Powered by THAIS)
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-200 dark:divide-slate-800">
+                {marketComparisons.map((row, idx) => (
+                  <tr key={idx} className={idx % 2 === 0 ? (darkMode ? 'bg-[#0E1318]' : 'bg-white') : (darkMode ? 'bg-slate-900/40' : 'bg-slate-50/50')}>
+                    <td className={`p-4 font-bold ${textTitle}`}>{row.struggle}</td>
+                    <td className="p-4 text-slate-500 dark:text-slate-400">{row.diet}</td>
+                    <td className="p-4 text-slate-500 dark:text-slate-400">{row.calorie}</td>
+                    <td className="p-4 text-slate-500 dark:text-slate-400">{row.injections}</td>
+                    <td className="p-4 font-semibold text-emerald-800 dark:text-emerald-300 bg-emerald-500/5">{row.tovelu}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* MOBILE STACKED COMPARISON CARDS */}
+          <div className="grid grid-cols-1 gap-3.5 md:hidden">
             {marketComparisons.map((c, idx) => (
-              <div key={idx} className={`p-4 sm:p-5 rounded-2xl border ${subBoxCls} space-y-2.5 flex flex-col justify-between`}>
-                <h3 className={`text-xs sm:text-sm font-black ${textTitle}`}>{c.struggle}</h3>
-                
-                <div className="space-y-2 text-xs">
-                  <div className="p-2.5 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-800 dark:text-rose-300">
+              <div key={idx} className={`p-4 rounded-2xl border ${subBoxCls} space-y-2`}>
+                <h3 className={`text-xs font-black ${textTitle}`}>{c.struggle}</h3>
+                <div className="space-y-1.5 text-xs">
+                  <div className="p-2 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-800 dark:text-rose-300">
                     <strong className="block text-[10px] uppercase text-rose-600 dark:text-rose-400">Other Diets & Injections:</strong>
                     {c.diet}
                   </div>
-                  <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-800 dark:text-emerald-300 font-semibold">
+                  <div className="p-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-800 dark:text-emerald-300 font-semibold">
                     <strong className="block text-[10px] uppercase text-emerald-700 dark:text-[#00FF9D]">👑 Tovelu (Powered by THAIS):</strong>
                     {c.tovelu}
                   </div>
