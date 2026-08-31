@@ -32,7 +32,7 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
   }, []);
 
   const cardCls = darkMode
-    ? 'bg-[#0E1318] border-slate-800 text-slate-100 shadow-lg'
+    ? 'bg-[#0E1318] border-slate-800 text-slate-100 shadow-xl'
     : 'bg-white border-slate-200 text-slate-900 shadow-md';
   const subBoxCls = darkMode
     ? 'bg-slate-900/90 border-slate-800/80 text-slate-200'
@@ -240,22 +240,22 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
   ];
 
   return (
-    <div className={`min-h-screen ${darkMode ? 'bg-[#050709] text-slate-100' : 'bg-slate-50 text-slate-900'} transition-colors duration-200 font-sans pb-28`}>
-      {/* 1. TOP NATIVE APP NAVIGATION BAR */}
+    <div className={`min-h-screen ${darkMode ? 'bg-[#050709] text-slate-100' : 'bg-slate-50 text-slate-900'} transition-colors duration-200 font-sans pb-24 sm:pb-16`}>
+      {/* 1. TOP RESPONSIVE NAVIGATION BAR */}
       <header className={`sticky top-0 z-40 w-full border-b backdrop-blur-xl transition-all ${
         darkMode ? 'bg-[#050709]/90 border-slate-800/80' : 'bg-white/90 border-slate-200/80'
       }`}>
-        <div className="max-w-2xl mx-auto px-4 h-14 flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
-            <HomeostasisLogo size={32} mode={darkMode ? 'on-dark' : 'on-light'} showWordmark={true} />
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <HomeostasisLogo size={36} mode={darkMode ? 'on-dark' : 'on-light'} showWordmark={true} />
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2.5 sm:gap-3">
             {onToggleTheme && (
               <button
                 onClick={onToggleTheme}
                 aria-label="Toggle theme"
-                className={`w-9 h-9 rounded-xl border flex items-center justify-center text-xs font-bold transition-all ${
+                className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl border flex items-center justify-center text-xs sm:text-sm font-bold transition-all ${
                   darkMode ? 'bg-slate-900 border-slate-800 text-amber-400' : 'bg-slate-100 border-slate-200 text-slate-700'
                 }`}
               >
@@ -265,7 +265,7 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
 
             <button
               onClick={onGoToLogin}
-              className={`py-1.5 px-3.5 rounded-xl text-xs font-bold transition-all border ${
+              className={`py-2 px-4 rounded-xl text-xs sm:text-sm font-bold transition-all border ${
                 darkMode ? 'bg-slate-900 border-slate-800 text-slate-300 hover:text-white' : 'bg-white border-slate-300 text-slate-700 hover:text-slate-900'
               }`}
             >
@@ -274,7 +274,7 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
 
             <button
               onClick={onTryForFree}
-              className="py-1.5 px-4 rounded-xl text-xs font-black uppercase tracking-wider bg-[#00FF9D] text-slate-950 hover:bg-[#00FF9D]/90 active:scale-95 transition-all shadow-[0_0_12px_rgba(0,255,157,0.35)]"
+              className="py-2 px-5 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider bg-[#00FF9D] text-slate-950 hover:bg-[#00FF9D]/90 active:scale-95 transition-all shadow-[0_0_15px_rgba(0,255,157,0.35)]"
             >
               Try for Free →
             </button>
@@ -282,29 +282,29 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
         </div>
       </header>
 
-      {/* MOBILE-FIRST APP CONTAINER */}
-      <main className="max-w-2xl mx-auto px-3.5 sm:px-6 pt-5 space-y-6">
+      {/* RESPONSIVE CONTAINER: NATIVE MOBILE ON PHONES, FULL-WIDTH LUXURY ON DESKTOP */}
+      <main className="max-w-6xl mx-auto px-3.5 sm:px-6 lg:px-8 pt-6 sm:pt-10 space-y-8 sm:space-y-12">
 
         {/* ========================================================================= */}
         {/* SECTION 1: THE MASTER HEADLINE & SUBHEADLINE (THE WHO PROOF HOOK) */}
         {/* ========================================================================= */}
-        <section className={`p-5 sm:p-7 rounded-3xl border ${cardCls} space-y-5 text-left relative overflow-hidden`}>
+        <section className={`p-6 sm:p-10 lg:p-12 rounded-3xl border ${cardCls} space-y-6 text-left relative overflow-hidden`}>
           {/* Subtle Ambient Glow */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
 
-          <div className="inline-flex items-center gap-2 py-1 px-3 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-[#00FF9D] text-[10px] sm:text-xs font-mono font-bold tracking-wider">
+          <div className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-[#00FF9D] text-xs font-mono font-bold tracking-wider">
             <span className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-[#00FF9D] animate-ping" />
             WORLD HEALTH ORGANIZATION DATA • CELLULAR HOMEOSTASIS OS
           </div>
 
-          <h1 className={`text-2xl sm:text-4xl font-black tracking-tight leading-[1.18] sm:leading-[1.18] ${textTitle}`}>
+          <h1 className={`text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.18] sm:leading-[1.15] max-w-5xl ${textTitle}`}>
             You Weren’t Failing Your Diets—<span className="text-rose-500">Your Diets Were Failing Your Biology:</span> <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 via-teal-400 to-[#00FF9D]">
               Just 500 Metabolic Pathways Cause 75% of Global Illnesses, and They Are Secretly Blocking Your Goals.
             </span>
           </h1>
 
-          <div className={`text-xs sm:text-sm ${textSub} leading-relaxed space-y-2.5`}>
+          <div className={`text-sm sm:text-base md:text-lg ${textSub} leading-relaxed space-y-3 max-w-4xl`}>
             <p>
               We know you just want to lose stubborn belly fat, stop the 2 PM energy crash, and feel light again. But clinical data from the WHO shows over 500 metabolic root conditions silently trigger post-meal insulin resistance, locking your body into fat storage regardless of calories.
             </p>
@@ -314,15 +314,15 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
           </div>
 
           {/* Primary Action Button */}
-          <div className="pt-2 space-y-2.5">
+          <div className="pt-2 max-w-md space-y-3">
             <button
               onClick={onTryForFree}
-              className="w-full py-4 px-6 rounded-2xl bg-[#00FF9D] hover:bg-[#00FF9D]/90 active:scale-[0.98] text-slate-950 font-black text-sm sm:text-base uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(0,255,157,0.4)] flex items-center justify-center gap-2"
+              className="w-full py-4 px-8 rounded-2xl bg-[#00FF9D] hover:bg-[#00FF9D]/90 active:scale-[0.98] text-slate-950 font-black text-sm sm:text-base uppercase tracking-wider transition-all shadow-[0_0_25px_rgba(0,255,157,0.45)] flex items-center justify-center gap-2"
             >
               <span>⚡ Try for Free →</span>
             </button>
 
-            <div className="flex items-center justify-center gap-3 text-[10px] sm:text-xs font-mono text-slate-400">
+            <div className="flex items-center justify-center sm:justify-start gap-4 text-xs font-mono text-slate-400">
               <span>✓ Takes 2 Minutes</span>
               <span>•</span>
               <span>✓ 100% Private & Encrypted</span>
@@ -335,260 +335,306 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
         {/* ========================================================================= */}
         {/* SECTION 2: CHOOSE YOUR #1 GOAL (11 GOALS WITH CLINICAL DATA) */}
         {/* ========================================================================= */}
-        <section className={`p-5 sm:p-7 rounded-3xl border ${cardCls} space-y-4`}>
-          <div className="space-y-1">
-            <span className="text-[10px] uppercase font-mono font-bold text-emerald-600 dark:text-[#00FF9D] tracking-widest block">
+        <section className={`p-6 sm:p-10 rounded-3xl border ${cardCls} space-y-6`}>
+          <div className="space-y-2">
+            <span className="text-xs uppercase font-mono font-bold text-emerald-600 dark:text-[#00FF9D] tracking-widest block">
               STEP 1 OF 3: YOUR PRIMARY TARGET
             </span>
-            <h2 className={`text-xl sm:text-2xl font-black tracking-tight ${textTitle}`}>
+            <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight ${textTitle}`}>
               What is the #1 Thing You Want to Fix in Your Body Right Now?
             </h2>
-            <p className={`text-xs ${textSub}`}>
+            <p className={`text-xs sm:text-sm ${textSub} max-w-3xl`}>
               Tap what matters to you today. We build your daily food order to hit your target from Day 1 while quietly shielding your 14 organs from 500 hidden diseases in the background:
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-2.5 pt-1">
+          {/* Responsive Multi-Column on Desktop (3 Cols), 1 Col on Mobile */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 pt-2">
             {goals.map((g) => {
               const isSelected = selectedGoal === g.id;
               return (
                 <div
                   key={g.id}
                   onClick={() => setSelectedGoal(g.id)}
-                  className={`p-3.5 rounded-2xl border transition-all cursor-pointer active:scale-[0.99] flex items-start gap-3 ${
+                  className={`p-4 rounded-2xl border transition-all cursor-pointer active:scale-[0.99] flex flex-col justify-between ${
                     isSelected
-                      ? 'border-emerald-500 bg-emerald-500/10 shadow-md shadow-emerald-500/10'
+                      ? 'border-emerald-500 bg-emerald-500/10 shadow-lg shadow-emerald-500/10'
                       : `${subBoxCls} hover:border-slate-400 dark:hover:border-slate-700`
                   }`}
                 >
-                  <span className="text-2xl shrink-0 mt-0.5">{g.icon}</span>
-                  <div className="min-w-0 flex-1 space-y-1">
+                  <div className="space-y-2">
                     <div className="flex items-center justify-between gap-2">
-                      <h3 className={`text-xs sm:text-sm font-bold ${textTitle}`}>{g.title}</h3>
-                      <span className={`w-4 h-4 rounded-full border flex items-center justify-center shrink-0 ${
-                        isSelected ? 'bg-emerald-500 border-emerald-500 text-slate-950 text-[10px] font-black' : 'border-slate-400 dark:border-slate-700'
+                      <div className="flex items-center gap-2.5">
+                        <span className="text-2xl shrink-0">{g.icon}</span>
+                        <h3 className={`text-xs sm:text-sm font-bold ${textTitle}`}>{g.title}</h3>
+                      </div>
+                      <span className={`w-5 h-5 rounded-full border flex items-center justify-center shrink-0 ${
+                        isSelected ? 'bg-emerald-500 border-emerald-500 text-slate-950 text-xs font-black' : 'border-slate-400 dark:border-slate-700'
                       }`}>
                         {isSelected ? '✓' : ''}
                       </span>
                     </div>
-                    <p className={`text-[11px] sm:text-xs ${textSub} leading-relaxed`}>{g.simple}</p>
-                    <div className="pt-0.5">
-                      <span className="text-[10px] font-mono font-bold text-emerald-700 dark:text-[#00FF9D] bg-emerald-500/10 px-2 py-0.5 rounded-md inline-block">
-                        📊 {g.data}
-                      </span>
-                    </div>
+                    <p className={`text-xs ${textSub} leading-relaxed`}>{g.simple}</p>
+                  </div>
+                  <div className="pt-3">
+                    <span className="text-[11px] font-mono font-bold text-emerald-700 dark:text-[#00FF9D] bg-emerald-500/10 px-2.5 py-1 rounded-lg inline-block">
+                      📊 {g.data}
+                    </span>
                   </div>
                 </div>
               );
             })}
           </div>
 
-          <button
-            onClick={onTryForFree}
-            className="w-full py-3.5 px-6 rounded-2xl bg-[#00FF9D] hover:bg-[#00FF9D]/90 active:scale-[0.98] text-slate-950 font-black text-xs sm:text-sm uppercase tracking-wider transition-all shadow-md shadow-[#00FF9D]/20 mt-2"
-          >
-            <span>Select Your Goal & Try for Free →</span>
-          </button>
+          <div className="pt-2">
+            <button
+              onClick={onTryForFree}
+              className="py-4 px-8 rounded-2xl bg-[#00FF9D] hover:bg-[#00FF9D]/90 active:scale-[0.98] text-slate-950 font-black text-xs sm:text-sm uppercase tracking-wider transition-all shadow-md shadow-[#00FF9D]/20 inline-flex items-center gap-2"
+            >
+              <span>Select Your Goal & Try for Free →</span>
+            </button>
+          </div>
         </section>
 
         {/* ========================================================================= */}
-        {/* SECTION 3: HOW IT WORKS (IN 3 SIMPLE STEPS) */}
+        {/* SECTION 3: HOW IT WORKS (IN 3 SIMPLE STEPS - 100% AS LOCKED) */}
         {/* ========================================================================= */}
-        <section className={`p-5 sm:p-7 rounded-3xl border ${cardCls} space-y-5`}>
-          <div className="space-y-1">
-            <span className="text-[10px] uppercase font-mono font-bold text-emerald-600 dark:text-[#00FF9D] tracking-widest block">
+        <section className={`p-6 sm:p-10 rounded-3xl border ${cardCls} space-y-6`}>
+          <div className="space-y-2">
+            <span className="text-xs uppercase font-mono font-bold text-emerald-600 dark:text-[#00FF9D] tracking-widest block">
               EFFORTLESS AUTOPILOT
             </span>
-            <h2 className={`text-xl sm:text-2xl font-black tracking-tight ${textTitle}`}>
+            <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight ${textTitle}`}>
               Zero Complicated Diet Rules. Zero Guesswork.
             </h2>
-            <p className={`text-xs ${textSub}`}>
+            <p className={`text-xs sm:text-sm ${textSub} max-w-3xl`}>
               Here is how simple it is to start, follow your daily routine, and eat with Tovelu:
             </p>
           </div>
 
-          <div className="space-y-3">
-            {/* Step 1 */}
-            <div className={`p-4 rounded-2xl border ${subBoxCls} space-y-2`}>
-              <div className="flex items-center gap-2">
-                <span className="w-6 h-6 rounded-lg bg-emerald-500/20 text-emerald-600 dark:text-[#00FF9D] flex items-center justify-center text-xs font-black font-mono">
+          <div className="space-y-4">
+            {/* STEP 1 */}
+            <div className={`p-5 sm:p-6 rounded-2xl border ${subBoxCls} space-y-3`}>
+              <div className="flex items-center gap-3">
+                <span className="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-600 dark:text-[#00FF9D] flex items-center justify-center text-sm font-black font-mono">
                   1
                 </span>
-                <h3 className={`text-xs sm:text-sm font-black ${textTitle}`}>
-                  The 2-Step Launch (Ready in 2 Minutes)
+                <h3 className={`text-sm sm:text-base font-black ${textTitle}`}>
+                  STEP 1: The 2-Step Launch (Ready in 2 Minutes)
                 </h3>
               </div>
-              <ul className={`text-xs ${textSub} space-y-1.5 pl-8 leading-relaxed list-disc`}>
+              <ul className={`text-xs sm:text-sm ${textSub} space-y-2 pl-4 sm:pl-11 leading-relaxed list-disc`}>
                 <li><strong>Fill the Quick Survey:</strong> Answer simple questions about your digestion, energy crashes, and sleep. We calculate your true internal biological age and scan 500 hidden disease risks.</li>
                 <li><strong>Choose & Start Day 1:</strong> Pick your launch date. The app instantly hands you your custom Day 1 food sequence using whatever food is already in your kitchen.</li>
               </ul>
             </div>
 
-            {/* Step 2 */}
-            <div className={`p-4 rounded-2xl border ${subBoxCls} space-y-2`}>
-              <div className="flex items-center gap-2">
-                <span className="w-6 h-6 rounded-lg bg-emerald-500/20 text-emerald-600 dark:text-[#00FF9D] flex items-center justify-center text-xs font-black font-mono">
+            {/* STEP 2 */}
+            <div className={`p-5 sm:p-6 rounded-2xl border ${subBoxCls} space-y-3`}>
+              <div className="flex items-center gap-3">
+                <span className="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-600 dark:text-[#00FF9D] flex items-center justify-center text-sm font-black font-mono">
                   2
                 </span>
-                <h3 className={`text-xs sm:text-sm font-black ${textTitle}`}>
-                  Your Daily Routine (Effortless Daily Rhythm)
+                <h3 className={`text-sm sm:text-base font-black ${textTitle}`}>
+                  STEP 2: Your Daily Routine (Effortless Daily Rhythm)
                 </h3>
               </div>
-              <ul className={`text-xs ${textSub} space-y-1.5 pl-8 leading-relaxed list-disc`}>
+              <ul className={`text-xs sm:text-sm ${textSub} space-y-2 pl-4 sm:pl-11 leading-relaxed list-disc`}>
                 <li><strong>Custom Tasks for Your Schedule:</strong> Built around your real wake-up, lunch, and bed times.</li>
                 <li><strong>Visual Portion Levels:</strong> No food scales or calorie counting. Simple visual plate portions (Fiber first, Protein second, Carbs last).</li>
                 <li><strong>1-Tap Checkmarks:</strong> Simply tap the checkmark when you finish eating. Your body stays in fat-burning mode while you go on with your day.</li>
               </ul>
             </div>
 
-            {/* Step 3 */}
-            <div className={`p-4 rounded-2xl border ${subBoxCls} space-y-2.5`}>
-              <div className="flex items-center gap-2">
-                <span className="w-6 h-6 rounded-lg bg-emerald-500/20 text-emerald-600 dark:text-[#00FF9D] flex items-center justify-center text-xs font-black font-mono">
+            {/* STEP 3: EXACTLY AS LOCKED */}
+            <div className={`p-5 sm:p-6 rounded-2xl border ${subBoxCls} space-y-4`}>
+              <div className="flex items-center gap-3">
+                <span className="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-600 dark:text-[#00FF9D] flex items-center justify-center text-sm font-black font-mono">
                   3
                 </span>
-                <h3 className={`text-xs sm:text-sm font-black ${textTitle}`}>
-                  Log Your Food Your Way (Scan | Manual | Ask AI)
-                </h3>
-              </div>
-              
-              <div className="space-y-2 pl-8 text-xs">
-                <div className="p-2.5 rounded-xl bg-slate-200/50 dark:bg-slate-800/60 border border-slate-300/60 dark:border-slate-700/60 space-y-1">
-                  <span className="font-bold text-emerald-600 dark:text-[#00FF9D] block">1. Scan, Upload, or Manual</span>
-                  <p className={`${textSub} text-[11px]`}>
-                    • <strong>By Dish:</strong> Snap a photo or type any finished meal (e.g. Biryani, Pasta, Steak, Dal). The app automatically breaks it down into your 1-2-3 order. <br />
-                    • <strong>By Ingredients:</strong> Cooking at home? Snap your raw ingredients on the counter. Tovelu tells you what order to prepare and eat them. <br />
-                    • <strong>By Menu:</strong> Sitting at a restaurant? Snap the physical food menu. The app instantly highlights what sequence to eat them in!
+                <div>
+                  <h3 className={`text-sm sm:text-base font-black ${textTitle}`}>
+                    STEP 3: Log Your Food Your Way (Scan, Manual, or Ask AI)
+                  </h3>
+                  <p className={`text-xs sm:text-sm ${textSub}`}>
+                    Log your meals however you like—we built it for real, busy human life:
                   </p>
                 </div>
+              </div>
 
-                <div className="p-2.5 rounded-xl bg-slate-200/50 dark:bg-slate-800/60 border border-slate-300/60 dark:border-slate-700/60 space-y-1">
-                  <span className="font-bold text-amber-500 block">2. Ask AI Coach</span>
-                  <p className={`${textSub} text-[11px]`}>
-                    Eating at a family dinner, wedding, or party? Just ask the AI like a friend: <em>“I’m at a party with pizza and drinks, how should I eat to avoid fat storage?”</em> You get an instant, judgment-free answer in 3 seconds.
-                  </p>
+              <div className="space-y-3 pl-2 sm:pl-11">
+                {/* 1. SCAN / UPLOAD / MANUAL */}
+                <div className={`p-4 rounded-2xl border ${darkMode ? 'bg-slate-900/60 border-slate-800' : 'bg-white border-slate-200'} space-y-2.5`}>
+                  <div className="font-bold text-xs sm:text-sm text-emerald-600 dark:text-[#00FF9D] flex items-center gap-2">
+                    <span>📸</span>
+                    <span>1. SCAN / UPLOAD / MANUAL (Plate, Ingredients, or Restaurant Menu):</span>
+                  </div>
+                  <div className={`space-y-2 text-xs sm:text-sm ${textSub} pl-2 sm:pl-4 leading-relaxed`}>
+                    <div className="flex items-start gap-2">
+                      <span className="text-base shrink-0">🍲</span>
+                      <p>
+                        <strong className={textTitle}>By Dish:</strong> Snap a photo or type the dish name (e.g. Biryani, Pasta, Steak, Dal Tadka). The app automatically breaks it down into your 1-2-3 eating order.
+                      </p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="text-base shrink-0">🥗</span>
+                      <p>
+                        <strong className={textTitle}>By Ingredients:</strong> Cooking at home? Snap your raw ingredients on the counter. Tovelu tells you what order to prepare and eat them.
+                      </p>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <span className="text-base shrink-0">📋</span>
+                      <p>
+                        <strong className={textTitle}>By Menu:</strong> Sitting at a restaurant? Snap the physical food menu. The app instantly highlights the best dishes to order and what sequence to eat them in!
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 2. ASK AI */}
+                <div className={`p-4 rounded-2xl border ${darkMode ? 'bg-slate-900/60 border-slate-800' : 'bg-white border-slate-200'} space-y-2`}>
+                  <div className="font-bold text-xs sm:text-sm text-amber-500 flex items-center gap-2">
+                    <span>🤖</span>
+                    <span>2. ASK AI (Your Personal Pocket Health Coach):</span>
+                  </div>
+                  <div className={`text-xs sm:text-sm ${textSub} pl-2 sm:pl-4 space-y-2`}>
+                    <p className="italic">
+                      Eating at a family dinner, wedding, or party? Just ask the AI like a friend:
+                    </p>
+                    <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-800 dark:text-amber-300 font-mono text-xs sm:text-sm">
+                      “I’m at a party with pizza and drinks, how should I eat to avoid fat storage?”
+                    </div>
+                    <p className="pt-1">
+                      You get an instant, friendly, judgment-free answer in 3 seconds so you can enjoy your life without ruining your progress.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <button
-            onClick={onTryForFree}
-            className="w-full py-3.5 px-6 rounded-2xl bg-[#00FF9D] hover:bg-[#00FF9D]/90 active:scale-[0.98] text-slate-950 font-black text-xs sm:text-sm uppercase tracking-wider transition-all shadow-md shadow-[#00FF9D]/20"
-          >
-            <span>Try for Free in 3 Simple Steps →</span>
-          </button>
+          <div className="pt-2">
+            <button
+              onClick={onTryForFree}
+              className="py-4 px-8 rounded-2xl bg-[#00FF9D] hover:bg-[#00FF9D]/90 active:scale-[0.98] text-slate-950 font-black text-xs sm:text-sm uppercase tracking-wider transition-all shadow-md shadow-[#00FF9D]/20 inline-flex items-center gap-2"
+            >
+              <span>Try for Free in 3 Simple Steps →</span>
+            </button>
+          </div>
         </section>
 
         {/* ========================================================================= */}
         {/* SECTION 4: USER DAILY JOURNEY WITH APP PREVIEW */}
         {/* ========================================================================= */}
-        <section className={`p-5 sm:p-7 rounded-3xl border ${cardCls} space-y-5`}>
-          <div className="space-y-1">
-            <span className="text-[10px] uppercase font-mono font-bold text-emerald-600 dark:text-[#00FF9D] tracking-widest block">
+        <section className={`p-6 sm:p-10 rounded-3xl border ${cardCls} space-y-6`}>
+          <div className="space-y-2">
+            <span className="text-xs uppercase font-mono font-bold text-emerald-600 dark:text-[#00FF9D] tracking-widest block">
               INSIDE THE TOVELU APP
             </span>
-            <h2 className={`text-xl sm:text-2xl font-black tracking-tight ${textTitle}`}>
+            <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight ${textTitle}`}>
               What Your Daily Life Looks Like With Tovelu
             </h2>
-            <p className={`text-xs ${textSub}`}>
+            <p className={`text-xs sm:text-sm ${textSub} max-w-3xl`}>
               Here is the simple, stress-free routine you follow inside the Tovelu app:
             </p>
           </div>
 
-          {/* 3 Touchpoints */}
-          <div className="space-y-2.5 text-xs">
-            <div className={`p-3.5 rounded-2xl border ${subBoxCls} space-y-1`}>
-              <div className="flex items-center gap-2 font-bold text-emerald-600 dark:text-[#00FF9D]">
-                <span>🌅</span>
-                <span>1. Morning Wake-Up (TODAY Tab)</span>
+          {/* Desktop 2-Column Grid (Steps on Left, Mockup on Right) */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center pt-2">
+            {/* 3 Touchpoints */}
+            <div className="space-y-3.5">
+              <div className={`p-4 sm:p-5 rounded-2xl border ${subBoxCls} space-y-1.5`}>
+                <div className="flex items-center gap-2.5 font-bold text-sm sm:text-base text-emerald-600 dark:text-[#00FF9D]">
+                  <span className="text-xl">🌅</span>
+                  <span>1. Morning Wake-Up (TODAY Tab)</span>
+                </div>
+                <p className={`text-xs sm:text-sm ${textSub} pl-7 leading-relaxed`}>
+                  Open the app. See your personalized breakfast sequence. Check it off when you finish. Enjoy clear, sharp focus with zero mid-morning cravings.
+                </p>
               </div>
-              <p className={`text-[11px] ${textSub} pl-6 leading-relaxed`}>
-                Open the app. See your personalized breakfast sequence. Check it off when you finish. Enjoy clear, sharp focus with zero mid-morning cravings.
-              </p>
+
+              <div className={`p-4 sm:p-5 rounded-2xl border ${subBoxCls} space-y-1.5`}>
+                <div className="flex items-center gap-2.5 font-bold text-sm sm:text-base text-amber-500">
+                  <span className="text-xl">☀️</span>
+                  <span>2. Lunch & Dinner Sequence (TODAY Tab)</span>
+                </div>
+                <p className={`text-xs sm:text-sm ${textSub} pl-7 leading-relaxed`}>
+                  Eat your normal home-cooked meals or restaurant food in the 1-2-3 sequence. The dreaded 2:00 PM afternoon food coma completely disappears.
+                </p>
+              </div>
+
+              <div className={`p-4 sm:p-5 rounded-2xl border ${subBoxCls} space-y-1.5`}>
+                <div className="flex items-center gap-2.5 font-bold text-sm sm:text-base text-sky-500">
+                  <span className="text-xl">📊</span>
+                  <span>3. Weekly Healing & Doctor Reports (REPORT & HEALTH Tabs)</span>
+                </div>
+                <p className={`text-xs sm:text-sm ${textSub} pl-7 leading-relaxed`}>
+                  Watch your internal Biological Age drop week after week. See all 14 organ systems stay in healthy green homeostasis. Export a 1-tap QR report for your doctor anytime.
+                </p>
+              </div>
             </div>
 
-            <div className={`p-3.5 rounded-2xl border ${subBoxCls} space-y-1`}>
-              <div className="flex items-center gap-2 font-bold text-amber-500">
-                <span>☀️</span>
-                <span>2. Lunch & Dinner Sequence (TODAY Tab)</span>
-              </div>
-              <p className={`text-[11px] ${textSub} pl-6 leading-relaxed`}>
-                Eat your normal home-cooked meals or restaurant food in the 1-2-3 sequence. The dreaded 2:00 PM afternoon food coma completely disappears.
-              </p>
-            </div>
-
-            <div className={`p-3.5 rounded-2xl border ${subBoxCls} space-y-1`}>
-              <div className="flex items-center gap-2 font-bold text-sky-500">
-                <span>📊</span>
-                <span>3. Weekly Healing & Doctor Reports (REPORT & HEALTH Tabs)</span>
-              </div>
-              <p className={`text-[11px] ${textSub} pl-6 leading-relaxed`}>
-                Watch your internal Biological Age drop week after week. See all 14 organ systems stay in healthy green homeostasis. Export a 1-tap QR report for your doctor anytime.
-              </p>
-            </div>
-          </div>
-
-          {/* Luxury Native Mobile Card Preview */}
-          <div className="pt-2 flex justify-center">
-            <div className={`w-full max-w-[340px] rounded-3xl p-4 border-2 ${
-              darkMode ? 'bg-[#080A0E] border-slate-700 shadow-2xl' : 'bg-white border-slate-300 shadow-xl'
-            } space-y-3 text-xs font-sans`}>
-              <div className="flex items-center justify-between border-b pb-2 border-slate-200 dark:border-slate-800">
-                <div className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-                  <span className="font-bold text-[11px]">TODAY MEAL ENGINE</span>
-                </div>
-                <span className="font-mono text-[10px] text-emerald-600 dark:text-[#00FF9D] font-bold">DAY 14 OF 90</span>
-              </div>
-
-              {/* Bio Age Card */}
-              <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-between">
-                <div>
-                  <span className="text-[9px] uppercase font-bold text-slate-500 block">Biological Age</span>
-                  <span className="text-lg font-black text-emerald-600 dark:text-[#00FF9D]">31.2 Years</span>
-                </div>
-                <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/20 px-2 py-0.5 rounded-full">
-                  ⚡ -2.8y Reversed
-                </span>
-              </div>
-
-              {/* Sequence Checklist */}
-              <div className="space-y-2">
-                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Today’s Sequence</span>
-
-                <div className="p-2 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
-                  <div>
-                    <span className="font-bold block text-[11px]">Breakfast • 8:30 AM</span>
-                    <span className="text-[10px] text-slate-500">Eggs & Avocado first → Toast last</span>
+            {/* Luxury Native Mobile Card Preview */}
+            <div className="flex justify-center">
+              <div className={`w-full max-w-[360px] rounded-3xl p-5 border-2 ${
+                darkMode ? 'bg-[#080A0E] border-slate-700 shadow-2xl' : 'bg-white border-slate-300 shadow-xl'
+              } space-y-3.5 text-xs font-sans`}>
+                <div className="flex items-center justify-between border-b pb-2.5 border-slate-200 dark:border-slate-800">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                    <span className="font-bold text-xs tracking-tight">TODAY MEAL ENGINE</span>
                   </div>
-                  <span className="text-emerald-500 font-bold">✓</span>
+                  <span className="font-mono text-xs text-emerald-600 dark:text-[#00FF9D] font-bold">DAY 14 OF 90</span>
                 </div>
 
-                <div className="p-2 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                {/* Bio Age Card */}
+                <div className="p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-between">
                   <div>
-                    <span className="font-bold block text-[11px]">Lunch • 1:15 PM</span>
-                    <span className="text-[10px] text-slate-500">Cucumber salad → Chicken/Dal → Rice</span>
+                    <span className="text-[10px] uppercase font-bold text-slate-500 block">Biological Age</span>
+                    <span className="text-xl font-black text-emerald-600 dark:text-[#00FF9D]">31.2 Years</span>
                   </div>
-                  <span className="text-emerald-500 font-bold">✓</span>
+                  <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/20 px-2.5 py-1 rounded-full">
+                    ⚡ -2.8y Reversed
+                  </span>
                 </div>
 
-                <div className="p-2 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
-                  <div>
-                    <span className="font-bold block text-[11px]">Dinner • 7:45 PM</span>
-                    <span className="text-[10px] text-slate-500">Steamed Greens → Salmon/Paneer → Sweet</span>
-                  </div>
-                  <span className="text-slate-400 text-[10px]">Upcoming</span>
-                </div>
-              </div>
+                {/* Sequence Checklist */}
+                <div className="space-y-2 pt-1">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Today’s Sequence</span>
 
-              {/* Bottom mini nav */}
-              <div className="pt-2 border-t border-slate-200 dark:border-slate-800 flex items-center justify-around text-[9px] font-bold text-slate-400">
-                <span className="text-emerald-500">TODAY</span>
-                <span>WEEK</span>
-                <span>REPORT</span>
-                <span>HEALTH</span>
-                <span>YOU</span>
+                  <div className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                    <div>
+                      <span className="font-bold block text-xs">Breakfast • 8:30 AM</span>
+                      <span className="text-[11px] text-slate-500">Eggs & Avocado first → Toast last</span>
+                    </div>
+                    <span className="text-emerald-500 font-bold text-sm">✓</span>
+                  </div>
+
+                  <div className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                    <div>
+                      <span className="font-bold block text-xs">Lunch • 1:15 PM</span>
+                      <span className="text-[11px] text-slate-500">Cucumber salad → Chicken/Dal → Rice</span>
+                    </div>
+                    <span className="text-emerald-500 font-bold text-sm">✓</span>
+                  </div>
+
+                  <div className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                    <div>
+                      <span className="font-bold block text-xs">Dinner • 7:45 PM</span>
+                      <span className="text-[11px] text-slate-500">Steamed Greens → Salmon/Paneer → Sweet</span>
+                    </div>
+                    <span className="text-slate-400 text-xs">Upcoming</span>
+                  </div>
+                </div>
+
+                {/* Bottom mini nav */}
+                <div className="pt-2.5 border-t border-slate-200 dark:border-slate-800 flex items-center justify-around text-[10px] font-bold text-slate-400">
+                  <span className="text-emerald-500">TODAY</span>
+                  <span>WEEK</span>
+                  <span>REPORT</span>
+                  <span>HEALTH</span>
+                  <span>YOU</span>
+                </div>
               </div>
             </div>
           </div>
@@ -597,31 +643,31 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
         {/* ========================================================================= */}
         {/* SECTION 5: WHY CHOOSE TOVELU (MARKET REAL STRUGGLES VS. US) */}
         {/* ========================================================================= */}
-        <section className={`p-5 sm:p-7 rounded-3xl border ${cardCls} space-y-5`}>
-          <div className="space-y-1">
-            <span className="text-[10px] uppercase font-mono font-bold text-rose-500 tracking-widest block">
+        <section className={`p-6 sm:p-10 rounded-3xl border ${cardCls} space-y-6`}>
+          <div className="space-y-2">
+            <span className="text-xs uppercase font-mono font-bold text-rose-500 tracking-widest block">
               THE HONEST TRUTH
             </span>
-            <h2 className={`text-xl sm:text-2xl font-black tracking-tight ${textTitle}`}>
+            <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight ${textTitle}`}>
               Why Has Every Other Diet, App, and Pill Failed You?
             </h2>
-            <p className={`text-xs ${textSub}`}>
+            <p className={`text-xs sm:text-sm ${textSub} max-w-3xl`}>
               Most health solutions force you to suffer, starve, or spend thousands of dollars on temporary fixes. Here is the reality of what people face every day:
             </p>
           </div>
 
-          {/* Vertical Stacked Cards on Mobile (No Horizontal Scrolling) */}
-          <div className="space-y-3">
+          {/* Responsive Comparison: Vertical Stack on Mobile, 2-Column Grid on Desktop */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
             {marketComparisons.map((c, idx) => (
-              <div key={idx} className={`p-3.5 rounded-2xl border ${subBoxCls} space-y-2`}>
-                <h3 className={`text-xs font-black ${textTitle}`}>{c.struggle}</h3>
+              <div key={idx} className={`p-4 sm:p-5 rounded-2xl border ${subBoxCls} space-y-2.5 flex flex-col justify-between`}>
+                <h3 className={`text-xs sm:text-sm font-black ${textTitle}`}>{c.struggle}</h3>
                 
-                <div className="grid grid-cols-1 gap-1.5 text-[11px]">
-                  <div className="p-2 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-800 dark:text-rose-300">
+                <div className="space-y-2 text-xs">
+                  <div className="p-2.5 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-800 dark:text-rose-300">
                     <strong className="block text-[10px] uppercase text-rose-600 dark:text-rose-400">Other Diets & Injections:</strong>
                     {c.diet}
                   </div>
-                  <div className="p-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-800 dark:text-emerald-300 font-semibold">
+                  <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-800 dark:text-emerald-300 font-semibold">
                     <strong className="block text-[10px] uppercase text-emerald-700 dark:text-[#00FF9D]">👑 Tovelu (Powered by THAIS):</strong>
                     {c.tovelu}
                   </div>
@@ -631,8 +677,8 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
           </div>
 
           {/* Scientific Proof Callout */}
-          <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-xs text-text-secondary space-y-2 leading-relaxed">
-            <strong className="text-emerald-700 dark:text-[#00FF9D] block font-bold text-sm">
+          <div className="p-5 sm:p-6 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-xs sm:text-sm text-text-secondary space-y-2.5 leading-relaxed">
+            <strong className="text-emerald-700 dark:text-[#00FF9D] block font-bold text-sm sm:text-base">
               💡 How is this possible? (The Science Behind THAIS)
             </strong>
             <p>
@@ -646,31 +692,33 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
             </p>
           </div>
 
-          <button
-            onClick={onTryForFree}
-            className="w-full py-3.5 px-6 rounded-2xl bg-[#00FF9D] hover:bg-[#00FF9D]/90 active:scale-[0.98] text-slate-950 font-black text-xs sm:text-sm uppercase tracking-wider transition-all shadow-md shadow-[#00FF9D]/20"
-          >
-            <span>Try for Free — Starts from $49 →</span>
-          </button>
+          <div className="pt-1">
+            <button
+              onClick={onTryForFree}
+              className="py-4 px-8 rounded-2xl bg-[#00FF9D] hover:bg-[#00FF9D]/90 active:scale-[0.98] text-slate-950 font-black text-xs sm:text-sm uppercase tracking-wider transition-all shadow-md shadow-[#00FF9D]/20 inline-flex items-center gap-2"
+            >
+              <span>Try for Free — Starts from $49 →</span>
+            </button>
+          </div>
         </section>
 
         {/* ========================================================================= */}
         {/* SECTION 6: FREQUENTLY ASKED QUESTIONS (FAQS) */}
         {/* ========================================================================= */}
-        <section className={`p-5 sm:p-7 rounded-3xl border ${cardCls} space-y-5`}>
-          <div className="space-y-1">
-            <span className="text-[10px] uppercase font-mono font-bold text-emerald-600 dark:text-[#00FF9D] tracking-widest block">
+        <section className={`p-6 sm:p-10 rounded-3xl border ${cardCls} space-y-6`}>
+          <div className="space-y-2">
+            <span className="text-xs uppercase font-mono font-bold text-emerald-600 dark:text-[#00FF9D] tracking-widest block">
               100% HONEST ANSWERS
             </span>
-            <h2 className={`text-xl sm:text-2xl font-black tracking-tight ${textTitle}`}>
+            <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight ${textTitle}`}>
               Frequently Asked Questions
             </h2>
-            <p className={`text-xs ${textSub}`}>
+            <p className={`text-xs sm:text-sm ${textSub} max-w-3xl`}>
               Everything you need to know before taking your free audit:
             </p>
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-2.5">
             {faqs.map((faq, idx) => {
               const isOpen = openFaq === idx;
               return (
@@ -680,9 +728,9 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
                 >
                   <button
                     onClick={() => setOpenFaq(isOpen ? null : idx)}
-                    className="w-full p-3.5 sm:p-4 flex items-center justify-between text-left gap-3"
+                    className="w-full p-4 sm:p-5 flex items-center justify-between text-left gap-4"
                   >
-                    <span className={`text-xs sm:text-sm font-bold ${textTitle}`}>
+                    <span className={`text-xs sm:text-sm md:text-base font-bold ${textTitle}`}>
                       {faq.q}
                     </span>
                     <span className={`text-xs font-mono ${textSub} shrink-0`}>
@@ -690,10 +738,10 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
                     </span>
                   </button>
                   {isOpen && (
-                    <div className={`px-3.5 sm:px-4 pb-3.5 pt-1 border-t ${
+                    <div className={`px-4 sm:px-5 pb-4 sm:pb-5 pt-1 border-t ${
                       darkMode ? 'border-slate-800' : 'border-slate-200'
                     }`}>
-                      <p className={`text-xs ${textSub} leading-relaxed`}>
+                      <p className={`text-xs sm:text-sm ${textSub} leading-relaxed`}>
                         {faq.a}
                       </p>
                     </div>
@@ -704,29 +752,29 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
           </div>
 
           {/* Final Action Box */}
-          <div className={`p-5 sm:p-6 rounded-2xl border text-center space-y-3 mt-4 ${
+          <div className={`p-6 sm:p-8 rounded-3xl border text-center space-y-3.5 mt-6 ${
             darkMode ? 'bg-slate-900 border-slate-800' : 'bg-slate-100 border-slate-200'
           }`}>
-            <h3 className={`text-base sm:text-lg font-black ${textTitle}`}>
+            <h3 className={`text-lg sm:text-xl md:text-2xl font-black ${textTitle}`}>
               Ready to Inspect Your Biological Health?
             </h3>
-            <p className={`text-xs ${textSub} max-w-sm mx-auto`}>
+            <p className={`text-xs sm:text-sm ${textSub} max-w-md mx-auto`}>
               Take the 2-minute diagnostic audit now. See your biological age and unlock your personalized food order today.
             </p>
             <button
               onClick={onTryForFree}
-              className="py-3.5 px-8 rounded-2xl bg-[#00FF9D] hover:bg-[#00FF9D]/90 active:scale-[0.98] text-slate-950 font-black text-xs uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(0,255,157,0.35)] inline-flex items-center gap-2"
+              className="py-4 px-8 rounded-2xl bg-[#00FF9D] hover:bg-[#00FF9D]/90 active:scale-[0.98] text-slate-950 font-black text-xs sm:text-sm uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(0,255,157,0.35)] inline-flex items-center gap-2"
             >
               <span>Start Your Free Clinical Audit Now →</span>
             </button>
-            <div className="text-[10px] font-mono text-slate-400">
+            <div className="text-[11px] font-mono text-slate-400">
               Takes 2 Minutes • No Credit Card • Starts from $49
             </div>
           </div>
         </section>
 
         {/* FOOTER */}
-        <footer className={`py-6 text-center text-[10px] font-mono ${darkMode ? 'text-slate-500' : 'text-slate-400'}`}>
+        <footer className={`py-8 text-center text-xs font-mono ${darkMode ? 'text-slate-500' : 'text-slate-400'}`}>
           <p>© {new Date().getFullYear()} Tovelu Sovereign Health OS • Cellular Homeostasis & Longevity</p>
         </footer>
 
@@ -736,7 +784,7 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
       {/* FLOATING STICKY THUMB CTA DOCKED AT BOTTOM ON MOBILE (THE 10X CONVERTER) */}
       {/* ========================================================================= */}
       {showStickyCta && (
-        <div className="fixed bottom-0 left-0 right-0 z-50 p-3 bg-white/80 dark:bg-[#050709]/85 backdrop-blur-xl border-t border-slate-200/80 dark:border-slate-800/80 animate-slideUp">
+        <div className="fixed bottom-0 left-0 right-0 z-50 p-3 bg-white/85 dark:bg-[#050709]/85 backdrop-blur-xl border-t border-slate-200/80 dark:border-slate-800/80 animate-slideUp">
           <div className="max-w-md mx-auto flex items-center justify-between gap-3">
             <div className="min-w-0 flex-1">
               <span className="text-[10px] font-mono font-bold text-emerald-600 dark:text-[#00FF9D] block uppercase">
@@ -748,7 +796,7 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
             </div>
             <button
               onClick={onTryForFree}
-              className="py-3 px-5 rounded-xl bg-[#00FF9D] hover:bg-[#00FF9D]/90 active:scale-95 text-slate-950 font-black text-xs uppercase tracking-wider shadow-[0_0_15px_rgba(0,255,157,0.4)] shrink-0"
+              className="py-2.5 px-5 rounded-xl bg-[#00FF9D] hover:bg-[#00FF9D]/90 active:scale-95 text-slate-950 font-black text-xs uppercase tracking-wider shadow-[0_0_15px_rgba(0,255,157,0.4)] shrink-0"
             >
               Try for Free →
             </button>
