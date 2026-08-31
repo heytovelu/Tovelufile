@@ -162,7 +162,13 @@ export default function App() {
         <BrandWebsite
           darkMode={darkMode}
           onToggleTheme={() => setDarkMode(!darkMode)}
-          onTryForFree={() => setFlowState('auth')}
+          onTryForFree={() => {
+            if (typeof window !== 'undefined' && window.location.hostname.includes('tovelu.store') && !window.location.hostname.startsWith('app.')) {
+              window.location.href = 'https://app.tovelu.store';
+            } else {
+              setFlowState('survey');
+            }
+          }}
           onGoToLogin={() => setFlowState('auth')}
         />
       )}

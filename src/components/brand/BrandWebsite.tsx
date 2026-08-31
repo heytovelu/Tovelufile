@@ -14,47 +14,53 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
   darkMode = false,
   onToggleTheme,
 }) => {
-  // Interactive Biological Age Calculator State
-  const [age, setAge] = useState(32);
-  const [symptoms, setSymptoms] = useState<string[]>(['bloat', 'crash']);
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
-
-  const toggleSymptom = (id: string) => {
-    setSymptoms(prev => 
-      prev.includes(id) ? prev.filter(s => s !== id) : [...prev, id]
-    );
-  };
-
-  const calculatedLag = (symptoms.includes('bloat') ? 2.1 : 0) + 
-                        (symptoms.includes('crash') ? 1.8 : 0) + 
-                        (symptoms.includes('sleep') ? 1.5 : 0) +
-                        (symptoms.includes('cravings') ? 1.4 : 0);
-  const estimatedBioAge = (age + calculatedLag).toFixed(1);
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [selectedGoal, setSelectedGoal] = useState<number | null>(null);
 
   const cardCls = darkMode
     ? 'bg-[#0E1318] border-slate-800 text-slate-100'
     : 'bg-white border-slate-200 text-slate-900 shadow-sm';
-  const subBoxCls = darkMode ? 'bg-slate-900/80 border-slate-800 text-slate-200' : 'bg-slate-50 border-slate-200 text-slate-800';
+  const subBoxCls = darkMode
+    ? 'bg-slate-900/80 border-slate-800 text-slate-200'
+    : 'bg-slate-50 border-slate-200 text-slate-800';
   const textTitle = darkMode ? 'text-slate-100' : 'text-slate-900';
   const textSub = darkMode ? 'text-slate-400' : 'text-slate-600';
 
+  const goals = [
+    { id: 1, icon: '🔥', title: 'Rapid Visceral Fat Loss', desc: 'Melt stubborn belly fat by stopping insulin spikes without cutting calories.' },
+    { id: 2, icon: '⚡', title: 'All-Day Constant Energy', desc: 'End the dreaded 2:00 PM afternoon crash once and for all.' },
+    { id: 3, icon: '✨', title: 'Total Gut De-Bloat', desc: 'Say goodbye to gas, bloating, and post-meal stomach heaviness in 72 hours.' },
+    { id: 4, icon: '🌙', title: 'Deep Unbroken Sleep', desc: 'Stop waking up at 3:00 AM by balancing your liver’s overnight glycogen rhythm.' },
+    { id: 5, icon: '🧠', title: 'Crystal-Clear Focus', desc: 'Wipe out brain fog caused by erratic blood sugar rollercoasters.' },
+    { id: 6, icon: '💪', title: 'Lean Muscle & Firm Tone', desc: 'Absorb more protein by locking it into your second digestive window.' },
+    { id: 7, icon: '🩸', title: 'Blood Sugar & Insulin Reset', desc: 'Blunt post-meal glucose spikes by up to 38% naturally.' },
+    { id: 8, icon: '❤️', title: 'Heart & Artery Protection', desc: 'Protect your cardiovascular system and reduce daily arterial stress.' },
+    { id: 9, icon: '🧬', title: 'Natural Hormonal Balance', desc: 'Soothe PCOS, thyroid sluggishness, and cortisol burnout.' },
+    { id: 10, icon: '💎', title: 'Clear, Radiant Skin', desc: 'Stop sugar molecules from damaging your skin’s collagen.' },
+    { id: 11, icon: '⏳', title: 'Biological Age Reversal', desc: 'Help your internal organs function up to 4 years younger in 90 days.' },
+  ];
+
   const faqs = [
     {
-      q: "What is Food Sequencing and how does it prevent fat storage?",
-      a: "Food sequencing is the clinical science of eating your meal in an exact biological order: Fiber/Greens first, Protein & Healthy Fats second, and Carbohydrates & Starches last. Fiber creates a viscous mesh in the small intestine that slows gastric emptying and blunts peak glucose spikes by up to 38% without cutting calories or starving."
+      q: 'Do I have to stop eating rice, roti, bread, pasta, or sweets?',
+      a: 'No, absolutely not! You still get to eat your favorite carbohydrates. You simply eat them last in your meal after your veggies and proteins. This slows down gastric digestion and stops your body from turning carbs into fat.',
     },
     {
-      q: "What do I get with the 3-Hour Free Access?",
-      a: "You get 100% unrestricted access to the entire Tovelu Operating System: your 52-Question Biological Age calculation, 14 organ systems diagnostic matrix, custom daily food sequencing blueprint, zero-waste kitchen autopilot, and cryptographic milestone certificates. Zero credit card is required to explore."
+      q: 'Can I do this with Indian, Asian, Mediterranean, or Vegetarian food?',
+      a: 'Yes, 100%. Tovelu’s meal sequencing engine adapts to every regional cuisine on earth (Indian, Mediterranean, Asian, Mexican, Western) and all diets (Vegetarian, Non-Vegetarian, Vegan, Jain, Eggetarian, Halal).',
     },
     {
-      q: "Are all taxes included in your pricing?",
-      a: "Yes. All Tovelu protocol memberships are 100% tax-inclusive (VAT & GST included). What you see is what you pay—there are zero surprise add-ons at checkout."
+      q: 'What if I have diagnosed conditions like Thyroid, Fatty Liver, Diabetes, or PCOS?',
+      a: 'That is exactly what our diagnostic engine is designed for. Your 52-question survey identifies your conditions and automatically formulates a meal sequence that protects your liver, pancreas, and endocrine system from inflammation.',
     },
     {
-      q: "Can I share my clinical reports with my doctor?",
-      a: "Yes. Tovelu includes a 1-tap HIPAA/GDPR compliant Doctor Report export that generates a scannable QR code and clinical summary across your 14 organ systems."
-    }
+      q: 'Is this difficult or time-consuming to follow?',
+      a: 'Not at all. There is zero calorie counting, no food weighing, and no special ingredients to buy. It takes less than 30 seconds a day to check your daily food sequence in the app.',
+    },
+    {
+      q: 'How do I get started?',
+      a: 'Simply tap "Try for Free" below to begin your personalized health audit. It takes just 2 minutes and maps your exact internal biological baseline.',
+    },
   ];
 
   return (
@@ -95,197 +101,292 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
               onClick={onTryForFree}
               className="py-2.5 px-5 rounded-full text-xs font-black uppercase tracking-wider bg-[#00FF9D] text-slate-950 hover:bg-[#00FF9D]/90 active:scale-95 transition-all shadow-[0_0_15px_rgba(0,255,157,0.35)]"
             >
-              Try It For Free →
+              Try for Free →
             </button>
           </div>
         </div>
       </header>
 
-      {/* 2. HERO SECTION */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 pt-12 pb-16 text-center space-y-6">
-        <div className="inline-flex items-center gap-2 py-1 px-4 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-[#00FF9D] text-xs font-bold font-mono uppercase tracking-widest">
+      {/* ========================================================================= */}
+      {/* SECTION 1: MAIN HEADLINE + SUBHEADLINE (DIRECT TALK TO VISITOR) */}
+      {/* ========================================================================= */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 pt-12 sm:pt-20 pb-16 text-center space-y-6">
+        <div className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-[#00FF9D] text-xs font-mono font-bold tracking-wider">
           <span className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-[#00FF9D] animate-ping" />
-          The Sovereign Health Operating System
+          A DIRECT MESSAGE FOR YOUR BODY & METABOLISM
         </div>
 
-        <h1 className={`text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-tight sm:leading-tight max-w-4xl mx-auto ${textTitle}`}>
-          Stop Fighting Willpower. <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-teal-500 to-[#00FF9D]">
-            Fix Cellular Homeostasis.
+        <h1 className={`text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.15] sm:leading-[1.15] ${textTitle}`}>
+          Your Body Can Face <span className="text-rose-500">55,000+ Diseases</span>. <br />
+          Just <span className="text-amber-500">500</span> Are Responsible For 75% to 80% of All Deaths & Chronic Illnesses. <br />
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 via-teal-400 to-[#00FF9D]">
+            And You Can Prevent & Reverse Almost Every Single One By Fixing Your Diet Order & Daily Routine.
           </span>
         </h1>
 
-        <p className={`text-base sm:text-lg ${textSub} max-w-2xl mx-auto leading-relaxed`}>
-          Calorie restriction fails because your metabolism is not a calculator. Tovelu calculates your <strong>real biological age</strong> and uses clinical food sequencing to cut glucose spikes by 38% without starving.
-        </p>
+        <div className={`text-base sm:text-lg ${textSub} max-w-2xl mx-auto leading-relaxed space-y-3`}>
+          <p>
+            <strong>Let’s be completely honest with you:</strong> You don’t have to live with a bloated stomach, exhausting afternoon fatigue, or stubborn belly fat. You don’t need dangerous crash diets, bitter powders, or synthetic pills.
+          </p>
+          <p className="font-semibold text-emerald-700 dark:text-[#00FF9D]">
+            Our system solves these 500 root disease pathways automatically—while helping you achieve your #1 personal body goal at the same time.
+          </p>
+        </div>
 
-        {/* Primary CTA Box */}
+        {/* Primary CTA */}
         <div className="pt-4 max-w-md mx-auto space-y-3">
           <button
             onClick={onTryForFree}
-            className="w-full py-4 px-8 rounded-2xl bg-[#00FF9D] hover:bg-[#00FF9D]/90 active:scale-98 text-slate-950 font-black text-base uppercase tracking-wider transition-all shadow-[0_0_25px_rgba(0,255,157,0.4)] flex items-center justify-center gap-2"
+            className="w-full py-4 px-8 rounded-2xl bg-[#00FF9D] hover:bg-[#00FF9D]/90 active:scale-98 text-slate-950 font-black text-base uppercase tracking-wider transition-all shadow-[0_0_25px_rgba(0,255,157,0.45)] flex items-center justify-center gap-2"
           >
-            <span>⚡ Try It For Free (Get 3-Hour Access) →</span>
+            <span>⚡ Try for Free →</span>
           </button>
 
-          <div className="flex items-center justify-center gap-4 text-xs font-mono text-slate-400">
-            <span>✓ No credit card required</span>
+          <div className="flex items-center justify-center gap-3 text-xs font-mono text-slate-400">
+            <span>✓ Takes 2 Minutes</span>
             <span>•</span>
-            <span>✓ 52-Q Clinical Audit</span>
+            <span>✓ 100% Private & Encrypted</span>
             <span>•</span>
-            <span>✓ 100% Free</span>
+            <span>✓ No Credit Card Needed</span>
           </div>
         </div>
       </section>
 
-      {/* 3. INTERACTIVE BIOLOGICAL AGE PREVIEW CALCULATOR */}
-      <section className="max-w-3xl mx-auto px-4 sm:px-6 pb-20">
-        <div className={`p-6 sm:p-10 rounded-3xl border-2 shadow-xl ${
-          calculatedLag > 2
-            ? 'border-amber-500/40 bg-gradient-to-br from-amber-500/5 via-transparent to-emerald-500/5'
-            : cardCls
-        } space-y-6`}>
-          <div className="text-center space-y-1.5">
-            <span className="text-xs uppercase font-mono font-bold text-amber-500 tracking-widest">
-              INTERACTIVE DIAGNOSTIC PREVIEW
+      {/* ========================================================================= */}
+      {/* SECTION 2: 11 GOALS (HEADLINE + SHORT CARDS) */}
+      {/* ========================================================================= */}
+      <section className={`py-16 border-y ${darkMode ? 'bg-[#080A0E] border-slate-800' : 'bg-slate-50/70 border-slate-200'}`}>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-8">
+          <div className="text-center space-y-2 max-w-2xl mx-auto">
+            <span className="text-xs uppercase font-mono font-bold text-emerald-600 dark:text-[#00FF9D] tracking-widest">
+              STEP 1: IDENTIFY YOUR TARGET
             </span>
-            <h2 className={`text-xl sm:text-2xl font-black tracking-tight ${textTitle}`}>
-              Are Your Cells Older Than Your Calendar Age?
+            <h2 className={`text-2xl sm:text-4xl font-black tracking-tight ${textTitle}`}>
+              Tell Us: What is Your #1 Goal Right Now?
             </h2>
-            <p className={`text-xs sm:text-sm ${textSub} max-w-md mx-auto`}>
-              Slide your age and tap your daily symptoms to estimate your cellular metabolic lag:
+            <p className={`text-xs sm:text-sm ${textSub}`}>
+              Pick what matters to your body today. Tovelu crafts your daily meal order to hit your target from Day 1 while quietly shielding your 14 organs from the 500 diseases in the background:
             </p>
           </div>
 
-          {/* Age Slider */}
-          <div className="space-y-2">
-            <div className="flex items-center justify-between text-sm font-bold">
-              <span className={textSub}>Your Calendar Age:</span>
-              <span className={`text-lg font-black font-mono ${textTitle}`}>{age} Years Old</span>
-            </div>
-            <input
-              type="range"
-              min={18}
-              max={75}
-              value={age}
-              onChange={(e) => setAge(Number(e.target.value))}
-              className="w-full accent-[#00FF9D] cursor-pointer h-2 bg-slate-200 dark:bg-slate-800 rounded-lg"
-            />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {goals.map((g) => {
+              const isSelected = selectedGoal === g.id;
+              return (
+                <div
+                  key={g.id}
+                  onClick={() => setSelectedGoal(isSelected ? null : g.id)}
+                  className={`p-4 rounded-2xl border transition-all cursor-pointer ${
+                    isSelected
+                      ? 'border-emerald-500 bg-emerald-500/10 shadow-md shadow-emerald-500/15'
+                      : `${cardCls} hover:border-slate-400 dark:hover:border-slate-700`
+                  } space-y-1.5`}
+                >
+                  <div className="flex items-center gap-2.5">
+                    <span className="text-2xl shrink-0">{g.icon}</span>
+                    <h3 className={`text-sm font-bold ${textTitle}`}>{g.title}</h3>
+                  </div>
+                  <p className={`text-xs ${textSub} leading-relaxed`}>{g.desc}</p>
+                </div>
+              );
+            })}
           </div>
 
-          {/* Symptom Chips */}
-          <div className="space-y-2">
-            <span className={`text-xs font-bold block ${textSub}`}>Select Common Symptoms:</span>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-              {[
-                { id: 'bloat', label: 'Post-Meal Bloat' },
-                { id: 'crash', label: '2 PM Energy Crash' },
-                { id: 'sleep', label: 'Restless Sleep' },
-                { id: 'cravings', label: 'Evening Sugar Cravings' },
-              ].map(s => {
-                const isActive = symptoms.includes(s.id);
-                return (
-                  <button
-                    key={s.id}
-                    onClick={() => toggleSymptom(s.id)}
-                    className={`p-2.5 rounded-xl border text-xs font-bold transition-all text-center ${
-                      isActive
-                        ? 'bg-amber-500/20 text-amber-700 dark:text-amber-300 border-amber-500/50 shadow-sm'
-                        : subBoxCls
-                    }`}
-                  >
-                    {isActive ? '✓ ' : '+ '} {s.label}
-                  </button>
-                );
-              })}
-            </div>
+          <div className="text-center pt-2">
+            <button
+              onClick={onTryForFree}
+              className="py-3 px-8 rounded-full bg-[#00FF9D] hover:bg-[#00FF9D]/90 active:scale-95 text-slate-950 font-black text-xs uppercase tracking-wider transition-all shadow-md shadow-[#00FF9D]/20 inline-flex items-center gap-2"
+            >
+              <span>Select Your Goal & Try for Free →</span>
+            </button>
           </div>
-
-          {/* Calculation Box */}
-          <div className="p-5 rounded-2xl bg-slate-900 text-white flex flex-col sm:flex-row items-center justify-between gap-4 border border-slate-800">
-            <div>
-              <span className="text-[11px] text-slate-400 uppercase font-mono block">Estimated Biological Age:</span>
-              <div className="text-3xl font-black text-[#00FF9D] font-mono">
-                {estimatedBioAge} <span className="text-sm font-sans font-normal text-slate-300">Years</span>
-              </div>
-            </div>
-            <div className="text-center sm:text-right">
-              <span className="text-[11px] text-amber-400 font-bold uppercase block">Cellular Metabolic Lag:</span>
-              <div className="text-lg font-black text-amber-300 font-mono">
-                +{calculatedLag.toFixed(1)} Years
-              </div>
-            </div>
-          </div>
-
-          {/* CTA Inside Widget */}
-          <button
-            onClick={onTryForFree}
-            className="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-emerald-500 to-[#00FF9D] text-slate-950 font-black text-xs uppercase tracking-wider hover:opacity-90 active:scale-98 transition-all shadow-md flex items-center justify-center gap-2"
-          >
-            <span>Run Complete 52-Question Clinical Audit to Reverse This →</span>
-          </button>
         </div>
       </section>
 
-      {/* 4. THE 3 CLINICAL PILLARS */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 pb-20 space-y-12">
-        <div className="text-center space-y-2">
+      {/* ========================================================================= */}
+      {/* SECTION 3: HOW IT WORKS (SHORT PARAGRAPH EXPLAINING WHAT WE SOLVE) */}
+      {/* ========================================================================= */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 py-16 space-y-8">
+        <div className="text-center space-y-2 max-w-2xl mx-auto">
           <span className="text-xs uppercase font-mono font-bold text-emerald-600 dark:text-[#00FF9D] tracking-widest">
-            CLINICALLY GROUNDED METHODOLOGY
+            THE BIOLOGICAL MECHANISM
           </span>
           <h2 className={`text-2xl sm:text-4xl font-black tracking-tight ${textTitle}`}>
-            Three Scientific Pillars That Replace Willpower
+            How Do We Solve This For You?
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className={`p-6 rounded-3xl border ${cardCls} space-y-3`}>
-            <div className="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-2xl">
-              🥗
-            </div>
-            <h3 className={`text-lg font-black tracking-tight ${textTitle}`}>
-              1. Food Sequencing = -38% Spikes
-            </h3>
-            <p className={`text-xs ${textSub} leading-relaxed`}>
-              Eating vegetables and fiber before protein and carbs coats your duodenum in a viscous mesh that slows carbohydrate absorption, blunting postprandial insulin surges by up to 38%.
+        <div className={`p-6 sm:p-8 rounded-3xl border ${cardCls} space-y-4 leading-relaxed text-sm sm:text-base`}>
+          <p className={textSub}>
+            Most health issues aren’t caused by <strong className={textTitle}>what</strong> you eat—they’re triggered by the <strong className={textTitle}>order</strong> you eat it. When you eat bread, rice, or sweets on an empty stomach, your blood sugar spikes violently. Your body releases a flood of insulin, which immediately locks your fat cells, forces your liver to store visceral belly fat, and triggers fatigue across your 14 organ systems.
+          </p>
+
+          <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-xs sm:text-sm text-text-secondary space-y-2">
+            <strong className="text-emerald-700 dark:text-[#00FF9D] font-bold block text-sm">
+              ✨ Tovelu solves this with one simple golden rule: The 1-2-3 Eating Sequence
+            </strong>
+            <p className="leading-relaxed">
+              You eat <strong className={textTitle}>Fiber & Veggies first</strong>, <strong className={textTitle}>Protein & Healthy Fats second</strong>, and <strong className={textTitle}>Carbohydrates & Sweets last</strong>. The vegetables create a gentle natural mesh in your stomach that slows down glucose absorption. Your peak insulin spikes drop by up to <strong className={textTitle}>38%</strong>, your body burns fat instead of storing it, and your 14 internal organs stay clean and protected from chronic disease.
             </p>
           </div>
 
-          <div className={`p-6 rounded-3xl border ${cardCls} space-y-3`}>
-            <div className="w-12 h-12 rounded-2xl bg-sky-500/15 border border-sky-500/30 flex items-center justify-center text-2xl">
-              🧬
-            </div>
-            <h3 className={`text-lg font-black tracking-tight ${textTitle}`}>
-              2. 14 Organ Systems Matrix
-            </h3>
-            <p className={`text-xs ${textSub} leading-relaxed`}>
-              Inspect real-time clinical grades (A to F) across endocrine, gut motility, cardiovascular, and liver detoxification markers, cross-referenced against a 500-disease prevention index.
-            </p>
-          </div>
+          <p className={`font-semibold text-center ${textTitle}`}>
+            Same food. Same plate. Zero starving. Real, irreversible results.
+          </p>
 
-          <div className={`p-6 rounded-3xl border ${cardCls} space-y-3`}>
-            <div className="w-12 h-12 rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-2xl">
-              📜
+          {/* 3 Step Visual Pills */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+            <div className={`p-3.5 rounded-2xl border text-center space-y-1 ${subBoxCls}`}>
+              <span className="text-2xl">🥗</span>
+              <div className="font-bold text-xs text-emerald-600 dark:text-[#00FF9D]">1. Fiber & Veggies First</div>
+              <p className={`text-[11px] ${textSub}`}>Forms stomach protective mesh</p>
             </div>
-            <h3 className={`text-lg font-black tracking-tight ${textTitle}`}>
-              3. Verified Milestone Credentials
-            </h3>
-            <p className={`text-xs ${textSub} leading-relaxed`}>
-              Earn cryptographic certificates of biological mastery formatted for Instagram Stories (9:16) and Facebook Posts (1:1) with official accreditation at WWW.TOVELU.STORE.
-            </p>
+            <div className={`p-3.5 rounded-2xl border text-center space-y-1 ${subBoxCls}`}>
+              <span className="text-2xl">🍗</span>
+              <div className="font-bold text-xs text-amber-500">2. Protein & Fats Second</div>
+              <p className={`text-[11px] ${textSub}`}>Triggers fullness & stops cravings</p>
+            </div>
+            <div className={`p-3.5 rounded-2xl border text-center space-y-1 ${subBoxCls}`}>
+              <span className="text-2xl">🍚</span>
+              <div className="font-bold text-xs text-sky-500">3. Carbs & Sweets Last</div>
+              <p className={`text-[11px] ${textSub}`}>Smooth, slow sugar absorption</p>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 5. FREQUENTLY ASKED QUESTIONS */}
-      <section className="max-w-3xl mx-auto px-4 sm:px-6 pb-20 space-y-6">
+      {/* ========================================================================= */}
+      {/* SECTION 4: USER JOURNEY WITH APP PREVIEW */}
+      {/* ========================================================================= */}
+      <section className={`py-16 border-t ${darkMode ? 'bg-[#080A0E] border-slate-800' : 'bg-slate-50/70 border-slate-200'}`}>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-10">
+          <div className="text-center space-y-2 max-w-2xl mx-auto">
+            <span className="text-xs uppercase font-mono font-bold text-emerald-600 dark:text-[#00FF9D] tracking-widest">
+              YOUR DAY-TO-DAY EXPERIENCE
+            </span>
+            <h2 className={`text-2xl sm:text-4xl font-black tracking-tight ${textTitle}`}>
+              What Your Daily Life Looks Like With Tovelu
+            </h2>
+            <p className={`text-xs sm:text-sm ${textSub}`}>
+              Here is the simple, stress-free routine you follow inside the Tovelu app:
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            {/* Left: 3 Daily Steps */}
+            <div className="space-y-4">
+              <div className={`p-4 rounded-2xl border ${cardCls} space-y-1.5`}>
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">🌅</span>
+                  <h3 className={`text-sm font-bold ${textTitle}`}>1. Morning Wake-Up (TODAY Tab)</h3>
+                </div>
+                <p className={`text-xs ${textSub} leading-relaxed pl-7`}>
+                  Open the app. See your personalized breakfast sequence. Check it off when you finish. Enjoy clear, sharp focus with zero mid-morning cravings.
+                </p>
+              </div>
+
+              <div className={`p-4 rounded-2xl border ${cardCls} space-y-1.5`}>
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">☀️</span>
+                  <h3 className={`text-sm font-bold ${textTitle}`}>2. Lunch & Dinner Sequence (TODAY Tab)</h3>
+                </div>
+                <p className={`text-xs ${textSub} leading-relaxed pl-7`}>
+                  Eat your normal home-cooked meals or restaurant food in the 1-2-3 sequence. The dreaded 2:00 PM afternoon food coma completely disappears.
+                </p>
+              </div>
+
+              <div className={`p-4 rounded-2xl border ${cardCls} space-y-1.5`}>
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">📊</span>
+                  <h3 className={`text-sm font-bold ${textTitle}`}>3. Weekly Healing & Doctor Reports (REPORT & HEALTH)</h3>
+                </div>
+                <p className={`text-xs ${textSub} leading-relaxed pl-7`}>
+                  Watch your internal Biological Age drop week after week. See all 14 organ systems stay in healthy green homeostasis. Export a 1-tap QR report for your doctor anytime.
+                </p>
+              </div>
+            </div>
+
+            {/* Right: Realistic Luxury Mobile UI Mockup */}
+            <div className="flex justify-center">
+              <div className={`w-full max-w-[340px] rounded-3xl p-4 border-2 ${
+                darkMode ? 'bg-[#080A0E] border-slate-700 shadow-2xl' : 'bg-white border-slate-300 shadow-xl'
+              } space-y-3 text-xs font-sans`}>
+                <div className="flex items-center justify-between border-b pb-2 border-slate-200 dark:border-slate-800">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
+                    <span className="font-bold text-[11px]">TODAY MEAL ENGINE</span>
+                  </div>
+                  <span className="font-mono text-[10px] text-emerald-600 dark:text-[#00FF9D]">DAY 14 OF 90</span>
+                </div>
+
+                {/* Biological Age Card */}
+                <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-between">
+                  <div>
+                    <span className="text-[9px] uppercase font-bold text-slate-500 block">Biological Age</span>
+                    <span className="text-lg font-black text-emerald-600 dark:text-[#00FF9D]">31.2 Years</span>
+                  </div>
+                  <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/20 px-2 py-0.5 rounded-full">
+                    ⚡ -2.8y Reversed
+                  </span>
+                </div>
+
+                {/* Meals Checklist */}
+                <div className="space-y-2">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Today's Sequence</span>
+                  
+                  <div className="p-2 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                    <div>
+                      <span className="font-bold block text-[11px]">Breakfast • 8:30 AM</span>
+                      <span className="text-[10px] text-slate-500">Eggs & Avocado first → Toast last</span>
+                    </div>
+                    <span className="text-emerald-500 font-bold">✓</span>
+                  </div>
+
+                  <div className="p-2 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                    <div>
+                      <span className="font-bold block text-[11px]">Lunch • 1:15 PM</span>
+                      <span className="text-[10px] text-slate-500">Cucumber salad → Chicken/Dal → Rice</span>
+                    </div>
+                    <span className="text-emerald-500 font-bold">✓</span>
+                  </div>
+
+                  <div className="p-2 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                    <div>
+                      <span className="font-bold block text-[11px]">Dinner • 7:45 PM</span>
+                      <span className="text-[10px] text-slate-500">Steamed Greens → Salmon/Paneer → Sweet</span>
+                    </div>
+                    <span className="text-slate-400 text-[10px]">Upcoming</span>
+                  </div>
+                </div>
+
+                {/* Bottom mini nav */}
+                <div className="pt-2 border-t border-slate-200 dark:border-slate-800 flex items-center justify-around text-[9px] font-bold text-slate-400">
+                  <span className="text-emerald-500">TODAY</span>
+                  <span>WEEK</span>
+                  <span>REPORT</span>
+                  <span>HEALTH</span>
+                  <span>YOU</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* SECTION 5: ALL FAQS (KILL EVERY HESITATION) */}
+      {/* ========================================================================= */}
+      <section className="max-w-3xl mx-auto px-4 sm:px-6 py-16 space-y-8">
         <div className="text-center space-y-2">
           <span className="text-xs uppercase font-mono font-bold text-emerald-600 dark:text-[#00FF9D] tracking-widest">
-            CLEAR ANSWERS
+            QUESTIONS & ANSWERS
           </span>
-          <h2 className={`text-2xl sm:text-3xl font-black tracking-tight ${textTitle}`}>
+          <h2 className={`text-2xl sm:text-4xl font-black tracking-tight ${textTitle}`}>
             Frequently Asked Questions
           </h2>
+          <p className={`text-xs sm:text-sm ${textSub}`}>
+            Everything you need to know before taking your free audit:
+          </p>
         </div>
 
         <div className="space-y-3">
@@ -294,72 +395,55 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
             return (
               <div
                 key={idx}
-                onClick={() => setOpenFaq(isOpen ? null : idx)}
-                className={`p-4 sm:p-5 rounded-2xl border cursor-pointer transition-all ${cardCls}`}
+                className={`rounded-2xl border transition-all overflow-hidden ${cardCls}`}
               >
-                <div className="flex items-center justify-between gap-3">
-                  <h4 className={`text-sm font-bold tracking-tight ${textTitle}`}>
+                <button
+                  onClick={() => setOpenFaq(isOpen ? null : idx)}
+                  className="w-full p-4 sm:p-5 flex items-center justify-between text-left gap-4"
+                >
+                  <span className={`text-sm sm:text-base font-bold ${textTitle}`}>
                     {faq.q}
-                  </h4>
-                  <span className={`text-xs font-bold text-emerald-600 dark:text-[#00FF9D] shrink-0`}>
-                    {isOpen ? '−' : '+'}
                   </span>
-                </div>
+                  <span className={`text-xs font-mono ${textSub} shrink-0`}>
+                    {isOpen ? '▲' : '▼'}
+                  </span>
+                </button>
                 {isOpen && (
-                  <p className={`text-xs ${textSub} leading-relaxed pt-2.5 border-t mt-2.5 ${darkMode ? 'border-slate-800' : 'border-slate-100'}`}>
-                    {faq.a}
-                  </p>
+                  <div className={`px-4 sm:px-5 pb-4 sm:pb-5 pt-1 border-t ${
+                    darkMode ? 'border-slate-800' : 'border-slate-100'
+                  }`}>
+                    <p className={`text-xs sm:text-sm ${textSub} leading-relaxed`}>
+                      {faq.a}
+                    </p>
+                  </div>
                 )}
               </div>
             );
           })}
         </div>
-      </section>
 
-      {/* 6. BOTTOM CALL TO ACTION */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 pb-20">
-        <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-tr from-[#0F141A] via-[#090C0F] to-[#040608] border-2 border-emerald-500/40 text-center text-white space-y-5 shadow-2xl">
-          <span className="text-xs font-mono font-bold uppercase tracking-[0.25em] text-[#00FF9D]">
-            WWW.TOVELU.STORE • SOVEREIGN PROTOCOL
-          </span>
-
-          <h2 className="text-2xl sm:text-4xl font-black tracking-tight max-w-xl mx-auto">
-            Ready to Reverse Your Biological Age?
-          </h2>
-
-          <p className="text-xs sm:text-sm text-slate-300 max-w-md mx-auto leading-relaxed">
-            Take the 52-question clinical test and unlock your full 3-hour access to the Tovelu Operating System.
+        {/* Final CTA Box */}
+        <div className={`p-8 rounded-3xl border text-center space-y-4 mt-8 ${
+          darkMode ? 'bg-[#080A0E] border-slate-800' : 'bg-slate-50 border-slate-200'
+        }`}>
+          <h3 className={`text-xl sm:text-2xl font-black ${textTitle}`}>
+            Ready to Inspect Your Biological Health?
+          </h3>
+          <p className={`text-xs sm:text-sm ${textSub} max-w-md mx-auto`}>
+            Take the 2-minute diagnostic audit now. See your biological age and unlock your personalized food order today.
           </p>
-
-          <div className="pt-2 max-w-sm mx-auto">
-            <button
-              onClick={onTryForFree}
-              className="w-full py-4 px-8 rounded-2xl bg-[#00FF9D] hover:bg-[#00FF9D]/90 active:scale-98 text-slate-950 font-black text-sm uppercase tracking-wider transition-all shadow-[0_0_25px_rgba(0,255,157,0.45)]"
-            >
-              ⚡ Try It For Free (Get 3-Hour Access) →
-            </button>
-          </div>
-
-          <div className="text-[11px] font-mono text-slate-400">
-            Takes 3 minutes • 100% Free • No credit card needed
-          </div>
+          <button
+            onClick={onTryForFree}
+            className="py-4 px-8 rounded-2xl bg-[#00FF9D] hover:bg-[#00FF9D]/90 active:scale-98 text-slate-950 font-black text-sm uppercase tracking-wider transition-all shadow-[0_0_20px_rgba(0,255,157,0.35)] inline-flex items-center gap-2"
+          >
+            <span>Try for Free →</span>
+          </button>
         </div>
       </section>
 
-      {/* 7. BRAND FOOTER */}
-      <footer className={`border-t py-8 text-center text-xs text-slate-400 space-y-2 ${
-        darkMode ? 'border-slate-800' : 'border-slate-200'
-      }`}>
-        <div className="flex items-center justify-center gap-4 font-bold">
-          <a href="https://tovelu.store" className="hover:underline">tovelu.store</a>
-          <span>•</span>
-          <a href="https://app.tovelu.store" className="hover:underline">app.tovelu.store</a>
-          <span>•</span>
-          <button onClick={onGoToLogin} className="hover:underline">Member Sign In</button>
-        </div>
-        <p className="text-[10px] font-mono">
-          © 2026 Tovelu Inc. All clinical calculations powered by THAIS. Founder: Ajay.
-        </p>
+      {/* FOOTER */}
+      <footer className={`border-t py-8 text-center text-xs ${darkMode ? 'border-slate-800 text-slate-500' : 'border-slate-200 text-slate-400'}`}>
+        <p>© {new Date().getFullYear()} Tovelu Sovereign Health OS • Cellular Homeostasis & Metabolic Longevity</p>
       </footer>
     </div>
   );
