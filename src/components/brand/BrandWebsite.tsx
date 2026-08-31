@@ -29,8 +29,16 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
 
   // Section states
   const [openFaq, setOpenFaq] = useState<number | null>(0);
-  const [selectedGoal, setSelectedGoal] = useState<number | null>(1);
+  const [selectedGoals, setSelectedGoals] = useState<number[]>([1, 2]);
   const [showStickyCta, setShowStickyCta] = useState(false);
+
+  const toggleGoal = (id: number) => {
+    setSelectedGoals(prev => 
+      prev.includes(id) 
+        ? (prev.length > 1 ? prev.filter(g => g !== id) : prev)
+        : [...prev, id]
+    );
+  };
 
   // Scroll listener for floating mobile CTA
   useEffect(() => {
@@ -309,13 +317,6 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
             >
               Sign In
             </button>
-
-            <button
-              onClick={onTryForFree}
-              className="py-2 px-5 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider bg-[#00FF9D] text-slate-950 hover:bg-[#00FF9D]/90 active:scale-95 transition-all shadow-[0_0_15px_rgba(0,255,157,0.35)]"
-            >
-              Try for Free →
-            </button>
           </div>
         </div>
       </header>
@@ -476,20 +477,20 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
               STEP 1 OF 3: YOUR PRIMARY TARGET
             </span>
             <h2 className={`text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight ${textTitle}`}>
-              What is the #1 Thing You Want to Fix in Your Body Right Now?
+              What Do You Want to Fix in Your Body Right Now? <span className="text-emerald-600 dark:text-[#00FF9D] text-lg sm:text-2xl font-bold block sm:inline">(Select All That Apply)</span>
             </h2>
             <p className={`text-xs sm:text-sm ${textSub} max-w-3xl`}>
-              Tap what matters to you today. We build your daily food order to hit your target from Day 1 while quietly shielding your 14 organs from 500 hidden diseases in the background:
+              Tap what matters to you today (choose multiple goals). We build your daily food order to hit your targets from Day 1 while quietly shielding your 14 organs from 500 hidden diseases in the background:
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 pt-2">
             {goals.map((g) => {
-              const isSelected = selectedGoal === g.id;
+              const isSelected = selectedGoals.includes(g.id);
               return (
                 <div
                   key={g.id}
-                  onClick={() => setSelectedGoal(g.id)}
+                  onClick={() => toggleGoal(g.id)}
                   className={`p-4 rounded-2xl border transition-all cursor-pointer active:scale-[0.99] flex flex-col justify-between ${
                     isSelected
                       ? 'border-emerald-500 bg-emerald-500/10 shadow-lg shadow-emerald-500/10'
@@ -525,7 +526,7 @@ export const BrandWebsite: React.FC<BrandWebsiteProps> = ({
               onClick={onTryForFree}
               className="py-4 px-8 rounded-2xl bg-[#00FF9D] hover:bg-[#00FF9D]/90 active:scale-[0.98] text-slate-950 font-black text-xs sm:text-sm uppercase tracking-wider transition-all shadow-md shadow-[#00FF9D]/20 inline-flex items-center gap-2"
             >
-              <span>Select Your Goal & Try for Free →</span>
+              <span>Lock In My {selectedGoals.length} {selectedGoals.length === 1 ? 'Goal' : 'Goals'} & Try for Free →</span>
             </button>
           </div>
         </section>
